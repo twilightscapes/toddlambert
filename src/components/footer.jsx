@@ -215,7 +215,7 @@ export function Footer() {
       <div className={blurb}>
 
 
-        <Link state={{modal: true}} to="/contact/" className="navbar-item  button fire" style={{margin:'10px 2rem 2rem 2rem', textDecoration:'none'}}>Contact Form</Link>
+        {/* <Link state={{modal: true}} to="/contact/" className="navbar-item  button fire" style={{margin:'10px 2rem 2rem 2rem', textDecoration:'none'}}>Contact Form</Link> */}
 
 
 
@@ -229,7 +229,8 @@ export function Footer() {
 
   ) : (
     <div className="social-icons" style={{textAlign:'center', justifyContent:'center', display:'flex', alignItems:'center'}}>
-       <div className="socialtext" style={{fontSize:'14px',}}>Social<br />Links</div> {sIcons}
+       <div className="socialtext" style={{fontSize:'14px',}}>Social<br />Links</div>
+        {sIcons}
         </div>
   )}
   
@@ -239,7 +240,8 @@ export function Footer() {
         
       </div>
       <nav className="footerlinks" aria-label="footer">
-      <div style={{textAlign: 'center', margin: '2rem 10px 1rem 10px', justifyContent: 'center', fontSize: '.95rem', textDecoration:'none'}}><Link to="/disclaimer/">Disclaimer</Link>  |  <Link to="/privacy/">Privacy Policy</Link>  |  <Link to="/terms/">Terms of Use</Link></div>
+
+      {/* <div style={{textAlign: 'center', margin: '2rem 10px 1rem 10px', justifyContent: 'center', fontSize: '.95rem', textDecoration:'none'}}><Link to="/disclaimer/">Disclaimer</Link>  |  <Link to="/privacy/">Privacy Policy</Link>  |  <Link to="/terms/">Terms of Use</Link></div> */}
   
 
 <div style={{textAlign: 'center', margin: '0 0 2rem 0', justifyContent: 'center', fontSize: '.75rem'}}>Copyright &copy; {(new Date().getFullYear())} {companyname}</div>

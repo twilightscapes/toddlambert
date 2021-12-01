@@ -8,6 +8,7 @@ import { RiArrowRightSLine } from "react-icons/ri"
 import { Footer } from "../components/footer"
 // import { GoArrowDown } from "react-icons/go"
 import ScrollAnimation from 'react-animate-on-scroll'
+import Contact from '../components/Contact-inc'
 import { Helmet } from "react-helmet"
 import { StaticImage } from "gatsby-plugin-image"
 import { useSiteMetadata } from "../hooks/use-site-metadata"
@@ -239,22 +240,18 @@ const YouTube = frontmatter.youtuber
     <Helmet>
   <body className="homepage vidsock triple" />
 </Helmet>
-{/* <Seo
-          title={`VidSock - Video Multimedia NFT Platform`}
-          description={`Create, display and market your NFTs with VidSock`}
-          image={'https://vidsock.com/default-og-image.jpg'}
-        /> */}
-       <Seo
+<Seo
+          title={`Todd Lambert (the original) - Photographer | Web Developer and Product Designer`}
+          description={`Todd builds websites, web apps and creates digital products. He also does conceptual photography.`}
+          image={'https://toddlambert.com/todd=camping.jpg'}
+        />
+       {/* <Seo
         title={frontmatter.title}
         description={
           frontmatter.description ? frontmatter.description : excerpt
         }
-  //       image={photoUrl}
-  //  photoUrl
-
    image={ siteUrl + getSrc(frontmatter.featuredImage) }
-
-      />
+      /> */}
       
       
 
@@ -581,6 +578,305 @@ Through NFT
 
 
  </div>{/* end scooch */}
+
+ <div className="logolink" style={{textAlign:'center', position:'relative', top:'8vh', zIndex:'0', width:'98vw'}}><span class="logofirst">todd</span> <span className="logocolor">lambert</span></div>
+
+ <section className="child" style={{position:'relative', height:'100vh', paddingTop:'0', overflow:'', display:'flex', flexDirection:'column', justifyContent:'center', textAlign:'center'}}>
+
+
+
+<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={500}>
+<h1 className="logofirst" style={{textAlign:'center', marginTop:'50px', fontSize:'7vw',
+fontFamily: 'Lobster Two',
+letterSpacing: '2px',
+textTransform: 'lowercase',
+fontWeight: '400',
+textShadow:'0 2px 0 #eee'
+}}>
+Digital Product Design
+</h1>
+</ScrollAnimation>
+
+
+<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={600}>
+<h4 className="logofirst" style={{textAlign:'center', marginTop:'', fontSize:'7vw',
+fontFamily: 'Lobster Two',
+letterSpacing: '2px',
+textTransform: 'lowercase',
+fontWeight: '400',
+textShadow:'0 2px 0 #eee',
+}}>
+Conceptual Photography
+</h4>
+</ScrollAnimation>
+
+<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={600}>
+<h4 className="logofirst" style={{textAlign:'center', marginTop:'', fontSize:'7vw',
+fontFamily: 'Lobster Two',
+letterSpacing: '2px',
+textTransform: 'lowercase',
+fontWeight: '400',
+textShadow:'0 2px 0 #eee',
+}}>
+Guerrilla Marketing
+</h4>
+</ScrollAnimation>
+
+
+
+  </section>
+
+
+
+
+  <section className="child split flexbutt" style={{position:'relative', height:'', overflow:'', display:'flex'}}>
+
+<div className="aboutme flexcheek" style={{width:'55vw'}}>
+  
+
+  <h3 className="logotype" style={{textAlign:'center', margin:'5vh', fontSize:'350%',}}>
+About
+</h3>
+
+<blockquote style={{padding:'1rem 0 1rem 5vw'}}>
+<p>Todd Lambert, a “webdude” that grew up in Southern California and whose career and endeavors have taken him to over 14 western states including living in Colorado, Texas and Oregon. He eventually found home living on the coastal Mississippi Sound.
+</p>
+<br /><br />
+<p>
+Having lived on the Mississippi gulf coast, twice, Todd has assisted many small businesses that were affected by Hurricane Katrina in establishing a sucessful online presence.
+</p>
+<br /><br />
+<p>
+Todd is also actively involved with photography. You can often find him in the middle of the night down some dark alley while doing night photography and astrophotography which are his favorite subjects.
+</p>
+<br /><br />
+<p>
+Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes up most of his free time.
+</p>
+
+  </blockquote>
+
+</div>
+
+<div className="flexcheek" style={{maxWidth:''}}>
+  <ScrollAnimation animateIn="fadeIn" animateOut="" initiallyVisible={false} animateOnce={true} animatePreScroll={false} delay={0} duration={3}>
+
+  <StaticImage src="../../static/assets/ahout-todd.jpg" alt="Twilightscapes Default Image" style={{height:'auto', maxHeight:'100vh', position:'', zIndex:'0', top:'0', border:'0px solid !important', objectFit:'contain',}} />
+
+</ScrollAnimation>
+</div>
+
+</section>
+
+
+
+
+
+
+
+
+
+ <h3 class="logotype"  style={{textAlign:'center', marginTop:'5vh', fontSize:'350%', clear:'right'}}>Portfolio</h3>
+<br />
+<div className="masonry noexit" style={{display:'',}}>
+
+
+  <div style={{width:'', margin:''}}>
+    <a href="https://twilightscapes.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
+    <StaticImage src="../../static/assets/twilightscapes-button.jpg" alt="Todd Lambert Night photos"  />
+    <br />
+    Experience a new style of landscape photography all through the eyes of Todd Lambert. Explore the unusual and see the Western States like you&apos;ve never seen them before.
+    <h5 style={{textAlign:'center',}}>Visit Twilightscapes.com</h5></a>
+    </div>
+
+
+    <div style={{width:'', margin:''}}>
+    <a href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
+    <StaticImage src="../../static/assets/vidsock-promo.jpg" alt="Todd builds Web Apps"  />
+    <br />
+Todd sells exceptionally fast and well-built multimedia web apps called VidSocks. They are a complete website solution that costs nothing to run!
+    <h5 style={{textAlign:'center',}}>Visit VidSocks.com</h5></a>
+    </div>
+
+    
+    <div style={{width:'', margin:''}}>
+    <a href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
+    <StaticImage src="../../static/assets/urban-fetish-button.jpg" alt="Todd Lambert Night photos"  />
+    <br />
+    Take a walk on the wild side and follow along as Todd Lambert goes in search of the creepiest, freakiest, spookiest abandoned and desolate locations he can find. 
+    <h5 style={{textAlign:'center',}}>Visit UrbanFetish.com</h5></a>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<div className="container3" style={{}}>
+<h3 className="logotype" style={{textAlign:'center', marginTop:'50px', fontSize:'350%',}}>
+Resume
+</h3>
+</div>
+
+
+
+
+{/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={0} duration={2}> */}
+
+<div className=" outer1 section1" style={{paddingTop:'100px', height:'', background:'transparent'}}>
+
+
+
+
+<div className="resume flexbutt" style={{width:'100%', padding:'0 4%', background:'transparent', gap:'30px'}}>
+
+
+
+<div className="primary1 flexcheek" style={{color:'', }}>
+
+{/* <h3 className="logotype printonly" style={{textAlign:'left', fontSize:'250%', height:'50px',}}>
+Lambert
+</h3> */}
+
+
+
+	
+	<h2 className="todd-headline">Highlights</h2>
+
+<p><strong>Product Designer - Skilled web designer/developer with 21 years of professional experience.</strong></p>
+
+<p>Successful product designer able to integrate both technical and creative skills to create cross-browser and cross-platform solutions with modern web architecture and navigation systems.</p>
+
+<p>Proven record of completing bold, clean, and effective designs with consistent performance ahead of schedule and under budget.</p>
+
+<p>Industry experience including semiconductor, hospitality, entertainment, health, publishing, finance, insurance, construction, computer software, and direct marketing.</p>
+
+<br />
+<h2 className="todd-headline" style={{marginBottom:''}}>Proficiency</h2>
+
+
+<p>Veteran WordPress Theme/Plugin Developer <br />React JS Frontend Designer/Developer</p>
+
+<p>Responsive, Reactive, Adaptive Design, progressive enhancement, PWA development, object oriented CSS animation.</p> 
+
+<p>Analytics, SEO, UI design, Information Architecture &amp; Content Management System integrations. Photo and Video production. </p>
+
+<p><strong>I prefer: JAM stack, React, Gatsby, Canon, Subaru and my Mac.</strong></p>
+
+<br />
+<h2 className="todd-headline">Education</h2>
+
+<ul className="edu">
+<li><strong>Cal State University Fullerton</strong><br />
+Web Design and Development - Degree</li>
+
+<li><strong>Coastline Community College</strong><br />
+Quality Assurance - Degree</li>
+
+<li><strong>Golden West College</strong><br />
+Business Management - Degree</li>
+
+<li><strong>Huntington Beach High School</strong><br />
+High School General Courses - Diploma</li>
+</ul>
+
+	
+</div>
+
+
+<div className="secondary1 flexcheek" style={{color:'', margin:'',}}>
+{/* <h3 className="printonly" style={{textAlign:'right', height:'50px', fontSize:'150%',}}>(228) 239-6088
+</h3>  
+	 */}
+<h2 className="todd-headline">Professional Experience</h2>
+
+<p style={{margin: '0 0 .5rem 0 ',
+padding: '0'}}><strong>Todd Lambert Enterprises, 1999 - Present</strong><br />
+<em>Sole Proprietor / Photographer</em></p>
+
+<p>Conducted all facets of web development business including meeting with clients, selling web services, and developing methods for improved customer support. <br /> I also like to travel all over the country and photograph spooky and abandoned places at night. <br /><a className="noexit" style={{color:'', textAlign:'center'}} href="https://twilightscapes.com">View @ TwilightScapes.com</a></p>
+
+<p><strong>Primal Health, 2013 - 2014</strong><br /> 
+<em>Creative Director / Associate Developer</em>
+</p>
+<p>
+Responsible for all graphic components and direct marketing efforts. Worked with various departments to advance reach through social marketing, engineering and analytics. Also performed SEO and conducted extensive AB testing.</p>
+
+<p><strong>Texas Instruments, 2010 - 2013</strong><br /> 
+<em>Style Architect / Front End Developer / Senior UI Designer</em>
+</p>
+<p>
+Worked on all aspects of TIs website, from new ad campaigns and interactive widgets to the core infrastructure including a new re-design and replacement of site navigation site-wide. Championed responsive design techniques and other modern architecture for use on corporate site. Utilized Jquery animation for replacing all of TIs legacy Flash files.</p>
+
+<p><strong>AGJ Systems &amp; Networks, 2008 - 2010 </strong><br />
+<em>Web Director / Lead Developer / Senior Designer</em>
+</p>
+<p>
+Solely responsible for all design and development aspects of web department. Interacted with customers and other departments to integrate designs into modern websites catered to customer needs.</p>
+
+<p><strong>TeleVox Software, 2004 - 2007</strong><br />
+<em>Director of Web Development</em>
+</p>
+<p>
+Responsible for site architecture, design, graphics, programming, copywriting/editing, project management of all TeleVox websites and online marketing campaigns. Supervised 25 designers and developers.</p>
+
+
+</div>
+
+ </div>
+
+ {/* <BgImage filename="resume-bg1.png" style={{padding:'',}} /> */}
+</div>
+{/* </ScrollAnimation> */}
+
+
+<div className="spacer33"></div> 
+
+<section className="child" style={{position:'relative', height:'auto', zIndex:'', paddingTop:'',}}>
+<h2 className="logotype" style={{textAlign:'center', fontSize:'180%', margin:''}}>
+loves when you fill this out
+</h2>
+  <div className="outer" style={{margin:'0 12%'}}><Contact /></div> 
+ </section>
+
+ <div className="spacer66"></div> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 
       
       

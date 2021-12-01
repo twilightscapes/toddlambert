@@ -8,7 +8,7 @@ body {
   width:100vw;
 }
 
-/* .popped{display: none !important;} */
+.popped{display: none !important;}
 /* 
 html {background: transparent !important;
   background-color: rgb(63, 42, 179) ;
@@ -36,7 +36,12 @@ html {background: transparent !important;
     } */
 
     
-body,h1,h2,h3,h4,.h1,.h2,.h3,.h4, #menu, .header .menu-icon:before, input.special, .intro:after, .intro:before, .scrolldown, label, .font, .gatsby-image-wrapper, .full-width-image:after{font-family: Roboto,lucida grande,lucida sans unicode,Tahoma,Sans-Serif; font-display: swap; /* font-style: italic; */ }
+/* body,h1,h2,h3,h4,.h1,.h2,.h3,.h4, #menu, .header .menu-icon:before, input.special, .intro:after, .intro:before, .scrolldown, label, .font, .gatsby-image-wrapper, .full-width-image:after{font-family: Roboto,lucida grande,lucida sans unicode,Tahoma,Sans-Serif; font-display: swap;  } */
+
+body{font-family: -system-ui, -apple-system, BlinkMacSystemFont, segoe ui, Hammersmith One, Helvetica, Arial, sans-serif;
+	font-size:1rem;
+    font-weight: 400;
+    line-height:1.35}
 
 /* External Links */
 a:not([href*='localhost:8000']):not([href^='#']):not([href^='/']):after {
@@ -45,15 +50,20 @@ a:not([href*='localhost:8000']):not([href^='#']):not([href^='/']):after {
   font-size: 115%;
   margin-left:6px;
   border:none !important;
-  text-shadow: 2px 1px 0px #000;
+  /* text-shadow: 2px 1px 0px #000; */
   filter: none !important;
-  color:#fff;
+
   font-weight:bold;
 }
 
 footer a:not([href*='localhost:8000']):not([href^='#']):not([href^='/']):after, a.noext:not([href*='localhost:8000']):not([href^='#']):not([href^='/']):after{
 content: none;
 }
+
+.noexit a:not([href*='localhost:8000']):not([href^='#']):not([href^='/']):after, a.noext:not([href*='localhost:8000']):not([href^='#']):not([href^='/']):after{
+  content: none;
+  }
+
 /* END External Links */
 
 
@@ -630,8 +640,15 @@ outline:1px rgba(0, 0, 0, 1);
 
 
 
-
-
+ .todd-headline{
+  color: rgb(221, 64, 0);
+  /* font-weight: bold; */
+  font-family: Lobster Two;
+  font-size: 200%;
+  margin-bottom: 1rem;
+  text-shadow:0 1px 0px #fff
+}
+.edu{margin-left:3rem;}
 
 
 
@@ -851,6 +868,40 @@ filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.8));  */
 }
 
 
+
+
+
+.masonry {
+  margin: 0 auto;
+  max-width: 90%;
+  column-gap: 1.5em;
+}
+
+.masonry * {
+  margin: 0 0 1.5em;
+  border-radius:12px;
+}
+
+/* Masonry on large screens */
+@media only screen and (min-width: 1024px) {
+  .masonry {
+    column-count: 3;
+  }
+}
+
+/* Masonry on medium-sized screens */
+@media only screen and (max-width: 1023px) and (min-width: 768px) {
+  .masonry {
+    column-count: 3;
+  }
+}
+
+/* Masonry on small screens */
+@media only screen and (max-width: 767px) and (min-width: 540px) {
+  .masonry {
+    column-count: 2;
+  }
+}
 
 
 
@@ -2953,3 +3004,101 @@ height:100vh;
             border:0x solid yellow;
             background: rgba(0,0,0,0.6);
             } */
+
+
+
+
+
+
+
+
+
+
+            .logolink {
+              text-decoration: none;
+              background: none;
+              height: 100%;
+              max-width:inherit !important;
+            
+            }
+            
+            .logocolor {
+              color: #dd4000;
+              position:relative
+            }
+            
+            .logocolor:before {
+              content: "{";
+              left:-12%
+            }
+            
+            .logocolor:after, .logocolor:before {
+              color: #666;
+              font-size: 120%;
+              position: absolute;
+              top: -20%;
+              font-weight:700
+            }
+            
+            .logocolor:after {
+              content: "}";
+              right:-15%
+            }
+            
+            .logolink {
+              font-family: Lobster Two;
+              color: #666;
+              letter-spacing: 1px;
+              text-transform: lowercase;
+              font-weight: 400;
+              padding-top:4px
+            }
+            
+            .logolink {
+              font-size: 490%;
+              text-shadow:0 2px 0px #fff
+            }
+            
+            .logofirst {
+              padding-right: 18px;
+              position: relative;
+              color:#999
+            }
+            
+            .logofirst:before {
+              content: " . ";
+              color: #999;
+              position: absolute;
+              left:-10%
+            }
+            
+            .logotype {
+              font-family: Lobster Two;
+              color: #dd4000;
+              letter-spacing: 2px;
+              text-transform: lowercase;
+              font-weight: 400;
+              position: relative;
+              text-shadow:0 1px 0 #fff
+            }
+            
+            .logotype:before {
+              content: ".todd {";
+              color: #999;
+              letter-spacing:2px;
+            }
+            
+            .logotype:after {
+              content: "}";
+              color: #666;
+              margin-left:3px;
+            }
+            
+            body.dark .logotype:after, body.dark .logotype:before {
+              color: #999;
+              text-shadow:0 1px 0 #fff
+            }
+
+            .logofirst {
+              line-height:10vh,
+            }

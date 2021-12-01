@@ -14,10 +14,14 @@ import { AiOutlineClose } from "react-icons/ai"
 // import { AnchorLink } from "gatsby-plugin-anchor-links"
 // import { FaHandPointDown } from "react-icons/fa"
 // import Bug from "../../static/assets/logo.svg"
+import '@fontsource/hammersmith-one'
+import '@fontsource/lobster-two'
+
 import "../styles/reset.css"
 import "../styles/variables.css"
 import "../styles/global.css"
-import '@fontsource/roboto'
+// import '@fontsource/roboto'
+
 
 // import { FiShare } from 'react-icons/fi';
 // import { FaRegPlusSquare } from 'react-icons/fa';
@@ -154,9 +158,9 @@ export function Layout({ children }) {
 
   <div style={{ display:'flex', gap:'20px', justifyContent:'space-around', padding:'2px 12px', background:'rgba(0,0,0,0.30)', borderRadius:'12px 12px 0 0',}}>
     
-  <button type="button" className="" onClick={toggleVisible} style={{wordWrap:'normal', color:'#fff'}}>
+  {/* <button type="button" className="" onClick={toggleVisible} style={{wordWrap:'normal', color:'#fff'}}>
   <IoHandLeft style={{float:'left', marginRight:'8px', fontSize:'20px'}} />Left-handed?
-</button>
+</button> */}
 
 
 
