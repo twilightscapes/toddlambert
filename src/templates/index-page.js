@@ -579,13 +579,14 @@ Through NFT
 
  </div>{/* end scooch */}
 
- <div className="logolink" style={{textAlign:'center', position:'relative', top:'8vh', zIndex:'0', margin:'0 4%'}}><span class="logofirst">todd</span> <span className="logocolor">lambert</span></div>
 
- <section className="child" style={{position:'relative', height:'', paddingTop:'15vh', overflow:'', display:'flex', flexDirection:'column', justifyContent:'center', textAlign:'center', fontSize:'5vw',
+
+ <section className="child" style={{position:'relative', height:'100vh', paddingTop:'', overflow:'', display:'flex', flexDirection:'column', justifyContent:'center', textAlign:'center', fontSize:'5vw',
 // fontSize: 'clamp(18px, calc(1rem + 2vw), 36px)',
 fontSize:'clamp(2.5rem, 3.5vw, 3.8rem)'
 }}>
 
+<div className="logolink" style={{textAlign:'center', position:'relative'}}><span class="logofirst">todd</span> <span className="logocolor">lambert</span></div>
 
 
 {/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={500}> */}
@@ -594,9 +595,9 @@ fontFamily: 'Lobster Two',
 letterSpacing: '2px',
 textTransform: 'lowercase',
 fontWeight: '400',
-textShadow:'0 2px 0 #eee'
+textShadow:'0 1px 0 #eee'
 }}>
-Digital Product Design
+Digital Product <span style={{color:'#dd4000'}}>Design</span>
 </h1>
 {/* </ScrollAnimation> */}
 
@@ -607,9 +608,9 @@ fontFamily: 'Lobster Two',
 letterSpacing: '2px',
 textTransform: 'lowercase',
 fontWeight: '400',
-textShadow:'0 2px 0 #eee',
+textShadow:'0 1px 0 #eee',
 }}>
-Conceptual Photography
+Conceptual <span style={{color:'#dd4000'}}>Photography</span>
 </h2>
 {/* </ScrollAnimation> */}
 
@@ -619,9 +620,9 @@ fontFamily: 'Lobster Two',
 letterSpacing: '2px',
 textTransform: 'lowercase',
 fontWeight: '400',
-textShadow:'0 2px 0 #eee',
+textShadow:'0 1px 0 #eee',
 }}>
-Guerrilla Marketing
+Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
 </h2>
 {/* </ScrollAnimation> */}
 
@@ -631,6 +632,7 @@ Guerrilla Marketing
 
 
 
+ <div className="spacer66"></div> 
   <h3 class="logotype"  style={{textAlign:'center', margin:'5vh 0', fontSize:'350%', clear:'right'}}>About</h3>
 
 
@@ -690,7 +692,7 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 <div className="masonry noexit" style={{display:'',}}>
 
 
-  <div style={{width:'', margin:''}}>
+    <div style={{height:'400px', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
     <a href="https://twilightscapes.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
     <StaticImage src="../../static/assets/twilightscapes-button.jpg" alt="Todd Lambert Night photos"  />
     <br />
@@ -700,7 +702,7 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
     </div>
 
 
-    <div style={{width:'', margin:''}}>
+    <div style={{height:'400px', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
     <a href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit'}}>
     <StaticImage src="../../static/assets/vidsock-promo.jpg" alt="Todd builds Web Apps"  />
     <br />
@@ -710,7 +712,7 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
     </div>
 
     
-    <div style={{width:'', margin:''}}>
+    <div style={{height:'400px', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
     <a href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
     <StaticImage src="../../static/assets/urban-fetish-button.jpg" alt="Todd Lambert Night photos"  />
     <br />

@@ -3058,7 +3058,7 @@ height:100vh;
             .logolink {
               text-decoration: none;
               background: none;
-              height: 100%;
+        
               max-width:inherit !important;
             
             }
@@ -3129,6 +3129,7 @@ height:100vh;
               color: #666;
               letter-spacing:2px;
             }
+            
             
             .logotype:after {
               content: "}";

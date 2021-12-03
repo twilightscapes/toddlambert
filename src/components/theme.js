@@ -35,7 +35,7 @@ const themeStyles = {
       mt: "-2px",
       p: "0 0 0 0",
       "&:hover": {
-        color: "var(--primary-color)",
+        color: "#fff",
       },
     },
   },
