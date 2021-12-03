@@ -641,7 +641,7 @@ Guerrilla Marketing
 
 
 
-<div style={{padding:'2rem 0', display:'', columnCount:'2', columnRule:' 4px dotted #dd4000', columnGap:'2rem', justifyContent:'', flexDirection:''}}>
+<div style={{padding:'2rem 0', display:'', columnCount:'2', columnRule:' 4px dotted #dd4000', columnGap:'40px', justifyContent:'', flexDirection:''}}>
 <p>Todd Lambert, a “webdude” that grew up in Southern California and whose career and endeavors have taken him to over 14 western states including living in Colorado, Texas and Oregon. </p>
   
   
