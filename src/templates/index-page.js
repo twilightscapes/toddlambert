@@ -751,9 +751,14 @@ Lambert
 <div className=" outer1 section1" style={{paddingTop:'', height:'', background:'transparent'}}>
 
 <div className="container3" style={{ position:'relative'}}>
-<h3 className="logotype" style={{textAlign:'center', margin:' 0', fontSize:'350%',}}>
+
+<h3 className="logotype print" style={{textAlign:'center', margin:' 0', fontSize:'350%',}}>
+Resume
+</h3>
+<h3 className="logotype printonly" style={{textAlign:'center', margin:' 0', fontSize:'350%',}}>
 Lambert
 </h3>
+
 <div className="printonly" style={{textAlign:'center', position:'absolute', bottom:'-30px', width:'100%'}}>
 (228) 239-6088<br /> toddlambert@gmail.com
 </div>
