@@ -581,7 +581,7 @@ Through NFT
 
 
 
- <section className="child" style={{position:'relative', height:'100vh', paddingTop:'', overflow:'', display:'flex', flexDirection:'column', justifyContent:'center', textAlign:'center', fontSize:'5vw',
+ <section className="child homeheight" style={{position:'relative', height:'100vh', paddingTop:'', overflow:'', display:'flex', flexDirection:'column', justifyContent:'center', textAlign:'center', fontSize:'5vw',
 // fontSize: 'clamp(18px, calc(1rem + 2vw), 36px)',
 fontSize:'clamp(2.5rem, 3.5vw, 3.8rem)'
 }}>
@@ -632,7 +632,9 @@ Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
 
 
 
- <div className="spacer66"></div> 
+ <div className="spacer66 mobilehide"></div> 
+
+ 
   <h3 class="logotype"  style={{textAlign:'center', margin:'5vh 0', fontSize:'350%', clear:'right'}}>About</h3>
 
 
