@@ -849,7 +849,7 @@ Contact
   <div className="outer" style={{margin:'0 12%'}}><Contact /></div> 
  </section>
 
- <div className="spacer66"></div> 
+ {/* <div className="spacer66"></div>  */}
 
 
 
