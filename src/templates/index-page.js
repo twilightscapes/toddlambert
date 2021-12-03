@@ -751,7 +751,7 @@ Lambert
 
 
 <section id="resume">
-<div className=" outer1 section1" style={{paddingTop:'', height:'', background:'transparent'}}>
+<div className=" outer1 section1" style={{padding:'0 2%', height:'', background:'transparent'}}>
 
 <div className="container3" style={{ position:'relative'}}>
 
