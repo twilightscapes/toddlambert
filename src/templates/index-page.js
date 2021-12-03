@@ -582,7 +582,7 @@ Through NFT
 
 
 
- <section id="intro" className="child homeheight" style={{position:'relative', height:'100vh', paddingTop:'', overflow:'', display:'flex', flexDirection:'column', justifyContent:'center', textAlign:'center',
+ <section id="intro" className="child" style={{position:'relative', height:'100vh', paddingTop:'', overflow:'', display:'flex', flexDirection:'column', justifyContent:'center', textAlign:'center',
 // fontSize: 'clamp(18px, calc(1rem + 2vw), 36px)',
 fontSize:'clamp(2.5rem, 3.5vw, 3.8rem)'
 }}>
@@ -596,7 +596,8 @@ fontFamily: 'Lobster Two',
 letterSpacing: '2px',
 textTransform: 'lowercase',
 fontWeight: '400',
-textShadow:'0 1px 0 #eee'
+textShadow:'0 1px 0 #eee',
+fontSize:'clamp(2rem, 3.5vw, 3.8rem)'
 }}>
 Digital Product <span style={{color:'#dd4000'}}>Design</span>
 </h1>
@@ -610,6 +611,7 @@ letterSpacing: '2px',
 textTransform: 'lowercase',
 fontWeight: '400',
 textShadow:'0 1px 0 #eee',
+fontSize:'clamp(1.8rem, 3.5vw, 3.8rem)'
 }}>
 Conceptual <span style={{color:'#dd4000'}}>Photography</span>
 </h2>
@@ -622,6 +624,7 @@ letterSpacing: '2px',
 textTransform: 'lowercase',
 fontWeight: '400',
 textShadow:'0 1px 0 #eee',
+fontSize:'clamp(2rem, 3.5vw, 3.8rem)'
 }}>
 Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
 </h2>
