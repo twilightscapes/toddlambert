@@ -625,7 +625,7 @@ outline:1px rgba(0, 0, 0, 1);
   
 
 .button:hover{
-  box-shadow:  0 0px 22px var(--primary-color);
+  box-shadow:  0 0px 22px ;
   color:#fff ;
    /* filter: drop-shadow(0px 0px 10px rgba(155,155,155,.5));  */
 }
@@ -635,19 +635,27 @@ outline:1px rgba(0, 0, 0, 1);
 
 
 
-
-
-
-
-
- .todd-headline{
+.todd-headline{
+  font-family: Lobster Two;
   color: rgb(221, 64, 0);
-  /* font-weight: bold; */
+  text-transform: lowercase;
+place-self: center;
+font-size: clamp(2.5rem, 2vw, 3rem);
+/* text-align: center; */
+line-height: 1;
+/* font-style: italic; */
+padding: 4vh 0;
+}
+
+
+
+ /* .todd-headline{
+  color: rgb(221, 64, 0);
   font-family: Lobster Two;
   font-size: 200%;
   margin-bottom: 1rem;
   text-shadow:0 1px 0px #fff
-}
+} */
 .edu{margin-left:3rem;}
 
 
@@ -3090,7 +3098,7 @@ height:100vh;
             
             .logotype:after {
               content: "}";
-              color: #666;
+              color: #999;
               margin-left:3px;
             }
             
