@@ -14,7 +14,7 @@ import { AiOutlineClose } from "react-icons/ai"
 // import { AnchorLink } from "gatsby-plugin-anchor-links"
 // import { FaHandPointDown } from "react-icons/fa"
 // import Bug from "../../static/assets/logo.svg"
-import '@fontsource/hammersmith-one'
+// import '@fontsource/hammersmith-one'
 import '@fontsource/lobster-two'
 
 import "../styles/reset.css"
