@@ -692,7 +692,7 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
     <StaticImage src="../../static/assets/twilightscapes-button.jpg" alt="Todd Lambert Night photos"  />
     <br />
     Experience a new style of landscape photography all through the eyes of Todd Lambert. Explore the unusual and see the Western States like you&apos;ve never seen them before.
-    <br /><br /><h5 style={{textAlign:'center',}}>Visit Twilightscapes.com</h5></a>
+    <br /><br /><strong style={{textAlign:'center',}}>Visit Twilightscapes.com</strong></a>
     </div>
 
 
@@ -701,7 +701,7 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
     <StaticImage src="../../static/assets/vidsock-promo.jpg" alt="Todd builds Web Apps"  />
     <br />
 Todd sells exceptionally fast and well-built multimedia web apps called VidSocks. They are a complete website solution that costs nothing to run and ranks great in Google!
-    <br /><br /><h5 style={{textAlign:'center',}}>Visit VidSocks.com</h5></a>
+    <br /><br /><strong style={{textAlign:'center',}}>Visit VidSocks.com</strong></a>
     </div>
 
     
@@ -710,7 +710,7 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
     <StaticImage src="../../static/assets/urban-fetish-button.jpg" alt="Todd Lambert Night photos"  />
     <br />
     Take a walk on the wild side and follow along as Todd Lambert goes in search of the creepiest, freakiest, spookiest abandoned and desolate locations he can find. 
-    <br /><br /><h5 style={{textAlign:'center',}}>Visit UrbanFetish.com</h5></a>
+    <br /><br /><strong style={{textAlign:'center',}}>Visit UrbanFetish.com</strong></a>
     </div>
 
 </div>

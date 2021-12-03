@@ -50,20 +50,14 @@ a:not([href*='localhost:8000']):not([href^='#']):not([href^='/']):after {
   font-size: 115%;
   margin-left:6px;
   border:none !important;
-  /* text-shadow: 2px 1px 0px #000; */
   filter: none !important;
 
   font-weight:bold;
 }
 
 footer a:not([href*='localhost:8000']):not([href^='#']):not([href^='/']):after, a.noext:not([href*='localhost:8000']):not([href^='#']):not([href^='/']):after{
-content: none;
-}
-
-.noexit a:not([href*='localhost:8000']):not([href^='#']):not([href^='/']):after, a.noext:not([href*='localhost:8000']):not([href^='#']):not([href^='/']):after{
   content: none;
   }
-
 /* END External Links */
 
 
