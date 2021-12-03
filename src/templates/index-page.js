@@ -5,6 +5,7 @@ import { graphql, Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { getSrc } from "gatsby-plugin-image"
 import { RiArrowRightSLine } from "react-icons/ri"
+import { VscFilePdf } from "react-icons/vsc"
 import { Footer } from "../components/footer"
 // import { GoArrowDown } from "react-icons/go"
 import ScrollAnimation from 'react-animate-on-scroll'
@@ -581,7 +582,7 @@ Through NFT
 
 
 
- <section className="child homeheight" style={{position:'relative', height:'100vh', paddingTop:'', overflow:'', display:'flex', flexDirection:'column', justifyContent:'center', textAlign:'center', fontSize:'5vw',
+ <section id="intro" className="child homeheight" style={{position:'relative', height:'100vh', paddingTop:'', overflow:'', display:'flex', flexDirection:'column', justifyContent:'center', textAlign:'center', fontSize:'5vw',
 // fontSize: 'clamp(18px, calc(1rem + 2vw), 36px)',
 fontSize:'clamp(2.5rem, 3.5vw, 3.8rem)'
 }}>
@@ -634,12 +635,12 @@ Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
 
  <div className="spacer66 mobilehide"></div> 
 
- 
+ <section id="about">
   <h3 class="logotype"  style={{textAlign:'center', margin:'0 0 5vh 0', fontSize:'350%', clear:'right'}}>About</h3>
 
 
 
-  <section className="child split flexbutt" style={{position:'relative', height:'', overflow:'', display:'flex', gap
+  <div className="child split flexbutt" style={{position:'relative', height:'', overflow:'', display:'flex', gap
   :'30px', margin:'0 4%'}}>
 
 
@@ -679,6 +680,8 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 
 </div>
 
+</div>
+
 </section>
 
 
@@ -687,18 +690,17 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 
 
 
-
-
+<section id="portfolio">
  <h3 class="logotype"  style={{textAlign:'center', margin:'5vh 0', fontSize:'350%', clear:'right'}}>Portfolio</h3>
 <br />
-<div className="masonry noexit" style={{display:'',}}>
+<div className="masonry noexit print" style={{display:'',}}>
 
 
     <div style={{height:'400px', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
     <a href="https://twilightscapes.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
     <StaticImage src="../../static/assets/twilightscapes-button.jpg" alt="Todd Lambert Night photos"  />
     <br />
-    Experience a new style of landscape photography all through the eyes of Todd Lambert. Explore the unusual and see the Western States like you&apos;ve never seen them before.
+    Experience a new style of landscape photography all through the eyes of Todd Lambert. Explore the unusual and see the night like you&apos;ve never seen it before.
     <br /><br />
     <strong style={{textAlign:'center',}}>Visit Twilightscapes.com</strong></a>
     </div>
@@ -708,7 +710,7 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
     <a href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit'}}>
     <StaticImage src="../../static/assets/vidsock-promo.jpg" alt="Todd builds Web Apps"  />
     <br />
-Todd sells exceptionally fast and well-built multimedia web apps called VidSocks. They are a complete website solution that costs nothing to run and ranks great in Google!
+Todd sells exceptionally fast and well-built multimedia web apps called VidSocks. They are a complete website solution that costs nothing to run and rank incredibly well in Google!
     <br /><br />
     <strong style={{textAlign:'center',}}>Visit VidSocks.com</strong></a>
     </div>
@@ -724,6 +726,7 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
     </div>
 
 </div>
+</section>
 
 
 
@@ -733,18 +736,28 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
 
 
 
-
-<div className="container3" style={{}}>
+{/* <div className="container3" style={{}}>
 <h3 className="logotype" style={{textAlign:'center', margin:'5vh 0', fontSize:'350%',}}>
-Resume
+Lambert
 </h3>
-</div>
+</div> */}
 
 {/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={0} duration={2}> */}
 
+
+
+
+<section id="resume">
 <div className=" outer1 section1" style={{paddingTop:'', height:'', background:'transparent'}}>
 
-
+<div className="container3" style={{ position:'relative'}}>
+<h3 className="logotype" style={{textAlign:'center', margin:' 0', fontSize:'350%',}}>
+Lambert
+</h3>
+<div className="printonly" style={{textAlign:'center', position:'absolute', bottom:'-30px', width:'100%'}}>
+(228) 239-6088<br /> toddlambert@gmail.com
+</div>
+</div>
 
 
 <div className="resume flexbutt" style={{width:'100%', padding:'0 4%', background:'transparent', gap:'30px'}}>
@@ -798,6 +811,7 @@ Business Management - Degree</li>
 High School General Courses - Diploma</li>
 </ul>
 
+
 	
 </div>
 
@@ -843,14 +857,38 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
 
  </div>
 
- {/* <BgImage filename="resume-bg1.png" style={{padding:'',}} /> */}
+ <a
+            href="https://assets/resume-toddlambert.pdf"
+            className="button fire actionJackson noexit print"
+            style={{
+              cursor:'pointer',
+              width:'80%',
+              maxWidth:'600px',
+              margin:'5vh auto',
+              display:'flex',
+              alignSelf:'center',
+              color:'#ccc'
+            }}
+          >
+            Download Resume For Todd Lambert
+            <span className="icon -right">
+              <VscFilePdf style={{fontSize:'30px'}} />
+            </span>
+
+            
+          </a>
+
+
+
 </div>
-{/* </ScrollAnimation> */}
+
+
+</section>
 
 
 {/* <div className="spacer33"></div>  */}
 
-<section className="child" style={{position:'relative', height:'auto', zIndex:'', paddingTop:'',}}>
+<section id="contact" className="child" style={{position:'relative', height:'auto', zIndex:'', paddingTop:'',}}>
 <div className="container3" style={{}}>
 <h3 className="logotype" style={{textAlign:'center', margin:'5vh 0', fontSize:'350%',}}>
 Contact

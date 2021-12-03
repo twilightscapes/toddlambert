@@ -55,7 +55,7 @@ a:not([href*='toddlambert.com']):not([href^='#']):not([href^='/']):after {
   font-weight:bold;
 }
 
-footer a:not([href*='toddlambert.com']):not([href^='#']):not([href^='/']):after, a.noext:not([href*='toddlambert.com']):not([href^='#']):not([href^='/']):after{
+footer a:not([href*='toddlambert.com']):not([href^='#']):not([href^='/']):after, a.noexit:not([href*='toddlambert.com']):not([href^='#']):not([href^='/']):after{
   content: none;
   }
 /* END External Links */
@@ -578,7 +578,7 @@ transition: var(--transition);
 font-size: 140%;
 text-decoration: none;
 text-shadow: 0px 0px 0px #333 !important;
-box-shadow:  0 0px 14px var(--primary-color);
+box-shadow:  0 0px 14px #dd4000 !important;
 /* filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.8));  */
 /* outline-width: 1px;
 outline-style: dotted;
@@ -683,7 +683,7 @@ padding: 4vh 0;
   margin-bottom: 1rem;
   text-shadow:0 1px 0px #fff
 } */
-.edu{margin-left:3rem;}
+.edu{margin-left:1rem;}
 
 
 
@@ -2517,30 +2517,41 @@ background-position:center 70px;
 
 
 
-        @media print {
-          body {
-             color: #000;
-             background: #fff;
-          }
+    
        
-       footer, .sidebarIconToggle, .back, .taggage, .infomenu, .sidebart, .print, .commentbox, .makeStyles-container-1 {display: none !important;}
 
-       #logo {
-        filter: brightness(0) saturate(100%) !important;
-        /* border:1px solid red !important; */
-        /* filter: invert(17%) sepia(97%) saturate(3794%) hue-rotate(305deg) brightness(99%) contrast(112%) !important; */
-        position:absolute !important; 
-        top:0px !important;
-        }
-     
-       }
+          
+       .printonly{display: none;}
+          
+	
+@media print {
+   body {
+      color: #000;
+      background: #fff !important;
+      background-image: none !important;
+   }
 
-       /* .print{ border: 1px solid red !important} */
 
-       #logo {
-       /* filter: drop-shadow(0 0.2rem 0.25rem rgba(0, 0, 0, 0.2)); */
-          filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.9));
-       }
+
+
+
+   footer, .back, #intro, #about, #portfolio, #contact, .spacer33, .spacer66, .print, .usability{display: none !important; height: 0px !important;}
+   .printonly{display: block;}
+   .logotype{ font-size: 500% !important;}
+   .todd-headline{font-size: 200% !important;}
+
+/* body stuff */
+	body{
+	font-family:helvetica, verdana, arial, sans-serif;
+	color:#000;
+	font-size:10.2px !important;
+padding-top:5px !important;
+padding-left:5px !important;
+padding-right:5px !important;
+margin: 0 !important;
+	}
+
+}
     
     
     
