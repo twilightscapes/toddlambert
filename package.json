@@ -67,7 +67,8 @@
     "react-timeago": "^6.2.1",
     "styled-components": "^4.4.1",
     "theme-ui": "^0.6.0",
-    "urql": "^2.0.2"
+    "urql": "^2.0.2",
+    "webpack-filter-warnings-plugin": "^1.2.1"
   },
   "devDependencies": {}
 }

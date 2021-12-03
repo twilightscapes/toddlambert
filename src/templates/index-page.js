@@ -587,7 +587,7 @@ Through NFT
 fontSize:'clamp(2.5rem, 3.5vw, 3.8rem)'
 }}>
 
-<div className="logolink" style={{textAlign:'center', position:'relative'}}><span class="logofirst">todd</span> <span className="logocolor">lambert</span></div>
+<div className="logolink" style={{textAlign:'center', position:'relative'}}><span className="logofirst">todd</span> <span className="logocolor">lambert</span></div>
 
 
 {/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={500}> */}
@@ -636,7 +636,7 @@ Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
  <div className="spacer66 mobilehide"></div> 
 
  <section id="about">
-  <h3 class="logotype"  style={{textAlign:'center', margin:'0 0 5vh 0', fontSize:'350%', clear:'right'}}>About</h3>
+  <h3 className="logotype"  style={{textAlign:'center', margin:'0 0 5vh 0', fontSize:'350%', clear:'right'}}>About</h3>
 
 
 
@@ -691,7 +691,7 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 
 
 <section id="portfolio">
- <h3 class="logotype"  style={{textAlign:'center', margin:'5vh 0', fontSize:'350%', clear:'right'}}>Portfolio</h3>
+ <h3 className="logotype"  style={{textAlign:'center', margin:'5vh 0', fontSize:'350%', clear:'right'}}>Portfolio</h3>
 <br />
 <div className="masonry noexit print" style={{display:'',}}>
 

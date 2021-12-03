@@ -1,8 +1,5 @@
-import "../styles/reset.css"
-import "../styles/variables.css"
-import "../assets/scss/style.scss"
-import "../styles/global.css"
-import '@fontsource/lobster-two'
+
+
 import React from "react"
 // import { SkipNavLink } from "./skip-nav"
 // import { Header } from "./header"
@@ -12,7 +9,11 @@ import React from "react"
 
 import Theme from "../components/theme"
 import { Seo } from "./seo"
-
+import '@fontsource/lobster-two'
+import "../styles/reset.css"
+import "../styles/variables.css"
+import "../styles/global.css"
+import "../assets/scss/style.scss"
 import { Link } from 'gatsby-plugin-modal-routing-3'
 import { ModalRoutingContext } from 'gatsby-plugin-modal-routing-3'
 import { AiOutlineClose } from "react-icons/ai"
