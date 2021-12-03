@@ -644,7 +644,7 @@ Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
 
 
   <div className="child split flexbutt" style={{position:'relative', height:'', overflow:'', display:'flex', gap
-  :'30px', margin:'0 4%'}}>
+  :'20px', margin:'0 4%'}}>
 
 
 
@@ -653,7 +653,7 @@ Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
 
 
 
-<div className="masonry" style={{padding:'0', display:'', columnCount:'2', columnRule:' 0px dotted #666', columnGap:'40px',}}>
+<div className="masonry" style={{padding:'0', display:'', columnCount:'2', columnRule:' 0px dotted #666', columnGap:'30px',}}>
 <p>Todd Lambert, a “webdude” that grew up in Southern California and whose career and endeavors have taken him to over 14 western states including living in Colorado, Texas and Oregon. </p>
   
   
@@ -699,33 +699,33 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 <div className="flexbutt noexit print" style={{gap:'20px', padding:'0 4%'}}>
 
 
-    <div className="flexcheek" style={{height:'400px', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
-    <a href="https://twilightscapes.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
+    <div className="flexcheek" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
+    <a className="noexit" href="https://twilightscapes.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
     <StaticImage src="../../static/assets/twilightscapes-button.jpg" alt="Todd Lambert Night photos"  />
     <br />
     Experience a new style of landscape photography all through the eyes of Todd Lambert. Explore the unusual and see the night like you&apos;ve never seen it before.
     <br /><br />
-    <strong style={{textAlign:'center',}}>Visit Twilightscapes.com</strong></a>
+    <div style={{textAlign:'center',}}>Visit Twilightscapes.com</div></a>
     </div>
 
 
-    <div className="flexcheek" style={{height:'400px', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
-    <a href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit'}}>
+    <div className="flexcheek" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
+    <a className="noexit" href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit'}}>
     <StaticImage src="../../static/assets/vidsock-promo.jpg" alt="Todd builds Web Apps"  />
     <br />
 Todd sells exceptionally fast and well-built multimedia web apps called VidSocks. They are a complete website solution that costs nothing to run and rank incredibly well in Google!
     <br /><br />
-    <strong style={{textAlign:'center',}}>Visit VidSocks.com</strong></a>
+    <div style={{textAlign:'center',}}>Visit VidSocks.com</div></a>
     </div>
 
     
-    <div className="flexcheek" style={{height:'400px', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
-    <a href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
+    <div className="flexcheek" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
+    <a className="noexit" href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
     <StaticImage src="../../static/assets/urban-fetish-button.jpg" alt="Todd Lambert Night photos"  />
     <br />
     Take a walk on the wild side and follow along as Todd Lambert goes in search of the creepiest, freakiest, spookiest abandoned and desolate locations he can find. 
     <br /><br />
-    <strong style={{textAlign:'center',}}>Visit UrbanFetish.com</strong></a>
+    <div style={{textAlign:'center',}}>Visit UrbanFetish.com</div></a>
     </div>
 
 </div>
