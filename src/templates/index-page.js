@@ -858,7 +858,7 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
  </div>
 
  <a
-            href="https://assets/resume-toddlambert.pdf"
+            href="https://toddlambert.com/assets/resume-toddlambert.pdf"
             className="button fire actionJackson noexit print"
             style={{
               cursor:'pointer',
@@ -870,9 +870,9 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
               color:'#ccc'
             }}
           >
-            Resume for Todd Lambert
+            Download Resume
             <span className="icon -right">
-              <VscFilePdf style={{fontSize:'30px'}} />[download]
+              <VscFilePdf style={{fontSize:'30px'}} />
             </span>
 
             
