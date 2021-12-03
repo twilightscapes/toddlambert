@@ -3071,12 +3071,12 @@ height:100vh;
             .logofirst {
               padding-right: 18px;
               position: relative;
-              color:#999
+              color:#666
             }
             
             .logofirst:before {
               content: " . ";
-              color: #999;
+              color: #666;
               position: absolute;
               left:-10%
             }
@@ -3093,18 +3093,18 @@ height:100vh;
             
             .logotype:before {
               content: ".todd {";
-              color: #999;
+              color: #666;
               letter-spacing:2px;
             }
             
             .logotype:after {
               content: "}";
-              color: #999;
+              color: #666;
               margin-left:3px;
             }
             
             body.dark .logotype:after, body.dark .logotype:before {
-              color: #999;
+              color: #666;
               text-shadow:0 1px 0 #fff
             }
 
