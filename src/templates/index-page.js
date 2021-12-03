@@ -3,7 +3,7 @@
 import { jsx } from "theme-ui"
 import { graphql, Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
-import { getSrc } from "gatsby-plugin-image"
+// import { getSrc } from "gatsby-plugin-image"
 import { RiArrowRightSLine } from "react-icons/ri"
 import { VscFilePdf } from "react-icons/vsc"
 import { Footer } from "../components/footer"
@@ -12,7 +12,7 @@ import ScrollAnimation from 'react-animate-on-scroll'
 import Contact from '../components/Contact-inc'
 import { Helmet } from "react-helmet"
 import { StaticImage } from "gatsby-plugin-image"
-import { useSiteMetadata } from "../hooks/use-site-metadata"
+// import { useSiteMetadata } from "../hooks/use-site-metadata"
 import ReactPlayer from 'react-player/lazy'
 // import { ImPlay } from "react-icons/im"
 import styled from "styled-components"
@@ -127,7 +127,7 @@ export const pageQuery = graphql`
 const HomePage = ({ data }) => {
   // const { postcount } = useSiteMetadata()
   const { markdownRemark, posts } = data // data.markdownRemark holds your post data
-  const { frontmatter, html, excerpt } = markdownRemark
+  const { frontmatter, html } = markdownRemark
   const Image = frontmatter.featuredImage
     ? frontmatter.featuredImage.childImageSharp.gatsbyImageData
     : ""
@@ -143,7 +143,7 @@ const HomePage = ({ data }) => {
     // const { iconimage } = useSiteMetadata()
 
 
-    const { siteUrl } = useSiteMetadata()
+    // const { siteUrl } = useSiteMetadata()
 
     const YouTubeStart = frontmatter.youtubestart
     const YouTubeEnd = frontmatter.youtubeend
@@ -582,7 +582,7 @@ Through NFT
 
 
 
- <section id="intro" className="child homeheight" style={{position:'relative', height:'100vh', paddingTop:'', overflow:'', display:'flex', flexDirection:'column', justifyContent:'center', textAlign:'center', fontSize:'5vw',
+ <section id="intro" className="child homeheight" style={{position:'relative', height:'100vh', paddingTop:'', overflow:'', display:'flex', flexDirection:'column', justifyContent:'center', textAlign:'center',
 // fontSize: 'clamp(18px, calc(1rem + 2vw), 36px)',
 fontSize:'clamp(2.5rem, 3.5vw, 3.8rem)'
 }}>

@@ -4,8 +4,8 @@ import * as React from "react"
 // import { FaEnvelope } from 'react-icons/fa';
 // import { Link } from "gatsby"
 import CookieConsent from "react-cookie-consent";
-import { FaHandPointDown } from "react-icons/fa"
-import ScrollAnimation from 'react-animate-on-scroll'
+// import { FaHandPointDown } from "react-icons/fa"
+// import ScrollAnimation from 'react-animate-on-scroll'
 
 import styled from "styled-components"
 const CustomBox = styled.div`

@@ -24,7 +24,7 @@ import {
   RiBehanceFill,
 } from "react-icons/ri"
 import { FaWordpress, FaVk } from "react-icons/fa"
-import { Link } from "gatsby"
+// import { Link } from "gatsby"
 
 import {
   footerStyle,

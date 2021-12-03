@@ -1,8 +1,13 @@
-import React, { useState } from "react"
+import "../styles/reset.css"
+import "../styles/variables.css"
+import "../assets/scss/style.scss"
+import "../styles/global.css"
+import '@fontsource/lobster-two'
+import React from "react"
 // import { SkipNavLink } from "./skip-nav"
 // import { Header } from "./header"
 // import { Footer } from "./footer"
-import { IoHandLeft } from "react-icons/io5"
+// import { IoHandLeft } from "react-icons/io5"
 // gatsby develop
 
 import Theme from "../components/theme"
@@ -15,11 +20,9 @@ import { AiOutlineClose } from "react-icons/ai"
 // import { FaHandPointDown } from "react-icons/fa"
 // import Bug from "../../static/assets/logo.svg"
 // import '@fontsource/hammersmith-one'
-import '@fontsource/lobster-two'
 
-import "../styles/reset.css"
-import "../styles/variables.css"
-import "../styles/global.css"
+
+
 // import '@fontsource/roboto'
 
 
@@ -34,7 +37,7 @@ import "../styles/global.css"
 // import Audio from '../assets/audio.mp3'
 // import TouchUp from '../components/TouchUp'
 // import { IoMdFingerPrint } from 'react-icons/io'
-import "../assets/scss/style.scss"
+
 // import Consent from './Consent'
 import { useSiteMetadata } from "../hooks/use-site-metadata"
 // 
@@ -49,10 +52,10 @@ export function Layout({ children }) {
   const { menu2 } = useSiteMetadata()
   const { menu3 } = useSiteMetadata()
 
-  const [isVisible, setIsVisible] = useState(false);
-  const toggleVisible = () => {
-    setIsVisible(!isVisible);
-  };
+  // const [isVisible, setIsVisible] = useState(false);
+  // const toggleVisible = () => {
+  //   setIsVisible(!isVisible);
+  // };
 
   return (
 
@@ -82,8 +85,8 @@ export function Layout({ children }) {
 
 
   
-<header name="pagetop" className={isVisible ? 'left' : ''} >
-{/* <header name="pagetop" className=""> */}
+{/* <header name="pagetop" className={isVisible ? 'left' : ''} > */}
+<header name="pagetop" className="">
 
       <input type="checkbox" className="openSidebarMenu" id="openSidebarMenu" />
 
