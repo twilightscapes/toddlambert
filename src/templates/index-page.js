@@ -632,7 +632,7 @@ Guerrilla Marketing
 <br />
 
 
-  <section className="child split flexbutt" style={{position:'relative', height:'', overflow:'', display:'flex'}}>
+  <section className="child split flexbutt" style={{position:'relative', height:'', overflow:'', display:'flex', margin:'0 4%'}}>
 
 
 
@@ -642,15 +642,18 @@ Guerrilla Marketing
 
 
 <div style={{padding:'2rem', display:'', columnCount:'2', columnGap:'2rem', justifyContent:'', flexDirection:''}}>
-<p>Todd Lambert, a “webdude” that grew up in Southern California and whose career and endeavors have taken him to over 14 western states including living in Colorado, Texas and Oregon. He eventually found home living on the coastal Mississippi Sound.
+<p>Todd Lambert, a “webdude” that grew up in Southern California and whose career and endeavors have taken him to over 14 western states including living in Colorado, Texas and Oregon. </p>
+  
+  
+<p>He eventually found home living on the coastal Mississippi Sound.
 </p>
 
-<p>
+{/* <p>
 Having lived on the Mississippi gulf coast, twice, Todd has assisted many small businesses that were affected by Hurricane Katrina in establishing a sucessful online presence.
-</p>
+</p> */}
 
 <p>
-Todd is also actively involved with photography. You can often find him in the middle of the night down some dark alley while doing night photography and astrophotography which are his favorite subjects.
+Todd is also actively involved with photography. You can often find him in the middle of the night doing night photography and astrophotography which are his favorite subjects.
 </p>
 
 <p>
