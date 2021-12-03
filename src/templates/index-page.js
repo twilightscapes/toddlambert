@@ -760,7 +760,7 @@ Lambert
 
 <p>Industry experience including semiconductor, hospitality, entertainment, health, publishing, finance, insurance, construction, computer software, and direct marketing.</p>
 
-<br />
+
 <h2 className="todd-headline" style={{marginBottom:''}}>Proficiency</h2>
 
 
@@ -772,7 +772,6 @@ Lambert
 
 <p><strong>I prefer: JAM stack, React, Gatsby, Canon, Subaru and my Mac.</strong></p>
 
-<br />
 <h2 className="todd-headline">Education</h2>
 
 <ul className="edu">
