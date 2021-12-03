@@ -638,30 +638,30 @@ Guerrilla Marketing
 About
 </h3>
 
-<blockquote style={{padding:'1rem 0 1rem 5vw'}}>
+<div style={{padding:'0 4%'}}>
 <p>Todd Lambert, a “webdude” that grew up in Southern California and whose career and endeavors have taken him to over 14 western states including living in Colorado, Texas and Oregon. He eventually found home living on the coastal Mississippi Sound.
 </p>
-<br /><br />
+
 <p>
 Having lived on the Mississippi gulf coast, twice, Todd has assisted many small businesses that were affected by Hurricane Katrina in establishing a sucessful online presence.
 </p>
-<br /><br />
+
 <p>
 Todd is also actively involved with photography. You can often find him in the middle of the night down some dark alley while doing night photography and astrophotography which are his favorite subjects.
 </p>
-<br /><br />
+
 <p>
 Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes up most of his free time.
 </p>
 
-  </blockquote>
+  </div>
 
 </div>
 
-<div className="flexcheek" style={{maxWidth:''}}>
+<div className="flexcheek" style={{maxWidth:'', justifyContent:'flex-end'}}>
   <ScrollAnimation animateIn="fadeIn" animateOut="" initiallyVisible={false} animateOnce={true} animatePreScroll={false} delay={0} duration={3}>
 
-  <StaticImage src="../../static/assets/ahout-todd.jpg" alt="Twilightscapes Default Image" style={{height:'auto', maxHeight:'100vh', position:'', zIndex:'0', top:'0', border:'0px solid !important', objectFit:'contain',}} />
+  <StaticImage src="../../static/assets/promo-about-todd.jpg" alt="Twilightscapes Default Image" style={{height:'', maxHeight:'', position:'', zIndex:'0', marginTop:'50px', border:'0px solid !important', objectFit:'cover',}} />
 
 </ScrollAnimation>
 </div>
