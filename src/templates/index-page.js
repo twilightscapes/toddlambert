@@ -599,7 +599,7 @@ Digital Product Design
 
 
 <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={600}>
-<h4 className="logofirst" style={{textAlign:'center', marginTop:'', 
+<h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
 fontFamily: 'Lobster Two',
 letterSpacing: '2px',
 textTransform: 'lowercase',
@@ -607,11 +607,11 @@ fontWeight: '400',
 textShadow:'0 2px 0 #eee',
 }}>
 Conceptual Photography
-</h4>
+</h2>
 </ScrollAnimation>
 
 <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={600}>
-<h4 className="logofirst" style={{textAlign:'center', marginTop:'', 
+<h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
 fontFamily: 'Lobster Two',
 letterSpacing: '2px',
 textTransform: 'lowercase',
@@ -619,7 +619,7 @@ fontWeight: '400',
 textShadow:'0 2px 0 #eee',
 }}>
 Guerrilla Marketing
-</h4>
+</h2>
 </ScrollAnimation>
 
 
