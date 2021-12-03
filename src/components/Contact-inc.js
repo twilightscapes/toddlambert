@@ -95,7 +95,18 @@ export default class Contact extends React.Component {
             <textarea name="message" placeholder="Your Message" required></textarea>
           </label>
         </p>
-        <p className="text-align-right" style={{marginRight:'60px', color:'#fff'}}>
+
+
+        <div className="" style={{fontSize: '100%', padding: '', textAlign: 'center', border:'0px solid red'}}> 
+        
+        {/* <label htmlFor="consent" style={{color:'inherit', border:'none', outline:'none', display:'flex', justifyContent:'center', alignItems:'center'}}>
+          <input type="checkbox" name="consent" aria-checked checked required style={{ display:'inherit', transition: 'inherit', boxSizing: 'inherit', width:'20px', height:'', background:'inherit', paddingTop:''}} /> &nbsp; I want to communicate by email.
+        </label> */}
+
+          </div>
+
+
+        <p className="text-align-center" style={{marginRight:'', color:'#fff', textAlign:'center'}}>
           <button
             className="button"
             
@@ -108,6 +119,9 @@ export default class Contact extends React.Component {
           </button>
         </p>
         </div>
+
+        <div style={{fontSize: '80%', padding: '1rem 3%', textAlign: 'center',}}><a style={{textAlign: 'center', paddingTop: '0px', paddingBottom: '0', textDecoration: 'underline',}} href="/privacy">Privacy Policy</a>
+                </div>
       </form>
     </div>
       

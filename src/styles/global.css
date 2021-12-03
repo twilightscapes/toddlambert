@@ -60,6 +60,39 @@ footer a:not([href*='toddlambert.com']):not([href^='#']):not([href^='/']):after,
   }
 /* END External Links */
 
+input[type=checkbox] {
+  position: relative;
+  cursor: pointer;
+  border:none;
+}
+label{border:none;}
+input[type=checkbox]:before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 0;
+  left: 0;
+  border: 2px solid #555555;
+  border-radius: 3px;
+  background-color: white;
+}
+input[type=checkbox]:checked:after {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 10px;
+  border: 0 solid black;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  position: absolute;
+  top: 2px;
+  left: 6px;
+}
+
 
 @media (prefers-reduced-motion: reduce) {
   * {
@@ -1304,7 +1337,7 @@ border: 0px solid red;
     font-weight: 600;
     background:#333;
     color:#fff !important;
-    border:1px solid #666 !important;
+    /* border:1px solid #666 !important; */
     padding:10px !important;
     border-radius:8px;
     /* background:rgba(145, 26, 103, 0.829) !important; */
