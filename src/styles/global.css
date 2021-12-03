@@ -338,7 +338,7 @@ display: none !important;
 
 .blog-post-content .megacall{font-size:100%; line-height: 3rem; margin:1rem 0; padding:1rem; border:3px dotted var(--primary); margin:2rem auto;}
 
-.blog-post-content a{color:var(--home-link-color-hover);}
+.blog-post-content a{color:"";}
 .blog-post-content h2{font-size:200%; line-height: 3rem; margin:1rem 0;}
 .blog-post-content h2.megacall{font-size:200%; line-height: 3rem; margin:1rem 0; padding:1rem; border:3px dotted var(--primary); margin:2rem auto;}
 .blog-post-content h3{font-size:150%; line-height: 2.5rem; margin:1rem 0;}

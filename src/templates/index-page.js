@@ -628,17 +628,20 @@ Guerrilla Marketing
 
 
 
+  <h3 class="logotype"  style={{textAlign:'center', marginTop:'5vh', fontSize:'350%', clear:'right'}}>About</h3>
+<br />
+
 
   <section className="child split flexbutt" style={{position:'relative', height:'', overflow:'', display:'flex'}}>
 
-<div className="aboutme flexcheek" style={{width:'55vw'}}>
+
+
+<div className="aboutme flexcheek" style={{width:'55vw', justifyContent:'space-between'}}>
   
 
-  <h3 className="logotype" style={{textAlign:'center', margin:'5vh', fontSize:'350%',}}>
-About
-</h3>
 
-<div style={{padding:'0 4%'}}>
+
+<div style={{padding:'2rem', display:'', columnCount:'2', columnGap:'2rem', justifyContent:'', flexDirection:''}}>
 <p>Todd Lambert, a “webdude” that grew up in Southern California and whose career and endeavors have taken him to over 14 western states including living in Colorado, Texas and Oregon. He eventually found home living on the coastal Mississippi Sound.
 </p>
 
@@ -658,10 +661,10 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 
 </div>
 
-<div className="flexcheek" style={{maxWidth:'', justifyContent:'flex-end'}}>
+<div className="flexcheek" style={{maxWidth:'', padding:'2rem', justifyContent:'flex-end'}}>
   <ScrollAnimation animateIn="fadeIn" animateOut="" initiallyVisible={false} animateOnce={true} animatePreScroll={false} delay={0} duration={3}>
 
-  <StaticImage src="../../static/assets/promo-about-todd.jpg" alt="Twilightscapes Default Image" style={{height:'', maxHeight:'', position:'', zIndex:'0', marginTop:'50px', border:'0px solid !important', objectFit:'cover',}} />
+  <StaticImage src="../../static/assets/promo-about-todd.jpg" alt="Twilightscapes Default Image" style={{height:'', maxHeight:'', position:'', zIndex:'0', borderRadius:'12px', marginTop:'', border:'0px solid !important', objectFit:'cover',}} />
 
 </ScrollAnimation>
 </div>
@@ -691,7 +694,7 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 
 
     <div style={{width:'', margin:''}}>
-    <a href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
+    <a href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit'}}>
     <StaticImage src="../../static/assets/vidsock-promo.jpg" alt="Todd builds Web Apps"  />
     <br />
 Todd sells exceptionally fast and well-built multimedia web apps called VidSocks. They are a complete website solution that costs nothing to run!
