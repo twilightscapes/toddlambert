@@ -1828,10 +1828,7 @@ input[type="checkbox"]:checked ~ .backdrop1 {
   overflow-y: hidden !important;
   }
 
-.featurelisting h2{
-/* font-size:170%; */
 
-}
 
 .featurelist li{
   display: block;
@@ -2532,11 +2529,10 @@ background-position:center 70px;
    }
 
 
-
-
-
    footer, .back, #intro, #about, #portfolio, #contact, .spacer33, .spacer66, .print, .usability{display: none !important; height: 0px !important;}
+
    .printonly{display: block;}
+
    .logotype{ font-size: 500% !important;}
    .todd-headline{font-size: 200% !important;}
 
@@ -2554,12 +2550,6 @@ margin: 0 !important;
 }
     
     
-    
-     
-
-
-
-
 
 
     .panel-wrapper{
