@@ -581,12 +581,12 @@ Through NFT
 
  <div className="logolink" style={{textAlign:'center', position:'relative', top:'8vh', zIndex:'0', margin:'0 4%'}}><span class="logofirst">todd</span> <span className="logocolor">lambert</span></div>
 
- <section className="child" style={{position:'relative', height:'', paddingTop:'40px', overflow:'', display:'flex', flexDirection:'column', justifyContent:'center', textAlign:'center'}}>
+ <section className="child" style={{position:'relative', height:'', paddingTop:'15vh', overflow:'', display:'flex', flexDirection:'column', justifyContent:'center', textAlign:'center', fontSize:'5vw',}}>
 
 
 
 <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={500}>
-<h1 className="logofirst" style={{textAlign:'center', marginTop:'50px', fontSize:'7vw',
+<h1 className="logofirst" style={{textAlign:'center', marginTop:'50px', 
 fontFamily: 'Lobster Two',
 letterSpacing: '2px',
 textTransform: 'lowercase',
@@ -599,7 +599,7 @@ Digital Product Design
 
 
 <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={600}>
-<h4 className="logofirst" style={{textAlign:'center', marginTop:'', fontSize:'7vw',
+<h4 className="logofirst" style={{textAlign:'center', marginTop:'', 
 fontFamily: 'Lobster Two',
 letterSpacing: '2px',
 textTransform: 'lowercase',
@@ -611,7 +611,7 @@ Conceptual Photography
 </ScrollAnimation>
 
 <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={600}>
-<h4 className="logofirst" style={{textAlign:'center', marginTop:'', fontSize:'7vw',
+<h4 className="logofirst" style={{textAlign:'center', marginTop:'', 
 fontFamily: 'Lobster Two',
 letterSpacing: '2px',
 textTransform: 'lowercase',
