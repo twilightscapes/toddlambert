@@ -11,7 +11,7 @@ const theme = {
     muted: "rgba(0, 0, 0, 0.7)",
     cardBg: "linear-gradient(180deg, #333 1%, #111 80%)",
     borderColor: "#444",
-    labelText: "#777",
+    labelText: "#333",
     inputBorder: "#aaa",
     inputBackground: "#fff",
     socialIcons: lightness("siteColor", 0.4),

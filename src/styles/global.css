@@ -1291,7 +1291,10 @@ border: 0px solid red;
 
   }
 
-
+  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #fff;
+    opacity: 1; /* Firefox */
+  }
 
 
 
