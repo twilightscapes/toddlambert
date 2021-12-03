@@ -845,6 +845,8 @@ height:0;
 
 .flexbutt {display:flex; }
 
+.flexbutt img{border-radius: 12px !important;}
+
 .flexcheek {width:50%; position:sticky; top:0;}
 
 .mobile{display: none; border:0px solid #ad04a5 !important;}

@@ -693,10 +693,10 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 <section id="portfolio">
  <h3 className="logotype"  style={{textAlign:'center', margin:'5vh 0', fontSize:'350%', clear:'right'}}>Portfolio</h3>
 <br />
-<div className="masonry noexit print" style={{display:'',}}>
+<div className="flexbutt noexit print" style={{gap:'20px', padding:'0 4%'}}>
 
 
-    <div style={{height:'400px', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
+    <div className="flexcheek" style={{height:'400px', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
     <a href="https://twilightscapes.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
     <StaticImage src="../../static/assets/twilightscapes-button.jpg" alt="Todd Lambert Night photos"  />
     <br />
@@ -706,7 +706,7 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
     </div>
 
 
-    <div style={{height:'400px', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
+    <div className="flexcheek" style={{height:'400px', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
     <a href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit'}}>
     <StaticImage src="../../static/assets/vidsock-promo.jpg" alt="Todd builds Web Apps"  />
     <br />
@@ -716,7 +716,7 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
     </div>
 
     
-    <div style={{height:'400px', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
+    <div className="flexcheek" style={{height:'400px', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
     <a href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
     <StaticImage src="../../static/assets/urban-fetish-button.jpg" alt="Todd Lambert Night photos"  />
     <br />
