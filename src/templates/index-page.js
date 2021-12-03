@@ -581,7 +581,10 @@ Through NFT
 
  <div className="logolink" style={{textAlign:'center', position:'relative', top:'8vh', zIndex:'0', margin:'0 4%'}}><span class="logofirst">todd</span> <span className="logocolor">lambert</span></div>
 
- <section className="child" style={{position:'relative', height:'100vh', paddingTop:'15vh', overflow:'', display:'flex', flexDirection:'column', justifyContent:'center', textAlign:'center', fontSize:'5vw',}}>
+ <section className="child" style={{position:'relative', height:'', paddingTop:'15vh', overflow:'', display:'flex', flexDirection:'column', justifyContent:'center', textAlign:'center', fontSize:'5vw',
+// fontSize: 'clamp(18px, calc(1rem + 2vw), 36px)',
+fontSize:'clamp(2.5rem, 3.5vw, 3.8rem)'
+}}>
 
 
 
@@ -637,12 +640,12 @@ Guerrilla Marketing
 
 
 
-<div className="aboutme flexcheek" style={{width:'55vw', justifyContent:'space-between'}}>
+<div className="aboutme flexcheek" style={{width:'55vw', justifyContent:''}}>
   
 
 
 
-<div style={{padding:'0', display:'', columnCount:'2', columnRule:' 4px dotted #dd4000', columnGap:'40px', justifyContent:'', flexDirection:''}}>
+<div style={{padding:'0', display:'', columnCount:'2', columnRule:' 0px dotted #666', columnGap:'40px', justifyContent:'', flexDirection:''}}>
 <p>Todd Lambert, a “webdude” that grew up in Southern California and whose career and endeavors have taken him to over 14 western states including living in Colorado, Texas and Oregon. </p>
   
   
