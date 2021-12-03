@@ -581,11 +581,11 @@ Through NFT
 
  <div className="logolink" style={{textAlign:'center', position:'relative', top:'8vh', zIndex:'0', margin:'0 4%'}}><span class="logofirst">todd</span> <span className="logocolor">lambert</span></div>
 
- <section className="child" style={{position:'relative', height:'', paddingTop:'15vh', overflow:'', display:'flex', flexDirection:'column', justifyContent:'center', textAlign:'center', fontSize:'5vw',}}>
+ <section className="child" style={{position:'relative', height:'100vh', paddingTop:'15vh', overflow:'', display:'flex', flexDirection:'column', justifyContent:'center', textAlign:'center', fontSize:'5vw',}}>
 
 
 
-<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={500}>
+{/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={500}> */}
 <h1 className="logofirst" style={{textAlign:'center', marginTop:'50px', 
 fontFamily: 'Lobster Two',
 letterSpacing: '2px',
@@ -595,10 +595,10 @@ textShadow:'0 2px 0 #eee'
 }}>
 Digital Product Design
 </h1>
-</ScrollAnimation>
+{/* </ScrollAnimation> */}
 
 
-<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={600}>
+{/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={600}> */}
 <h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
 fontFamily: 'Lobster Two',
 letterSpacing: '2px',
@@ -608,9 +608,9 @@ textShadow:'0 2px 0 #eee',
 }}>
 Conceptual Photography
 </h2>
-</ScrollAnimation>
+{/* </ScrollAnimation> */}
 
-<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={600}>
+{/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={600}> */}
 <h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
 fontFamily: 'Lobster Two',
 letterSpacing: '2px',
@@ -620,7 +620,7 @@ textShadow:'0 2px 0 #eee',
 }}>
 Guerrilla Marketing
 </h2>
-</ScrollAnimation>
+{/* </ScrollAnimation> */}
 
 
 
@@ -628,11 +628,12 @@ Guerrilla Marketing
 
 
 
-  <h3 class="logotype"  style={{textAlign:'center', marginTop:'5vh', fontSize:'350%', clear:'right'}}>About</h3>
-<br />
+  <h3 class="logotype"  style={{textAlign:'center', margin:'5vh 0', fontSize:'350%', clear:'right'}}>About</h3>
 
 
-  <section className="child split flexbutt" style={{position:'relative', height:'', overflow:'', display:'flex', margin:'0 4%'}}>
+
+  <section className="child split flexbutt" style={{position:'relative', height:'', overflow:'', display:'flex', gap
+  :'30px', margin:'0 4%'}}>
 
 
 
@@ -641,7 +642,7 @@ Guerrilla Marketing
 
 
 
-<div style={{padding:'2rem 0', display:'', columnCount:'2', columnRule:' 4px dotted #dd4000', columnGap:'40px', justifyContent:'', flexDirection:''}}>
+<div style={{padding:'0', display:'', columnCount:'2', columnRule:' 4px dotted #dd4000', columnGap:'40px', justifyContent:'', flexDirection:''}}>
 <p>Todd Lambert, a “webdude” that grew up in Southern California and whose career and endeavors have taken him to over 14 western states including living in Colorado, Texas and Oregon. </p>
   
   
@@ -664,12 +665,11 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 
 </div>
 
-<div className="flexcheek" style={{maxWidth:'', padding:'2rem', justifyContent:'flex-end'}}>
-  <ScrollAnimation animateIn="fadeIn" animateOut="" initiallyVisible={false} animateOnce={true} animatePreScroll={false} delay={0} duration={3}>
+<div className="flexcheek" style={{maxWidth:'', padding:'', justifyContent:'flex-end'}}>
+ 
 
   <StaticImage src="../../static/assets/promo-about-todd.jpg" alt="Twilightscapes Default Image" style={{height:'', maxHeight:'', position:'', zIndex:'0', borderRadius:'12px', marginTop:'', border:'0px solid !important', objectFit:'cover',}} />
 
-</ScrollAnimation>
 </div>
 
 </section>
@@ -682,7 +682,7 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 
 
 
- <h3 class="logotype"  style={{textAlign:'center', marginTop:'5vh', fontSize:'350%', clear:'right'}}>Portfolio</h3>
+ <h3 class="logotype"  style={{textAlign:'center', margin:'5vh 0', fontSize:'350%', clear:'right'}}>Portfolio</h3>
 <br />
 <div className="masonry noexit" style={{display:'',}}>
 
@@ -725,14 +725,14 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
 
 
 <div className="container3" style={{}}>
-<h3 className="logotype" style={{textAlign:'center', marginTop:'50px', fontSize:'350%',}}>
+<h3 className="logotype" style={{textAlign:'center', margin:'5vh 0', fontSize:'350%',}}>
 Resume
 </h3>
 </div>
 
 {/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={0} duration={2}> */}
 
-<div className=" outer1 section1" style={{paddingTop:'40px', height:'', background:'transparent'}}>
+<div className=" outer1 section1" style={{paddingTop:'', height:'', background:'transparent'}}>
 
 
 
@@ -838,11 +838,11 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
 {/* </ScrollAnimation> */}
 
 
-<div className="spacer33"></div> 
+{/* <div className="spacer33"></div>  */}
 
 <section className="child" style={{position:'relative', height:'auto', zIndex:'', paddingTop:'',}}>
 <div className="container3" style={{}}>
-<h3 className="logotype" style={{textAlign:'center', marginTop:'50px', fontSize:'350%',}}>
+<h3 className="logotype" style={{textAlign:'center', margin:'5vh 0', fontSize:'350%',}}>
 Contact
 </h3>
 </div>
