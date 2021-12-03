@@ -870,9 +870,9 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
               color:'#ccc'
             }}
           >
-            Download Resume For Todd Lambert
+            Resume for Todd Lambert
             <span className="icon -right">
-              <VscFilePdf style={{fontSize:'30px'}} />
+              <VscFilePdf style={{fontSize:'30px'}} />[download]
             </span>
 
             
