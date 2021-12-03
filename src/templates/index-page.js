@@ -243,7 +243,7 @@ const YouTube = frontmatter.youtuber
 <Seo
           title={`Todd Lambert (the original) - Photographer | Web Developer and Product Designer`}
           description={`Todd builds websites, web apps and creates digital products. He also does conceptual photography.`}
-          image={'https://toddlambert.com/todd-camping.jpg'}
+          image={'https://toddlambert.com/assets/todd-camping.jpg'}
         />
        {/* <Seo
         title={frontmatter.title}
