@@ -70,6 +70,8 @@ export default class Contact extends React.Component {
         data-netlify-honeypot="bot-field"
       >
         <input type="hidden" name="form-name" value="contact" />
+
+        <div className="masonry">
         <p>
           <label>
             <input type="text" name="name" placeholder="Name" required />
@@ -85,6 +87,9 @@ export default class Contact extends React.Component {
             <input type="text" name="subject" placeholder="Subject" required />
           </label>
         </p>
+        </div>
+        
+        <div>
         <p>
           <label>
             <textarea name="message" placeholder="Your Message" required></textarea>
@@ -102,6 +107,7 @@ export default class Contact extends React.Component {
             </span>
           </button>
         </p>
+        </div>
       </form>
     </div>
       
