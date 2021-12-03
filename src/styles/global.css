@@ -44,7 +44,7 @@ body{font-family: -system-ui, -apple-system, BlinkMacSystemFont, segoe ui,  Helv
     line-height:1.35}
 
 /* External Links */
-a:not([href*='localhost:8000']):not([href^='#']):not([href^='/']):after {
+a:not([href*='toddlambert.com']):not([href^='#']):not([href^='/']):after {
   content: " \2348";
   text-decoration: none !important;
   font-size: 115%;
@@ -55,7 +55,7 @@ a:not([href*='localhost:8000']):not([href^='#']):not([href^='/']):after {
   font-weight:bold;
 }
 
-footer a:not([href*='localhost:8000']):not([href^='#']):not([href^='/']):after, a.noext:not([href*='localhost:8000']):not([href^='#']):not([href^='/']):after{
+footer a:not([href*='toddlambert.com']):not([href^='#']):not([href^='/']):after, a.noext:not([href*='toddlambert.com']):not([href^='#']):not([href^='/']):after{
   content: none;
   }
 /* END External Links */
