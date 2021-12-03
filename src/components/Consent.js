@@ -9,9 +9,7 @@ import CookieConsent from "react-cookie-consent";
 
 import styled from "styled-components"
 const CustomBox = styled.div`
-@media (max-width: 58em) {
-.bounce{left:inherit !important;}
-}
+
 
 `
 

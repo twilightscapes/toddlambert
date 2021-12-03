@@ -184,6 +184,14 @@ module.exports = {
         trackingIds: [
           settings.ga, // Google Analytics / GA
         ],
+        pluginConfig: {
+          // Puts tracking script in the head instead of the body
+          head: false,
+          // Setting this parameter is also optional
+          respectDNT: true,
+          // Avoids sending pageview hits from custom paths
+          exclude: ["/preview/**", "/do-not-track/me/too/"],
+        },
       },
     },
     
