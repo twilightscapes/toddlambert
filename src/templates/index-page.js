@@ -243,7 +243,7 @@ const YouTube = frontmatter.youtuber
 <Seo
           title={`Todd Lambert (the original) - Photographer | Web Developer and Product Designer`}
           description={`Todd builds websites, web apps and creates digital products. He also does conceptual photography.`}
-          image={'https://toddlambert.com/todd=camping.jpg'}
+          image={'https://toddlambert.com/todd-camping.jpg'}
         />
        {/* <Seo
         title={frontmatter.title}
@@ -653,7 +653,7 @@ Having lived on the Mississippi gulf coast, twice, Todd has assisted many small 
 </p> */}
 
 <p>
-Todd is also actively involved with photography. You can often find him in the middle of the night doing night photography and astrophotography which are his favorite subjects.
+Todd is actively pushing the boundaries of night photography. You can often find him in the middle of the night shooting astrophotography which is his favorite subject.
 </p>
 
 <p>

@@ -3063,8 +3063,9 @@ height:100vh;
             }
             
             .logolink {
-              font-size: 490%;
-              text-shadow:0 2px 0px #fff
+              /* font-size:13vw; */
+              font-size: clamp(2.5rem, 13vw, 5rem);
+              text-shadow:0 2px 0px #fff;
             }
             
             .logofirst {
