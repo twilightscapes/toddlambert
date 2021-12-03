@@ -579,9 +579,9 @@ Through NFT
 
  </div>{/* end scooch */}
 
- <div className="logolink" style={{textAlign:'center', position:'relative', top:'8vh', zIndex:'0', width:'98vw'}}><span class="logofirst">todd</span> <span className="logocolor">lambert</span></div>
+ <div className="logolink" style={{textAlign:'center', position:'relative', top:'8vh', zIndex:'0', margin:'0 4%'}}><span class="logofirst">todd</span> <span className="logocolor">lambert</span></div>
 
- <section className="child" style={{position:'relative', height:'100vh', paddingTop:'0', overflow:'', display:'flex', flexDirection:'column', justifyContent:'center', textAlign:'center'}}>
+ <section className="child" style={{position:'relative', height:'', paddingTop:'40px', overflow:'', display:'flex', flexDirection:'column', justifyContent:'center', textAlign:'center'}}>
 
 
 
@@ -730,12 +730,9 @@ Resume
 </h3>
 </div>
 
-
-
-
 {/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={0} duration={2}> */}
 
-<div className=" outer1 section1" style={{paddingTop:'100px', height:'', background:'transparent'}}>
+<div className=" outer1 section1" style={{paddingTop:'40px', height:'', background:'transparent'}}>
 
 
 
@@ -845,9 +842,11 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
 <div className="spacer33"></div> 
 
 <section className="child" style={{position:'relative', height:'auto', zIndex:'', paddingTop:'',}}>
-<h2 className="logotype" style={{textAlign:'center', fontSize:'180%', margin:''}}>
-loves when you fill this out
-</h2>
+<div className="container3" style={{}}>
+<h3 className="logotype" style={{textAlign:'center', marginTop:'50px', fontSize:'350%',}}>
+Contact
+</h3>
+</div>
   <div className="outer" style={{margin:'0 12%'}}><Contact /></div> 
  </section>
 
