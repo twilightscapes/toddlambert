@@ -639,7 +639,7 @@ Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
  <div className="spacer66 mobilehide"></div> 
 
  <section id="about">
-  <h3 className="logotype"  style={{textAlign:'center', margin:'0 0 5vh 0', fontSize:'350%', clear:'right'}}>About</h3>
+  <h3 className="logotype"  style={{textAlign:'center', margin:'0 0 5vh 0', fontSize:'300%', clear:'right'}}>About</h3>
 
 
 
@@ -694,7 +694,7 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 
 
 <section id="portfolio">
- <h3 className="logotype"  style={{textAlign:'center', margin:'5vh 0', fontSize:'350%', clear:'right'}}>Portfolio</h3>
+ <h3 className="logotype"  style={{textAlign:'center', margin:'5vh 0', fontSize:'300%', clear:'right'}}>Portfolio</h3>
 <br />
 <div className="flexbutt noexit print" style={{gap:'20px', padding:'0 4%'}}>
 
@@ -755,7 +755,7 @@ Lambert
 
 <div className="container3" style={{ position:'relative'}}>
 
-<h3 className="logotype print" style={{textAlign:'center', margin:' 0', fontSize:'350%',}}>
+<h3 className="logotype print" style={{textAlign:'center', margin:' 0', fontSize:'300%',}}>
 Resume
 </h3>
 <h3 className="logotype printonly" style={{textAlign:'center', margin:' 0', fontSize:'350%',}}>
@@ -898,7 +898,7 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
 
 <section id="contact" className="child" style={{position:'relative', height:'auto', zIndex:'', paddingTop:'',}}>
 <div className="container3" style={{}}>
-<h3 className="logotype" style={{textAlign:'center', margin:'5vh 0', fontSize:'350%',}}>
+<h3 className="logotype" style={{textAlign:'center', margin:'5vh 0', fontSize:'300%',}}>
 Contact
 </h3>
 </div>

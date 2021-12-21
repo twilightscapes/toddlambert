@@ -3,7 +3,7 @@
 body {
   font-family: var(--font-body);
   color: var(--text-color);
-  background: inherit;
+  background: #222;
   overflow-x: hidden !important;
   width:100vw;
 }
