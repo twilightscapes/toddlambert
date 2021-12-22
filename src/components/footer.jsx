@@ -24,14 +24,9 @@ import {
   RiBehanceFill,
 } from "react-icons/ri"
 import { FaWordpress, FaVk } from "react-icons/fa"
-// import { Link } from "gatsby"
+import { Link } from "gatsby"
 
-import {
-  footerStyle,
-  // links,
-  blurb,
-  // logos,
-} from "./footer.module.css"
+
 
 
 
@@ -206,16 +201,16 @@ export function Footer() {
 
 {/* </ScrollAnimation> */}
 
-    <footer className={footerStyle} style={{padding:'1rem 0', marginTop:'2rem', position:'relative', zIndex:'1'}}>
+    <footer className="footerstyle" style={{padding:'1rem 0', marginTop:'2rem', position:'relative', zIndex:'1', display:'flex', flexDirection:'column'}}>
 
-    {/* <FaHandPointDown className="bounce" style={{fontSize:'80px', textAlign:'center', width:'100%', position:'absolute', top:'-80px', margin:'1rem auto', color:'#fff',}} /> */}
+    
     <Consent />
 
     
-      <div className={blurb}>
+      <div className="" style={{display:'flex', justifyContent:'center', flexDirection:'column'}}>
 
 
-        {/* <Link state={{modal: true}} to="/contact/" className="navbar-item  button fire" style={{margin:'10px 2rem 2rem 2rem', textDecoration:'none'}}>Contact Form</Link> */}
+        <Link state={{modal: true}} to="/contact/" className="navbar-item  button fire" style={{margin:'20px auto 2rem auto', textDecoration:'none', maxWidth:'250px', fontSize:'120%', textAlign:'center' }}>Contact Me!</Link>
 
 
 
@@ -229,8 +224,7 @@ export function Footer() {
 
   ) : (
     <div className="social-icons" style={{textAlign:'center', justifyContent:'center', display:'flex', alignItems:'center'}}>
-       <div className="socialtext" style={{fontSize:'14px',}}>Social<br />Links</div>
-        {sIcons}
+       <div className="socialtext" style={{fontSize:'14px',}}>Social<br />Links</div> {sIcons}
         </div>
   )}
   
@@ -240,11 +234,16 @@ export function Footer() {
         
       </div>
       <nav className="footerlinks" aria-label="footer">
-
-      {/* <div style={{textAlign: 'center', margin: '2rem 10px 1rem 10px', justifyContent: 'center', fontSize: '.95rem', textDecoration:'none'}}><Link to="/disclaimer/">Disclaimer</Link>  |  <Link to="/privacy/">Privacy Policy</Link>  |  <Link to="/terms/">Terms of Use</Link></div> */}
+      <div style={{textAlign: 'center', margin: '2rem 10px 1rem 10px', justifyContent: 'center', fontSize: '.95rem', textDecoration:'none'}}><Link to="/disclaimer/">Disclaimer</Link>  |  <Link to="/privacy/">Privacy Policy</Link>  |  <Link to="/terms/">Terms of Use</Link></div>
   
 
 <div style={{textAlign: 'center', margin: '0 0 2rem 0', justifyContent: 'center', fontSize: '.75rem'}}>Copyright &copy; {(new Date().getFullYear())} {companyname}</div>
+
+
+
+
+<br />
+<br />
 
 
 

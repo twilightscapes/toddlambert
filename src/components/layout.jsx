@@ -14,12 +14,13 @@ import { AiOutlineClose } from "react-icons/ai"
 // import { AnchorLink } from "gatsby-plugin-anchor-links"
 // import { FaHandPointDown } from "react-icons/fa"
 // import Bug from "../../static/assets/logo.svg"
+import { Helmet } from "react-helmet"
 import "../styles/reset.css"
 import "../styles/variables.css"
 import "../styles/global.css"
 // import '@fontsource/roboto'
 // import '@fontsource/hammersmith-one'
-import '@fontsource/lobster-two'
+// import '@fontsource/lobster-two'
 
 // import { FiShare } from 'react-icons/fi';
 // import { FaRegPlusSquare } from 'react-icons/fa';
@@ -55,6 +56,14 @@ export function Layout({ children }) {
   return (
 
 <>
+
+<Helmet>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" /> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> 
+<link href="https://fonts.googleapis.com/css2?family=Lobster+Two&amp;display=swap" rel="stylesheet" />
+
+</Helmet>
       <Seo />
 
 

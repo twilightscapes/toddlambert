@@ -65,12 +65,12 @@ export const pageQuery = graphql`
         featuredImage {
           publicURL
           childImageSharp {
-            gatsbyImageData(layout: FULL_WIDTH)
+            gatsbyImageData(layout: CONSTRAINED)
           }
         }
         secondaryImage {
           childImageSharp {
-            gatsbyImageData(layout: FULL_WIDTH)
+            gatsbyImageData(layout: CONSTRAINED)
           }
         }
         underlayImage {
