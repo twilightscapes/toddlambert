@@ -620,7 +620,7 @@ Through NFT
 {/* end show Posts */}
 {ShowPosts ? (
 
-<div id="posts" name="posts">
+<div>
         <BlogListHome data={posts} />
 
         <section style={{height:'auto'}}>
@@ -831,6 +831,105 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
 
 
 
+
+
+<section id="posts" name="posts">
+ <h3 className="logotype"  style={{textAlign:'center', margin:'5vh 0', fontSize:'300%', clear:'right'}}>Portfolio</h3>
+<br />
+
+
+<SRLWrapper options={options} className="1">
+
+<div className="masonry4" style={{display:''}}>
+
+<div style={{textAlign:'center'}}>
+  <StaticImage className="1" src="../../static/assets/tle-portfolio-spotlights.png" alt="Todd builds Web Apps" style={{}}  />
+Concept to Conception
+</div>
+
+<div style={{textAlign:'center'}}>
+<StaticImage className="1" src="../../static/assets/tle-portfolio-spotlights2.png" alt="Todd builds Web Apps"  />
+Concept to Conception
+</div>
+
+<div style={{textAlign:'center'}}>
+<StaticImage className="1" src="../../static/assets/tle-portfolio-spotlights3.png" alt="Todd builds Web Apps"  />
+Homepage Redesign and Product Portal
+</div>
+
+</div>
+</SRLWrapper>
+
+<br />
+<br />
+<div className="masonry4" style={{display:''}}>
+<Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'120%', textAlign:'center' }}>
+  <StaticImage className="1" src="../../static/assets/Experiences-Header-6.jpg" alt="Todd builds Web Apps"  />
+Animated SVG VIDEO
+</Link>
+
+{/* <Link state={{modal: true}} to="/they-live/" className="" style={{margin:'', textDecoration:'none', fontSize:'120%', textAlign:'center' }}>
+<StaticImage className="1" src="../../static/assets/TheyLive-Header.jpg" alt="Todd builds Web Apps"  />
+Animated SVG VIDEO
+</Link> */}
+
+{/* <Link state={{modal: true}} to="/mystery-science-theater-3021/" className="" style={{fontSize:'120%', textDecoration:'none', textAlign:'center' }}>
+  <StaticImage className="1" src="../../static/assets/Experiences-Header-7.jpg" alt="Todd builds Web Apps"  />
+  Animated SVG VIDEO
+  </Link> */}
+
+
+  <Link state={{modal: true}} to="/twilightscapes/" className="" style={{fontSize:'120%', textDecoration:'none', textAlign:'center' }}>
+  <StaticImage className="1" src="../../static/assets/Experiences-Header-5.jpg" alt="Todd builds Web Apps"  />
+  Animated SVG VIDEO
+  </Link>
+
+  {/* <Link state={{modal: true}} to="/tv-signals/" className="" style={{fontSize:'120%', textDecoration:'none', textAlign:'center' }}>
+  <StaticImage className="1" src="../../static/assets/television-signals-promo.jpg" alt="Todd builds Web Apps"  />
+  Animated SVG VIDEO
+  </Link> */}
+
+  <Link state={{modal: true}} to="/alien-egg-farm/" className="" style={{fontSize:'120%', textDecoration:'none', textAlign:'center' }}>
+  <StaticImage className="1" src="../../static/assets/Experiences-Header-3.jpg" alt="Todd builds Web Apps"  />
+  Animated SVG VIDEO
+  </Link>
+
+{/* <StaticImage className="" src="../../static/assets/tle-portfolio-spotlights.png" alt="Todd builds Web Apps"  />
+
+<StaticImage className="" src="../../static/assets/tle-portfolio-spotlights2.png" alt="Todd builds Web Apps"  />
+
+<StaticImage className="" src="../../static/assets/tle-portfolio-spotlights3.png" alt="Todd builds Web Apps"  /> */}
+
+{/* <StaticImage src="../../static/assets/coast-promos.png" alt="Todd builds Web Apps"  />
+
+
+
+<StaticImage src="../../static/assets/coast-promos3.png" alt="Todd builds Web Apps"  />
+
+
+
+<StaticImage src="../../static/assets/zombie-bucket-logo.png" alt="Todd builds Web Apps"  /> */}
+
+</div>
+
+
+  <article className="post-card button actionJackson" style={{ display:'flex', maxWidth:'400px', justifyContent:'center', border:'1px solid', padding:'', margin:'2rem auto', fontSize:'150%', textAlign:'center', }}>
+  <Link to="/posts/" style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
+    View More <RiArrowRightSLine style={{fontSize:'50px'}} />
+    </Link>
+    </article>
+
+
+
+</section>
+
+
+
+
+<div className="spacer66"></div>
+
+
+
 {/* <div className="container3" style={{}}>
 <h3 className="logotype" style={{textAlign:'center', margin:'5vh 0', fontSize:'350%',}}>
 Lambert
@@ -985,99 +1084,7 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
 
 </section>
 
-<div className="spacer66"></div>
 
-
-
-<section id="portfolio">
- <h3 className="logotype"  style={{textAlign:'center', margin:'5vh 0', fontSize:'300%', clear:'right'}}>Portfolio</h3>
-<br />
-
-
-<SRLWrapper options={options} className="1">
-
-<div className="masonry4" style={{display:''}}>
-
-<div style={{textAlign:'center'}}>
-  <StaticImage className="1" src="../../static/assets/tle-portfolio-spotlights.png" alt="Todd builds Web Apps" style={{}}  />
-Concept to Conception
-</div>
-
-<div style={{textAlign:'center'}}>
-<StaticImage className="1" src="../../static/assets/tle-portfolio-spotlights2.png" alt="Todd builds Web Apps"  />
-Concept to Conception
-</div>
-
-<div style={{textAlign:'center'}}>
-<StaticImage className="1" src="../../static/assets/tle-portfolio-spotlights3.png" alt="Todd builds Web Apps"  />
-Homepage Redesign and Product Portal
-</div>
-
-</div>
-</SRLWrapper>
-
-<br />
-<br />
-<div className="masonry4" style={{display:''}}>
-<Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'120%', textAlign:'center' }}>
-  <StaticImage className="1" src="../../static/assets/Experiences-Header-6.jpg" alt="Todd builds Web Apps"  />
-Animated SVG VIDEO
-</Link>
-
-<Link state={{modal: true}} to="/they-live/" className="" style={{margin:'', textDecoration:'none', fontSize:'120%', textAlign:'center' }}>
-<StaticImage className="1" src="../../static/assets/TheyLive-Header.jpg" alt="Todd builds Web Apps"  />
-Animated SVG VIDEO
-</Link>
-
-<Link state={{modal: true}} to="/mystery-science-theater-3021/" className="" style={{fontSize:'120%', textDecoration:'none', textAlign:'center' }}>
-  <StaticImage className="1" src="../../static/assets/Experiences-Header-7.jpg" alt="Todd builds Web Apps"  />
-  Animated SVG VIDEO
-  </Link>
-
-
-  <Link state={{modal: true}} to="/twilightscapes/" className="" style={{fontSize:'120%', textDecoration:'none', textAlign:'center' }}>
-  <StaticImage className="1" src="../../static/assets/Experiences-Header-5.jpg" alt="Todd builds Web Apps"  />
-  Animated SVG VIDEO
-  </Link>
-
-  <Link state={{modal: true}} to="/tv-signals/" className="" style={{fontSize:'120%', textDecoration:'none', textAlign:'center' }}>
-  <StaticImage className="1" src="../../static/assets/television-signals-promo.jpg" alt="Todd builds Web Apps"  />
-  Animated SVG VIDEO
-  </Link>
-
-  <Link state={{modal: true}} to="/alien-egg-farm/" className="" style={{fontSize:'120%', textDecoration:'none', textAlign:'center' }}>
-  <StaticImage className="1" src="../../static/assets/Experiences-Header-3.jpg" alt="Todd builds Web Apps"  />
-  Animated SVG VIDEO
-  </Link>
-
-{/* <StaticImage className="" src="../../static/assets/tle-portfolio-spotlights.png" alt="Todd builds Web Apps"  />
-
-<StaticImage className="" src="../../static/assets/tle-portfolio-spotlights2.png" alt="Todd builds Web Apps"  />
-
-<StaticImage className="" src="../../static/assets/tle-portfolio-spotlights3.png" alt="Todd builds Web Apps"  /> */}
-
-{/* <StaticImage src="../../static/assets/coast-promos.png" alt="Todd builds Web Apps"  />
-
-
-
-<StaticImage src="../../static/assets/coast-promos3.png" alt="Todd builds Web Apps"  />
-
-
-
-<StaticImage src="../../static/assets/zombie-bucket-logo.png" alt="Todd builds Web Apps"  /> */}
-
-</div>
-
-
-  <article className="post-card button actionJackson" style={{ display:'flex', maxWidth:'400px', justifyContent:'center', border:'1px solid', padding:'', margin:'2rem auto', fontSize:'150%', textAlign:'center', }}>
-  <Link to="/posts/" style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
-    View More <RiArrowRightSLine style={{fontSize:'50px'}} />
-    </Link>
-    </article>
-
-
-
-</section>
 
 
 
