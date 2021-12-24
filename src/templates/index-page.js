@@ -791,7 +791,7 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
     <br />
     Experience a new style of landscape photography all through the eyes of Todd Lambert. Explore the unusual and see the night like you&apos;ve never seen it before.
     <br /><br /> */}
-    <div style={{textAlign:'center',}}>Twilightscapes.com</div>
+    <div style={{textAlign:'center',}}><a className="button noexit" href="https://twilightscapes.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>Twilightscapes.com</a></div>
     {/* </a> */}
     </div>
 
@@ -802,7 +802,7 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
     <br />
 Todd sells exceptionally fast and well-built multimedia web apps called VidSocks. They are a complete website solution that costs nothing to run and rank incredibly well in Google!
     <br /><br /> */}
-    <div style={{textAlign:'center',}}>VidSocks.com</div>
+    <div style={{textAlign:'center',}}><a className="button noexit" href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>VidSocks.com</a></div>
     {/* </a> */}
     </div>
 
@@ -813,7 +813,7 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
     <br />
     Take a walk on the wild side and follow along as Todd Lambert goes in search of the creepiest, freakiest, spookiest abandoned and desolate locations he can find. 
     <br /><br /> */}
-    <div style={{textAlign:'center',}}>UrbanFetish.com</div>
+    <div style={{textAlign:'center',}}><a className="button noexit" href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>UrbanFetish.com</a></div>
     {/* </a> */}
     </div>
 

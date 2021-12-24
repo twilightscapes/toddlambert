@@ -289,8 +289,8 @@ const iframeUrl = "https://www.youtube.com/embed/" + frontmatter.youtuber + ""
       <img className="homepage-bg1 mobilehide" src={iconimage} width="90%" height="" alt="VidSock" style={{ width:'', height:'', maxWidth:'',  background:'transparent !important',}} />
       <br /><br />
     </div>
-          
-              <div style={{width:'', margin:'2rem auto 0 auto', fontWeight:'bold', padding:'0 1rem', fontSize:'2rem', background:'linear-gradient(180deg, #eee 30%, #2FBFE8 80%)', borderRadius:'12px', border:'1px solid #333',filter:'drop-shadow(2px 2px 2px #000)'}}><span style={{filter:'drop-shadow(2px 2px 2px #000)'}}>Click To Play</span></div>
+
+              <div className="actionJackson" style={{width:'', margin:'2rem auto 0 auto', fontWeight:'bold', padding:'0 1rem', fontSize:'2rem', background:'linear-gradient(180deg, #292628 1%, #111 99%)', borderRadius:'12px', border:'1px solid #333',filter:'drop-shadow(2px 2px 2px #000)'}}><span style={{filter:'drop-shadow(2px 2px 2px #000)'}}>Click To Play</span></div>
       {/* <ImPlay style={{margin:'0 auto', width:'50%', fontSize:'60px'}} /> */}
               </div>
               </button>}
