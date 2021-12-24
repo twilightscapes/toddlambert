@@ -749,7 +749,7 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 {/* <Link state={{modal: true}} to="/about-todd/" className="actionJackson button" style={{margin:'', textDecoration:'none', fontSize:'120%', textAlign:'center' }}>View More About Todd</Link> */}
 
 
-<Link state={{modal: true}}
+{/* <Link state={{modal: true}}
             to="/about-todd/"
             className="button fire actionJackson noexit print"
             style={{
@@ -763,12 +763,7 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
             }}
           >
             View More About Todd
-            {/* <span className="icon -right">
-              <VscFilePdf style={{fontSize:'30px'}} />
-            </span> */}
-
-            
-          </Link>
+          </Link> */}
 
 
 </section>
