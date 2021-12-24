@@ -12,6 +12,7 @@ import ScrollAnimation from 'react-animate-on-scroll'
 import Contact from '../components/Contact-inc'
 import { Helmet } from "react-helmet"
 import { StaticImage } from "gatsby-plugin-image"
+import CasePanels from "../components/casepanels"
 // import { useSiteMetadata } from "../hooks/use-site-metadata"
 import ReactPlayer from 'react-player/lazy'
 // import { ImPlay } from "react-icons/im"
@@ -20,6 +21,7 @@ import Newsignup from "../components/newssign"
 import BlogListHome from "../components/blog-list-home"
 import { Seo } from "../components/seo"
 import { Layout } from "../components/layout"
+import { SRLWrapper } from "simple-react-lightbox"
 const CustomBox = styled.div`
 
 `
@@ -121,7 +123,65 @@ export const pageQuery = graphql`
   }
 `
 
-
+const options = {
+  settings: {
+    autoplaySpeed: 3000,
+    // boxShadow: '0px 0px 20px #fff',
+    disableKeyboardControls: false,
+    disablePanzoom: false,
+    disableWheelControls: false,
+    hideControlsAfter: false,
+    lightboxTransitionSpeed: 0.3,
+    lightboxTransitionTimingFunction: 'linear',
+    // overlayColor: 'rgba(185, 7, 230, 0.5)',
+    slideAnimationType: 'slide',
+    slideSpringValues: [300, 50],
+    slideTransitionSpeed: 0.6,
+    slideTransitionTimingFunction: 'linear',
+    usingPreact: false
+  },
+  buttons: {
+    backgroundColor: 'rgba(30,30,36,0.8)',
+    iconColor: 'rgba(255, 255, 255, 0.8)',
+    iconPadding: '10px',
+    showAutoplayButton: false,
+    showCloseButton: true,
+    showDownloadButton: true,
+    showFullscreenButton: true,
+    showNextButton: true,
+    showPrevButton: true,
+    showThumbnailsButton: false,
+    size: '40px'
+  },
+  caption: {
+captionAlignment: 'start',
+captionColor: '#FFFFFF',
+captionContainerPadding: '20px 12% 30px 12%',
+captionFontFamily: 'inherit',
+captionFontSize: 'inherit',
+captionFontStyle: 'inherit',
+captionFontWeight: 'inherit',
+captionTextTransform: 'inherit',
+showCaption: true
+  },
+  thumbnails: {
+    showThumbnails: true,
+    thumbnailsAlignment: 'center',
+    thumbnailsContainerBackgroundColor: 'transparent',
+    thumbnailsContainerPadding: '0',
+    thumbnailsGap: '0 1px',
+    thumbnailsIconColor: '#ffffff',
+    thumbnailsOpacity: 0.4,
+    thumbnailsPosition: 'bottom',
+    thumbnailsSize: ['100px', '80px']
+  },
+  progressBar: {
+    backgroundColor: '#f2f2f2',
+    fillColor: '#000000',
+    height: '3px',
+    showProgressBar: true
+  },
+};
 
 
 const HomePage = ({ data }) => {
@@ -233,6 +293,7 @@ const YouTube = frontmatter.youtuber
 
   
 
+  
 
   
   return (
@@ -685,53 +746,84 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 
 </div>
 
+{/* <Link state={{modal: true}} to="/about-todd/" className="actionJackson button" style={{margin:'', textDecoration:'none', fontSize:'120%', textAlign:'center' }}>View More About Todd</Link> */}
+
+
+<Link state={{modal: true}}
+            to="/about-todd/"
+            className="button fire actionJackson noexit print"
+            style={{
+              cursor:'pointer',
+              width:'',
+              maxWidth:'300px',
+              margin:'5vh auto',
+              display:'flex',
+              alignSelf:'center',
+              color:'#ccc'
+            }}
+          >
+            View More About Todd
+            {/* <span className="icon -right">
+              <VscFilePdf style={{fontSize:'30px'}} />
+            </span> */}
+
+            
+          </Link>
+
+
 </section>
+<div className="spacer66"></div>
 
 
 
 
 
 
-
-<section id="portfolio">
- <h3 className="logotype"  style={{textAlign:'center', margin:'5vh 0', fontSize:'300%', clear:'right'}}>Portfolio</h3>
+<section id="network">
+ <h3 className="logotype"  style={{textAlign:'center', margin:'5vh 0', fontSize:'300%', clear:'right'}}>Network</h3>
 <br />
-<div className="flexbutt noexit print" style={{gap:'20px', padding:'0 4%'}}>
+<div className="flexbutt noexit print" style={{gap:'10px', padding:'0 4%'}}>
 
 
     <div className="flexcheek" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
-    <a className="noexit" href="https://twilightscapes.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
+    {/* <a className="noexit" href="https://twilightscapes.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
     <StaticImage src="../../static/assets/twilightscapes-button.jpg" alt="Todd Lambert Night photos"  />
     <br />
     Experience a new style of landscape photography all through the eyes of Todd Lambert. Explore the unusual and see the night like you&apos;ve never seen it before.
-    <br /><br />
-    <div style={{textAlign:'center',}}>Visit Twilightscapes.com</div></a>
+    <br /><br /> */}
+    <div style={{textAlign:'center',}}>Twilightscapes.com</div>
+    {/* </a> */}
     </div>
 
 
     <div className="flexcheek" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
-    <a className="noexit" href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit'}}>
+    {/* <a className="noexit" href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit'}}>
     <StaticImage src="../../static/assets/vidsock-promo.jpg" alt="Todd builds Web Apps"  />
     <br />
 Todd sells exceptionally fast and well-built multimedia web apps called VidSocks. They are a complete website solution that costs nothing to run and rank incredibly well in Google!
-    <br /><br />
-    <div style={{textAlign:'center',}}>Visit VidSocks.com</div></a>
+    <br /><br /> */}
+    <div style={{textAlign:'center',}}>VidSocks.com</div>
+    {/* </a> */}
     </div>
 
     
     <div className="flexcheek" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
-    <a className="noexit" href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
+    {/* <a className="noexit" href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
     <StaticImage src="../../static/assets/urban-fetish-button.jpg" alt="Todd Lambert Night photos"  />
     <br />
     Take a walk on the wild side and follow along as Todd Lambert goes in search of the creepiest, freakiest, spookiest abandoned and desolate locations he can find. 
-    <br /><br />
-    <div style={{textAlign:'center',}}>Visit UrbanFetish.com</div></a>
+    <br /><br /> */}
+    <div style={{textAlign:'center',}}>UrbanFetish.com</div>
+    {/* </a> */}
     </div>
 
 </div>
+
+
 </section>
 
-
+<CasePanels />
+<div className="spacer66"></div>
 
 
 
@@ -871,7 +963,7 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
             style={{
               cursor:'pointer',
               width:'80%',
-              maxWidth:'600px',
+              maxWidth:'300px',
               margin:'5vh auto',
               display:'flex',
               alignSelf:'center',
@@ -893,8 +985,106 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
 
 </section>
 
+<div className="spacer66"></div>
 
-{/* <div className="spacer33"></div>  */}
+
+
+<section id="portfolio">
+ <h3 className="logotype"  style={{textAlign:'center', margin:'5vh 0', fontSize:'300%', clear:'right'}}>Portfolio</h3>
+<br />
+
+
+<SRLWrapper options={options} className="1">
+
+<div className="masonry4" style={{display:''}}>
+
+<div style={{textAlign:'center'}}>
+  <StaticImage className="1" src="../../static/assets/tle-portfolio-spotlights.png" alt="Todd builds Web Apps" style={{}}  />
+Concept to Conception
+</div>
+
+<div style={{textAlign:'center'}}>
+<StaticImage className="1" src="../../static/assets/tle-portfolio-spotlights2.png" alt="Todd builds Web Apps"  />
+Concept to Conception
+</div>
+
+<div style={{textAlign:'center'}}>
+<StaticImage className="1" src="../../static/assets/tle-portfolio-spotlights3.png" alt="Todd builds Web Apps"  />
+Homepage Redesign and Product Portal
+</div>
+
+</div>
+</SRLWrapper>
+
+<br />
+<br />
+<div className="masonry4" style={{display:''}}>
+<Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'120%', textAlign:'center' }}>
+  <StaticImage className="1" src="../../static/assets/Experiences-Header-6.jpg" alt="Todd builds Web Apps"  />
+Animated SVG VIDEO
+</Link>
+
+<Link state={{modal: true}} to="/they-live/" className="" style={{margin:'', textDecoration:'none', fontSize:'120%', textAlign:'center' }}>
+<StaticImage className="1" src="../../static/assets/TheyLive-Header.jpg" alt="Todd builds Web Apps"  />
+Animated SVG VIDEO
+</Link>
+
+<Link state={{modal: true}} to="/mystery-science-theater-3021/" className="" style={{fontSize:'120%', textDecoration:'none', textAlign:'center' }}>
+  <StaticImage className="1" src="../../static/assets/Experiences-Header-7.jpg" alt="Todd builds Web Apps"  />
+  Animated SVG VIDEO
+  </Link>
+
+
+  <Link state={{modal: true}} to="/twilightscapes/" className="" style={{fontSize:'120%', textDecoration:'none', textAlign:'center' }}>
+  <StaticImage className="1" src="../../static/assets/Experiences-Header-5.jpg" alt="Todd builds Web Apps"  />
+  Animated SVG VIDEO
+  </Link>
+
+  <Link state={{modal: true}} to="/tv-signals/" className="" style={{fontSize:'120%', textDecoration:'none', textAlign:'center' }}>
+  <StaticImage className="1" src="../../static/assets/television-signals-promo.jpg" alt="Todd builds Web Apps"  />
+  Animated SVG VIDEO
+  </Link>
+
+  <Link state={{modal: true}} to="/alien-egg-farm/" className="" style={{fontSize:'120%', textDecoration:'none', textAlign:'center' }}>
+  <StaticImage className="1" src="../../static/assets/Experiences-Header-3.jpg" alt="Todd builds Web Apps"  />
+  Animated SVG VIDEO
+  </Link>
+
+{/* <StaticImage className="" src="../../static/assets/tle-portfolio-spotlights.png" alt="Todd builds Web Apps"  />
+
+<StaticImage className="" src="../../static/assets/tle-portfolio-spotlights2.png" alt="Todd builds Web Apps"  />
+
+<StaticImage className="" src="../../static/assets/tle-portfolio-spotlights3.png" alt="Todd builds Web Apps"  /> */}
+
+{/* <StaticImage src="../../static/assets/coast-promos.png" alt="Todd builds Web Apps"  />
+
+
+
+<StaticImage src="../../static/assets/coast-promos3.png" alt="Todd builds Web Apps"  />
+
+
+
+<StaticImage src="../../static/assets/zombie-bucket-logo.png" alt="Todd builds Web Apps"  /> */}
+
+</div>
+
+
+  <article className="post-card button actionJackson" style={{ display:'flex', maxWidth:'400px', justifyContent:'center', border:'1px solid', padding:'', margin:'2rem auto', fontSize:'150%', textAlign:'center', }}>
+  <Link to="/posts/" style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
+    View More <RiArrowRightSLine style={{fontSize:'50px'}} />
+    </Link>
+    </article>
+
+
+
+</section>
+
+
+
+
+
+
+<div className="spacer66"></div> 
 
 <section id="contact" className="child" style={{position:'relative', height:'auto', zIndex:'', paddingTop:'',}}>
 <div className="container3" style={{}}>
@@ -906,7 +1096,6 @@ Contact
  </section>
 
  {/* <div className="spacer66"></div>  */}
-
 
 
 

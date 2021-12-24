@@ -233,7 +233,7 @@ const iframeUrl = "https://www.youtube.com/embed/" + frontmatter.youtuber + ""
               
     
               <div style={{position:'relative', maxWidth:'100vw', margin:'10% 0', zIndex:'0', display:'flex', justifyContent:'center', background:'transparent !important',}}>
-      <img className="homepage-bg" src={iconimage} width="300px" height="150px" alt="VidSock" style={{ width:'100%', filter:'drop-shadow(2px 2px 2px #000)', background:'transparent !important',}} />
+      <img className="homepage-bg mobilehide" src={iconimage} width="300px" height="150px" alt="VidSock" style={{ width:'100%', filter:'drop-shadow(2px 2px 2px #000)', background:'transparent !important',}} />
     </div>
           
               <span style={{fontWeight:'bold', padding:'0 0 0 0', fontSize:'2rem'}}>Click To Play</span>
@@ -286,7 +286,7 @@ const iframeUrl = "https://www.youtube.com/embed/" + frontmatter.youtuber + ""
               {/* <object className="" id="vidsock-logo" data={iconimage} type="image/svg+xml" style={{ overflow:'hidden', border:'0px solid red', zIndex:'0', width:'30vw', maxWidth:'', height:'auto', background:'transparent'  }} alt="animated content" title="animated content" >You need a new browser</object> */}
 
 
-      <img className="homepage-bg1" src={iconimage} width="90%" height="" alt="VidSock" style={{ width:'', height:'', maxWidth:'',  background:'transparent !important',}} />
+      <img className="homepage-bg1 mobilehide" src={iconimage} width="90%" height="" alt="VidSock" style={{ width:'', height:'', maxWidth:'',  background:'transparent !important',}} />
       <br /><br />
     </div>
           

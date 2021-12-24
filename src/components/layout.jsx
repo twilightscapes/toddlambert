@@ -7,7 +7,7 @@ import React, {  } from "react"
 
 // import Theme from "../components/theme"
 import { Seo } from "./seo"
-
+import FullScreen from "../components/FullScreen"
 import { Link } from 'gatsby-plugin-modal-routing-3'
 import { ModalRoutingContext } from 'gatsby-plugin-modal-routing-3'
 import { AiOutlineClose } from "react-icons/ai"
@@ -60,7 +60,7 @@ export function Layout({ children }) {
 <Helmet>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" /> 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" /> 
 <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&amp;display=swap" rel="stylesheet" />
 
 </Helmet>
@@ -69,14 +69,26 @@ export function Layout({ children }) {
 
       <ModalRoutingContext.Consumer>
     {({ modal, closeTo }) => (
-      <div style={{overflow:''}}>
+      <div className="" style={{overflow:''}}>
         {modal ? (
           <>
-          <div style={{position:'fixed', top:'0', right:'0', padding:'10px', fontSize:'40px', background:'#111 !important', opacity:'1 !important', zIndex:'2',  filter:' drop-shadow(0px 4px 3px #000)',}}>
-          <Link state={{noScroll: true }} to={closeTo}>
-            <AiOutlineClose />
-          </Link>
-          </div>
+
+<div className="closer">
+<FullScreen className="test" />
+
+<Link className="test" state={{noScroll: true }} to={closeTo}>
+  
+
+
+
+<AiOutlineClose />
+
+  {/* <button title="Close" class="SRLCloseButton"><div class="SRLCloseButton" >
+  <svg style={{ color:'#fff',}} class="SRLCloseButton" xmlns="http://www.w3.org/2000/svg" viewBox="11 11 30 30"><path class="SRLCloseButton" d="M27.92 25l8.84-8.84 1.82-1.82c.27-.27.27-.71 0-.97l-1.95-1.95a.682.682 0 0 0-.97 0L25 22.08 14.34 11.42a.682.682 0 0 0-.97 0l-1.95 1.95c-.27.27-.27.71 0 .97L22.08 25 11.42 35.66c-.27.27-.27.71 0 .97l1.95 1.95c.27.27.71.27.97 0L25 27.92l8.84 8.84 1.82 1.82c.27.27.71.27.97 0l1.95-1.95c.27-.27.27-.71 0-.97L27.92 25z"></path></svg></div></button> */}
+  
+  </Link>
+</div>
+
           </>
         ) : (
 ""
