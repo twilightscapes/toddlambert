@@ -419,7 +419,7 @@ const YouTube = frontmatter.youtuber
 
 
 
-<br />
+
 
 {/* show Info */}
 {ShowInfo ? (
@@ -643,7 +643,7 @@ Through NFT
 
 
 
- <section id="intro" className="child" style={{position:'relative', height:'100vh', paddingTop:'', overflow:'', display:'flex', flexDirection:'column', justifyContent:'center', textAlign:'center',
+ <section id="intro" className="child intro" style={{position:'relative', height:'100vh', paddingTop:'', overflow:'', display:'flex', flexDirection:'column', justifyContent:'center', textAlign:'center',
 // fontSize: 'clamp(18px, calc(1rem + 2vw), 36px)',
 fontSize:'clamp(2.5rem, 3.5vw, 3.8rem)'
 }}>
@@ -711,13 +711,13 @@ Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
 
 
   <div className="child split flexbutt" style={{position:'relative', height:'', width:'', overflow:'', display:'flex', gap
-  :'', margin:'0 auto', padding:'2rem', outline:'18px dotted rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
+  :'', margin:'0 auto', padding:'2rem', outline:'18px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
 
 
 
 <div className="aboutme flexcheek" style={{width:'', justifyContent:'center', alignContent:'center', verticalAlign:'center', display:'grid'}}>
 
-<h3 className="logotype"  style={{textAlign:'center', margin:'0 0 5vh 0', fontSize:'5vw', clear:'right'}}>About</h3>
+<h3 className="logotype"  style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', filter: 'drop-shadow(0px 0px 10px #444)'}}>About</h3>
   
 {/* <h2 className="logofirst" style={{textAlign:'', marginTop:'', 
 fontFamily: 'Lobster Two',
@@ -821,10 +821,10 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 <section id="network">
 
 <div style={{padding:'0 0 1rem 0',
-position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dotted rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
+position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
 
 
-<h3 className="logotype"  style={{textAlign:'center', margin:'5vh 0', fontSize:'5vw', clear:'right'}}>Network</h3>
+<h3 className="logotype" style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', filter: 'drop-shadow(0px 0px 10px #444)', paddingTop:'1rem'}}>Network</h3>
 <div className="flexbutt noexit print" style={{padding:'2rem 4%',
 position:'relative', height:'', width:'', overflow:'', display:'flex', gap
   :'20px', margin:'0 auto', }}>
@@ -882,8 +882,8 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
 
 
   <div style={{padding:'0 0 1rem 0',
-position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dotted rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
- <h3 className="logotype"  style={{textAlign:'center', margin:'5vh 0', fontSize:'5vw', clear:'right'}}>Portfolio</h3>
+position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
+ <h3 className="logotype" style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', filter: 'drop-shadow(0px 0px 10px #444)', paddingTop:'1rem'}}>Portfolio</h3>
 <br />
 
 
@@ -992,14 +992,14 @@ Lambert
 
 <section id="resume">
 <div style={{padding:'2rem 0',
-position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dotted rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
+position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
 
 
 <div className=" outer1 section1" style={{padding:'0 2%', height:'', background:'transparent'}}>
 
 <div className="container3" style={{ position:'relative'}}>
 
-<h3 className="logotype print" style={{textAlign:'center', margin:' 0', fontSize:'5vw',}}>
+<h3 className="logotype print" style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', filter: 'drop-shadow(0px 0px 10px #444)', paddingTop:'1rem'}}>
 Resume
 </h3>
 <h3 className="logotype printonly" style={{textAlign:'center', margin:' 0', fontSize:'350%',}}>
@@ -1148,12 +1148,12 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
 
 <section id="contact" className="child" style={{position:'relative', height:'auto', zIndex:'', paddingTop:'',}}>
 {/* <div style={{padding:'0',
-position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dotted rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}> */}
+position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}> */}
 <div className="container3" style={{}}>
 
 </div>
   <div className="outer" style={{margin:'0 12%', outline:'0px solid rgba(121, 115, 115, 0.3)', outlineOffset:'12px', background:'rgba(121, 115, 115, 0.2)', borderRadius:'12px', padding:'0 4%'}}>
-    <h3 className="logotype" style={{textAlign:'center', margin:'5vh 0', fontSize:'5vw',}}>
+    <h3 className="logotype" style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', filter: 'drop-shadow(0px 0px 10px #444)', paddingTop:'1rem'}}>
 Contact
 </h3>
 <Contact /></div> 
