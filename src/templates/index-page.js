@@ -879,7 +879,7 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
 
   <div style={{padding:'1rem 0',
 position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dotted rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
- <h3 className="logotype"  style={{textAlign:'center', margin:'5vh 0', fontSize:'300%', clear:'right'}}>Portfolio</h3>
+ <h3 className="logotype"  style={{textAlign:'center', margin:'5vh 0', fontSize:'5vw', clear:'right'}}>Portfolio</h3>
 <br />
 
 
@@ -995,7 +995,7 @@ position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outl
 
 <div className="container3" style={{ position:'relative'}}>
 
-<h3 className="logotype print" style={{textAlign:'center', margin:' 0', fontSize:'300%',}}>
+<h3 className="logotype print" style={{textAlign:'center', margin:' 0', fontSize:'5vw',}}>
 Resume
 </h3>
 <h3 className="logotype printonly" style={{textAlign:'center', margin:' 0', fontSize:'350%',}}>
@@ -1143,15 +1143,17 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
 <div className="spacer66"></div> 
 
 <section id="contact" className="child" style={{position:'relative', height:'auto', zIndex:'', paddingTop:'',}}>
-<div style={{padding:'0',
-position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dotted rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
+{/* <div style={{padding:'0',
+position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dotted rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}> */}
 <div className="container3" style={{}}>
-<h3 className="logotype" style={{textAlign:'center', margin:'5vh 0', fontSize:'300%',}}>
+
+</div>
+  <div className="outer" style={{margin:'0 12%', outline:'0px solid rgba(121, 115, 115, 0.3)', outlineOffset:'12px', background:'rgba(121, 115, 115, 0.2)', borderRadius:'12px'}}>
+    <h3 className="logotype" style={{textAlign:'center', margin:'5vh 0', fontSize:'5vw',}}>
 Contact
 </h3>
-</div>
-  <div className="outer" style={{margin:'0 12%'}}><Contact /></div> 
-  </div>
+<Contact /></div> 
+  {/* </div> */}
  </section>
 
  {/* <div className="spacer66"></div>  */}
