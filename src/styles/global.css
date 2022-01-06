@@ -3330,6 +3330,7 @@ height:100vh;
               font-family: Lobster Two;
               color: #dd4000;
               letter-spacing: 2px;
+              font-size: clamp(2.5rem, 5vw, 5rem) !important;
               text-transform: lowercase;
               font-weight: 400;
               position: relative;

@@ -1152,7 +1152,7 @@ position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outl
 <div className="container3" style={{}}>
 
 </div>
-  <div className="outer" style={{margin:'0 12%', outline:'0px solid rgba(121, 115, 115, 0.3)', outlineOffset:'12px', background:'rgba(121, 115, 115, 0.2)', borderRadius:'12px'}}>
+  <div className="outer" style={{margin:'0 12%', outline:'0px solid rgba(121, 115, 115, 0.3)', outlineOffset:'12px', background:'rgba(121, 115, 115, 0.2)', borderRadius:'12px', padding:'0 4%'}}>
     <h3 className="logotype" style={{textAlign:'center', margin:'5vh 0', fontSize:'5vw',}}>
 Contact
 </h3>
