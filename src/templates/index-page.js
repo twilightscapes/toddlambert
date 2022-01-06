@@ -652,7 +652,7 @@ fontSize:'clamp(2.5rem, 3.5vw, 3.8rem)'
 <div className="logolink" style={{textAlign:'center', position:'relative',fontSize:'clamp(2rem, 12.5vw, 10rem)', padding:'0 0 2% 0', background:'tranparent', filter: 'drop-shadow(0px 0px 30px #444)'}}><span className="logofirst">todd</span> <span className="logocolor">lambert</span></div>
 {/* </ScrollAnimation> */}
 
-<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={500}>
+<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={1400}>
 <h1 className="logofirst" style={{textAlign:'center', marginTop:'50px', 
 fontFamily: 'Lobster Two',
 letterSpacing: '2px',
@@ -669,7 +669,7 @@ Digital Product <span style={{color:'#dd4000'}}>Design</span>
 
 
 
-<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={600}>
+<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={1500}>
 <h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
 fontFamily: 'Lobster Two',
 letterSpacing: '2px',
@@ -683,7 +683,7 @@ Conceptual <span style={{color:'#dd4000'}}>Photography</span>
 </h2>
 </ScrollAnimation>
 
-<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={700}>
+<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={1600}>
 <h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
 fontFamily: 'Lobster Two',
 letterSpacing: '2px',
@@ -709,14 +709,14 @@ Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
 
 
 
- <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={300}>
+ <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 
   <div className="child split flexbutt" style={{position:'relative', height:'', width:'', overflow:'', display:'flex', gap
   :'', margin:'0 auto', padding:'2rem', outline:'18px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
 
 
 
-<div className="aboutme flexcheek" style={{width:'', justifyContent:'center', alignContent:'center', verticalAlign:'center', display:'grid'}}>
+<div className="aboutme flexcheek" style={{minWidth:'50vw', justifyContent:'center', alignContent:'center', verticalAlign:'center', display:'grid'}}>
 
 <h3 className="logotype"  style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', filter: 'drop-shadow(0px 0px 10px #444)'}}>About</h3>
   
@@ -780,12 +780,12 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 
 </div>
 
-<div className="flexcheek" style={{maxWidth:'', padding:'', justifyContent:'flex-end'}}>
+<div className="flexcheek" style={{maxWidth:'', padding:'1rem 2rem 1rem 1rem', justifyContent:'flex-end'}}>
  
 
   <StaticImage src="../../static/assets/promo-about-todd.jpg" alt="Twilightscapes Default Image" style={{height:'', maxHeight:'', position:'', zIndex:'0', borderRadius:'12px', marginTop:'', border:'0px solid !important', objectFit:'cover',}} />
 
-  <p style={{fontFamily:'Lobster Two', fontSize:'3.5vw', textAlign:'center'}}>I create digital experiences using intriguing photography, animation and typography, all packaged in the most performant coding.
+  <p style={{fontFamily:'Lobster Two', fontSize:'2.8vw', textAlign:'center'}}>I create digital experiences using intriguing photography, animation and typography, all packaged in the most performant coding.
 </p>
 </div>
 
@@ -822,7 +822,7 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 
 <section id="network">
 
-<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={300}>
+<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 
 <div style={{padding:'0 0 1rem 0',
 position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
@@ -834,7 +834,7 @@ position:'relative', height:'', width:'', overflow:'', display:'flex', gap
   :'20px', margin:'0 auto', }}>
 
 
-    <div className="flexcheek" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
+    <div className="flexcheek network" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
     <a className="noexit" href="https://twilightscapes.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
     <StaticImage src="../../static/assets/twilightscapes-button.jpg" alt="Todd Lambert Night photos"  />
     <br />
@@ -845,18 +845,18 @@ position:'relative', height:'', width:'', overflow:'', display:'flex', gap
     </div>
 
 
-    <div className="flexcheek" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
+    <div className="flexcheek network" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
     <a className="noexit" href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit'}}>
     <StaticImage src="../../static/assets/vidsock-promo.jpg" alt="Todd builds Web Apps"  />
     <br />
-Todd sells exceptionally fast and well-built multimedia web apps called VidSocks. They are a complete website solution that costs nothing to run and rank incredibly well in Google!
+Todd sells exceptionally fast and well-built multimedia web apps called VidSocks. They are a complete website solution that costs nothing to run and get top ranks in Google!
     <br /><br />
     <div style={{textAlign:'center',}}><a className="button noexit" href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>VidSocks.com</a></div>
     </a>
     </div>
 
     
-    <div className="flexcheek" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
+    <div className="flexcheek network" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
     <a className="noexit" href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
     <StaticImage src="../../static/assets/urban-fetish-button.jpg" alt="Todd Lambert Night photos"  />
     <br />
@@ -885,7 +885,7 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
 
 <section id="posts1" name="posts">
 
-<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={300}>
+<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 
   <div style={{padding:'0 0 1rem 0',
 position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
@@ -897,18 +897,21 @@ position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outl
 
 <div className="masonry4" style={{display:''}}>
 
-<div style={{textAlign:'center'}}>
+<div style={{textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
   <StaticImage className="1" src="../../static/assets/tle-portfolio-spotlights.png" alt="Todd builds Web Apps" style={{}}  />
+<br />
 Concept to Conception
 </div>
 
-<div style={{textAlign:'center'}}>
+<div style={{textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
 <StaticImage className="1" src="../../static/assets/tle-portfolio-spotlights2.png" alt="Todd builds Web Apps"  />
+<br />
 Concept to Conception
 </div>
 
-<div style={{textAlign:'center'}}>
+<div style={{textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
 <StaticImage className="1" src="../../static/assets/tle-portfolio-spotlights3.png" alt="Todd builds Web Apps"  />
+<br />
 Homepage Redesign and Product Portal
 </div>
 
@@ -918,8 +921,9 @@ Homepage Redesign and Product Portal
 <br />
 <br />
 <div className="masonry4" style={{display:''}}>
-<Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'120%', textAlign:'center' }}>
+<Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'120%', textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
   <StaticImage className="1" src="../../static/assets/Experiences-Header-6.jpg" alt="Todd builds Web Apps"  />
+  <br />
 Animated SVG VIDEO
 </Link>
 
@@ -934,8 +938,9 @@ Animated SVG VIDEO
   </Link> */}
 
 
-  <Link state={{modal: true}} to="/twilightscapes/" className="" style={{fontSize:'120%', textDecoration:'none', textAlign:'center' }}>
+  <Link state={{modal: true}} to="/twilightscapes/" className="" style={{fontSize:'120%', textDecoration:'none', textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)', }}>
   <StaticImage className="1" src="../../static/assets/Experiences-Header-5.jpg" alt="Todd builds Web Apps"  />
+  <br />
   Animated SVG VIDEO
   </Link>
 
@@ -944,8 +949,9 @@ Animated SVG VIDEO
   Animated SVG VIDEO
   </Link> */}
 
-  <Link state={{modal: true}} to="/alien-egg-farm/" className="" style={{fontSize:'120%', textDecoration:'none', textAlign:'center' }}>
+  <Link state={{modal: true}} to="/alien-egg-farm/" className="" style={{fontSize:'120%', textDecoration:'none', textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
   <StaticImage className="1" src="../../static/assets/Experiences-Header-3.jpg" alt="Todd builds Web Apps"  />
+  <br />
   Animated SVG VIDEO
   </Link>
 
@@ -998,7 +1004,7 @@ Lambert
 
 <section id="resume">
 
-<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={300}>
+<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 
 <div style={{padding:'2rem 0',
 position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
@@ -1154,9 +1160,9 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
 
 
 
-<div className="spacer66"></div> 
+<div className="spacer33"></div> 
 
-<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={300}>
+<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 
 <section id="contact" className="child" style={{position:'relative', height:'auto', zIndex:'', paddingTop:'',}}>
 {/* <div style={{padding:'0',

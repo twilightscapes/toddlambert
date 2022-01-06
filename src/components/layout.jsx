@@ -61,7 +61,7 @@ export function Layout({ children }) {
 
 <link rel="preconnect" href="https://fonts.googleapis.com" /> 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" /> 
-<link href="https://fonts.googleapis.com/css2?family=Lobster+Two&amp;display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Lobster+Two&amp;display=swap" display="swap" rel="stylesheet" />
 
 </Helmet>
       <Seo />
@@ -74,7 +74,7 @@ export function Layout({ children }) {
           <>
 
 <div className="closer">
-<FullScreen className="test" />
+{/* <FullScreen className="test" /> */}
 
 <Link className="test" state={{noScroll: true }} to={closeTo}>
   

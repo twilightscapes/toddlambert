@@ -46,7 +46,7 @@ const Consent = () => (
 {/* </ScrollAnimation> */}
 
     <div style={{color:'inherit', padding:'1rem 1rem 1rem 1rem', fontSize:'1.2rem', textAlign:'center',}}>
-     I use cookies to optimize my site.{" "}<br />
+     Todd uses cookies to optimize his site.{" "}<br />
     <span style={{ fontSize: "75%", color:'inherit', textDecoration:'underline' }}>
    <a className="donotsell" href="/privacy/">Do Not Sell My Personal Information</a>
     </span>
