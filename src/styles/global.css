@@ -2,8 +2,9 @@
 
 body {
   font-family: var(--font-body);
-  color: #ccc;
-  background: #222;
+  color: #474642 !important;
+  background: #c4bdb3 !important;
+  /* background: #b6aea3 !important; */
   overflow-x: hidden !important;
   width:100vw;
 }
@@ -78,7 +79,7 @@ input[type=checkbox]:before {
   left: 0;
   border: 2px solid #555555;
   border-radius: 3px;
-  background-color: white;
+  background-color: #ff0000;
 }
 input[type=checkbox]:checked:after {
   content: "";
@@ -3271,7 +3272,8 @@ height:100vh;
             
             .logocolor {
               color: #dd4000;
-              position:relative
+              position:relative;
+              filter: drop-shadow(2px 2px 0px #000);
             }
             
             .logocolor:before {
@@ -3305,12 +3307,16 @@ height:100vh;
               /* font-size:13vw; */
               font-size: clamp(2.5rem, 13vw, 5rem);
               text-shadow:0 2px 0px #fff;
+              
+          
             }
+          
             
             .logofirst {
               padding-right: 18px;
               position: relative;
-              color:#666
+              color:#666;
+              filter: drop-shadow(2px 2px 0px #000);
             }
             
             .logofirst:before {
@@ -3327,7 +3333,8 @@ height:100vh;
               text-transform: lowercase;
               font-weight: 400;
               position: relative;
-              text-shadow:0 1px 0 #fff
+              text-shadow:0 1px 0 #fff;
+              
             }
             
             .logotype:before {

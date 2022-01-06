@@ -648,48 +648,54 @@ Through NFT
 fontSize:'clamp(2.5rem, 3.5vw, 3.8rem)'
 }}>
 
-<div className="logolink" style={{textAlign:'center', position:'relative'}}><span className="logofirst">todd</span> <span className="logocolor">lambert</span></div>
+{/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={400}> */}
+<div className="logolink" style={{textAlign:'center', position:'relative',fontSize:'clamp(2rem, 12.5vw, 10rem)', padding:'0 0 2% 0', background:'tranparent', filter: 'drop-shadow(0px 0px 30px #444)'}}><span className="logofirst">todd</span> <span className="logocolor">lambert</span></div>
+{/* </ScrollAnimation> */}
 
-
-{/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={500}> */}
+<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={500}>
 <h1 className="logofirst" style={{textAlign:'center', marginTop:'50px', 
 fontFamily: 'Lobster Two',
 letterSpacing: '2px',
 textTransform: 'lowercase',
 fontWeight: '400',
 textShadow:'0 1px 0 #eee',
-fontSize:'clamp(2rem, 3.5vw, 3.8rem)'
+fontSize:'clamp(2rem, 6.5vw, 3.8rem)',
+filter: 'drop-shadow(0px 0px 10px #444)'
 }}>
 Digital Product <span style={{color:'#dd4000'}}>Design</span>
 </h1>
-{/* </ScrollAnimation> */}
+</ScrollAnimation>
 
 
-{/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={600}> */}
+
+
+<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={600}>
 <h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
 fontFamily: 'Lobster Two',
 letterSpacing: '2px',
 textTransform: 'lowercase',
 fontWeight: '400',
 textShadow:'0 1px 0 #eee',
-fontSize:'clamp(1.8rem, 3.5vw, 3.8rem)'
+fontSize:'clamp(2rem, 6.5vw, 3.8rem)',
+filter: 'drop-shadow(0px 0px 10px #444)'
 }}>
 Conceptual <span style={{color:'#dd4000'}}>Photography</span>
 </h2>
-{/* </ScrollAnimation> */}
+</ScrollAnimation>
 
-{/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={600}> */}
+<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={700}>
 <h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
 fontFamily: 'Lobster Two',
 letterSpacing: '2px',
 textTransform: 'lowercase',
 fontWeight: '400',
 textShadow:'0 1px 0 #eee',
-fontSize:'clamp(2rem, 3.5vw, 3.8rem)'
+fontSize:'clamp(2rem, 6.5vw, 3.8rem)',
+filter: 'drop-shadow(0px 0px 10px #444)'
 }}>
 Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
 </h2>
-{/* </ScrollAnimation> */}
+</ScrollAnimation>
 
 
 
@@ -700,30 +706,66 @@ Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
  <div className="spacer66 mobilehide"></div> 
 
  <section id="about">
-  <h3 className="logotype"  style={{textAlign:'center', margin:'0 0 5vh 0', fontSize:'300%', clear:'right'}}>About</h3>
 
 
 
-  <div className="child split flexbutt" style={{position:'relative', height:'', overflow:'', display:'flex', gap
-  :'20px', margin:'0 4%'}}>
+
+  <div className="child split flexbutt" style={{position:'relative', height:'', width:'', overflow:'', display:'flex', gap
+  :'', margin:'0 auto', padding:'2rem', outline:'18px dotted rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
 
 
 
-<div className="aboutme flexcheek" style={{width:'55vw', justifyContent:''}}>
+<div className="aboutme flexcheek" style={{width:'', justifyContent:'center', alignContent:'center', verticalAlign:'center', display:'grid'}}>
+
+<h3 className="logotype"  style={{textAlign:'center', margin:'0 0 5vh 0', fontSize:'5vw', clear:'right'}}>About</h3>
   
+{/* <h2 className="logofirst" style={{textAlign:'', marginTop:'', 
+fontFamily: 'Lobster Two',
+letterSpacing: '2px',
+textTransform: 'lowercase',
+fontWeight: '400',
+textShadow:'0 1px 0 #eee',
+fontSize:'clamp(1.8rem, 3.5vw, 3.8rem)'
+}}>
+Digital Product <span style={{color:'#dd4000'}}>Design</span>
+</h2>
 
 
 
-<div className="masonry" style={{padding:'0', display:'', columnCount:'2', columnRule:' 0px dotted #666', columnGap:'30px',}}>
+<h2 className="logofirst" style={{textAlign:'', marginTop:'', 
+fontFamily: 'Lobster Two',
+letterSpacing: '2px',
+textTransform: 'lowercase',
+fontWeight: '400',
+textShadow:'0 1px 0 #eee',
+fontSize:'clamp(1.8rem, 3.5vw, 3.8rem)'
+}}>
+Conceptual <span style={{color:'#dd4000'}}>Photography</span>
+</h2>
+
+<h2 className="logofirst" style={{textAlign:'', marginTop:'', 
+fontFamily: 'Lobster Two',
+letterSpacing: '2px',
+textTransform: 'lowercase',
+fontWeight: '400',
+textShadow:'0 1px 0 #eee',
+fontSize:'clamp(2rem, 3.5vw, 3.8rem)'
+}}>
+Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
+</h2> */}
+
+<div className="masonry" style={{padding:'0', display:'', columnCount:'1', columnRule:'0px dashed rgba(121, 115, 115, 0.2)', columnGap:'0',}}>
+
+
 <p>Todd Lambert, a “webdude” that grew up in Southern California and whose career and endeavors have taken him to over 14 western states including living in Colorado, Texas and Oregon. </p>
   
   
 <p>He eventually found home living on the coastal Mississippi Sound.
 </p>
 
-{/* <p>
+<p>
 Having lived on the Mississippi gulf coast, twice, Todd has assisted many small businesses that were affected by Hurricane Katrina in establishing a sucessful online presence.
-</p> */}
+</p>
 
 <p>
 Todd is actively pushing the boundaries of night photography. You can often find him in the middle of the night shooting astrophotography which is his favorite subject.
@@ -742,6 +784,8 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 
   <StaticImage src="../../static/assets/promo-about-todd.jpg" alt="Twilightscapes Default Image" style={{height:'', maxHeight:'', position:'', zIndex:'0', borderRadius:'12px', marginTop:'', border:'0px solid !important', objectFit:'cover',}} />
 
+  <p style={{fontFamily:'Lobster Two', fontSize:'3.5vw', textAlign:'center'}}>I create digital experiences using intriguing photography, animation and typography, all packaged in the most performant coding.
+</p>
 </div>
 
 </div>
@@ -775,41 +819,43 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 
 
 <section id="network">
- <h3 className="logotype"  style={{textAlign:'center', margin:'5vh 0', fontSize:'300%', clear:'right'}}>Network</h3>
-<br />
-<div className="flexbutt noexit print" style={{gap:'10px', padding:'0 4%'}}>
+
+<h3 className="logotype"  style={{textAlign:'center', margin:'5vh 0', fontSize:'5vw', clear:'right'}}>Network</h3>
+<div className="flexbutt noexit print" style={{padding:'2rem 4%',
+position:'relative', height:'', width:'', overflow:'', display:'flex', gap
+  :'20px', margin:'0 auto', outline:'18px dotted rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
 
 
     <div className="flexcheek" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
-    {/* <a className="noexit" href="https://twilightscapes.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
+    <a className="noexit" href="https://twilightscapes.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
     <StaticImage src="../../static/assets/twilightscapes-button.jpg" alt="Todd Lambert Night photos"  />
     <br />
     Experience a new style of landscape photography all through the eyes of Todd Lambert. Explore the unusual and see the night like you&apos;ve never seen it before.
-    <br /><br /> */}
+    <br /><br />
     <div style={{textAlign:'center',}}><a className="button noexit" href="https://twilightscapes.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>Twilightscapes.com</a></div>
-    {/* </a> */}
+    </a>
     </div>
 
 
     <div className="flexcheek" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
-    {/* <a className="noexit" href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit'}}>
+    <a className="noexit" href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit'}}>
     <StaticImage src="../../static/assets/vidsock-promo.jpg" alt="Todd builds Web Apps"  />
     <br />
 Todd sells exceptionally fast and well-built multimedia web apps called VidSocks. They are a complete website solution that costs nothing to run and rank incredibly well in Google!
-    <br /><br /> */}
+    <br /><br />
     <div style={{textAlign:'center',}}><a className="button noexit" href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>VidSocks.com</a></div>
-    {/* </a> */}
+    </a>
     </div>
 
     
     <div className="flexcheek" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
-    {/* <a className="noexit" href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
+    <a className="noexit" href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
     <StaticImage src="../../static/assets/urban-fetish-button.jpg" alt="Todd Lambert Night photos"  />
     <br />
     Take a walk on the wild side and follow along as Todd Lambert goes in search of the creepiest, freakiest, spookiest abandoned and desolate locations he can find. 
-    <br /><br /> */}
+    <br /><br />
     <div style={{textAlign:'center',}}><a className="button noexit" href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>UrbanFetish.com</a></div>
-    {/* </a> */}
+    </a>
     </div>
 
 </div>
@@ -817,7 +863,7 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
 
 </section>
 
-<CasePanels />
+{/* <CasePanels /> */}
 <div className="spacer66"></div>
 
 
@@ -828,7 +874,11 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
 
 
 
-<section id="posts" name="posts">
+<section id="posts1" name="posts">
+
+
+  <div style={{padding:'1rem 0',
+position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dotted rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
  <h3 className="logotype"  style={{textAlign:'center', margin:'5vh 0', fontSize:'300%', clear:'right'}}>Portfolio</h3>
 <br />
 
@@ -913,7 +963,7 @@ Animated SVG VIDEO
     View More <RiArrowRightSLine style={{fontSize:'50px'}} />
     </Link>
     </article>
-
+    </div>
 
 
 </section>
@@ -937,6 +987,10 @@ Lambert
 
 
 <section id="resume">
+<div style={{padding:'2rem 0',
+position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dotted rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
+
+
 <div className=" outer1 section1" style={{padding:'0 2%', height:'', background:'transparent'}}>
 
 <div className="container3" style={{ position:'relative'}}>
@@ -1076,7 +1130,7 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
 
 </div>
 
-
+</div>
 </section>
 
 
@@ -1089,12 +1143,15 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
 <div className="spacer66"></div> 
 
 <section id="contact" className="child" style={{position:'relative', height:'auto', zIndex:'', paddingTop:'',}}>
+<div style={{padding:'0',
+position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dotted rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
 <div className="container3" style={{}}>
 <h3 className="logotype" style={{textAlign:'center', margin:'5vh 0', fontSize:'300%',}}>
 Contact
 </h3>
 </div>
   <div className="outer" style={{margin:'0 12%'}}><Contact /></div> 
+  </div>
  </section>
 
  {/* <div className="spacer66"></div>  */}

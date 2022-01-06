@@ -12,6 +12,10 @@ import styled from "styled-components"
 const CustomBox = styled.div`
 
 
+
+
+
+
 `
 
 
@@ -78,7 +82,7 @@ showCaption: true
   },
 };
 
-export default function testPage() {
+export default function gridPage() {
    return (
 
 
@@ -93,75 +97,13 @@ export default function testPage() {
 
 
 
-{/* <CasePanels /> */}
 
-      {/* <div className="zoombox">
-      <SRLWrapper options={options} className="">
-
-   <StaticImage
-          src="../../static/assets/homepage.jpg"
-          alt="Start with the best built website and then make sure it's as fast as can be. Then make some of the most innovative features that nobody else has. Finally, make sure it's virtually hack-proof, easy to use and ready to go!"
-          className="item"
-          style={{borderRadius:'12', margin:'2rem 4%'}}
-        />
-
-<div className="masonry" style={{}}>
-
-<StaticImage
-          src="../../static/assets/Experiences-Header-2.jpg"
-          alt="Image 2"
-          srl_gallery_image="true"
-          className="item"
-        />
-
-<StaticImage
-          src="../../static/assets/Experiences-Header-6.jpg"
-          alt="Image 4"
-          srl_gallery_image="true"
-          className="item"
-        />
-
-
-<StaticImage
-          src="../../static/assets/Experiences-Header-3.jpg"
-          alt="Image 3"
-          srl_gallery_image="true"
-          className="item"
-        />
-
-
-<StaticImage
-          src="../../static/assets/Experiences-Header-4.jpg"
-          alt="Image 4"
-          srl_gallery_image="true"
-          className="item"
-        />
-
-<StaticImage
-          src="../../static/assets/Experiences-Header-5.jpg"
-          alt="Image 3"
-          srl_gallery_image="true"
-          className="item"
-        />
-</div>
-</SRLWrapper>
-  </div> */}
-
-    
-    {/* <div className="spacer66"></div> */}
 
 
     <div className="zoombox">
       <SRLWrapper options={options} className="">
 
-   <StaticImage
-          src="../../src/img/DendroidDreams/sea-of-sorrow.jpg"
-          alt="Start with the best built website and then make sure it's as fast as can be. Then make some of the most innovative features that nobody else has. Finally, make sure it's virtually hack-proof, easy to use and ready to go!"
-          className="item"
-          style={{borderRadius:'12', margin:'1rem 4%'}}
-        />
-
-<div className="masonry4" style={{}}>
+<div className="masonry" style={{}}>
 
 <StaticImage
           src="../../src/img/DendroidDreams/dances-with-the-moon.jpg"
@@ -252,6 +194,11 @@ export default function testPage() {
           srl_gallery_image="true"
           className="item"
         />
+
+
+<span className="item break"></span>
+  <span className="item break"></span>
+  <span className="item break"></span>
 
 </div>
 </SRLWrapper>

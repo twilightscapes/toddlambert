@@ -210,7 +210,7 @@ export function Footer() {
       <div className="" style={{display:'flex', justifyContent:'center', flexDirection:'column'}}>
 
 
-        <Link state={{modal: true}} to="/contact/" className="navbar-item  button fire" style={{margin:'20px auto 2rem auto', textDecoration:'none', maxWidth:'250px', fontSize:'120%', textAlign:'center' }}>Contact Me!</Link>
+        {/* <Link state={{modal: true}} to="/contact/" className="navbar-item  button fire" style={{margin:'20px auto 2rem auto', textDecoration:'none', maxWidth:'250px', fontSize:'120%', textAlign:'center' }}>Contact Me!</Link> */}
 
 
 
@@ -224,7 +224,7 @@ export function Footer() {
 
   ) : (
     <div className="social-icons" style={{textAlign:'center', justifyContent:'center', display:'flex', alignItems:'center'}}>
-       <div className="socialtext" style={{fontSize:'14px',}}>Social<br />Links</div> {sIcons}
+       <div className="socialtext" style={{fontSize:'14px',}}>I'm<br />Social</div> {sIcons}
         </div>
   )}
   
