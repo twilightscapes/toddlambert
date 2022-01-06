@@ -703,12 +703,13 @@ Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
 
 
 
- <div className="spacer66 mobilehide"></div> 
+ <div className="spacer33 mobilehide"></div> 
 
  <section id="about">
 
 
 
+ <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={300}>
 
   <div className="child split flexbutt" style={{position:'relative', height:'', width:'', overflow:'', display:'flex', gap
   :'', margin:'0 auto', padding:'2rem', outline:'18px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
@@ -789,6 +790,7 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 </div>
 
 </div>
+</ScrollAnimation>
 
 {/* <Link state={{modal: true}} to="/about-todd/" className="actionJackson button" style={{margin:'', textDecoration:'none', fontSize:'120%', textAlign:'center' }}>View More About Todd</Link> */}
 
@@ -811,7 +813,7 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 
 
 </section>
-<div className="spacer66"></div>
+<div className="spacer33"></div>
 
 
 
@@ -819,6 +821,8 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 
 
 <section id="network">
+
+<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={300}>
 
 <div style={{padding:'0 0 1rem 0',
 position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
@@ -865,10 +869,11 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
 </div>
 
 </div>
+</ScrollAnimation>
 </section>
 
 {/* <CasePanels /> */}
-<div className="spacer66"></div>
+<div className="spacer33"></div>
 
 
 
@@ -880,6 +885,7 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
 
 <section id="posts1" name="posts">
 
+<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={300}>
 
   <div style={{padding:'0 0 1rem 0',
 position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
@@ -968,14 +974,14 @@ Animated SVG VIDEO
     </Link>
     </article>
     </div>
-
+</ScrollAnimation>
 
 </section>
 
 
 
 
-<div className="spacer66"></div>
+<div className="spacer33"></div>
 
 
 
@@ -991,6 +997,9 @@ Lambert
 
 
 <section id="resume">
+
+<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={300}>
+
 <div style={{padding:'2rem 0',
 position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
 
@@ -1135,6 +1144,7 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
 </div>
 
 </div>
+</ScrollAnimation>
 </section>
 
 
@@ -1145,6 +1155,8 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
 
 
 <div className="spacer66"></div> 
+
+<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={300}>
 
 <section id="contact" className="child" style={{position:'relative', height:'auto', zIndex:'', paddingTop:'',}}>
 {/* <div style={{padding:'0',
@@ -1159,6 +1171,7 @@ Contact
 <Contact /></div> 
   {/* </div> */}
  </section>
+ </ScrollAnimation>
 
  {/* <div className="spacer66"></div>  */}
 
