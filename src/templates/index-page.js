@@ -820,10 +820,14 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 
 <section id="network">
 
+<div style={{padding:'0 0 1rem 0',
+position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dotted rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
+
+
 <h3 className="logotype"  style={{textAlign:'center', margin:'5vh 0', fontSize:'5vw', clear:'right'}}>Network</h3>
 <div className="flexbutt noexit print" style={{padding:'2rem 4%',
 position:'relative', height:'', width:'', overflow:'', display:'flex', gap
-  :'20px', margin:'0 auto', outline:'18px dotted rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
+  :'20px', margin:'0 auto', }}>
 
 
     <div className="flexcheek" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
@@ -860,7 +864,7 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
 
 </div>
 
-
+</div>
 </section>
 
 {/* <CasePanels /> */}
@@ -877,7 +881,7 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
 <section id="posts1" name="posts">
 
 
-  <div style={{padding:'1rem 0',
+  <div style={{padding:'0 0 1rem 0',
 position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dotted rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
  <h3 className="logotype"  style={{textAlign:'center', margin:'5vh 0', fontSize:'5vw', clear:'right'}}>Portfolio</h3>
 <br />
