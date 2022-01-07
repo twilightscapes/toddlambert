@@ -3244,7 +3244,9 @@ height:100vh;
 
 
 
-
+#chaticon:hover{
+  opacity: 1 !important;
+}
 
 
             .logolink {
