@@ -45,8 +45,8 @@ const Consent = () => (
 {/* <FaHandPointDown className="" style={{fontSize:'80px', textAlign:'center', width:'100%', position:'absolute', top:'-80px', left:'32vw', margin:'0 auto', color:'#ccc', }} /> */}
 {/* </ScrollAnimation> */}
 
-    <div style={{color:'inherit', padding:'1rem 1rem 1rem 1rem', fontSize:'1.2rem', textAlign:'center',}}>
-     Todd uses cookies to optimize his site.{" "}<br />
+    <div style={{color:'inherit', padding:'1rem 1rem 1rem 1rem', fontSize:'1rem', textAlign:'center',}}>
+     Todd uses cookies to optimize this site.{" "}<br />
     <span style={{ fontSize: "75%", color:'inherit', textDecoration:'underline' }}>
    <a className="donotsell" href="/privacy/">Do Not Sell My Personal Information</a>
     </span>
