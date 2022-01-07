@@ -54,8 +54,8 @@ a:not([href*='toddlambert.com']):not([href^='#']):not([href^='/']):after {
   border:none !important;
   filter: none !important;
   font-weight:bold;
-  position: absolute;
-  right:1rem;
+  position: relative;
+  right:0;
 }
 
 footer a:not([href*='toddlambert.com']):not([href^='#']):not([href^='/']):after, a.noexit:not([href*='toddlambert.com']):not([href^='#']):not([href^='/']):after{
@@ -2513,20 +2513,21 @@ border:1px solid #222;
 
 
         body.homepage #intro:before{
-          /* content: "design  development  photography  marketing"; */
-          content: "Hi!";
+          content: "design  development  photography  marketing";
+          content: "";
         position:absolute !important;
         display: flex !important;
         align-items: center;
         justify-content: center;
         align-self:center;
           z-index: 5;
-        animation: poof 1s forwards;
+        animation: poof .7s forwards;
         animation-delay: 1.2s;
         overflow: hidden;
         color:#f8f8fc;
         padding: 0 20%;
-        background-color:rgb(219, 62, 0, .85);
+        background-color:#222;
+        /* background-color:rgb(219, 62, 0, .85); */
         
         border:0px solid yellow;
         background-size: 50%;
@@ -2535,7 +2536,7 @@ border:1px solid #222;
         width: 100vw;
         letter-spacing: 2px;
         line-height: 90%;
-          font-size: clamp(3.5rem, 35vw, 19rem) !important;
+          font-size: clamp(1.5rem, 20vw, 9rem) !important;
           text-transform: lowercase;
           font-weight: 400;
           position: relative;

@@ -12,11 +12,11 @@ import ScrollAnimation from 'react-animate-on-scroll'
 import Contact from '../components/Contact-inc'
 import { Helmet } from "react-helmet"
 import { StaticImage } from "gatsby-plugin-image"
-import CasePanels from "../components/casepanels"
+// import CasePanels from "../components/casepanels"
 // import { useSiteMetadata } from "../hooks/use-site-metadata"
 import ReactPlayer from 'react-player/lazy'
 // import { ImPlay } from "react-icons/im"
-import LineTest from "../../static/assets/LineTest.svg"
+// import LineTest from "../../static/assets/LineTest.svg"
 import styled from "styled-components"
 import Newsignup from "../components/newssign"
 import BlogListHome from "../components/blog-list-home"
@@ -550,65 +550,6 @@ to="#experiences" title="See the new EXPERIENCES™" /> */}
   </div>
 </ScrollAnimation>
 
-
-{/* <ScrollAnimation animateIn="bounceInDown" delay={350} offset={0}  initiallyVisible={false} animateOnce={true} animatePreScroll={true} >
-<div style={{position:'relative', top:'0px', paddingRight:'', border:'0px solid yellow', zIndex:'0'}}>
-  <h2
-  className="title1 txtshadow-header"
-  style={{
-
-
-   position: 'relative',
-    textAlign: 'center', 
-    float: 'none',
-    margin:'1rem 0 0 0',
-    padding:'0',
-  }}
->
-Only Available<br />
-Through NFT
-</h2>
-</div>
-</ScrollAnimation> */}
-
-
-{/* <ScrollAnimation animateIn="bounceInRight" delay={400} initiallyVisible={false} animateOnce={true} animatePreScroll={true} style={{position:'relative', top:'', paddingRight:'10%', border:'0px solid red', zIndex:'0'}}>
-<h2
-  className="letter narrow txtshadow mobile-txt"
-  style={{
-   fontSize:'40px',
-   color: 'white',
-   position: 'relative',
-    textAlign: 'right', 
-    margin:'0',
-    padding:'0',
-  }}
->
-  into the
-</h2>
-</ScrollAnimation> */}
-
-
-{/* <ScrollAnimation animateIn="bounceInUp" delay={450} initiallyVisible={false} animateOnce={true} animatePreScroll={true} style={{position:'relative', top:'', paddingRight:'10%', border:'0px solid blue', zIndex:'0'}}>
-<h2
-  className="letter narrow txtshadow mobile-txt"
-  style={{
-   fontSize:'80px',
-   color: 'white',
-   position: 'relative',
-   fontWeight:'bold',
-//            top: '230px',
-    textAlign: 'right',
-    textTransform: 'uppercase', 
-    margin:'0',
-    padding:'0',
-  }}
->
-  Night
-</h2>
-</ScrollAnimation> */}
-
-{/* <div style={{fontSize:'120%', textAlign:'center', margin:'1rem', textShadow:'2px 2px 0 #000'}}><Link state={{modal: true}} to="/about/">Learn More About The VidSock Platform Here</Link></div> */}
 </div>
 
       
@@ -720,7 +661,7 @@ Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
 
 
 
- {/* <div className="spacer33 mobilehide"></div>  */}
+ <div className="spacer33 mobile"></div> 
 
  <section id="about">
 
@@ -729,50 +670,18 @@ Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
  <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 
   <div className="child split flexbutt" style={{position:'relative', height:'', width:'', overflow:'', display:'flex', gap
-  :'', margin:'0 auto', padding:'0', outline:'0px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)',
-  //  background:'rgba(121, 115, 115, 0.2)'
+  :'30px', margin:'0 auto', padding:'0', outline:'0px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)',
+  //  background:'rgba(121, 115, 115, 0.2)',
+  // position:'sticky', top:'0',
    }}>
 
 
 
-<div className="aboutme flexcheek" style={{minWidth:'50vw', justifyContent:'center', alignContent:'center', verticalAlign:'center', display:'grid'}}>
+<div className="aboutme flexcheek" style={{minWidth:'50vw', justifyContent:'center', alignContent:'center', verticalAlign:'center', display:'grid',}}>
 
 <h3 className="logotype"  style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', }}>About</h3>
   
-{/* <h2 className="logofirst" style={{textAlign:'', marginTop:'', 
-fontFamily: 'Lobster Two',
-letterSpacing: '2px',
-textTransform: 'lowercase',
-fontWeight: '400',
-textShadow:'0 1px 0 #eee',
-fontSize:'clamp(1.8rem, 3.5vw, 3.8rem)'
-}}>
-Digital Product <span style={{color:'#dd4000'}}>Design</span>
-</h2>
 
-
-
-<h2 className="logofirst" style={{textAlign:'', marginTop:'', 
-fontFamily: 'Lobster Two',
-letterSpacing: '2px',
-textTransform: 'lowercase',
-fontWeight: '400',
-textShadow:'0 1px 0 #eee',
-fontSize:'clamp(1.8rem, 3.5vw, 3.8rem)'
-}}>
-Conceptual <span style={{color:'#dd4000'}}>Photography</span>
-</h2>
-
-<h2 className="logofirst" style={{textAlign:'', marginTop:'', 
-fontFamily: 'Lobster Two',
-letterSpacing: '2px',
-textTransform: 'lowercase',
-fontWeight: '400',
-textShadow:'0 1px 0 #eee',
-fontSize:'clamp(2rem, 3.5vw, 3.8rem)'
-}}>
-Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
-</h2> */}
 
 <div className="masonry" style={{padding:'0', display:'', columnCount:'1', columnRule:'0px dashed rgba(121, 115, 115, 0.2)', columnGap:'0', fontSize:'110%'}}>
 
@@ -782,9 +691,9 @@ Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
 Todd Lambert is an award winning web designer and photographer that trained in Southern California and migrated to the Deep South where he found home living on the coastal Mississippi Sound.
 </p>
 
-<p>
+{/* <p>
 Having lived on the Mississippi gulf coast twice, Todd has assisted many small businesses that were affected by Hurricane Katrina in establishing a successful online presence.
-</p>
+</p> */}
 
 <p>Todd's skills include all facets of online and multimedia creation including HTML emails, online ads, user interface design, information architecture, web navigation, icon creation, web graphics, cross-platform and cross-browser web applications, web template creation &amp; CMS implementations.</p>
 
@@ -805,7 +714,7 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 <div className="flexcheek" style={{maxWidth:'', padding:'1rem 2rem 1rem 1rem', justifyContent:'flex-end'}}>
  
 
-  <StaticImage src="../../static/assets/about-todd.jpg" alt="Twilightscapes Default Image" style={{height:'', maxHeight:'70vh', position:'', zIndex:'0', borderRadius:'12px', marginTop:'', border:'0px solid !important', objectFit:'cover',}} />
+  <StaticImage src="../../static/assets/about-todd.jpg" alt="Twilightscapes Default Image" style={{height:'', maxHeight:'', position:'', zIndex:'0', borderRadius:'12px', marginTop:'', border:'0px solid !important', objectFit:'cover',}} />
   <Link state={{modal: true}}
             to="/about-todd/"
             className="post-card button noexit print"
@@ -871,30 +780,30 @@ position:'relative', height:'', width:'', overflow:'', display:'flex', gap
     <br />
     Experience a new style of landscape photography all through the eyes of Todd Lambert. Explore the unusual and see the night like you&apos;ve never seen it before.
     <br /><br />
-    <div style={{textAlign:'center',}}><a className="post-card button noexit" href="https://twilightscapes.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>Twilightscapes.com</a></div>
+    <div style={{textAlign:'center',}}><a className="post-card button " href="https://twilightscapes.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>Twilightscapes.com</a></div>
     
     </div>
 
 
     <div className="flexcheek network" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
     <a className="noexit" href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit'}}>
-    <StaticImage src="../../static/assets/vidsock-promo.jpg" alt="Todd builds Web Apps"  />
+    <StaticImage src="../../static/assets/vidsock-promo.jpg" alt="Todd builds Web Apps"  /></a>
     <br />
 Todd sells exceptionally fast and well-built multimedia web apps called VidSocks. They are a complete website solution that costs nothing to run and get top ranks in Google!
     <br /><br />
-    <div style={{textAlign:'center',}}><a className="post-card button noexit" href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>VidSocks.com</a></div>
-    </a>
+    <div style={{textAlign:'center',}}><a className="post-card button " href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>VidSocks.com</a></div>
+    
     </div>
 
     
     <div className="flexcheek network" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
     <a className="noexit" href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
-    <StaticImage src="../../static/assets/urban-fetish-button.jpg" alt="Todd Lambert Night photos"  />
+    <StaticImage src="../../static/assets/urban-fetish-button.jpg" alt="Todd Lambert Night photos"  /></a>
     <br />
     Take a walk on the wild side and follow along as Todd Lambert goes in search of the creepiest, freakiest, spookiest abandoned and desolate locations he can find. 
     <br /><br />
-    <div style={{textAlign:'center',}}><a className="post-card button noexit" href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>UrbanFetish.com</a></div>
-    </a>
+    <div style={{textAlign:'center',}}><a className="post-card button " href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>UrbanFetish.com</a></div>
+    
     </div>
 
 </div>

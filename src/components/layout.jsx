@@ -74,7 +74,7 @@ export function Layout({ children }) {
       <div className="" style={{overflow:''}}>
         {modal ? (
           <>
-
+<Link className="test2" state={{noScroll: true }} to={closeTo} style={{display:'flex', position:'absolute', alignSelf:'center', bottom:'0', textAlign:'center', margin:'0 auto', width:'100%', textDecoration:'underline', justifyContent:'center'}}>Close &amp; Return</Link>
 <div className="closer">
 {/* <FullScreen className="test" /> */}
 
@@ -85,11 +85,13 @@ export function Layout({ children }) {
 
 <AiOutlineClose />
 
-  {/* <button title="Close" class="SRLCloseButton"><div class="SRLCloseButton" >
+  {/* <button title="Close" class="SRLCloseButton1"><div class="SRLCloseButton1" >
   <svg style={{ color:'#fff',}} class="SRLCloseButton" xmlns="http://www.w3.org/2000/svg" viewBox="11 11 30 30"><path class="SRLCloseButton" d="M27.92 25l8.84-8.84 1.82-1.82c.27-.27.27-.71 0-.97l-1.95-1.95a.682.682 0 0 0-.97 0L25 22.08 14.34 11.42a.682.682 0 0 0-.97 0l-1.95 1.95c-.27.27-.27.71 0 .97L22.08 25 11.42 35.66c-.27.27-.27.71 0 .97l1.95 1.95c.27.27.71.27.97 0L25 27.92l8.84 8.84 1.82 1.82c.27.27.71.27.97 0l1.95-1.95c.27-.27.27-.71 0-.97L27.92 25z"></path></svg></div></button> */}
   
   </Link>
 </div>
+
+
 
           </>
         ) : (
@@ -101,9 +103,9 @@ export function Layout({ children }) {
   </ModalRoutingContext.Consumer>
 
 
-
-  <div id="chaticon" className="noexit" style={{fontSize:'40px', position:'fixed', right:'20px', bottom:'5vh', zIndex:'1', background:'#dd4000', color:'#fff', borderRadius:'50px', padding:'1rem', filter: 'drop-shadow(0px 0px 5px rgba(44, 44, 44, 0.5))', border:'2px solid #ccc', opacity:'.7'}}><Link state={{modal: true}} to="/contact/"><BsChatRightDots /></Link></div>
-
+<Link state={{modal: true}} to="/contact/">
+  <div id="chaticon" className="noexit" style={{fontSize:'40px', position:'fixed', right:'20px', bottom:'5vh', zIndex:'1', background:'#dd4000', color:'#fff', borderRadius:'50px', padding:'1rem', filter: 'drop-shadow(0px 0px 5px rgba(44, 44, 44, 0.5))', border:'2px solid #ccc', opacity:'.7'}}><BsChatRightDots /></div>
+</Link>
 
 
 {/* <header name="pagetop" className={isVisible ? 'left' : ''} > */}
