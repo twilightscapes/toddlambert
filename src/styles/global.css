@@ -3242,7 +3242,7 @@ height:100vh;
 
 
 
-
+body.bloglist #chaticon{display: none !important;}
 
 #chaticon:hover{
   opacity: 1 !important;

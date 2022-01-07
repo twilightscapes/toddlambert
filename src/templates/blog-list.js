@@ -12,8 +12,8 @@ import { RiArrowRightLine, RiArrowLeftLine} from "react-icons/ri"
 import GoBack from "../components/goBack"
 
 import PostCard from "../components/post-card"
-// import { Seo } from "../components/seo"
-// import { Layout } from "../components/layout"
+import { Seo } from "../components/seo"
+import { Layout } from "../components/layout"
 
 
 // import { Slide } from 'react-slideshow-image'
@@ -139,17 +139,16 @@ class BlogIndex extends React.Component {
     }
 
     return (
-      // <Layout className="blog-page1">
-      <div>
+      <Layout className="blog-page1">
 <Helmet>
   <body className="bloglist" />
 </Helmet>
-        {/* <Seo
+        <Seo
           title={"VidSocks Archive — Page " + currentPage + " of " + numPages}
           description={
             "VidSocks Archive page " + currentPage + " of " + numPages
           }
-        /> */}
+        />
         
 
 {/* <h1 style={{padding:'10px', margin:'0'}}>Articles</h1> */}
@@ -414,8 +413,7 @@ class BlogIndex extends React.Component {
 <div id="contentscroll1" name="container21" className="container" style={{display:'', justifySelf:'', width:'100%', maxWidth:'100%', height:'', border:'0px solid #000 !important', margin:'0', marginTop:'0', padding:'4%'}}>
 
 
-<h1 className="headline neonText" style={{fontSize:'250%', textAlign:'center', margin:'0', padding:'0'}}>Examples</h1>
-
+<h1 className="headline neonText" style={{fontSize:'250%', textAlign:'center', margin:'0', padding:'0'}}>Portfolio</h1>
 {/* VidSock - The World's First Multimedia 3D Blog for creating, hosting and marketing the next generation of NFTs. */}
 
 {/* onFocus={disableBodyScroll()} */}
@@ -438,7 +436,7 @@ class BlogIndex extends React.Component {
 
 </article>
 </section>
-<div className="moble"><GoBack /></div>
+<div className=""><GoBack /></div>
         <Pagination {...props} />
 
 
@@ -453,8 +451,7 @@ class BlogIndex extends React.Component {
 <FaHandPointDown className="bounce" style={{fontSize:'80px', textAlign:'center', width:'100%', margin:'1rem auto'}} />
 </ScrollAnimation> */}
  <br /><br />
-      {/* // </Layout> */}
-      </div>
+      </Layout>
     )
   }
 }
