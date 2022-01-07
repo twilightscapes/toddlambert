@@ -1,5 +1,6 @@
 import React from 'react'
 import { navigate } from 'gatsby-link'
+import { Link } from 'gatsby'
 // import { FaEnvelope } from 'react-icons/fa'
 import { RiSendPlane2Line } from 'react-icons/ri'
 
@@ -120,7 +121,7 @@ export default class Contact extends React.Component {
         </p>
         </div>
 
-        <div style={{fontSize: '80%', padding: '1rem 3%', textAlign: 'center',}}><a style={{textAlign: 'center', paddingTop: '0px', paddingBottom: '0', textDecoration: 'underline',}} href="/privacy">Privacy Policy</a>
+        <div style={{fontSize: '80%', padding: '1rem 3%', textAlign: 'center',}}><Link style={{textAlign: 'center', paddingTop: '0px', paddingBottom: '0', textDecoration: 'underline',}} state={{modal: true}} to="/privacy">Privacy Policy</Link>
                 </div>
       </form>
     </div>

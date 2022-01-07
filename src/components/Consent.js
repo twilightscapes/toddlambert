@@ -2,7 +2,7 @@
 import * as React from "react"
 // import { navigate } from 'gatsby-link'
 // import { FaEnvelope } from 'react-icons/fa';
-// import { Link } from "gatsby"
+import { Link } from "gatsby"
 import CookieConsent from "react-cookie-consent";
 // import { FaHandPointDown } from "react-icons/fa"
 // import ScrollAnimation from 'react-animate-on-scroll'
@@ -48,7 +48,7 @@ const Consent = () => (
     <div style={{color:'inherit', padding:'1rem 1rem 1rem 1rem', fontSize:'1rem', textAlign:'center',}}>
      Todd uses cookies to optimize this site.{" "}<br />
     <span style={{ fontSize: "75%", color:'inherit', textDecoration:'underline' }}>
-   <a className="donotsell" href="/privacy/">Do Not Sell My Personal Information</a>
+   <Link className="donotsell" state={{modal: true}} to="/privacy/">Do Not Sell My Personal Information</Link>
     </span>
     </div>
     
