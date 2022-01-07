@@ -669,7 +669,7 @@ fontSize:'clamp(2.5rem, 3.5vw, 3.8rem)'
 <div className="logolink" style={{textAlign:'center', position:'relative',fontSize:'clamp(2rem, 12.5vw, 10rem)', padding:'0 0 2% 0', background:'tranparent', filter: 'drop-shadow(0px 0px 0px #444)'}}><span className="logofirst mainlogo">todd</span> <span className="logocolor">lambert</span></div>
 {/* </ScrollAnimation> */}
 
-<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={1400}>
+<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={1000}>
 <h1 className="logofirst" style={{textAlign:'center', marginTop:'50px', 
 fontFamily: 'Lobster Two',
 letterSpacing: '2px',
@@ -686,7 +686,7 @@ Digital Product <span style={{color:'#dd4000'}}>Design</span>
 
 
 
-<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={1500}>
+<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={1100}>
 <h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
 fontFamily: 'Lobster Two',
 letterSpacing: '2px',
@@ -700,7 +700,7 @@ Conceptual <span style={{color:'#dd4000'}}>Photography</span>
 </h2>
 </ScrollAnimation>
 
-<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={1600}>
+<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={1200}>
 <h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
 fontFamily: 'Lobster Two',
 letterSpacing: '2px',
@@ -777,23 +777,26 @@ Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
 <div className="masonry" style={{padding:'0', display:'', columnCount:'1', columnRule:'0px dashed rgba(121, 115, 115, 0.2)', columnGap:'0',}}>
 
 
-<p>Todd Lambert, a “webdude” that grew up in Southern California and whose career and endeavors have taken him to over 14 western states including living in Colorado, Texas and Oregon. </p>
-  
-  
-<p>He eventually found home living on the coastal Mississippi Sound.
+{/* <p>Todd Lambert, a “webdude” that grew up in Southern California and whose career and endeavors have taken him to over 14 western states including living in Colorado, Texas and Oregon. </p> */}
+<p>
+Todd Lambert is an award winning web designer and photographer that trained in Southern California and migrated to the Deep South where he found home living on the coastal Mississippi Sound.
 </p>
 
 <p>
-Having lived on the Mississippi gulf coast, twice, Todd has assisted many small businesses that were affected by Hurricane Katrina in establishing a sucessful online presence.
+Having lived on the Mississippi gulf coast twice, Todd has assisted many small businesses that were affected by Hurricane Katrina in establishing a successful online presence.
 </p>
 
+<p>Todd's skills include all facets of online and multimedia creation including HTML emails, online ads, user interface design, information architecture, web navigation, icon creation, web graphics, cross-platform and cross-browser web applications, web template creation &amp; CMS implementations.</p>
+
 <p>
-Todd is actively pushing the boundaries of night photography. You can often find him in the middle of the night shooting astrophotography which is his favorite subject.
+When Todd is not online, he is often found pushing the boundaries of night photography. You can usually find him in the middle of the night shooting astrophotography which is his favorite subject.
 </p>
 
 <p>
 Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes up most of his free time.
 </p>
+
+
 
   </div>
 
@@ -803,20 +806,9 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
  
 
   <StaticImage src="../../static/assets/about-todd.jpg" alt="Twilightscapes Default Image" style={{height:'', maxHeight:'70vh', position:'', zIndex:'0', borderRadius:'12px', marginTop:'', border:'0px solid !important', objectFit:'cover',}} />
-
-  <p style={{fontFamily:'Lobster Two', fontSize:'2.8vw', textAlign:'center'}}>" I create digital experiences using intriguing photography, animation and typography, all packaged in the most performant coding. "
-</p>
-</div>
-
-</div>
-</ScrollAnimation>
-
-{/* <Link state={{modal: true}} to="/about-todd/" className="actionJackson button" style={{margin:'', textDecoration:'none', fontSize:'120%', textAlign:'center' }}>View More About Todd</Link> */}
-
-
-{/* <Link state={{modal: true}}
+  <Link state={{modal: true}}
             to="/about-todd/"
-            className="button fire actionJackson noexit print"
+            className="post-card button noexit print"
             style={{
               cursor:'pointer',
               width:'',
@@ -828,7 +820,17 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
             }}
           >
             View More About Todd
-          </Link> */}
+          </Link>
+  
+</div>
+
+</div>
+</ScrollAnimation>
+
+{/* <Link state={{modal: true}} to="/about-todd/" className="actionJackson button" style={{margin:'', textDecoration:'none', fontSize:'120%', textAlign:'center' }}>View More About Todd</Link> */}
+
+
+
 
 
 </section>
@@ -838,7 +840,12 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 
 
 
-
+<ScrollAnimation animateIn="bounceInUp" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={100}>
+<blockquote style={{fontFamily:'Lobster Two', fontSize:'2.5vw', textAlign:'center', padding:'', background:'rgba(121, 115, 115, 0.2)', borderRadius:'12px'}}>
+  <span style={{padding:'0 10%'}}>I create digital experiences using intriguing photography, animation and typography, all packaged in the most performant coding.</span>
+  <br /><div style={{textAlign:'right', margin:'2rem 30% 0 0'}}>- Todd Lambert</div>
+</blockquote>
+</ScrollAnimation>
 
 <section id="network">
 
@@ -906,10 +913,12 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
 
 
 
-
 <section id="posts1" name="posts">
 
 <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
+
+
+
 
   <div style={{padding:'0 0 1rem 0',
 position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto',

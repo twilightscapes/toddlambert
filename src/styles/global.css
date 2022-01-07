@@ -1877,22 +1877,23 @@ blockquote:before {
   quotes: "“" "”" "‘" "’";
   content: open-quote;
   font-size: 4em;
-  line-height: 0.1em;
-   margin-left: -.25em;
-  vertical-align: -0.4em;
+  font-size:clamp(2rem, 15.5vw, 9.8rem);
+  line-height: 0.4em;
+
   position:absolute;
 
 }
 blockquote:after {
   content: close-quote;
   font-size: 4em;
+  font-size:clamp(2rem, 15.5vw, 9.8rem);
   line-height: 0.1em;
   margin-right: 0.25em;
   vertical-align: -0.4em;
   text-align: right;
   position:absolute;
   right:0;
-  bottom:-20px;
+  line-height: 0.6em;
   width:100%;
 
 }
@@ -2512,7 +2513,8 @@ border:1px solid #222;
 
 
         body.homepage #intro:before{
-          content: "design  development  photography  marketing";
+          /* content: "design  development  photography  marketing"; */
+          content: "Hi!";
         position:absolute !important;
         display: flex !important;
         align-items: center;
@@ -2520,26 +2522,32 @@ border:1px solid #222;
         align-self:center;
           z-index: 5;
         animation: poof 1s forwards;
-        animation-delay: 1.5s;
+        animation-delay: 1.2s;
         overflow: hidden;
-
-        
-        font-size:8vw;
         color:#f8f8fc;
         padding: 0 20%;
-        background-color:#111;
+        background-color:rgb(219, 62, 0, .85);
+        
         border:0px solid yellow;
         background-size: 50%;
         background-position:center 50px;
-          height: 100vh;
-          width: 100vw;
+        height: 100vh;
+        width: 100vw;
+        letter-spacing: 2px;
+        line-height: 90%;
+          font-size: clamp(3.5rem, 35vw, 19rem) !important;
+          text-transform: lowercase;
+          font-weight: 400;
+          position: relative;
+          text-shadow:0 0 10px #000;
+          filter: drop-shadow(0px 1px 30px rgba(44, 44, 44, 0.9));
         }
 
 .intro{border:0px solid orange !important;}
 
 
-/* body.homepage .intro:after{
-  content: " ";
+/* body.homepage #intro:after{
+  content: " DAMN ";
   position:fixed;
 left:0;
 top:0;
@@ -2554,35 +2562,7 @@ background: rgba(0,0,0,0.6);
 } */
 
 
-body.homepage .intro:before{
-          
-  content: "Clicking Skip, Sucks";
-/* position:fixed; */
-/* left:0;
-top:0;
-right:0; */
-/* filter: drop-shadow(1px 1px 24px rgba(255, 0, 0, 0.9)); */
-display: flex;
-align-items: center;
-justify-content: center;
-align-self:center;
-  width:100%;
-/* animation: poof 1s forwards;
-animation-delay: 1.5s; */
-overflow: hidden;
-  /* border:1px solid red; */
-padding:0 0 0 0;
-font-size:5vw; 
-color:#f8f8fc;
-text-shadow: 12px 7px 15px 12px black;
-/* background-color:#111; */
-border:0px solid yellow;
-background-size: 60%;
-background-position:center 70px;
-/* filter: blur(60px); */
-  
 
-}
 
 
 
