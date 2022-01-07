@@ -663,6 +663,8 @@ Through NFT
 fontSize:'clamp(2.5rem, 3.5vw, 3.8rem)'
 }}>
 
+{/* <div style={{position:'absolute', zIndex:'', top:'30vh', maxHeight:'33vh', overflow:'hidden', border:'0px solid red'}}><LineTest /></div> */}
+
 {/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={400}> */}
 <div className="logolink" style={{textAlign:'center', position:'relative',fontSize:'clamp(2rem, 12.5vw, 10rem)', padding:'0 0 2% 0', background:'tranparent', filter: 'drop-shadow(0px 0px 0px #444)'}}><span className="logofirst mainlogo">todd</span> <span className="logocolor">lambert</span></div>
 {/* </ScrollAnimation> */}
@@ -718,7 +720,7 @@ Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
 
 
 
- <div className="spacer33 mobilehide"></div> 
+ {/* <div className="spacer33 mobilehide"></div>  */}
 
  <section id="about">
 
@@ -727,7 +729,9 @@ Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
  <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 
   <div className="child split flexbutt" style={{position:'relative', height:'', width:'', overflow:'', display:'flex', gap
-  :'', margin:'0 auto', padding:'2rem', outline:'18px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
+  :'', margin:'0 auto', padding:'2rem', outline:'0px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)',
+  //  background:'rgba(121, 115, 115, 0.2)'
+   }}>
 
 
 
@@ -828,7 +832,8 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 
 
 </section>
-<div className="spacer33"></div>
+ {/* <div style={{position:'relative', zIndex:'-1', bottom:'0', maxHeight:'33vh', overflow:'hidden', border:'0px solid red'}}><LineTest /></div> */}
+{/* <div className="spacer33"></div> */}
 
 
 
@@ -840,27 +845,31 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 
 <div style={{padding:'0 0 1rem 0',
-position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
+position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', 
+// outline:'18px dashed rgba(121, 115, 115, 0.3)',
+// border:'0px solid rgba(121, 115, 115, 0.3)',
+ background:'rgba(121, 115, 115, 0.2)'
+ }}>
 
 
-<h3 className="logotype" style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', paddingTop:'1rem'}}>Network</h3>
+<h3 className="logotype" style={{textAlign:'center', margin:'0 0 0 0', fontSize:'5vw', clear:'right', paddingTop:'1rem'}}>Network</h3>
 <div className="flexbutt noexit print" style={{padding:'2rem 4%',
 position:'relative', height:'', width:'', overflow:'', display:'flex', gap
   :'20px', margin:'0 auto', }}>
 
 
-    <div className="flexcheek network" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
+    <div className="flexcheek network" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
     <a className="noexit" href="https://twilightscapes.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
-    <StaticImage src="../../static/assets/twilightscapes-button.jpg" alt="Todd Lambert Night photos"  />
+    <StaticImage src="../../static/assets/twilightscapes-button.jpg" alt="Todd Lambert Night photos"  /></a>
     <br />
     Experience a new style of landscape photography all through the eyes of Todd Lambert. Explore the unusual and see the night like you&apos;ve never seen it before.
     <br /><br />
     <div style={{textAlign:'center',}}><a className="post-card button noexit" href="https://twilightscapes.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>Twilightscapes.com</a></div>
-    </a>
+    
     </div>
 
 
-    <div className="flexcheek network" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
+    <div className="flexcheek network" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
     <a className="noexit" href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit'}}>
     <StaticImage src="../../static/assets/vidsock-promo.jpg" alt="Todd builds Web Apps"  />
     <br />
@@ -871,7 +880,7 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
     </div>
 
     
-    <div className="flexcheek network" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'start'}}>
+    <div className="flexcheek network" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
     <a className="noexit" href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
     <StaticImage src="../../static/assets/urban-fetish-button.jpg" alt="Todd Lambert Night photos"  />
     <br />
@@ -888,7 +897,7 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
 </section>
 
 {/* <CasePanels /> */}
-<div className="spacer33"></div>
+{/* <div className="spacer33"></div> */}
 
 
 
@@ -903,8 +912,13 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
 <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 
   <div style={{padding:'0 0 1rem 0',
-position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
- <h3 className="logotype" style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', paddingTop:'1rem'}}>Portfolio</h3>
+position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto',
+//  outline:'18px dashed rgba(121, 115, 115, 0.3)', 
+ borderRadius:'', 
+ border:'0px solid rgba(121, 115, 115, 0.3)', 
+ background:'rgba(121, 115, 115, 0.2)'
+ }}>
+ <h3 className="logotype" style={{textAlign:'center', margin:'0 0 0 0', fontSize:'5vw', clear:'right', paddingTop:'1rem'}}>Portfolio</h3>
 <br />
 
 
@@ -1002,7 +1016,7 @@ Animated SVG VIDEO
 
 
 
-<div className="spacer33"></div>
+{/* <div className="spacer33"></div> */}
 
 
 
@@ -1022,7 +1036,11 @@ Lambert
 <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 
 <div style={{padding:'2rem 0',
-position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
+position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto',
+ outline:'18px dashed rgba(121, 115, 115, 0.3)',
+ borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', 
+// background:'rgba(121, 115, 115, 0.2)'
+}}>
 
 
 <div className=" outer1 section1" style={{padding:'0 2%', height:'', background:'transparent'}}>
@@ -1175,11 +1193,11 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
 
 
 
-<div className="spacer33"></div> 
+{/* <div className="spacer33"></div>  */}
 
-<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
+<ScrollAnimation animateIn="bounceInUp" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 
-<section id="contact" className="child" style={{position:'relative', height:'auto', zIndex:'', paddingTop:'',}}>
+<section id="contact" className="child" style={{position:'relative', height:'auto', zIndex:'', padding:'2rem 0', background:'rgba(121, 115, 115, 0.2)'}}>
 {/* <div style={{padding:'0',
 position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}> */}
 <div className="container3" style={{}}>
