@@ -103,7 +103,7 @@ export function Layout({ children }) {
   </ModalRoutingContext.Consumer>
 
 
-<Link state={{modal: true}} to="/contact/">
+<Link state={{modal: true}} to="/contact/" title="Contact Todd Lambert">
   <div id="chaticon" className="noexit" style={{fontSize:'40px', position:'fixed', right:'20px', bottom:'5vh', zIndex:'1', background:'#dd4000', color:'#fff', borderRadius:'50px', padding:'1rem', filter: 'drop-shadow(0px 0px 5px rgba(44, 44, 44, 0.5))', border:'2px solid #ccc', opacity:'.7'}}><BsChatRightDots /></div>
 </Link>
 

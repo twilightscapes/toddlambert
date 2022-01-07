@@ -617,8 +617,9 @@ letterSpacing: '2px',
 textTransform: 'lowercase',
 fontWeight: '400',
 textShadow:'0 1px 0 #eee',
-fontSize:'clamp(2rem, 6.5vw, 3.8rem)',
-opacity:'.9'
+fontSize:'clamp(1.6rem, 6vw, 3.8rem)',
+opacity:'.9',
+paddingLeft:'2rem',
 }}>
 Digital Product <span style={{color:'#dd4000'}}>Design</span>
 </h1>
@@ -634,8 +635,9 @@ letterSpacing: '2px',
 textTransform: 'lowercase',
 fontWeight: '400',
 textShadow:'0 1px 0 #eee',
-fontSize:'clamp(2rem, 6.5vw, 3.8rem)',
-opacity:'.9'
+fontSize:'clamp(1.6rem, 6vw, 3.8rem)',
+opacity:'.9',
+paddingLeft:'2rem',
 }}>
 Conceptual <span style={{color:'#dd4000'}}>Photography</span>
 </h2>
@@ -648,8 +650,9 @@ letterSpacing: '2px',
 textTransform: 'lowercase',
 fontWeight: '400',
 textShadow:'0 1px 0 #eee',
-fontSize:'clamp(2rem, 6.5vw, 3.8rem)',
-opacity:'.9'
+fontSize:'clamp(1.6rem, 6vw, 3.8rem)',
+opacity:'.9',
+paddingLeft:'2rem',
 }}>
 Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
 </h2>
