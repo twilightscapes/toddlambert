@@ -729,7 +729,7 @@ Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
  <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 
   <div className="child split flexbutt" style={{position:'relative', height:'', width:'', overflow:'', display:'flex', gap
-  :'', margin:'0 auto', padding:'2rem', outline:'0px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)',
+  :'', margin:'0 auto', padding:'0', outline:'0px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)',
   //  background:'rgba(121, 115, 115, 0.2)'
    }}>
 
@@ -774,7 +774,7 @@ fontSize:'clamp(2rem, 3.5vw, 3.8rem)'
 Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
 </h2> */}
 
-<div className="masonry" style={{padding:'0', display:'', columnCount:'1', columnRule:'0px dashed rgba(121, 115, 115, 0.2)', columnGap:'0',}}>
+<div className="masonry" style={{padding:'0', display:'', columnCount:'1', columnRule:'0px dashed rgba(121, 115, 115, 0.2)', columnGap:'0', fontSize:'110%'}}>
 
 
 {/* <p>Todd Lambert, a “webdude” that grew up in Southern California and whose career and endeavors have taken him to over 14 western states including living in Colorado, Texas and Oregon. </p> */}
