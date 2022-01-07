@@ -201,6 +201,20 @@ const HomePage = ({ data }) => {
     : ""
 
     // const { iconimage } = useSiteMetadata()
+    // const now = new Date();
+    // now.setDate(now.getDate()+14);
+    // const AvaNow = now;
+
+    // const nextWeek = new Date()
+
+    // add 7 days to the current date
+    // nextWeek.setDate(new Date().getDate() + 7)
+    
+
+    
+    const current = new Date();
+  const date = `${current.getMonth()+2}/${current.getDate()+2}/${current.getFullYear()}`;
+
 
 
     // const { siteUrl } = useSiteMetadata()
@@ -1174,7 +1188,17 @@ position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outl
     <h3 className="logotype" style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', filter: 'drop-shadow(0px 0px 10px #444)', paddingTop:'1rem'}}>
 Contact
 </h3>
-<Contact /></div> 
+<p style={{fontSize:'1.5rem', textAlign:'center'}}>
+Looking for innovative, top performing, design?
+<br />Contact me and let's create something great together.</p>
+
+<p style={{fontSize:'1.2rem', textAlign:'center', fontWeight:'bold'}}>
+Availability: &nbsp; {date}
+</p>
+
+<Contact />
+
+</div> 
   {/* </div> */}
  </section>
  </ScrollAnimation>
