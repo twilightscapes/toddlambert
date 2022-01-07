@@ -9,11 +9,11 @@ import React from 'react'
 import { Helmet } from "react-helmet"
 import { Link, graphql } from "gatsby"
 import { RiArrowRightLine, RiArrowLeftLine} from "react-icons/ri"
-
+import GoBack from "../components/goBack"
 
 import PostCard from "../components/post-card"
-import { Seo } from "../components/seo"
-import { Layout } from "../components/layout"
+// import { Seo } from "../components/seo"
+// import { Layout } from "../components/layout"
 
 
 // import { Slide } from 'react-slideshow-image'
@@ -139,16 +139,17 @@ class BlogIndex extends React.Component {
     }
 
     return (
-      <Layout className="blog-page1">
+      // <Layout className="blog-page1">
+      <div>
 <Helmet>
   <body className="bloglist" />
 </Helmet>
-        <Seo
+        {/* <Seo
           title={"VidSocks Archive — Page " + currentPage + " of " + numPages}
           description={
             "VidSocks Archive page " + currentPage + " of " + numPages
           }
-        />
+        /> */}
         
 
 {/* <h1 style={{padding:'10px', margin:'0'}}>Articles</h1> */}
@@ -410,10 +411,11 @@ class BlogIndex extends React.Component {
     </div> */}
 
 
-<div id="contentscroll" name="container2" className="container" style={{display:'', justifySelf:'', width:'100%', maxWidth:'100%', height:'', border:'0px solid #000 !important', margin:'0', marginTop:'0', padding:'4%'}}>
+<div id="contentscroll1" name="container21" className="container" style={{display:'', justifySelf:'', width:'100%', maxWidth:'100%', height:'', border:'0px solid #000 !important', margin:'0', marginTop:'0', padding:'4%'}}>
 
 
-<h1 className="headline neonText" style={{fontSize:'250%', textAlign:'center', margin:'0', padding:'0'}}>Archive</h1>
+<h1 className="headline neonText" style={{fontSize:'250%', textAlign:'center', margin:'0', padding:'0'}}>Examples</h1>
+
 {/* VidSock - The World's First Multimedia 3D Blog for creating, hosting and marketing the next generation of NFTs. */}
 
 {/* onFocus={disableBodyScroll()} */}
@@ -421,20 +423,22 @@ class BlogIndex extends React.Component {
  {/* <div className="home-posts grids col-1 sm-2 lg-3" style={{clear:'both', textAlign:'left'}}> */}
 
 
- <section style={{height:'auto'}}>
+ {/* <section style={{height:'auto'}}>
   <Link to="/#posts" style={{display:'block', width:'100%'}}><article className="post-card" style={{height:'50%', display:'flex', flexDirection:'row', justifyContent:'center', border:'1px solid', padding:'2rem', fontSize:'200%', textAlign:'center' }}>
   <RiArrowLeftLine style={{fontSize:'50px'}} /> View Newest 
     </article></Link>
     </section>
+    <br /> */}
 
  <section style={{height:'auto'}}>
   <article className="" style={{height:'auto'}}>
 
  {posts}
 
+
 </article>
 </section>
-
+<div className="moble"><GoBack /></div>
         <Pagination {...props} />
 
 
@@ -449,7 +453,8 @@ class BlogIndex extends React.Component {
 <FaHandPointDown className="bounce" style={{fontSize:'80px', textAlign:'center', width:'100%', margin:'1rem auto'}} />
 </ScrollAnimation> */}
  <br /><br />
-      </Layout>
+      {/* // </Layout> */}
+      </div>
     )
   }
 }

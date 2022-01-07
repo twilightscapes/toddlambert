@@ -806,7 +806,7 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
  
 
   <StaticImage src="../../static/assets/about-todd.jpg" alt="Twilightscapes Default Image" style={{height:'', maxHeight:'70vh', position:'', zIndex:'0', borderRadius:'12px', marginTop:'', border:'0px solid !important', objectFit:'cover',}} />
-  <Link state={{modal: true}}
+  {/* <Link state={{modal: true}}
             to="/about-todd/"
             className="post-card button noexit print"
             style={{
@@ -820,7 +820,7 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
             }}
           >
             View More About Todd
-          </Link>
+          </Link> */}
   
 </div>
 
