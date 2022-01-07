@@ -8,7 +8,8 @@ import React, {  } from "react"
 // import Theme from "../components/theme"
 import { Seo } from "./seo"
 import FullScreen from "../components/FullScreen"
-import { Link } from 'gatsby-plugin-modal-routing-3'
+// import { Link } from 'gatsby-plugin-modal-routing-3'
+import { Link } from "gatsby"
 import { ModalRoutingContext } from 'gatsby-plugin-modal-routing-3'
 import { AiOutlineClose } from "react-icons/ai"
 // import { AnchorLink } from "gatsby-plugin-anchor-links"
@@ -27,6 +28,7 @@ import "../styles/global.css"
 // import Fullscreen from "../components/FullScreen"
 // import Menu from "../components/menu1"
 
+import { BsChatRightDots } from 'react-icons/bs'
 
 
 
@@ -100,7 +102,10 @@ export function Layout({ children }) {
 
 
 
-  
+  <div id="menuicon" className="noexit" style={{fontSize:'40px', position:'fixed', right:'20px', bottom:'5vh', zIndex:'1', background:'#dd4000', color:'#fff', borderRadius:'50px', padding:'1rem', filter: 'drop-shadow(0px 0px 5px rgba(44, 44, 44, 0.5))', border:'2px solid #ccc'}}><Link state={{modal: true}} to="/contact/"><BsChatRightDots /></Link></div>
+
+
+
 {/* <header name="pagetop" className={isVisible ? 'left' : ''} > */}
 <header name="pagetop" className="">
 

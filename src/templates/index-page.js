@@ -840,7 +840,7 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 
 
 
-<ScrollAnimation animateIn="bounceInUp" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={100}>
+<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={300}>
 <blockquote style={{fontFamily:'Lobster Two', fontSize:'2.5vw', textAlign:'center', padding:'', background:'rgba(121, 115, 115, 0.2)', borderRadius:'12px'}}>
   <span style={{padding:'0 10%'}}>I create digital experiences using intriguing photography, animation and typography, all packaged in the most performant coding.</span>
   <br /><div style={{textAlign:'right', margin:'2rem 30% 0 0'}}>- Todd Lambert</div>
