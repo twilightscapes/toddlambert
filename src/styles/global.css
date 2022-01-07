@@ -3278,7 +3278,8 @@ height:100vh;
             .logocolor {
               color: #dd4000;
               position:relative;
-              filter: drop-shadow(2px 2px 0px #000);
+          
+              filter: drop-shadow(1px 1px 0px rgba(44, 44, 44, 0.5));
             }
             
             .logocolor:before {
@@ -3318,17 +3319,17 @@ height:100vh;
           
             
             .logofirst {
-              padding-right: 18px;
+              padding-right: 3%;
               position: relative;
               color:#666;
-              filter: drop-shadow(2px 2px 0px #000);
+              filter: drop-shadow(1px 1px 0px rgba(44, 44, 44, 0.5));
             }
             
-            .logofirst:before {
+            .logofirst.mainlogo:before {
               content: " . ";
               color: #666;
               position: absolute;
-              left:-10%
+              margin-left:-10%;
             }
             
             .logotype {
@@ -3340,6 +3341,7 @@ height:100vh;
               font-weight: 400;
               position: relative;
               text-shadow:0 1px 0 #fff;
+              filter: drop-shadow(1px 1px 0px rgba(44, 44, 44, 0.5));
               
             }
             
@@ -3347,6 +3349,7 @@ height:100vh;
               content: ".todd {";
               color: #666;
               letter-spacing:2px;
+              word-spacing: -8px;
             }
             
             

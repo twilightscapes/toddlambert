@@ -16,6 +16,7 @@ import CasePanels from "../components/casepanels"
 // import { useSiteMetadata } from "../hooks/use-site-metadata"
 import ReactPlayer from 'react-player/lazy'
 // import { ImPlay } from "react-icons/im"
+import LineTest from "../../static/assets/LineTest.svg"
 import styled from "styled-components"
 import Newsignup from "../components/newssign"
 import BlogListHome from "../components/blog-list-home"
@@ -663,7 +664,7 @@ fontSize:'clamp(2.5rem, 3.5vw, 3.8rem)'
 }}>
 
 {/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={400}> */}
-<div className="logolink" style={{textAlign:'center', position:'relative',fontSize:'clamp(2rem, 12.5vw, 10rem)', padding:'0 0 2% 0', background:'tranparent', filter: 'drop-shadow(0px 0px 30px #444)'}}><span className="logofirst">todd</span> <span className="logocolor">lambert</span></div>
+<div className="logolink" style={{textAlign:'center', position:'relative',fontSize:'clamp(2rem, 12.5vw, 10rem)', padding:'0 0 2% 0', background:'tranparent', filter: 'drop-shadow(0px 0px 0px #444)'}}><span className="logofirst mainlogo">todd</span> <span className="logocolor">lambert</span></div>
 {/* </ScrollAnimation> */}
 
 <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={1400}>
@@ -674,7 +675,7 @@ textTransform: 'lowercase',
 fontWeight: '400',
 textShadow:'0 1px 0 #eee',
 fontSize:'clamp(2rem, 6.5vw, 3.8rem)',
-filter: 'drop-shadow(0px 0px 10px #444)'
+opacity:'.9'
 }}>
 Digital Product <span style={{color:'#dd4000'}}>Design</span>
 </h1>
@@ -691,7 +692,7 @@ textTransform: 'lowercase',
 fontWeight: '400',
 textShadow:'0 1px 0 #eee',
 fontSize:'clamp(2rem, 6.5vw, 3.8rem)',
-filter: 'drop-shadow(0px 0px 10px #444)'
+opacity:'.9'
 }}>
 Conceptual <span style={{color:'#dd4000'}}>Photography</span>
 </h2>
@@ -705,7 +706,7 @@ textTransform: 'lowercase',
 fontWeight: '400',
 textShadow:'0 1px 0 #eee',
 fontSize:'clamp(2rem, 6.5vw, 3.8rem)',
-filter: 'drop-shadow(0px 0px 10px #444)'
+opacity:'.9'
 }}>
 Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
 </h2>
@@ -721,7 +722,7 @@ Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
 
  <section id="about">
 
-
+ {/* <div style={{position:'relative', zIndex:'-1', bottom:'0', maxHeight:'33vh', overflow:'hidden', border:'0px solid red'}}><LineTest /></div> */}
 
  <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 
@@ -732,7 +733,7 @@ Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
 
 <div className="aboutme flexcheek" style={{minWidth:'50vw', justifyContent:'center', alignContent:'center', verticalAlign:'center', display:'grid'}}>
 
-<h3 className="logotype"  style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', filter: 'drop-shadow(0px 0px 10px #444)'}}>About</h3>
+<h3 className="logotype"  style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', }}>About</h3>
   
 {/* <h2 className="logofirst" style={{textAlign:'', marginTop:'', 
 fontFamily: 'Lobster Two',
@@ -799,7 +800,7 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 
   <StaticImage src="../../static/assets/about-todd.jpg" alt="Twilightscapes Default Image" style={{height:'', maxHeight:'70vh', position:'', zIndex:'0', borderRadius:'12px', marginTop:'', border:'0px solid !important', objectFit:'cover',}} />
 
-  <p style={{fontFamily:'Lobster Two', fontSize:'2.8vw', textAlign:'center'}}>I create digital experiences using intriguing photography, animation and typography, all packaged in the most performant coding.
+  <p style={{fontFamily:'Lobster Two', fontSize:'2.8vw', textAlign:'center'}}>" I create digital experiences using intriguing photography, animation and typography, all packaged in the most performant coding. "
 </p>
 </div>
 
@@ -842,7 +843,7 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
 
 
-<h3 className="logotype" style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', filter: 'drop-shadow(0px 0px 10px #444)', paddingTop:'1rem'}}>Network</h3>
+<h3 className="logotype" style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', paddingTop:'1rem'}}>Network</h3>
 <div className="flexbutt noexit print" style={{padding:'2rem 4%',
 position:'relative', height:'', width:'', overflow:'', display:'flex', gap
   :'20px', margin:'0 auto', }}>
@@ -903,7 +904,7 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
 
   <div style={{padding:'0 0 1rem 0',
 position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}>
- <h3 className="logotype" style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', filter: 'drop-shadow(0px 0px 10px #444)', paddingTop:'1rem'}}>Portfolio</h3>
+ <h3 className="logotype" style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', paddingTop:'1rem'}}>Portfolio</h3>
 <br />
 
 
@@ -1028,7 +1029,7 @@ position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outl
 
 <div className="container3" style={{ position:'relative'}}>
 
-<h3 className="logotype print" style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', filter: 'drop-shadow(0px 0px 10px #444)', paddingTop:'1rem'}}>
+<h3 className="logotype print" style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', paddingTop:'1rem'}}>
 Resume
 </h3>
 <h3 className="logotype printonly" style={{textAlign:'center', margin:' 0', fontSize:'350%',}}>
@@ -1185,7 +1186,7 @@ position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outl
 
 </div>
   <div className="outer" style={{margin:'0 12%', outline:'0px solid rgba(121, 115, 115, 0.3)', outlineOffset:'12px', background:'rgba(121, 115, 115, 0.2)', borderRadius:'12px', padding:'0 4%'}}>
-    <h3 className="logotype" style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', filter: 'drop-shadow(0px 0px 10px #444)', paddingTop:'1rem'}}>
+    <h3 className="logotype" style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', paddingTop:'1rem'}}>
 Contact
 </h3>
 <p style={{fontSize:'1.5rem', textAlign:'center'}}>
