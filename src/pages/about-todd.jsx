@@ -254,7 +254,7 @@ const options = {
 
 <div className="imgbox" style={{border:'0px solid black', position:'relative', margin:'0 0 0 0',}}>
 
-       <StaticImage alt="Todd Lambert Web development for photographers" src="../../static/assets/todd.jpg" />
+       <StaticImage alt="Todd Lambert on location" src="../../static/assets/todd.jpg" />
 <div style={{position:'absolute', bottom:'5px', fontSize:'60%', color:'#ddd', textAlign:'center', width:'100%',}}><span className="txtshadow" style={{background:'#000', opacity:'.8', padding:'3px 5px',}}>
 Todd Lambert on location</span></div>
 </div>
