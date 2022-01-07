@@ -842,7 +842,7 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 
 <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={300}>
 <blockquote style={{fontFamily:'Lobster Two', fontSize:'2.5vw', textAlign:'center', padding:'', background:'rgba(121, 115, 115, 0.2)', borderRadius:'12px'}}>
-  <span style={{padding:'0 10%'}}>I create digital experiences using intriguing photography, animation and typography, all packaged in the most performant coding.</span>
+  <span style={{padding:'0 10%'}}>I imagine things and then make them come to life. Creating digital experiences using intriguing photography, animation and typography, all packaged in the most performant coding that loads fast everywhere.</span>
   <br /><div style={{textAlign:'right', margin:'2rem 30% 0 0'}}>- Todd Lambert</div>
 </blockquote>
 </ScrollAnimation>
@@ -1204,7 +1204,7 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
 
 {/* <div className="spacer33"></div>  */}
 
-<ScrollAnimation animateIn="bounceInUp" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
+<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 
 <section id="contact" className="child" style={{position:'relative', height:'auto', zIndex:'', padding:'2rem 0', background:'rgba(121, 115, 115, 0.2)'}}>
 {/* <div style={{padding:'0',
