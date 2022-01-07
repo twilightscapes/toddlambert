@@ -783,7 +783,7 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
 <div className="flexcheek" style={{maxWidth:'', padding:'1rem 2rem 1rem 1rem', justifyContent:'flex-end'}}>
  
 
-  <StaticImage src="../../static/assets/promo-about-todd.jpg" alt="Twilightscapes Default Image" style={{height:'', maxHeight:'', position:'', zIndex:'0', borderRadius:'12px', marginTop:'', border:'0px solid !important', objectFit:'cover',}} />
+  <StaticImage src="../../static/assets/about-todd.jpg" alt="Twilightscapes Default Image" style={{height:'', maxHeight:'70vh', position:'', zIndex:'0', borderRadius:'12px', marginTop:'', border:'0px solid !important', objectFit:'cover',}} />
 
   <p style={{fontFamily:'Lobster Two', fontSize:'2.8vw', textAlign:'center'}}>I create digital experiences using intriguing photography, animation and typography, all packaged in the most performant coding.
 </p>
@@ -840,7 +840,7 @@ position:'relative', height:'', width:'', overflow:'', display:'flex', gap
     <br />
     Experience a new style of landscape photography all through the eyes of Todd Lambert. Explore the unusual and see the night like you&apos;ve never seen it before.
     <br /><br />
-    <div style={{textAlign:'center',}}><a className="button noexit" href="https://twilightscapes.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>Twilightscapes.com</a></div>
+    <div style={{textAlign:'center',}}><a className="post-card button noexit" href="https://twilightscapes.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>Twilightscapes.com</a></div>
     </a>
     </div>
 
@@ -851,7 +851,7 @@ position:'relative', height:'', width:'', overflow:'', display:'flex', gap
     <br />
 Todd sells exceptionally fast and well-built multimedia web apps called VidSocks. They are a complete website solution that costs nothing to run and get top ranks in Google!
     <br /><br />
-    <div style={{textAlign:'center',}}><a className="button noexit" href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>VidSocks.com</a></div>
+    <div style={{textAlign:'center',}}><a className="post-card button noexit" href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>VidSocks.com</a></div>
     </a>
     </div>
 
@@ -862,7 +862,7 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
     <br />
     Take a walk on the wild side and follow along as Todd Lambert goes in search of the creepiest, freakiest, spookiest abandoned and desolate locations he can find. 
     <br /><br />
-    <div style={{textAlign:'center',}}><a className="button noexit" href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>UrbanFetish.com</a></div>
+    <div style={{textAlign:'center',}}><a className="post-card button noexit" href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>UrbanFetish.com</a></div>
     </a>
     </div>
 
@@ -974,7 +974,7 @@ Animated SVG VIDEO
 </div>
 
 
-  <article className="post-card button actionJackson" style={{ display:'flex', maxWidth:'400px', justifyContent:'center', border:'1px solid', padding:'', margin:'2rem auto', fontSize:'150%', textAlign:'center', }}>
+  <article className="post-card button" style={{ display:'flex', maxWidth:'400px', justifyContent:'center', border:'1px solid', padding:'', margin:'2rem auto', fontSize:'150%', textAlign:'center', }}>
   <Link to="/posts/" style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
     View More <RiArrowRightSLine style={{fontSize:'50px'}} />
     </Link>
@@ -1126,7 +1126,7 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
 
  <a
             href="https://toddlambert.com/assets/resume-toddlambert.pdf"
-            className="button fire actionJackson noexit print"
+            className="post-card button noexit print"
             style={{
               cursor:'pointer',
               width:'80%',

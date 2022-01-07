@@ -108,7 +108,7 @@ export default class Contact extends React.Component {
 
         <p className="text-align-center" style={{marginRight:'', color:'#fff', textAlign:'center'}}>
           <button
-            className="button"
+            className="post-card button"
             
             type="submit"
           >
