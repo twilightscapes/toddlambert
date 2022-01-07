@@ -356,7 +356,7 @@ display: none !important;
 
 .vidbox {
   overflow: hidden;
-  position: relative; width: 100%; height: 100vh;
+  position: relative; width: 100%;
 }
 .youtube {
   height: 100%;
@@ -980,7 +980,8 @@ overflow: hidden} */
 
 .description .gatsby-image-wrapper{cursor:pointer;}
 
-.masonry img{cursor:zoom-in !important;}
+.masonry4 img{cursor:zoom-in !important;}
+body.about .gatsby-image-wrapper{cursor:zoom-in !important;}
 
 .masonry {
   margin: 0 auto;
@@ -3243,7 +3244,7 @@ height:100vh;
 
 
 
-body.bloglist #chaticon{display: none !important;}
+body.bloglist #chaticon, body.about #chaticon{display: none !important;}
 
 #chaticon:hover{
   opacity: 1 !important;

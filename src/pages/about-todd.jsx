@@ -6,10 +6,10 @@ import { Seo } from "../components/seo"
 import { FaHandPointDown } from "react-icons/fa"
 import CommentBox from "../components/commentbox"
 
-
+import { Helmet } from "react-helmet"
 import { StaticImage } from "gatsby-plugin-image"
 import ScrollAnimation from 'react-animate-on-scroll'
-
+import { SRLWrapper } from "simple-react-lightbox"
 
 import styled from 'styled-components'
 
@@ -109,6 +109,66 @@ height: 0;
 `
 
 
+const options = {
+       settings: {
+         autoplaySpeed: 3000,
+         // boxShadow: '0px 0px 20px #fff',
+         disableKeyboardControls: false,
+         disablePanzoom: false,
+         disableWheelControls: false,
+         hideControlsAfter: false,
+         lightboxTransitionSpeed: 0.3,
+         lightboxTransitionTimingFunction: 'linear',
+         // overlayColor: 'rgba(185, 7, 230, 0.5)',
+         slideAnimationType: 'slide',
+         slideSpringValues: [300, 50],
+         slideTransitionSpeed: 0.6,
+         slideTransitionTimingFunction: 'linear',
+         usingPreact: false
+       },
+       buttons: {
+         backgroundColor: 'rgba(30,30,36,0.8)',
+         iconColor: 'rgba(255, 255, 255, 0.8)',
+         iconPadding: '10px',
+         showAutoplayButton: false,
+         showCloseButton: true,
+         showDownloadButton: false,
+         showFullscreenButton: false,
+         showNextButton: true,
+         showPrevButton: true,
+         showThumbnailsButton: false,
+         size: '40px'
+       },
+       caption: {
+     captionAlignment: 'start',
+     captionColor: '#FFFFFF',
+     captionContainerPadding: '20px 12% 30px 12%',
+     captionFontFamily: 'inherit',
+     captionFontSize: 'inherit',
+     captionFontStyle: 'inherit',
+     captionFontWeight: 'inherit',
+     captionTextTransform: 'inherit',
+     showCaption: true
+       },
+       thumbnails: {
+         showThumbnails: false,
+         thumbnailsAlignment: 'center',
+         thumbnailsContainerBackgroundColor: 'transparent',
+         thumbnailsContainerPadding: '0',
+         thumbnailsGap: '0 1px',
+         thumbnailsIconColor: '#ffffff',
+         thumbnailsOpacity: 0.4,
+         thumbnailsPosition: 'bottom',
+         thumbnailsSize: ['100px', '80px']
+       },
+       progressBar: {
+         backgroundColor: '#f2f2f2',
+         fillColor: '#000000',
+         height: '3px',
+         showProgressBar: true
+       },
+     };
+
 
 // export const query = graphql`
 //   query {
@@ -129,23 +189,22 @@ height: 0;
 <CustomBox>
     
     <Layout className="thanks-page">
-
+    <Helmet>
+  <body className="about" />
+</Helmet>
     <Seo
           title={`About Todd Lambert`}
           description={`Todds story - about Todd Lambert`}
           image={'https://twilightscapes.com/promo-about-todd.jpg'}
         />
 
-{/* <Seo title={`About Todd Lambert`} /> */}
+
 
 <div className="vidbox" style={{position:'relative', maxHeight:'80vh'}}>
 
 
 
-{/* <ScrollAnimation animateIn="bounceInDown" animateOut="" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={0} style={{position:'absolute', zIndex:'1', top:'100px',  fontSize:'10vw', color:'white', display:'flex', justifyContent:'center', alignItems:'center', border:'0px solid blue', width:'100vw'}}>
-      <div className="txtshadow-header letter zoomer">About
-    </div>
-</ScrollAnimation> */}
+
 
 
 
@@ -162,49 +221,36 @@ height: 0;
 
 </div>
 
+
 <br />
-<br />
 
 
-    
-    {/* <ScrollAnimation animateIn="bounceInUp" animateOut="bounceInDown" animateOnce={true} delay={1000}> */}
-      <div className="" style={{display:'none',}}>
-        <div className="columns">
+<SRLWrapper options={options} className="poppit">
 
-              <h2 className="title has-text-weight-bold1">
-                About Todd!
-              </h2>
-              
-        </div>
-      </div>
-      {/* </ScrollAnimation> */}
+
+
       
       
  <div className="split" style={{display:'flex', justifyContent:'center', alignItems:'center', position:'relative', backgroundColor:'#222', width:'92%', margin:'0 auto', padding:'1rem', borderBottom:'4px solid #000', borderTop:'1px solid #000', boxShadow:'0px 0px 20px 0px #000', borderRadius:'20px', overflow:'',}}>
 
- 
- {/* <ScrollAnimation animateIn="" animateOut="" initiallyVisible={true} animateOnce={true} animatePreScroll={true} delay={0} style={{width:'60%',}}>     */}
 <div className="" style={{ width:'95%', borderRadius:'12px', margin:'0', padding:'', color:'#fff'}}>
 <h2>Meet Todd</h2>
 <p style={{position:'relative',}}>My name is Todd Lambert, and this is my story. It all began when the country was a different place, my parents were wanting to have a family, and I was born.
 
-{/* <ScrollAnimation animateIn="fadeIn" animateOnce={false} animatePreScroll={true} delay={1800}>  */}
 <div className="txtshadow-header" style={{position:'absolute', top:'30px', left:'0', width:'100%', borderBottom:'12px solid ', transform:'rotate(8deg)', textAlign:'center', fontSize:'450%', zIndex:'1',}}><div className="txtshadow-3d" style={{color:'#ff0000', transform:'rotate(-10deg)', fontWeight:'bold', textShadow:' 1px 8px 2px black',}}>NOPE!</div></div>
 <div style={{position:'absolute', top:'30px', left:'0', width:'100%', borderBottom:'12px solid ', transform:'rotate(-8deg)', textAlign:'center',}}> &nbsp;</div>
-{/* </ScrollAnimation>  */}
+
 </p>
 
 </div>
 
-{/* <ScrollAnimation animateIn="zoomInDown" animateOnce={false} animatePreScroll={true} delay={1800}>  */}
+
+
+
+
 <div style={{margin:'1rem auto 0 auto', color:'#fff', width:'90%', textAlign:'center',}}>
-<h3>OK, who wants to read that crap?</h3> Lets keep things fun, shall we?
+<h3>OK, who wants to read that crap?</h3> How about some photos instead?
 </div>
-{/* </ScrollAnimation>  */}
-
-{/* </ScrollAnimation> */}
-
- {/* <ScrollAnimation animateIn="" animateOut="" initiallyVisible={true} animateOnce={true} animatePreScroll={true} style={{width:'40%', padding:'0',}}>     */}
 
 <div className="imgbox" style={{border:'0px solid black', position:'relative', margin:'0 0 0 0',}}>
 
@@ -212,49 +258,14 @@ height: 0;
 <div style={{position:'absolute', bottom:'5px', fontSize:'60%', color:'#ddd', textAlign:'center', width:'100%',}}><span className="txtshadow" style={{background:'#000', opacity:'.8', padding:'3px 5px',}}>
 Todd Lambert on location</span></div>
 </div>
-{/* </ScrollAnimation> */}
+
 
  </div>
 
  
- 
- 
- 
-  {/* <ScrollAnimation animateIn="bounce" animateOut="" initiallyVisible={true} animateOnce={true} animatePreScroll={false} delay={0} style={{}}>
-  
- <div className="spacer33 bounce txtshadow-header" style={{fontSize:'500%', color:'#fff', textAlign:'center', position:'relative',}}>
- 
- <GiPlainArrow className="" style={{padding:'1rem', color:'#169dc6', borderRadius:'10px',}} />
- 
- <span className="txtshadow-header" style={{position:'relative', top:'-25px', fontSize:'50%', fontWeight:'bold', color:'#fff', margin:'0 1rem 0 1rem',}}>SCROLL</span>
- 
- <GiPlainArrow className="" style={{padding:'1rem', color:'#169dc6', borderRadius:'10px',}} />
- 
- </div>
-  </ScrollAnimation>   */}
- 
- 
- <div className="spacer33"></div>
- 
 
   
-  <div style={{padding:'1% 9%', fontSize:'120%', color:'#fff', textAlign:'center', backgroundColor:'#000', margin:'2em auto 0 auto', width:'80%', border:'1px solid',}}>
-  <h5 className="txtshadow">The following content is rated:</h5> 
-  <h4 className="txtshadow shadow-3d" style={{fontSize:'200%',}}>TV-MA</h4>
-  <h6 className="txtshadow">This content may contain adult language , violence and mature themes not suitable for viewers under 18.</h6> 
-  <h6 className="txtshadow">Viewer discretion is strongly advised.</h6> 
-  </div>
-  
- 
 
-
- 
- 
- 
- {/* <div className="btp" style={{margin:'10% auto', width:'90%', border:'3px solid #fff', transform:'rotate(-3deg)', color:'#fff', backgroundColor:'#000', padding:'0 1rem',}}>
- <h3>In the style of reality TV:</h3>
- <StaticImage alt="Behind The Photos - VH1 " src="../../static/assets/behind-the-photos.png" />
- </div> */}
 
  
  
@@ -265,443 +276,79 @@ Todd Lambert on location</span></div>
  
 
  
-{/* <ScrollAnimation animateIn="fadeIn" duration={3} animateOnce={true} animatePreScroll={false}  style={{position:'relative', height:'50vh', margin:'50px 0',}}> */}
-       <div className=" scene" style={{backgroundImage:'linear-gradient(#222 10%, #000 80%)', height:'100%', width:'100%', position:'absolute', display:'flex', justifyContent:'center', alignItems:'center',}}>
-              <h2 style={{position:'absolute', fontSize:'200%', textAlign:'center', color:'#fff',}}>
-             "Master of Night"<br />
-             <span style={{fontSize:'16px',}}>(The story of Todd Lambert)</span>
-              </h2>
-       </div>
-       {/* </ScrollAnimation> */}
-       
-       
- 
-{/*  <div className="spacer33"></div> */} 
- 
-{/* Show Intro */}
  
 
- <div className="spacer33"></div>
- 
- <div className="" style={{width:'80%', margin:'0 auto',}}>
- <h2 style={{textAlign:'center',  fontSize:'180%', margin:'2rem auto 0 auto', padding:'0',}}>[Narrator Voice]</h2>
- 
- <p>Tonight, we look at Twilightscapes by Todd Lambert. Todd is best-known for his incredible night photography and unusual photo locations.</p>
- 
- <h3 style={{textAlign:'center',}}>Now, Lets Go Behind The Photos</h3>
- 
- <p>We begin in Southern Californa in  the early 80s, where Todd spent his childhood enjoying sports and grew up surfing, skateboarding and skiing.</p>
- </div>
  
  
  
-  <div className="spacer33"></div>
- 
- 
- 
- <div className="split" style={{display:'flex', justifyContent:'center',  alignItems:'center', position:'relative', width:'92%', margin:'0 auto', padding:'1rem', borderRadius:'12px', overflow:'',}}>
+ <div className="split2" style={{display:'flex', justifyContent:'center',  alignItems:'center', position:'relative', width:'92%', margin:'0 auto', padding:'1rem', borderRadius:'12px', overflow:'',}}>
 
-{/* <ScrollAnimation animateIn="rotateIn" animateOut="rotateOut" animateOnce={false} delay={200} style={{width:'50%', padding:'0',}}>     */}
 
-<div className="imgbox shadow-3d" style={{border:'1px solid #444', borderRadius:'3px', padding:'5px 5px 25px 5px', background:'#fff', position:'relative', margin:'0 0', transform:'rotate(10deg)',}}><StaticImage alt="Todd Lambert Web development for photographers" src="../../static/assets/todd-young1.jpg" style={{}}  />
+
+<div className="imgbox shadow-3d" style={{border:'1px solid #444', borderRadius:'3px', padding:'5px 5px 25px 5px', background:'#fff', position:'relative', margin:'0 0', transform:'rotate(10deg)',}}><StaticImage alt="Todd Lambert - rockin' the bowl-cut!" src="../../static/assets/todd-young1.jpg" style={{}}  />
 <div className="" style={{position:'absolute', bottom:'8px', fontSize:'60%', color:'#333', textAlign:'center', width:'100%',}}>Rockin the bowl cut!</div>
 </div>
-{/* </ScrollAnimation> */}
 
 
-
- {/* <ScrollAnimation animateIn="rotateIn" animateOut="rotateOut" animateOnce={false} delay={500} style={{width:'50%', padding:'0',}}>     */}
-
-<div className="imgbox shadow-3d" style={{border:'1px solid #444', borderRadius:'3px', padding:'5px 5px 25px 5px', background:'#fff', position:'relative', margin:'0 0', transform:'rotate(-10deg)',}}><StaticImage alt="Todd Lambert Web development for photographers" src="../../static/assets/todd-young2.jpg" style={{}}  />
+<div className="imgbox shadow-3d" style={{border:'1px solid #444', borderRadius:'3px', padding:'5px 5px 25px 5px', background:'#fff', position:'relative', margin:'0 0', transform:'rotate(-10deg)',}}><StaticImage alt="Todd Lambert - Future was so bright, needed shades" src="../../static/assets/todd-young2.jpg" style={{}}  />
 <div className="" style={{position:'absolute', bottom:'8px', fontSize:'60%', color:'#333', textAlign:'center', width:'100%',}}>Future was so bright, needed shades</div>
 </div>
-{/* </ScrollAnimation> */}
+
 
  </div>
  
  
- <div className="spacer33"></div>
- 
- 
- 
-  {/* <ScrollAnimation animateIn="fadeIn" duration={3} animateOnce={false}  animatePreScroll={false}  style={{position:'relative', height:'50vh', margin:'50px 0',}}> */}
-       <div className=" scene" style={{backgroundImage:'linear-gradient(#222 10%, #000 80%)', height:'100%', width:'100%', position:'absolute', display:'flex', justifyContent:'center', alignItems:'center',}}>
-              <h2 style={{position:'absolute', fontSize:'200%', textAlign:'center', color:'#fff',}}>
-             [Fast-Forwarding Childhood]</h2>
-              
-
-       </div>
-       {/* </ScrollAnimation> */}
-       
-       
 
  
  
  
   
-  
-  
-  
-      
-              
+<div className="masonry4">
+<div className="imgbox" style={{border:'0px solid black', position:'relative', margin:'0 0',}}>
+       <StaticImage alt="Todd Lambert hanging with friends" src="../../static/assets/todd-friends.jpg" />
 
-<div className="spacer33"></div>
-
-
-
-
- <div className="split" style={{display:'flex', justifyContent:'center', alignContent:'center', alignItems:'center', position:'relative',  width:'92%', margin:'0 auto', padding:'1rem', borderRadius:'12px', overflow:'',}}>
-
- {/* <ScrollAnimation animateIn="fadeIn" animateOut="" animateOnce={true} delay={0} style={{width:'60%', order:'2',}}>     */}
-<div className="" style={{ width:'95%', borderRadius:'12px', margin:'0 0 0 -10px', padding:'1rem 2rem',}}>
-<h2 style={{textAlign:'center', fontSize:'130%', padding:'0',}}>[Narrator]</h2>
-
-<p>It’s now many years later and Todd is fresh into the working world, after having busted his way out of high school with C- grades.</p>
-
- <p>Todd quickly followed that act with his encore performance of a drug and alcohol-induced loss of his first two years of college.</p>
- 
-<p>He often seemed to get along with both the people and obstacles in his life, by faking it better than most.</p> 
-</div>
-{/* </ScrollAnimation> */}
-
- {/* <ScrollAnimation animateIn="fadeIn" animateOut="" animateOnce={true} delay={100} style={{width:'40%', padding:'0 auto 0 auto', order:'1',}}>     */}
-
-<div className="imgbox" style={{border:'0px solid black', position:'relative', margin:'0 0',}}><StaticImage alt="Todd Lambert hanging with friends" src="../../static/assets/todd-friends.jpg" />
 <div className="txtshadow" style={{position:'absolute', bottom:'5px', fontSize:'60%', color:'#ddd', textAlign:'center', width:'100%',}}>
 <span style={{background:'#000', opacity:'.8', padding:'3px 5px',}}>Hanging with friends</span>
 </div>
-</div>
-{/* </ScrollAnimation> */}
-
- </div>
-
-       
-       
-       
-      <div className="spacer33"></div>  
-       
-
-       
-        <div className="split" style={{display:'flex', justifyContent:'center', alignItems:'center', position:'relative',  width:'92%', margin:'0 auto', padding:'1rem', borderRadius:'12px', overflow:'',}}>
-
- {/* <ScrollAnimation animateIn="fadeIn" animateOut="" animateOnce={true} delay={0} style={{width:'60%',}}>     */}
-<div className="" style={{ width:'95%', borderRadius:'12px', margin:'0', padding:'',}}>
-<h3 style={{textAlign:'center', fontSize:'130%', padding:'0', margin:'0 0 1rem 0',}}>[Narrator]</h3>
-
-<h3>The Dawn Of The Internet</h3>
-<p>The Internet had just really started, but it became a fountain of knowledge at Todds fingertips.</p>
-
-<p>Just as he’d been self-taught with most other things in his life, Todd immersed himself completely, trying to learn as much as he could about all aspects of...</p> 
-
-
-<h2 style={{textAlign:'center', margin:'0 0 30px 0',}}> Website Design and Development</h2>
 
 </div>
-{/* </ScrollAnimation> */}
 
- {/* <ScrollAnimation animateIn="fadeIn" animateOut="" animateOnce={true} delay={100} style={{width:'40%', padding:'40px auto 40px auto',}}>     */}
 
-<div className="imgbox" style={{border:'0px solid black', position:'relative', margin:'0 0 0 0',}}><StaticImage alt="Todd Lambert Web development for photographers" src="../../static/assets/todd-young-business.jpg" />
-<div className="txtshadow" style={{position:'absolute', bottom:'5px', fontSize:'60%', color:'#ddd', textAlign:'center', width:'100%',}}>
-<span style={{background:'#000', opacity:'.8', padding:'3px 5px',}}>Clean cut and baby-faced</span>
+
+       
+       
+<div className="imgbox" style={{border:'0px solid black', position:'relative', margin:'0 0 0 0',}}>  
+      <StaticImage alt="Young Todd, Clean Cut!" src="../../static/assets/todd-young-business.jpg" />
+
+      <div className="txtshadow" style={{position:'absolute', bottom:'5px', fontSize:'60%', color:'#ddd', textAlign:'center', width:'100%',}}>
+<span style={{background:'#000', opacity:'.8', padding:'3px 5px',}}>Clean Cut!</span>
 </div>
-</div>
-{/* </ScrollAnimation> */}
-
- </div>
- 
- 
- 
- 
- 
- <div className="spacer33"></div> 
- 
- 
- 
- 
- 
- 
-{/* <ScrollAnimation animateIn="fadeIn" duration={3} animateOnce={false}  animatePreScroll={false}  style={{position:'relative', height:'50vh', margin:'100px 0',}}> */}
-       <div className=" scene" style={{backgroundImage:'linear-gradient(#222 10%, #000 80%)', height:'100%', width:'100%', position:'absolute', display:'flex', justifyContent:'center', alignItems:'center',}}>
-              <h2 style={{position:'absolute', fontSize:'200%', textAlign:'center', color:'#fff',}}>
-             [The ride to the top]
-             </h2>
-       </div>
-       {/* </ScrollAnimation> */}
-       
-
-
-       
-        <div className="split" style={{display:'flex', justifyContent:'center', alignItems:'center', position:'relative',  width:'92%', margin:'0 auto', padding:'1rem', borderRadius:'12px', overflow:'',}}>
-
- {/* <ScrollAnimation animateIn="fadeIn" animateOut="" animateOnce={true} delay={0} style={{width:'45%', order:'2',}}>     */}
-<div className="" style={{ width:'95%', borderRadius:'12px', margin:'0 0 0 0', padding:'',}}>
-<h3 style={{textAlign:'center', fontSize:'130%', padding:'0', margin:'0 0 1rem 0',}}>[Narrator]</h3>
-<h3>Todd becomes a new pioneer on the frontiers of the World Wide Web</h3>
-<p>
-Todd had worked hard and become one of the the once-vaunted “Webmasters” who controlled the Internet.</p>
-
-<p>These Webmasters, were the ones that they made the critically-acclaimed movie “Hackers” about and starred Angelina Jolie. </p>
-</div>
-{/* </ScrollAnimation> */}
-
- {/* <ScrollAnimation animateIn="fadeIn" animateOut="" animateOnce={true} delay={100} style={{width:'55%', padding:'0', order:'1',}}>     */}
-
-<div className="imgbox" style={{border:'0px solid black', position:'relative', margin:'0 1rem 0 0',}}><StaticImage alt="Hackers Movie Poster" src="../../static/assets/hackthis.jpg" />
-<div className="txtshadow" style={{position:'absolute', bottom:'5px', fontSize:'60%', color:'#ddd', textAlign:'center', width:'100%',}}>
-<span style={{background:'#000', opacity:'.8', padding:'3px 5px',}}>Biopic film of Todds life at this point</span>
-</div>
-</div>
-{/* </ScrollAnimation> */}
-
- </div>
- 
- 
-       
-       
-       
-       {/*
-       <div className="spacer33"></div>  
-       
-
-       
-         <div className="split nowrap" style={{display:'flex', justifyContent:'center', alignItems:'center', flexWrap:'no-wrap', position:'relative',  width:'92%', margin:'0 auto', padding:'1rem', borderRadius:'12px', overflow:'',}}>
-
- <ScrollAnimation animateIn="fadeIn" animateOut="" animateOnce={true} delay={0} style={{width:'70%', zIndex:'1',}}>    
-<div className=" speech" style={{ width:'95%', borderRadius:'12px', margin:'0', padding:'', order:'1', position:'relative',}}>
-
-<p>
-<span className="txtshadow-header" style={{fontSize:'500%', position:'absolute', top:'-5px', left:'-10px',}}>&#10077;</span><br />
-<span className="txtshadow-header" style={{fontSize:'500%', position:'absolute', bottom:'-15px', right:'-10px',}}>&#10078;</span><br />
-
-It was my hey-day of web development. I had Jeffrey Zeldman and Eric Meyer listed as friends on my Flickr (pro) account. Yup, that was me.
-</p>
-<h5>- Todd Lambert</h5>
-</div>
-</ScrollAnimation>
-
- <ScrollAnimation animateIn="fadeIn" animateOut="" animateOnce={true} delay={100} style={{width:'30%', padding:'0', order:'2 !important',  zIndex:'0',}}>    
-
-<div className="imgbox grad" style={{border:'4px solid #fff', position:'relative', margin:'0 0 0 0', borderRadius:'50%', padding:'1rem', overflow:'hidden',}}><StaticImage alt="Co-worker talks about Todd Lambert" src="../img/todd-toon.png" style={{borderColor:'transparent',}} />
-<div className="txtshadow" style={{position:'absolute', left:'0', bottom:'5px', fontSize:'70%', color:'#ddd', textAlign:'center', width:'100%',}}>Todd Lambert</div>
-</div>
-</ScrollAnimation>
-
- </div> */}
-
-       
-       
-       
-       
-       
-       
-       <div className="spacer33"></div>  
-       
-       
-       
-       
-       
-       
-       
-       <div className="split" style={{display:'flex', justifyContent:'center', alignItems:'center', position:'relative',  width:'92%', margin:'0 auto', padding:'1rem', borderRadius:'12px', overflow:'',}}>
-
- {/* <ScrollAnimation animateIn="fadeIn" animateOut="" animateOnce={true} delay={0} style={{width:'45%', order:'2',}}>     */}
-<div className="" style={{ width:'95%', borderRadius:'12px', margin:'0 0 0 0', padding:'',}}>
-<h3 style={{textAlign:'center', fontSize:'130%', padding:'0', margin:'0 0 1rem 0',}}>[Narrator]</h3>
-<h3>The view was great!</h3>
-
-<p>It was at this point that Todd was shining while he was sinking. He’d reached a great peak in his career, and he should have been basking in what that brought.</p>
-
-<p>Todd finally had the large McMansion in the Burbs, new cars, happy dogs and a great career.</p>
-
 
 </div>
-{/* </ScrollAnimation> */}
-
-
- {/* <ScrollAnimation animateIn="fadeIn" animateOut="" animateOnce={true} delay={100} style={{width:'55%', padding:'0', order:'1',}}>     */}
-
-<div className="imgbox" style={{border:'0px solid black', position:'relative', margin:'0 1rem 0 0',}}><StaticImage alt="Todds garage and cars" src="../../static/assets/todd-cars.jpg" />
-<div className="txtshadow" style={{position:'absolute', bottom:'5px', fontSize:'60%', color:'#ddd', textAlign:'center', width:'100%',}}>
-<span style={{background:'#000', opacity:'.8', padding:'3px 5px',}}>Got the McMansion and new cars</span>
-</div>
-</div>
-{/* </ScrollAnimation> */}
-
- </div>
-       
-       
-       
-       
-       
-       
-       <div className="spacer33"></div>  
-       
-
-       
-        <div className="split nowrap" style={{display:'flex', justifyContent:'center', alignItems:'center', flexWrap:'no-wrap', position:'relative',  width:'92%', margin:'0 auto', padding:'1rem', borderRadius:'12px', overflow:'',}}>
-
- {/* <ScrollAnimation animateIn="fadeIn" animateOut="" animateOnce={true} delay={0} style={{width:'70%', zIndex:'1',}}>     */}
-<div className=" speech" style={{ width:'95%', borderRadius:'12px', margin:'0', padding:'', order:'1', position:'relative',}}>
-
-<p>
-<span className="txtshadow-header" style={{fontSize:'500%', position:'absolute', top:'-5px', left:'-10px',}}>&#10077;</span><br />
-<span className="txtshadow-header" style={{fontSize:'500%', position:'absolute', bottom:'-15px', right:'-10px',}}>&#10078;</span><br />
-
-I should have been on top of the world, yet I felt empty and felt as though I was just going through the motions.
-</p>
-<h5>- Todd Lambert</h5>
-</div>
-{/* </ScrollAnimation> */}
-
- {/* <ScrollAnimation animateIn="fadeIn" animateOut="" animateOnce={true} delay={100} style={{width:'30%', padding:'0', order:'2 !important',  zIndex:'0',}}>     */}
-
-<div className="imgbox grad circle" style={{border:'4px solid #fff', position:'relative', margin:'0 0 0 0', borderRadius:'50%', padding:'1rem', overflow:'hidden',}}><StaticImage alt="Co-worker talks about Todd Lambert" src="../../static/assets/todd-toon.png" style={{borderColor:'transparent',}} />
-<div className="txtshadow" style={{position:'absolute', left:'0', bottom:'5px', fontSize:'70%', color:'#ddd', textAlign:'center', width:'100%',}}>Todd Lambert</div>
-</div>
-{/* </ScrollAnimation> */}
-
- </div>
-       
  
  
  
- 
- 
- 
- <div className="spacer33"></div>  
-       
-       
-        {/* <ScrollAnimation animateIn="fadeIn" duration={3} animateOnce={false}  animatePreScroll={false} style={{position:'relative', height:'50vh', margin:'100px 0',}}> */}
-       <div className=" scene" style={{backgroundImage:'linear-gradient(#222 10%, #000 80%)', height:'100%', width:'100%', position:'absolute', display:'flex', justifyContent:'center', alignItems:'center', opacity:'.9',}}>
-              <h2 style={{position:'absolute', color:'#fff', fontSize:'300%', textAlign:'center',}}>
-             [What goes up]
-             <br />
-             <span style={{color:'#fff', fontSize:'60%',}}>(Sometimes goes sideways)</span>
-             </h2>
-       </div>
-       {/* </ScrollAnimation> */}
-       
-       
 
-       
-        <div className="split" style={{display:'flex', justifyContent:'center', alignItems:'center', position:'relative',  width:'92%', margin:'0 auto', padding:'1rem', borderRadius:'12px', overflow:'',}}>
 
- {/* <ScrollAnimation animateIn="fadeIn" animateOut="" animateOnce={true} delay={0} style={{width:'60%',}}>     */}
-<div className="" style={{ width:'95%', borderRadius:'12px', margin:'0', padding:'',}}>
-<h3 style={{textAlign:'center', fontSize:'130%', padding:'0', margin:'0 0 1rem 0',}}>[Narrator]</h3>
+<div className="imgbox" style={{border:'0px solid black', position:'relative', margin:'0 0 0 0',}}>
+       <StaticImage alt="Life Reachs Out And Grabs Ya!" src="../../static/assets/todd-grabs.jpg" />
 
-<h3>Wobbles in Web Town</h3>
-<p>But it all started to come crashing down for Todd. Eventually, his body succumbed from all of the years of excessive 1 and 0’s.</p>
-
-<p>The "stay-up-all-night-party-like-a-rock-star" type of life he’d always dreamed of was in fact, <br /> <div className="txtshadow" style={{margin:'1rem 0', fontSize:'250%', textAlign:'center',}}>killing him.</div></p>
-</div>
-{/* </ScrollAnimation> */}
-
- {/* <ScrollAnimation animateIn="fadeIn" animateOut="" animateOnce={true} delay={100} style={{width:'40%', padding:'40px auto 40px auto',}}>     */}
-
-<div className="imgbox" style={{border:'0px solid black', position:'relative', margin:'0 0 0 0',}}><StaticImage alt="Todd Lambert Web development for photographers" src="../../static/assets/todd-grabs.jpg" />
 <div className="txtshadow" style={{position:'absolute', bottom:'5px', fontSize:'60%', color:'#ddd', textAlign:'center', width:'100%',}}>
 <span style={{background:'#000', opacity:'.8', padding:'3px 5px',}}>Life reachs out and grabs ya</span>
 </div>
+
 </div>
-{/* </ScrollAnimation> */}
 
  </div>
  
  
  
- 
 
- 
- 
-       
-       
-       <div className="spacer33"></div> 
-       
-       
-
-       
-        <div className="split nowrap" style={{display:'flex', justifyContent:'center', alignItems:'center', flexWrap:'no-wrap', position:'relative',  width:'92%', margin:'0 auto', padding:'1rem', borderRadius:'12px', overflow:'',}}>
-
- {/* <ScrollAnimation animateIn="fadeIn" animateOut="" animateOnce={true} delay={0} style={{width:'60%', zIndex:'1',}}>     */}
-<div className=" speech" style={{ width:'95%', borderRadius:'12px', margin:'0', padding:'', order:'1', position:'relative',}}>
-
-<p>
-<span className="txtshadow-header" style={{fontSize:'500%', position:'absolute', top:'-5px', left:'-10px',}}>&#10077;</span><br />
-<span className="txtshadow-header" style={{fontSize:'500%', position:'absolute', bottom:'-15px', right:'-10px',}}>&#10078;</span><br /><br />
-I once saw Todd eat an entire box of Krispie Kreme donuts and then he washed it down with at least 2 gallons of Mountain Dew.
-<br /><br />
-</p>
-<h5>- anonymous co-worker</h5>
-</div>
-{/* </ScrollAnimation> */}
-{/* 
- <ScrollAnimation animateIn="fadeIn" animateOut="" animateOnce={true} delay={100} style={{width:'40%', padding:'0', order:'2 !important',  zIndex:'0',}}>     */}
-
-<div className="imgbox grad circle" style={{border:'4px solid #fff', clipPath: 'circle(20vw at center)', position:'relative', margin:'0 0 0 0', borderRadius:'50%', padding:'1rem', overflow:'hidden',}}><StaticImage alt="Co-worker talks about Todd Lambert" src="../../static/assets/coworker.png" style={{borderColor:'transparent',}} />
-<div className="txtshadow" style={{position:'absolute', left:'0', bottom:'25px', fontSize:'70%', color:'#ddd', textAlign:'center', width:'100%',}}>co-worker</div>
-</div>
-{/* </ScrollAnimation> */}
-
- </div>
- 
-
-
- 
- 
- 
- <div className="spacer33"></div>  
-       
-       
-       
-      
- 
- 
- 
- 
+</SRLWrapper>
  
        
-{/*        
-       <ScrollAnimation animateIn="fadeIn" duration={3} animateOnce={false} delay={100} style={{position:'relative', height:'50vh',}}> */}
-       <div className="" style={{backgroundImage:'linear-gradient(#222 10%, #000 80%)', height:'100%', width:'100%', position:'absolute', display:'flex', justifyContent:'center', alignItems:'center', opacity:'.9',}}>
-              <h2 style={{position:'absolute', fontSize:'200%', color:'#fff',}}>
-              [fade to black]
-              </h2>
-       </div>
-       {/* </ScrollAnimation> */}
        
        
-       
-       
-       
-       
-       
-       
-       
-       
-       <h3 style={{textAlign:'center', fontSize:'160%', fontWeight:'bold', maxWidth:'700px', margin:'3rem  auto 0 auto',}}>Wow! If you've made it this far, then that must mean that you are:</h3> <br /><br />
-
-       <ul style={{display:'flex', flexDirection:'column', justifyContent:'space-between', fontSize:'150%', margin:'0 auto', width:'55%', listStyle:'none', listStyleType:'none', textAlign:'left', border:'1px solid', padding:'3rem', borderRadius:'12px', gap:'2rem' }}>
-
-              <li>a) a stalker (great, as long as you're buyin! - HMU)</li>
-   <li>b) a Russian bot (great, as long as you're buyin! - don't HMU)</li>
-
-      <li>c) FBI (Sorry, new number, who dis?) </li>
-
-
-       <li>d) my Mom (Love you Mom!)</li>
-
-       {/* <li>SOOO, that must mean you're cool and I like you. (HMU - I'm buyin!)</li> */}
-       </ul>
-
-       <div style={{display:'flex', flexDirection:'column', justifyContent:'space-between', fontSize:'150%', margin:'0 auto', width:'75%', textAlign:'left'}}>
-       <h2 style={{fontSize:'200%', fontWeight:'bold', textAlign:'center', margin:'3rem auto 1rem auto' }}>AND...</h2>
-
-       <blockquote style={{fontSize:'130%', border:'1 px dotted', padding:'1rem', borderRadius:'12px'}}>if you've come this far, maybe you're willing to come a little further. You remember the name of the town, don't you?</blockquote>
-
-       <blockquote style={{fontSize:'130%', border:'1 px dotted', padding:'1rem', borderRadius:'12px'}}>I could use a good man to help me get my project on wheels. I'll keep an eye out for you and the chessboard ready.</blockquote>
-</div>
 
 {/* <ScrollAnimation animateIn="bounce" duration={1} animateOnce={false} animatePreScroll={false} >
 <FaHandPointDown className="bounce" style={{fontSize:'80px', textAlign:'center', width:'100%', margin:'1rem auto'}} />
