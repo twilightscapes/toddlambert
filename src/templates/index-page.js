@@ -864,9 +864,11 @@ position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto',
 //  outline:'18px dashed rgba(121, 115, 115, 0.3)', 
  borderRadius:'', 
  border:'0px solid rgba(121, 115, 115, 0.3)', 
- background:'rgba(121, 115, 115, 0.2)'
+ background:'rgba(0, 0, 0, 0.3)',
+ color:'#fff',
+ textShadow: '2px 2px 2px black',
  }}>
- <h3 className="logotype" style={{textAlign:'center', margin:'0 0 0 0', fontSize:'5vw', clear:'right', paddingTop:'1rem'}}>Portfolio</h3>
+ <h3 className="logotype" style={{textAlign:'center', margin:'0 0 0 0', fontSize:'5vw', clear:'right', paddingTop:'1rem', filter: 'drop-shadow(1px 1px 0px rgba(0, 0, 0, 0.8))'}}>Portfolio</h3>
 <br />
 
 
@@ -899,7 +901,7 @@ Homepage Redesign and Product Portal
 </div>
 </SRLWrapper> */}
 
-<p style={{textAlign:'center'}}>Custom SVG Animations</p>
+<p style={{textAlign:'center', margin:'3rem 0 10px 0'}}>Custom SVG Animations</p>
 
 <div className="masonry4" style={{display:''}}>
 <Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>

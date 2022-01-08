@@ -58,6 +58,8 @@ a:not([href*='toddlambert.com']):not([href^='#']):not([href^='/']):after {
   right:0;
 }
 
+a.SRLThumb:after {content:" " !important;}
+
 footer a:not([href*='toddlambert.com']):not([href^='#']):not([href^='/']):after, a.noexit:not([href*='toddlambert.com']):not([href^='#']):not([href^='/']):after{
   content: none;
   }
@@ -3390,12 +3392,13 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                 width: calc(350px + 1px);
                 max-height: 100vw;
                 margin: 0;
-                padding-top: 1px;
+                padding: 20px 0;
                 /* background: #abc; */
                 overflow-y: auto;
                 overflow-x: hidden;
                 transform: rotate(-90deg) translateY(-350px);
                 transform-origin: right top;
+                transition: transform .2s;
               }
               .horizontal-scroll-wrapper > * {
                 display: block;
@@ -3414,7 +3417,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                 width: 350px;
                 height: 350px;
                 margin: 10vw 0;
-                filter: drop-shadow(2px 2px 10px rgba(44, 44, 44, 0.8));
+                filter: drop-shadow(0px 0px 30px rgba(44, 44, 44, 0.8));
               }
               
               @media (pointer: coarse) {
