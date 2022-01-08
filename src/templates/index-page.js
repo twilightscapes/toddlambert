@@ -1135,10 +1135,10 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
     <h3 className="logotype" style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', paddingTop:'1rem'}}>
 Contact
 </h3>
-<p style={{fontSize:'1.4rem', textAlign:'center'}}>
-Looking for innovative, top performing, design?</p>
-<p style={{fontSize:'1.4rem', fontWeight:'bold', textAlign:'center'}}>
-  Let's create something great together.</p>
+<p style={{fontSize:'clamp(1.5rem, 2.5vw, 3.8rem)', textAlign:'center'}}>
+Looking for innovative top-performing website apps that scale?</p>
+<p style={{fontSize:'clamp(1.2rem, 2.5vw, 3.8rem)', fontWeight:'bold', textAlign:'center', textShadow:'1px 1px 0 #666'}}>
+  Let's create something <span>great together</span>.</p>
 
 <p style={{fontSize:'1.2rem', textAlign:'center', fontWeight:'bold'}}>
 Availability: &nbsp; {date}
