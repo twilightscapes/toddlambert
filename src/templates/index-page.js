@@ -956,7 +956,7 @@ Lambert
 
 
 
-<section id="resume">
+<section id="resume" style={{margin:'2rem 0'}}>
 
 <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 
