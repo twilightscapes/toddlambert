@@ -670,7 +670,7 @@ Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
 
  <div className="parent" style={{display:'flex', flexDirection:'row', justifyContent:'space-between', height:'100%', gap:'20px', marginTop:'20px'}}> 
 
-<div className="div1" style={{width:'65%', display:'flex', flexDirection:'column', justifyContent:'center', background:'', borderRight:'2px solid #dfcfc9' }}>
+<div className="div1" style={{width:'65%', display:'flex', flexDirection:'column', justifyContent:'center', background:'', borderRight:'0px solid #dfcfc9' }}>
 
 <div className="div3" style={{background:'',}}>
   

@@ -3424,12 +3424,12 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                   display: inline-block;
                 } */
               
-                .squares {
+                /* .squares {
                   padding-top: 0;
                 }
                 .squares > * {
                   margin: 0 10px;
-                }
+                } */
               }
               /* .horizontal-scroll-wrapper {
                 position: relative;
