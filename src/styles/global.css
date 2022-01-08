@@ -2245,20 +2245,17 @@ background:#000;
   .seotext{padding-top:5vh !important;}
 
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 1rem;
 }
 ::-webkit-scrollbar-track {
   background: #111;
-  /* -webkit-box-shadow: inset 0 0 6px rgba(2mcb, 3, 187, 0.9);
-  box-shadow: inset 0 0 6px rgba(248, 3, 187, 0.9); */
-  /* border-left: 1px solid rgba(248, 3, 187, 0.9); */
 }
 ::-webkit-scrollbar-thumb {
 background: #000;
 border:1px solid #222;
 
-}
+} */
 
 
 
@@ -2291,7 +2288,15 @@ border:1px solid #222;
   background-color: transparent;
 } */
 
+::-webkit-scrollbar {
+  width: 1px !important;
+  height: 1px !important;
+}
 
+::-webkit-scrollbar-button {
+  width: 1px !important;
+  height: 1px !important;
+}
 
 
 

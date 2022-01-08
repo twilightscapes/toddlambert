@@ -1,0 +1,331 @@
+import * as React from "react"
+import { Layout } from "../components/layout"
+import GoBack from "../components/goBack"
+import { Link } from "gatsby"
+import { StaticImage } from "gatsby-plugin-image"
+import { Seo } from "../components/seo"
+import CasePanels from "../components/casepanels"
+
+import { SRLWrapper } from "simple-react-lightbox"
+
+import styled from "styled-components"
+const CustomBox = styled.div`
+
+
+// .parent { 
+//   display: grid; 
+//   grid-template-columns: 2fr 3fr; 
+//   grid-template-rows: repeat(2, 1fr); 
+//   grid-column-gap: 20vw;
+//   grid-row-gap: 20vh; 
+//   }
+
+//   .parent div{border:1px solid red;}
+//   .div1 { grid-area: 1 / 1 / 2 / 2; } 
+//   .div2 { grid-area: 1 / 2 / 2 / 3; } 
+//   .div3 { grid-area: 2 / 1 / 3 / 3; } 
+//   .div4 { grid-area: 2 / 1 / 3 / 2; } 
+//   .div5 { grid-area: 2 / 2 / 3 / 3; } 
+
+
+
+@media (max-width: 48rem) {
+.parent {flex-direction:column !important;}
+.parent div{width:100% !important;}
+}
+
+
+::-webkit-scrollbar {
+  width: 1px !important;
+  height: 1px !important;
+}
+
+::-webkit-scrollbar-button {
+  width: 1px !important;
+  height: 1px !important;
+}
+
+
+
+.horizontal-scroll-wrapper {
+  position: relative;
+  display: block;
+  top: 0;
+  left: 0;
+  width: calc(350px + 1px);
+  max-height: 100vw;
+  margin: 0;
+  padding-top: 1px;
+  // background: #abc;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transform: rotate(-90deg) translateY(-350px);
+  transform-origin: right top;
+  z-index:0;
+}
+.horizontal-scroll-wrapper > div {
+  display: block;
+  padding: 5px;
+  background: #cab;
+  transform: rotate(90deg);
+  transform-origin: right top;
+}
+
+.squares {
+  padding: 350px 0 0 0;
+}
+.squares > div {
+  width: 350px;
+  height: 350px;
+  margin: 10px 0;
+}
+
+@media (pointer: coarse) {
+  .horizontal-scroll-wrapper {
+    transform: none;
+    width: 100vw;
+    height: 350px;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  .horizontal-scroll-wrapper > div {
+    transform: none;
+    display: inline-block;
+  }
+
+  .squares {
+    padding-top: 0;
+  }
+  .squares > div {
+    margin: 0 10px;
+  }
+}
+
+
+
+`
+
+
+
+export default function test2Page() {
+   return (
+
+
+    <CustomBox>
+    <Layout className="thanks-page">
+
+<Seo
+          title={`Photography`}
+          description={`Twilightscapes - `}
+          image={'https://twilightscapes.com/default-og-image-blank.jpg'}
+        />
+    
+    {/* <div className="spacer66"></div> */}
+
+
+    {/* <div className="parent"> 
+<div className="div1"> div 1</div> 
+<div className="div2"> div 2</div> 
+<div className="div3"> div 3</div> 
+<div className="div4"> div 4</div> 
+<div className="div5"> div 5</div> 
+</div> */}
+
+<div className="parent" style={{display:'flex', flexDirection:'row', justifyContent:'space-between', height:'100%', gap:'20px'}}> 
+
+<div className="div1" style={{width:'65%', display:'flex', flexDirection:'column', justifyContent:'center', background:'', borderRight:'2px dashed #222' }}>
+
+<div className="div3" style={{background:'',}}>
+  
+  <h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
+fontFamily: 'Lobster Two',
+letterSpacing: '2px',
+textTransform: 'lowercase',
+fontWeight: '400',
+textShadow:'0 1px 0 #eee',
+fontSize:'clamp(1.6rem, 12vw, 3.8rem)',
+// opacity:'.9',
+// paddingLeft:'',
+}}>
+  Roles are like hats
+{/* <span style={{color:'#dd4000'}}>Roles are like hats</span> */}
+</h2>
+
+</div>
+
+<div className="div4" style={{background:'', height:'100%', justifyContent:'center', display:'flex', flexDirection:'column',}}>
+<div style={{padding:'0 8%', fontSize:'clamp(1rem, 2vw, 2.8rem)',}}>
+<p>Todd's skills include all facets of online and multimedia creation including HTML emails, online ads, user interface design, information architecture, web navigation, icon creation, web graphics, cross-platform and cross-browser web applications, web template creation &amp; CMS implementations.</p>
+
+<p>
+When Todd is not online, he is often found pushing the boundaries of night photography. You can usually find him in the middle of the night shooting astrophotography which is his favorite subject.
+</p>
+</div>
+
+</div>
+
+
+
+</div>
+
+<div className="div2" style={{width:'35%', display:'flex', flexDirection:'column', justifyContent:'space-between', background:'', }}>
+
+<div className="div5" style={{background:'',}}>
+  <h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
+// fontFamily: 'Lobster Two',
+letterSpacing: '2px',
+textTransform: 'lowercase',
+fontWeight: '400',
+textShadow:'0 1px 0 #eee',
+fontSize:'clamp(1.6rem, 12vw, 3.8rem)',
+// opacity:'.9',
+// paddingLeft:'',
+}}>
+  CODE NERD
+{/* <span style={{color:'#dd4000'}}>Roles are like hats</span> */}
+</h2>
+</div>
+
+<StaticImage src="../../static/assets/todd-toon.png" alt="Twilightscapes Default Image" style={{height:'auto', maxHeight:'100vh', position:'', zIndex:'0', top:'0', border:'0px solid !important', objectFit:'contain',}} />
+
+<div className="div6" style={{background:'',}}>  <h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
+fontFamily: 'Lobster Two',
+letterSpacing: '2px',
+textTransform: 'lowercase',
+fontWeight: '400',
+textShadow:'0 1px 0 #eee',
+fontSize:'clamp(1.3rem, 7vw, 2.8rem)',
+// opacity:'.9',
+// paddingLeft:'',
+}}>
+  Roles are like hats
+{/* <span style={{color:'#dd4000'}}>Roles are like hats</span> */}
+</h2></div>
+</div>
+
+</div>
+
+<br />
+
+<div class="horizontal-scroll-wrapper squares">
+  <div>item 1</div>
+  <div>item 2</div>
+  <div>item 3</div>
+  <div>item 4</div>
+  <div>item 5</div>
+  <div>item 6</div>
+  <div>item 7</div>
+  <div>item 8</div>
+</div>
+
+    {/* <div className="zoombox">
+      <SRLWrapper options={options} className="">
+
+   <StaticImage
+          src="../../src/img/DendroidDreams/sea-of-sorrow.jpg"
+          alt="Start with the best built website and then make sure it's as fast as can be. Then make some of the most innovative features that nobody else has. Finally, make sure it's virtually hack-proof, easy to use and ready to go!"
+          className="item"
+          style={{borderRadius:'12', margin:'1rem 4%'}}
+        />
+
+<div className="masonry4" style={{}}>
+
+<StaticImage
+          src="../../src/img/DendroidDreams/dances-with-the-moon.jpg"
+          alt="Image 2"
+          srl_gallery_image="true"
+          className="item"
+          
+        />
+
+<StaticImage
+          src="../../src/img/DendroidDreams/big-dreams.jpg"
+          alt="Image 4"
+          srl_gallery_image="true"
+          className="item"
+        />
+
+
+<StaticImage
+          src="../../src/img/DendroidDreams/amber-oak.jpg"
+          alt="Image 3"
+          srl_gallery_image="true"
+          className="item"
+        />
+
+
+<StaticImage
+          src="../../src/img/DendroidDreams/deciduous-doiley.jpg"
+          alt="Image 4"
+          srl_gallery_image="true"
+          className="item"
+        />
+
+<StaticImage
+          src="../../src/img/DendroidDreams/evening-crown.jpg"
+          alt="Image 3"
+          srl_gallery_image="true"
+          className="item"
+        />
+
+<StaticImage
+          src="../../src/img/DendroidDreams/gnarled-barkley.jpg"
+          alt="Image 3"
+          srl_gallery_image="true"
+          className="item"
+        />
+
+<StaticImage
+          src="../../src/img/DendroidDreams/lonely-tree.jpg"
+          alt="Image 3"
+          srl_gallery_image="true"
+          className="item"
+        />
+
+<StaticImage
+          src="../../src/img/DendroidDreams/moaning-tree.jpg"
+          alt="Image 3"
+          srl_gallery_image="true"
+          className="item"
+        />
+
+<StaticImage
+          src="../../src/img/DendroidDreams/silver-serenity.jpg"
+          alt="Image 3"
+          srl_gallery_image="true"
+          className="item"
+        />
+        <StaticImage
+          src="../../src/img/DendroidDreams/tree-tops.jpg"
+          alt="Image 3"
+          srl_gallery_image="true"
+          className="item"
+        />
+        <StaticImage
+          src="../../src/img/DendroidDreams/tree-with-a-view.jpg"
+          alt="Image 3"
+          srl_gallery_image="true"
+          className="item"
+        />
+        <StaticImage
+          src="../../src/img/DendroidDreams/waimeia-milkyway.jpg"
+          alt="Image 3"
+          srl_gallery_image="true"
+          className="item"
+        />
+        <StaticImage
+          src="../../src/img/DendroidDreams/wishing-tree.jpg"
+          alt="Image 3"
+          srl_gallery_image="true"
+          className="item"
+        />
+
+</div>
+</SRLWrapper>
+  </div> */}
+    
+    </Layout>
+</CustomBox>
+  )
+}
