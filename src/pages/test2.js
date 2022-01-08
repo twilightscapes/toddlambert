@@ -106,9 +106,9 @@ export default function test2Page() {
 
 
 
-<SRLWrapper options={options} className="">
+
   <div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'355px', overflow:'hidden', position:'relative', padding:'0 0'}}>
-<div class="horizontal-scroll-wrapper squares" style={{margin:'0 auto', width:'', padding:'0'}}>
+
   {/* <div>item 1</div>
   <div>item 2</div>
   <div>item 3</div>
@@ -123,27 +123,50 @@ export default function test2Page() {
 
 
 
+<SRLWrapper options={options} className="">
+
+
+{/* <div class="" style={{margin:'0 auto', width:'', padding:'0', height:'100vw'}}>
+
+<Link state={{modal: true}} to="/legacy/" style={{height:'350px', position:'relative', left:'0', top:'-60px'}}>
+  <StaticImage className="" src="../../static/assets/Experiences-Header-6.jpg" alt="Todd builds Web Apps" style={{height:'350px'}}  />
+  todd
+</Link>
+</div> */}
+
+
+
+<div class="horizontal-scroll-wrapper squares" style={{margin:'0 auto', width:'', padding:'0'}}>
+
+
+
+
+
+
 
 
 
 
 <StaticImage
-       src="../../static/assets/coast-promos2.png"
-       alt="Image 4"
-       srl_gallery_image="true"
-       className="item"
-     />
-
-<StaticImage
-        src="../../static/assets/tle-portfolio-spotlights.png"
+        src="../../static/assets/tle-portfolio-spotlights2.png"
         alt="Todd builds Web Apps"
         srl_gallery_image="true"
         className="item"
       />
 
 
+
+
+
 <StaticImage
         src="../../static/assets/tle-portfolio-spotlights2.png"
+        alt="Todd builds Web Apps"
+        srl_gallery_image="true"
+        className="item"
+      />
+
+<StaticImage
+        src="../../static/assets/tle-portfolio-spotlights.png"
         alt="Todd builds Web Apps"
         srl_gallery_image="true"
         className="item"
@@ -181,6 +204,13 @@ export default function test2Page() {
 
 <StaticImage
        src="../../static/assets/coast-promos1.png"
+       alt="Image 4"
+       srl_gallery_image="true"
+       className="item"
+     />
+
+<StaticImage
+       src="../../static/assets/DUC-product.png"
        alt="Image 4"
        srl_gallery_image="true"
        className="item"
@@ -233,16 +263,24 @@ export default function test2Page() {
        className="item"
      />
 
-
-
 <StaticImage
-       src="../../static/assets/DUC-product.png"
+       src="../../static/assets/coast-promos2.png"
        alt="Image 4"
        srl_gallery_image="true"
        className="item"
      />
 
 
+     
+    
+     </div>
+ </SRLWrapper>
+
+ <Link state={{modal: true}} to="/legacy/" style={{position:'absolute', left:'0', top:'', width:'100px'}}>
+  <StaticImage className="" src="../../static/assets/legacy.png" alt="Todd builds Web Apps" style={{height:'350px', borderRadius:'0 12px 12px 0'}}  />
+  todd
+</Link>
+</div>
 
 
 
@@ -262,9 +300,9 @@ export default function test2Page() {
 
 
 
-</div>
-</div>
-</SRLWrapper>
+
+
+
     {/* <div className="zoombox">
       <SRLWrapper options={options} className="">
 

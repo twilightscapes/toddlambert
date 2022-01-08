@@ -1136,7 +1136,7 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
 Contact
 </h3>
 <p style={{fontSize:'clamp(1.5rem, 2.5vw, 3.8rem)', textAlign:'center'}}>
-Looking for innovative top-performing website apps that scale?</p>
+Looking for innovative design in a top-performing website app?</p>
 <p style={{fontSize:'clamp(1.2rem, 2.5vw, 3.8rem)', fontWeight:'bold', textAlign:'center', textShadow:'1px 1px 0 #666'}}>
   Let's create something <span>great together</span>.</p>
 

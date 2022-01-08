@@ -3372,7 +3372,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
               .horizontal-scroll-wrapper  img{cursor:zoom-in !important;  border-radius:12px !important;}
               
               .horizontal-scroll-wrapper img:hover{border:4px solid #dd4000 !important;
-                background-position: right !important;
+                /* background-position: right !important; */
                 /* transform: scale(1.4) !important; */
                 border-radius: 12px !important;
               }
@@ -3416,7 +3416,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
               .squares > * {
                 width: 350px;
                 height: 350px;
-                margin: 40% 0;
+                margin: 0 0 40% 0;
                 filter: drop-shadow(0px 0px 30px rgba(44, 44, 44, 0.8));
               }
               
