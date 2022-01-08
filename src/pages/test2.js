@@ -277,7 +277,7 @@ export default function test2Page() {
  </SRLWrapper>
 
  <Link state={{modal: true}} to="/legacy/" style={{position:'absolute', left:'0', top:'', width:'100px'}}>
-  <StaticImage className="" src="../../static/assets/legacy.png" alt="Todd builds Web Apps" style={{height:'350px', borderRadius:'0 12px 12px 0'}}  />
+  <StaticImage className="" src="../../static/assets/legacy.png" alt="Todd builds Web Apps" style={{height:'350px', borderRadius:'0 12px 12px 0', opacity:'.6'}}  />
   todd
 </Link>
 </div>
