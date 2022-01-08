@@ -1,10 +1,10 @@
 import * as React from "react"
-import { Layout } from "../components/layout"
-import GoBack from "../components/goBack"
+// import { Layout } from "../components/layout"
+// import GoBack from "../components/goBack"
 import { Link } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
-import { Seo } from "../components/seo"
-import CasePanels from "../components/casepanels"
+// import { Seo } from "../components/seo"
+// import CasePanels from "../components/casepanels"
 
 import { SRLWrapper } from "simple-react-lightbox"
 
@@ -40,13 +40,13 @@ const CustomBox = styled.div`
 
 .horizontal-scroll-wrapper img:hover{border:4px solid #dd4000 !important;}
 
-.gatsby-image-wrapper{cursor:zoom-in !important;}
+// .gatsby-image-wrapper{cursor:zoom-in !important;}
 
   border-radius:12px;
 
 
 .horizontal-scroll-wrapper {
-  position: relative;
+  position: absolute;
   display: block;
   top: 0;
   left: 0;
@@ -69,14 +69,14 @@ const CustomBox = styled.div`
   transform-origin: right top;
 }
 
-.squares {
-  padding: 350px 0 0 0;
-}
-.squares > div {
-  width: 350px;
-  height: 350px;
-  margin: 10px 0;
-}
+// .squares {
+//   padding: 350px 0 0 0;
+// }
+// .squares > div {
+//   width: 350px;
+//   height: 350px;
+//   margin: 10px 0;
+// }
 
 @media (pointer: coarse) {
   .horizontal-scroll-wrapper {
@@ -170,13 +170,13 @@ export default function test2Page() {
 
 
     <CustomBox>
-    <Layout className="thanks-page">
+    {/* <Layout className="thanks-page">
 
 <Seo
           title={`Photography`}
           description={`Twilightscapes - `}
           image={'https://twilightscapes.com/default-og-image-blank.jpg'}
-        />
+        /> */}
     
     {/* <div className="spacer66"></div> */}
 
@@ -189,82 +189,11 @@ export default function test2Page() {
 <div className="div5"> div 5</div> 
 </div> */}
 
-<div className="parent" style={{display:'flex', flexDirection:'row', justifyContent:'space-between', height:'100%', gap:'20px', marginTop:'20px'}}> 
-
-<div className="div1" style={{width:'65%', display:'flex', flexDirection:'column', justifyContent:'center', background:'', borderRight:'2px dashed #222' }}>
-
-<div className="div3" style={{background:'',}}>
-  
-  <h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
-fontFamily: 'Lobster Two',
-letterSpacing: '2px',
-textTransform: 'lowercase',
-fontWeight: '400',
-textShadow:'0 1px 0 #eee',
-fontSize:'clamp(1.6rem, 12vw, 3.8rem)',
-// opacity:'.9',
-// paddingLeft:'',
-}}>
-  Roles are like hats
-{/* <span style={{color:'#dd4000'}}>Roles are like hats</span> */}
-</h2>
-
-</div>
-
-<div className="div4" style={{background:'', height:'100%', justifyContent:'center', display:'flex', flexDirection:'column',}}>
-<div style={{padding:'0 8%', fontSize:'clamp(1rem, 2vw, 2.8rem)',}}>
-<p>Todd's skills include all facets of online and multimedia creation including HTML emails, online ads, user interface design, information architecture, web navigation, icon creation, web graphics, cross-platform and cross-browser web applications, web template creation &amp; CMS implementations.</p>
-
-<p>
-When Todd is not online, he is often found pushing the boundaries of night photography. You can usually find him in the middle of the night shooting astrophotography which is his favorite subject.
-</p>
-</div>
-
-</div>
 
 
 
-</div>
-
-<div className="div2" style={{width:'35%', display:'flex', flexDirection:'column', justifyContent:'space-between', background:'', }}>
-
-<div className="div5" style={{background:'',}}>
-  <h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
-// fontFamily: 'Lobster Two',
-letterSpacing: '2px',
-textTransform: 'lowercase',
-fontWeight: '400',
-textShadow:'0 1px 0 #eee',
-fontSize:'clamp(1.6rem, 12vw, 3.8rem)',
-// opacity:'.9',
-// paddingLeft:'',
-}}>
-  CODE NERD
-{/* <span style={{color:'#dd4000'}}>Roles are like hats</span> */}
-</h2>
-</div>
-
-<StaticImage src="../../static/assets/todd-toon.png" alt="Twilightscapes Default Image" style={{height:'auto', maxHeight:'100vh', position:'', zIndex:'0', top:'0', border:'0px solid !important', objectFit:'contain',}} />
-
-<div className="div6" style={{background:'',}}>  <h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
-fontFamily: 'Lobster Two',
-letterSpacing: '2px',
-textTransform: 'lowercase',
-fontWeight: '400',
-textShadow:'0 1px 0 #eee',
-fontSize:'clamp(1.3rem, 7vw, 2.8rem)',
-// opacity:'.9',
-// paddingLeft:'',
-}}>
-  Roles are like hats
-{/* <span style={{color:'#dd4000'}}>Roles are like hats</span> */}
-</h2></div>
-</div>
-
-</div>
-
-<br />
 <SRLWrapper options={options} className="">
+  <div style={{display:'block', width:'100%', height:'350px', overflow:'hidden', position:'relative'}}>
 <div class="horizontal-scroll-wrapper squares">
   {/* <div>item 1</div>
   <div>item 2</div>
@@ -296,6 +225,13 @@ fontSize:'clamp(1.3rem, 7vw, 2.8rem)',
        className="item"
      />
 
+{/* <Link state={{modal: true}} to="/transcendence/" alt="Image 2"
+  
+       className="item" style={{margin:'', textDecoration:'none', fontSize:'120%', textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
+  <StaticImage className="1" src="../../static/assets/Experiences-Header-6.jpg" alt="Todd builds Web Apps"  />
+  <br />
+Animated SVG VIDEO
+</Link> */}
 
 <StaticImage
        src="../../src/img/DendroidDreams/amber-oak.jpg"
@@ -373,6 +309,7 @@ fontSize:'clamp(1.3rem, 7vw, 2.8rem)',
 
 
 
+</div>
 </div>
 </SRLWrapper>
     {/* <div className="zoombox">
@@ -481,7 +418,7 @@ fontSize:'clamp(1.3rem, 7vw, 2.8rem)',
 </SRLWrapper>
   </div> */}
     
-    </Layout>
+    {/* </Layout> */}
 </CustomBox>
   )
 }

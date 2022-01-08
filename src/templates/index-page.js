@@ -17,6 +17,7 @@ import { StaticImage } from "gatsby-plugin-image"
 import ReactPlayer from 'react-player/lazy'
 // import { ImPlay } from "react-icons/im"
 // import LineTest from "../../static/assets/LineTest.svg"
+import AboutMe from "../../src/pages/test2"
 import styled from "styled-components"
 import Newsignup from "../components/newssign"
 import BlogListHome from "../components/blog-list-home"
@@ -664,39 +665,37 @@ Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
 
 
 
- <div className="spacer33 mobile"></div> 
-
- <section id="about">
-
- {/* <div style={{position:'relative', zIndex:'-1', bottom:'0', maxHeight:'33vh', overflow:'hidden', border:'0px solid red'}}><LineTest /></div> */}
-
- <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
-
-  <div className="child split flexbutt" style={{position:'relative', height:'', width:'', overflow:'', display:'flex', gap
-  :'30px', margin:'0 auto', padding:'0', outline:'0px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)',
-  //  background:'rgba(121, 115, 115, 0.2)',
-  // position:'sticky', top:'0',
-   }}>
+ {/* <div className="spacer33 mobile"></div>  */}
 
 
+ <div className="parent" style={{display:'flex', flexDirection:'row', justifyContent:'space-between', height:'100%', gap:'20px', marginTop:'20px'}}> 
 
-<div className="aboutme flexcheek" style={{minWidth:'50vw', justifyContent:'center', alignContent:'center', verticalAlign:'center', display:'grid',}}>
+<div className="div1" style={{width:'65%', display:'flex', flexDirection:'column', justifyContent:'center', background:'', borderRight:'2px solid #dfcfc9' }}>
 
-<h3 className="logotype"  style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', }}>About</h3>
+<div className="div3" style={{background:'',}}>
   
+  <h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
+fontFamily: 'Lobster Two',
+letterSpacing: '2px',
+textTransform: 'lowercase',
+fontWeight: '400',
+textShadow:'0 1px 0 #eee',
+fontSize:'clamp(1.6rem, 12vw, 3.8rem)',
+// opacity:'.9',
+// paddingLeft:'',
+}}>
+  <h3 className="logotype"  style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', }}>About</h3>
+{/* <span style={{color:'#dd4000'}}>Roles are like hats</span> */}
+</h2>
 
+</div>
 
-<div className="masonry" style={{padding:'0', display:'', columnCount:'1', columnRule:'0px dashed rgba(121, 115, 115, 0.2)', columnGap:'0', fontSize:'110%'}}>
-
-
-{/* <p>Todd Lambert, a “webdude” that grew up in Southern California and whose career and endeavors have taken him to over 14 western states including living in Colorado, Texas and Oregon. </p> */}
+<div className="div4" style={{background:'', maxHeight:'', justifyContent:'center', display:'flex', flexDirection:'column',}}>
+<div style={{padding:'0 8%', fontSize:'clamp(1rem, 2vw, 2.8rem)',}}>
 <p>
 Todd Lambert is an award winning web designer and photographer that trained in Southern California and migrated to the Deep South where he found home living on the coastal Mississippi Sound.
 </p>
 
-{/* <p>
-Having lived on the Mississippi gulf coast twice, Todd has assisted many small businesses that were affected by Hurricane Katrina in establishing a successful online presence.
-</p> */}
 
 <p>Todd's skills include all facets of online and multimedia creation including HTML emails, online ads, user interface design, information architecture, web navigation, icon creation, web graphics, cross-platform and cross-browser web applications, web template creation &amp; CMS implementations.</p>
 
@@ -708,17 +707,36 @@ When Todd is not online, he is often found pushing the boundaries of night photo
 Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes up most of his free time.
 </p>
 
-
-
-  </div>
+</div>
 
 </div>
 
-<div className="flexcheek" style={{maxWidth:'', padding:'1rem 2rem 1rem 1rem', justifyContent:'flex-end'}}>
- 
 
-  <StaticImage src="../../static/assets/about-todd.jpg" alt="Twilightscapes Default Image" style={{height:'', maxHeight:'', position:'', zIndex:'0', borderRadius:'12px', marginTop:'', border:'0px solid !important', objectFit:'cover',}} />
-  <Link state={{modal: true}}
+
+</div>
+
+<div className="div2" style={{width:'35%', display:'flex', flexDirection:'column', justifyContent:'space-between', background:'', }}>
+
+<div className="div5" style={{background:'',}}>
+  <h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
+// fontFamily: 'Lobster Two',
+letterSpacing: '2px',
+textTransform: 'lowercase',
+fontWeight: '400',
+textShadow:'0 1px 0 #eee',
+fontSize:'clamp(1.6rem, 12vw, 3.8rem)',
+// opacity:'.9',
+// paddingLeft:'',
+}}>
+  CODE NERD
+{/* <span style={{color:'#dd4000'}}>Roles are like hats</span> */}
+</h2>
+</div>
+
+<StaticImage src="../../static/assets/todd-toon.png" alt="Twilightscapes Default Image" style={{height:'auto', maxHeight:'100vh', position:'', zIndex:'0', top:'0', border:'0px solid !important', objectFit:'contain',}} />
+
+<div className="div6" style={{background:'',}}>  
+<Link state={{modal: true}}
             to="/about-todd/"
             className="post-card button noexit print"
             style={{
@@ -733,19 +751,28 @@ Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes
           >
             View More About Todd
           </Link>
-  
+<h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
+fontFamily: 'Lobster Two',
+letterSpacing: '2px',
+textTransform: 'lowercase',
+fontWeight: '400',
+textShadow:'0 1px 0 #eee',
+fontSize:'clamp(1.3rem, 7vw, 2.8rem)',
+// opacity:'.9',
+// paddingLeft:'',
+}}>
+    
+{/* <span style={{color:'#dd4000'}}>Roles are like hats</span> */}
+</h2></div>
 </div>
 
 </div>
-</ScrollAnimation>
 
 
 
 
 
-
-
-</section>
+ 
  {/* <div style={{position:'relative', zIndex:'-1', bottom:'0', maxHeight:'33vh', overflow:'hidden', border:'0px solid red'}}><LineTest /></div> */}
 {/* <div className="spacer33"></div> */}
 
@@ -843,7 +870,11 @@ position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto',
 <br />
 
 
-<SRLWrapper options={options} className="1">
+<AboutMe />
+
+
+
+{/* <SRLWrapper options={options} className="1">
 
 <div className="masonry4" style={{display:''}}>
 
@@ -866,9 +897,8 @@ Homepage Redesign and Product Portal
 </div>
 
 </div>
-</SRLWrapper>
+</SRLWrapper> */}
 
-<br />
 <br />
 <div className="masonry4" style={{display:''}}>
 <Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'120%', textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
@@ -877,15 +907,6 @@ Homepage Redesign and Product Portal
 Animated SVG VIDEO
 </Link>
 
-{/* <Link state={{modal: true}} to="/they-live/" className="" style={{margin:'', textDecoration:'none', fontSize:'120%', textAlign:'center' }}>
-<StaticImage className="1" src="../../static/assets/TheyLive-Header.jpg" alt="Todd builds Web Apps"  />
-Animated SVG VIDEO
-</Link> */}
-
-{/* <Link state={{modal: true}} to="/mystery-science-theater-3021/" className="" style={{fontSize:'120%', textDecoration:'none', textAlign:'center' }}>
-  <StaticImage className="1" src="../../static/assets/Experiences-Header-7.jpg" alt="Todd builds Web Apps"  />
-  Animated SVG VIDEO
-  </Link> */}
 
 
   <Link state={{modal: true}} to="/twilightscapes/" className="" style={{fontSize:'120%', textDecoration:'none', textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)', }}>
@@ -894,10 +915,7 @@ Animated SVG VIDEO
   Animated SVG VIDEO
   </Link>
 
-  {/* <Link state={{modal: true}} to="/tv-signals/" className="" style={{fontSize:'120%', textDecoration:'none', textAlign:'center' }}>
-  <StaticImage className="1" src="../../static/assets/television-signals-promo.jpg" alt="Todd builds Web Apps"  />
-  Animated SVG VIDEO
-  </Link> */}
+
 
   <Link state={{modal: true}} to="/alien-egg-farm/" className="" style={{fontSize:'120%', textDecoration:'none', textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
   <StaticImage className="1" src="../../static/assets/Experiences-Header-3.jpg" alt="Todd builds Web Apps"  />
@@ -905,30 +923,16 @@ Animated SVG VIDEO
   Animated SVG VIDEO
   </Link>
 
-{/* <StaticImage className="" src="../../static/assets/tle-portfolio-spotlights.png" alt="Todd builds Web Apps"  />
-
-<StaticImage className="" src="../../static/assets/tle-portfolio-spotlights2.png" alt="Todd builds Web Apps"  />
-
-<StaticImage className="" src="../../static/assets/tle-portfolio-spotlights3.png" alt="Todd builds Web Apps"  /> */}
-
-{/* <StaticImage src="../../static/assets/coast-promos.png" alt="Todd builds Web Apps"  />
-
-
-
-<StaticImage src="../../static/assets/coast-promos3.png" alt="Todd builds Web Apps"  />
-
-
-
-<StaticImage src="../../static/assets/zombie-bucket-logo.png" alt="Todd builds Web Apps"  /> */}
 
 </div>
 
 
-  <article className="post-card button" style={{ display:'flex', maxWidth:'400px', justifyContent:'center', border:'1px solid', padding:'', margin:'2rem auto', fontSize:'150%', textAlign:'center', }}>
+  {/* <article className="post-card button" style={{ display:'flex', maxWidth:'400px', justifyContent:'center', border:'1px solid', padding:'', margin:'2rem auto', fontSize:'150%', textAlign:'center', }}>
   <Link to="/posts/" style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
     View More <RiArrowRightSLine style={{fontSize:'50px'}} />
     </Link>
-    </article>
+    </article> */}
+
     </div>
 </ScrollAnimation>
 
