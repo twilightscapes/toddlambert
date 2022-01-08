@@ -1123,18 +1123,18 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
 <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 
 <section id="contact" className="child" style={{position:'relative', height:'auto', zIndex:'', padding:'2rem 0', background:'rgba(121, 115, 115, 0.2)'}}>
-{/* <div style={{padding:'0',
-position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', outline:'18px dashed rgba(121, 115, 115, 0.3)', borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', background:'rgba(121, 115, 115, 0.2)'}}> */}
-<div className="container3" style={{}}>
 
-</div>
-  <div className="outer" style={{margin:'0 12%', outline:'0px solid rgba(121, 115, 115, 0.3)', outlineOffset:'12px', background:'rgba(121, 115, 115, 0.2)', borderRadius:'12px', padding:'0 4%'}}>
+
+
+
+  <div className="outer" style={{margin:'0', outline:'0px solid rgba(121, 115, 115, 0.3)', outlineOffset:'12px', borderRadius:'12px', padding:'0 4%'}}>
+
     <h3 className="logotype" style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', paddingTop:'1rem'}}>
 Contact
 </h3>
-<p style={{fontSize:'1.5rem', textAlign:'center'}}>
+<p style={{fontSize:'1.4rem', textAlign:'center'}}>
 Looking for innovative, top performing, design?
-<br />Contact me and let's create something great together.</p>
+<br />Let's create something great together.</p>
 
 <p style={{fontSize:'1.2rem', textAlign:'center', fontWeight:'bold'}}>
 Availability: &nbsp; {date}
@@ -1143,7 +1143,8 @@ Availability: &nbsp; {date}
 <Contact />
 
 </div> 
-  {/* </div> */}
+
+
  </section>
  </ScrollAnimation>
 
