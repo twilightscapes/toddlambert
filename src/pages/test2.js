@@ -12,93 +12,7 @@ import styled from "styled-components"
 const CustomBox = styled.div`
 
 
-// .parent { 
-//   display: grid; 
-//   grid-template-columns: 2fr 3fr; 
-//   grid-template-rows: repeat(2, 1fr); 
-//   grid-column-gap: 20vw;
-//   grid-row-gap: 20vh; 
-//   }
 
-//   .parent div{border:1px solid red;}
-//   .div1 { grid-area: 1 / 1 / 2 / 2; } 
-//   .div2 { grid-area: 1 / 2 / 2 / 3; } 
-//   .div3 { grid-area: 2 / 1 / 3 / 3; } 
-//   .div4 { grid-area: 2 / 1 / 3 / 2; } 
-//   .div5 { grid-area: 2 / 2 / 3 / 3; } 
-
-
-
-@media (max-width: 48rem) {
-.parent {flex-direction:column !important;}
-.parent div{width:100% !important;}
-}
-
-
-
-.horizontal-scroll-wrapper  img{cursor:zoom-in !important;  border-radius:12px !important;}
-
-.horizontal-scroll-wrapper img:hover{border:4px solid #dd4000 !important;}
-
-// .gatsby-image-wrapper{cursor:zoom-in !important;}
-
-  border-radius:12px;
-
-
-.horizontal-scroll-wrapper {
-  position: relative;
-  display: block;
-  top: 0;
-  left: 0;
-  width: calc(350px + 1px);
-  max-height: 100vw;
-  margin: 0;
-  padding-top: 1px;
-  // background: #abc;
-  overflow-y: auto;
-  overflow-x: hidden;
-  transform: rotate(-90deg) translateY(-350px);
-  transform-origin: right top;
-  z-index:0;
-}
-.horizontal-scroll-wrapper > * {
-  display: block;
-  padding: 5px;
-  // background: #cab;
-  transform: rotate(90deg);
-  transform-origin: right top;
-}
-
-// .squares {
-//   padding: 350px 0 0 0;
-// }
-// .squares > div {
-//   width: 350px;
-//   height: 350px;
-//   margin: 10px 0;
-// }
-
-@media (pointer: coarse) {
-  .horizontal-scroll-wrapper {
-    transform: none;
-    width: 100vw;
-    height: 350px;
-    white-space: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-  }
-  .horizontal-scroll-wrapper > * {
-    transform: none;
-    display: inline-block;
-  }
-
-  .squares {
-    padding-top: 0;
-  }
-  .squares > * {
-    margin: 0 10px;
-  }
-}
 
 
 
@@ -193,8 +107,8 @@ export default function test2Page() {
 
 
 <SRLWrapper options={options} className="">
-  <div className="sliderholder" style={{display:'block', width:'100%', height:'350px', overflow:'hidden', position:'relative'}}>
-<div class="horizontal-scroll-wrapper squares">
+  <div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'450px', overflow:'hidden', position:'relative',}}>
+<div class="horizontal-scroll-wrapper squares" style={{margin:'0 auto', width:''}}>
   {/* <div>item 1</div>
   <div>item 2</div>
   <div>item 3</div>

@@ -3375,8 +3375,63 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
               
  
               
+       
+
               
               .horizontal-scroll-wrapper {
+                position: absolute;
+                display: block;
+                top: 0;
+                left: 0;
+                width: calc(350px + 1px);
+                max-height: 100vw;
+                margin: 0;
+                padding-top: 1px;
+                /* background: #abc; */
+                overflow-y: auto;
+                overflow-x: hidden;
+                transform: rotate(-90deg) translateY(-350px);
+                transform-origin: right top;
+              }
+              .horizontal-scroll-wrapper > div {
+                display: block;
+                padding: 5px;
+                /* background: #cab; */
+                transform: rotate(90deg);
+                transform-origin: right top;
+              }
+              
+              .squares {
+                padding: 350px 0 0 0;
+              }
+              .squares > div {
+                width: 350px;
+                height: 350px;
+                margin: 10px 0;
+              }
+              
+              @media (pointer: coarse) {
+                .horizontal-scroll-wrapper {
+                  transform: none;
+                  width: 1050px;
+                  height: 350px;
+                  white-space: nowrap;
+                  overflow-x: auto;
+                  overflow-y: hidden;
+                }
+                .horizontal-scroll-wrapper > div {
+                  transform: none;
+                  display: inline-block;
+                }
+              
+                .squares {
+                  padding-top: 0;
+                }
+                .squares > div {
+                  margin: 0 10px;
+                }
+              }
+              /* .horizontal-scroll-wrapper {
                 position: relative;
                 display: block;
                 top: 0;
@@ -3411,20 +3466,20 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
               
               @media (pointer: coarse) {
 
-                /* .horizontal-scroll-wrapper {
+                .horizontal-scroll-wrapper {
                   transform: none;
                   width: 100vw;
                   height: 100vh !important;
                   white-space: nowrap;
                   overflow-x: auto;
                   overflow-y: hidden;
-                } */
+                }
 
                 .sliderholder{
                   height:100% !important;
                 }
                 .horizontal-scroll-wrapper > * {
-                  /* transform: none; */
+                  transform: none;
                   display: inline-block;
                 }
               
@@ -3434,4 +3489,5 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                 .squares > * {
                   margin: 0 10px;
                 }
-              }
+              } 
+              */
