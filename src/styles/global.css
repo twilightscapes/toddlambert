@@ -3413,7 +3413,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                 .horizontal-scroll-wrapper {
                   transform: none;
                   width: 100vw;
-                  height: 350px;
+                  height: 100vh !important;
                   white-space: nowrap;
                   overflow-x: auto;
                   overflow-y: hidden;
