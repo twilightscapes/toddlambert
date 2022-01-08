@@ -3410,22 +3410,23 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
               }
               
               @media (pointer: coarse) {
-                .horizontal-scroll-wrapper {
+
+                /* .horizontal-scroll-wrapper {
                   transform: none;
                   width: 100vw;
                   height: 100vh !important;
                   white-space: nowrap;
                   overflow-x: auto;
                   overflow-y: hidden;
-                }
+                } */
 
                 .sliderholder{
                   height:100% !important;
                 }
-                .horizontal-scroll-wrapper > * {
+                /* .horizontal-scroll-wrapper > * {
                   transform: none;
                   display: inline-block;
-                }
+                } */
               
                 .squares {
                   padding-top: 0;
