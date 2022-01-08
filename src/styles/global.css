@@ -3404,14 +3404,14 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
               .squares {
                 padding: 350px 0 0 0;
               }
-              .squares > div {
+              .squares > * {
                 width: 350px;
                 height: 350px;
                 margin: 10px 0;
               }
               
               @media (pointer: coarse) {
-                .horizontal-scroll-wrapper {
+                /* .horizontal-scroll-wrapper {
                   transform: none;
                   width: 1050px;
                   height: 350px;
@@ -3422,12 +3422,12 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                 .horizontal-scroll-wrapper > div {
                   transform: none;
                   display: inline-block;
-                }
+                } */
               
                 .squares {
                   padding-top: 0;
                 }
-                .squares > div {
+                .squares > * {
                   margin: 0 10px;
                 }
               }
