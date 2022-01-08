@@ -899,28 +899,29 @@ Homepage Redesign and Product Portal
 </div>
 </SRLWrapper> */}
 
-<br />
+<p style={{textAlign:'center'}}>Custom SVG Animations</p>
+
 <div className="masonry4" style={{display:''}}>
-<Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'120%', textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
+<Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
   <StaticImage className="1" src="../../static/assets/Experiences-Header-6.jpg" alt="Todd builds Web Apps"  />
   <br />
-Animated SVG VIDEO
+Animated SVG &amp; Photo
 </Link>
 
 
 
-  <Link state={{modal: true}} to="/twilightscapes/" className="" style={{fontSize:'120%', textDecoration:'none', textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)', }}>
+  <Link state={{modal: true}} to="/twilightscapes/" className="" style={{fontSize:'', textDecoration:'none', textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)', }}>
   <StaticImage className="1" src="../../static/assets/Experiences-Header-5.jpg" alt="Todd builds Web Apps"  />
   <br />
-  Animated SVG VIDEO
+  Animated SVG &amp; Photo &amp; Video
   </Link>
 
 
 
-  <Link state={{modal: true}} to="/alien-egg-farm/" className="" style={{fontSize:'120%', textDecoration:'none', textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
+  <Link state={{modal: true}} to="/alien-egg-farm/" className="" style={{fontSize:'', textDecoration:'none', textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
   <StaticImage className="1" src="../../static/assets/Experiences-Header-3.jpg" alt="Todd builds Web Apps"  />
   <br />
-  Animated SVG VIDEO
+  Animated SVG &amp; Photo
   </Link>
 
 
@@ -1133,8 +1134,9 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
 Contact
 </h3>
 <p style={{fontSize:'1.4rem', textAlign:'center'}}>
-Looking for innovative, top performing, design?
-<br />Let's create something great together.</p>
+Looking for innovative, top performing, design?</p>
+<p style={{fontSize:'1.4rem', fontWeight:'bold', textAlign:'center'}}>
+  Let's create something great together.</p>
 
 <p style={{fontSize:'1.2rem', textAlign:'center', fontWeight:'bold'}}>
 Availability: &nbsp; {date}
