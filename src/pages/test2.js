@@ -107,7 +107,7 @@ export default function test2Page() {
 
 
 <SRLWrapper options={options} className="">
-  <div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'355px', overflow:'hidden', position:'relative', padding:'20px 0'}}>
+  <div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'355px', overflow:'hidden', position:'relative', padding:'0 0'}}>
 <div class="horizontal-scroll-wrapper squares" style={{margin:'0 auto', width:'', padding:'0'}}>
   {/* <div>item 1</div>
   <div>item 2</div>
