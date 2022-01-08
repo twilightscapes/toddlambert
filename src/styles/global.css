@@ -3418,6 +3418,10 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                   overflow-x: auto;
                   overflow-y: hidden;
                 } */
+
+                .sliderhider{
+                  height:100% !important;
+                }
                 .horizontal-scroll-wrapper > * {
                   transform: none;
                   display: inline-block;

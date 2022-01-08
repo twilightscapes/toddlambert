@@ -46,7 +46,7 @@ const CustomBox = styled.div`
 
 
 .horizontal-scroll-wrapper {
-  position: absolute;
+  position: relative;
   display: block;
   top: 0;
   left: 0;
@@ -193,7 +193,7 @@ export default function test2Page() {
 
 
 <SRLWrapper options={options} className="">
-  <div style={{display:'block', width:'100%', height:'350px', overflow:'hidden', position:'relative'}}>
+  <div className="sliderholder" style={{display:'block', width:'100%', height:'350px', overflow:'hidden', position:'relative'}}>
 <div class="horizontal-scroll-wrapper squares">
   {/* <div>item 1</div>
   <div>item 2</div>
@@ -225,13 +225,6 @@ export default function test2Page() {
        className="item"
      />
 
-{/* <Link state={{modal: true}} to="/transcendence/" alt="Image 2"
-  
-       className="item" style={{margin:'', textDecoration:'none', fontSize:'120%', textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
-  <StaticImage className="1" src="../../static/assets/Experiences-Header-6.jpg" alt="Todd builds Web Apps"  />
-  <br />
-Animated SVG VIDEO
-</Link> */}
 
 <StaticImage
        src="../../src/img/DendroidDreams/amber-oak.jpg"
