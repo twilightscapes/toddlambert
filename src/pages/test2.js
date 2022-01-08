@@ -37,6 +37,9 @@ const CustomBox = styled.div`
 
 
 .horizontal-scroll-wrapper  img{cursor:zoom-in !important;  border-radius:12px !important;}
+
+.horizontal-scroll-wrapper img:hover{border:4px solid #dd4000 !important;}
+
 .gatsby-image-wrapper{cursor:zoom-in !important;}
 
   border-radius:12px;
@@ -61,7 +64,7 @@ const CustomBox = styled.div`
 .horizontal-scroll-wrapper > * {
   display: block;
   padding: 5px;
-  background: #cab;
+  // background: #cab;
   transform: rotate(90deg);
   transform-origin: right top;
 }
