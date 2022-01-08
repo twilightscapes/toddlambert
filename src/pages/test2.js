@@ -124,84 +124,130 @@ export default function test2Page() {
 
 
 
-<StaticImage
-       src="../../src/img/DendroidDreams/dances-with-the-moon.jpg"
-       alt="Image 2"
-       srl_gallery_image="true"
-       className="item"
-       
-     />
 
-<StaticImage
-       src="../../src/img/DendroidDreams/big-dreams.jpg"
-       alt="Image 4"
-       srl_gallery_image="true"
-       className="item"
-     />
 
 
 <StaticImage
-       src="../../src/img/DendroidDreams/amber-oak.jpg"
-       alt="Image 3"
-       srl_gallery_image="true"
-       className="item"
-     />
-
-
-<StaticImage
-       src="../../src/img/DendroidDreams/deciduous-doiley.jpg"
+       src="../../static/assets/coast-promos2.png"
        alt="Image 4"
        srl_gallery_image="true"
        className="item"
      />
 
 <StaticImage
-       src="../../src/img/DendroidDreams/evening-crown.jpg"
+        src="../../static/assets/tle-portfolio-spotlights.png"
+        alt="Todd builds Web Apps"
+        srl_gallery_image="true"
+        className="item"
+      />
+
+
+<StaticImage
+        src="../../static/assets/tle-portfolio-spotlights2.png"
+        alt="Todd builds Web Apps"
+        srl_gallery_image="true"
+        className="item"
+      />
+
+<StaticImage
+        src="../../static/assets/tle-portfolio-spotlights3.png"
+        alt="Todd builds Web Apps"
+        srl_gallery_image="true"
+        className="item"
+      />
+
+
+
+<StaticImage
+       src="../../static/assets/zombie-bucket-logo.png"
+       alt="Image 4"
+       srl_gallery_image="true"
+       className="item"
+     />
+
+
+
+<StaticImage
+       src="../../static/assets/coast-promos.png"
        alt="Image 3"
        srl_gallery_image="true"
        className="item"
      />
 
+
+
+
+
+
 <StaticImage
-       src="../../src/img/DendroidDreams/gnarled-barkley.jpg"
-       alt="Image 3"
+       src="../../static/assets/coast-promos1.png"
+       alt="Image 4"
        srl_gallery_image="true"
        className="item"
      />
 
 <StaticImage
-       src="../../src/img/DendroidDreams/lonely-tree.jpg"
-       alt="Image 3"
+       src="../../static/assets/coast-promos3.png"
+       alt="Image 4"
        srl_gallery_image="true"
        className="item"
      />
 
+
+
+
 <StaticImage
-       src="../../src/img/DendroidDreams/moaning-tree.jpg"
-       alt="Image 3"
+       src="../../static/assets/earth-horizon.jpg"
+       alt="Image 4"
        srl_gallery_image="true"
        className="item"
      />
 
+
+
+
 <StaticImage
-       src="../../src/img/DendroidDreams/silver-serenity.jpg"
-       alt="Image 3"
+       src="../../static/assets/fiverr3.png"
+       alt="Image 4"
        srl_gallery_image="true"
        className="item"
      />
-     <StaticImage
-       src="../../src/img/DendroidDreams/tree-tops.jpg"
-       alt="Image 3"
+
+
+
+
+<StaticImage
+       src="../../static/assets/photo-promo-banners.jpg"
+       alt="Image 4"
        srl_gallery_image="true"
        className="item"
      />
-     <StaticImage
-       src="../../src/img/DendroidDreams/tree-with-a-view.jpg"
-       alt="Image 3"
+
+
+
+
+<StaticImage
+       src="../../static/assets/TheyLive-Header.jpg"
+       alt="Image 4"
        srl_gallery_image="true"
        className="item"
      />
-     <StaticImage
+
+
+
+<StaticImage
+       src="../../static/assets/DUC-product.png"
+       alt="Image 4"
+       srl_gallery_image="true"
+       className="item"
+     />
+
+
+
+
+
+
+     {/* <StaticImage
        src="../../src/img/DendroidDreams/waimeia-milkyway.jpg"
        alt="Image 3"
        srl_gallery_image="true"
@@ -212,7 +258,7 @@ export default function test2Page() {
        alt="Image 3"
        srl_gallery_image="true"
        className="item"
-     />
+     /> */}
 
 
 

@@ -907,7 +907,7 @@ Homepage Redesign and Product Portal
 <Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
   <StaticImage className="1" src="../../static/assets/Experiences-Header-6.jpg" alt="Todd builds Web Apps"  />
   <br />
-Animated SVG &amp; Photo
+  Animated SVG &amp; Photo &amp; Video
 </Link>
 
 
