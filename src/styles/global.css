@@ -3410,16 +3410,16 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
               }
               
               @media (pointer: coarse) {
-                /* .horizontal-scroll-wrapper {
+                .horizontal-scroll-wrapper {
                   transform: none;
                   width: 100vw;
                   height: 350px;
                   white-space: nowrap;
                   overflow-x: auto;
                   overflow-y: hidden;
-                } */
+                }
 
-                .sliderhider{
+                .sliderholder{
                   height:100% !important;
                 }
                 .horizontal-scroll-wrapper > * {

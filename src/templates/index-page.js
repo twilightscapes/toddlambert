@@ -728,7 +728,7 @@ fontSize:'clamp(1.6rem, 12vw, 3.8rem)',
 // opacity:'.9',
 // paddingLeft:'',
 }}>
-  CODE NERD
+
 {/* <span style={{color:'#dd4000'}}>Roles are like hats</span> */}
 </h2>
 </div>
