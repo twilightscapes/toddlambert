@@ -729,7 +729,7 @@ fontSize:'clamp(1.6rem, 12vw, 3.8rem)',
 </h2>
 </div>
 
-<div className="imgbox grad circle" style={{border:'2px solid #dd4000', position:'relative', margin:'0 0 0 0', borderRadius:'50%', padding:'1rem', overflow:'hidden', filter: 'drop-shadow(0px 0px 3px #444)'}}><StaticImage alt="Todd Lambert" src="../../static/assets/todd-toon.png" style={{borderColor:'transparent',}} />
+<div className="imgbox grad circle" style={{border:'2px solid #dd4000', position:'relative', padding:'2rem', overflow:'hidden', filter: 'drop-shadow(0px 0px 3px #444)'}}><StaticImage alt="Todd Lambert" src="../../static/assets/todd-toon.png" style={{borderColor:'transparent',}} />
 <div className="txtshadow" style={{position:'absolute', left:'0', bottom:'5px', fontSize:'70%', color:'#ddd', textAlign:'center', width:'100%',}}>Todd Lambert</div>
 </div>
 

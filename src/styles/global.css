@@ -136,6 +136,8 @@ opacity:.8;
       color:#fff !important; 
     }
 
+    .circle{clip-path: none !important; background-color:#222; margin:0 auto; max-width: 60%;}
+
   }
 
 
@@ -3481,4 +3483,6 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
 
               .imgbox img{border:0px solid #000;}
 
-              .circle{clip-path: circle(30vw at center); background-color:#222;}
+              .circle {border-radius:50%; background-color:#222;}
+
+              
