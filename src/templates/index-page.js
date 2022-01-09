@@ -901,9 +901,15 @@ Homepage Redesign and Product Portal
 </div>
 </SRLWrapper> */}
 
-<p style={{textAlign:'center', margin:'3rem 0 10px 0'}}>Custom SVG Animations</p>
+<p style={{textAlign:'center', margin:'8rem 0 10px 0'}}>Custom SVG Animations</p>
 
-<div className="masonry4" style={{display:''}}>
+<div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'255px', overflow:'hidden', position:'relative', margin:'0 0 3rem 0'}}>
+
+
+<div class="horizontal-scroll-wrapper squares" style={{margin:'0 auto', width:'', padding:'0'}}>
+
+
+{/* <div className="masonry4" style={{display:''}}> */}
 <Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
   <StaticImage className="1" src="../../static/assets/Experiences-Header-6.jpg" alt="Todd builds Web Apps"  />
   <br />
@@ -926,9 +932,15 @@ Homepage Redesign and Product Portal
   Animated SVG &amp; Photo
   </Link>
 
+  <Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
+  <StaticImage className="1" src="../../static/assets/Experiences-Header-6.jpg" alt="Todd builds Web Apps"  />
+  <br />
+  Animated SVG &amp; Photo &amp; Video
+</Link>
+
 
 </div>
-
+</div>
 
   {/* <article className="post-card button" style={{ display:'flex', maxWidth:'400px', justifyContent:'center', border:'1px solid', padding:'', margin:'2rem auto', fontSize:'150%', textAlign:'center', }}>
   <Link to="/posts/" style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
