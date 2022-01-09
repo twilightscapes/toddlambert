@@ -138,7 +138,7 @@ export default function test2Page() {
   scroll <span style={{fontSize:'18px'}}>&#10095;</span>
 </div>
 
-<div class="horizontal-scroll-wrapper squares" style={{margin:'30px auto 0 auto', width:'', padding:'0'}}>
+<div className="horizontal-scroll-wrapper squares" style={{margin:'30px auto 0 auto', width:'', padding:'0'}}>
 
 
 
