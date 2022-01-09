@@ -22,7 +22,7 @@ svgzindex: "0"
 comments: ""
 shareable: ""
 underlayImage: /assets/transparent.png
-featuredImage: /assets/Experiences-Header-5.jpg
+featuredImage: /assets/subaru.jpg
 svgImage: /assets/subaru.svg
 nftlink: ""
 nftdrop: "2021-10-31T14:00:00"

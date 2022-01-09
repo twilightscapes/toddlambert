@@ -285,12 +285,12 @@ Todd Lambert on location</span></div>
 
 
 
-<div className="imgbox shadow-3d" style={{border:'1px solid #444', borderRadius:'3px', padding:'5px 5px 25px 5px', background:'#fff', position:'relative', margin:'0 0', transform:'rotate(10deg)',}}><StaticImage alt="Todd Lambert - rockin' the bowl-cut!" src="../../static/assets/todd-young1.jpg" style={{}}  />
+<div className="imgbox shadow-3d" style={{border:'1px solid #444', borderRadius:'3px', padding:'5px 5px 25px 5px', background:'#fff', position:'relative', margin:'0 0', transform:'rotate(10deg)', zIndex:'' }}><StaticImage alt="Todd Lambert - rockin' the bowl-cut!" src="../../static/assets/todd-young1.jpg" style={{}}  />
 <div className="" style={{position:'absolute', bottom:'8px', fontSize:'60%', color:'#333', textAlign:'center', width:'100%',}}>Rockin the bowl cut!</div>
 </div>
 
 
-<div className="imgbox shadow-3d" style={{border:'1px solid #444', borderRadius:'3px', padding:'5px 5px 25px 5px', background:'#fff', position:'relative', margin:'0 0', transform:'rotate(-10deg)',}}><StaticImage alt="Todd Lambert - Future was so bright, needed shades" src="../../static/assets/todd-young2.jpg" style={{}}  />
+<div className="imgbox shadow-3d" style={{border:'1px solid #444', borderRadius:'3px', padding:'5px 5px 25px 5px', background:'#fff', position:'relative', margin:'0 0', transform:'rotate(-10deg)', zIndex:''}}><StaticImage alt="Todd Lambert - Future was so bright, needed shades" src="../../static/assets/todd-young2.jpg" style={{}}  />
 <div className="" style={{position:'absolute', bottom:'8px', fontSize:'60%', color:'#333', textAlign:'center', width:'100%',}}>Future was so bright, needed shades</div>
 </div>
 
@@ -304,8 +304,10 @@ Todd Lambert on location</span></div>
  
   
 <div className="masonry4">
-<div className="imgbox" style={{border:'0px solid black', position:'relative', margin:'0 0',}}>
-       <StaticImage alt="Todd Lambert hanging with friends" src="../../static/assets/todd-friends.jpg" />
+
+
+<div className="imgbox" style={{border:'0px solid black', position:'relative', margin:'0 0 0 0',}}>  
+       <StaticImage alt="Hanging with friends" src="../../static/assets/todd-friends.jpg" />
 
 <div className="txtshadow" style={{position:'absolute', bottom:'5px', fontSize:'60%', color:'#ddd', textAlign:'center', width:'100%',}}>
 <span style={{background:'#000', opacity:'.8', padding:'3px 5px',}}>Hanging with friends</span>
@@ -321,7 +323,7 @@ Todd Lambert on location</span></div>
       <StaticImage alt="Young Todd, Clean Cut!" src="../../static/assets/todd-young-business.jpg" />
 
       <div className="txtshadow" style={{position:'absolute', bottom:'5px', fontSize:'60%', color:'#ddd', textAlign:'center', width:'100%',}}>
-<span style={{background:'#000', opacity:'.8', padding:'3px 5px',}}>Clean Cut!</span>
+<span style={{background:'#000', opacity:'.8', padding:'3px 5px',}}>Clean Cut! (a rare shot!)</span>
 </div>
 
 </div>
@@ -339,10 +341,82 @@ Todd Lambert on location</span></div>
 
 </div>
 
+
+
+
+<div className="imgbox" style={{border:'0px solid black', position:'relative', margin:'0 0 0 0',}}>
+       <StaticImage alt="Selfie while shooting in Mono Lake" src="../../static/assets/todd-horizons.jpg" />
+
+<div className="txtshadow" style={{position:'absolute', bottom:'5px', fontSize:'60%', color:'#ddd', textAlign:'center', width:'100%',}}>
+<span style={{background:'#000', opacity:'.8', padding:'3px 5px',}}>Selfie while shooting in Mono Lake</span>
+</div>
+
+</div>
+
+
+
+<div className="imgbox" style={{border:'0px solid black', position:'relative', margin:'0 0 0 0',}}>
+       <StaticImage alt="Oops! @#$!" src="../../static/assets/bluebox-crash.jpg" />
+
+<div className="txtshadow" style={{position:'absolute', bottom:'5px', fontSize:'60%', color:'#ddd', textAlign:'center', width:'100%',}}>
+<span style={{background:'#000', opacity:'.8', padding:'3px 5px',}}>Oops! @#$!</span>
+</div>
+
+</div>
+
+ 
+<div className="imgbox" style={{border:'0px solid black', position:'relative', margin:'0 0 0 0',}}>
+       <StaticImage alt="Hi, I'm Todd" src="../../static/assets/todd-profile.jpg" />
+
+<div className="txtshadow" style={{position:'absolute', bottom:'5px', fontSize:'60%', color:'#ddd', textAlign:'center', width:'100%',}}>
+<span style={{background:'#000', opacity:'.8', padding:'3px 5px',}}>Hi, I'm Todd</span>
+</div>
+
+</div>
+
+
+
+
+<div className="imgbox" style={{border:'0px solid black', position:'relative', margin:'0 0 0 0',}}>
+       <StaticImage alt="Todd standing at Mushroom Rock, Kansas" src="../../static/assets/todd2.jpg" />
+
+<div className="txtshadow" style={{position:'absolute', bottom:'5px', fontSize:'60%', color:'#ddd', textAlign:'center', width:'100%',}}>
+<span style={{background:'#000', opacity:'.8', padding:'3px 5px',}}>Todd standing at Mushroom Rock, Kansas</span>
+</div>
+
+</div>
+ 
+
+
+<div className="imgbox" style={{border:'0px solid black', position:'relative', margin:'0 0 0 0',}}>
+       <StaticImage alt="On the road, always a new target to shoot!" src="../../static/assets/IMG_0643.jpg" />
+
+<div className="txtshadow" style={{position:'absolute', bottom:'5px', fontSize:'60%', color:'#ddd', textAlign:'center', width:'100%',}}>
+<span style={{background:'#000', opacity:'.8', padding:'3px 5px',}}>On the road, always a new target to shoot!</span>
+</div>
+
+</div>
+
+
+<div className="imgbox" style={{border:'0px solid black', position:'relative', margin:'0 0 0 0',}}>
+       <StaticImage alt="The man behind the camers - it's me!" src="../../static/assets/IMG_1894.jpg" />
+
+<div className="txtshadow" style={{position:'absolute', bottom:'5px', fontSize:'60%', color:'#ddd', textAlign:'center', width:'100%',}}>
+<span style={{background:'#000', opacity:'.8', padding:'3px 5px',}}>The man behind the camera - it's me!</span>
+</div>
+
+</div>
+
+ 
+ <br /><br />
+ 
+
+
+
+
+
+
  </div>
- 
- 
- 
 
 </SRLWrapper>
  

@@ -733,7 +733,11 @@ fontSize:'clamp(1.6rem, 12vw, 3.8rem)',
 </h2>
 </div>
 
-<StaticImage src="../../static/assets/todd-toon.png" alt="Twilightscapes Default Image" style={{height:'auto', maxHeight:'100vh', position:'', zIndex:'0', top:'0', border:'0px solid !important', objectFit:'contain',}} />
+<div className="imgbox grad circle" style={{border:'2px solid #dd4000', position:'relative', margin:'0 0 0 0', borderRadius:'50%', padding:'1rem', overflow:'hidden', filter: 'drop-shadow(0px 0px 3px #444)'}}><StaticImage alt="Todd Lambert" src="../../static/assets/todd-toon.png" style={{borderColor:'transparent',}} />
+<div className="txtshadow" style={{position:'absolute', left:'0', bottom:'5px', fontSize:'70%', color:'#ddd', textAlign:'center', width:'100%',}}>Todd Lambert</div>
+</div>
+
+
 
 <div className="div6" style={{background:'',}}>  
 <Link state={{modal: true}}
@@ -929,15 +933,51 @@ Homepage Redesign and Product Portal
 
 
 
-  <Link state={{modal: true}} to="/alien-egg-farm/" className="" style={{fontSize:'', textDecoration:'none', textAlign:'center',}}>
-  <StaticImage className="1" src="../../static/assets/Experiences-Header-3.jpg" alt="Todd builds Web Apps"  />
-  Animated SVG &amp; Photo
-  </Link>
 
   <Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
   <StaticImage className="1" src="../../static/assets/Experiences-Header-6.jpg" alt="Todd builds Web Apps"  />
   Animated SVG &amp; Photo &amp; Video
 </Link>
+
+
+<Link state={{modal: true}} to="/automotive/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
+  <StaticImage className="1" src="../../static/assets/subaru.jpg" alt="Todd builds Web Apps"  />
+  Animated SVG &amp; Photo &amp; Video
+</Link>
+
+<Link state={{modal: true}} to="/they-live/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
+  <StaticImage className="1" src="../../static/assets/TheyLive-Header.jpg" alt="Todd builds Web Apps"  />
+  Animated SVG &amp; Photo &amp; Video
+</Link>
+
+<Link state={{modal: true}} to="/asteroid-series-riding-the-belt/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
+  <StaticImage className="1" src="../../static/assets/Experiences-Header-2.jpg" alt="Todd builds Web Apps"  />
+  Animated SVG &amp; Photo &amp; Video
+</Link>
+
+<Link state={{modal: true}} to="/crude-addiction/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
+  <StaticImage className="1" src="../../static/assets/Experiences-Header-4.jpg" alt="Todd builds Web Apps"  />
+  Animated SVG &amp; Photo &amp; Video
+</Link>
+
+<Link state={{modal: true}} to="/alien-egg-farm/" className="" style={{fontSize:'', textDecoration:'none', textAlign:'center',}}>
+  <StaticImage className="1" src="../../static/assets/Experiences-Header-3.jpg" alt="Todd builds Web Apps"  />
+  Animated SVG &amp; Photo
+  </Link>
+
+
+<Link state={{modal: true}} to="/pillowtalk/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
+  <StaticImage className="1" src="../../static/assets/Experiences-Header-8.jpg" alt="Todd builds Web Apps"  />
+  Animated SVG &amp; Photo &amp; Video
+</Link>
+
+
+<Link state={{modal: true}} to="/tv-signals/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
+  <StaticImage className="1" src="../../static/assets/television-signals-promo.jpg" alt="Todd builds Web Apps"  />
+  Animated SVG &amp; Photo &amp; Video
+</Link>
+
+
 
 
 </div>

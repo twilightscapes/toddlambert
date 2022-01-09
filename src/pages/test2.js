@@ -162,21 +162,21 @@ export default function test2Page() {
 
 <StaticImage
         src="../../static/assets/tle-portfolio-spotlights2.png"
-        alt="Todd builds Web Apps"
+        alt="[PaleoBurn] website, mobile app, product portal, direct marketing, funnel marketing"
         srl_gallery_image="true"
         className="item"
       />
 
 <StaticImage
         src="../../static/assets/tle-portfolio-spotlights.png"
-        alt="Todd builds Web Apps"
+        alt="[Pav&amp;Broome] online branding, website, web app, e-commerce"
         srl_gallery_image="true"
         className="item"
       />
 
 <StaticImage
-        src="../../static/assets/tle-portfolio-spotlights3.png"
-        alt="Todd builds Web Apps"
+        src="../../static/assets/ticom.jpg"
+        alt="[Texas Instruments] homepage redesign - product tabs projects"
         srl_gallery_image="true"
         className="item"
       />
@@ -185,7 +185,7 @@ export default function test2Page() {
 
 <StaticImage
        src="../../static/assets/zombie-bucket-logo.png"
-       alt="Image 4"
+       alt="[Zombie Bucket] product design, branding, direct marketing, social marketing"
        srl_gallery_image="true"
        className="item"
      />
@@ -193,64 +193,98 @@ export default function test2Page() {
 
 
 <StaticImage
-       src="../../static/assets/coast-promos.png"
-       alt="Image 3"
+       src="../../static/assets/mapusoft.jpg"
+       alt="[Mapusoft] branding, website, product design"
        srl_gallery_image="true"
        className="item"
      />
 
+
 <StaticImage
+       src="../../static/assets/paleoburn.jpg"
+       alt="[PaleoBurn] product design, website, social marketing"
+       srl_gallery_image="true"
+       className="item"
+     />
+
+
+{/* <StaticImage
        src="../../static/assets/coast-promos1.png"
        alt="Image 4"
        srl_gallery_image="true"
        className="item"
-     />
+     /> */}
 
 <StaticImage
        src="../../static/assets/DUC-product.png"
-       alt="Image 4"
+       alt="[Dress Up Chef] branding, product design, website, web app, e-commerce, social marketing"
        srl_gallery_image="true"
        className="item"
      />
 
 <StaticImage
        src="../../static/assets/coast-promos3.png"
-       alt="Image 4"
+       alt="[Coast Nightlife] branding, product design, affiliate development, website POC"
        srl_gallery_image="true"
        className="item"
      />
 
 
 <StaticImage
-       src="../../static/assets/earth-horizon.jpg"
-       alt="Image 4"
+       src="../../static/assets/launchlamp.jpg"
+       alt="[LaunchLamp] branding, membership program, website"
        srl_gallery_image="true"
        className="item"
      />
 
 
-<StaticImage
+{/* <StaticImage
        src="../../static/assets/fiverr3.png"
        alt="Image 4"
        srl_gallery_image="true"
        className="item"
-     />
-
+     /> */}
 
 
 
 <StaticImage
+       src="../../static/assets/televox.jpg"
+       alt="[Televox] website, product design"
+       srl_gallery_image="true"
+       className="item"
+     />
+
+<StaticImage
+       src="../../static/assets/print-to-own.jpg"
+       alt="[PrintToOwn] design, website poc, "
+       srl_gallery_image="true"
+       className="item"
+     />
+
+
+<StaticImage
+       src="../../static/assets/ebs.jpg"
+       alt="[EBS] website, content, legacy wordpress conversion"
+       srl_gallery_image="true"
+       className="item"
+     />
+
+
+
+{/* <StaticImage
        src="../../static/assets/TheyLive-Header.jpg"
        alt="Image 4"
        srl_gallery_image="true"
        className="item"
-     />
-<StaticImage
+     /> */}
+
+
+{/* <StaticImage
        src="../../static/assets/photo-promo-banners.jpg"
        alt="Image 4"
        srl_gallery_image="true"
        className="item"
-     />
+     /> */}
 
 
 {/* <StaticImage
