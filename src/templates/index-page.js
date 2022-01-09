@@ -619,7 +619,6 @@ textTransform: 'lowercase',
 fontWeight: '400',
 textShadow:'0 1px 0 #eee',
 fontSize:'clamp(1.6rem, 6vw, 3.8rem)',
-opacity:'.9',
 paddingLeft:'2rem',
 }}>
 Digital Product <span style={{color:'#dd4000'}}>Design</span>
@@ -637,7 +636,6 @@ textTransform: 'lowercase',
 fontWeight: '400',
 textShadow:'0 1px 0 #eee',
 fontSize:'clamp(1.6rem, 6vw, 3.8rem)',
-opacity:'.9',
 paddingLeft:'2rem',
 }}>
 Conceptual <span style={{color:'#dd4000'}}>Photography</span>
@@ -652,7 +650,6 @@ textTransform: 'lowercase',
 fontWeight: '400',
 textShadow:'0 1px 0 #eee',
 fontSize:'clamp(1.6rem, 6vw, 3.8rem)',
-opacity:'.9',
 paddingLeft:'2rem',
 }}>
 Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
@@ -873,7 +870,7 @@ position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto',
  color:'#fff',
  textShadow: '1px 1px 0 rgba(121, 115, 115, 0.7)',
  }}>
- <h3 className="logotype" style={{textAlign:'center', margin:'0 0 0 0', fontSize:'5vw', clear:'right', paddingTop:'1rem', filter: 'drop-shadow(1px 1px 0px rgba(0, 0, 0, 0.8))'}}>Portfolio</h3>
+ <h3 className="logotype" style={{textAlign:'center', margin:'0 0 0 0', fontSize:'5vw', clear:'right', paddingTop:'1rem',}}>Portfolio</h3>
 <br />
 
 

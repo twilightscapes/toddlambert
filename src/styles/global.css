@@ -3315,7 +3315,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
               padding-right: 3%;
               position: relative;
               color:#666;
-              filter: drop-shadow(1px 1px 3px rgba(44, 44, 44, 0.5));
+              filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.5));
             }
             
             .logofirst.mainlogo:before {
@@ -3334,8 +3334,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
               font-weight: 400;
               position: relative;
               text-shadow:0 1px 0 #fff;
-              filter: drop-shadow(1px 1px 3px rgba(228, 223, 223, 0.5));
-              
+              filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.5));
             }
             
             .logotype:before {
