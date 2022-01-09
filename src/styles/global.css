@@ -3433,7 +3433,8 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                 transform: rotate(-90deg) translateY(-350px);
                 transform-origin: right top;
                 transition: transform .2s;
-                scroll-snap-type: y proximity;
+                
+                scroll-padding: 0 0 0 80px;
               }
               .horizontal-scroll-wrapper > * {
                 display: block;
@@ -3441,7 +3442,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                 /* background: #cab; */
                 transform: rotate(90deg);
                 transform-origin: right top;
-                scroll-snap-align:end;
+                scroll-snap-align:center;
               }
               
               .squares {
@@ -3477,6 +3478,10 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                 .squares > * {
                   margin: 0 10px;
                 } */
+
+                .horizontal-scroll-wrapper {
+                  scroll-snap-type: both proximity;
+                }
               }
              
 
