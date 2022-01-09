@@ -3271,8 +3271,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
             .logocolor {
               color: #dd4000;
               position:relative;
-          
-              filter: drop-shadow(1px 1px 3px rgba(44, 44, 44, 0.5));
+              filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.5));
             }
             
             .logocolor:before {
@@ -3306,7 +3305,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
               /* font-size:13vw; */
               font-size: clamp(2.5rem, 13vw, 5rem);
               text-shadow:0 2px 2px #fff;
-              
+              filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.5));
           
             }
           

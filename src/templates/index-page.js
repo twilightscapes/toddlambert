@@ -676,12 +676,13 @@ fontFamily: 'Lobster Two',
 letterSpacing: '2px',
 textTransform: 'lowercase',
 fontWeight: '400',
-textShadow:'0 1px 0 #eee',
 fontSize:'clamp(1.6rem, 12vw, 3.8rem)',
 // opacity:'.9',
 // paddingLeft:'',
 }}>
   <h3 className="logotype"  style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', }}>About</h3>
+
+  
 {/* <span style={{color:'#dd4000'}}>Roles are like hats</span> */}
 </h2>
 
@@ -800,6 +801,9 @@ position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto',
 
 
 <h3 className="logotype" style={{textAlign:'center', margin:'0 0 0 0', fontSize:'5vw', clear:'right', paddingTop:'1rem'}}>Network</h3>
+
+
+
 <div className="flexbutt noexit print" style={{padding:'2rem 4%',
 position:'relative', height:'', width:'', overflow:'', display:'flex', gap
   :'20px', margin:'0 auto', }}>
