@@ -2384,7 +2384,7 @@ border:1px solid #222;
     
     .galmenu li:first-child{border:0px solid red !important; width:100% !important;}
     
-    #intro {height:inherit !important;}
+    /* #intro {height:inherit !important;} */
 
     }
 
