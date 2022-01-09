@@ -107,7 +107,7 @@ export default function test2Page() {
 
 
 
-  <div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'355px', overflow:'hidden', position:'relative', padding:'0 0'}}>
+  <div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'455px', overflow:'hidden', position:'relative', padding:' 0'}}>
 
   {/* <div>item 1</div>
   <div>item 2</div>
@@ -136,7 +136,7 @@ export default function test2Page() {
 
 
 
-<div class="horizontal-scroll-wrapper squares" style={{margin:'0 auto', width:'', padding:'0'}}>
+<div class="horizontal-scroll-wrapper squares" style={{margin:'30px auto 0 auto', width:'', padding:'0'}}>
 
 
 
@@ -148,7 +148,7 @@ export default function test2Page() {
 
 
 <StaticImage
-        src="../../static/assets/tle-portfolio-spotlights2.png"
+        src="../../static/assets/transparent.png"
         alt="Todd builds Web Apps"
         srl_gallery_image="true"
         className="item"
@@ -276,9 +276,9 @@ export default function test2Page() {
      </div>
  </SRLWrapper>
 
- <Link state={{modal: true}} to="/legacy/" style={{position:'absolute', left:'0', top:'', width:'100px'}}>
-  <StaticImage className="" src="../../static/assets/legacy.png" alt="Todd builds Web Apps" style={{height:'350px', borderRadius:'0 12px 12px 0', opacity:'.6'}}  />
-  todd
+ <Link state={{modal: true}} to="/legacy/" style={{position:'absolute', left:'0', top:'', width:'60px'}}>
+  <StaticImage className="" src="../../static/assets/legacy.png" alt="Todd builds Web Apps" style={{height:'380px', borderRadius:'0 12px 12px 0', border:'1px solid #aaa', borderLeft:'0', boxShadow: '0px 0px 20px #333', opacity:''}}  />
+  
 </Link>
 </div>
 
