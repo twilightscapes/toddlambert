@@ -904,7 +904,7 @@ Homepage Redesign and Product Portal
 
 <p style={{textAlign:'center', margin:'4rem 0 10px 0'}}>Custom SVG Animations</p>
 
-<div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'275px', overflow:'hidden', position:'relative', margin:'0 0 3rem 0'}}>
+<div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'280px', overflow:'hidden', position:'relative', margin:'0 0 1rem 0'}}>
 
 
 <div class="horizontal-scroll-wrapper squares" style={{margin:'0 auto', width:'', padding:'0'}}>
@@ -913,7 +913,6 @@ Homepage Redesign and Product Portal
 
 <Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
   <StaticImage className="1" src="../../static/assets/transparent.png" alt="Todd builds Web Apps"  />
-
   Animated SVG &amp; Photo &amp; Video www
 </Link>
 
@@ -921,7 +920,6 @@ Homepage Redesign and Product Portal
 
   <Link state={{modal: true}} to="/twilightscapes/" className="" style={{fontSize:'', textDecoration:'none', textAlign:'center', }}>
   <StaticImage className="1" src="../../static/assets/Experiences-Header-5.jpg" alt="Todd builds Web Apps"  />
-
   Animated SVG &amp; Photo &amp; Video
   </Link>
 
@@ -929,13 +927,11 @@ Homepage Redesign and Product Portal
 
   <Link state={{modal: true}} to="/alien-egg-farm/" className="" style={{fontSize:'', textDecoration:'none', textAlign:'center',}}>
   <StaticImage className="1" src="../../static/assets/Experiences-Header-3.jpg" alt="Todd builds Web Apps"  />
-
   Animated SVG &amp; Photo
   </Link>
 
   <Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
   <StaticImage className="1" src="../../static/assets/Experiences-Header-6.jpg" alt="Todd builds Web Apps"  />
-
   Animated SVG &amp; Photo &amp; Video
 </Link>
 
