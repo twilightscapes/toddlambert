@@ -3380,8 +3380,27 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
             
               
  
-              
-       
+              .sliderholder::before{
+                content:' ';
+                position:absolute;
+                z-index: 1;
+                display: block;
+                width: 100%;
+                height:30px;
+                background-color: #dd4000;
+                opacity:0;
+              }
+              .sliderholder::after{
+                content:' ';
+                position:absolute;
+                z-index: 1;
+                display: block;
+                width: 100%;
+                height:50px;
+                background-color: #dd4000;
+                opacity:0;
+                bottom:0;
+              }
 
               
               .horizontal-scroll-wrapper {

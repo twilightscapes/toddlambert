@@ -901,9 +901,9 @@ Homepage Redesign and Product Portal
 </div>
 </SRLWrapper> */}
 
-<p style={{textAlign:'center', margin:'8rem 0 10px 0'}}>Custom SVG Animations</p>
+<p style={{textAlign:'center', margin:'4rem 0 10px 0'}}>Custom SVG Animations</p>
 
-<div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'255px', overflow:'hidden', position:'relative', margin:'0 0 3rem 0'}}>
+<div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'275px', overflow:'hidden', position:'relative', margin:'0 0 3rem 0'}}>
 
 
 <div class="horizontal-scroll-wrapper squares" style={{margin:'0 auto', width:'', padding:'0'}}>
