@@ -276,9 +276,8 @@ export default function test2Page() {
      </div>
  </SRLWrapper>
 
- <Link state={{modal: true}} to="/legacy/" style={{position:'absolute', left:'0', top:'', zIndex:'1', width:'60px'}}>
-  <StaticImage className="post-card" src="../../static/assets/legacy.png" alt="Todd builds Web Apps" style={{height:'350px', borderRadius:'0 12px 12px 0', border:'1px solid #aaa', borderLeft:'0', boxShadow: '0px 0px 20px #333', opacity:''}}  />
-  
+ <Link state={{modal: true}} to="/legacy/" title="View Todd's Legacy Work" style={{position:'absolute', left:'0', top:'', zIndex:'1', width:'60px'}}>
+  <StaticImage className="button post-card" src="../../static/assets/legacy.png" alt="View Todd's Legacy Work" style={{height:'350px', borderRadius:'0 12px 12px 0', border:'1px solid #aaa', borderLeft:'0', boxShadow: '0px 0px 10px #333', opacity:''}}  />
 </Link>
 </div>
 

@@ -867,7 +867,7 @@ position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto',
 //  background:'rgba(0, 0, 0, 0.3)',
  background:'rgba(121, 115, 115, 0.2)',
  color:'#fff',
- textShadow: '2px 2px 2px black',
+ textShadow: '1px 1px 0 rgba(121, 115, 115, 0.7)',
  }}>
  <h3 className="logotype" style={{textAlign:'center', margin:'0 0 0 0', fontSize:'5vw', clear:'right', paddingTop:'1rem', filter: 'drop-shadow(1px 1px 0px rgba(0, 0, 0, 0.8))'}}>Portfolio</h3>
 <br />
@@ -910,32 +910,32 @@ Homepage Redesign and Product Portal
 <div class="horizontal-scroll-wrapper squares" style={{margin:'0 auto', width:'', padding:'0'}}>
 
 
-{/* <div className="masonry4" style={{display:''}}> */}
-<Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
-  <StaticImage className="1" src="../../static/assets/Experiences-Header-6.jpg" alt="Todd builds Web Apps"  />
-  <br />
-  Animated SVG &amp; Photo &amp; Video
+
+<Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
+  <StaticImage className="1" src="../../static/assets/transparent.png" alt="Todd builds Web Apps"  />
+
+  Animated SVG &amp; Photo &amp; Video www
 </Link>
 
 
 
-  <Link state={{modal: true}} to="/twilightscapes/" className="" style={{fontSize:'', textDecoration:'none', textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)', }}>
+  <Link state={{modal: true}} to="/twilightscapes/" className="" style={{fontSize:'', textDecoration:'none', textAlign:'center', }}>
   <StaticImage className="1" src="../../static/assets/Experiences-Header-5.jpg" alt="Todd builds Web Apps"  />
-  <br />
+
   Animated SVG &amp; Photo &amp; Video
   </Link>
 
 
 
-  <Link state={{modal: true}} to="/alien-egg-farm/" className="" style={{fontSize:'', textDecoration:'none', textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
+  <Link state={{modal: true}} to="/alien-egg-farm/" className="" style={{fontSize:'', textDecoration:'none', textAlign:'center',}}>
   <StaticImage className="1" src="../../static/assets/Experiences-Header-3.jpg" alt="Todd builds Web Apps"  />
-  <br />
+
   Animated SVG &amp; Photo
   </Link>
 
-  <Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
+  <Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
   <StaticImage className="1" src="../../static/assets/Experiences-Header-6.jpg" alt="Todd builds Web Apps"  />
-  <br />
+
   Animated SVG &amp; Photo &amp; Video
 </Link>
 
