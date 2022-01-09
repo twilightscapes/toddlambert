@@ -662,7 +662,7 @@ Guerrilla <span style={{color:'rgb(187 54 0)'}}>Marketing</span>
 
 
 
- <div className="spacer33 mobile"></div> 
+ <div className="spacer66 "></div> 
 
 
  <div className="parent" style={{display:'flex', flexDirection:'row', justifyContent:'space-between', height:'100%', gap:'20px', marginTop:'20px'}}> 
