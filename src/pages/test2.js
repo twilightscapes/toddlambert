@@ -151,7 +151,7 @@ export default function test2Page() {
 
 <StaticImage
         src="../../static/assets/transparent.png"
-        alt="Todd builds Web Apps"
+        alt="-->Done, you've viewed all of the images.<--"
         srl_gallery_image="true"
         className="item"
       />

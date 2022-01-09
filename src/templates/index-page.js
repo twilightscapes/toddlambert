@@ -920,7 +920,7 @@ Homepage Redesign and Product Portal
 
 
 <Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
-  <StaticImage className="1" src="../../static/assets/transparent.png" alt="Todd builds Web Apps"  />
+  <StaticImage className="1" src="../../static/assets/transparent.png" alt="Done, you've viewed all of the images."  />
   Animated SVG &amp; Photo &amp; Video www
 </Link>
 
@@ -934,16 +934,20 @@ Homepage Redesign and Product Portal
 
 
 
-  <Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
-  <StaticImage className="1" src="../../static/assets/Experiences-Header-6.jpg" alt="Todd builds Web Apps"  />
-  Animated SVG &amp; Photo &amp; Video
-</Link>
+  
 
 
 <Link state={{modal: true}} to="/automotive/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
   <StaticImage className="1" src="../../static/assets/subaru.jpg" alt="Todd builds Web Apps"  />
   Animated SVG &amp; Photo &amp; Video
 </Link>
+
+
+<Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
+  <StaticImage className="1" src="../../static/assets/Experiences-Header-6.jpg" alt="Todd builds Web Apps"  />
+  Animated SVG &amp; Photo &amp; Video
+</Link>
+
 
 <Link state={{modal: true}} to="/they-live/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
   <StaticImage className="1" src="../../static/assets/TheyLive-Header.jpg" alt="Todd builds Web Apps"  />
