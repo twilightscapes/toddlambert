@@ -611,7 +611,7 @@ fontSize:'clamp(2.5rem, 3.5vw, 3.8rem)'
 <div className="logolink" style={{textAlign:'center', position:'relative',fontSize:'clamp(2rem, 12.5vw, 10rem)', padding:'0 0 2% 0', background:'tranparent', filter: 'drop-shadow(0px 0px 0px #444)'}}><span className="logofirst mainlogo">todd</span> <span className="logocolor">lambert</span></div>
 {/* </ScrollAnimation> */}
 
-<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={1000}>
+{/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={1000}> */}
 <h1 className="logofirst" style={{textAlign:'center', marginTop:'50px', 
 fontFamily: 'Lobster Two',
 letterSpacing: '2px',
@@ -624,12 +624,12 @@ paddingLeft:'2rem',
 }}>
 Digital Product <span style={{color:'#dd4000'}}>Design</span>
 </h1>
-</ScrollAnimation>
+{/* </ScrollAnimation> */}
 
 
 
 
-<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={1100}>
+{/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={1100}> */}
 <h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
 fontFamily: 'Lobster Two',
 letterSpacing: '2px',
@@ -642,9 +642,9 @@ paddingLeft:'2rem',
 }}>
 Conceptual <span style={{color:'#dd4000'}}>Photography</span>
 </h2>
-</ScrollAnimation>
+{/* </ScrollAnimation> */}
 
-<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={1200}>
+{/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={1200}> */}
 <h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
 fontFamily: 'Lobster Two',
 letterSpacing: '2px',
@@ -657,7 +657,7 @@ paddingLeft:'2rem',
 }}>
 Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
 </h2>
-</ScrollAnimation>
+{/* </ScrollAnimation> */}
 
 
 
@@ -665,7 +665,7 @@ Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
 
 
 
- {/* <div className="spacer33 mobile"></div>  */}
+ <div className="spacer33 mobile"></div> 
 
 
  <div className="parent" style={{display:'flex', flexDirection:'row', justifyContent:'space-between', height:'100%', gap:'20px', marginTop:'20px'}}> 
@@ -864,7 +864,8 @@ position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto',
 //  outline:'18px dashed rgba(121, 115, 115, 0.3)', 
  borderRadius:'', 
  border:'0px solid rgba(121, 115, 115, 0.3)', 
- background:'rgba(0, 0, 0, 0.3)',
+//  background:'rgba(0, 0, 0, 0.3)',
+ background:'rgba(121, 115, 115, 0.2)',
  color:'#fff',
  textShadow: '2px 2px 2px black',
  }}>

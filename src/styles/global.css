@@ -676,11 +676,13 @@ outline:1px rgba(0, 0, 0, 1);
   color: rgb(221, 64, 0);
   text-transform: lowercase;
 place-self: center;
-font-size: clamp(2.5rem, 2vw, 3rem);
+font-size: clamp(2rem, 1.8vw, 2.5rem);
 /* text-align: center; */
 line-height: 1;
 /* font-style: italic; */
 padding: 4vh 0;
+text-shadow:1px 1px 0px rgba(207, 204, 204, 0.8);
+filter: drop-shadow(1px 1px 0px rgba(44, 44, 44, 0.5));
 }
 
 
