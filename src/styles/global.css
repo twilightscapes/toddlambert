@@ -136,7 +136,7 @@ opacity:.8;
       color:#fff !important; 
     }
 
-    .circle{clip-path: none !important; background-color:#222; margin:0 auto; max-width: 60%;}
+    .circle{clip-path: none !important; background-color:#222; margin:0 auto; max-width: 60% !important;}
 
   }
 
@@ -3433,7 +3433,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                 transform: rotate(-90deg) translateY(-350px);
                 transform-origin: right top;
                 transition: transform .2s;
-                scroll-snap-type: y mandatory;
+                scroll-snap-type: y proximity;
               }
               .horizontal-scroll-wrapper > * {
                 display: block;
@@ -3483,6 +3483,6 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
 
               .imgbox img{border:0px solid #000;}
 
-              .circle {border-radius:50%; background-color:#222;}
+              .circle {border-radius:50%; background-color:#222; max-width: 90%; margin:0 auto}
 
               
