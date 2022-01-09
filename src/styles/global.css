@@ -3334,7 +3334,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
               font-weight: 400;
               position: relative;
               text-shadow:0 1px 0 #fff;
-              filter: drop-shadow(1px 1px 0px rgba(44, 44, 44, 0.5));
+              filter: drop-shadow(1px 1px 0px rgba(228, 223, 223, 0.5));
               
             }
             
@@ -3404,6 +3404,16 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                 opacity:0;
                 bottom:0;
               }
+
+              /* .horizontal-scroll-wrapper::after{
+                content:"\00BB";
+                position:absolute;
+                z-index: 1;
+                bottom: 0;
+                display: block;
+                font-size: 40px;
+                transform: rotate(90deg);
+              } */
 
               
               .horizontal-scroll-wrapper {
