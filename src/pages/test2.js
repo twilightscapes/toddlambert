@@ -136,7 +136,7 @@ export default function test2Page() {
 
 
 
-<div class="horizontal-scroll-wrapper squares" style={{margin:'10px auto 0 auto', width:'', padding:'0'}}>
+<div class="horizontal-scroll-wrapper squares" style={{margin:'30px auto 0 auto', width:'', padding:'0'}}>
 
 
 
@@ -197,11 +197,6 @@ export default function test2Page() {
        className="item"
      />
 
-
-
-
-
-
 <StaticImage
        src="../../static/assets/coast-promos1.png"
        alt="Image 4"
@@ -224,8 +219,6 @@ export default function test2Page() {
      />
 
 
-
-
 <StaticImage
        src="../../static/assets/earth-horizon.jpg"
        alt="Image 4"
@@ -234,20 +227,8 @@ export default function test2Page() {
      />
 
 
-
-
 <StaticImage
        src="../../static/assets/fiverr3.png"
-       alt="Image 4"
-       srl_gallery_image="true"
-       className="item"
-     />
-
-
-
-
-<StaticImage
-       src="../../static/assets/photo-promo-banners.jpg"
        alt="Image 4"
        srl_gallery_image="true"
        className="item"
@@ -262,17 +243,21 @@ export default function test2Page() {
        srl_gallery_image="true"
        className="item"
      />
-
 <StaticImage
-       src="../../static/assets/coast-promos2.png"
+       src="../../static/assets/photo-promo-banners.jpg"
        alt="Image 4"
        srl_gallery_image="true"
        className="item"
      />
 
 
-     
-    
+{/* <StaticImage
+       src="../../static/assets/coast-promos2.png"
+       alt="Image 4"
+       srl_gallery_image="true"
+       className="item"
+     /> */}
+
      </div>
  </SRLWrapper>
 
