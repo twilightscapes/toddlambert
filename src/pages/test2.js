@@ -126,7 +126,7 @@ export default function test2Page() {
 <SRLWrapper options={options} className="">
 
 
-{/* <div class="" style={{margin:'0 auto', width:'', padding:'0', height:'100vw'}}>
+{/* <div className="" style={{margin:'0 auto', width:'', padding:'0', height:'100vw'}}>
 
 <Link state={{modal: true}} to="/legacy/" style={{height:'350px', position:'relative', left:'0', top:'-60px'}}>
   <StaticImage className="" src="../../static/assets/Experiences-Header-6.jpg" alt="Todd builds Web Apps" style={{height:'350px'}}  />
