@@ -621,7 +621,7 @@ textShadow:'0 1px 0 #eee',
 fontSize:'clamp(1.6rem, 6vw, 3.8rem)',
 paddingLeft:'2rem',
 }}>
-Digital Product <span style={{color:'#dd4000'}}>Design</span>
+Digital Product <span style={{color:'rgb(187 54 0)'}}>Design</span>
 </h1>
 {/* </ScrollAnimation> */}
 
@@ -638,7 +638,7 @@ textShadow:'0 1px 0 #eee',
 fontSize:'clamp(1.6rem, 6vw, 3.8rem)',
 paddingLeft:'2rem',
 }}>
-Conceptual <span style={{color:'#dd4000'}}>Photography</span>
+Conceptual <span style={{color:'rgb(187 54 0)'}}>Photography</span>
 </h2>
 {/* </ScrollAnimation> */}
 
@@ -652,7 +652,7 @@ textShadow:'0 1px 0 #eee',
 fontSize:'clamp(1.6rem, 6vw, 3.8rem)',
 paddingLeft:'2rem',
 }}>
-Guerrilla <span style={{color:'#dd4000'}}>Marketing</span>
+Guerrilla <span style={{color:'rgb(187 54 0)'}}>Marketing</span>
 </h2>
 {/* </ScrollAnimation> */}
 
@@ -680,12 +680,10 @@ fontSize:'clamp(1.6rem, 12vw, 3.8rem)',
 // opacity:'.9',
 // paddingLeft:'',
 }}>
-  <h3 className="logotype"  style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', }}>About</h3>
-
   
 {/* <span style={{color:'#dd4000'}}>Roles are like hats</span> */}
 </h2>
-
+<h3 className="logotype"  style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', }}>About</h3>
 </div>
 
 <div className="div4" style={{background:'', maxHeight:'', justifyContent:'center', display:'flex', flexDirection:'column',}}>
@@ -1029,7 +1027,7 @@ position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto',
 }}>
 
 
-<div className=" outer1 section1" style={{padding:'0 2%', height:'', background:'transparent'}}>
+<div className="outer1 section1" style={{padding:'0 2%', height:'', background:'transparent'}}>
 
 <div className="container3" style={{ position:'relative'}}>
 

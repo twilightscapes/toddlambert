@@ -673,7 +673,7 @@ outline:1px rgba(0, 0, 0, 1);
 
 .todd-headline{
   font-family: Lobster Two;
-  color: rgb(221, 64, 0);
+  color: rgb(187 54 0);
   text-transform: lowercase;
 place-self: center;
 font-size: clamp(2rem, 1.8vw, 2.5rem);
@@ -688,7 +688,7 @@ filter: drop-shadow(1px 1px 0px rgba(44, 44, 44, 0.5));
 
 
  /* .todd-headline{
-  color: rgb(221, 64, 0);
+  color: rgb(187 54 0);
   font-family: Lobster Two;
   font-size: 200%;
   margin-bottom: 1rem;
@@ -3257,6 +3257,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
 
 #chaticon:hover{
   opacity: 1 !important;
+  background: rgb(187 54 0) !important;
 }
 
 
@@ -3269,7 +3270,10 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
             }
             
             .logocolor {
-              color: #dd4000;
+              color: rgb(187 54 0);
+             
+              /* color: rgb(141 41 0); */
+
               position:relative;
               filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.5));
             }
@@ -3305,8 +3309,6 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
               /* font-size:13vw; */
               font-size: clamp(2.5rem, 13vw, 5rem);
               text-shadow:0 2px 2px #fff;
-              filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.5));
-          
             }
           
             
@@ -3326,7 +3328,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
             
             .logotype {
               font-family: Lobster Two;
-              color: #dd4000;
+              color: rgb(187 54 0);
               letter-spacing: 2px;
               font-size: clamp(2.5rem, 5vw, 5rem) !important;
               text-transform: lowercase;
@@ -3371,7 +3373,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
               
               .horizontal-scroll-wrapper  img{cursor:zoom-in !important;  border-radius:12px !important;}
               
-              .horizontal-scroll-wrapper img:hover{border:4px solid #dd4000 !important;
+              .horizontal-scroll-wrapper img:hover{border:4px solid rgb(187 54 0) !important;
                 /* background-position: right !important; */
                 /* transform: scale(1.4) !important; */
                 border-radius: 12px !important;
@@ -3387,7 +3389,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                 display: block;
                 width: 100%;
                 height:40px;
-                background-color: #dd4000;
+                background-color: rgb(187 54 0);
                 opacity:0;
                 top:0;
               }
@@ -3398,7 +3400,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                 display: block;
                 width: 100%;
                 height:60px;
-                background-color: #dd4000;
+                background-color: rgb(187 54 0);
                 opacity:0;
                 bottom:0;
               }
