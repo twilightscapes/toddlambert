@@ -3399,6 +3399,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                 transform: rotate(-90deg) translateY(-350px);
                 transform-origin: right top;
                 transition: transform .2s;
+                scroll-snap-type: y proximity;
               }
               .horizontal-scroll-wrapper > * {
                 display: block;
@@ -3406,6 +3407,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                 /* background: #cab; */
                 transform: rotate(90deg);
                 transform-origin: right top;
+                scroll-snap-align: start;
               }
               
               .squares {
