@@ -2020,7 +2020,26 @@ input[type="checkbox"]:checked ~ .backdrop1 {
 }
 
 
+.photobox{
+  display:flex;
+  /* flex-direction: column; */
+  width:100%;
+  gap:20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.photobox *{
+  max-height: 400px;
+  max-width: 30vw;
+  cursor:zoom-in !important; 
+  border-radius:12px !important;
+  filter: drop-shadow(-2px -2px 3px rgba(44, 44, 44, 0.6));
+}
+
 @media (min-width: 48em) {
+
+
 
 
   .signbox {flex-direction: row;}
@@ -2714,6 +2733,11 @@ margin: 0 !important;
   .spacer66{height:8vh;}
   .spacer99{height:99vh;}
 
+
+  .photobox *{
+    max-height: 400px;
+    max-width: 40vw !important;
+  }
 
   .slidepanel > div{
     align-items: inherit !important;

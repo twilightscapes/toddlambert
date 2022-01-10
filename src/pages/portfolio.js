@@ -259,7 +259,7 @@ export default function test2Page() {
 
 
 <p style={{textAlign:'center', margin:'4rem 0 10px 0'}}>Conceptual Photography</p>
-<div className="masonry4" style={{display:'', background:'rgba(121, 115, 115, 0.9)', padding:'1rem 2rem', borderTop:'1px solid #444', borderBottom:'1px solid #444'}}>
+<div className="photobox" style={{display:'', background:'rgba(121, 115, 115, 0.9)', padding:'1rem 2rem', borderTop:'1px solid #444', borderBottom:'1px solid #444'}}>
 
 <div style={{textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
   <StaticImage className="1" src="../../static/assets/atomic-martini-flyboys_2400x1599_crop_center.jpg.webp" alt="Todd builds Web Apps" style={{}}  />
