@@ -93,14 +93,16 @@ export default function test2Page() {
         /> */}
     
     {/* <div className="spacer66"></div> */}
-
+<SRLWrapper options={options} className="">
   
-<p style={{textAlign:'center', margin:'4rem 0 10px 0'}}>Custom SVG Animations</p>
+{/* <p style={{textAlign:'center', margin:'4rem 0 10px 0'}}>Custom SVG Animations</p> */}
+
+
   <div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'375px', overflow:'hidden', position:'relative', padding:' 0'}}>
 
 
   
-<SRLWrapper options={options} className="">
+
 
 
 {/* <div className="" style={{margin:'0 auto', width:'', padding:'0', height:'100vw'}}>
@@ -231,9 +233,10 @@ export default function test2Page() {
        alt="Image 4"
        srl_gallery_image="true"
        className="item"
-     /> */}
+     /> */} 
+ 
      </div>
- </SRLWrapper>
+
 
  <Link className="post-card" state={{modal: true}} to="/legacy/" title="View Todd's Legacy Work" style={{position:'absolute', left:'0', top:'', zIndex:'1', width:'60px',  background:'rgba(0, 0, 0, .9)', height:'350px', display:'flex', borderRadius:'0 12px 12px 0'}}>
   {/* <StaticImage className="button post-card" src="../../static/assets/legacy.png" alt="View Todd's Legacy Work" style={{height:'350px', borderRadius:'0 12px 12px 0', border:'1px solid #aaa', borderLeft:'0', boxShadow: '0px 0px 10px #333', opacity:''}}  /> */}
@@ -254,7 +257,7 @@ export default function test2Page() {
 
 
 
-<SRLWrapper options={options} className="1">
+
 <p style={{textAlign:'center', margin:'4rem 0 10px 0'}}>Conceptual Photography</p>
 <div className="masonry4" style={{display:'', background:'rgba(121, 115, 115, 0.9)', padding:'1rem 2rem', borderTop:'1px solid #444', borderBottom:'1px solid #444'}}>
 
@@ -285,12 +288,12 @@ export default function test2Page() {
 
 
 </div>
+
+
+
+
+
 </SRLWrapper>
-
-
-
-
-
 
 
 
