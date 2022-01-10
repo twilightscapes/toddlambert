@@ -687,7 +687,7 @@ fontSize:'clamp(1.6rem, 12vw, 3.8rem)',
 </div>
 
 <div className="div4" style={{background:'', maxHeight:'', justifyContent:'center', display:'flex', flexDirection:'column',}}>
-<div style={{padding:'0 8%', fontSize:'clamp(1rem, 2vw, 2.8rem)',}}>
+<div style={{padding:'0 8% 0 6.5%', fontSize:'clamp(1rem, 2vw, 2.8rem)',}}>
 <p>
 Todd Lambert is an award winning web designer and photographer that trained in Southern California and migrated to the Deep South where he found home living on the coastal Mississippi Sound.
 </p>
