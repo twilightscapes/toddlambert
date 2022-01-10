@@ -258,10 +258,11 @@ export default function test2Page() {
 
 
 
+<p style={{position:'relative', bottom:'-40px', textAlign:'center', margin:'0 0 10px 0', width:'100%', color:'#fff', zIndex:'1'}}>Conceptual Photography</p>
+
 
 <div className="photobox" style={{display:'', background:'rgba(121, 115, 115, 0.9)', padding:'40px 0', position:'relative', borderTop:'1px solid #444', borderBottom:'1px solid #444'}}>
 
-<p style={{position:'absolute', top:'10px', textAlign:'center', margin:'0 0 10px 0', width:'100%', color:'#fff'}}>Conceptual Photography</p>
 
 <div style={{textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
   <StaticImage className="1" src="../../static/assets/atomic-martini-flyboys_2400x1599_crop_center.jpg.webp" alt="Todd builds Web Apps" style={{}}  />
