@@ -17,7 +17,7 @@ import { StaticImage } from "gatsby-plugin-image"
 import ReactPlayer from 'react-player/lazy'
 // import { ImPlay } from "react-icons/im"
 // import LineTest from "../../static/assets/LineTest.svg"
-import AboutMe from "../../src/pages/test2"
+import Portfolio from "../pages/portfolio"
 import styled from "styled-components"
 import Newsignup from "../components/newssign"
 import BlogListHome from "../components/blog-list-home"
@@ -869,14 +869,14 @@ position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto',
  border:'0px solid rgba(121, 115, 115, 0.3)', 
 //  background:'rgba(0, 0, 0, 0.3)',
  background:'rgba(121, 115, 115, 0.2)',
- color:'#fff',
- textShadow: '1px 1px 0 rgba(121, 115, 115, 0.7)',
+
+//  textShadow: '1px 1px 0 rgba(121, 115, 115, 0.7)',
  }}>
  <h3 className="logotype" style={{textAlign:'center', margin:'0 0 0 0', fontSize:'5vw', clear:'right', paddingTop:'1rem',}}>Portfolio</h3>
 <br />
 
 
-<AboutMe />
+<Portfolio />
 
 
 
@@ -905,86 +905,7 @@ Homepage Redesign and Product Portal
 </div>
 </SRLWrapper> */}
 
-<p style={{textAlign:'center', margin:'4rem 0 10px 0'}}>Custom SVG Animations</p>
 
-<div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'280px', overflow:'hidden', position:'relative', margin:'0 0 1rem 0'}}>
-
-<div className="RArrow" style={{fontSize:'1rem', position:'absolute', right:'20px', top:'0', zIndex:'1', color:'#dd4000', filter:' drop-shadow(1px 1px 0px rgba(228, 223, 223, 0.5))'}}>
-  scroll <span style={{fontSize:'18px'}}>&#10095;</span>
-</div>
-
-
-<div className="horizontal-scroll-wrapper squares" style={{margin:'0 auto', width:'', padding:'0'}}>
-
-
-
-<Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
-  <StaticImage className="1" src="../../static/assets/transparent.png" alt="Done, you've viewed all of the images."  />
-  Animated SVG &amp; Photo &amp; Video www
-</Link>
-
-
-
-  <Link state={{modal: true}} to="/twilightscapes/" className="" style={{fontSize:'', textDecoration:'none', textAlign:'center', }}>
-  <StaticImage className="1" src="../../static/assets/Experiences-Header-5.jpg" alt="Todd builds Web Apps"  />
-  Animated SVG &amp; Photo &amp; Video
-  </Link>
-
-
-
-
-  
-
-
-<Link state={{modal: true}} to="/automotive/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
-  <StaticImage className="1" src="../../static/assets/subaru.jpg" alt="Todd builds Web Apps"  />
-  Animated SVG &amp; Photo &amp; Video
-</Link>
-
-
-<Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
-  <StaticImage className="1" src="../../static/assets/Experiences-Header-6.jpg" alt="Todd builds Web Apps"  />
-  Animated SVG &amp; Photo &amp; Video
-</Link>
-
-
-<Link state={{modal: true}} to="/they-live/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
-  <StaticImage className="1" src="../../static/assets/TheyLive-Header.jpg" alt="Todd builds Web Apps"  />
-  Animated SVG &amp; Photo &amp; Video
-</Link>
-
-<Link state={{modal: true}} to="/asteroid-series-riding-the-belt/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
-  <StaticImage className="1" src="../../static/assets/Experiences-Header-2.jpg" alt="Todd builds Web Apps"  />
-  Animated SVG &amp; Photo &amp; Video
-</Link>
-
-<Link state={{modal: true}} to="/crude-addiction/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
-  <StaticImage className="1" src="../../static/assets/Experiences-Header-4.jpg" alt="Todd builds Web Apps"  />
-  Animated SVG &amp; Photo &amp; Video
-</Link>
-
-<Link state={{modal: true}} to="/alien-egg-farm/" className="" style={{fontSize:'', textDecoration:'none', textAlign:'center',}}>
-  <StaticImage className="1" src="../../static/assets/Experiences-Header-3.jpg" alt="Todd builds Web Apps"  />
-  Animated SVG &amp; Photo
-  </Link>
-
-
-<Link state={{modal: true}} to="/pillowtalk/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
-  <StaticImage className="1" src="../../static/assets/Experiences-Header-8.jpg" alt="Todd builds Web Apps"  />
-  Animated SVG &amp; Photo &amp; Video
-</Link>
-
-
-<Link state={{modal: true}} to="/tv-signals/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
-  <StaticImage className="1" src="../../static/assets/television-signals-promo.jpg" alt="Todd builds Web Apps"  />
-  Animated SVG &amp; Photo &amp; Video
-</Link>
-
-
-
-
-</div>
-</div>
 
   {/* <article className="post-card button" style={{ display:'flex', maxWidth:'400px', justifyContent:'center', border:'1px solid', padding:'', margin:'2rem auto', fontSize:'150%', textAlign:'center', }}>
   <Link to="/posts/" style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
