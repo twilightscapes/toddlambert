@@ -611,8 +611,8 @@ fontSize:'clamp(2.5rem, 3.5vw, 3.8rem)', background: 'rgba(196, 189, 179, .4)'
 <div style={{width:'100vw', height:'100vh', position:'fixed', top:'0', zIndex:'-1', opacity:'', overflow:''}}>
 
 
-<LineTest />
-<h3 style={{fontSize:'35vw', opacity:'.3', transform: 'skewY(20deg)', transform:'rotate(-8deg)'}}>design</h3>
+{/* <LineTest /> */}
+<h3 style={{fontSize:'35vw', opacity:'.1', transform: 'skewY(20deg)', transform:'rotate(-8deg)'}}>design</h3>
 
 <h3 style={{fontSize:'35vw', opacity:'.1', transform: 'skewY(-120deg)', transform:'rotate(14deg)', top:'35vh'}}>gatsby</h3>
 
