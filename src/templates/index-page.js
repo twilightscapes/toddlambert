@@ -604,7 +604,7 @@ to="#experiences" title="See the new EXPERIENCES™" /> */}
 
  <section id="intro" className="child intro" style={{position:'relative', height:'100vh', paddingTop:'', overflow:'', display:'flex', flexDirection:'column', justifyContent:'center', textAlign:'center',
 // fontSize: 'clamp(18px, calc(1rem + 2vw), 36px)',
-fontSize:'clamp(2.5rem, 3.5vw, 3.8rem)'
+fontSize:'clamp(2.5rem, 3.5vw, 3.8rem)', background: 'rgba(196, 189, 179, .4)'
 }}>
 
 
@@ -637,8 +637,8 @@ fontSize:'clamp(2.5rem, 3.5vw, 3.8rem)'
 
 {/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={400}> */}
 
-<div style={{ width:'80%', background: 'rgba(196, 189, 179, .5)',
-  backdropFilter: 'blur(44px)', margin:'0 auto', borderRadius:'12px', zIndex:'2'}}>
+{/* <div style={{ width:'80%', background: 'rgba(196, 189, 179, .5)',
+  backdropFilter: 'blur(44px)', margin:'0 auto', borderRadius:'12px', zIndex:'2'}}> */}
 
 <div className="logolink" style={{textAlign:'center', position:'relative',fontSize:'clamp(2rem, 12.5vw, 10rem)', padding:'0 0 2% 0', background:'tranparent', filter: 'drop-shadow(0px 0px 0px #444)'}}><span className="logofirst mainlogo">todd</span> <span className="logocolor">lambert</span></div>
 {/* </ScrollAnimation> */}
@@ -687,8 +687,8 @@ paddingLeft:'2rem',
 Guerrilla <span style={{color:'rgb(187 54 0)'}}>Marketing</span>
 </h2>
 {/* </ScrollAnimation> */}
-
-</div>
+{/* 
+</div> */}
 
   </section>
 
@@ -718,7 +718,7 @@ fontSize:'clamp(1.6rem, 12vw, 3.8rem)',
 <h3 className="logotype"  style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', }}>About</h3>
 </div>
 
-<div className="div4" style={{ background: 'rgba(196, 189, 179, .5)', maxHeight:'', justifyContent:'center', display:'flex', flexDirection:'column',}}>
+<div className="div4" style={{ background: 'rgba(196, 189, 179, .6)', maxHeight:'', justifyContent:'center', display:'flex', flexDirection:'column',}}>
 <div style={{padding:'0 8% 0 6.5%', fontSize:'clamp(1rem, 2vw, 2.8rem)',}}>
 <p>
 Todd Lambert is an award winning web designer and photographer that trained in Southern California and migrated to the Deep South where he found home living on the coastal Mississippi Sound.
@@ -843,7 +843,7 @@ position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto',
 
 <div className="flexbutt noexit print" style={{padding:'2rem 4%',
 position:'relative', height:'', width:'', overflow:'', display:'flex', gap
-  :'20px', margin:'0 auto', background: 'rgba(196, 189, 179, .4)' }}>
+  :'20px', margin:'0 auto', background: 'rgba(196, 189, 179, .5)' }}>
 
 
     <div className="flexcheek network" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between',}}>
@@ -1147,7 +1147,7 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
 
 <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 
-<section id="contact" className="child" style={{position:'relative', height:'auto', zIndex:'', padding:'2rem 0', background:'rgba(121, 115, 115, 0.2)'}}>
+<section id="contact" className="child" style={{position:'relative', height:'auto', zIndex:'', padding:'2rem 0', background: 'rgba(196, 189, 179, .5)'}}>
 
 
 
