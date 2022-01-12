@@ -814,13 +814,13 @@ paddingLeft:'',
 
 
 <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={300}>
-<blockquote style={{fontFamily:'Lobster Two', textAlign:'left', padding:'', background:'rgba(121, 115, 115, 0.2)', borderRadius:'12px', fontSize:'clamp(1.4rem, 2.5vw, 2.8rem)'}}>
-  <div style={{padding:'2rem 10% 0 10%',}}>
+<blockquote style={{fontFamily:'Lobster Two', textAlign:'left', padding:'', borderRadius:'12px', background: 'rgba(196, 189, 179, .7)', fontSize:'clamp(1.5rem, 2.6vw, 2.8rem)', filter:'drop-shadow(-12px -12px 12px rgba(44, 44, 44, 0.5))'}}>
+  <div style={{padding:'2rem 10% 0 10%', filter:'none', textShadow:'1px 1px 0 #aaa'}}>
   Experience has taught me that good design is not created on a spur of the moment, nor does it come naturally. Good design is a thorough and interative process with site visitors in mind foremost. Good design is identifying a problem for those visitors and removing that problem.
 
     {/* I imagine things and then make them come to life. Creating digital experiences using intriguing photography, animation and typography, all packaged in the most performant coding that loads fast everywhere. */}
   </div>
- <div className="logotype" style={{fontSize:'2rem', textAlign:'right', margin:'2rem 30% 0 0'}}>Lambert</div>
+ <div className="logotype" style={{fontSize:'2rem', textAlign:'right', margin:'2rem 30% 0 0', filter:'none'}}>Lambert</div>
 </blockquote>
 </ScrollAnimation>
 
@@ -831,7 +831,9 @@ paddingLeft:'',
 
 
 
-<section id="network">
+<section id="network" style={{
+  filter:'drop-shadow(12px -12px 12px rgba(44, 44, 44, 0.4))',
+  }}>
 
 <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 
@@ -839,7 +841,11 @@ paddingLeft:'',
 position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', 
 // outline:'18px dashed rgba(121, 115, 115, 0.3)',
 // border:'0px solid rgba(121, 115, 115, 0.3)',
- background:'rgba(121, 115, 115, 0.2)'
+//  background:'rgba(121, 115, 115, 0.2)',
+ background: 'rgba(196, 189, 179, .9)',
+//  background:'rgba(192, 181, 181, 0.6))'
+//  background: 'rgba(196, 189, 179, .9)'
+ 
  }}>
 
 
@@ -848,8 +854,7 @@ position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto',
 
 
 <div className="flexbutt noexit print" style={{padding:'2rem 4%',
-position:'relative', height:'', width:'', overflow:'', display:'flex', gap
-  :'20px', margin:'0 auto', background: 'rgba(196, 189, 179, .5)' }}>
+position:'relative', height:'', width:'', overflow:'', display:'flex', gap:'20px', margin:'0 auto', background: 'rgba(196, 189, 179, .9)' }}>
 
 
     <div className="flexcheek network" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between',}}>
@@ -910,8 +915,9 @@ position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto',
  borderRadius:'', 
  border:'0px solid rgba(121, 115, 115, 0.3)', 
 //  background:'rgba(0, 0, 0, 0.3)',
- background:'rgba(121, 115, 115, 0.2)',
-
+//  background:'rgba(121, 115, 115, 0.2)',
+ background: 'rgba(196, 189, 179, .9)',
+zIndex:'0'
 //  textShadow: '1px 1px 0 rgba(121, 115, 115, 0.7)',
  }}>
 
@@ -972,26 +978,18 @@ Homepage Redesign and Product Portal
 
 
 
-{/* <div className="spacer33"></div> */}
 
-
-
-{/* <div className="container3" style={{}}>
-<h3 className="logotype" style={{textAlign:'center', margin:'5vh 0', fontSize:'350%',}}>
-Lambert
-</h3>
-</div> */}
 
 {/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={0} duration={2}> */}
 
 
 
 
-<section id="resume" style={{margin:'2rem 0', background: 'rgba(196, 189, 179, .9)'}}>
+<section id="resume" style={{margin:'0', background: 'rgba(196, 189, 179, .9)', filter:'drop-shadow(12px 12px 12px rgba(44, 44, 44, 0.6))'}}>
 
 <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 
-<div style={{padding:'2rem 0',
+<div style={{padding:'0',
 position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto',
  outline:'18px dashed rgba(121, 115, 115, 0.3)',
  borderRadius:'', border:'0px solid rgba(121, 115, 115, 0.3)', 
@@ -1135,7 +1133,7 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
           </a>
 
 
-
+<br />
 </div>
 
 </div>

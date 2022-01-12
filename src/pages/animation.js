@@ -97,7 +97,7 @@ export default function AnimationPage() {
 
 
 
-<p className="todd-headline" style={{textAlign:'center', margin:'2rem 0 10px 0'}}>Custom <span style={{textTransform:'uppercase'}}>SVG</span> Animation</p>
+<p className="todd-headline mouse" style={{textAlign:'center', margin:'1rem 0 10px 0'}}>Custom <span style={{textTransform:'uppercase'}}>SVG</span> Animation</p>
 
 <div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'280px', overflow:'hidden', position:'relative', margin:'0 0 1rem 0'}}>
 
