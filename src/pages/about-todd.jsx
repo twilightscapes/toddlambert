@@ -4,7 +4,7 @@ import { Layout } from "../components/layout"
 // import { ProductListing } from "../components/product-listing"
 import { Seo } from "../components/seo"
 import { FaHandPointDown } from "react-icons/fa"
-import CommentBox from "../components/commentbox"
+// import CommentBox from "../components/commentbox"
 
 import { Helmet } from "react-helmet"
 import { StaticImage } from "gatsby-plugin-image"
