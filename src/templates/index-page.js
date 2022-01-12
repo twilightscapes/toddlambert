@@ -859,12 +859,9 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
 
 <section id="posts1" name="posts">
 
-<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 
 
-
-
-  <div style={{padding:'0 0 1rem 0',
+<div style={{padding:'0 0 1rem 0',
 position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto',
 //  outline:'18px dashed rgba(121, 115, 115, 0.3)', 
  borderRadius:'', 
@@ -874,14 +871,22 @@ position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto',
 
 //  textShadow: '1px 1px 0 rgba(121, 115, 115, 0.7)',
  }}>
+
+
  <h3 className="logotype" style={{textAlign:'center', margin:'0 0 0 0', fontSize:'5vw', clear:'right', paddingTop:'1rem',}}>Portfolio</h3>
 <br />
 
-
+<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 <Portfolio />
-<Photos />
-<Animation />
+</ScrollAnimation>
 
+<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
+<Photos />
+</ScrollAnimation>
+
+<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
+<Animation />
+</ScrollAnimation>
 
 {/* <SRLWrapper options={options} className="1">
 
@@ -916,8 +921,8 @@ Homepage Redesign and Product Portal
     </Link>
     </article> */}
 
-    </div>
-</ScrollAnimation>
+  </div>
+
 
 </section>
 
