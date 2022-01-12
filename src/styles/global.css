@@ -3587,7 +3587,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                 transform: rotate(-90deg) translateY(-350px);
                 transform-origin: right top;
                 transition: transform .2s;
-                
+                scroll-snap-type: y proximity;
                 scroll-padding: 0 0 0 0;
               }
               .horizontal-scroll-wrapper > * {
@@ -3614,7 +3614,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
               
   @media (pointer: coarse) {
   .horizontal-scroll-wrapper {
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
   }
   .RArrow span::before{
   content:"swipe " !important;
