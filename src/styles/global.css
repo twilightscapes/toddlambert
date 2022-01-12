@@ -4,6 +4,7 @@ body {
   font-family: var(--font-body);
   color: #474642 !important;
   background: #c4bdb3 !important;
+  /* background: rgba(196, 189, 179, .9) !important; */
   /* background: #b6aea3 !important; */
   overflow-x: hidden !important;
   width:100vw;
@@ -3368,7 +3369,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
               font-family: Lobster Two;
               color: rgb(187 54 0);
               letter-spacing: 2px;
-              font-size: clamp(2.5rem, 5vw, 5rem) !important;
+              font-size: clamp(2.5rem, 5vw, 5rem);
               text-transform: lowercase;
               font-weight: 400;
               position: relative;
@@ -3392,7 +3393,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
             
             body.dark .logotype:after, body.dark .logotype:before {
               color: #666;
-              text-shadow:0 1px 0 #fff
+              text-shadow:0 1px 0 #fff;
             }
 
             .logofirst {
