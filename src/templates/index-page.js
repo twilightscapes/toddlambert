@@ -604,7 +604,8 @@ to="#experiences" title="See the new EXPERIENCES™" /> */}
 
  <section id="intro" className="child intro" style={{position:'relative', height:'100vh', paddingTop:'', overflow:'', display:'flex', flexDirection:'column', justifyContent:'center', textAlign:'center',
 // fontSize: 'clamp(18px, calc(1rem + 2vw), 36px)',
-fontSize:'clamp(2.5rem, 3.5vw, 3.8rem)', background: 'rgba(196, 189, 179, .4)'
+fontSize:'clamp(2.5rem, 3.5vw, 3.8rem)', 
+background: 'rgba(196, 189, 179, .4)'
 }}>
 
 
@@ -820,7 +821,7 @@ paddingLeft:'',
 
     {/* I imagine things and then make them come to life. Creating digital experiences using intriguing photography, animation and typography, all packaged in the most performant coding that loads fast everywhere. */}
   </div>
- <div className="logotype" style={{fontSize:'2rem', textAlign:'right', margin:'2rem 30% 0 0', filter:'none'}}>Lambert</div>
+ <div className="logofirst" style={{fontSize:'', textAlign:'right', margin:'2rem 30% 0 0', filter:'none'}}>- Todd Lambert</div>
 </blockquote>
 </ScrollAnimation>
 

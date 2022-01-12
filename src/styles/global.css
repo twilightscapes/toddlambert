@@ -3369,7 +3369,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
               font-family: Lobster Two;
               color: rgb(187 54 0);
               letter-spacing: 2px;
-              font-size: clamp(2.5rem, 5vw, 5rem);
+              font-size: clamp(2.5rem, 5vw, 5rem) !important;
               text-transform: lowercase;
               font-weight: 400;
               position: relative;
