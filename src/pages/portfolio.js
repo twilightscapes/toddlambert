@@ -82,8 +82,8 @@ showCaption: true
 export default function PortfolioPage() {
    return (
 
-
-    <CustomBox>
+<>
+    // <CustomBox>
     {/* <Layout className="thanks-page">
 
 <Seo
@@ -93,7 +93,7 @@ export default function PortfolioPage() {
         /> */}
     
     {/* <div className="spacer66"></div> */}
-<SRLWrapper options={options} className="">
+<SRLWrapper options={options}>
   
 {/* <p style={{textAlign:'center', margin:'4rem 0 10px 0'}}>Custom SVG Animations</p> */}
 
@@ -255,6 +255,7 @@ export default function PortfolioPage() {
      
     
     {/* </Layout> */}
-</CustomBox>
+// </CustomBox>
+</>
   )
 }

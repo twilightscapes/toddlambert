@@ -6,7 +6,7 @@ import { Helmet } from "react-helmet"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { getSrc } from "gatsby-plugin-image"
 import { RiArrowRightLine, RiArrowLeftLine } from "react-icons/ri"
-import CommentBox from "../components/commentbox"
+// import CommentBox from "../components/commentbox"
 // import { StaticImage } from "gatsby-plugin-image"
 import { useSiteMetadata } from "../hooks/use-site-metadata"
 import Countdown from 'react-countdown'
@@ -809,7 +809,7 @@ const { iconimage } = useSiteMetadata()
 {Comments ? (
 <div style={{width:'80%', padding:'0', margin:'0 auto'}}>
   
-<CommentBox />
+{/* <CommentBox /> */}
     
        </div>
        
