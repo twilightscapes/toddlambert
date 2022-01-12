@@ -100,7 +100,7 @@ export default function favPage() {
 
 
 
-<p className="todd-headline" style={{textAlign:'center', margin:'4rem 0 10px 0'}}>Conceptual Photography</p>
+<p className="todd-headline" style={{textAlign:'center', margin:'2rem 0 10px 0'}}>Conceptual Photography</p>
 
   <div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'375px', overflow:'hidden', position:'relative', padding:' 0', margin:'0 0 0 0'}}>
 
