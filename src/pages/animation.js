@@ -106,7 +106,7 @@ export default function AnimationPage() {
 </div>
 
 
-<div className="horizontal-scroll-wrapper squares" style={{margin:'0 auto 0 auto', width:'', padding:''}}>
+<div className="horizontal-scroll-wrapper squares" style={{margin:'0 auto 0 auto', width:'', color:'#fff'}}>
 
 <Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
   <StaticImage className="1" src="../../static/assets/transparent.png" alt="Done, you've viewed all of the images."  />

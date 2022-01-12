@@ -3617,7 +3617,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
 
 
   
- .horizontal-scroll-wrapper a:first-child:after, .horizontal-scroll-wrapper a:nth-child(7n-8):after{
+ /* .horizontal-scroll-wrapper a:first-child:after, .horizontal-scroll-wrapper a:nth-child(7n-8):after{
     content: " Just Sold ";
     color:#222 !important;
     pointer-events: none !important;
@@ -3634,4 +3634,4 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
     justify-content: center;
     place-content: center;
     text-align:center;
-  }
+  } */
