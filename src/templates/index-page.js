@@ -610,9 +610,9 @@ fontSize:'clamp(2.5rem, 3.5vw, 3.8rem)'
 
 <div style={{width:'100vw', height:'100vh', position:'fixed', top:'0', zIndex:'-1', opacity:'', overflow:''}}>
 
-<LineTest />
 
-{/* <h3 style={{fontSize:'35vw', opacity:'.3', transform: 'skewY(20deg)', transform:'rotate(-8deg)'}}>design</h3>
+<LineTest />
+<h3 style={{fontSize:'35vw', opacity:'.3', transform: 'skewY(20deg)', transform:'rotate(-8deg)'}}>design</h3>
 
 <h3 style={{fontSize:'35vw', opacity:'.1', transform: 'skewY(-120deg)', transform:'rotate(14deg)', top:'35vh'}}>gatsby</h3>
 
@@ -626,7 +626,8 @@ fontSize:'clamp(2.5rem, 3.5vw, 3.8rem)'
 
 <h3 style={{fontSize:'12vw', opacity:'.1', transform: 'skewY(-120deg)', transform:'rotate(-37deg)', position:'absolute', bottom:'4vh', right:'0vw', fontWeight:'normal'}}>javascript</h3>
 
-<h3 style={{fontSize:'42vw', opacity:'.4', transform: 'skewY(-120deg)', transform:'rotate(7deg)', position:'absolute', bottom:'10vh', right:'10vw', fontWeight:'normal', color:'transparent', border:'0px solid white', textShadow:'0 0 0px #fff', filter:'drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.5))'}}>pwa</h3> */}
+<h3 style={{fontSize:'42vw', opacity:'.1', transform: 'skewY(-120deg)', transform:'rotate(7deg)', position:'absolute', bottom:'10vh', right:'10vw', fontWeight:'normal', color:'transparent', border:'0px solid white', textShadow:'0 0 0px #fff', filter:'drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.5))'}}>pwa</h3>
+
 
 </div>
 
