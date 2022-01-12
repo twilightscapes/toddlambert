@@ -18,6 +18,8 @@ import ReactPlayer from 'react-player/lazy'
 // import { ImPlay } from "react-icons/im"
 // import LineTest from "../../static/assets/LineTest.svg"
 import Portfolio from "../pages/portfolio"
+import Photos from "../pages/favorites"
+import Animation from "../pages/animation"
 import styled from "styled-components"
 import Newsignup from "../components/newssign"
 import BlogListHome from "../components/blog-list-home"
@@ -877,7 +879,8 @@ position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto',
 
 
 <Portfolio />
-
+<Photos />
+<Animation />
 
 
 {/* <SRLWrapper options={options} className="1">

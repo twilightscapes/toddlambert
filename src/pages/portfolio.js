@@ -79,7 +79,7 @@ showCaption: true
   },
 };
 
-export default function test2Page() {
+export default function PortfolioPage() {
    return (
 
 
@@ -98,10 +98,10 @@ export default function test2Page() {
 {/* <p style={{textAlign:'center', margin:'4rem 0 10px 0'}}>Custom SVG Animations</p> */}
 
 
-  <div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'375px', overflow:'hidden', position:'relative', padding:' 0'}}>
 
 
-  
+
+  <div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'375px', overflow:'hidden', position:'relative', padding:' 0',}}>
 
 
 
@@ -113,12 +113,12 @@ export default function test2Page() {
 </Link>
 </div> */}
 
-<div className="RArrow" style={{fontSize:'1rem', position:'absolute', right:'20px', top:'0', zIndex:'1', color:'#dd4000', filter:' drop-shadow(1px 1px 0px rgba(228, 223, 223, 0.5))'}}>
-  scroll <span style={{fontSize:'18px'}}>&#10095;</span>
+<div className="RArrow">
+  <span>&#10095;</span>
 </div>
 
 
-<div className="horizontal-scroll-wrapper squares" style={{margin:'30px auto 0 auto', width:'', padding:'0'}}>
+<div className="horizontal-scroll-wrapper squares" style={{margin:'30px auto 0 auto', width:'', padding:'30px 0'}}>
 
 
 <StaticImage
@@ -126,6 +126,7 @@ export default function test2Page() {
         alt="-->Done, you've viewed all of the images.<--"
         srl_gallery_image="true"
         className="item"
+        style={{width:'400px'}}
       />
 <StaticImage
         src="../../static/assets/tle-portfolio-spotlights2.png"
@@ -238,7 +239,7 @@ export default function test2Page() {
      </div>
 
 
- <Link className="post-card" state={{modal: true}} to="/legacy/" title="View Todd's Legacy Work" style={{position:'absolute', left:'0', top:'', zIndex:'1', width:'60px',  background:'rgba(0, 0, 0, .9)', height:'350px', display:'flex', borderRadius:'0 12px 12px 0'}}>
+ <Link className="post-card" state={{modal: true}} to="/legacy/" title="View Todd's Legacy Work" style={{position:'absolute', left:'0', top:'10px', zIndex:'1', width:'60px',  background:'rgba(0, 0, 0, .9)', height:'350px', display:'flex', borderRadius:'0 12px 12px 0'}}>
   {/* <StaticImage className="button post-card" src="../../static/assets/legacy.png" alt="View Todd's Legacy Work" style={{height:'350px', borderRadius:'0 12px 12px 0', border:'1px solid #aaa', borderLeft:'0', boxShadow: '0px 0px 10px #333', opacity:''}}  /> */}
   <div style={{position:'absolute', right:'180%', top:'', transform: 'rotate(90deg)', width:'', height:'100%', border:'0px solid red', color:'#fff',  textShadow: '1px 1px 0 rgba(121, 115, 115, 0.7)', whiteSpace:'nowrap',}}>View Legacy Work Here</div>
 </Link>
@@ -246,149 +247,10 @@ export default function test2Page() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-<p style={{position:'relative', bottom:'-40px', textAlign:'center', margin:'0 0 10px 0', width:'100%', color:'#fff', zIndex:'1'}}>Conceptual Photography</p>
-
-
-<div className="masonry4" style={{display:'', background:'rgba(121, 115, 115, 0.9)', padding:'40px', position:'relative', borderTop:'1px solid #444', borderBottom:'1px solid #444'}}>
-
-
-<div style={{textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
-  <StaticImage className="1" src="../../static/assets/atomic-martini-flyboys_2400x1599_crop_center.jpg.webp" alt="Todd builds Web Apps" style={{}}  />
-</div>
-
-<div style={{textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
-<StaticImage className="1" src="../../static/assets/night213.jpg" alt="Todd builds Web Apps"  />
-</div>
-
-<div style={{textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
-<StaticImage className="1" src="../../static/assets/challenger-explosion_2400x1600_crop_center.jpg.webp" alt="Todd builds Web Apps"  />
-</div>
-
-<div style={{textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
-  <StaticImage className="1" src="../../static/assets/ambassador-of-twilight_2400x1600_crop_center.jpg.webp" alt="Todd builds Web Apps" style={{}}  />
-</div>
-
-<div style={{textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
-<StaticImage className="1" src="../../static/assets/prada-marfa_2400x1600_crop_center.jpg.webp" alt="Todd builds Web Apps"  />
-</div>
-
-<div style={{textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
-<StaticImage className="1" src="../../static/assets/Ufo.jpg" alt="Todd builds Web Apps"  />
-</div>
-
-
-
-</div>
-
-
-
-
-
 </SRLWrapper>
 
 
 
-
-
-
-
-
-
-<p style={{textAlign:'center', margin:'4rem 0 10px 0'}}>Custom SVG Animations</p>
-
-<div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'280px', overflow:'hidden', position:'relative', margin:'0 0 1rem 0'}}>
-
-<div className="RArrow" style={{fontSize:'1rem', position:'absolute', right:'20px', top:'0', zIndex:'1', color:'#dd4000', filter:' drop-shadow(1px 1px 0px rgba(228, 223, 223, 0.5))'}}>
-  scroll <span style={{fontSize:'18px'}}>&#10095;</span>
-</div>
-
-
-<div className="horizontal-scroll-wrapper squares" style={{margin:'0 auto', width:'', padding:'0'}}>
-
-<Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
-  <StaticImage className="1" src="../../static/assets/transparent.png" alt="Done, you've viewed all of the images."  />
-  Animated SVG &amp; Photo &amp; Video www
-</Link>
-
-<Link state={{modal: true}} to="/twilightscapes/" className="" style={{fontSize:'', textDecoration:'none', textAlign:'center', }}>
-  <StaticImage className="1" src="../../static/assets/Experiences-Header-5.jpg" alt="Todd builds Web Apps"  />
-  Animated SVG &amp; Photo &amp; Video
-</Link>
-
-<Link state={{modal: true}} to="/automotive/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
-  <StaticImage className="1" src="../../static/assets/subaru.jpg" alt="Todd builds Web Apps"  />
-  Animated SVG &amp; Photo &amp; Video
-</Link>
-
-<Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
-  <StaticImage className="1" src="../../static/assets/Experiences-Header-6.jpg" alt="Todd builds Web Apps"  />
-  Animated SVG &amp; Photo &amp; Video
-</Link>
-
-<Link state={{modal: true}} to="/they-live/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
-  <StaticImage className="1" src="../../static/assets/TheyLive-Header.jpg" alt="Todd builds Web Apps"  />
-  Animated SVG &amp; Photo &amp; Video
-</Link>
-
-<Link state={{modal: true}} to="/asteroid-series-riding-the-belt/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
-  <StaticImage className="1" src="../../static/assets/Experiences-Header-2.jpg" alt="Todd builds Web Apps"  />
-  Animated SVG &amp; Photo &amp; Video
-</Link>
-
-<Link state={{modal: true}} to="/crude-addiction/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
-  <StaticImage className="1" src="../../static/assets/Experiences-Header-4.jpg" alt="Todd builds Web Apps"  />
-  Animated SVG &amp; Photo &amp; Video
-</Link>
-
-<Link state={{modal: true}} to="/alien-egg-farm/" className="" style={{fontSize:'', textDecoration:'none', textAlign:'center',}}>
-  <StaticImage className="1" src="../../static/assets/Experiences-Header-3.jpg" alt="Todd builds Web Apps"  />
-  Animated SVG &amp; Photo
-  </Link>
-
-<Link state={{modal: true}} to="/pillowtalk/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
-  <StaticImage className="1" src="../../static/assets/Experiences-Header-8.jpg" alt="Todd builds Web Apps"  />
-  Animated SVG &amp; Photo &amp; Video
-</Link>
-
-<Link state={{modal: true}} to="/tv-signals/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
-  <StaticImage className="1" src="../../static/assets/television-signals-promo.jpg" alt="Todd builds Web Apps"  />
-  Animated SVG &amp; Photo &amp; Video
-</Link>
-
-</div>
-
-<a aria-label="Link to VidSocks.com" className="post-card noexit" rel="noreferrer" target="_blank" href="https://vidsocks.com" title="Link to VidSocks.com" style={{position:'absolute', left:'0', top:'', zIndex:'1', width:'60px',  background:'rgba(0, 0, 0, .9)', height:'260px', display:'flex', borderRadius:'0 12px 12px 0'}}>
-  {/* <StaticImage className="button post-card" src="../../static/assets/legacy.png" alt="View Todd's Legacy Work" style={{height:'350px', borderRadius:'0 12px 12px 0', border:'1px solid #aaa', borderLeft:'0', boxShadow: '0px 0px 10px #333', opacity:''}}  /> */}
-  <div style={{position:'absolute', right:'180%', top:'', transform: 'rotate(90deg)', width:'', height:'100%', border:'0px solid red', color:'#fff',  textShadow: '1px 1px 0 rgba(121, 115, 115, 0.7)', whiteSpace:'nowrap',}}>View More</div>
-</a>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<br /><br />
 
      
     
