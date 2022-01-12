@@ -16,7 +16,7 @@ import { StaticImage } from "gatsby-plugin-image"
 // import { useSiteMetadata } from "../hooks/use-site-metadata"
 import ReactPlayer from 'react-player/lazy'
 // import { ImPlay } from "react-icons/im"
-// import LineTest from "../../static/assets/LineTest.svg"
+import LineTest from "../../static/assets/textualhealing.svg"
 import Portfolio from "../pages/portfolio"
 import Photos from "../pages/favorites"
 import Animation from "../pages/animation"
@@ -607,7 +607,32 @@ to="#experiences" title="See the new EXPERIENCES™" /> */}
 fontSize:'clamp(2.5rem, 3.5vw, 3.8rem)'
 }}>
 
-{/* <div style={{position:'absolute', zIndex:'', top:'30vh', maxHeight:'33vh', overflow:'hidden', border:'0px solid red'}}><LineTest /></div> */}
+
+<div style={{width:'100vw', height:'100vh', position:'fixed', top:'0', zIndex:'-1', opacity:'', overflow:''}}>
+
+<LineTest />
+
+{/* <h3 style={{fontSize:'35vw', opacity:'.3', transform: 'skewY(20deg)', transform:'rotate(-8deg)'}}>design</h3>
+
+<h3 style={{fontSize:'35vw', opacity:'.1', transform: 'skewY(-120deg)', transform:'rotate(14deg)', top:'35vh'}}>gatsby</h3>
+
+<h3 style={{fontSize:'20vw', opacity:'.1', transform: 'skewY(-20deg)', transform:'rotate(-7deg)', position:'absolute', top:'2vh', fontWeight:'bold'}}>≺code≻</h3>
+
+<h3 style={{fontSize:'20vw', opacity:'.2', transform: 'skewY(140deg)', transform:'rotate(-2deg)', position:'absolute', top:'-12vh', fontWeight:'bold'}}>php</h3>
+
+<h3 style={{fontSize:'18vw', opacity:'.2', transform: 'skewY(-20deg)', transform:'rotate(32deg)', position:'absolute', top:'-5vh', right:'0', fontWeight:'normal'}}><i>html</i></h3>
+
+<h3 style={{fontSize:'18vw', opacity:'.2', transform: 'skewY(-20deg)', transform:'rotate(27deg)', position:'absolute', bottom:'1vh', left:'10vw', fontWeight:'bold'}}>css</h3>
+
+<h3 style={{fontSize:'12vw', opacity:'.1', transform: 'skewY(-120deg)', transform:'rotate(-37deg)', position:'absolute', bottom:'4vh', right:'0vw', fontWeight:'normal'}}>javascript</h3>
+
+<h3 style={{fontSize:'42vw', opacity:'.4', transform: 'skewY(-120deg)', transform:'rotate(7deg)', position:'absolute', bottom:'10vh', right:'10vw', fontWeight:'normal', color:'transparent', border:'0px solid white', textShadow:'0 0 0px #fff', filter:'drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.5))'}}>pwa</h3> */}
+
+</div>
+
+
+
+
 
 {/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={400}> */}
 <div className="logolink" style={{textAlign:'center', position:'relative',fontSize:'clamp(2rem, 12.5vw, 10rem)', padding:'0 0 2% 0', background:'tranparent', filter: 'drop-shadow(0px 0px 0px #444)'}}><span className="logofirst mainlogo">todd</span> <span className="logocolor">lambert</span></div>
@@ -688,7 +713,7 @@ fontSize:'clamp(1.6rem, 12vw, 3.8rem)',
 <h3 className="logotype"  style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', }}>About</h3>
 </div>
 
-<div className="div4" style={{background:'', maxHeight:'', justifyContent:'center', display:'flex', flexDirection:'column',}}>
+<div className="div4" style={{ background: 'rgba(196, 189, 179, .5)', maxHeight:'', justifyContent:'center', display:'flex', flexDirection:'column',}}>
 <div style={{padding:'0 8% 0 6.5%', fontSize:'clamp(1rem, 2vw, 2.8rem)',}}>
 <p>
 Todd Lambert is an award winning web designer and photographer that trained in Southern California and migrated to the Deep South where he found home living on the coastal Mississippi Sound.
@@ -788,6 +813,13 @@ fontSize:'clamp(1.3rem, 7vw, 2.8rem)',
 </blockquote>
 </ScrollAnimation>
 
+
+
+
+
+
+
+
 <section id="network">
 
 <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
@@ -806,10 +838,10 @@ position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto',
 
 <div className="flexbutt noexit print" style={{padding:'2rem 4%',
 position:'relative', height:'', width:'', overflow:'', display:'flex', gap
-  :'20px', margin:'0 auto', }}>
+  :'20px', margin:'0 auto', background: 'rgba(196, 189, 179, .4)' }}>
 
 
-    <div className="flexcheek network" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
+    <div className="flexcheek network" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between',}}>
     <a className="noexit" href="https://twilightscapes.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
     <StaticImage src="../../static/assets/twilightscapes-button.jpg" alt="Todd Lambert Night photos"  /></a>
     <br />
@@ -944,7 +976,7 @@ Lambert
 
 
 
-<section id="resume" style={{margin:'2rem 0'}}>
+<section id="resume" style={{margin:'2rem 0', background: 'rgba(196, 189, 179, .9)'}}>
 
 <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 
