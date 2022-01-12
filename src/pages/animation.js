@@ -162,7 +162,7 @@ export default function AnimationPage() {
 
 <a aria-label="Link to VidSocks.com" className="post-card noexit" rel="noreferrer" target="_blank" href="https://vidsocks.com" title="Link to VidSocks.com" style={{position:'absolute', left:'0', top:'10px', zIndex:'1', width:'60px',  background:'rgba(0, 0, 0, .9)', height:'260px', display:'flex', borderRadius:'0 12px 12px 0'}}>
   {/* <StaticImage className="button post-card" src="../../static/assets/legacy.png" alt="View Todd's Legacy Work" style={{height:'350px', borderRadius:'0 12px 12px 0', border:'1px solid #aaa', borderLeft:'0', boxShadow: '0px 0px 10px #333', opacity:''}}  /> */}
-  <div style={{position:'absolute', right:'130%', top:'', transform: 'rotate(90deg)', width:'', height:'100%', border:'0px solid red', color:'#fff',  textShadow: '1px 1px 0 rgba(121, 115, 115, 0.7)', whiteSpace:'nowrap',}}>Visit VidSocks.com</div>
+  <div style={{position:'absolute', right:'130%', top:'', transform: 'rotate(90deg)', width:'', height:'100%', border:'0px solid red', color:'#fff',  textShadow: '1px 1px 0 rgba(121, 115, 115, 0.7)', whiteSpace:'nowrap', fontWeight:'bold'}}>Visit VidSocks.com</div>
 </a>
 </div>
 

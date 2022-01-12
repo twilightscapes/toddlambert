@@ -241,7 +241,7 @@ export default function PortfolioPage() {
 
  <Link className="post-card" state={{modal: true}} to="/legacy/" title="View Todd's Legacy Work" style={{position:'absolute', left:'0', top:'10px', zIndex:'1', width:'60px',  background:'rgba(0, 0, 0, .9)', height:'350px', display:'flex', borderRadius:'0 12px 12px 0'}}>
   {/* <StaticImage className="button post-card" src="../../static/assets/legacy.png" alt="View Todd's Legacy Work" style={{height:'350px', borderRadius:'0 12px 12px 0', border:'1px solid #aaa', borderLeft:'0', boxShadow: '0px 0px 10px #333', opacity:''}}  /> */}
-  <div style={{position:'absolute', right:'180%', top:'', transform: 'rotate(90deg)', width:'', height:'100%', border:'0px solid red', color:'#fff',  textShadow: '1px 1px 0 rgba(121, 115, 115, 0.7)', whiteSpace:'nowrap',}}>View Legacy Work Here</div>
+  <div style={{position:'absolute', right:'180%', top:'', transform: 'rotate(90deg)', width:'', height:'100%', border:'0px solid red', color:'#fff',  textShadow: '1px 1px 0 rgba(121, 115, 115, 0.7)', whiteSpace:'nowrap', fontWeight:'bold'}}>View Legacy Work Here</div>
 </Link>
 </div>
 
