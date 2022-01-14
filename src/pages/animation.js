@@ -99,14 +99,14 @@ export default function AnimationPage() {
 
 <p className="todd-headline mouse" style={{textAlign:'center', margin:'1rem 0 10px 0'}}>Custom <span style={{textTransform:'uppercase'}}>SVG</span> Animation</p>
 
-<div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'280px', overflow:'hidden', position:'relative', margin:'0 0 1rem 0'}}>
+<div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'280px', overflow:'hidden', position:'relative', margin:'0 0 20vh 0', paddingBottom:'2rem'}}>
 
 <div className="RArrow" >
   <span>&#10095;</span>
 </div>
 
 
-<div className="horizontal-scroll-wrapper squares" style={{margin:'0 auto 0 auto', width:'', color:'#fff'}}>
+<div className="horizontal-scroll-wrapper squares" style={{margin:'20px auto 0 auto', width:'', color:'#fff'}}>
 
 <Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
   <StaticImage className="1" src="../../static/assets/transparent.png" alt="Done, you've viewed all of the images."  />
@@ -179,7 +179,7 @@ export default function AnimationPage() {
 
 
 
-<br /><br />
+
 
      
     

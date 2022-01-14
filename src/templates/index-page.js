@@ -613,21 +613,24 @@ background: 'rgba(196, 189, 179, .4)'
 
 
 {/* <LineTest /> */}
-<h3 style={{fontSize:'35vw', opacity:'.1', transform: 'skewY(20deg)', transform:'rotate(-8deg)'}}>design</h3>
 
-<h3 style={{fontSize:'35vw', opacity:'.1', transform: 'skewY(-120deg)', transform:'rotate(14deg)', top:'35vh'}}>gatsby</h3>
 
-<h3 style={{fontSize:'20vw', opacity:'.1', transform: 'skewY(-20deg)', transform:'rotate(-7deg)', position:'absolute', top:'2vh', fontWeight:'bold'}}>≺code≻</h3>
 
-<h3 style={{fontSize:'20vw', opacity:'.2', transform: 'skewY(140deg)', transform:'rotate(-2deg)', position:'absolute', top:'-12vh', fontWeight:'bold'}}>php</h3>
+<h3 style={{fontSize:'25vw', opacity:'.1', transform: 'skewY(-120deg)', transform:'rotate(7deg)', bottom:'35vh'}}>gatsby</h3>
 
-<h3 style={{fontSize:'18vw', opacity:'.2', transform: 'skewY(-20deg)', transform:'rotate(32deg)', position:'absolute', top:'-5vh', right:'0', fontWeight:'normal'}}><i>html</i></h3>
+<h3 style={{fontSize:'35vw', opacity:'.1', transform: 'skewY(20deg)', transform:'rotate(-8deg)', bottom:'0', border:'0px solid red'}}>design</h3>
 
-<h3 style={{fontSize:'18vw', opacity:'.2', transform: 'skewY(-20deg)', transform:'rotate(27deg)', position:'absolute', bottom:'1vh', left:'10vw', fontWeight:'bold'}}>css</h3>
+<h3 style={{fontSize:'20vw', opacity:'.1', transform: 'skewY(-20deg)', transform:'rotate(2deg)', position:'absolute', top:'39vh', left:'20vw', fontWeight:'bold'}}>≺code≻</h3>
 
-<h3 style={{fontSize:'12vw', opacity:'.1', transform: 'skewY(-120deg)', transform:'rotate(-37deg)', position:'absolute', bottom:'4vh', right:'0vw', fontWeight:'normal'}}>javascript</h3>
+<h3 style={{fontSize:'10vw', opacity:'.2', transform: 'skewY(140deg)', transform:'rotate(-15deg)', position:'absolute', top:'0', fontWeight:'bold'}}>php</h3>
 
-<h3 style={{fontSize:'42vw', opacity:'.1', transform: 'skewY(-120deg)', transform:'rotate(7deg)', position:'absolute', bottom:'10vh', right:'10vw', fontWeight:'normal', color:'transparent', border:'0px solid white', textShadow:'0 0 0px #fff', filter:'drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.5))'}}>pwa</h3>
+<h3 style={{fontSize:'18vw', opacity:'.2', transform: 'skewY(-0deg)', transform:'rotate(32deg)', position:'absolute', top:'0vh', right:'0', fontWeight:'normal', color:'#000'}}><i>html</i></h3>
+
+<h3 style={{fontSize:'18vw', opacity:'.2', transform: 'skewY(-20deg)', transform:'rotate(27deg)', position:'absolute', top:'60vh', left:'3vw', fontWeight:'bold'}}>css</h3>
+
+<h3 style={{fontSize:'12vw', opacity:'.1', transform: 'skewY(-120deg)', transform:'rotate(-21deg)', position:'absolute', bottom:'18vh', right:'0vw', fontWeight:'normal'}}>javascript</h3>
+
+<h3 style={{fontSize:'42vw', opacity:'.1', transform: 'skewY(-120deg)', transform:'rotate(7deg)', position:'absolute', top:'70vh', right:'10vw', fontWeight:'normal', color:'transparent', border:'0px solid white', textShadow:'0 0 0px #fff', filter:'drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.5))'}}>pwa</h3>
 
 
 </div>
@@ -815,7 +818,7 @@ paddingLeft:'',
 
 
 <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={300}>
-<blockquote style={{fontFamily:'Lobster Two', textAlign:'left', padding:'', borderRadius:'12px', background: 'rgba(196, 189, 179, .7)', fontSize:'clamp(1.5rem, 2.6vw, 2.8rem)', filter:'drop-shadow(-12px -12px 12px rgba(44, 44, 44, 0.5))'}}>
+<blockquote style={{fontFamily:'Lobster Two', textAlign:'left', padding:'', borderRadius:'12px', background: 'rgba(196, 189, 179, .7)', fontSize:'clamp(1.5rem, 2.6vw, 2.8rem)', filter:'drop-shadow(-12px 12px 12px rgba(44, 44, 44, 0.5))'}}>
   <div style={{padding:'2rem 10% 0 10%', filter:'none', textShadow:'1px 1px 0 #aaa'}}>
   Experience has taught me that good design is not created on a spur of the moment, nor does it come naturally. Good design is a thorough and interative process with site visitors in mind foremost. Good design is identifying a problem for those visitors and removing that problem.
 
@@ -838,15 +841,17 @@ paddingLeft:'',
 
 <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 
-<div style={{padding:'0 0 1rem 0',
+<div style={{padding:'0 0 0 0',
 position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', 
 // outline:'18px dashed rgba(121, 115, 115, 0.3)',
 // border:'0px solid rgba(121, 115, 115, 0.3)',
-//  background:'rgba(121, 115, 115, 0.2)',
- background: 'rgba(196, 189, 179, .9)',
+ background:'rgba(121, 115, 115, 0.5)',
+
 //  background:'rgba(192, 181, 181, 0.6))'
 //  background: 'rgba(196, 189, 179, .9)'
- 
+
+
+  // background: 'rgba(196, 189, 179, .9)',
  }}>
 
 
@@ -910,20 +915,21 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
 
 
 
-<div style={{padding:'0 0 1rem 0',
+<div style={{padding:'0 0 0 0',
 position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto',
 //  outline:'18px dashed rgba(121, 115, 115, 0.3)', 
  borderRadius:'', 
  border:'0px solid rgba(121, 115, 115, 0.3)', 
 //  background:'rgba(0, 0, 0, 0.3)',
 //  background:'rgba(121, 115, 115, 0.2)',
- background: 'rgba(196, 189, 179, .9)',
+//  background: 'rgba(196, 189, 179, .9)',
+ background:'rgba(121, 115, 115, 0.5)',
 zIndex:'0'
 //  textShadow: '1px 1px 0 rgba(121, 115, 115, 0.7)',
  }}>
 
 
- <h3 className="logotype" style={{textAlign:'center', margin:'0 0 0 0', fontSize:'5vw', clear:'right', paddingTop:'1rem',}}>Portfolio</h3>
+ <h3 className="logotype" style={{textAlign:'center', margin:'0 0 0 0', fontSize:'5vw', clear:'right', paddingTop:'0',}}>Portfolio</h3>
 <br />
 
 <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
@@ -937,40 +943,6 @@ zIndex:'0'
 <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 <Animation />
 </ScrollAnimation>
-
-{/* <SRLWrapper options={options} className="1">
-
-<div className="masonry4" style={{display:''}}>
-
-<div style={{textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
-  <StaticImage className="1" src="../../static/assets/tle-portfolio-spotlights.png" alt="Todd builds Web Apps" style={{}}  />
-<br />
-Concept to Conception
-</div>
-
-<div style={{textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
-<StaticImage className="1" src="../../static/assets/tle-portfolio-spotlights2.png" alt="Todd builds Web Apps"  />
-<br />
-Concept to Conception
-</div>
-
-<div style={{textAlign:'center', filter: 'drop-shadow(0px 0px 10px #444)',}}>
-<StaticImage className="1" src="../../static/assets/tle-portfolio-spotlights3.png" alt="Todd builds Web Apps"  />
-<br />
-Homepage Redesign and Product Portal
-</div>
-
-</div>
-</SRLWrapper> */}
-
-
-
-  {/* <article className="post-card button" style={{ display:'flex', maxWidth:'400px', justifyContent:'center', border:'1px solid', padding:'', margin:'2rem auto', fontSize:'150%', textAlign:'center', }}>
-  <Link to="/posts/" style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
-    View More <RiArrowRightSLine style={{fontSize:'50px'}} />
-    </Link>
-    </article> */}
-
   </div>
 
 

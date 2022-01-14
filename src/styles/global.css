@@ -2478,7 +2478,9 @@ border:1px solid #222;
 
 
 
-      body.homepage footer{background: #111;}
+      body.homepage footer{background: #111;
+        filter:drop-shadow(0 -10px 10px  rgba(44, 44, 44, 0.6));
+      }
 
 
       .footerStyle {
@@ -3074,13 +3076,16 @@ margin: 0 !important;
               #deskPlayer{display: none;}
                 
                 footer{background-color: #111; padding:.1rem 0rem; margin:0; display:flex; justify-content: center; color:#fff !important; position:relative; bottom:0 ; z-index: 2; opacity: 1;
-                  background: linear-gradient(
+                  /* background: linear-gradient(
                     0deg,
-                     #111,
-                      #222,
-                       #000,
-                        #111);
-                  background-size: 300% 300%;
+                     rgb(68, 66, 66),
+                      rgb(77, 77, 77),
+                       #111,
+                        #000)
+                        !important;
+                  background-size: 200% 00%; */
+                  background: linear-gradient(180deg, #333 1%, #111 80%) !important;
+                  
                   /* animation: gradient 12s ease infinite; */
                 }
 
@@ -3170,7 +3175,7 @@ opacity:.8;
       @media (hover: none) {
         .container2 {
           overflow-y: scroll;
-          scroll-snap-type: y proximity;
+          /* scroll-snap-type: y proximity; */
           height:90vh;
         }
         .container2 section {
@@ -3587,7 +3592,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                 transform: rotate(-90deg) translateY(-350px);
                 transform-origin: right top;
                 transition: transform .2s;
-                scroll-snap-type: y proximity;
+                /* scroll-snap-type: both proximity; */
                 scroll-padding: 0 0 0 0;
               }
               .horizontal-scroll-wrapper > * {
@@ -3614,7 +3619,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
               
   @media (pointer: coarse) {
   .horizontal-scroll-wrapper {
-  scroll-snap-type: y proximity;
+  scroll-snap-type: both proximity;
   }
   .RArrow span::before{
   content:"swipe " !important;

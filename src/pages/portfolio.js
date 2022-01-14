@@ -83,7 +83,7 @@ export default function PortfolioPage() {
    return (
 
 <>
-    // <CustomBox>
+     <CustomBox>
     {/* <Layout className="thanks-page">
 
 <Seo
@@ -118,7 +118,7 @@ export default function PortfolioPage() {
 </div>
 
 
-<div className="horizontal-scroll-wrapper squares" style={{margin:'30px auto 0 auto', width:'', padding:'30px 0'}}>
+<div className="horizontal-scroll-wrapper squares" style={{margin:'40px auto 0 auto', width:'', padding:'30px 0'}}>
 
 
 <StaticImage
@@ -255,7 +255,7 @@ export default function PortfolioPage() {
      
     
     {/* </Layout> */}
-// </CustomBox>
+ </CustomBox>
 </>
   )
 }
