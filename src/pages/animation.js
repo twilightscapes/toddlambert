@@ -101,13 +101,13 @@ export default function AnimationPage() {
 
 {/* <div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'60vh !important', overflow:'hidden', position:'relative', margin:'0 0 20vh 0', paddingBottom:'2rem'}}> */}
 
-<div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'', overflow:'hidden', position:'relative', padding:' 0',}}>
+<div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'34vh', overflow:'hidden', position:'relative',}}>
 
 <div className="RArrow" />
 
 
 
-<div className="horizontal-scroll-wrapper squares" style={{margin:'20px auto 0 auto', width:'', color:'#fff'}}>
+<div className="horizontal-scroll-wrapper squares" style={{margin:'0 auto 0 auto', width:'calc(30vw + 1px)', transform: 'rotate(-90deg) translateY(-30vw)', padding:'30px', color:'#fff',}}>
 
 <Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
   <StaticImage className="1" src="../../static/assets/transparent.png" alt="Done, you've viewed all of the images."  />
@@ -163,7 +163,7 @@ export default function AnimationPage() {
 
 <a aria-label="Link to VidSocks.com" className="post-card noexit" rel="noreferrer" target="_blank" href="https://vidsocks.com" title="Link to VidSocks.com" style={{position:'absolute', left:'0', top:'', zIndex:'1', width:'50px', background:'rgba(0, 0, 0, .9)', height:'95%', display:'flex', flexDirection:'column', justifyContent:'center', borderRadius:'0 12px 12px 0', border:'1px solid #999 !important', borderLeft:'none !important', margin:'10px 0'}}>
 
-  <div style={{position:'', left:'', top:'', transform: 'rotate(90deg)', width:'100%', height:'', border:'0px solid red', color:'#fff',  textShadow: '1px 1px 0 rgba(121, 115, 115, 0.7)', whiteSpace:'nowrap', fontWeight:'bold', margin:'-60px auto 0 auto'}}>Visit VidSocks.com</div>
+  <div style={{position:'', left:'', top:'', transform: 'rotate(90deg)', width:'100%', height:'', border:'0px solid red', color:'#fff',  textShadow: '1px 1px 0 rgba(121, 115, 115, 0.7)', whiteSpace:'nowrap', fontWeight:'bold', margin:'-80px auto 0 auto'}}>Visit VidSocks.com</div>
 </a>
 </div>
 
