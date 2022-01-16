@@ -113,7 +113,7 @@ export default function PortfolioPage() {
 </Link>
 </div> */}
 
-<div className="RArrow" />
+<div className="RArrow"><span></span></div>
 
 
 <div className="horizontal-scroll-wrapper squares" style={{margin:'0 auto 0 auto', width:'calc(40vw + 1px)', transform: 'rotate(-90deg) translateY(-40vw)', padding:'30px'}}>

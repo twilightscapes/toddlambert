@@ -3659,9 +3659,13 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
              }
              .RArrow{
                position:absolute;
-               z-index: 2;
+               z-index: 5;
                right:20px;
-               bottom:20px;
+               bottom:10px;
+               border:0px solid red !important;
+               color:#999;
+               /* height:60px;
+               width:60px; */
                /* animation: fadeout 3s forwards; */
              }
              .RArrow span{

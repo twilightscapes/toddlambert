@@ -103,7 +103,7 @@ export default function AnimationPage() {
 
 <div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'34vh', overflow:'hidden', position:'relative',}}>
 
-<div className="RArrow" />
+<div className="RArrow"><span></span></div>
 
 
 

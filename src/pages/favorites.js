@@ -105,7 +105,7 @@ export default function favPage() {
 <div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'50vh', overflow:'hidden', position:'relative',}}>
 
 
-  <div className="RArrow" />
+<div className="RArrow"><span></span></div>
 
 
 {/* <div className="horizontal-scroll-wrapper squares" style={{margin:'30px auto 0 auto', width:'', padding:'30px 0'}}> */}
