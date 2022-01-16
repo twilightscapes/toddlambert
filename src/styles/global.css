@@ -3647,9 +3647,9 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                           
                            
                @media (pointer: coarse) {
-               .horizontal-scroll-wrapper {
+               /* .horizontal-scroll-wrapper {
                 scroll-snap-type: y mandatory;
-               }
+               } */
                .RArrow span::before{
                content:"\276E \276E swipe" !important;
                }
