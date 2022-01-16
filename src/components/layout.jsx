@@ -74,7 +74,7 @@ export function Layout({ children }) {
       <div className="" style={{overflow:''}}>
         {modal ? (
           <>
-<Link className="test2" state={{noScroll: true }} to={closeTo} style={{display:'flex', position:'absolute', alignSelf:'center', bottom:'0', textAlign:'center', margin:'0 auto', width:'100%', textDecoration:'underline', justifyContent:'center'}}>Close &amp; Return</Link>
+<Link className="test testbottom" state={{noScroll: true }} to={closeTo} style={{display:'flex', position:'absolute', alignSelf:'center', bottom:'0', textAlign:'center', margin:'0 auto', width:'100%', textDecoration:'underline', justifyContent:'center'}}>Close &amp; Return</Link>
 <div className="closer">
 {/* <FullScreen className="test" /> */}
 
