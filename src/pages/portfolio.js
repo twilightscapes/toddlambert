@@ -101,7 +101,7 @@ export default function PortfolioPage() {
 
 
 
-  <div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'375px', overflow:'hidden', position:'relative', padding:' 0',}}>
+  <div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'', overflow:'hidden', position:'relative', padding:' 0',}}>
 
 
 
@@ -113,12 +113,10 @@ export default function PortfolioPage() {
 </Link>
 </div> */}
 
-<div className="RArrow">
-  <span>&#10095;</span>
-</div>
+<div className="RArrow" />
 
 
-<div className="horizontal-scroll-wrapper squares" style={{margin:'40px auto 0 auto', width:'', padding:'30px 0'}}>
+<div className="horizontal-scroll-wrapper squares" style={{margin:'0 auto 0 auto', width:'', padding:'0 0'}}>
 
 
 <StaticImage
@@ -239,9 +237,9 @@ export default function PortfolioPage() {
      </div>
 
 
- <Link className="post-card11" state={{modal: true}} to="/legacy/" title="View Todd's Legacy Work" style={{position:'absolute', left:'0', top:'', zIndex:'1', width:'80px', background:'rgba(0, 0, 0, .9)', height:'96%', display:'flex', flexDirection:'column', justifyContent:'center', borderRadius:'0 12px 12px 0', border:'1px solid #999 !important', borderLeft:'none !important', margin:'10px 0'}}>
+ {/* <Link className="post-card11" state={{modal: true}} to="/legacy/" title="View Todd's Legacy Work" style={{position:'absolute', left:'0', top:'', zIndex:'1', width:'50px', background:'rgba(0, 0, 0, .9)', height:'96%', display:'flex', flexDirection:'column', justifyContent:'center', borderRadius:'0 12px 12px 0', border:'1px solid #999 !important', borderLeft:'none !important', margin:'10px 0'}}>
   <div style={{position:'', left:'', top:'', transform: 'rotate(90deg)', width:'100%', height:'', border:'0px solid red', color:'#fff',  textShadow: '1px 1px 0 rgba(121, 115, 115, 0.7)', whiteSpace:'nowrap', fontWeight:'bold', margin:'-60px auto 0 auto'}}>View Legacy Work Here</div>
-</Link>
+</Link> */}
 
 {/* <a aria-label="Link to VidSocks.com" className="post-card11 noexit" rel="noreferrer" target="_blank" href="https://twilightscapes.com" title="Link to VidSocks.com" style={{position:'absolute', left:'0', top:'', zIndex:'1', width:'80px', background:'rgba(0, 0, 0, .9)', height:'96%', display:'flex', flexDirection:'column', justifyContent:'center', borderRadius:'0 12px 12px 0', border:'1px solid #999 !important', borderLeft:'none !important', margin:'10px 0'}}>
 

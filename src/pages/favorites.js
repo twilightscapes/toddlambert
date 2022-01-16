@@ -105,9 +105,7 @@ export default function favPage() {
   <div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'', overflow:'hidden', position:'relative', padding:' 0', margin:'0 0 0 0'}}>
 
 
-<div className="RArrow">
-  <span>&#10095;</span>
-</div>
+  <div className="RArrow" />
 
 
 <div className="horizontal-scroll-wrapper squares" style={{margin:'30px auto 0 auto', width:'', padding:'30px 0'}}>
@@ -303,7 +301,7 @@ export default function favPage() {
      </div>
 
 
-     <a aria-label="Link to VidSocks.com" className="post-card11 noexit" rel="noreferrer" target="_blank" href="https://twilightscapes.com" title="Link to VidSocks.com" style={{position:'absolute', left:'0', top:'', zIndex:'1', width:'80px', background:'rgba(0, 0, 0, .9)', height:'96%', display:'flex', flexDirection:'column', justifyContent:'center', borderRadius:'0 12px 12px 0', border:'1px solid #999 !important', borderLeft:'none !important', margin:'10px 0'}}>
+     <a aria-label="Link to VidSocks.com" className="post-card11 noexit" rel="noreferrer" target="_blank" href="https://twilightscapes.com" title="Link to VidSocks.com" style={{position:'absolute', left:'0', top:'', zIndex:'1', width:'50px', background:'rgba(0, 0, 0, .9)', height:'96%', display:'flex', flexDirection:'column', justifyContent:'center', borderRadius:'0 12px 12px 0', border:'1px solid #999 !important', borderLeft:'none !important', margin:'10px 0'}}>
 
   <div  style={{position:'', left:'', top:'', transform: 'rotate(90deg)', width:'100%', height:'', border:'0px solid red', color:'#fff',  textShadow: '1px 1px 0 rgba(121, 115, 115, 0.7)', whiteSpace:'nowrap', fontWeight:'bold', margin:'-60px auto 0 auto'}}>Visit Twilightscapes.com</div>
 </a>
