@@ -3635,11 +3635,11 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                           @media (max-width: 48rem) {
                             .sliderholder{height:45vh !important;}
                             .horizontal-scroll-wrapper{margin:0 auto 0 auto !important;
-                              width: calc(350px + 1px) !important;
-                            transform: rotate(-90deg) translateY(-350px) !important;
+                              width: calc(50vh + 1px) !important;
+                            transform: rotate(-90deg) translateY(-50vh) !important;
                             }
                             .squares > * {
-                              max-height: 350px !important; 
+                              max-height: 35vh !important; 
                             }
                           }
 
