@@ -6,7 +6,7 @@ import { StaticImage } from "gatsby-plugin-image"
 // import { Seo } from "../components/seo"
 // import CasePanels from "../components/casepanels"
 
-import { SRLWrapper } from "simple-react-lightbox"
+import SimpleReactLightbox, { SRLWrapper } from "simple-react-lightbox"
 
 import styled from "styled-components"
 const CustomBox = styled.div`
@@ -93,7 +93,7 @@ export default function PortfolioPage() {
         /> */}
     
     {/* <div className="spacer66"></div> */}
-<SRLWrapper options={options}>
+
   
 {/* <p style={{textAlign:'center', margin:'4rem 0 10px 0'}}>Custom SVG Animations</p> */}
 
@@ -116,16 +116,14 @@ export default function PortfolioPage() {
 <div className="RArrow"><span></span></div>
 
 
+<SimpleReactLightbox>
+<SRLWrapper options={options}>
+
 <div className="horizontal-scroll-wrapper squares" style={{margin:'0 auto 0 auto', width:'calc(40vw + 1px)', transform: 'rotate(-90deg) translateY(-40vw)', padding:'30px'}}>
 
 
-<StaticImage
-        src="../../static/assets/transparent.png"
-        alt="-->Done, you've viewed all of the images.<--"
-        srl_gallery_image="true"
-        className="item"
-        style={{width:'400px'}}
-      />
+<div style={{width:'1000px', height:'1000px'}}></div>
+
 <StaticImage
         src="../../static/assets/tle-portfolio-spotlights2.png"
         alt="[PaleoBurn] website, mobile app, product portal, direct marketing, funnel marketing"
@@ -236,7 +234,8 @@ export default function PortfolioPage() {
  
      </div>
 
-
+</SRLWrapper>
+</SimpleReactLightbox>
  <Link className="post-card11" state={{modal: true}} to="/legacy/" title="View Todd's Legacy Work" style={{position:'absolute', left:'0', top:'', zIndex:'1', width:'50px', background:'rgba(0, 0, 0, .9)', height:'95%', display:'flex', flexDirection:'column', justifyContent:'center', borderRadius:'0 12px 12px 0', border:'1px solid #999 !important', borderLeft:'none !important', margin:'8px 0'}}>
   <div style={{position:'', left:'', top:'', transform: 'rotate(90deg)', width:'100%', height:'', border:'0px solid red', color:'#fff',  textShadow: '1px 1px 0 rgba(121, 115, 115, 0.7)', whiteSpace:'nowrap', fontWeight:'bold', margin:'-120px auto 0 auto'}}>View Legacy Work Here</div>
 </Link>
@@ -252,7 +251,6 @@ export default function PortfolioPage() {
 
 
 
-</SRLWrapper>
 
 
 

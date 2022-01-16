@@ -6,8 +6,7 @@ import { StaticImage } from "gatsby-plugin-image"
 // import { Seo } from "../components/seo"
 // import CasePanels from "../components/casepanels"
 
-import { SRLWrapper } from "simple-react-lightbox"
-
+import SimpleReactLightbox, { SRLWrapper } from "simple-react-lightbox"
 import styled from "styled-components"
 
 const CustomBox = styled.div`
@@ -94,7 +93,7 @@ export default function favPage() {
         /> */}
     
     {/* <div className="spacer66"></div> */}
-<SRLWrapper options={options} className="">
+    
   
 {/* <p style={{textAlign:'center', margin:'4rem 0 10px 0'}}>Custom SVG Animations</p> */}
 
@@ -106,19 +105,14 @@ export default function favPage() {
 
 
 <div className="RArrow"><span></span></div>
-
+<SimpleReactLightbox>
+<SRLWrapper options={options} className="">
 
 {/* <div className="horizontal-scroll-wrapper squares" style={{margin:'30px auto 0 auto', width:'', padding:'30px 0'}}> */}
 <div className="horizontal-scroll-wrapper squares" style={{margin:'0 auto 0 auto', width:'calc(40vw + 1px)', transform: 'rotate(-90deg) translateY(-40vw)', padding:'30px'}}>
 
-<StaticImage
-        src="../../static/assets/transparent.png"
-        alt="-->Done, you've viewed all of the images.<--"
-        srl_gallery_image="true"
-        className="item"
-        style={{width:''}}
-      />
 
+<div style={{width:'1000px', height:'1000px'}}></div>
 
 <StaticImage
         src="../../src/img/favorites/night165.jpg"
@@ -300,7 +294,9 @@ export default function favPage() {
  
      </div>
 
+</SRLWrapper>
 
+</SimpleReactLightbox>
      <a aria-label="Link to VidSocks.com" className="post-card11 noexit" rel="noreferrer" target="_blank" href="https://twilightscapes.com" title="Link to VidSocks.com" style={{position:'absolute', left:'0', top:'', zIndex:'1', width:'50px', background:'rgba(0, 0, 0, .9)', height:'96%', display:'flex', flexDirection:'column', justifyContent:'center', borderRadius:'0 12px 12px 0', border:'1px solid #999 !important', borderLeft:'none !important', margin:'10px 0'}}>
 
   <div  style={{position:'', left:'', top:'', transform: 'rotate(90deg)', width:'100%', height:'', border:'0px solid red', color:'#fff',  textShadow: '1px 1px 0 rgba(121, 115, 115, 0.7)', whiteSpace:'nowrap', fontWeight:'bold', margin:'-140px auto 0 auto'}}>Visit Twilightscapes.com</div>
@@ -333,8 +329,6 @@ export default function favPage() {
 
 
 
-
-</SRLWrapper>
 
 
 

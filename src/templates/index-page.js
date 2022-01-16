@@ -845,7 +845,7 @@ paddingLeft:'',
 position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', 
 // outline:'18px dashed rgba(121, 115, 115, 0.3)',
 // border:'0px solid rgba(121, 115, 115, 0.3)',
- background:'rgba(121, 115, 115, 0.5)',
+//  background:'rgba(121, 115, 115, 0.5)',
 
 //  background:'rgba(192, 181, 181, 0.6))'
 //  background: 'rgba(196, 189, 179, .9)'
@@ -923,7 +923,7 @@ position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto',
 //  background:'rgba(0, 0, 0, 0.3)',
 //  background:'rgba(121, 115, 115, 0.2)',
 //  background: 'rgba(196, 189, 179, .9)',
- background:'rgba(121, 115, 115, 0.5)',
+//  background:'rgba(121, 115, 115, 0.5)',
 zIndex:'0'
 //  textShadow: '1px 1px 0 rgba(121, 115, 115, 0.7)',
  }}>
@@ -931,6 +931,7 @@ zIndex:'0'
 
  <h3 className="logotype" style={{textAlign:'center', margin:'0 0 0 0', fontSize:'5vw', clear:'right', paddingTop:'0',}}>Portfolio</h3>
 <br />
+
 
 <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 <Portfolio />
