@@ -3648,7 +3648,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                            
                @media (pointer: coarse) {
                .horizontal-scroll-wrapper {
-               scroll-snap-type: both mandatory;
+                scroll-snap-type: y mandatory;
                }
                .RArrow span::before{
                content:"\276E \276E swipe" !important;
