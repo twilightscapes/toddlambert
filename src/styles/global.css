@@ -3553,8 +3553,8 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
              
              filter: drop-shadow(0px 0px 0px #ccc);
              height:100%;
-                             max-height: 65vh !important;
-                      
+                             max-height: 65vh ;
+                            padding-left:20vw;
                            }
              
              
@@ -3596,19 +3596,23 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
              
                            
               
-                           .sliderholder::before{
-                             content:' ';
-                             position:absolute;
-                             z-index: 1;
-                             display: block;
-                             width: 100%;
-                             height:100%;
-                             background-color: rgb(187 54 0);
-                             opacity:0;
-                           }
+                     
 
                            @media (hover: hover) {
 
+
+                            .sliderholder::before{
+                              content:' ';
+                              position:absolute;
+                              z-index: 1;
+                              display: block;
+                              width: 100%;
+                              height:100%;
+                              background-color: rgb(187 54 0);
+                              opacity:0;
+                            }
+
+                            
                            .sliderholder:hover::before{
                             animation: move 4s; 
                            }
@@ -3672,9 +3676,9 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                            }
                            .squares > * {
                              /* max-width: 400px; */
-                             height: 70vh;
+                             /* height: 70vh; */
                              margin: 0 0 50% 0;
-                             padding: 0 0 !important;
+                             padding: 0 0;
                              /* filter: drop-shadow(0px 0px 5px rgba(44, 44, 44, 0.8)); */
                            }
                            

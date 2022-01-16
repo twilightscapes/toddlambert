@@ -101,7 +101,7 @@ export default function PortfolioPage() {
 
 
 
-  <div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'', overflow:'hidden', position:'relative', padding:' 0',}}>
+  <div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'30vh', overflow:'hidden', position:'relative', padding:' 0',}}>
 
 
 
