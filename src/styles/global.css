@@ -3696,9 +3696,9 @@ height:100%;
               }
               
   @media (pointer: coarse) {
-  .horizontal-scroll-wrapper {
+  /* .horizontal-scroll-wrapper {
   scroll-snap-type: y mandatory;
-  }
+  } */
   .RArrow span::before{
   content:"\2329  swipe" !important;
   }
