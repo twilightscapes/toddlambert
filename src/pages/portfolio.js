@@ -101,7 +101,7 @@ export default function PortfolioPage() {
 
 
 
-  <div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'35vh', overflow:'hidden', position:'relative',}}>
+  <div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'60vh', overflow:'hidden', position:'relative',}}>
 
 
 
@@ -119,11 +119,17 @@ export default function PortfolioPage() {
 <SimpleReactLightbox>
 <SRLWrapper options={options}>
 
-<div className="horizontal-scroll-wrapper squares" style={{margin:'0 auto 0 auto', width:'calc(30vw + 1px)', transform: 'rotate(-90deg) translateY(-30vw)', padding:'30px'}}>
+<div className="horizontal-scroll-wrapper squares" style={{margin:'0 auto 0 auto', width:'calc(60vw + 1px)', transform: 'rotate(-90deg) translateY(-60vw)', padding:'30px'}}>
 
 
 {/* <div style={{width:'1000px', height:'1000px'}}></div> */}
 <div className="introspacer" style={{}}></div>
+
+{/* <Link state={{modal: true}} to="/twilightscapes/" className="" style={{fontSize:'', textDecoration:'none', textAlign:'center', }}>
+  <StaticImage className="1" src="../../static/assets/Experiences-Header-5.jpg" alt="Todd builds Web Apps"  />
+  Animated SVG &amp; Photo &amp; Video
+</Link> */}
+
 
 <StaticImage
         src="../../static/assets/tle-portfolio-spotlights2.png"
@@ -232,11 +238,11 @@ export default function PortfolioPage() {
        srl_gallery_image="true"
        className="item"
      /> */} 
- 
-     </div>
 
-</SRLWrapper>
+     </div>
+ </SRLWrapper>
 </SimpleReactLightbox>
+
  <Link className="post-card11" state={{modal: true}} to="/legacy/" title="View Todd's Legacy Work" style={{position:'absolute', left:'0', top:'', zIndex:'1', width:'50px', background:'rgba(0, 0, 0, .9)', height:'95%', display:'flex', flexDirection:'column', justifyContent:'center', borderRadius:'0 12px 12px 0', border:'1px solid #999 !important', borderLeft:'none !important', margin:'8px 0'}}>
   <div style={{position:'', left:'', top:'', transform: 'rotate(90deg)', width:'100%', height:'', border:'0px solid red', color:'#fff',  textShadow: '1px 1px 0 rgba(121, 115, 115, 0.7)', whiteSpace:'nowrap', fontWeight:'bold', margin:'-120px auto 0 auto'}}>View Legacy Work Here</div>
 </Link>
