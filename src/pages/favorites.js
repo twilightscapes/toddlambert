@@ -101,7 +101,8 @@ export default function favPage() {
 
 <p className="todd-headline mouse" style={{textAlign:'center', margin:'1rem 0 10px 0'}}>Conceptual Photography</p>
 
-<div className="sliderholder stack-layout" style={{display:'flex', justifyContent:'center', width:'100%', overflow:'hidden', position:'relative', padding:' 0',}}>
+
+<div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'35vh', overflow:'hidden', position:'relative',}}>
 
 
 <div className="RArrow"><span></span></div>
@@ -109,10 +110,11 @@ export default function favPage() {
 <SRLWrapper options={options} className="">
 
 {/* <div className="horizontal-scroll-wrapper squares" style={{margin:'30px auto 0 auto', width:'', padding:'30px 0'}}> */}
-<div className="horizontal-scroll-wrapper squares" style={{ width:'', padding:'0'}}>
+<div className="horizontal-scroll-wrapper squares" style={{margin:'0 auto 0 auto', width:'calc(30vw + 1px)', transform: 'rotate(-90deg) translateY(-30vw)', padding:'30px'}}>
 
 
-<div style={{width:'1000px', height:'1000px'}}></div>
+{/* <div style={{width:'1000px', height:'1000px'}}></div> */}
+<div className="introspacer" style={{}}></div>
 
 <StaticImage
         src="../../src/img/favorites/night165.jpg"
