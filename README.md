@@ -53,7 +53,7 @@ We have written a short article on [Custom domain with Netlify website](custom-d
 
 ## 🙏 Thank you
 
-We really appreciate you taking time to build your website with our VidSock.
+We really appreciate you taking time to build your website with VidSocks.
 
 
 [gatsby]: https://gatsbyjs.org

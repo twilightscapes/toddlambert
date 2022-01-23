@@ -100,8 +100,7 @@ export default function PortfolioPage() {
 
 
 
-
-  <div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'48vh', overflow:'hidden', position:'relative',}}>
+<div className="sliderholder stack-layout" style={{display:'flex', justifyContent:'center', width:'100%', overflow:'hidden', position:'relative', padding:' 0',}}>
 
 
 
@@ -119,7 +118,7 @@ export default function PortfolioPage() {
 <SimpleReactLightbox>
 <SRLWrapper options={options}>
 
-<div className="horizontal-scroll-wrapper squares" style={{margin:'0 auto 0 auto', width:'calc(40vw + 1px)', transform: 'rotate(-90deg) translateY(-40vw)', padding:'30px'}}>
+<div className="horizontal-scroll-wrapper squares" style={{ width:'', padding:'0'}}>
 
 
 <div style={{width:'1000px', height:'1000px'}}></div>

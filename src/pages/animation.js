@@ -101,13 +101,13 @@ export default function AnimationPage() {
 
 {/* <div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'60vh !important', overflow:'hidden', position:'relative', margin:'0 0 20vh 0', paddingBottom:'2rem'}}> */}
 
-<div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'34vh', overflow:'hidden', position:'relative',}}>
+<div className="sliderholder stack-layout" style={{display:'flex', justifyContent:'center', width:'100%', overflow:'hidden', position:'relative', padding:' 0',}}>
 
 <div className="RArrow"><span></span></div>
 
 
 
-<div className="horizontal-scroll-wrapper squares" style={{margin:'0 auto 0 auto', width:'calc(30vw + 1px)', transform: 'rotate(-90deg) translateY(-30vw)', padding:'30px', color:'#fff',}}>
+<div className="horizontal-scroll-wrapper squares" style={{ width:'', padding:'0'}}>
 
 <Link state={{modal: true}} to="/transcendence/" className="" style={{margin:'', textDecoration:'none', fontSize:'', textAlign:'center',}}>
   <StaticImage className="1" src="../../static/assets/transparent.png" alt="Done, you've viewed all of the images."  />
