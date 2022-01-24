@@ -3659,12 +3659,12 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                               max-height: 35vh !important; 
                             }
 
-                            @media (pointer: coarse) {
+                            /* @media (pointer: coarse) {
                               .horizontal-scroll-wrapper {
                                scroll-snap-type: y mandatory;
                               }
                     
-                            }
+                            } */
                             
                           }
 
