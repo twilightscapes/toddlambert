@@ -16,16 +16,17 @@ import { StaticImage } from "gatsby-plugin-image"
 // import { useSiteMetadata } from "../hooks/use-site-metadata"
 import ReactPlayer from 'react-player/lazy'
 // import { ImPlay } from "react-icons/im"
-import LineTest from "../../static/assets/textualhealing.svg"
-import Portfolio from "../pages/portfolio"
-import Photos from "../pages/favorites"
-import Animation from "../pages/animation"
+// import LineTest from "../../static/assets/textualhealing.svg"
+// import Portfolio from "../pages/portfolio"
+// import Photos from "../pages/favorites"
+// import Animation from "../pages/animation"
+import SimpleReactLightbox, { SRLWrapper } from "simple-react-lightbox"
 import styled from "styled-components"
 import Newsignup from "../components/newssign"
 import BlogListHome from "../components/blog-list-home"
 import { Seo } from "../components/seo"
 import { Layout } from "../components/layout"
-import { SRLWrapper } from "simple-react-lightbox"
+
 const CustomBox = styled.div`
 
 `
@@ -34,6 +35,25 @@ const CustomBox = styled.div`
 
 export const pageQuery = graphql`
   query HomeQuery($id: String! ) {
+
+
+    allFile(
+      filter: {extension: {regex: "/(jpg)|(jpeg)|(png)/"}, dir: {regex: "/img/portfolio/"}}
+      sort: { order: ASC, fields: name }
+    ) {
+      edges {
+        node {
+          name
+          id
+          relativePath
+          childImageSharp {
+            gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
+          }
+        }
+      }
+    }
+
+
     
     site {
       siteMetadata {
@@ -933,10 +953,45 @@ zIndex:'0'
 <br />
 
 
-<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
+{/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 <Portfolio />
-</ScrollAnimation>
+</ScrollAnimation> */}
 
+
+<div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'60vh', overflow:'hidden', position:'relative',}}>
+
+<div className="RArrow"><span></span></div>
+
+<SimpleReactLightbox>
+<SRLWrapper options={options}>
+
+<div className="horizontal-scroll-wrapper squares" style={{margin:'0 auto 0 auto', width:'calc(60vw + 1px)', transform: 'rotate(-90deg) translateY(-60vw)', padding:'30px'}}>
+
+
+{/* <div style={{width:'1000px', height:'1000px'}}></div> */}
+<div className="introspacer" style={{}}></div>
+
+
+{data.allFile.edges.map(edge => {
+      return <GatsbyImage
+      image={edge.node.childImageSharp.gatsbyImageData}
+      srl_gallery_image="true"
+      alt={edge.node.name}
+      key={edge.node.id}
+    />
+    })}
+
+
+    </div>
+    </SRLWrapper>
+    </SimpleReactLightbox>
+
+    <Link className="post-card11" state={{modal: true}} to="/legacy/" title="View Todd's Legacy Work" style={{position:'absolute', left:'0', top:'', zIndex:'1', width:'50px', background:'rgba(0, 0, 0, .9)', height:'95%', display:'flex', flexDirection:'column', justifyContent:'center', borderRadius:'0 12px 12px 0', border:'1px solid #999 !important', borderLeft:'none !important', margin:'8px 0'}}>
+  <div style={{position:'', left:'', top:'', transform: 'rotate(90deg)', width:'100%', height:'', border:'0px solid red', color:'#fff',  textShadow: '1px 1px 0 rgba(121, 115, 115, 0.7)', whiteSpace:'nowrap', fontWeight:'bold', margin:'-120px auto 0 auto'}}>View Legacy Work Here</div>
+</Link>
+
+
+</div>
 {/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
 <Photos />
 </ScrollAnimation> */}
@@ -961,7 +1016,7 @@ zIndex:'0'
 
 <section id="resume" style={{margin:'0', background: 'rgba(196, 189, 179, .9)', filter:'drop-shadow(12px 12px 12px rgba(44, 44, 44, 0.6))'}}>
 
-<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
+{/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}> */}
 
 <div style={{padding:'0',
 position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto',
@@ -1111,7 +1166,7 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
 </div>
 
 </div>
-</ScrollAnimation>
+{/* </ScrollAnimation> */}
 </section>
 
 
