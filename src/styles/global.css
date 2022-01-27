@@ -3609,7 +3609,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                              /* background: #cab; */
                              transform: rotate(90deg);
                              transform-origin: right top;
-                             scroll-snap-align:end;
+                             /* scroll-snap-align:end; */
                            }
                            
                            /* .squares {
@@ -3650,9 +3650,9 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                            }
                          }
 
-                         .horizontal-scroll-wrapper {
+                         /* .horizontal-scroll-wrapper {
                                scroll-snap-type: y mandatory;
-                              }
+                              } */
             
                           @media (max-width: 48rem) {
                             .sliderholder{height:45vh !important;}
