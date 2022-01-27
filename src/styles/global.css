@@ -1,4 +1,4 @@
-@import "animate.css";
+/* @import "animate.css"; */
 
 body {
   font-family: var(--font-body);
@@ -1145,6 +1145,9 @@ overflow: hidden}
 }
 
 body.homepage .post-content a, body.bloglist .post-content a{color:#fff !important;}
+
+
+
 .post-content h2{
   font-size: clamp(0.9rem, 1vw + 1rem, 2.2rem);
   border:0px solid red;
@@ -1289,17 +1292,19 @@ font-size: 1.2rem;
 
 
 
+/* 
+.ReactModalPortal :is(header,footer,.headline,.intro:before,.intro:after,.back,.usability,.pagination,.blog-post,#chaticon,div.toppad  ){
+  display: none !important;
+} */
 
 
-
-
-.ReactModalPortal header, .ReactModalPortal footer, .ReactModalPortal div.toppad, .ReactModalPortal .fluff, .ReactModalPortal .audio, .ReactModalPortal .headline, .ReactModalPortal .intro:before, .ReactModalPortal .intro:after, .ReactModalPortal .back, .ReactModalPortal .usability, .ReactModalPortal .pagination,  .ReactModalPortal .blog-post, .ReactModalPortal #chaticon
+/* .ReactModalPortal header, .ReactModalPortal footer, .ReactModalPortal div.toppad, .ReactModalPortal .fluff, .ReactModalPortal .audio, .ReactModalPortal .headline, .ReactModalPortal .intro:before, .ReactModalPortal .intro:after, .ReactModalPortal .back, .ReactModalPortal .usability, .ReactModalPortal .pagination,  .ReactModalPortal .blog-post, .ReactModalPortal #chaticon
 {
 display: none !important;
 
-}
+} */
 
-.ReactModalPortal div.toppad{border:0px solid blue !important; display: none !important;}
+
 
 .ReactModalPortal {
   /* margin:0 19% !important; width:80% !important;  */
