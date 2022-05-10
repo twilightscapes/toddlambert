@@ -12,7 +12,7 @@ import ScrollAnimation from 'react-animate-on-scroll'
 import Contact from '../components/Contact-inc'
 import { Helmet } from "react-helmet"
 import { StaticImage } from "gatsby-plugin-image"
-// import CasePanels from "../components/casepanels"
+import CasePanels from "../components/casepanels"
 // import { useSiteMetadata } from "../hooks/use-site-metadata"
 import ReactPlayer from 'react-player/lazy'
 // import { ImPlay } from "react-icons/im"
@@ -52,6 +52,12 @@ export const pageQuery = graphql`
         }
       }
     }
+
+
+
+
+
+    
 
 
     
@@ -745,7 +751,7 @@ fontSize:'clamp(1.6rem, 12vw, 3.8rem)',
 <div className="div4" style={{ background: 'rgba(196, 189, 179, .6)', maxHeight:'', justifyContent:'center', display:'flex', flexDirection:'column',}}>
 <div style={{padding:'0 8% 0 6.5%', fontSize:'clamp(1rem, 2vw, 2.8rem)',}}>
 <p>
-Todd Lambert is an award-winning web designer and photographer that trained in Southern California and migrated to the Deep South where he found home living on the coastal Mississippi Sound.
+Todd Lambert is an award-winning web designer and photographer that trained in Southern California and has traveled and lived in over 16 Western states.
 </p>
 
 
@@ -855,35 +861,48 @@ paddingLeft:'',
 
 
 
-<section id="network" style={{
-  filter:'drop-shadow(12px -12px 12px rgba(44, 44, 44, 0.4))',
-  }}>
+<section id="posts1" name="posts">
 
-<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
+
 
 <div style={{padding:'0 0 0 0',
-position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto', 
-// outline:'18px dashed rgba(121, 115, 115, 0.3)',
-// border:'0px solid rgba(121, 115, 115, 0.3)',
+position:'relative', height:'', width:'100%', overflow:'', margin:'0 auto',
+//  outline:'18px dashed rgba(121, 115, 115, 0.3)', 
+ borderRadius:'', 
+ border:'0px solid rgba(121, 115, 115, 0.3)', 
+//  background:'rgba(0, 0, 0, 0.3)',
+//  background:'rgba(121, 115, 115, 0.2)',
+//  background: 'rgba(196, 189, 179, .9)',
 //  background:'rgba(121, 115, 115, 0.5)',
-
-//  background:'rgba(192, 181, 181, 0.6))'
-//  background: 'rgba(196, 189, 179, .9)'
-
-
-  // background: 'rgba(196, 189, 179, .9)',
+zIndex:'0'
+//  textShadow: '1px 1px 0 rgba(121, 115, 115, 0.7)',
  }}>
 
 
-<h3 className="logotype" style={{textAlign:'center', margin:'0 0 0 0', fontSize:'5vw', clear:'right', paddingTop:'1rem'}}>Network</h3>
+ <h3 className="logotype" style={{textAlign:'center', margin:'0 0 0 0', fontSize:'5vw', clear:'right', paddingTop:'0',}}>Network</h3>
+<br />
+
+
+{/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
+<Portfolio />
+</ScrollAnimation> */}
+
+
+<div className="sliderholder" style={{display:'flex', justifyContent:'center', width:'100%', height:'60vh', overflow:'hidden', position:'relative',}}>
+
+<div className="RArrow"><span></span></div>
 
 
 
-<div className="flexbutt noexit print" style={{padding:'2rem 4%',
-position:'relative', height:'', width:'', overflow:'', display:'flex', gap:'20px', margin:'0 auto', background: 'rgba(196, 189, 179, .9)' }}>
+<div className="horizontal-scroll-wrapper squares" style={{margin:'0 auto 0 auto', width:'calc(60vw + 1px)', transform: 'rotate(-90deg) translateY(-60vw)', padding:'30px'}}>
 
 
-    <div className="flexcheek network" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between',}}>
+{/* <div style={{width:'1000px', height:'1000px'}}></div> */}
+<div className="introspacer" style={{}}></div>
+
+
+
+<div className="" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between',}}>
     <a className="noexit" href="https://twilightscapes.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
     <StaticImage src="../../static/assets/twilightscapes-button.jpg" alt="Todd Lambert Night photos"  /></a>
     <br />
@@ -894,7 +913,8 @@ position:'relative', height:'', width:'', overflow:'', display:'flex', gap:'20px
     </div>
 
 
-    <div className="flexcheek network" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
+
+    <div className="" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
     <a className="noexit" href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit'}}>
     <StaticImage src="../../static/assets/vidsock-promo.jpg" alt="Todd builds Web Apps"  /></a>
     <br />
@@ -904,8 +924,11 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
     
     </div>
 
-    
-    <div className="flexcheek network" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
+
+
+
+
+    <div className="" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
     <a className="noexit" href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
     <StaticImage src="../../static/assets/urban-fetish-button.jpg" alt="Todd Lambert Night photos"  /></a>
     <br />
@@ -915,14 +938,46 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
     
     </div>
 
-</div>
+
+{/* {data.projectFiles.edges.map(edge => {
+      return <GatsbyImage
+      image={edge.node.childImageSharp.gatsbyImageData}
+      srl_gallery_image="true"
+      alt={edge.node.name}
+      key={edge.node.id}
+    />
+    })} */}
+
+
+    </div>
+
+
+    {/* <Link className="post-card11" state={{modal: true}} to="/legacy/" title="View Todd's Legacy Work" style={{position:'absolute', left:'0', top:'', zIndex:'1', width:'50px', background:'rgba(0, 0, 0, .9)', height:'95%', display:'flex', flexDirection:'column', justifyContent:'center', borderRadius:'0 12px 12px 0', border:'1px solid #999 !important', borderLeft:'none !important', margin:'8px 0'}}>
+  <div style={{position:'', left:'', top:'', transform: 'rotate(90deg)', width:'100%', height:'', border:'0px solid red', color:'#fff',  textShadow: '1px 1px 0 rgba(121, 115, 115, 0.7)', whiteSpace:'nowrap', fontWeight:'bold', margin:'-120px auto 0 auto'}}>View Legacy Work Here</div>
+</Link> */}
+
 
 </div>
-</ScrollAnimation>
+{/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
+<Photos />
+</ScrollAnimation> */}
+
+{/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
+<Animation />
+</ScrollAnimation> */}
+  </div>
+
+
 </section>
 
-{/* <CasePanels /> */}
-{/* <div className="spacer33"></div> */}
+
+
+
+{/* <h3 className="logotype" style={{textAlign:'center', margin:'0 0 0 0', fontSize:'5vw', clear:'right', paddingTop:'0',}}>Portfolio</h3>
+<br />
+
+<CasePanels />
+<div className="spacer33"></div> */}
 
 
 
@@ -1003,6 +1058,26 @@ zIndex:'0'
 
 
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

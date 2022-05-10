@@ -3573,8 +3573,8 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                               display: block;
                               width: 100%;
                               height:100%;
-                              background-color: rgb(187 54 0);
-                              opacity:0;
+                              /* background-color: rgb(187 54 0);
+                              opacity:.6; */
                             }
                            .sliderholder:hover::before{
                             animation: move 3s forwards; 
