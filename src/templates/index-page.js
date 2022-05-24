@@ -914,6 +914,21 @@ zIndex:'0'
 
 
 
+
+    <div className="" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between',}}>
+    <a className="noexit" href="https://tron.allin60.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
+    <StaticImage src="../../static/assets/tronin60.jpg" alt="TRON movie in only 60 seconds"  /></a>
+    <br />
+Explore the world of TRON - all in only 60 seconds. 
+    <br /><br />
+    <div style={{textAlign:'center',}}><a className="post-card button " href="https://tron.allin60.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>Tron.Allin60.com</a></div>
+    
+    </div>
+
+
+
+
+
     <div className="" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
     <a className="noexit" href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit'}}>
     <StaticImage src="../../static/assets/vidsock-promo.jpg" alt="Todd builds Web Apps"  /></a>
