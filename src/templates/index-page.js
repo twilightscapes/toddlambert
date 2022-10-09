@@ -901,6 +901,41 @@ zIndex:'0'
 <div className="introspacer" style={{}}></div>
 
 
+<div className="" style={{height:'', padding:'', display:'flex', flexDirection:'column', justifyContent:'space-between',}}>
+<ReactPlayer
+      className='react-player666'
+      url="https://youtu.be/CKygRPp5-v0"
+      width="100%"
+      height="400px"
+      config={{
+        youtube: {
+          playerVars: { showinfo:false, autoplay:false, controls:false, start:YouTubeStart, end:YouTubeEnd, mute:true  }
+        },
+      }}
+      loop
+      playsinline
+      />
+</div>
+
+
+
+<div className="" style={{height:'', padding:'', display:'flex', flexDirection:'column', justifyContent:'space-between',}}>
+<ReactPlayer
+      className='react-player666'
+      url="https://youtu.be/CKygRPp5-v0"
+      width="100%"
+      height="400px"
+      config={{
+        youtube: {
+          playerVars: { showinfo:1, autoplay:false, controls:true, start:YouTubeStart, end:YouTubeEnd, mute:true  }
+        },
+      }}
+      loop
+      playsinline
+      />
+</div>
+
+
 
 <div className="" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between',}}>
     <a className="noexit" href="https://twilightscapes.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
@@ -1040,6 +1075,9 @@ zIndex:'0'
 
 {/* <div style={{width:'1000px', height:'1000px'}}></div> */}
 <div className="introspacer" style={{}}></div>
+
+
+
 
 
 {data.allFile.edges.map(edge => {
