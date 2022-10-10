@@ -901,7 +901,7 @@ zIndex:'0'
 <div className="introspacer" style={{}}></div>
 
 
-<div className="" style={{height:'', padding:'', display:'flex', flexDirection:'column', justifyContent:'space-between',}}>
+{/* <div className="" style={{height:'', padding:'', display:'flex', flexDirection:'column', justifyContent:'space-between',}}>
 <ReactPlayer
       className='react-player666'
       url="https://youtu.be/CKygRPp5-v0"
@@ -933,7 +933,7 @@ zIndex:'0'
       loop
       playsinline
       />
-</div>
+</div> */}
 
 
 
