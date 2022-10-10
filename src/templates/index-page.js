@@ -12,10 +12,11 @@ import ScrollAnimation from 'react-animate-on-scroll'
 import Contact from '../components/Contact-inc'
 import { Helmet } from "react-helmet"
 import { StaticImage } from "gatsby-plugin-image"
-import CasePanels from "../components/casepanels"
+// import CasePanels from "../components/casepanels"
+import { AiOutlineAudioMuted } from "react-icons/ai"
 // import { useSiteMetadata } from "../hooks/use-site-metadata"
 import ReactPlayer from 'react-player/lazy'
-// import { ImPlay } from "react-icons/im"
+import { ImPlay } from "react-icons/im"
 // import LineTest from "../../static/assets/textualhealing.svg"
 // import Portfolio from "../pages/portfolio"
 // import Photos from "../pages/favorites"
@@ -1107,7 +1108,7 @@ zIndex:'0'
       className='react-player666'
       url="https://youtu.be/-mYw48uq010"
       width="100%"
-      height="400px"
+      height="350px"
       config={{
         youtube: {
           playerVars: { showinfo:'0', autoplay:true, controls:'0', start:YouTubeStart, end:YouTubeEnd, mute:true  }
@@ -1115,7 +1116,27 @@ zIndex:'0'
       }}
       loop
       playsinline
+      playIcon={
+        <button aria-label="Click To Play" className="clickplays" style={{position:'relative', zIndex:'0', top:'', border:'0px  solid red', width:'100vw', height:'', background:'transparent', color:'#fff', fontSize:'18px', textAlign:'center', display:'flex', flexDirection:'column', verticalAlign:'center', justifyContent:'center', alignItems:'center', paddingTop:'0', borderRadius:'12px'}}>
+      
+    <div className="" style={{position:'absolute', bottom:'-120px', zIndex:'0', textAlign:'center', animation:'fadeIn 3s', display:'flex', justifyContent:'', width:'auto', marginBottom:''}}>
+      
+      <div className="popped1" style={{display:'flex', width:'', margin:'0 auto', fontWeight:'bold', padding:'.5rem', fontSize:'2rem', background:'linear-gradient(180deg, #777 30%, #333 80%)', borderRadius:'12px', border:'1px solid #333', filter:'drop-shadow(2px 2px 2px #000)'}}><div style={{fontSize:'14px', fontWeight:'', padding:'0 0 0 .3rem', filter:'drop-shadow(2px 2px 2px #000)'}}><ImPlay style={{margin:'0 auto', width:'', fontSize:'30px'}} />CLICK TO PLAY</div></div>
+
+      </div>
+      </button>}
+
+        light="../assets/twilightscapes-promo.jpg"
       />
+
+<br />
+
+<div className="post-card button1 " style={{textAlign:'center', padding:'.5rem', margin:'0 10%'}}>
+  {/* <a className="post-card button " href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}> */}
+  Unique Conceptual Photography
+  {/* </a> */}
+  </div>
+
 </div>
 
 
@@ -1124,7 +1145,7 @@ zIndex:'0'
       className='react-player666'
       url="https://youtu.be/cHwL8y-NJjk"
       width="100%"
-      height="400px"
+      height="350px"
       config={{
         youtube: {
           playerVars: { showinfo:'0', autoplay:true, controls:'0', start:YouTubeStart, end:YouTubeEnd, mute:true  }
@@ -1132,8 +1153,29 @@ zIndex:'0'
       }}
       loop
       playsinline
+      playIcon={
+        <button aria-label="Click To Play" className="clickplays" style={{position:'relative', zIndex:'0', top:'', border:'0px  solid red', width:'100vw', height:'', background:'transparent', color:'#fff', fontSize:'18px', textAlign:'center', display:'flex', flexDirection:'column', verticalAlign:'center', justifyContent:'center', alignItems:'center', paddingTop:'0', borderRadius:'12px'}}>
+      
+    <div className="" style={{position:'absolute', bottom:'-120px', zIndex:'0', textAlign:'center', animation:'fadeIn 3s', display:'flex', justifyContent:'', width:'auto', marginBottom:''}}>
+      
+      <div className="popped1" style={{display:'flex', width:'', margin:'0 auto', fontWeight:'bold', padding:'.5rem', fontSize:'2rem', background:'linear-gradient(180deg, #777 30%, #333 80%)', borderRadius:'12px', border:'1px solid #333', filter:'drop-shadow(2px 2px 2px #000)'}}><div style={{fontSize:'14px', fontWeight:'', padding:'0 0 0 .3rem', filter:'drop-shadow(2px 2px 2px #000)'}}><ImPlay style={{margin:'0 auto', width:'', fontSize:'30px'}} />CLICK TO PLAY</div></div>
+
+      </div>
+      </button>}
+       light="../assets/tronin60.jpg"
       />
+
+<br />
+    <div className="post-card button1 " style={{textAlign:'center', padding:'.5rem', margin:'0 10%'}}>
+      {/* <a className="post-card button " href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}> */}
+      Responsive web apps that work everywhere
+      {/* </a> */}
+      </div>
 </div> 
+
+
+
+
 
 
 <div className="" style={{height:'', padding:'', display:'flex', flexDirection:'column', justifyContent:'space-between',}}>
@@ -1141,7 +1183,7 @@ zIndex:'0'
       className='react-player666'
       url="https://youtu.be/cZJUyxw2G2w"
       width="100%"
-      height="400px"
+      height="350px"
       config={{
         youtube: {
           playerVars: { showinfo:'0', autoplay:true, controls:'0', start:YouTubeStart, end:YouTubeEnd, mute:true  }
@@ -1149,7 +1191,23 @@ zIndex:'0'
       }}
       loop
       playsinline
+      playIcon={
+        <button aria-label="Click To Play" className="clickplays" style={{position:'relative', zIndex:'0', top:'', border:'0px  solid red', width:'100vw', height:'', background:'transparent', color:'#fff', fontSize:'18px', textAlign:'center', display:'flex', flexDirection:'column', verticalAlign:'center', justifyContent:'center', alignItems:'center', paddingTop:'0', borderRadius:'12px'}}>
+      
+    <div className="" style={{position:'absolute', bottom:'-120px', zIndex:'0', textAlign:'center', animation:'fadeIn 3s', display:'flex', justifyContent:'', width:'auto', marginBottom:''}}>
+      
+      <div className="popped1" style={{display:'flex', width:'', margin:'0 auto', fontWeight:'bold', padding:'.5rem', fontSize:'2rem', background:'linear-gradient(180deg, #777 30%, #333 80%)', borderRadius:'12px', border:'1px solid #333', filter:'drop-shadow(2px 2px 2px #000)'}}><div style={{fontSize:'14px', fontWeight:'', padding:'0 0 0 .3rem', filter:'drop-shadow(2px 2px 2px #000)'}}><ImPlay style={{margin:'0 auto', width:'', fontSize:'30px'}} />CLICK TO PLAY</div></div>
+
+      </div>
+      </button>}
+       light="../assets/twilight-promo-in-the-sky-with-diamonds.jpg"
       />
+      <br />
+    <div className="post-card button1 " style={{textAlign:'center', padding:'.5rem', margin:'0 10%'}}>
+      {/* <a className="post-card button " href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}> */}
+      Blending layered interactive multimedia with images + SVG + Video
+      {/* </a> */}
+      </div>
 </div> 
 
 
@@ -1158,7 +1216,7 @@ zIndex:'0'
       className='react-player666'
       url="https://youtu.be/M-RJO7TlLU4"
       width="100%"
-      height="400px"
+      height="350px"
       config={{
         youtube: {
           playerVars: { showinfo:'0', autoplay:true, controls:'0', start:YouTubeStart, end:YouTubeEnd, mute:true, loop:true  }
@@ -1166,8 +1224,26 @@ zIndex:'0'
       }}
       loop
       playsinline
+      playIcon={
+        <button aria-label="Click To Play" className="clickplays" style={{position:'relative', zIndex:'0', top:'', border:'0px  solid red', width:'100vw', height:'', background:'transparent', color:'#fff', fontSize:'18px', textAlign:'center', display:'flex', flexDirection:'column', verticalAlign:'center', justifyContent:'center', alignItems:'center', paddingTop:'0', borderRadius:'12px'}}>
+      
+    <div className="" style={{position:'absolute', bottom:'-120px', zIndex:'0', textAlign:'center', animation:'fadeIn 3s', display:'flex', justifyContent:'', width:'auto', marginBottom:''}}>
+      
+      <div className="popped1" style={{display:'flex', width:'', margin:'0 auto', fontWeight:'bold', padding:'.5rem', fontSize:'2rem', background:'linear-gradient(180deg, #777 30%, #333 80%)', borderRadius:'12px', border:'1px solid #333', filter:'drop-shadow(2px 2px 2px #000)'}}><div style={{fontSize:'14px', fontWeight:'', padding:'0 0 0 .3rem', filter:'drop-shadow(2px 2px 2px #000)'}}><ImPlay style={{margin:'0 auto', width:'', fontSize:'30px'}} />CLICK TO PLAY</div></div>
+
+      </div>
+      </button>}
+       light="../assets/timelapse-videography.jpg"
       />
+            <br />
+    <div className="post-card button1 " style={{textAlign:'center', padding:'.5rem', margin:'0 10%'}}>
+      {/* <a className="post-card button " href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}> */}
+      State-of-the-art photography techniques pushed to the edge
+      {/* </a> */}
+      </div>
 </div> 
+
+
 
 
 {data.allFile.edges.map(edge => {
