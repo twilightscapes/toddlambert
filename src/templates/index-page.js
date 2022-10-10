@@ -901,15 +901,17 @@ zIndex:'0'
 <div className="introspacer" style={{}}></div>
 
 
+
+
 {/* <div className="" style={{height:'', padding:'', display:'flex', flexDirection:'column', justifyContent:'space-between',}}>
 <ReactPlayer
       className='react-player666'
-      url="https://youtu.be/CKygRPp5-v0"
+      url="https://youtu.be/-mYw48uq010"
       width="100%"
       height="400px"
       config={{
         youtube: {
-          playerVars: { showinfo:false, autoplay:false, controls:false, start:YouTubeStart, end:YouTubeEnd, mute:true  }
+          playerVars: { showinfo:'0', autoplay:true, controls:'0', start:YouTubeStart, end:YouTubeEnd, mute:true  }
         },
       }}
       loop
@@ -920,6 +922,28 @@ zIndex:'0'
 
 
 <div className="" style={{height:'', padding:'', display:'flex', flexDirection:'column', justifyContent:'space-between',}}>
+<ReactPlayer
+      className='react-player666'
+      url="https://youtu.be/cHwL8y-NJjk"
+      width="100%"
+      height="400px"
+      config={{
+        youtube: {
+          playerVars: { showinfo:'0', autoplay:true, controls:'0', start:YouTubeStart, end:YouTubeEnd, mute:true  }
+        },
+      }}
+      loop
+      playsinline
+      />
+</div> */}
+
+
+
+
+
+
+
+{/* <div className="" style={{height:'', padding:'', display:'flex', flexDirection:'column', justifyContent:'space-between',}}>
 <ReactPlayer
       className='react-player666'
       url="https://youtu.be/CKygRPp5-v0"
@@ -1078,6 +1102,72 @@ zIndex:'0'
 
 
 
+<div className="" style={{height:'', padding:'', display:'flex', flexDirection:'column', justifyContent:'space-between',}}>
+<ReactPlayer
+      className='react-player666'
+      url="https://youtu.be/-mYw48uq010"
+      width="100%"
+      height="400px"
+      config={{
+        youtube: {
+          playerVars: { showinfo:'0', autoplay:true, controls:'0', start:YouTubeStart, end:YouTubeEnd, mute:true  }
+        },
+      }}
+      loop
+      playsinline
+      />
+</div>
+
+
+<div className="" style={{height:'', padding:'', display:'flex', flexDirection:'column', justifyContent:'space-between',}}>
+<ReactPlayer
+      className='react-player666'
+      url="https://youtu.be/cHwL8y-NJjk"
+      width="100%"
+      height="400px"
+      config={{
+        youtube: {
+          playerVars: { showinfo:'0', autoplay:true, controls:'0', start:YouTubeStart, end:YouTubeEnd, mute:true  }
+        },
+      }}
+      loop
+      playsinline
+      />
+</div> 
+
+
+<div className="" style={{height:'', padding:'', display:'flex', flexDirection:'column', justifyContent:'space-between',}}>
+<ReactPlayer
+      className='react-player666'
+      url="https://youtu.be/cZJUyxw2G2w"
+      width="100%"
+      height="400px"
+      config={{
+        youtube: {
+          playerVars: { showinfo:'0', autoplay:true, controls:'0', start:YouTubeStart, end:YouTubeEnd, mute:true  }
+        },
+      }}
+      loop
+      playsinline
+      />
+</div> 
+
+
+<div className="" style={{height:'', padding:'', display:'flex', flexDirection:'column', justifyContent:'space-between',}}>
+<ReactPlayer
+      className='react-player666'
+      url="https://youtu.be/M-RJO7TlLU4"
+      width="100%"
+      height="400px"
+      config={{
+        youtube: {
+          playerVars: { showinfo:'0', autoplay:true, controls:'0', start:YouTubeStart, end:YouTubeEnd, mute:true, loop:true  }
+        },
+      }}
+      loop
+      playsinline
+      />
+</div> 
 
 
 {data.allFile.edges.map(edge => {
