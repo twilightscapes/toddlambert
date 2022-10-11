@@ -3382,7 +3382,19 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
               font-size: clamp(2.5rem, 13vw, 5rem);
               text-shadow:0 2px 2px #fff;
             }
+
+            .logocopy {
+              /* font-family: Lobster Two; */
+              color: #fff;
+              letter-spacing: 1px;
+              /* text-transform: lowercase; */
+              font-weight: 400;
+              /* padding-top:4px; */
+              font-size: clamp(.7rem, 1.4rem, 2rem);
+            }
           
+
+            /* .post-card img{border-radius:12px 12px 0 0 !important;} */
             
             .logofirst {
               padding-right: 3%;
