@@ -1023,12 +1023,12 @@ zIndex:'0'
 
 
 
-<div className="" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between',}}>
+<div className="post-card" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between', borderRadius:'12px', overflow:'hidden'}}>
     <a className="noexit" href="https://twilightscapes.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
     <StaticImage src="../../static/assets/twilightscapes-button.jpg" alt="Todd Lambert Night photos"  /></a>
     <br />
-    Experience a new style of landscape photography all through the eyes of Todd Lambert. Explore the unusual and see the night like you&apos;ve never seen it before.
-    <br /><br />
+    <p style={{padding:'0 0 0 2rem'}}>Experience a new style of landscape photography all through the eyes of Todd Lambert. Explore the unusual and see the night like you&apos;ve never seen it before.</p>
+   <br />
     <div style={{textAlign:'center',}}><a className="post-card button " href="https://twilightscapes.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>Twilightscapes.com</a></div>
     
     </div>
@@ -1036,12 +1036,14 @@ zIndex:'0'
 
 
 
-    <div className="" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between',}}>
+    <div className="post-card" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between', borderRadius:'12px', overflow:'hidden'}}>
     <a className="noexit" href="https://tron.allin60.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
     <StaticImage src="../../static/assets/tronin60.jpg" alt="TRON movie in only 60 seconds"  /></a>
     <br />
+    <p style={{padding:'0 0 0 2rem'}}>
 Explore the world of TRON - all in only 60 seconds. 
-    <br /><br />
+</p>
+   <br />
     <div style={{textAlign:'center',}}><a className="post-card button " href="https://tron.allin60.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>Tron.Allin60.com</a></div>
     
     </div>
@@ -1050,12 +1052,13 @@ Explore the world of TRON - all in only 60 seconds.
 
 
 
-    <div className="" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
+    <div className="post-card" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between', borderRadius:'12px', overflow:'hidden'}}>
     <a className="noexit" href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit'}}>
     <StaticImage src="../../static/assets/vidsock-promo.jpg" alt="Todd builds Web Apps"  /></a>
     <br />
-Todd sells exceptionally fast and well-built multimedia web apps called VidSocks. They are a complete website solution that costs nothing to run and get top ranks in Google!
-    <br /><br />
+    <p style={{padding:'0 0 0 2rem'}}>
+Todd sells exceptionally fast and well-built multimedia web apps called VidSocks. They are a complete website solution that get top ranks in Google!
+    </p><br />
     <div style={{textAlign:'center',}}><a className="post-card button " href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>VidSocks.com</a></div>
     
     </div>
@@ -1064,12 +1067,13 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
 
 
 
-    <div className="" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between'}}>
+    <div className="post-card" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between', borderRadius:'12px', overflow:'hidden'}}>
     <a className="noexit" href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
     <StaticImage src="../../static/assets/urban-fetish-button.jpg" alt="Todd Lambert Night photos"  /></a>
     <br />
+    <p style={{padding:'0 0 0 2rem'}}>
     Take a walk on the wild side and follow along as Todd Lambert goes in search of the creepiest, freakiest, spookiest abandoned and desolate locations he can find. 
-    <br /><br />
+    </p><br />
     <div style={{textAlign:'center',}}><a className="post-card button " href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>UrbanFetish.com</a></div>
     
     </div>
