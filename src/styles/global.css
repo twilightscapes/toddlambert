@@ -3393,6 +3393,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
               font-size: clamp(.7rem, 1.4rem, 2rem);
             }
           
+            .react-player666{border-radius:12px 12px 0 0 !important; overflow:hidden;}
 
             /* .post-card img{border-radius:12px 12px 0 0 !important;} */
             
