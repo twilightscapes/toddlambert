@@ -1200,6 +1200,13 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
     </div>
 
 
+
+    <div style={{position:'relative', top:'', margin:'0', padding:'5% 0',  width:'', zIndex:'1', textAlign:'', borderRadius:'12px',}}>
+  <Newsignup />
+  </div>
+
+
+
 {/* {data.allFile.edges.map(edge => {
       return <GatsbyImage
       image={edge.node.childImageSharp.gatsbyImageData}

@@ -54,7 +54,7 @@ const NewsletterPage = () => (
 
 
             
-              <div className="txtshadow" style={{fontSize:'120%', textAlign:'center', marginTop:'10px'}}><strong>Enter your email to follow</strong></div><br />
+              <div className="txtshadow" style={{fontSize:'120%', textAlign:'center', marginTop:'10px'}}><strong>Wanna Chat? Drop me your email.</strong></div><br />
               
               {/* <span className="txtshadow" style={{fontSize:'85%'}}>Current NFT owners will be the only accounts created during initial launch phase<br /><br />Second Phase will open to invite only<br />Reserve Your Spot Below:</span><br /><br /> */}
 
@@ -80,7 +80,7 @@ const NewsletterPage = () => (
               type="submit"
               style={{marginTop:'-8px', fontSize:'clamp(1rem, 1.3vw, 1.5rem)', whiteSpace:'nowrap'}}
             >
-              Follow{" "}
+              Connect{" "}
               <span className="icon -right">
                 <RiSendPlane2Line />
               </span>

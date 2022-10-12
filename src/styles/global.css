@@ -3607,7 +3607,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                             opacity: .7;
                             position: relative;
                             right: 12vh;
-                            /* top: 375px; */
+                            top: 375px;
                             -webkit-transform: rotate(90deg);
                             transform:rotate(90deg)
                         }
