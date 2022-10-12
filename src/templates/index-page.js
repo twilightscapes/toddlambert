@@ -844,7 +844,7 @@ paddingLeft:'',
 
 
 
-<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={300}>
+{/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={300}> */}
 <blockquote style={{fontFamily:'Lobster Two', textAlign:'left', padding:'', borderRadius:'12px', background: 'rgba(196, 189, 179, .7)', fontSize:'clamp(1.5rem, 2.6vw, 2.8rem)', filter:'drop-shadow(-12px 12px 12px rgba(44, 44, 44, 0.5))'}}>
   <div style={{padding:'2rem 10% 0 10%', filter:'none', textShadow:'1px 1px 0 #aaa'}}>
   Experience has taught me that good design is not created on a spur of the moment, nor does it come naturally. Good design is a thorough and interative process with site visitors in mind foremost. Good design is identifying a problem for those visitors and removing that problem.
@@ -853,7 +853,7 @@ paddingLeft:'',
   </div>
  <div className="logofirst" style={{fontSize:'', textAlign:'right', margin:'2rem 30% 0 0', filter:'none'}}>- Todd Lambert</div>
 </blockquote>
-</ScrollAnimation>
+{/* </ScrollAnimation> */}
 
 
 
@@ -922,7 +922,7 @@ zIndex:'0'
 
 
 
-<div className="post-card" style={{height:'', padding:'', display:'flex', flexDirection:'column', justifyContent:'space-between',}}>
+{/* <div className="post-card" style={{height:'', padding:'', display:'flex', flexDirection:'column', justifyContent:'space-between',}}>
 <ReactPlayer
       className='react-player666'
       url="https://youtu.be/LHJlm_4B-Vo"
@@ -948,11 +948,11 @@ zIndex:'0'
       />
             <br />
     <div className="post-card1 button1 logocopy" style={{textAlign:'center', padding:'.5rem', margin:'0 10%'}}>
-      {/* <a className="post-card button " href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}> */}
+
       Interactive pages with e-commerce and CMS
-      {/* </a> */}
+
       </div>
-</div> 
+</div>  */}
 
 
 
@@ -979,12 +979,12 @@ zIndex:'0'
 
       </div>
       </button>}
-       light="../assets/spa-apps.jpg"
+       light="../assets/big-site-designs.jpg"
       />
             <br />
     <div className="post-card1 button1 logocopy " style={{textAlign:'center', padding:'.5rem', margin:'0 10%'}}>
       {/* <a className="post-card button " href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}> */}
-      Single Page Applications (SPA)
+      Flexible design that adapts to the device
       {/* </a> */}
       </div>
 </div> 
@@ -1050,11 +1050,11 @@ zIndex:'0'
       
     <div className="" style={{position:'absolute', bottom:'-120px', zIndex:'0', textAlign:'center', animation:'fadeIn 3s', display:'flex', justifyContent:'', width:'auto', marginBottom:''}}>
       
-      <div className="popped1" style={{display:'flex', width:'', margin:'0 auto', fontWeight:'bold', padding:'.5rem', fontSize:'2rem', background:'linear-gradient(180deg, #777 30%, #333 80%)', borderRadius:'12px', border:'1px solid #333', filter:'drop-shadow(2px 2px 2px #000)'}}><div style={{fontSize:'14px', fontWeight:'', padding:'0 0 0 .3rem', filter:'drop-shadow(2px 2px 2px #000)'}}><ImPlay style={{margin:'0 auto', width:'', fontSize:'30px'}} />CLICK TO PLAY</div></div>
+      <div className="popped1" style={{display:'flex', width:'', margin:'0 auto', fontWeight:'bold', padding:'.5rem', fontSize:'2rem', background:'linear-gradient(180deg, #777 30%, #333 80%)', borderRadius:'12px', border:'1px solid #333', filter:'drop-shadow(2px 2px 2px #000)',}}><div style={{fontSize:'14px', fontWeight:'', padding:'0 0 0 .3rem', filter:'drop-shadow(2px 2px 2px #000)'}}><ImPlay style={{margin:'0 auto', width:'', fontSize:'30px'}} />CLICK TO PLAY</div></div>
 
       </div>
       </button>}
-       light="../assets/tronin60.jpg"
+       light="../assets/modern-responsive.jpg"
       />
 
 <br />
@@ -1073,7 +1073,7 @@ zIndex:'0'
 <div className="post-card" style={{height:'', padding:'', display:'flex', flexDirection:'column', justifyContent:'space-between',}}>
 <ReactPlayer
       className='react-player666'
-      url="https://youtu.be/cZJUyxw2G2w"
+      url="https://youtu.be/LHJlm_4B-Vo"
       width="100%"
       height="350px"
       config={{
@@ -1092,7 +1092,7 @@ zIndex:'0'
 
       </div>
       </button>}
-       light="../assets/twilight-promo-in-the-sky-with-diamonds.jpg"
+       light="../assets/state-art.jpg"
       />
       <br />
     <div className="post-card1 button1 logocopy " style={{textAlign:'center', padding:'.5rem', margin:'0 10%'}}>
