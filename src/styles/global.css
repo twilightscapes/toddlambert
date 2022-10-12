@@ -3598,6 +3598,33 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                           }
 
 
+
+                          .horizontal-scroll-wrapper:after {
+                            bottom: 20vh;
+                            content: "\276E \276E  scroll";
+                            font-size: clamp(2rem, 3vw, 3rem);
+                            left: 20vw;
+                            opacity: .7;
+                            position: relative;
+                            right: 12vh;
+                            /* top: 375px; */
+                            -webkit-transform: rotate(90deg);
+                            transform:rotate(90deg)
+                        }
+                    
+                        .horizontal-scroll-wrapper:after, .sliderholder1:before {
+                            background: rgba(0, 0, 0, .7);
+                            border-radius: 12px;
+                            color: #fff;
+                            display: inline-block;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            margin: auto;
+                            padding: 10px;
+                            text-shadow: 2px 2px 2px #333;
+                            z-index:1
+                        }
              
              
                            
