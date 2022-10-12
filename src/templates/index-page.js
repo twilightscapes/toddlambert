@@ -8,7 +8,7 @@ import { RiArrowRightSLine } from "react-icons/ri"
 import { VscFilePdf } from "react-icons/vsc"
 import { Footer } from "../components/footer"
 // import { GoArrowDown } from "react-icons/go"
-import ScrollAnimation from 'react-animate-on-scroll'
+// import ScrollAnimation from 'react-animate-on-scroll'
 import Contact from '../components/Contact-inc'
 import { Helmet } from "react-helmet"
 import { StaticImage } from "gatsby-plugin-image"
@@ -574,11 +574,11 @@ to="#experiences" title="See the new EXPERIENCES™" /> */}
 
 
 
-<ScrollAnimation className="" animateIn="bounceInUp" delay={550} initiallyVisible={false} animateOnce={true} animatePreScroll={true} style={{position:'', margin:'', padding:'',  width:'', zIndex:'', textAlign:'',}}>
+{/* <ScrollAnimation className="" animateIn="bounceInUp" delay={550} initiallyVisible={false} animateOnce={true} animatePreScroll={true} style={{position:'', margin:'', padding:'',  width:'', zIndex:'', textAlign:'',}}> */}
 <div style={{position:'relative', top:'', margin:'0', padding:'25% 0',  width:'', zIndex:'1', textAlign:'', borderRadius:'12px',}}>
   <Newsignup />
   </div>
-</ScrollAnimation>
+{/* </ScrollAnimation> */}
 
 </div>
 
@@ -1437,7 +1437,7 @@ Responsible for site architecture, design, graphics, programming, copywriting/ed
 
 {/* <div className="spacer33"></div>  */}
 
-<ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}>
+{/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={200}> */}
 
 <section id="contact" className="child" style={{position:'relative', height:'auto', zIndex:'', padding:'2rem 0', background: 'rgba(196, 189, 179, .5)'}}>
 
@@ -1464,7 +1464,7 @@ Availability: &nbsp; {date}
 
 
  </section>
- </ScrollAnimation>
+ {/* </ScrollAnimation> */}
 
  {/* <div className="spacer66"></div>  */}
 
