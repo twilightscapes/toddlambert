@@ -728,132 +728,7 @@ Guerrilla <span style={{color:'rgb(187 54 0)'}}>Marketing</span>
  <div className="spacer66 mobile"></div> 
 
 
- <div className="parent" style={{display:'flex', flexDirection:'row', justifyContent:'space-between', height:'100%', gap:'20px', marginTop:'20px'}}> 
-
-<div className="div1" style={{width:'65%', display:'flex', flexDirection:'column', justifyContent:'center', background:'', borderRight:'0px solid #dfcfc9' }}>
-
-<div className="div3" style={{background:'',}}>
-  
-  <h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
-fontFamily: 'Lobster Two',
-letterSpacing: '2px',
-textTransform: 'lowercase',
-fontWeight: '400',
-fontSize:'clamp(1.6rem, 12vw, 3.8rem)',
-// opacity:'.9',
-// paddingLeft:'',
-}}>
-  
-{/* <span style={{color:'#dd4000'}}>Roles are like hats</span> */}
-</h2>
-<h3 className="logotype"  style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', }}>About</h3>
-</div>
-
-<div className="div4" style={{ background: 'rgba(196, 189, 179, .6)', maxHeight:'', justifyContent:'center', display:'flex', flexDirection:'column',}}>
-<div style={{padding:'0 8% 0 6.5%', fontSize:'clamp(1rem, 2vw, 2.8rem)',}}>
-<p>
-Todd Lambert is an award-winning web designer and photographer that trained in Southern California and has traveled and lived in over 16 Western states.
-</p>
-
-
-<p>Todd's skills include all facets of online and multimedia creation including HTML emails, online ads, user interface design, information architecture, web navigation, branding, web graphics, cross-platform and cross-browser web applications, web template creation &amp; CMS implementations.</p>
-
-<p>
-When Todd is not online, he is often found pushing the boundaries of night photography. You can usually find him in the middle of the night shooting astrophotography which is his favorite subject.
-</p>
-
-<p>
-Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes up most of his free time.
-</p>
-
-</div>
-
-</div>
-
-
-
-</div>
-
-<div className="div2" style={{width:'35%', display:'flex', flexDirection:'column', justifyContent:'space-between', background:'', }}>
-
-<div className="div5" style={{background:'',}}>
-  <h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
-// fontFamily: 'Lobster Two',
-letterSpacing: '2px',
-textTransform: 'lowercase',
-fontWeight: '400',
-textShadow:'0 1px 0 #eee',
-fontSize:'clamp(1.6rem, 12vw, 3.8rem)',
-// opacity:'.9',
-// paddingLeft:'',
-}}>
-
-{/* <span style={{color:'#dd4000'}}>Roles are like hats</span> */}
-</h2>
-</div>
-
-<div className="imgbox grad circle" style={{border:'2px solid #dd4000', position:'relative', padding:'2rem', overflow:'hidden', filter: 'drop-shadow(0px 0px 3px #444)'}}><StaticImage alt="Todd Lambert" src="../../static/assets/todd-toon.png" style={{borderColor:'transparent',}} />
-<div className="txtshadow" style={{position:'absolute', left:'0', bottom:'5px', fontSize:'70%', color:'#ddd', textAlign:'center', width:'100%',}}>Todd Lambert</div>
-</div>
-
-<Link state={{modal: true}}
-            to="/about-todd/"
-            className="post-card button noexit print"
-            style={{
-              cursor:'pointer',
-              width:'',
-              maxWidth:'300px',
-              margin:'0 auto',
-              display:'flex',
-              alignSelf:'center',
-              color:'#ccc'
-            }}
-          >
-            View More About Todd
-          </Link>
-
-<div className="div6" style={{margin:'1rem 0 0 0',}}>  
-
-{/* <h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
-fontFamily: 'Lobster Two',
-letterSpacing: '2px',
-textTransform: 'lowercase',
-fontWeight: '400',
-textShadow:'0 1px 0 #eee',
-fontSize:'clamp(1.3rem, 7vw, 2.8rem)',
-opacity:'.9',
-paddingLeft:'',
-}}>
-    
-<span style={{color:''}}>My experience has taught me that good design is not created on a spur of the moment, nor does it come naturally. Good design is a thorough and interative process with site visitors in mind foremost. Good design is identifying a problem for those visitors and removing that problem.</span>
-</h2> */}
-
-</div>
-</div>
-
-</div>
-
-
-
-
-
  
- {/* <div style={{position:'relative', zIndex:'-1', bottom:'0', maxHeight:'33vh', overflow:'hidden', border:'0px solid red'}}><LineTest /></div> */}
-{/* <div className="spacer33"></div> */}
-
-
-
-
-{/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={300}> */}
-<blockquote style={{fontFamily:'Lobster Two', textAlign:'left', padding:'', borderRadius:'12px', background: 'rgba(196, 189, 179, .7)', fontSize:'clamp(1.5rem, 2.6vw, 2.8rem)', filter:'drop-shadow(-12px 12px 12px rgba(44, 44, 44, 0.5))'}}>
-  <div style={{padding:'2rem 10% 0 10%', filter:'none', textShadow:'1px 1px 0 #aaa'}}>
-  Experience has taught me that good design is not created on a spur of the moment, nor does it come naturally. Good design is a thorough and interative process with site visitors in mind foremost. Good design is identifying a problem for those visitors and removing that problem.
-
-    {/* I imagine things and then make them come to life. Creating digital experiences using intriguing photography, animation and typography, all packaged in the most performant coding that loads fast everywhere. */}
-  </div>
- <div className="logofirst" style={{fontSize:'', textAlign:'right', margin:'2rem 30% 0 0', filter:'none'}}>- Todd Lambert</div>
-</blockquote>
-{/* </ScrollAnimation> */}
 
 
 
@@ -1251,7 +1126,132 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
 
 
 
+<div className="parent" style={{display:'flex', flexDirection:'row', justifyContent:'space-between', height:'100%', gap:'20px', marginTop:'20px'}}> 
 
+<div className="div1" style={{width:'65%', display:'flex', flexDirection:'column', justifyContent:'center', background:'', borderRight:'0px solid #dfcfc9' }}>
+
+<div className="div3" style={{background:'',}}>
+  
+  <h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
+fontFamily: 'Lobster Two',
+letterSpacing: '2px',
+textTransform: 'lowercase',
+fontWeight: '400',
+fontSize:'clamp(1.6rem, 12vw, 3.8rem)',
+// opacity:'.9',
+// paddingLeft:'',
+}}>
+  
+{/* <span style={{color:'#dd4000'}}>Roles are like hats</span> */}
+</h2>
+<h3 className="logotype"  style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', }}>About</h3>
+</div>
+
+<div className="div4" style={{ background: 'rgba(196, 189, 179, .6)', maxHeight:'', justifyContent:'center', display:'flex', flexDirection:'column',}}>
+<div style={{padding:'0 8% 0 6.5%', fontSize:'clamp(1rem, 2vw, 2.8rem)',}}>
+<p>
+Todd Lambert is an award-winning web designer and photographer that trained in Southern California and has traveled and lived in over 16 Western states.
+</p>
+
+
+<p>Todd's skills include all facets of online and multimedia creation including HTML emails, online ads, user interface design, information architecture, web navigation, branding, web graphics, cross-platform and cross-browser web applications, web template creation &amp; CMS implementations.</p>
+
+<p>
+When Todd is not online, he is often found pushing the boundaries of night photography. You can usually find him in the middle of the night shooting astrophotography which is his favorite subject.
+</p>
+
+<p>
+Todd is single and has a dog-child and playful Boxer named “Zoe”, that takes up most of his free time.
+</p>
+
+</div>
+
+</div>
+
+
+
+</div>
+
+<div className="div2" style={{width:'35%', display:'flex', flexDirection:'column', justifyContent:'space-between', background:'', }}>
+
+<div className="div5" style={{background:'',}}>
+  <h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
+// fontFamily: 'Lobster Two',
+letterSpacing: '2px',
+textTransform: 'lowercase',
+fontWeight: '400',
+textShadow:'0 1px 0 #eee',
+fontSize:'clamp(1.6rem, 12vw, 3.8rem)',
+// opacity:'.9',
+// paddingLeft:'',
+}}>
+
+{/* <span style={{color:'#dd4000'}}>Roles are like hats</span> */}
+</h2>
+</div>
+
+<div className="imgbox grad circle" style={{border:'2px solid #dd4000', position:'relative', padding:'2rem', overflow:'hidden', filter: 'drop-shadow(0px 0px 3px #444)'}}><StaticImage alt="Todd Lambert" src="../../static/assets/todd-toon.png" style={{borderColor:'transparent',}} />
+<div className="txtshadow" style={{position:'absolute', left:'0', bottom:'5px', fontSize:'70%', color:'#ddd', textAlign:'center', width:'100%',}}>Todd Lambert</div>
+</div>
+
+<Link state={{modal: true}}
+            to="/about-todd/"
+            className="post-card button noexit print"
+            style={{
+              cursor:'pointer',
+              width:'',
+              maxWidth:'300px',
+              margin:'0 auto',
+              display:'flex',
+              alignSelf:'center',
+              color:'#ccc'
+            }}
+          >
+            View More About Todd
+          </Link>
+
+<div className="div6" style={{margin:'1rem 0 0 0',}}>  
+
+{/* <h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
+fontFamily: 'Lobster Two',
+letterSpacing: '2px',
+textTransform: 'lowercase',
+fontWeight: '400',
+textShadow:'0 1px 0 #eee',
+fontSize:'clamp(1.3rem, 7vw, 2.8rem)',
+opacity:'.9',
+paddingLeft:'',
+}}>
+    
+<span style={{color:''}}>My experience has taught me that good design is not created on a spur of the moment, nor does it come naturally. Good design is a thorough and interative process with site visitors in mind foremost. Good design is identifying a problem for those visitors and removing that problem.</span>
+</h2> */}
+
+</div>
+</div>
+
+</div>
+
+
+
+
+
+ 
+ {/* <div style={{position:'relative', zIndex:'-1', bottom:'0', maxHeight:'33vh', overflow:'hidden', border:'0px solid red'}}><LineTest /></div> */}
+{/* <div className="spacer33"></div> */}
+
+
+
+
+{/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={false} delay={300}> */}
+<blockquote style={{fontFamily:'Lobster Two', textAlign:'left', padding:'', borderRadius:'12px', background: 'rgba(196, 189, 179, .7)', fontSize:'clamp(1.5rem, 2.6vw, 2.8rem)', filter:'drop-shadow(-12px 12px 12px rgba(44, 44, 44, 0.5))'}}>
+  <div style={{padding:'2rem 10% 0 10%', filter:'none', textShadow:'1px 1px 0 #aaa'}}>
+  Experience has taught me that good design is not created on a spur of the moment, nor does it come naturally. Good design is a thorough and interative process with site visitors in mind foremost. Good design is identifying a problem for those visitors and removing that problem.
+
+    {/* I imagine things and then make them come to life. Creating digital experiences using intriguing photography, animation and typography, all packaged in the most performant coding that loads fast everywhere. */}
+  </div>
+ <div className="logofirst" style={{fontSize:'', textAlign:'right', margin:'2rem 30% 0 0', filter:'none'}}>- Todd Lambert</div>
+</blockquote>
+{/* </ScrollAnimation> */}
 
 
 
