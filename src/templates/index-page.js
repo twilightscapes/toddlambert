@@ -1142,8 +1142,8 @@ zIndex:'0'
 
 
 
-<div>
-  LIVE EXAMPLES
+<div style={{ fontWeight:'bold', padding:'30% 0 0 0', fontSize:'2rem', }}>
+  <div style={{display:'flex', flexDirection:'column', justifyContent: 'center',}}>LIVE EXAMPLES:</div>
 </div>
 
 
