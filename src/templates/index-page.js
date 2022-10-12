@@ -972,7 +972,7 @@ zIndex:'0'
       <br />
     <div className="post-card1 button1 logocopy " style={{textAlign:'center', padding:'.5rem', margin:'0 10%'}}>
       {/* <a className="post-card button " href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}> */}
-      Pushing boundaries with images + SVG + Video
+      Pushing boundaries with blended technologies
       {/* </a> */}
       </div>
 </div> 
