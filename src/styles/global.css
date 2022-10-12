@@ -3452,6 +3452,8 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
             @media (max-width: 48rem) {
               .parent {flex-direction:column !important;}
               .parent div{width:100% !important;}
+
+              .logocopy{display:none !important;}
               }
               
               
