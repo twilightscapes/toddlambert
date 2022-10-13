@@ -1098,7 +1098,7 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
 
 
 
-    <div style={{position:'relative', display:'flex', justifyContent:'center', alignItems:'center', top:'', margin:'0 0 0 5rem',  borderLeft:'3px dotted #666', padding:'0 0 0 8rem', minWidth:'500px', height:'50vh', zIndex:'1', textAlign:'', borderRadius:'',}}>
+    <div className="post-card1" style={{height:'50vh', minWidth:'300px', margin:'', display:'flex', flexDirection:'column', justifyContent:'center',}}>
   <Newsignup />
   </div>
 
