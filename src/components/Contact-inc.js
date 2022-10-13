@@ -73,21 +73,22 @@ export default class Contact extends React.Component {
         <input type="hidden" name="form-name" value="contact" />
 
         <div className="flexbutt" style={{justifyContent:'center', justifyItems:'center'}}>
-        <p style={{margin:'0 1rem'}}>
+        {/* <p style={{margin:'0 1rem'}}>
           <label>
             <input type="text" name="name" placeholder="Name" required />
           </label>
-        </p>
-        <p style={{margin:'0 1rem'}}>
+        </p> */}
+        <p style={{margin:'0 1rem', textAlign:'center'}}>
+        Please enter your Email:
           <label>
             <input type="email" name="email" placeholder="your@email.com" required />
           </label>
         </p>
-        <p style={{margin:'0 1rem'}}>
+        {/* <p style={{margin:'0 1rem'}}>
           <label>
             <input type="text" name="subject" placeholder="Subject" required />
           </label>
-        </p>
+        </p> */}
         </div>
         
         <div>
