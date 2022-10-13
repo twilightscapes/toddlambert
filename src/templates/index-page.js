@@ -1035,18 +1035,18 @@ zIndex:'0'
 
 
 
-
     <div className="post-card" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between', borderRadius:'12px', overflow:'hidden'}}>
     <a className="noexit" href="https://tron.allin60.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
-    <StaticImage src="../../static/assets/allin60seconds.jpg" alt="TRON movie in only 60 seconds"  /></a>
+    <StaticImage src="../../static/assets/tronin60.jpg" alt="TRON movie in only 60 seconds"  /></a>
     <br />
     <p style={{padding:'0 2rem'}}>
-    Today's most popular movies are recreated in a dynamic multimedia format and it's all in 60 seconds. Experience your favorite movies again in fast 60 second snippets with multimedia.
+    TRON, recreated in a dynamic multimedia format and it's all in 60 seconds. Rediscover your favorite movie in just 60 seconds. Enter the Grid - now.
 </p>
    <br />
-    <div style={{textAlign:'center',}}><a className="post-card button " href="https://allin60.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>Allin60.com</a></div>
+    <div style={{textAlign:'center',}}><a className="post-card button " href="https://tron.allin60.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>Tron.Allin60.com</a></div>
     
     </div>
+
 
 
 
@@ -1062,6 +1062,24 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
     <div style={{textAlign:'center',}}><a className="post-card button " href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>VidSocks.com</a></div>
     
     </div>
+
+
+
+
+    <div className="post-card" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between', borderRadius:'12px', overflow:'hidden'}}>
+    <a className="noexit" href="https://allin60.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
+    <StaticImage src="../../static/assets/allin60seconds.jpg" alt="Popular movies in only 60 seconds"  /></a>
+    <br />
+    <p style={{padding:'0 2rem'}}>
+    Today's most popular movies are recreated in a dynamic multimedia format and it's all in 60 seconds. Experience your favorite movies again in fast 60 second snippets with multimedia.
+</p>
+   <br />
+    <div style={{textAlign:'center',}}><a className="post-card button " href="https://allin60.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>Allin60.com</a></div>
+    
+    </div>
+
+
+
 
 
 
