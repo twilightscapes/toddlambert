@@ -1145,12 +1145,6 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
 
 
 
-
-
-<div className="parent" style={{display:'flex', flexDirection:'row', justifyContent:'space-between', height:'100%', gap:'20px', marginTop:'20px'}}> 
-
-<div className="div1" style={{width:'65%', display:'flex', flexDirection:'column', justifyContent:'center', background:'', borderRight:'0px solid #dfcfc9' }}>
-
 <div className="div3" style={{background:'',}}>
   
   <h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
@@ -1167,6 +1161,13 @@ fontSize:'clamp(1.6rem, 12vw, 3.8rem)',
 </h2>
 <h3 className="logotype"  style={{textAlign:'center', margin:'1vh 0 3vh 0', fontSize:'5vw', clear:'right', }}>About</h3>
 </div>
+
+<div className="parent" style={{display:'flex', flexDirection:'row', justifyContent:'space-between', height:'100%', gap:'20px', marginTop:'20px'}}> 
+
+
+<div className="div1" style={{width:'65%', display:'flex', flexDirection:'column', justifyContent:'center', background:'', borderRight:'0px solid #dfcfc9' }}>
+
+
 
 <div className="div4" style={{ background: 'rgba(196, 189, 179, .6)', maxHeight:'', justifyContent:'center', display:'flex', flexDirection:'column',}}>
 <div style={{padding:'0 8% 0 6.5%', fontSize:'clamp(1rem, 2vw, 2.8rem)',}}>
