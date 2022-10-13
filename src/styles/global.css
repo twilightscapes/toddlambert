@@ -3732,7 +3732,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                right:20px;
                bottom:10px;
                border:0px solid red !important;
-               color:#999;
+               color:#fff;
                /* height:60px;
                width:60px; */
                /* animation: fadeout 3s forwards; */
