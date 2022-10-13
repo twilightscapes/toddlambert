@@ -848,7 +848,7 @@ zIndex:'0'
       playIcon={
         <button aria-label="Click To Play" className="clickplays" style={{position:'relative', zIndex:'0', top:'', border:'0px  solid red', width:'100vw', height:'', background:'transparent', color:'#fff', fontSize:'18px', textAlign:'center', display:'flex', flexDirection:'column', verticalAlign:'center', justifyContent:'center', alignItems:'center', paddingTop:'0', borderRadius:'12px'}}>
       
-    <div className="" style={{position:'absolute', bottom:'-100px', zIndex:'0', textAlign:'center', animation:'fadeIn 3s', display:'flex', justifyContent:'', width:'auto', marginBottom:''}}>
+    <div className="" style={{position:'absolute', bottom:'-50px', zIndex:'0', textAlign:'center', animation:'fadeIn 3s', display:'flex', justifyContent:'', width:'auto', marginBottom:''}}>
       
       <div className="popped1" style={{display:'flex', width:'', margin:'0 auto', fontWeight:'bold', padding:'.5rem', fontSize:'2rem', background:'linear-gradient(180deg, #777 30%, #333 80%)', borderRadius:'12px', border:'1px solid #333', filter:'drop-shadow(2px 2px 2px #000)'}}><div style={{fontSize:'14px', fontWeight:'', padding:'0 0 0 .3rem', filter:'drop-shadow(2px 2px 2px #000)'}}><ImPlay style={{margin:'0 auto', width:'', fontSize:'30px'}} />CLICK TO PLAY</div></div>
 
@@ -857,7 +857,7 @@ zIndex:'0'
        light="../assets/big-site-designs.jpg"
       />
             <br />
-    <div className="post-card1 button1 logocopy " style={{textAlign:'center', padding:'.5rem', margin:'0 10%'}}>
+            <div className="post-card1 button1 logocopy " style={{textAlign:'center', padding:'0 0 .5rem 0', margin:'0'}}>
       {/* <a className="post-card button " href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}> */}
       Flexible design that adapts to the device
       {/* </a> */}
@@ -886,7 +886,7 @@ zIndex:'0'
       playIcon={
         <button aria-label="Click To Play" className="clickplays" style={{position:'relative', zIndex:'0', top:'', border:'0px  solid red', width:'100vw', height:'', background:'transparent', color:'#fff', fontSize:'18px', textAlign:'center', display:'flex', flexDirection:'column', verticalAlign:'center', justifyContent:'center', alignItems:'center', paddingTop:'0', borderRadius:'12px'}}>
       
-    <div className="" style={{position:'absolute', bottom:'-100px', zIndex:'0', textAlign:'center', animation:'fadeIn 3s', display:'flex', justifyContent:'', width:'auto', marginBottom:''}}>
+    <div className="" style={{position:'absolute', bottom:'-50px', zIndex:'0', textAlign:'center', animation:'fadeIn 3s', display:'flex', justifyContent:'', width:'auto', marginBottom:''}}>
       
       <div className="popped1" style={{display:'flex', width:'', margin:'0 auto', fontWeight:'bold', padding:'.5rem', fontSize:'2rem', background:'linear-gradient(180deg, #777 30%, #333 80%)', borderRadius:'12px', border:'1px solid #333', filter:'drop-shadow(2px 2px 2px #000)'}}><div style={{fontSize:'14px', fontWeight:'', padding:'0 0 0 .3rem', filter:'drop-shadow(2px 2px 2px #000)'}}><ImPlay style={{margin:'0 auto', width:'', fontSize:'30px'}} />CLICK TO PLAY</div></div>
 
@@ -898,7 +898,7 @@ zIndex:'0'
 
 <br />
 
-<div className="post-card1 button1 logocopy " style={{textAlign:'center', padding:'.5rem', margin:'0 10%'}}>
+<div className="post-card1 button1 logocopy " style={{textAlign:'center', padding:'0 0 .5rem 0', margin:'0'}}>
   {/* <a className="post-card button " href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}> */}
   Unique Conceptual Photography
   {/* </a> */}
@@ -923,7 +923,7 @@ zIndex:'0'
       playIcon={
         <button aria-label="Click To Play" className="clickplays" style={{position:'relative', zIndex:'0', top:'', border:'0px  solid red', width:'100vw', height:'', background:'transparent', color:'#fff', fontSize:'18px', textAlign:'center', display:'flex', flexDirection:'column', verticalAlign:'center', justifyContent:'center', alignItems:'center', paddingTop:'0', borderRadius:'12px'}}>
       
-    <div className="" style={{position:'absolute', bottom:'-100px', zIndex:'0', textAlign:'center', animation:'fadeIn 3s', display:'flex', justifyContent:'', width:'auto', marginBottom:''}}>
+    <div className="" style={{position:'absolute', bottom:'-50px', zIndex:'0', textAlign:'center', animation:'fadeIn 3s', display:'flex', justifyContent:'', width:'auto', marginBottom:''}}>
       
       <div className="popped1" style={{display:'flex', width:'', margin:'0 auto', fontWeight:'bold', padding:'.5rem', fontSize:'2rem', background:'linear-gradient(180deg, #777 30%, #333 80%)', borderRadius:'12px', border:'1px solid #333', filter:'drop-shadow(2px 2px 2px #000)',}}><div style={{fontSize:'14px', fontWeight:'', padding:'0 0 0 .3rem', filter:'drop-shadow(2px 2px 2px #000)'}}><ImPlay style={{margin:'0 auto', width:'', fontSize:'30px'}} />CLICK TO PLAY</div></div>
 
@@ -933,7 +933,7 @@ zIndex:'0'
       />
 
 <br />
-    <div className="post-card1 button1 logocopy " style={{textAlign:'center', padding:'.5rem', margin:'0 10%'}}>
+<div className="post-card1 button1 logocopy " style={{textAlign:'center', padding:'0 0 .5rem 0', margin:'0'}}>
       {/* <a className="post-card button " href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}> */}
       Responsive web apps that work everywhere
       {/* </a> */}
@@ -961,7 +961,7 @@ zIndex:'0'
       playIcon={
         <button aria-label="Click To Play" className="clickplays" style={{position:'relative', zIndex:'0', top:'', border:'0px  solid red', width:'100vw', height:'', background:'transparent', color:'#fff', fontSize:'18px', textAlign:'center', display:'flex', flexDirection:'column', verticalAlign:'center', justifyContent:'center', alignItems:'center', paddingTop:'0', borderRadius:'12px'}}>
       
-    <div className="" style={{position:'absolute', bottom:'-100px', zIndex:'0', textAlign:'center', animation:'fadeIn 3s', display:'flex', justifyContent:'', width:'auto', marginBottom:''}}>
+    <div className="" style={{position:'absolute', bottom:'-50px', zIndex:'0', textAlign:'center', animation:'fadeIn 3s', display:'flex', justifyContent:'', width:'auto', marginBottom:''}}>
       
       <div className="popped1" style={{display:'flex', width:'', margin:'0 auto', fontWeight:'bold', padding:'.5rem', fontSize:'2rem', background:'linear-gradient(180deg, #777 30%, #333 80%)', borderRadius:'12px', border:'1px solid #333', filter:'drop-shadow(2px 2px 2px #000)'}}><div style={{fontSize:'14px', fontWeight:'', padding:'0 0 0 .3rem', filter:'drop-shadow(2px 2px 2px #000)'}}><ImPlay style={{margin:'0 auto', width:'', fontSize:'30px'}} />CLICK TO PLAY</div></div>
 
@@ -970,7 +970,7 @@ zIndex:'0'
        light="../assets/state-art.jpg"
       />
       <br />
-    <div className="post-card1 button1 logocopy " style={{textAlign:'center', padding:'.5rem', margin:'0 10%'}}>
+      <div className="post-card1 button1 logocopy " style={{textAlign:'center', padding:'0 0 .5rem 0', margin:'0'}}>
       {/* <a className="post-card button " href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}> */}
       Pushing boundaries with blended technologies
       {/* </a> */}
@@ -994,7 +994,7 @@ zIndex:'0'
       playIcon={
         <button aria-label="Click To Play" className="clickplays" style={{position:'relative', zIndex:'0', top:'', border:'0px  solid red', width:'100vw', height:'', background:'transparent', color:'#fff', fontSize:'18px', textAlign:'center', display:'flex', flexDirection:'column', verticalAlign:'center', justifyContent:'center', alignItems:'center', paddingTop:'0', borderRadius:'12px'}}>
       
-    <div className="" style={{position:'absolute', bottom:'-100px', zIndex:'0', textAlign:'center', animation:'fadeIn 3s', display:'flex', justifyContent:'', width:'auto', marginBottom:''}}>
+    <div className="" style={{position:'absolute', bottom:'-50px', zIndex:'0', textAlign:'center', animation:'fadeIn 3s', display:'flex', justifyContent:'', width:'auto', marginBottom:''}}>
       
       <div className="popped1" style={{display:'flex', width:'', margin:'0 auto', fontWeight:'bold', padding:'.5rem', fontSize:'2rem', background:'linear-gradient(180deg, #777 30%, #333 80%)', borderRadius:'12px', border:'1px solid #333', filter:'drop-shadow(2px 2px 2px #000)'}}><div style={{fontSize:'14px', fontWeight:'', padding:'0 0 0 .3rem', filter:'drop-shadow(2px 2px 2px #000)'}}><ImPlay style={{margin:'0 auto', width:'', fontSize:'30px'}} />CLICK TO PLAY</div></div>
 
@@ -1003,7 +1003,7 @@ zIndex:'0'
        light="../assets/timelapse-videography.jpg"
       />
             <br />
-    <div className="post-card1 button1 logocopy " style={{textAlign:'center', padding:'.5rem', margin:'0 10%'}}>
+            <div className="post-card1 button1 logocopy " style={{textAlign:'center', padding:'0 0 .5rem 0', margin:'0'}}>
       {/* <a className="post-card button " href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}> */}
       State-of-the-art photography techniques
       {/* </a> */}
@@ -1027,7 +1027,7 @@ zIndex:'0'
     <a className="noexit" href="https://twilightscapes.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
     <StaticImage src="../../static/assets/twilightscapes-button.jpg" alt="Todd Lambert Night photos"  /></a>
     <br />
-    <p style={{padding:'0 0 0 2rem'}}>Experience a new style of landscape photography all through the eyes of Todd Lambert. Explore the unusual and see the night like you&apos;ve never seen it before.</p>
+    <p style={{padding:'0 2rem'}}>Experience a new style of landscape photography all through the eyes of Todd Lambert. Explore the unusual and see the night like you&apos;ve never seen it before.</p>
    <br />
     <div style={{textAlign:'center',}}><a className="post-card button " href="https://twilightscapes.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>Twilightscapes.com</a></div>
     
@@ -1038,13 +1038,13 @@ zIndex:'0'
 
     <div className="post-card" style={{height:'', margin:'', display:'flex', flexDirection:'column', justifyContent:'space-between', borderRadius:'12px', overflow:'hidden'}}>
     <a className="noexit" href="https://tron.allin60.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
-    <StaticImage src="../../static/assets/tronin60.jpg" alt="TRON movie in only 60 seconds"  /></a>
+    <StaticImage src="../../static/assets/allin60seconds.jpg" alt="TRON movie in only 60 seconds"  /></a>
     <br />
-    <p style={{padding:'0 0 0 2rem'}}>
-Explore the world of TRON - all in only 60 seconds. 
+    <p style={{padding:'0 2rem'}}>
+    Today's most popular movies are recreated in a dynamic multimedia format and it's all in 60 seconds. Experience your favorite movies again in fast 60 second snippets with multimedia.
 </p>
    <br />
-    <div style={{textAlign:'center',}}><a className="post-card button " href="https://tron.allin60.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>Tron.Allin60.com</a></div>
+    <div style={{textAlign:'center',}}><a className="post-card button " href="https://allin60.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>Allin60.com</a></div>
     
     </div>
 
@@ -1056,7 +1056,7 @@ Explore the world of TRON - all in only 60 seconds.
     <a className="noexit" href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit'}}>
     <StaticImage src="../../static/assets/vidsock-promo.jpg" alt="Todd builds Web Apps"  /></a>
     <br />
-    <p style={{padding:'0 0 0 2rem'}}>
+    <p style={{padding:'0 2rem'}}>
 Todd sells exceptionally fast and well-built multimedia web apps called VidSocks. They are a complete website solution that get top ranks in Google!
     </p><br />
     <div style={{textAlign:'center',}}><a className="post-card button " href="https://vidsocks.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>VidSocks.com</a></div>
@@ -1071,7 +1071,7 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
     <a className="noexit" href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>
     <StaticImage src="../../static/assets/urban-fetish-button.jpg" alt="Todd Lambert Night photos"  /></a>
     <br />
-    <p style={{padding:'0 0 0 2rem'}}>
+    <p style={{padding:'0 2rem'}}>
     Take a walk on the wild side and follow along as Todd Lambert goes in search of the creepiest, freakiest, spookiest abandoned and desolate locations he can find. 
     </p><br />
     <div style={{textAlign:'center',}}><a className="post-card button " href="https://urbanfetish.com" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'inherit',}}>UrbanFetish.com</a></div>
@@ -1080,7 +1080,7 @@ Todd sells exceptionally fast and well-built multimedia web apps called VidSocks
 
 
 
-    <div style={{position:'relative', top:'', margin:'0', padding:'5% 0',  width:'', zIndex:'1', textAlign:'', borderRadius:'12px',}}>
+    <div style={{position:'relative', display:'flex', justifyContent:'center', alignItems:'center', top:'', margin:'0 0 0 5rem',  borderLeft:'3px dotted #666', padding:'0 0 0 8rem', minWidth:'500px', height:'50vh', zIndex:'1', textAlign:'', borderRadius:'',}}>
   <Newsignup />
   </div>
 
