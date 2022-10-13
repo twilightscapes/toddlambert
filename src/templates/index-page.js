@@ -1017,8 +1017,8 @@ zIndex:'0'
 
 
 
-<div style={{ fontWeight:'bold', padding:'30% 0 0 0', fontSize:'2rem', }}>
-  <div style={{display:'flex', flexDirection:'column', justifyContent: 'center',}}>LIVE EXAMPLES:</div>
+<div style={{ fontWeight:'bold', marginLeft:'5rem', padding:'0 0 0 30%', fontSize:'2rem', borderLeft:'3px dashed #333', display:'flex', flexDirection:'column', justifyContent: 'center', height:'55vh'}}>
+  <div style={{}}>LIVE EXAMPLES:</div>
 </div>
 
 
