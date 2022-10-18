@@ -95,7 +95,7 @@ export default function testPage() {
 
 {/* <CasePanels /> */}
 
-      {/* <div className="zoombox">
+      <div className="zoombox">
       <SRLWrapper options={options} className="">
 
    <StaticImage
@@ -145,7 +145,7 @@ export default function testPage() {
         />
 </div>
 </SRLWrapper>
-  </div> */}
+  </div>
 
     
     {/* <div className="spacer66"></div> */}

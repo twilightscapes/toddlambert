@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import { RiSendPlane2Line } from "react-icons/ri"
 
 import { Seo } from "../components/seo"
@@ -56,21 +56,21 @@ const Contact = ({ data }) => {
           data-netlify-honeypot="bot-field"
         >
           <input type="hidden" name="form-name" value="contact" />
-          <p>
+          {/* <p>
             <label>
               <input type="text" name="name" placeholder="Name" required />
             </label>
-          </p>
+          </p> */}
           <p>
             <label>
               <input type="email" name="email" placeholder="your@email.com" required />
             </label>
           </p>
-          <p>
+          {/* <p>
             <label>
               <input type="text" name="subject" placeholder="Subject" required />
             </label>
-          </p>
+          </p> */}
           <p>
             <label>
               <textarea name="message" placeholder="Your Message" required></textarea>
@@ -89,6 +89,8 @@ const Contact = ({ data }) => {
             </button>
           </p>
         </form>
+        <div style={{fontSize: '80%', padding: '1rem 3%', textAlign: 'center',}}><Link style={{textAlign: 'center', paddingTop: '0px', paddingBottom: '0', textDecoration: 'underline',}} state={{modal: true}} to="/privacy">Privacy Policy</Link>
+                </div>
       </div>
       <br />
     </Layout>

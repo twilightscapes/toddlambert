@@ -671,7 +671,11 @@ background: 'rgba(196, 189, 179, .4)'
 {/* <div style={{ width:'80%', background: 'rgba(196, 189, 179, .5)',
   backdropFilter: 'blur(44px)', margin:'0 auto', borderRadius:'12px', zIndex:'2'}}> */}
 
-<div className="logolink" style={{textAlign:'center', position:'relative',fontSize:'clamp(2rem, 12.5vw, 10rem)', padding:'0 0 2% 0', background:'tranparent', filter: 'drop-shadow(0px 0px 0px #444)'}}><span className="logofirst mainlogo">todd</span> <span className="logocolor">lambert</span></div>
+{/* <header className="" style={{backgroundColor:'#222', height:'400px', display:'grid', placeContent:'center', color:'#fff',}}>
+<div className="logolink" style={{textAlign:'center', position:'relative',fontSize:'clamp(2rem, 12.5vw, 8rem)', padding:'0 0 2% 0', background:'tranparent', filter: 'drop-shadow(0px 0px 0px #444)'}}><span className="logofirst mainlogo">todd</span> <span className="logocolor">lambert</span></div>
+</header> */}
+
+<div className="logolink" style={{textAlign:'center', position:'relative',fontSize:'clamp(2rem, 12.5vw, 10rem)', padding:'0 0 2% 0', background:'#222', filter: 'drop-shadow(0px 0px 0px #444)'}}><span className="logofirst mainlogo">todd</span> <span className="logocolor">lambert</span></div>
 {/* </ScrollAnimation> */}
 
 {/* <ScrollAnimation animateIn="fadeIn" animateOut="fadeOut" initiallyVisible={false} animateOnce={false} animatePreScroll={true} delay={1000}> */}
