@@ -6,7 +6,7 @@ date: 2021-11-19 10:43
 description: Twilightscapes uses Shopify Integration and custom VidSocks setup
 youtuber: "iHxmNzMfDj4"
 youtuber2: ""
-youtubeshoworiginal: ""
+youtubeshoworiginal: "1"
 youtubersuggestion1: ""
 youtubersuggestion2: "https://youtu.be/7vz43MYaCA0"
 youtubersuggestion3: "https://youtu.be/8yFVBuGcOe8-3"
@@ -28,5 +28,5 @@ nftlink: ""
 nftdrop: "2021-10-31T14:00:00"
 nftredeem:
 ---
-
+An example of layering graphics and animted SVG multimedia over fullscreen video. This is all controlled from an open source CMS. So new posts with video and interactive multimedia can be built with no code! 
 
