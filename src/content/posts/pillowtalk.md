@@ -7,9 +7,9 @@ description: Let's Find Mike A Woman
 youtuber: "SD0EKkyuakY"
 youtuber2: "VgdB9QYKeyM"
 youtubeshoworiginal: "1"
-youtubersuggestion1: "https://youtu.be/iiZnOlRPiE0"
-youtubersuggestion2: "https://youtu.be/zQB-_N7CIYY"
-youtubersuggestion3: "https://youtu.be/24nttG5Lnio"
+youtubersuggestion1: ""
+youtubersuggestion2: ""
+youtubersuggestion3: ""
 youtubestart: "0"
 youtubeend: "0"
 youtubemute: "1"
@@ -17,9 +17,9 @@ audiostart: "820"
 audioend: "5000"
 youtubecontrols: "0"
 youtubeautostart: "1"
-isnftforsale: "1"
+isnftforsale: ""
 svgzindex: "0"
-comments: "1"
+comments: "0"
 shareable: "1"
 underlayImage: /assets/PillowTalkBG.png
 featuredImage: /assets/Experiences-Header-8.jpg
@@ -39,7 +39,6 @@ If you enjoyed this, please buy the NFT! You get a funny piece of art and a grea
 
 
 
-<h2 class="neonText" style="text-align: center;">BUY THE NFT!</h2>
-<nft-card style="border:none;border-radius:12px" contractAddress="0x495f947276749ce646f68ac8c248420045cb7b5e" tokenId="14583650834310525071617320783641503123203461641321595508191183191728178855937"> </nft-card>
+
 
 <!-- XjuLZwlDxh8 -->

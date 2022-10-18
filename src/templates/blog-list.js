@@ -80,7 +80,7 @@ export const blogListQuery = graphql`
 `
 const Pagination = props => (
   <div className="pagination" sx={styles.pagination}>
-    <ul>
+    <ul style={{backgroundColor:'#222', color:'#fff', borderRadius:'12px'}}>
       {!props.isFirst && (
         <li>
           <Link to={props.prevPage} rel="prev">
@@ -118,7 +118,7 @@ class BlogIndex extends React.Component {
   render() {
     const { data } = this.props
     const { currentPage, numPages } = this.props.pageContext
-    const blogSlug = "/archive/"
+    const blogSlug = "/posts/"
     const isFirst = currentPage === 1
     const isLast = currentPage === numPages
     const prevPage =

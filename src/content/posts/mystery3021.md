@@ -1,6 +1,6 @@
 ---
 template: blog-post
-title: (Video Blog Example) Mystery Science Theater 3021 - A great way to show off what the VidSocks platform allows you to do. Interactive multimedia blog posts - it's new, we invented it :-)
+title: Mystery Science Theater remade with svg/video
 slug: /mystery-science-theater-3021
 date: 2021-10-18 10:43
 description: A bit of a tribute to the great MST3000

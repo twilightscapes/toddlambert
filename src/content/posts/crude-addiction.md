@@ -33,7 +33,6 @@ So, it seemed appropriate to take it to the next level and add some animation to
 
 I hope you like it.
 
-<h2 class="neonText" style="text-align: center;">BUY THE NFT!</h2>
-<!-- <nft-card style="border:none;border-radius:12px" contractAddress="0x495f947276749ce646f68ac8c248420045cb7b5e" tokenId="14583650834310525071617320783641503123203461641321595508191183186230620717057"> </nft-card> -->
+
 
 
