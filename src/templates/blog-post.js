@@ -607,7 +607,7 @@ const { iconimage } = useSiteMetadata()
             <h1>{frontmatter.title}</h1>
             {/* <time sx={{color: "muted"}}>{frontmatter.date}</time> */}
             {/* <TimeAgo date={frontmatter.date} style={{color:'#fff !important'}} /> */}
-            Posted: over a month ago
+            Posted: over a week ago
           </section>
         </header>
 

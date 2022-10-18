@@ -111,7 +111,7 @@ date={Date.now() + 20000} className="countdown"> */}
 
 <p style={{minWidth:'20vw', position:'relative', textAlign:'center', border:'0px solid red'}}>
   {/* <TimeAgo date={data.frontmatter.date}/> */}
-  Posted: over a month ago
+  Posted: over a week ago
 </p>
 </div>
 
