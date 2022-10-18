@@ -1249,7 +1249,7 @@ fontSize:'clamp(1.6rem, 12vw, 3.8rem)',
               color:'#ccc'
             }}
           >
-            Todd's Latest Posts
+            Todd's Latest Work
           </Link>
 
 <div className="div6" style={{margin:'1rem 0 0 0',}}>  
