@@ -3652,6 +3652,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                              transform: rotate(90deg);
                              transform-origin: right top;
                              /* scroll-snap-align:end; */
+                            
                            }
                            
                            /* .squares {
@@ -3732,7 +3733,7 @@ body.bloglist #chaticon, body.about #chaticon{display: none !important;}
                right:20px;
                bottom:10px;
                border:0px solid red !important;
-               color:#fff;
+               color:#999;
                /* height:60px;
                width:60px; */
                /* animation: fadeout 3s forwards; */
