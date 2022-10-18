@@ -1225,7 +1225,7 @@ fontSize:'clamp(1.6rem, 12vw, 3.8rem)',
             className="post-card button noexit print"
             style={{
               cursor:'pointer',
-              width:'',
+              width:'300px',
               maxWidth:'300px',
               margin:'0 auto',
               display:'flex',
@@ -1233,7 +1233,23 @@ fontSize:'clamp(1.6rem, 12vw, 3.8rem)',
               color:'#ccc'
             }}
           >
-            View More About Todd
+            More About Todd
+          </Link>
+
+          <Link state={{modal: true}}
+            to="/posts/"
+            className="post-card button noexit print"
+            style={{
+              cursor:'pointer',
+              width:'300px',
+              maxWidth:'300px',
+              margin:'0 auto',
+              display:'flex',
+              alignSelf:'center',
+              color:'#ccc'
+            }}
+          >
+            Todd's Latest Posts
           </Link>
 
 <div className="div6" style={{margin:'1rem 0 0 0',}}>  

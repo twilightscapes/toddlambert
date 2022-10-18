@@ -413,7 +413,21 @@ class BlogIndex extends React.Component {
 <div id="contentscroll1" name="container21" className="container" style={{display:'', justifySelf:'', width:'100%', maxWidth:'100%', height:'', border:'0px solid #000 !important', margin:'0', marginTop:'0', padding:'4%'}}>
 
 
-<h1 className="headline neonText" style={{fontSize:'250%', textAlign:'center', margin:'0', padding:'0'}}>Portfolio</h1>
+{/* <h1 className="headline neonText" style={{fontSize:'250%', textAlign:'center', margin:'0', padding:'0'}}>Todd</h1> */}
+
+<Link to="../"><h2 className="logofirst" style={{textAlign:'center', marginTop:'', 
+fontFamily: 'Lobster Two',
+letterSpacing: '2px',
+textTransform: 'lowercase',
+fontWeight: '400',
+textShadow:'0 1px 0 #eee',
+fontSize:'clamp(1.6rem, 6vw, 3.8rem)',
+paddingLeft:'2rem',
+}}>
+Todd's <span style={{color:'rgb(187 54 0)'}}>latest posts</span>
+</h2>
+</Link>
+
 {/* VidSock - The World's First Multimedia 3D Blog for creating, hosting and marketing the next generation of NFTs. */}
 
 {/* onFocus={disableBodyScroll()} */}
