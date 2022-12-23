@@ -9,20 +9,20 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const blogList = path.resolve(`./src/templates/blog-list.js`)
 
   const result = await graphql(`
-    {
-      allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
-        edges {
-          node {
-            id
-            frontmatter {
-              slug
-              template
-              title
-            }
+  {
+    allMarkdownRemark(sort: {frontmatter: {date: DESC}}) {
+      edges {
+        node {
+          id
+          frontmatter {
+            slug
+            template
+            title
           }
         }
       }
     }
+  }
   `)
 
   // Handle errors
@@ -90,15 +90,3 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 }
 
 
-const FilterWarningsPlugin = require("webpack-filter-warnings-plugin");
-
-exports.onCreateWebpackConfig = ({ actions }) => {
-  actions.setWebpackConfig({
-    plugins: [
-      new FilterWarningsPlugin({
-        exclude:
-          /mini-css-extract-plugin[^]*Conflicting order. Following module has been added:/,
-      }),
-    ],
-  });
-};
