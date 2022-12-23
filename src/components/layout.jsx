@@ -7,11 +7,11 @@ import React, {  } from "react"
 
 // import Theme from "../components/theme"
 import { Seo } from "./seo"
-// import FullScreen from "../components/FullScreen"
+import FullScreen from "../components/FullScreen"
 // import { Link } from 'gatsby-plugin-modal-routing-3'
 import { Link } from "gatsby"
-// import { ModalRoutingContext } from 'gatsby-plugin-modal-routing-3'
-// import { AiOutlineClose } from "react-icons/ai"
+import { ModalRoutingContext } from 'gatsby-plugin-modal-routing-3'
+import { AiOutlineClose } from "react-icons/ai"
 // import { AnchorLink } from "gatsby-plugin-anchor-links"
 // import { FaHandPointDown } from "react-icons/fa"
 // import Bug from "../../static/assets/logo.svg"
@@ -60,21 +60,23 @@ export function Layout({ children }) {
 <>
 
 <Helmet>
+
 <link rel="preconnect" href="https://fonts.googleapis.com" /> 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" /> 
 <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&amp;display=swap" display="swap" rel="stylesheet" />
+
 </Helmet>
       <Seo />
 
 
-      {/* <ModalRoutingContext.Consumer>
+      <ModalRoutingContext.Consumer>
     {({ modal, closeTo }) => (
       <div className="" style={{overflow:''}}>
         {modal ? (
           <>
 <Link className="test testbottom" state={{noScroll: true }} to={closeTo} style={{display:'flex', position:'absolute', alignSelf:'center', bottom:'0', textAlign:'center', margin:'0 auto', width:'100%', textDecoration:'underline', justifyContent:'center'}}>Close &amp; Return</Link>
 <div className="closer">
-
+{/* <FullScreen className="test" /> */}
 
 <Link className="test" state={{noScroll: true }} to={closeTo}>
   
@@ -83,7 +85,8 @@ export function Layout({ children }) {
 
 <AiOutlineClose />
 
-
+  {/* <button title="Close" className="SRLCloseButton1"><div className="SRLCloseButton1" >
+  <svg style={{ color:'#fff',}} className="SRLCloseButton" xmlns="http://www.w3.org/2000/svg" viewBox="11 11 30 30"><path className="SRLCloseButton" d="M27.92 25l8.84-8.84 1.82-1.82c.27-.27.27-.71 0-.97l-1.95-1.95a.682.682 0 0 0-.97 0L25 22.08 14.34 11.42a.682.682 0 0 0-.97 0l-1.95 1.95c-.27.27-.27.71 0 .97L22.08 25 11.42 35.66c-.27.27-.27.71 0 .97l1.95 1.95c.27.27.71.27.97 0L25 27.92l8.84 8.84 1.82 1.82c.27.27.71.27.97 0l1.95-1.95c.27-.27.27-.71 0-.97L27.92 25z"></path></svg></div></button> */}
   
   </Link>
 </div>
@@ -97,7 +100,7 @@ export function Layout({ children }) {
 
       </div>
     )}
-  </ModalRoutingContext.Consumer> */}
+  </ModalRoutingContext.Consumer>
 
 
 <Link state={{modal: true}} to="/contact/" title="Contact Todd Lambert">

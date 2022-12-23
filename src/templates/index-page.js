@@ -35,104 +35,123 @@ const CustomBox = styled.div`
 
 
 export const pageQuery = graphql`
-query HomeQuery($id: String!) {
-  allFile(
-    filter: {extension: {regex: "/(jpg)|(jpeg)|(png)/"}, dir: {regex: "/img/portfolio/"}}
-    sort: {name: ASC}
-  ) {
-    edges {
-      node {
-        name
-        id
-        relativePath
-        childImageSharp {
-          gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
+  query HomeQuery($id: String! ) {
+
+
+    allFile(
+      filter: {extension: {regex: "/(jpg)|(jpeg)|(png)/"}, dir: {regex: "/img/portfolio/"}}
+      sort: { order: ASC, fields: name }
+    ) {
+      edges {
+        node {
+          name
+          id
+          relativePath
+          childImageSharp {
+            gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
+          }
         }
       }
     }
-  }
-  site {
-    siteMetadata {
-      title
-      titleDefault
-      siteUrl
-      description
-      image
-      twitterUsername
-      companyname
-      showfooter
+
+
+
+
+
+    
+
+
+    
+    site {
+      siteMetadata {
+        title
+        titleDefault
+        siteUrl
+        description
+        image
+        twitterUsername
+        companyname
+        showfooter
+      }
+
     }
-  }
-  markdownRemark(id: {eq: $id}) {
-    id
-    html
-    excerpt(pruneLength: 148)
-    frontmatter {
-      date(formatString: "YYYY-MM-DD-HH-MM-SS")
-      slug
-      title
-      description
-      showFeature
-      showPosts
-      showInfo
-      youtuber
-      youtubestart
-      youtubeend
-      youtubemute
-      youtubecontrols
-      youtubeautostart
-      svgzindex
-      tagline
-      featuredImage {
-        publicURL
-        childImageSharp {
-          gatsbyImageData(layout: CONSTRAINED)
+    markdownRemark(id: { eq: $id }) {
+      id
+      html
+      excerpt(pruneLength: 148)
+      frontmatter {
+        date(formatString: "YYYY-MM-DD-HH-MM-SS")
+        slug
+        title
+        description
+        showFeature
+        showPosts
+        showInfo
+        youtuber
+        youtubestart
+        youtubeend
+        youtubemute
+        youtubecontrols
+        youtubeautostart
+        svgzindex
+        tagline
+        featuredImage {
+          publicURL
+          childImageSharp {
+            gatsbyImageData(layout: CONSTRAINED)
+          }
         }
-      }
-      secondaryImage {
-        childImageSharp {
-          gatsbyImageData(layout: CONSTRAINED)
+        secondaryImage {
+          childImageSharp {
+            gatsbyImageData(layout: CONSTRAINED)
+          }
         }
-      }
-      underlayImage {
-        childImageSharp {
-          gatsbyImageData(layout: FULL_WIDTH)
+        underlayImage {
+          childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+          }
         }
-      }
-      cta {
-        ctaText
-        ctaLink
-      }
-      svgImage {
-        relativePath
+        cta {
+          ctaText
+          ctaLink
+        }
+        svgImage{
+          relativePath
+        }
       }
     }
-  }
-  posts: allMarkdownRemark(
-    sort: {frontmatter: {date: DESC}}
-    filter: {frontmatter: {template: {eq: "blog-post"}}}
-    limit: 9
-  ) {
-    edges {
-      node {
-        id
-        excerpt(pruneLength: 250)
-        frontmatter {
-          date(formatString: "YYYY-MM-DD-HH-MM-SS")
-          slug
-          title
-          nftdrop
-          featuredImage {
-            publicURL
-            childImageSharp {
-              gatsbyImageData(layout: FULL_WIDTH)
+
+
+ 
+    
+
+    posts: allMarkdownRemark(
+      sort: { order: DESC, fields: [frontmatter___date] }
+      filter: { frontmatter: { template: { eq: "blog-post" } } }
+      limit: 9
+    ) {
+      edges {
+        node {
+          id
+          excerpt(pruneLength: 250)
+          frontmatter {
+            date(formatString: "YYYY-MM-DD-HH-MM-SS")
+            slug
+            title
+            nftdrop
+  
+            
+            featuredImage {
+              publicURL
+              childImageSharp {
+                gatsbyImageData(layout: FULL_WIDTH)
+              }
             }
           }
         }
       }
     }
   }
-}
 `
 
 const options = {
