@@ -1355,7 +1355,7 @@ Lambert
 	
 	<h2 className="todd-headline">Highlights</h2>
 
-<p><strong>Product Designer - Skilled web designer/developer with 21 years of professional experience.</strong></p>
+<p><strong>Digital Product Designer - Skilled web designer/developer with 20+ years of professional experience.</strong></p>
 
 <p>Successful product designer able to integrate both technical and creative skills to create cross-browser and cross-platform solutions with modern web architecture and navigation systems.</p>
 
@@ -1373,7 +1373,7 @@ Lambert
 
 <p>Analytics, SEO, UI design, Information Architecture &amp; Content Management System integrations. Photo and Video production. </p>
 
-<p><strong>I prefer: JAM stack, React, Gatsby, Canon, Subaru and my Mac.</strong></p>
+<p><strong>I prefer: Astro, React, Canon, Subaru and my Mac.</strong></p>
 
 <h2 className="todd-headline">Education</h2>
 
