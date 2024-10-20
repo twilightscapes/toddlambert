@@ -1,0 +1,30 @@
+showFeature: false
+featureImage:
+  src: /images/homepage/featureImage/src.webp
+  alt: Become A PIRATE!
+youtube:
+  discriminant: false
+cta: contact todd
+showBioOnHome: true
+showApp: false
+showHomeGallery: false
+showResume: true
+showPosts: true
+showMore: false
+showFaqOnHome: false
+showTestOnHome: false
+pitch: How It Works
+pitch2: Social Media That YOU Control
+pitch3: High Seas Freedom
+featureOrder: 11
+bioOrder: 1
+appOrder: .nan
+galleryOrder: .nan
+postsOrder: 3
+resumeOrder: 2
+faqOrder: 6
+testimonialsOrder: 9
+infoblockOrder: 3
+infoblock2Order: 4
+infoblock3Order: 5
+postsectiontitle: Todd's Recent Work
