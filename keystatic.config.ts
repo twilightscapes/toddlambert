@@ -83,22 +83,23 @@ export default config({
           label: 'Tags',
           itemLabel: (props: any) => props.value,        }),
       },
-    }),    pages: collection({      label: 'Other Pages',
-      path: 'src/content/pages/*',
-      slugField: 'title',
-      format: { contentField: 'content' },
-      schema: {
-        title: fields.text({ label: 'Title' }),
-        description: fields.text({ label: 'Description' }),
-        content: fields.document({
-          label: 'Content',
-          formatting: true,
-          dividers: true,
-          links: true,
-          images: true,
-        }),
-      },
-    }),
+    }),    
+    // pages: collection({      label: 'Other Pages',
+    //   path: 'src/content/pages/*',
+    //   slugField: 'title',
+    //   format: { contentField: 'content' },
+    //   schema: {
+    //     title: fields.text({ label: 'Title' }),
+    //     description: fields.text({ label: 'Description' }),
+    //     content: fields.document({
+    //       label: 'Content',
+    //       formatting: true,
+    //       dividers: true,
+    //       links: true,
+    //       images: true,
+    //     }),
+    //   },
+    // }),
 
     CTAs: collection({
       label: 'Call-To-Actions',
@@ -265,13 +266,21 @@ export default config({
       slugField: 'title',
       schema: {
         title: fields.text({ label: 'Title' }),
-        feedUrl: fields.text({ label: 'Feed Url', description: 'The address to the Pirate users feed that you want to follow' }),
+        feedUrl: fields.url({ label: 'Feed Url', description: 'The address to the Pirate users feed that you want to follow' }),
         order: fields.number({ label: 'Order' }),
       },
     }),
 
 
-
+    rssFeeds: collection({
+      label: 'RSS Feeds',
+      path: 'src/content/rss-feeds/*/',
+      slugField: 'name',
+      schema: {
+        name: fields.text({ label: 'Feed Name' }),
+        rssFeedUrl: fields.url({ label: 'RSS Feed URL' }),
+      },
+    }),
 
     
 
@@ -605,6 +614,12 @@ export default config({
         showGallerySelector: fields.checkbox({
           label: 'Show Gallery Drop Down Menu',
           description: '(Directory-based mode only) Hiding this or leaving the default directory empty, will automatically show all the images in all directories',
+          defaultValue: false,
+        }),
+
+        showSwitch: fields.checkbox({
+          label: 'Show Swipe/Scroll Icon',
+          description: 'This will show the Swipe/Scroll icon making it possible to change the view from the set default',
           defaultValue: true,
         }),
 
@@ -650,12 +665,12 @@ export default config({
           label: 'Light Background Color', 
           description: '(light) Page Background - can use any color value',
         }),
-        lightAccent: colorPicker({ 
-          label: 'Light Accent Color', 
-          description: '(light) Accent - can use any color value',
-        }),
+        // lightAccent: colorPicker({ 
+        //   label: 'Light Accent Color', 
+        //   description: '(light) Accent - can use any color value',
+        // }),
         lightAccent2: colorPicker({ 
-          label: 'Light Accent2 Color', 
+          label: 'Light Button Color', 
           description: '(light) Accent2 - can use any color value',
         }),
         divider6: fields.empty(),
@@ -663,12 +678,12 @@ export default config({
           label: 'Dark Background Color', 
           description: '(dark) Page Background - can use any color value',
         }),
-        darkAccent: colorPicker({ 
-          label: 'Dark Accent Color', 
-          description: '(dark) Accent Color - can use any color value',
-        }),
+        // darkAccent: colorPicker({ 
+        //   label: 'Dark Accent Color', 
+        //   description: '(dark) Accent Color - can use any color value',
+        // }),
         darkAccent2: colorPicker({ 
-          label: 'Dark Accent2 Color', 
+          label: 'Dark Button Color', 
           description: '(dark) Accent Color2 - can use any color value',
         }),
         divider7: fields.empty(),
@@ -689,15 +704,16 @@ export default config({
           label: 'Dark Text Color', 
           description: '(dark) Text Color - can use any color value',
         }),
-        divider9: fields.empty(),
-        lightLink: colorPicker({ 
-          label: 'Light Link Color', 
-          description: '(light) Link Color - can use any color value',
-        }),
-        darkLink: colorPicker({ 
-          label: 'Dark Link Color', 
-          description: '(dark) Link Color - can use any color value',
-        }),
+        divider9: fields.empty(),  
+        // divider9: fields.empty(),
+        // lightLink: colorPicker({ 
+        //   label: 'Light Link Color', 
+        //   description: '(light) Link Color - can use any color value',
+        // }),
+        // darkLink: colorPicker({ 
+        //   label: 'Dark Link Color', 
+        //   description: '(dark) Link Color - can use any color value',
+        // }),
 
         customCSS: fields.text({ label: 'Custom CSS', description:'Additional CSS can be written here, overwriting the sites default styles.', multiline: true }),
 
@@ -835,15 +851,15 @@ ui: {
     name: ' ',
     mark: ({ colorScheme }: { colorScheme: string }) => {
       let path = colorScheme === 'dark'
-        ? '/images/logo/logoImage.svg'
-        : '/images/logo/logoImage.svg';
+        ? 'https://pirateweb.org/images/logo/logoImage.svg'
+        : 'https://pirateweb.org/images/logo/logoImage.svg';
       return React.createElement('img', { src: path, height: 40, alt: "Pirate Logo" });
     },
   },
   navigation: {
     'Site Pages and Posts': [
       'home',
-      'pages',
+      // 'pages',
       'posts',
     ],
     'Content Modules': [
