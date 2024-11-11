@@ -28,14 +28,7 @@ export default defineConfig({
   base: process.env.VUE_APP_BASE || "/klearsky",
 
   build: {
-    // for `TypeError: xx is not a constructor`
-    // SEE: stackoverflow.com/a/73470097
-    // commonjsOptions: { include: [] },
-
-    chunkSizeWarningLimit: 600,
-
-    outDir: "docs",
-
+    outDir: "dist",
     rollupOptions: {
       output: {
         manualChunks (id: string) {
