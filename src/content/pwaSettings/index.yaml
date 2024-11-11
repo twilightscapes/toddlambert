@@ -5,7 +5,7 @@ shortName: Todd
 description: Digital Creator, Designer, Developer and Photographer
 themeColor: rgba(0, 0, 0, 1)
 backgroundColor: rgba(0, 0, 0, 1)
-startUrl: /
+startUrl: /pirate
 display: standalone
 icon192: /images/pwa/icon192.png
 icon512: /images/pwa/icon512.png
