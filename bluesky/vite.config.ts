@@ -25,7 +25,7 @@ export default defineConfig({
   },
 
   // Cloudflare 向け環境変数
-  base: process.env.VUE_APP_BASE || "/klearsky",
+  base: process.env.VUE_APP_BASE || "/bluesky",
 
   build: {
     outDir: "dist",
