@@ -26,3 +26,9 @@
     """
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[redirects]]
+  from = "/bluesky/*"
+  to = "/bluesky/:splat"
+  status = 200
+
