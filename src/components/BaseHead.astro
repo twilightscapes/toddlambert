@@ -39,7 +39,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://example.
 <meta content={description} name="description" />
 <meta content={siteConfig.author} name="author" />
 
-<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' bsky.social *.bsky.social; connect-src 'self' bsky.social *.bsky.social; img-src 'self' data: https: http:;">
+
+
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data:; connect-src 'self' https: wss: bsky.social *.bsky.social; img-src 'self' data: https: http: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https:;">
 
 
 
