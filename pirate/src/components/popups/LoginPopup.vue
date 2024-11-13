@@ -192,7 +192,7 @@ function submitCallback () {
     <div class="login-popup__inner">
       <div class="login-popup__header">
         <Logo />
-        <div class="description">Argh, Matey!</div>
+        <div class="description">Ahoy, Matey!</div>
       </div>
       <div class="login-popup__body">
         <EasyForm
