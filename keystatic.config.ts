@@ -122,33 +122,54 @@ export default config({
       schema: {
         friendlyName: fields.text({ label: 'Friendly Name' }),
         link: fields.text({ label: 'Link URL' }),
+        
         icon: fields.select({
           label: 'Icon',
           options: [
-            { label: 'X/Twitter', value: 'mdi:twitter' },
-            { label: 'GitHub', value: 'mdi:github' },
-            { label: 'Facebook', value: 'mdi:facebook' },
-            { label: 'YouTube', value: 'mdi:youtube' },
-            { label: 'Twitch', value: 'mdi:twitch' },
-            { label: 'LinkedIn', value: 'mdi:linkedin' },
-            { label: 'Instagram', value: 'mdi:instagram' },
-            { label: 'Mastodon', value: 'mdi:mastodon' },
+            { label: 'X/Twitter', value: 'bi:twitter-x' },
+
+            { label: 'Bluesky', value: 'simple-icons:bluesky' },
+            { label: 'Threads', value: 'bi:threads' },
+
+
+            { label: 'GitHub', value: 'bi:github' },
+            { label: 'Facebook', value: 'bi:facebook' },
+            { label: 'YouTube', value: 'bi:youtube' },
+            { label: 'Twitch', value: 'bi:twitch' },
+            { label: 'LinkedIn', value: 'bi:linkedin' },
+            { label: 'Instagram', value: 'bi:instagram' },
+            { label: 'Mastodon', value: 'bi:mastodon' },
             { label: 'Patreon', value: 'mdi:patreon' },
-            { label: 'Pinterest', value: 'mdi:pinterest' },
-            { label: 'Reddit', value: 'mdi:reddit' },
-            { label: 'Skype', value: 'mdi:skype' },
-            { label: 'Slack', value: 'mdi:slack' },
-            { label: 'Snapchat', value: 'mdi:snapchat' },
+            { label: 'Pinterest', value: 'bi:pinterest' },
+            { label: 'Reddit', value: 'bi:reddit' },
+            { label: 'Skype', value: 'bi:skype' },
+            { label: 'Slack', value: 'bi:slack' },
+            { label: 'Snapchat', value: 'bi:snapchat' },
             { label: 'SoundCloud', value: 'mdi:soundcloud' },
-            { label: 'WhatsApp', value: 'mdi:whatsapp' },
-            { label: 'Wordpress', value: 'mdi:wordpress' },
+            { label: 'WhatsApp', value: 'bi:whatsapp' },
+            { label: 'Wordpress', value: 'bi:wordpress' },
           ],
-          defaultValue: 'mdi:twitter'
+          defaultValue: 'simple-icons:bluesky'
         }),
+        // order: fields.conditional(
+        //   fields.checkbox({ label: 'Set Custom Order?' }),
+        //   {
+        //     true: fields.number({ label: 'Order Number' }),
+        //     false: fields.empty()
+        //   }
+        // ),
+
+        order: fields.number({ 
+          label: 'Order',
+          description: 'Optional: Leave blank for alphabetical sorting'
+        }),
+
         isWebmention: fields.checkbox({ label: 'Is Webmention', defaultValue: true }),
       },
       slugField: 'friendlyName'
+      
     }),
+    
     
     
 
@@ -248,28 +269,28 @@ export default config({
       },
     }),
 
-    piratePosts: collection({
-      label: 'Pirate Posts',
-      path: 'src/content/piratePosts/*',
-      format: { contentField: 'content' },
-      slugField: 'title',
-      schema: {
-        title: fields.slug({ name: { label: 'Title' } }),
-        content: fields.markdoc({ label: 'Content' }),
-        createdAt: fields.datetime({ label: 'Created At' }),
-      },
-    }),
+    // piratePosts: collection({
+    //   label: 'Pirate Posts',
+    //   path: 'src/content/piratePosts/*',
+    //   format: { contentField: 'content' },
+    //   slugField: 'title',
+    //   schema: {
+    //     title: fields.slug({ name: { label: 'Title' } }),
+    //     content: fields.markdoc({ label: 'Content' }),
+    //     createdAt: fields.datetime({ label: 'Created At' }),
+    //   },
+    // }),
 
-    pirateFeeds: collection({
-      label: 'Pirate Feeds',
-      path: 'src/content/pirateFeeds/*',
-      slugField: 'title',
-      schema: {
-        title: fields.text({ label: 'Title' }),
-        feedUrl: fields.url({ label: 'Feed Url', description: 'The address to the Pirate users feed that you want to follow' }),
-        order: fields.number({ label: 'Order' }),
-      },
-    }),
+    // pirateFeeds: collection({
+    //   label: 'Pirate Feeds',
+    //   path: 'src/content/pirateFeeds/*',
+    //   slugField: 'title',
+    //   schema: {
+    //     title: fields.text({ label: 'Title' }),
+    //     feedUrl: fields.url({ label: 'Feed Url', description: 'The address to the Pirate users feed that you want to follow' }),
+    //     order: fields.number({ label: 'Order' }),
+    //   },
+    // }),
 
 
     rssFeeds: collection({
@@ -783,25 +804,25 @@ export default config({
     }),    
 
 
-    pirateSocial: singleton({
-      label: 'Settings',
-      path: 'src/content/pirate/',
-      schema: {
-        profile: fields.text({ label: 'Profile Name' }),
-        description: fields.text({ label: 'Profile Description' }),
+    // pirateSocial: singleton({
+    //   label: 'Settings',
+    //   path: 'src/content/pirate/',
+    //   schema: {
+    //     profile: fields.text({ label: 'Profile Name' }),
+    //     description: fields.text({ label: 'Profile Description' }),
 
-        // autoDeletePiratePosts: fields.checkbox({
-        //   label: 'Auto-delete Pirate Posts',
-        //   description: 'Enable this to automatically delete Pirate Posts',
-        //   defaultValue: false,
-        // }),
-        // autoDeleteTime: fields.number({
-        //   label: 'Auto-delete Time (in minutes)',
-        //   description: 'Set the time after which Pirate Posts will be deleted',
-        //   defaultValue: 1440, // 24 hours in minutes
-        // }),
-      },
-    }),
+    //     // autoDeletePiratePosts: fields.checkbox({
+    //     //   label: 'Auto-delete Pirate Posts',
+    //     //   description: 'Enable this to automatically delete Pirate Posts',
+    //     //   defaultValue: false,
+    //     // }),
+    //     // autoDeleteTime: fields.number({
+    //     //   label: 'Auto-delete Time (in minutes)',
+    //     //   description: 'Set the time after which Pirate Posts will be deleted',
+    //     //   defaultValue: 1440, // 24 hours in minutes
+    //     // }),
+    //   },
+    // }),
 
 
 
@@ -879,13 +900,8 @@ ui: {
       'styleAppearance',
       'language',
       'resumeSettings',
-    ],
-    'Pirate Social': [
-      'pirateSocial',
-      'piratePosts',
-      'pirateFeeds',
       'socialLinks',
-    ],
+    ]
   },
 },});
 

@@ -17,4 +17,4 @@ description: >-
 image: /images/bio/image.webp
 subheading: Todd Lambert
 cta: contact todd
-showSocial: true
+showSocial: false
