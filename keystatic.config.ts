@@ -4,7 +4,7 @@ import { colorPicker } from './src/components/ColorPicker.tsx';
 export default config({
   storage: import.meta.env.PROD ? { kind: 'cloud' } : { kind: 'local' },
   cloud: import.meta.env.PROD
-    ? { project: import.meta.env.VITE_KEYSTATIC_PROJECT || 'toddlambert/toddlambert' }
+    ? { project: import.meta.env.VITE_KEYSTATIC_PROJECT || 'twilightscapes/twilight-astro' }
     : undefined,
   collections: {
     posts: collection({
@@ -126,21 +126,19 @@ export default config({
         icon: fields.select({
           label: 'Icon',
           options: [
+            { label: 'Pirate', value: 'game-icons:pirate-flag' },
             { label: 'X/Twitter', value: 'bi:twitter-x' },
-
             { label: 'Bluesky', value: 'simple-icons:bluesky' },
             { label: 'Threads', value: 'bi:threads' },
-
-
-            { label: 'GitHub', value: 'bi:github' },
             { label: 'Facebook', value: 'bi:facebook' },
+            { label: 'Mastodon', value: 'bi:mastodon' },
+            { label: 'Instagram', value: 'bi:instagram' },
+            { label: 'GitHub', value: 'bi:github' },
             { label: 'YouTube', value: 'bi:youtube' },
             { label: 'Twitch', value: 'bi:twitch' },
             { label: 'LinkedIn', value: 'bi:linkedin' },
-            { label: 'Instagram', value: 'bi:instagram' },
-            { label: 'Mastodon', value: 'bi:mastodon' },
-            { label: 'Patreon', value: 'mdi:patreon' },
             { label: 'Pinterest', value: 'bi:pinterest' },
+            { label: 'Patreon', value: 'mdi:patreon' },
             { label: 'Reddit', value: 'bi:reddit' },
             { label: 'Skype', value: 'bi:skype' },
             { label: 'Slack', value: 'bi:slack' },
@@ -149,15 +147,9 @@ export default config({
             { label: 'WhatsApp', value: 'bi:whatsapp' },
             { label: 'Wordpress', value: 'bi:wordpress' },
           ],
-          defaultValue: 'simple-icons:bluesky'
+          defaultValue: 'game-icons:pirate-flag'
         }),
-        // order: fields.conditional(
-        //   fields.checkbox({ label: 'Set Custom Order?' }),
-        //   {
-        //     true: fields.number({ label: 'Order Number' }),
-        //     false: fields.empty()
-        //   }
-        // ),
+
 
         order: fields.number({ 
           label: 'Order',

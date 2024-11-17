@@ -139,6 +139,9 @@ const collections = {
     }),
   }),
 
+
+
+
   socialLinks: defineCollection({
     type: 'data',
     schema: z.object({
@@ -146,8 +149,14 @@ const collections = {
       link: z.string().optional(),
       icon: z.string().optional(),
       isWebmention: z.boolean().optional(),
+      order: z.any().transform(val => 
+        (val === '.nan' || val === 'nan' || Number.isNaN(val)) ? undefined : Number(val)
+      ).optional()
     }),
   }),
+
+
+
 
   siteSettings: defineCollection({
     type: 'data',
