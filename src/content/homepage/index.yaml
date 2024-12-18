@@ -4,12 +4,11 @@ featureImage:
   alt: Become A PIRATE!
 youtube:
   discriminant: false
-cta: contact todd
 showBioOnHome: true
 showApp: false
 showHomeGallery: false
-showResume: true
-showPosts: true
+showResume: false
+showPosts: false
 showMore: false
 showFaqOnHome: false
 showTestOnHome: false
