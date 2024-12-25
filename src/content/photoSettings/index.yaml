@@ -1,7 +1,8 @@
 galleryMode: directory
-showCaptions: true
+showCaptions: false
 showBioOnPhotos: false
 showFaqsOnPhotos: false
 showTestimonialsOnPhotos: false
-showGallerySelector: true
+showGallerySelector: false
+showSwitch: true
 galleryImages: []

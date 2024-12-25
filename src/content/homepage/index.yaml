@@ -6,8 +6,8 @@ youtube:
   discriminant: false
 showBioOnHome: true
 showApp: false
-showHomeGallery: false
-showResume: false
+showHomeGallery: true
+showResume: true
 showPosts: false
 showMore: false
 showFaqOnHome: false
@@ -16,14 +16,14 @@ pitch: How It Works
 pitch2: Social Media That YOU Control
 pitch3: High Seas Freedom
 featureOrder: 11
-bioOrder: 1
+bioOrder: 2
 appOrder: .nan
-galleryOrder: .nan
-postsOrder: 3
-resumeOrder: 2
-faqOrder: 6
+galleryOrder: 1
+postsOrder: 4
+resumeOrder: 3
+faqOrder: -12
 testimonialsOrder: 9
 infoblockOrder: 3
-infoblock2Order: 4
+infoblock2Order: 5
 infoblock3Order: 5
 postsectiontitle: Todd's Recent Work

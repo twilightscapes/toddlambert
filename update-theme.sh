@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# # Set the URL of your central repository
+# Set the URL of your central repository
 # THEME_REPO_URL="https://github.com/piratesocial/pirate"
 
 # # Set the branch or tag you want to pull updates from

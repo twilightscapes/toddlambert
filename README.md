@@ -5,13 +5,7 @@
   </div>
 
 <div align="center">
-<!--   <a href="https://pirateweb.org">
-    <img src="public/images/homepage/featureImage/src.webp" alt="Logo" width="100%" height="auto">
-  </a>
- -->
-  
 
-<!-- https://github.com/user-attachments/assets/1f2cb472-cffe-4c51-ae21-c61a37003172 -->
 
 
   <strong align="center" style="font-size:30px">You're the Captain now!</strong>
@@ -79,22 +73,12 @@ Setup takes about 4 minutes and <strong><i>requires a valid email address</i></s
 - PiRATE Social features a full version of BlueSky built in
 
 
-## 🏴‍☠️ PIRATE Social
-
-PIRATE is not your typical social network. It's a decentralized network of individualy owned personal websites acting together as a new social content distribution model.
-
-Here's how it works: instead of relying on a central platform, PIRATE leverages the power of Netlify and GitHub to utilize their free services for hosting your own platorm. Your individual website becomes your hub for social interactions on BlueSky. Just go to yourwebsite.com/pirate and login. Now you can control your website, and your social media in the same app on your phone! All for FREE!
-
-Your PIRATE website is actually a Progressive Web App (PWA), which means you can access it seamlessly from any of your devices. Being a PWA also means there are no App Stores to worry about!
-
-PIRATE gives you the tools to easily edit your homepage, update your profile, post your resume, and publish engaging posts. It's super easy to get started, without any complicated technical barriers.
-
 
 <div align="center">
 
 <br />
-<h3>Technology Stack</h3>
-PIRATE is built on industry leading technologies, and is designed from the ground up, using the best, most secure and modern development technology stack available today: <h3 style="font-size:30px;"><strong><i>T R A K</i></strong></h3>
+<h3><strong><i>T R A K</i></strong> | Technology Stack</h3>
+PIRATE is built on industry leading technologies, and is designed from the ground up, using the best, most secure and modern development technology stack available today: <h3 style="font-size:30px;"><strong><i></i></strong></h3>
 <a href=""><img alt="" role="presentation" aria-hidden="true" src="public/images/partners/typescript-logo.webp" width="24%" height="auto" /></a>
 <a href="https://react.dev"><img alt="React Logo" role="presentation" aria-hidden="true" src="public/images/partners/react-logo.webp" width="24%" height="auto" /></a>
 <a href="https://astro.build"><img alt="Astro Logo" role="presentation" aria-hidden="true" src="public/images/partners/Astro-logo.webp" width="24%" height="auto" /></a>

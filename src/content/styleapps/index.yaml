@@ -1,12 +1,13 @@
-backgroundImage: /images/styleapps/backgroundImage.webp
-siteFont: Lobster
+backgroundImage: /images/logo/logoImage.svg
+siteFont: Orbitron
 borderRadius: 10px
-lightBg: rgba(192, 185, 185, 0.57)
+lightBg: rgba(243, 231, 231, 1)
 lightAccent2: rgba(0, 0, 0, 1)
 darkBg: rgba(34, 34, 34, 1)
 darkAccent2: rgba(0, 0, 0, 1)
 lightHeader: rgba(0, 0, 0, 0.9)
 darkHeader: rgba(0, 0, 0, 0.9)
-lightText: rgba(0, 0, 0, 1)
+lightText: rgba(243, 231, 231, 1)
 darkText: rgba(243, 231, 231, 1)
-customCSS: 'body {color: #fff !important;}'
+customCSS: >-
+   #main{padding-bottom: 10vh} .resume-container{background: rgba(17, 17, 17, 0.75)}
