@@ -1,4 +1,4 @@
-backgroundImage: /images/logo/logoImage.svg
+backgroundImage: /images/styleapps/backgroundImage.webp
 siteFont: Orbitron
 borderRadius: 10px
 lightBg: rgba(243, 231, 231, 1)
@@ -10,4 +10,5 @@ darkHeader: rgba(0, 0, 0, 0.9)
 lightText: rgba(243, 231, 231, 1)
 darkText: rgba(243, 231, 231, 1)
 customCSS: >-
-   #main{padding-bottom: 10vh} .resume-container{background: rgba(17, 17, 17, 0.75)}
+  #main{padding-bottom: 10vh} .resume-container{background: rgba(17, 17, 17,
+  0.75)}
