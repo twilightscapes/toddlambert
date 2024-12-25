@@ -4,5 +4,5 @@ showBioOnPhotos: false
 showFaqsOnPhotos: false
 showTestimonialsOnPhotos: false
 showGallerySelector: false
-showSwitch: true
+showSwitch: false
 galleryImages: []
