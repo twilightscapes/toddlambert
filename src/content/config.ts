@@ -274,6 +274,7 @@ const collections = {
     type: 'data',
     schema: z.object({
       backgroundImage: z.string().optional(),
+      backgroundVideo: z.string().optional(),
       siteFont: z.string().optional(),
       borderRadius: z.string().optional(),
       lightBg: z.string().optional(),

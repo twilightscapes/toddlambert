@@ -671,6 +671,8 @@ export default config({
           directory: 'public/images/styleapps',
           publicPath: '/images/styleapps'
         }),
+        backgroundVideo: fields.text({ label: 'Background Video', defaultValue: '', description: 'Copy the url of an embed from youtube and paste here - just the url' }),
+
         siteFont: fields.text({ label: 'Site Font', defaultValue: 'Bowlby One', description: 'Enter the name of any Google Font' }),
         borderRadius: fields.text({ label: 'Border Radius', description: 'Border Radius of elements on page (0) for square', validation: { isRequired: false }, defaultValue: "0px" }),
         divider5: fields.empty(),
