@@ -62,6 +62,7 @@ const collections = {
       ctaUrl: z.string().optional(),
       description: z.string().optional(),
       showFancy: z.boolean().optional(),
+      showTransition: z.boolean().optional(),
     }),
   }),
 
@@ -197,6 +198,7 @@ const collections = {
       display: z.enum(['standalone', 'fullscreen', 'minimal-ui', 'browser']).optional(),
       icon192: z.string().optional(),
       icon512: z.string().optional(),
+      location: z.string().optional(),
     }),
   }),
 
@@ -246,6 +248,7 @@ const collections = {
       infoblock2Order: z.number().optional(),
       infoblock3Order: z.number().optional(),
       photosectiontitle: z.string().optional(),
+      locationtitle: z.string().optional(),
       faqsectiontitle: z.string().optional(),
       testimonialtitle: z.string().optional(),
       postsectiontitle: z.string().optional(),
