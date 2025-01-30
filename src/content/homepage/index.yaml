@@ -15,15 +15,14 @@ showTestOnHome: false
 pitch: How It Works
 pitch2: Social Media That YOU Control
 pitch3: High Seas Freedom
-featureOrder: 11
-bioOrder: 2
-appOrder: .nan
-galleryOrder: 1
-postsOrder: 4
-resumeOrder: 3
-faqOrder: -12
-testimonialsOrder: 9
-infoblockOrder: 3
-infoblock2Order: 5
-infoblock3Order: 5
+sectionOrdering:
+  - posts
+  - bio
+  - resume
+  - feature
+  - gallery
+  - testimonials
+  - infoblock1
+  - infoblock2
+  - infoblock3
 postsectiontitle: Todd's Recent Work
