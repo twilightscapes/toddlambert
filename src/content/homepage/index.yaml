@@ -1,28 +1,14 @@
-showFeature: false
+sectionOrdering:
+  - bio
+  - resume
+  - gallery
 featureImage:
   src: /images/homepage/featureImage/src.webp
   alt: Become A PIRATE!
 youtube:
   discriminant: false
-showBioOnHome: true
-showApp: false
-showHomeGallery: true
-showResume: true
-showPosts: false
 showMore: false
-showFaqOnHome: false
-showTestOnHome: false
 pitch: How It Works
 pitch2: Social Media That YOU Control
 pitch3: High Seas Freedom
-sectionOrdering:
-  - posts
-  - bio
-  - resume
-  - feature
-  - gallery
-  - testimonials
-  - infoblock1
-  - infoblock2
-  - infoblock3
 postsectiontitle: Todd's Recent Work
