@@ -1,7 +1,7 @@
 sectionOrdering:
   - bio
   - resume
-  - gallery
+  - posts
 featureImage:
   src: /images/homepage/featureImage/src.webp
   alt: Become A PIRATE!
