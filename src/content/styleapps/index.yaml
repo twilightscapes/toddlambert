@@ -14,4 +14,5 @@ customCSS: >-
   #main{padding-bottom: 10vh} .resume-container{background: rgba(17, 17, 17,
   0.75)}.vidbox{opacity:.6; height: 110vh !important; width: 110vw !important;}
   #profile img{max-height:60vh !important; max-width:1000px; width:90%;}
-  .description, .resume-container{text-shadow: 2px 2px black !important;}
+  .description, .resume-container{text-shadow: 2px 2px black !important;} .font,
+  .glow{text-transform:lowercase !important;}
