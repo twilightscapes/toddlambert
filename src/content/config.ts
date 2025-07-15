@@ -369,6 +369,53 @@ export const collections = {
       rightColumnItems: z.array(z.string()).optional(),
     }),
   }),
+
+  contactFormSettings: defineCollection({
+    type: 'data',
+    schema: z.object({
+      emailTo: z.string().optional(),
+      emailSubject: z.string().optional(),
+      successMessage: z.string().optional(),
+      errorMessage: z.string().optional(),
+      buttonText: z.string().optional(),
+    }),
+  }),
+
+  ctas: defineCollection({
+    type: 'data',
+    schema: z.object({
+      text: z.string().optional(),
+      url: z.string().optional(),
+      style: z.string().optional(),
+      order: z.number().optional(),
+    }),
+  }),
+
+  photoUpload: defineCollection({
+    type: 'data',
+    schema: z.object({
+      allowedTypes: z.array(z.string()).optional(),
+      maxSize: z.number().optional(),
+      uploadPath: z.string().optional(),
+      successMessage: z.string().optional(),
+      errorMessage: z.string().optional(),
+    }),
+  }),
+
+  post: defineCollection({
+    type: 'content',
+    schema: postSchema,
+  }),
+
+  social: defineCollection({
+    type: 'data',
+    schema: z.object({
+      platform: z.string().optional(),
+      url: z.string().optional(),
+      icon: z.string().optional(),
+      order: z.number().optional(),
+    }),
+  }),
 };
 
 
