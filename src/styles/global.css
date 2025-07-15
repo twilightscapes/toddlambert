@@ -1,7 +1,9 @@
+
 /* tailwindcss */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 @layer base {
 	:root {
@@ -26,13 +28,21 @@
 
 /* Base styles */
 html {
-  @apply scroll-smooth;
+  scroll-behavior: smooth;
   overflow-x: hidden;
   min-height: 100dvh;
 }
 
 body {
-  @apply mx-auto flex min-h-screen max-w-3xl flex-col px-8 pt-16 text-textColor antialiased;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 4rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   font-family: var(--font-family);
   line-height: 1.5;
   background-color: var(--theme-bg);
@@ -496,7 +506,7 @@ button.topper{background:var(--theme-header) !important;}
 	  body:has(#homemap) {overflow-y:auto !important;}
 
 
-	  body:has(.home) #footer{display: none;}
+	  /* body:has(.home) #footer{display: none;} */
 
 	  #footer{padding-bottom: 80px;}
 
@@ -613,7 +623,7 @@ button.topper{background:var(--theme-header) !important;}
 			*/
 			--icon-external-link: url('data:image/svg+xml,\
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"> \
-				<g style="stroke:white;stroke-width:1"> \
+				<g style="stroke:grey;stroke-width:1"> \
 					<line x1="5" y1="5" x2="5" y2="14" /> \
 					<line x1="14" y1="9" x2="14" y2="14" /> \
 					<line x1="5" y1="14" x2="14" y2="14" /> \

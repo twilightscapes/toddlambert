@@ -4,7 +4,7 @@ import { colorPicker } from './src/components/ColorPicker.tsx';
 export default config({
   storage: import.meta.env.PROD ? { kind: 'cloud' } : { kind: 'local' },
   cloud: import.meta.env.PROD
-    ? { project: import.meta.env.VITE_KEYSTATIC_PROJECT || 'toddlambert/toddlambert' }
+    ? { project: import.meta.env.VITE_KEYSTATIC_PROJECT || 'pirate/pirate' }
     : undefined,
   collections: {
     posts: collection({
@@ -157,7 +157,7 @@ export default config({
           description: 'Optional: Leave blank for alphabetical sorting'
         }),
 
-        isWebmention: fields.checkbox({ label: 'Is Webmention', defaultValue: true }),
+
       },
       slugField: 'friendlyName'
       
@@ -256,7 +256,7 @@ export default config({
     
     menuItems: collection({
       label: 'Menu Items',
-      path: 'src/content/menu/*',
+      path: 'src/content/menuItems/*',
       slugField: 'name', 
       schema: {
         name: fields.text({ label: 'Name' }),
@@ -378,6 +378,9 @@ export default config({
           defaultValue: false,
         }),
         siteUrl: fields.text({ label: 'Site Url', description: 'The address to your website' }),
+        title: fields.text({ label: 'Home Page Title', defaultValue: 'Home Page Title', }),
+        description: fields.text({ label: 'SEO/App Description', description: 'The description is used as the description of the homepage for SEO, and on Android in the PWA install dialogue window', }),
+        
         name: fields.text({ label: 'App Name' }),
         shortName: fields.text({ label: 'Short Name' }),
 
@@ -391,7 +394,8 @@ export default config({
           directory: 'public/images/pwa',
           publicPath: '/images/pwa',
         }),
-        description: fields.text({ label: 'SEO/App Description', description: 'The description is used as the title of the homepage for SEO, and on Android in the PWA install dialogue window', }),
+
+  
 
         divider2: fields.empty(),
 
@@ -434,7 +438,7 @@ export default config({
     }),
     home: singleton({
       label: 'Home Page',
-      path: 'src/content/homepage/',
+      path: 'src/content/home/',
       schema: {
 
         sectionOrdering: fields.array(
@@ -648,7 +652,7 @@ export default config({
       },
     }),        
     
-    styleAppearance: singleton({
+    styleapps: singleton({
       label: 'Appearance',
       path: 'src/content/styleapps/',
       schema: {
@@ -902,7 +906,7 @@ ui: {
       'menuItems',
       'socialCard',
       'photoSettings',
-      'styleAppearance',
+      'styleapps',
       'language',
       'resumeSettings',
       'socialLinks',

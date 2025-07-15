@@ -8,13 +8,16 @@ type Props = {
     withDesc?: boolean;
 };
 import { getEntry } from 'astro:content';
+import { formatDate } from '../../utils/date';
+
 const { post, withDesc = false } = Astro.props;
+const siteSettings = await getEntry('siteSettings', 'main');
+const { showTitles, showDates = true } = siteSettings?.data ?? {};
+const formattedDate = post.data.publishDate ? formatDate(post.data.publishDate) : '';
+
 const defaultImageSrc = `${import.meta.env.BASE_URL}socialCard.webp`;
 const defaultImageWidth = 900; 
 const defaultImageHeight = 600; 
-
-const siteSettings = await getEntry('siteSettings', 'main');
-const { showTitles } = siteSettings.data;
 
 function getYouTubeId(url: string) {
   const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
@@ -26,6 +29,11 @@ function getYouTubeThumbnail(videoId: string) {
   return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
 }
 
+
+if ('slug' in post) {
+  const slug = post.slug;
+  // use slug
+}
 
 const videoId = post.data.youtube?.value?.url ? getYouTubeId(post.data.youtube.value.url) : null;
 const thumbnailUrl = videoId ? getYouTubeThumbnail(videoId) : null;
@@ -162,12 +170,21 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
     </div>
 </div>
 
+<!-- Update your template where you want to show the date -->
+{showDates && formattedDate && (
+  <time datetime={post.data.publishDate instanceof Date ? 
+    post.data.publishDate.toISOString() : 
+    new Date(post.data.publishDate).toISOString()}>
+    {formattedDate}
+  </time>
+)}
+
 <style>
     .iframe-container {
         position: relative;
         width: 100%;
         /* padding-bottom: 56.25%;  */
-        aspect-ratio: 16/9;
+        /* aspect-ratio: 16/9; */
         /* height: 0; */
         overflow: hidden;
     }
@@ -182,7 +199,7 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
     }
 
     @media(hover:none) {
-        .iframe-container iframe {z-index: 1; min-width: 100%;}
+        .iframe-container iframe {z-index: 1; min-width: 50%;}
     }
     @media(max-width:48rem) {
 
@@ -221,19 +238,18 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
 
 /* .slider .video-container, .slider .post-card1, .slider .custom-youtube-player{ min-width: 80vw !important;} */
 .grid-container .custom-youtube-player {margin-bottom: 0;}
-    .iframe-container.inactive::before {
+    /* .iframe-container.inactive::before {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        /* background-color: rgba(128, 128, 128, 0.5); */
         z-index: 1;
         display:grid;
         place-content: center;
         color:white;
-    }
+    } */
 </style>
 <script>
   document.querySelectorAll('.video-container').forEach(container => {
