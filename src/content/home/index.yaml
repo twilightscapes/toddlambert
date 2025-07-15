@@ -1,6 +1,5 @@
 sectionOrdering:
   - bio
-  - resume
   - posts
 featureImage:
   src: /images/homepage/featureImage/src.webp
