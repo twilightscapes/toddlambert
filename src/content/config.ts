@@ -90,17 +90,7 @@ export const collections = {
     })
   }),
 
-  // CTAs collection
-  CTAs: defineCollection({
-    type: 'data',
-    schema: z.object({
-      title: z.string().optional(),
-      ctaUrl: z.string().optional(),
-      description: z.string().optional(),
-      showFancy: z.boolean().optional(),
-      showTransition: z.boolean().optional()
-    })
-  }),
+
 
   // StyleApps collection
   styleapps: defineCollection({
@@ -150,9 +140,6 @@ export const collections = {
       layout: z.string().optional(),
       draft: z.boolean().optional(),
     }),
-    slug: ({ defaultSlug, id }) => {
-      return id.split('/').pop()?.replace(/\.(md|mdx|mdoc)$/, '') || defaultSlug;
-    },
   }),
 
   pitches: defineCollection({
@@ -370,53 +357,28 @@ export const collections = {
     }),
   }),
 
-  contactFormSettings: defineCollection({
+  CTAs: defineCollection({
     type: 'data',
     schema: z.object({
-      emailTo: z.string().optional(),
-      emailSubject: z.string().optional(),
-      successMessage: z.string().optional(),
-      errorMessage: z.string().optional(),
-      buttonText: z.string().optional(),
-    }),
-  }),
-
-  ctas: defineCollection({
-    type: 'data',
-    schema: z.object({
-      text: z.string().optional(),
-      url: z.string().optional(),
-      style: z.string().optional(),
-      order: z.number().optional(),
-    }),
-  }),
-
-  photoUpload: defineCollection({
-    type: 'data',
-    schema: z.object({
-      allowedTypes: z.array(z.string()).optional(),
-      maxSize: z.number().optional(),
-      uploadPath: z.string().optional(),
-      successMessage: z.string().optional(),
-      errorMessage: z.string().optional(),
-    }),
-  }),
-
-  post: defineCollection({
-    type: 'content',
-    schema: postSchema,
-  }),
-
-  social: defineCollection({
-    type: 'data',
-    schema: z.object({
-      platform: z.string().optional(),
-      url: z.string().optional(),
-      icon: z.string().optional(),
-      order: z.number().optional(),
-    }),
+      title: z.string().optional(),
+      ctaUrl: z.string().optional(),
+      description: z.string().optional(),
+      showFancy: z.boolean().optional(),
+      showTransition: z.boolean().optional()
+    })
   }),
 };
+
+  // ctas: defineCollection({
+  //   type: 'data',
+  //   schema: z.object({
+  //     title: z.string().optional(),
+  //     ctaUrl: z.string().optional(),
+  //     description: z.string().optional(),
+  //     showFancy: z.boolean().optional(),
+  //     showTransition: z.boolean().optional()
+  //   })
+  // });
 
 
 
