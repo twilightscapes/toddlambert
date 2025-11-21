@@ -143,11 +143,9 @@ export default config({
             type: fields.select({
               label: 'Section Type',
               options: [
-                { label: 'Content', value: 'content' },
-                { label: 'Form Section', value: 'form' },
-                { label: 'YouTube Form Section', value: 'youform' },
-                { label: 'YouTube Feeds', value: 'youtubefeeds' },
                 { label: 'Content Block', value: 'contentblock' },
+                { label: 'Form Section', value: 'form' },
+                { label: 'YouTube Feeds', value: 'youtubefeeds' },
                 { label: 'Posts Section', value: 'posts' },
                 { label: 'Testimonials Section', value: 'testimonials' },
                 { label: 'FAQ Section', value: 'faqs' },
@@ -156,7 +154,7 @@ export default config({
                 { label: 'Map/Video Section', value: 'app' },
                 { label: 'Photos Section', value: 'photos' }
               ],
-              defaultValue: 'content'
+              defaultValue: 'contentblock'
             }),
             customTitle: fields.text({
               label: 'Section Title Override (Optional)',
@@ -959,90 +957,90 @@ export default config({
         })
       }
     }),
-    // photoSettings: singleton({
-    //   label: 'Photo Gallery Settings',
-    //   path: 'src/content/photoSettings/',
-    //   schema: {
-    //     galleryMode: fields.select({
-    //       label: 'Gallery Mode',
-    //       description: '',
-    //       options: [
-    //         { label: 'Directory-based', value: 'directory' },
-    //         { label: 'CMS-managed', value: 'keystatic' }
-    //       ],
-    //       defaultValue: 'directory'
-    //     }),
-    //     showCaptions: fields.checkbox({
-    //       label: 'Show Photo Titles',
-    //       defaultValue: true,
-    //     }),
+    photoSettings: singleton({
+      label: 'Photo Gallery',
+      path: 'src/content/photoSettings/',
+      schema: {
+        galleryMode: fields.select({
+          label: 'Gallery Mode',
+          description: 'Choose how gallery images are provided',
+          options: [
+            { label: 'Directory-based', value: 'directory' },
+            { label: 'CMS-managed', value: 'keystatic' }
+          ],
+          defaultValue: 'directory'
+        }),
 
-    //     divider: fields.empty(),
+        showCaptions: fields.checkbox({
+          label: 'Show Photo Titles',
+          defaultValue: true,
+        }),
 
+        divider: fields.empty(),
 
+        // showFaqsOnPhotos: fields.checkbox({
+        //   label: 'Show FAQ Module',
+        //   defaultValue: false,
+        // }),
 
-    //     showFaqsOnPhotos: fields.checkbox({
-    //       label: 'Show FAQ Module',
-    //       defaultValue: false,
-    //     }),
+        // showTestimonialsOnPhotos: fields.checkbox({
+        //   label: 'Show Testimonials Module',
+        //   defaultValue: false,
+        // }),
 
-    //     showTestimonialsOnPhotos: fields.checkbox({
-    //       label: 'Show Testimonials Module',
-    //       defaultValue: false,
-    //     }),
+        // pitch: fields.relationship({
+        //   label: 'Content Block 1',
+        //   collection: 'pitches',
+        //   validation: { isRequired: false }
+        // }),
 
-    //     pitch: fields.relationship({
-    //       label: 'Content Block 1',
-    //       collection: 'pitches',
-    //     }),
-        
+        divider5: fields.empty(),
 
-    //     divider5: fields.empty(),
+        defaultDirectory: fields.text({
+          label: '(Directory-based Mode) Default Directory',
+          description: "Enter the EXACT name of the Default Directory to be displayed (case-sensitive). Leave blank to show all directories.",
+          defaultValue: 'all',
+          validation: { isRequired: false }
+        }),
 
-    //     defaultDirectory: fields.text({
-    //       label: '(Directory-based Mode)',
-    //       description: "Directory-based mode allows you to upload multiple folders of photos and it will automatically use the file names as the image captions allowing you to quickly create entire photo galleries - (Note: IT IS case-sensitive and space-sensitive) - Enter the EXACT name of the Default Directory to be displayed, below:",
-    //       defaultValue: 'all',
-    //       validation: { isRequired: false }
-    //     }),
-        
-    //     showGallerySelector: fields.checkbox({
-    //       label: 'Show Gallery Drop Down Menu',
-    //       description: '(Directory-based mode only) Hiding this or leaving the default directory empty, will automatically show all the images in all directories',
-    //       defaultValue: false,
-    //     }),
+        showGallerySelector: fields.checkbox({
+          label: 'Show Gallery Drop Down Menu',
+          description: '(Directory-based mode only) Hiding this will show all images across directories',
+          defaultValue: true,
+        }),
 
-    //     showSwitch: fields.checkbox({
-    //       label: 'Show Swipe/Scroll Icon',
-    //       description: 'This will show the Swipe/Scroll icon making it possible to change the view from the set default',
-    //       defaultValue: true,
-    //     }),
+        // showSwitch: fields.checkbox({
+        //   label: 'Show Swipe/Scroll Icon',
+        //   description: 'Show the icon that allows switching between grid and swipe views',
+        //   defaultValue: true,
+        // }),
 
-    //     divider2: fields.empty(),
-    //     divider3: fields.empty(),
+        divider2: fields.empty(),
+        divider3: fields.empty(),
 
-    //     galleryImages: fields.array(
-    //       fields.object({
-    //         image: fields.image({
-    //           label: 'Gallery Image',
-    //           directory: 'public/images',
-    //           publicPath: '/images',
-    //           validation: { isRequired: false }
-    //         }),
+        galleryImages: fields.array(
+          fields.object({
+            image: fields.image({
+              label: 'Gallery Image',
+              directory: 'public/images',
+              publicPath: '/images',
+              validation: { isRequired: false }
+            }),
 
-    //         caption: fields.text({
-    //           label: 'Image Caption',
-    //           description: 'Enter a caption for this image',
-    //           validation: { isRequired: false }
-    //         })
-    //       }),
-    //       {
-    //         label: 'CMS-managed Gallery Images',
-    //         itemLabel: (props: { fields: { caption: { value: string } } }) => props.fields.caption.value || 'Image',          }
-    //     ),        divider4: fields.empty(),
-
-    //   },
-    // }),        
+            caption: fields.text({
+              label: 'Image Caption',
+              description: 'Enter a caption for this image',
+              validation: { isRequired: false }
+            })
+          }),
+          {
+            label: 'CMS-managed Gallery Images',
+            itemLabel: (props: { fields: { caption: { value: string } } }) => props.fields.caption.value || 'Image',
+          }
+        ),
+        divider4: fields.empty(),
+      },
+    }),
     
     styleapps: singleton({
       label: 'Appearance',
@@ -1278,6 +1276,7 @@ ui: {
       'socialCard',
       'styleapps',
       'language',
+      'photoSettings',
       'resumeSettings',
       'socialLinks',
     ],

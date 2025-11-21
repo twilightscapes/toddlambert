@@ -79,7 +79,7 @@ export const collections = {
       useTemplateSystem: z.boolean().optional(),
       sections: z.array(z.object({
         type: z.enum([
-          'content', 'contentblock', 'pitch', 'testimonials', 'faqs', 
+          'contentblock', 'pitch', 'testimonials', 'faqs', 
           'resume', 'ctas', 'youtubefeeds', 'youform', 'posts', 'photos', 'app', 'form'
         ]),
         customTitle: z.string().optional(),
@@ -249,9 +249,9 @@ export const collections = {
     schema: z.object({
       galleryMode: z.enum(['directory', 'keystatic']).optional(),
       showCaptions: z.boolean().optional(),
-      showFaqsOnPhotos: z.boolean().optional(),
-      showTestimonialsOnPhotos: z.boolean().optional(),
-      pitch: z.string().optional(),
+      // showFaqsOnPhotos: z.boolean().optional(),
+      // showTestimonialsOnPhotos: z.boolean().optional(),
+      // pitch: z.string().optional(),
       defaultDirectory: z.string().optional(),
       showGallerySelector: z.boolean().optional(),
       galleryImages: z.array(z.object({

@@ -107,9 +107,9 @@ const processedImages = allImages.map(image => ({
 <!-- Gallery selector - positioned absolutely outside flow -->
 {showGallerySelector && (
   <div class="cattags" style={{ position: 'absolute', top: '-10px', left: '50%', transform: 'translateX(-50%)', width: 'auto', display: 'flex', justifyContent:'center', gap: '0', color: '', zIndex: defaultView === 'grid' ? '1' : '20', background: 'var(--theme-bg, #1a1a1a)', padding: '0.5rem', borderRadius: 'var(--border-radius)' }}>
-    <select aria-label="View Available Galleries" id="directorySelect" name="directorySelect" style={{ background: '', border: '1px solid #000', borderRadius: 'var(--border-radius)', padding: '8px', boxShadow: '0px 0px 0px 1px #000', opacity:'.9', color:'#fff' }}>
+    <select aria-label="View Available Galleries" id="directorySelect" name="directorySelect" value={defaultDirectory} style={{ background: '', border: '1px solid #000', borderRadius: 'var(--border-radius)', padding: '8px', boxShadow: '0px 0px 0px 1px #000', opacity:'.9', color:'#fff' }}>
       {directories.map((dir) => (
-        <option value={dir} selected={dir === defaultDirectory}>
+        <option value={dir}>
           {dir === 'all' ? languageData.allimages : dir}
         </option>
       ))}
@@ -125,13 +125,15 @@ const processedImages = allImages.map(image => ({
   
   {allImages.map((image, index) => (
     <div class="post-card1" data-directory={image.directory}>
-      <img 
-        src={image.src ?? ''} 
-        alt={image.alt ?? ''}
-        class="object-contain rounded-image"
-        style="border-radius: var(--border-radius);"
-        data-image-index={index}
-      />
+      <div class="image-wrapper">
+        <img 
+          src={image.src ?? ''} 
+          alt={image.alt ?? ''}
+          class="object-contain rounded-image"
+          style="border-radius: var(--border-radius);"
+          data-image-index={index}
+        />
+      </div>
       {showCaptions && (
         <div class="image-caption">
           <h2>{image.title}</h2>
@@ -199,6 +201,60 @@ div[data-section-id*="gallery"] div.section-content div.homegallery.slider .post
   margin-bottom: 0 !important;
 }
 
+/* Layout: ensure post-card contains an image wrapper and caption below */
+.post-card1 {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Grid mode: fixed aspect ratio for the image area, caption stays below */
+.homegallery.grid-container .post-card1 .image-wrapper,
+[data-section-id*="gallery"] .homegallery.grid-container .post-card1 .image-wrapper {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  width: 100%;
+  display: block;
+}
+
+.homegallery.grid-container .post-card1 .image-wrapper img,
+[data-section-id*="gallery"] .homegallery.grid-container .post-card1 .image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* crop to fill */
+  display: block;
+}
+
+/* Slider (swipe) mode: allow images to keep natural proportions but limit height; caption visible below */
+.homegallery.slider .post-card1,
+[data-section-id*="gallery"] .homegallery.slider .post-card1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Use a fixed slide height so portrait and landscape images match height in swipe mode */
+.homegallery.slider,
+[data-section-id*="gallery"] .homegallery.slider {
+  --gallery-slide-height: 40vh; /* adjust default slide height here */
+}
+
+.homegallery.slider .post-card1 .image-wrapper,
+[data-section-id*="gallery"] .homegallery.slider .image-wrapper {
+  width: auto;
+  height: var(--gallery-slide-height);
+  display: block;
+}
+
+.homegallery.slider .post-card1 .image-wrapper img,
+[data-section-id*="gallery"] .homegallery.slider .image-wrapper img {
+  width: auto;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
 @media(max-width:48rem) {
   #directorySelect {right:inherit; left:1rem; width:60%;}
   body:has(.header) #directorySelect{left:0 !important; right:0 !important; }
@@ -240,6 +296,28 @@ div[data-section-id*="gallery"] div.section-content div.homegallery.slider .post
   function initializeGallery() {
     // Use defaultDirectory instead of reading from select
     filterImages(defaultDirectory);
+    // Ensure wheel/drag scroll functionality is added when in swipe mode
+    try {
+      const galleryContainer = document.querySelector(`[data-section-id="${sectionId}"] .homegallery`);
+      if (galleryContainer && typeof window !== 'undefined' && window.ViewModeSwitchScrollFunctions) {
+        if (galleryContainer.classList.contains('slider')) {
+          window.ViewModeSwitchScrollFunctions.addScrollFunctionality(galleryContainer);
+        } else {
+          window.ViewModeSwitchScrollFunctions.removeScrollFunctionality(galleryContainer);
+        }
+      }
+    } catch (err) {
+      console.warn('Error initializing gallery scroll handlers', err);
+    }
+    // Ensure the select reflects the active default directory
+    try {
+      const sel = document.getElementById('directorySelect');
+      if (sel && sel instanceof HTMLSelectElement) {
+        sel.value = defaultDirectory;
+      }
+    } catch (err) {
+      console.warn('Error setting directory select value', err);
+    }
   }
 
   // Wait for both DOM and images to load
@@ -267,6 +345,18 @@ div[data-section-id*="gallery"] div.section-content div.homegallery.slider .post
         // Update selector z-index based on mode
         if (selectorContainer) {
           selectorContainer.style.zIndex = event.detail.viewMode === 'grid' ? '1' : '20';
+        }
+        // Add/remove shared scroll functionality (wheel/drag)
+        try {
+          if (typeof window !== 'undefined' && window.ViewModeSwitchScrollFunctions) {
+            if (event.detail.viewMode === 'swipe') {
+              window.ViewModeSwitchScrollFunctions.addScrollFunctionality(galleryContainer);
+            } else {
+              window.ViewModeSwitchScrollFunctions.removeScrollFunctionality(galleryContainer);
+            }
+          }
+        } catch (err) {
+          console.warn('Error toggling gallery scroll handlers', err);
         }
       }
       
