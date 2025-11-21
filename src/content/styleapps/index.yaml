@@ -1,18 +1,16 @@
-backgroundVideo: >-
-  https://www.youtube.com/embed/-XL3t8BtEDc?si=3jQ3ZKTIbB7eXN1J&amp;controls=0&amp;autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=-XL3t8BtEDc&amp;playsinline=1&amp;modestbranding=1&amp;rel=0&amp;showinfo=0&amp;fs=0&amp;endscreen=0
 siteFont: Lobster
 borderRadius: 10px
-lightBg: rgba(243, 231, 231, 1)
-lightAccent2: rgba(0, 0, 0, 1)
+lightBg: rgba(227, 249, 246, 1)
+lightAccent2: rgba(54, 211, 230, 1)
 darkBg: rgba(34, 34, 34, 1)
 darkAccent2: rgba(0, 0, 0, 1)
-lightHeader: rgba(0, 0, 0, 0.9)
+lightHeader: rgba(0, 0, 0, 0.88)
 darkHeader: rgba(0, 0, 0, 0.9)
-lightText: rgba(243, 231, 231, 1)
+lightText: rgba(42, 42, 41, 1)
 darkText: rgba(243, 231, 231, 1)
 customCSS: >-
   #main{padding-bottom: 10vh} .resume-container{background: rgba(17, 17, 17,
-  0.75)}.vidbox{opacity:.6; height: 110vh !important; width: 110vw !important;}
+  0.75)} .vidbox{opacity:.2; height: 110vh !important; width: 110vw !important;}
   #profile img{max-height:60vh !important; max-width:1000px; width:90%;}
   .description, .resume-container{text-shadow: 2px 2px black !important;} .font,
   .glow{text-transform:lowercase !important;}

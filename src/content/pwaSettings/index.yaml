@@ -1,11 +1,25 @@
 showRobots: true
-siteUrl: https://toddlambert.com
-description: Digital Creator, Designer, Developer and Photographer
+siteUrl: https://dogpoopers.com
+title: Todd Lambert - Digital Creator, Designer, Developer and Photographer
+description: A multi-talented visionary who implements concept, design and development together
 name: Todd Lambert
-shortName: Todd
-themeColor: rgba(8, 4, 10, 1)
-backgroundColor: rgba(15, 15, 15, 1)
-startUrl: /
+shortName: Todd Lambert
+location: >-
+  https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d154546.6032849972!2d-88.94227414957832!3d30.442437545968502!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1762658647112!5m2!1sen!2sus
+showMap: true
+showName: true
+showPhone: true
+showMessage: true
+showUpload: false
+showExtraField: false
+extraFieldLabel: Extra Field
+showExtraField2: false
+extraFieldLabel2: Extra Field 2
+formContent: 'For all inquiries, please complete the form below: '
+screenshot: /images/pwa/screenshot.png
+themeColor: rgba(62, 136, 42, 1)
+backgroundColor: rgba(62, 136, 42, 1)
+startUrl: /map
 display: standalone
-icon192: /images/pwa/icon192.webp
-icon512: /images/pwa/icon512.webp
+icon192: /images/pwa/icon192.png
+icon512: /images/pwa/icon512.png
