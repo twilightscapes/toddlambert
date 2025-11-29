@@ -105,12 +105,12 @@ const playerVars: { [key: string]: number | string } = {
       id={`youtube-iframe-${videoId}`}
       width="100%"
       height="100%"
-      src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=${autoplay ? 1 : 0}&mute=${mute ? 1 : 0}&loop=${loop ? 1 : 0}&start=${start}&end=${end > 0 ? end : ''}&playsinline=1&rel=0`}
+      src={`https://www.youtube.com/embed/${videoId}?autoplay=${autoplay ? 1 : 0}&mute=${mute ? 1 : 0}&controls=${controls ? 1 : 0}&loop=${loop ? 1 : 0}${loop ? `&playlist=${videoId}` : ''}${start ? `&start=${start}` : ''}${end > 0 ? `&end=${end}` : ''}&rel=0`}
       title={title}
       frameborder="0"
-      allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       allowfullscreen
-      referrerpolicy="no-referrer"
+      referrerpolicy="strict-origin-when-cross-origin"
       loading="lazy"
       style="aspect-ratio: 16/9; position: relative; z-index: 2;"
       onload="this.previousElementSibling.style.display = 'none'"
@@ -173,18 +173,25 @@ document.addEventListener('DOMContentLoaded', () => {
       if (iframeContainer) {
         iframeContainer.style.display = 'block';
         
-        // Create and insert iframe
+        // Create and insert iframe - use simple working parameters
         const iframe = document.createElement('iframe');
         iframe.id = `youtube-iframe-${videoId}`;
         iframe.width = '100%';
         iframe.height = '100%';
-        // Simplified parameters to avoid Error 153
-        iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=${mute ? 1 : 0}&loop=${loop ? 1 : 0}&start=${start}&end=${end > 0 ? end : ''}&playsinline=1&rel=0`;
+        
+        // Build URL with minimal working parameters (same as auto-load)
+        let iframeSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=${mute ? 1 : 0}&controls=1`;
+        if (loop) iframeSrc += `&loop=1&playlist=${videoId}`;
+        if (start) iframeSrc += `&start=${start}`;
+        if (end > 0) iframeSrc += `&end=${end}`;
+        iframeSrc += `&rel=0`;
+        
+        iframe.src = iframeSrc;
         iframe.title = 'YouTube Video';
         iframe.frameBorder = '0';
-        iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
         iframe.allowFullscreen = true;
-        iframe.referrerPolicy = 'no-referrer';
+        iframe.referrerPolicy = 'strict-origin-when-cross-origin';
         iframe.style.cssText = 'aspect-ratio: 16/9; width: 100%; height: 100%;';
         
         iframeContainer.appendChild(iframe);
