@@ -42,7 +42,7 @@ const resumeSettings = await getEntry('resumeSettings', 'index');
 
 // Get posts for posts sections
 const allPosts = await getAllPosts();
-const sortedPosts = sortMDByDate(allPosts);
+const sortedPosts = sortMDByDate(allPosts, true);
 
 // Get testimonials for testimonials sections
 const allTestimonials = await getCollection('testimonials');

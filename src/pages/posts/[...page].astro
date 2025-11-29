@@ -28,7 +28,7 @@ export const getStaticPaths = (async ({ paginate }) => {
   };
 
   const allPosts = await getAllPosts();
-  const allPostsByDate = sortMDByDate(allPosts);
+  const allPostsByDate = sortMDByDate(allPosts, true);
   const uniqueTags = getUniqueTags(allPosts);
   
   return paginate(allPostsByDate, { 
