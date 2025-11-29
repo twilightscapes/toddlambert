@@ -9,6 +9,15 @@ export default function GalleryLightbox({ images, showCaptions }) {
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
 
+  // Read auto-open setting from DOM
+  useEffect(() => {
+    const autoOpenElement = document.querySelector('[data-auto-open]');
+    const shouldAutoOpen = autoOpenElement?.getAttribute('data-auto-open') === 'true';
+    if (shouldAutoOpen) {
+      setTimeout(() => setOpen(true), 100);
+    }
+  }, []);
+
   const options = {
     settings: {
       autoplaySpeed: 3000,

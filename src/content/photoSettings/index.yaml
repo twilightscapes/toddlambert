@@ -1,5 +1,6 @@
 galleryMode: directory
 showCaptions: true
+autoOpenLightbox: true
 defaultDirectory: Favorites
 showGallerySelector: true
 galleryImages: []

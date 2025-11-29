@@ -249,6 +249,7 @@ export const collections = {
     schema: z.object({
       galleryMode: z.enum(['directory', 'keystatic']).optional(),
       showCaptions: z.boolean().optional(),
+      autoOpenLightbox: z.boolean().optional(),
       // showFaqsOnPhotos: z.boolean().optional(),
       // showTestimonialsOnPhotos: z.boolean().optional(),
       // pitch: z.string().optional(),
