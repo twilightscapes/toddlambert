@@ -46,11 +46,16 @@ const {
 let showFooter = false;
 let enableImageBlur = true;
 let siteDisclaimer = '';
+let siteThemeMode = themeMode; // Use prop as default
 
 try {
   const siteSettings = await getEntry('siteSettings', 'main');
   if (siteSettings) {
     ({ showFooter = false, enableImageBlur = true } = siteSettings.data);
+    // Override themeMode with site settings if not explicitly passed as prop
+    if (themeMode === 'user' && siteSettings.data.themeMode) {
+      siteThemeMode = siteSettings.data.themeMode;
+    }
   } else {
     console.warn('Site settings not found, using defaults');
   }
@@ -84,7 +89,7 @@ const pageOgImage = ogImage || meta?.ogImage;
 		<meta charset="utf-8" />
 
         
-        <ThemeProvider themeMode={themeMode} />
+        <ThemeProvider themeMode={siteThemeMode} />
         <BaseHead 
             title={pageTitle} 
             description={pageDescription} 

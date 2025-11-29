@@ -1,16 +1,12 @@
-siteFont: Emilys Candy
+backgroundImage: /images/styleapps/backgroundImage.webp
+siteFont: Science Gothic
 borderRadius: 10px
-lightBg: rgba(227, 249, 246, 1)
+lightBg: rgba(243, 246, 249, 1)
 lightAccent2: rgba(54, 211, 230, 1)
-darkBg: rgba(34, 34, 34, 1)
-darkAccent2: rgba(0, 0, 0, 1)
+darkBg: rgba(0, 0, 0, 1)
+darkAccent2: rgba(243, 42, 108, 1)
 lightHeader: rgba(0, 0, 0, 0.88)
-darkHeader: rgba(0, 0, 0, 0.9)
+darkHeader: rgba(45, 45, 45, 0.9)
 lightText: rgba(42, 42, 41, 1)
 darkText: rgba(243, 231, 231, 1)
-customCSS: >-
-  #main{padding-bottom: 10vh} .resume-container{background: rgba(17, 17, 17,
-  0.75)} .vidbox{opacity:.2; height: 110vh !important; width: 110vw !important;}
-  #profile img{max-height:60vh !important; max-width:1000px; width:90%;}
-  .description, .resume-container{text-shadow: 2px 2px black !important;} .font,
-  .glow{text-transform:lowercase !important;}
+customCSS: 'article{font-size: clamp(1.3rem, 2vw, 2rem) !important;}'

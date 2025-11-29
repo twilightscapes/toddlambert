@@ -11,7 +11,7 @@ interface Props {
 
 const { post } = Astro.props;
 const {
-    data: { description, coverImage, publishDate, title, updatedDate, youtube }
+    data: { description, coverImage, publishDate, title, updatedDate, youtube, overlayImage, overlayImageAlt, overlaySvg, overlaySvgAlt }
 } = post;
 
 // Helper function to extract YouTube video ID
@@ -50,7 +50,6 @@ const { headings = [] } = (post.rendered as { headings?: any[] } | undefined) ??
   title={title} 
   description={description} 
   articleDate={articleDate} 
-  themeMode="user"
   ogImage={socialImage}
 >
   <div class="gap-x-10 lg:flex lg:items-start blogpost" >

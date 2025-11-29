@@ -6,7 +6,7 @@ import { getEntry } from 'astro:content';
 import Pagination from "@/components/Paginator.astro";
 import PostPreview from "@/components/blog/PostPreview.astro";
 import ViewModeSwitch from "@/components/ViewModeSwitch.jsx";
-import { getAllPosts, getUniqueTags, groupPostsByYear, sortMDByDate } from "@/data/post";
+import { getAllPosts, getUniqueTags, groupPostsByYearMonth, sortMDByDate } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
 
 interface SiteSettings {
@@ -75,12 +75,15 @@ const paginationProps = {
 	}),
 };
 
-const groupedByYear = groupPostsByYear(page.data);
-const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
+const groupedByYearMonth = groupPostsByYearMonth(page.data);
+const descYearKeys = Object.keys(groupedByYearMonth).sort((a, b) => +b - +a);
+
+// Month order for sorting
+const monthOrder = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 ---
 
-<PageLayout meta={meta} themeMode="user">
+<PageLayout meta={meta}>
 	<br />
 	<span class="">
 		<div data-section-id="posts-page">
@@ -95,18 +98,34 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 			
 			<div class={`contentpanel section-content ${defaultView === 'swipe' ? 'slider' : 'grid-container'}`} style="">
 				<div class="sliderSpacer"></div>
-				{descYearKeys.map((yearKey) => (
-					<>
-						{typeof showDates !== 'undefined' && showDates && (
-							<div class="grid place-content-center">
-								<h2 class="title text-lg">{yearKey}</h2>
-							</div>
-						)}
-						{groupedByYear[yearKey]?.map((p) => (
-							<PostPreview post={p} />
-						))}
-					</>
-				))}
+				{descYearKeys.map((yearKey) => {
+					const monthsInYear = groupedByYearMonth[yearKey];
+					const sortedMonthKeys = Object.keys(monthsInYear || {}).sort((a, b) => {
+						return monthOrder.indexOf(b) - monthOrder.indexOf(a);
+					});
+					
+					return (
+						<>
+							{typeof showDates !== 'undefined' && showDates && (
+								<div class="grid place-content-center">
+									<h2 class="title text-xl" style="margin-top: 2rem;">{yearKey}</h2>
+								</div>
+							)}
+							{sortedMonthKeys.map((monthKey) => (
+								<>
+									{typeof showDates !== 'undefined' && showDates && (
+										<div class="grid place-content-center">
+											<h3 class="title text-lg" style="margin-top: 1rem; opacity: 0.8;">{monthKey}</h3>
+										</div>
+									)}
+									{monthsInYear[monthKey]?.map((p) => (
+										<PostPreview post={p} />
+									))}
+								</>
+							))}
+						</>
+					);
+				})}
 
 				<div class="grid place-content-center min-w-[380px] min-h-[180px] max-h-[85%] ">
 					<Pagination {...paginationProps} />

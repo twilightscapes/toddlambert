@@ -64,6 +64,31 @@ export default config({
           }),
         }),
 
+        overlayImage: fields.image({
+          label: 'Overlay Image (PNG)',
+          description: 'Transparent PNG image to layer over the video (e.g., logo, watermark, frame)',
+          directory: 'public/images/posts',
+          publicPath: '/images/posts',
+          validation: { isRequired: false }
+        }),
+        overlayImageAlt: fields.text({
+          label: 'Overlay Image Alt Text',
+          description: 'Alternative text for the overlay image (for accessibility)',
+          validation: { isRequired: false }
+        }),
+        overlaySvg: fields.image({
+          label: 'Overlay SVG',
+          description: 'SVG image to layer over the video (scalable, ideal for logos and graphics)',
+          directory: 'public/images/posts',
+          publicPath: '/images/posts',
+          validation: { isRequired: false }
+        }),
+        overlaySvgAlt: fields.text({
+          label: 'Overlay SVG Alt Text',
+          description: 'Alternative text for the SVG overlay (for accessibility)',
+          validation: { isRequired: false }
+        }),
+
         externalUrl: fields.text({ label: 'External Url', description: 'A url of an external site will be loaded into an iframe', }),
 
 
@@ -534,6 +559,31 @@ export default config({
             { label: 'Right of Content', value: 'right' }
           ],
           defaultValue: 'top'
+        }),
+        
+        overlayImage: fields.image({
+          label: 'Overlay Image (PNG)',
+          description: 'Transparent PNG image to layer over the video (e.g., logo, watermark, frame)',
+          directory: 'public/images/content-blocks',
+          publicPath: '/images/content-blocks',
+          validation: { isRequired: false }
+        }),
+        overlayImageAlt: fields.text({
+          label: 'Overlay Image Alt Text',
+          description: 'Alternative text for the overlay image (for accessibility)',
+          validation: { isRequired: false }
+        }),
+        overlaySvg: fields.image({
+          label: 'Overlay SVG',
+          description: 'SVG image to layer over the video (scalable, ideal for logos and graphics)',
+          directory: 'public/images/content-blocks',
+          publicPath: '/images/content-blocks',
+          validation: { isRequired: false }
+        }),
+        overlaySvgAlt: fields.text({
+          label: 'Overlay SVG Alt Text',
+          description: 'Alternative text for the SVG overlay (for accessibility)',
+          validation: { isRequired: false }
         }),
         
         // CTA Integration

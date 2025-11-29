@@ -194,7 +194,7 @@ function ViewModeSwitch({ sectionId, defaultView = 'grid', onViewChange = null }
         if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
           e.preventDefault();
           e.stopPropagation();
-          slider.scrollLeft += e.deltaY * 1.4; // Moderate scrolling speed
+          slider.scrollLeft += e.deltaY * 3; // Fast scrolling speed
         }
       }
     };
@@ -356,7 +356,7 @@ if (typeof window !== 'undefined') {
           if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
             e.preventDefault();
             e.stopPropagation();
-            slider.scrollLeft += e.deltaY * 1.4;
+            slider.scrollLeft += e.deltaY * 3;
           }
         }
       };

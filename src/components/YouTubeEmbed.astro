@@ -68,23 +68,23 @@ const playerVars: { [key: string]: number | string } = {
 {clickToLoad ? (
   <div class="iframe-youtube-player click-to-load" style="position: relative; width: 100%; aspect-ratio: 16/9; background: #000; cursor: pointer;" data-video-id={videoId}>
     <img 
-      src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
+      src={`https://img.youtube.com/vi/${videoId}/sddefault.jpg`}
       alt={title || 'YouTube Video'}
       style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;"
       onload="this.style.zIndex = '2'"
       onerror="handleYouTubeEmbedThumbnailError(this)"
     />
     
-    <!-- Play button overlay -->
-    <div class="play-button-overlay" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; background: rgba(0,0,0,0.8); border-radius: 50%; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
-        <path d="M8 5v14l11-7z"/>
-      </svg>
-    </div>
-    
-    <!-- Privacy notice -->
-    <div class="privacy-notice" style="position: absolute; bottom: 10px; left: 10px; right: 10px; background: rgba(0,0,0,0.8); color: white; padding: 8px; border-radius: 4px; font-size: 12px; z-index: 3;">
-      🛡️(privacy-focused)
+    <!-- Black overlay with title and play button -->
+    <div class="video-overlay-screen" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 3; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer;">
+      {title && (
+        <h2 class="video-overlay-title" style="color: white; font-size: clamp(1.5rem, 4vw, 3rem); text-align: center; margin: 0 1rem 2rem; font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">{title}</h2>
+      )}
+      <div class="play-button-overlay" style="background: rgba(255,255,255,0.2); border: 3px solid white; border-radius: 50%; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease;">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="white" style="margin-left: 4px;">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </div>
     </div>
     
     <!-- Placeholder for iframe - will be inserted on click -->
@@ -94,7 +94,7 @@ const playerVars: { [key: string]: number | string } = {
 ) : (
   <div class="iframe-youtube-player auto-load" style="position: relative; width: 100%; aspect-ratio: 16/9; background: #000;" data-video-id={videoId}>
     <img 
-      src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
+      src={`https://img.youtube.com/vi/${videoId}/sddefault.jpg`}
       alt={title || 'YouTube Video'}
       style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;"
       onload="this.style.zIndex = '0'"
@@ -105,7 +105,7 @@ const playerVars: { [key: string]: number | string } = {
       id={`youtube-iframe-${videoId}`}
       width="100%"
       height="100%"
-      src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=${autoplay ? 1 : 0}&mute=${mute ? 1 : 0}&controls=${controls ? 1 : 0}&loop=${loop ? 1 : 0}${loop ? `&playlist=${videoId}` : ''}${start ? `&start=${start}` : ''}${end > 0 ? `&end=${end}` : ''}&rel=0`}
+      src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=${(autoplay || mute) ? 1 : 0}&mute=${mute ? 1 : 0}&controls=${controls ? 1 : 0}&loop=${loop ? 1 : 0}${loop ? `&playlist=${videoId}` : ''}${start ? `&start=${start}` : ''}${end > 0 ? `&end=${end}` : ''}&rel=0`}
       title={title}
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -158,29 +158,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const clickToLoadContainer = document.querySelector(`.click-to-load[data-video-id="${videoId}"]`);
     if (!clickToLoadContainer) return;
 
-    const playButton = clickToLoadContainer.querySelector('.play-button-overlay');
-    const privacyNotice = clickToLoadContainer.querySelector('.privacy-notice');
     const iframeContainer = clickToLoadContainer.querySelector('.iframe-container');
     const thumbnail = clickToLoadContainer.querySelector('img');
 
     function loadVideo() {
-      // Hide overlay elements
-      if (playButton) playButton.style.display = 'none';
-      if (privacyNotice) privacyNotice.style.display = 'none';
+      // Get stored video preferences for mute state
+      const storedPreferences = (window as any).VideoPreferences?.getPreferences() || { muted: false };
+      const shouldMute = storedPreferences.muted;
+      
+      // Hide overlay screen
+      const overlayScreen = clickToLoadContainer.querySelector('.video-overlay-screen');
+      if (overlayScreen) overlayScreen.style.display = 'none';
       if (thumbnail) thumbnail.style.display = 'none';
       
       // Show iframe container
       if (iframeContainer) {
         iframeContainer.style.display = 'block';
         
-        // Create and insert iframe - use simple working parameters
+        // Create and insert iframe
         const iframe = document.createElement('iframe');
         iframe.id = `youtube-iframe-${videoId}`;
         iframe.width = '100%';
         iframe.height = '100%';
         
-        // Build URL with minimal working parameters (same as auto-load)
-        let iframeSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=${mute ? 1 : 0}&controls=1`;
+        // Build URL using stored preferences for mute, always autoplay when clicked
+        let iframeSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=${shouldMute ? 1 : 0}&controls=1`;
         if (loop) iframeSrc += `&loop=1&playlist=${videoId}`;
         if (start) iframeSrc += `&start=${start}`;
         if (end > 0) iframeSrc += `&end=${end}`;
@@ -201,17 +203,20 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Add click handlers
-    if (playButton) {
-      playButton.addEventListener('click', loadVideo);
+    // Add click handlers to overlay screen
+    const overlayScreen = clickToLoadContainer.querySelector('.video-overlay-screen');
+    if (overlayScreen) {
+      overlayScreen.addEventListener('click', loadVideo);
     }
     
-    // Also allow clicking the whole container
-    clickToLoadContainer.addEventListener('click', (e) => {
-      if (e.target === clickToLoadContainer || e.target === thumbnail) {
-        loadVideo();
-      }
-    });
+    // Also allow clicking thumbnail directly
+    if (thumbnail) {
+      thumbnail.addEventListener('click', (e) => {
+        if (e.target === thumbnail) {
+          loadVideo();
+        }
+      });
+    }
   }
 
   // Initialize click-to-load
@@ -1604,8 +1609,7 @@ function handleYouTubeEmbedThumbnailError(img) {
   
   // Define fallback hierarchy (high-res to lower-res)
   const fallbackSizes = [
-    'maxresdefault.jpg',    // 1280x720 (original attempt)
-    'sddefault.jpg',        // 640x480 (high quality)
+    'sddefault.jpg',        // 640x480 (high quality, default)
     'hqdefault.jpg',        // 480x360 (medium quality)
     'mqdefault.jpg',        // 320x180 (lower quality)
     'default.jpg'           // 120x90 (lowest quality)

@@ -16,6 +16,10 @@ const postSchema = z.object({
     src: z.string().optional(),
     alt: z.string().default(""),
   }).optional(),
+  overlayImage: z.string().optional(),
+  overlayImageAlt: z.string().optional(),
+  overlaySvg: z.string().optional(),
+  overlaySvgAlt: z.string().optional(),
   tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
   draft: z.boolean().default(false),
   order: z.object({
@@ -156,7 +160,7 @@ export const collections = {
       friendlyName: z.string().optional(),
       link: z.string().optional(),
       icon: z.string().optional(),
-      isWebmention: z.boolean().optional(),
+      isActive: z.boolean().optional(),
       order: z.any().transform(val => 
         (val === '.nan' || val === 'nan' || Number.isNaN(val)) ? undefined : Number(val)
       ).optional()

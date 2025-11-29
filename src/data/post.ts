@@ -50,6 +50,27 @@ export function groupPostsByYear(posts: CollectionEntry<"post">[]) {
 	}, {});
 }
 
+/** groups posts by year and month (based on option siteConfig.sortPostsByUpdatedDate)
+ *  Returns nested structure: { year: { month: [posts] } }
+ *  Note: This function doesn't filter draft posts, pass it the result of getAllPosts above to do so.
+ */
+export function groupPostsByYearMonth(posts: CollectionEntry<"post">[]) {
+	return posts.reduce<Record<string, Record<string, CollectionEntry<"post">[]>>>((acc, post) => {
+		const date = getPostSortDate(post);
+		const year = date.getFullYear().toString();
+		const month = date.toLocaleString('en-US', { month: 'long' });
+		
+		if (!acc[year]) {
+			acc[year] = {};
+		}
+		if (!acc[year][month]) {
+			acc[year][month] = [];
+		}
+		acc[year][month]?.push(post);
+		return acc;
+	}, {});
+}
+
 /** returns all tags created from posts (inc duplicate tags)
  *  Note: This function doesn't filter draft posts, pass it the result of getAllPosts above to do so.
  *  */
