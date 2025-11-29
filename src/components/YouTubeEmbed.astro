@@ -192,18 +192,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const thumbnail = clickToLoadContainer.querySelector('img');
 
     function loadVideo() {
-      // Determine mute state based on post settings and stored preferences
-      // If post has mute=false (unmuted), always play with sound
-      // If post has mute=true, use stored preferences
-      let shouldMute;
-      if (!mute) {
-        // Post is set to unmuted - play with sound regardless of stored preferences
-        shouldMute = false;
-      } else {
-        // Post is set to muted - check stored preferences
-        const storedPreferences = window.VideoPreferences?.getPreferences() || { muted: true };
-        shouldMute = storedPreferences.muted;
-      }
+      // Use the mute setting from the post - always respect it
+      const shouldMute = mute;
       
       // Hide overlay screen
       const overlayScreen = clickToLoadContainer.querySelector('.video-overlay-screen');
