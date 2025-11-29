@@ -25,37 +25,22 @@ const hasOverlay = data.overlayImage || data.overlaySvg;
 {
   (data.youtube && data.youtube.discriminant && data.youtube.value && data.youtube.value.url) ? (
     <div class="video-container-with-overlay" style="position: relative;">
-      <div style={hasOverlay ? "pointer-events: none;" : ""}>
-        <YouTubeEmbed 
-          title={data.youtube.value.title}
-          url={data.youtube.value.url}
-          controls={data.youtube.value.controls}
-          mute={data.youtube.value.mute}
-          autoplay={false}
-          loop={data.youtube.value.loop}
-          start={data.youtube.value.start}
-          end={data.youtube.value.end}
-          clickToLoad={data.youtube.value.clickToLoad}
-          useCustomPlayer={data.youtube.value.useCustomPlayer}
-        />
-      </div>
-      {data.overlayImage && (
-        <img 
-          src={data.overlayImage}
-          alt={data.overlayImageAlt || 'Video overlay'}
-          class="video-overlay-image"
-          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; z-index: 10;"
-        />
-      )}
-      {data.overlaySvg && (
-        <object 
-          data={data.overlaySvg}
-          type="image/svg+xml"
-          aria-label={data.overlaySvgAlt || 'Video SVG overlay'}
-          class="video-overlay-svg"
-          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; z-index: 99;"
-        ></object>
-      )}
+      <YouTubeEmbed 
+        title={data.youtube.value.title}
+        url={data.youtube.value.url}
+        controls={data.youtube.value.controls}
+        mute={data.youtube.value.mute}
+        autoplay={false}
+        loop={data.youtube.value.loop}
+        start={data.youtube.value.start}
+        end={data.youtube.value.end}
+        clickToLoad={data.youtube.value.clickToLoad}
+        useCustomPlayer={data.youtube.value.useCustomPlayer}
+        overlayImage={data.overlayImage}
+        overlayImageAlt={data.overlayImageAlt}
+        overlaySvg={data.overlaySvg}
+        overlaySvgAlt={data.overlaySvgAlt}
+      />
     </div>
   ) : data.coverImage && data.coverImage.src ? (
     <div class=" mb-6">
