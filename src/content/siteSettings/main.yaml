@@ -12,7 +12,7 @@ showFooter: true
 showTitles: true
 showDates: true
 enableImageBlur: true
-showSocial: true
+showSocial: false
 showTags: true
 showShare: true
 videoTimeLimitMinutes: -1
