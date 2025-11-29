@@ -97,11 +97,12 @@ const images = allImages.map(img => ({
   caption: img.title, 
 }));
 
-// Pre-process images for the client component
+// Pre-process ALL images for the client component (it will filter to visible ones)
 const processedImages = allImages.map(image => ({
   src: image.src, // Use original high-quality source for lightbox
   alt: image.alt || '',
   title: image.title || '',
+  directory: image.directory || '',
   // Only include data needed by GalleryLightbox
 }));
 ---
