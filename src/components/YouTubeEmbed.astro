@@ -108,6 +108,23 @@ const playerVars: { [key: string]: number | string } = {
       )}
     </div>
     
+    <!-- Mute/Unmute button (only shown when overlays exist) -->
+    {(overlayImage || overlaySvg) && (
+      <button 
+        class="overlay-mute-toggle"
+        data-video-id={videoId}
+        style="position: absolute; bottom: 20px; right: 20px; z-index: 20; width: 50px; height: 50px; border-radius: 50%; background: rgba(0, 0, 0, 0.7); border: 2px solid white; cursor: pointer; display: none; align-items: center; justify-content: center; transition: all 0.3s ease;"
+        aria-label="Toggle mute"
+      >
+        <svg class="mute-icon" width="24" height="24" viewBox="0 0 24 24" fill="white" style="display: block;">
+          <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+        </svg>
+        <svg class="unmute-icon" width="24" height="24" viewBox="0 0 24 24" fill="white" style="display: none;">
+          <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+        </svg>
+      </button>
+    )}
+    
     <!-- Black overlay with title and play button -->
     <div class="video-overlay-screen" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 15; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; pointer-events: auto;">
       {title && (
@@ -159,6 +176,15 @@ const playerVars: { [key: string]: number | string } = {
 .mute-toggle-btn:hover {
   background: rgba(0,0,0,0.9) !important;
 }
+
+.overlay-mute-toggle:hover {
+  background: rgba(0, 0, 0, 0.9) !important;
+  transform: scale(1.1);
+}
+
+.overlay-mute-toggle:active {
+  transform: scale(0.95);
+}
 </style>
 
 <script>
@@ -181,6 +207,43 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script define:vars={{ videoId, playerVars, start, end, loop, videoTimeLimitMinutes, isContentBlockVideo, isTimerDisabled, autoplay, mute, clickToLoad }}>
+  // Helper function to update mute button visual state
+  function updateMuteButtonState(button, isMuted) {
+    const muteIcon = button.querySelector('.mute-icon');
+    const unmuteIcon = button.querySelector('.unmute-icon');
+    
+    if (isMuted) {
+      muteIcon.style.display = 'none';
+      unmuteIcon.style.display = 'block';
+      button.setAttribute('aria-label', 'Unmute video');
+    } else {
+      muteIcon.style.display = 'block';
+      unmuteIcon.style.display = 'none';
+      button.setAttribute('aria-label', 'Mute video');
+    }
+  }
+  
+  // Helper function to set up mute toggle functionality
+  function setupMuteToggle(button, iframe, initialMuteState) {
+    let isMuted = initialMuteState;
+    
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      isMuted = !isMuted;
+      
+      // Send command to YouTube iframe via postMessage
+      const command = isMuted ? 'mute' : 'unMute';
+      iframe.contentWindow.postMessage(JSON.stringify({
+        event: 'command',
+        func: command
+      }), '*');
+      
+      updateMuteButtonState(button, isMuted);
+    });
+  }
+  
   // Click-to-load functionality for privacy (only when clickToLoad is true)
   function setupClickToLoad() {
     if (!clickToLoad) return; // Only run for click-to-load videos
@@ -204,6 +267,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const overlayWrapper = clickToLoadContainer.querySelector('.overlay-wrapper');
       if (overlayWrapper) overlayWrapper.style.display = 'block';
       
+      // Show mute toggle button
+      const muteToggle = clickToLoadContainer.querySelector('.overlay-mute-toggle');
+      if (muteToggle) {
+        muteToggle.style.display = 'flex';
+        updateMuteButtonState(muteToggle, shouldMute);
+      }
+      
       // Show iframe container
       if (iframeContainer) {
         iframeContainer.style.display = 'block';
@@ -215,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
         iframe.height = '100%';
         
         // Build URL using stored preferences for mute, always autoplay when clicked
-        let iframeSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=${shouldMute ? 1 : 0}&controls=1`;
+        let iframeSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=${shouldMute ? 1 : 0}&controls=1&enablejsapi=1`;
         if (loop) iframeSrc += `&loop=1&playlist=${videoId}`;
         if (start) iframeSrc += `&start=${start}`;
         if (end > 0) iframeSrc += `&end=${end}`;
@@ -230,6 +300,11 @@ document.addEventListener('DOMContentLoaded', () => {
         iframe.style.cssText = 'aspect-ratio: 16/9; width: 100%; height: 100%;';
         
         iframeContainer.appendChild(iframe);
+        
+        // Set up mute toggle functionality
+        if (muteToggle) {
+          setupMuteToggle(muteToggle, iframe, shouldMute);
+        }
         
         // Start timer after iframe loads if needed
         setupSimpleIframeTimer();
