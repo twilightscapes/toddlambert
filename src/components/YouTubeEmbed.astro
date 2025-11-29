@@ -105,7 +105,7 @@ const playerVars: { [key: string]: number | string } = {
       id={`youtube-iframe-${videoId}`}
       width="100%"
       height="100%"
-      src={`https://www.youtube.com/embed/${videoId}?autoplay=${autoplay ? 1 : 0}&mute=${mute ? 1 : 0}&controls=${controls ? 1 : 0}&loop=${loop ? 1 : 0}${loop ? `&playlist=${videoId}` : ''}${start ? `&start=${start}` : ''}${end > 0 ? `&end=${end}` : ''}&rel=0`}
+      src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=${autoplay ? 1 : 0}&mute=${mute ? 1 : 0}&controls=${controls ? 1 : 0}&loop=${loop ? 1 : 0}${loop ? `&playlist=${videoId}` : ''}${start ? `&start=${start}` : ''}${end > 0 ? `&end=${end}` : ''}&rel=0`}
       title={title}
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
         iframe.height = '100%';
         
         // Build URL with minimal working parameters (same as auto-load)
-        let iframeSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=${mute ? 1 : 0}&controls=1`;
+        let iframeSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=${mute ? 1 : 0}&controls=1`;
         if (loop) iframeSrc += `&loop=1&playlist=${videoId}`;
         if (start) iframeSrc += `&start=${start}`;
         if (end > 0) iframeSrc += `&end=${end}`;
