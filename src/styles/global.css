@@ -269,6 +269,8 @@ body {
 /* body:has(.contactpage) #missioncontrol{display:none !important} */
 
 
+
+
 #gobacker {position: absolute !important; right:60px !important; background:var(--theme-header) !important;}
 
 button.topper{background:var(--theme-header) !important;}
@@ -550,6 +552,8 @@ body:has(.videopage) .youtube-video-actions{position: relative; left: 90% !impor
 	  }
 
 	  body:has(#homemap) {overflow-y:auto !important;}
+
+	  body:has(.blogpost) .legalese{display:grid !important;  border:0px solid red !important;}
 
 /* body:has(.video) #missioncontrol{display: none !important;} */
 
