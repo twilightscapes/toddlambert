@@ -226,6 +226,11 @@ export default config({
               collection: 'CTAs',
               validation: { isRequired: false }
             }),
+            showTags: fields.checkbox({
+              label: 'Show Tags',
+              description: 'Show/hide the tag filter pills in Magic Search (only applies to Magic Search sections)',
+              defaultValue: true
+            }),
             hideCollapseButton: fields.checkbox({
               label: 'Hide Collapse Button',
               description: 'Hide the collapse/expand button for this section. When unchecked, users can collapse this section and the state persists.',
@@ -1208,6 +1213,19 @@ export default config({
         shareText: fields.text({ label: 'Share This' }),
         copyButton: fields.text({ label: 'Copy' }),
         siteDisclaimer: fields.text({ label: 'Site Disclaimer', multiline: true }),
+        
+        // Magic Search Component Labels
+        magicSearchPlaceholder: fields.text({ label: 'Magic Search Placeholder', defaultValue: 'Search posts by title or description...' }),
+        magicSearchTopics: fields.text({ label: 'Magic Search Topics Label', defaultValue: 'Topics:' }),
+        magicSearchAll: fields.text({ label: 'Magic Search All Label', defaultValue: 'All' }),
+        magicSearchShowing: fields.text({ label: 'Magic Search Showing Text', defaultValue: 'Showing' }),
+        magicSearchOf: fields.text({ label: 'Magic Search Of Text', defaultValue: 'of' }),
+        magicSearchPosts: fields.text({ label: 'Magic Search Posts Text', defaultValue: 'posts' }),
+        magicSearchPost: fields.text({ label: 'Magic Search Post Text (singular)', defaultValue: 'post' }),
+        magicSearchShowMoreTopics: fields.text({ label: 'Magic Search Show More Topics', defaultValue: 'Show More Topics ▼' }),
+        magicSearchShowLessTopics: fields.text({ label: 'Magic Search Show Less Topics', defaultValue: 'Show Less Topics ▲' }),
+        magicSearchNoResults: fields.text({ label: 'Magic Search No Results Title', defaultValue: 'No posts found' }),
+        magicSearchNoResultsDesc: fields.text({ label: 'Magic Search No Results Description', defaultValue: 'Try adjusting your search or filter criteria' }),
         
         // temp: fields.text({ label: 'temp', multiline: true }),
       },

@@ -7,7 +7,7 @@ showLogo: true
 showHome: true
 showTheme: true
 showSwitch: false
-showSearch: true
+showSearch: false
 showFooter: true
 showTitles: true
 showDates: true

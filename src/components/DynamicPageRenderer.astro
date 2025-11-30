@@ -113,6 +113,7 @@ function getSectionWidthClass(width?: string) {
     const customTitle = section.customTitle || section.title;
     const customDescription = section.customDescription || section.description;
     const showTitle = section.showTitle ?? true;
+    const showTags = section.showTags ?? true;
     
     return (
       <div class={getSectionWidthClass(section.sectionWidth)} style="margin-bottom: 0rem;">
@@ -304,6 +305,7 @@ function getSectionWidthClass(width?: string) {
               const magicSearchDescription = customDescription || "";
               const magicSearchShowTitle = showTitle;
               const magicSearchView = defaultView === 'list' ? 'grid' : defaultView;
+              const magicSearchShowTags = showTags ?? true;
               
               return (
                 <div data-section-id={`magic-search-${index}`}>
@@ -314,6 +316,7 @@ function getSectionWidthClass(width?: string) {
                     showTitle={magicSearchShowTitle}
                     hideCollapseButton={hideCollapseButton}
                     defaultView={magicSearchView}
+                    showTags={magicSearchShowTags}
                   />
                 </div>
               );
