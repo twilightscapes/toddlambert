@@ -13,6 +13,7 @@
 		--theme-accent: var(--theme-accent-light);
 		--theme-accent2: var(--theme-accent2-light);
 		--theme-header: var(--theme-header-light);
+		--theme-card-bg: var(--theme-card-bg-light);
 	}
 
 	[data-theme="dark"] {
@@ -22,6 +23,7 @@
 		--theme-accent: var(--theme-accent-dark);
 		--theme-accent2: var(--theme-accent2-dark);
 		--theme-header: var(--theme-header-dark);
+		--theme-card-bg: var(--theme-card-bg-dark);
 	}
 }
 

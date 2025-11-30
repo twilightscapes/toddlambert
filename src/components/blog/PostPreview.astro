@@ -41,7 +41,7 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
 
 <style>
 .post-video-card {
-  background: var(--theme-bg, #fff);
+  background: var(--theme-card-bg, var(--theme-bg, #fff));
   border-radius: 8px;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -103,7 +103,7 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
 
 .post-video-info {
   padding: 0.75rem;
-  background: var(--theme-bg, #fff);
+  background: var(--theme-card-bg, var(--theme-bg, #fff));
   color: var(--theme-text, #333);
   flex: 1;
   display: flex;

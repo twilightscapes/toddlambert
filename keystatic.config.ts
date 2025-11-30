@@ -1164,6 +1164,15 @@ export default config({
           description: '(dark) Quote Color2 - can use any color value',
         }),
         divider8: fields.empty(),
+        lightCardBg: colorPicker({ 
+          label: 'Light Post Card Background', 
+          description: '(light) Background color for post cards',
+        }),
+        darkCardBg: colorPicker({ 
+          label: 'Dark Post Card Background', 
+          description: '(dark) Background color for post cards',
+        }),
+        divider8b: fields.empty(),
         lightText: colorPicker({ 
           label: 'Light Text Color', 
           description: '(light) Text Color - can use any color value',

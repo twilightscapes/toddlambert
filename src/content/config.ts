@@ -77,6 +77,8 @@ export const collections = {
       darkAccent2: z.string().optional(),
       lightHeader: z.string().optional(),
       darkHeader: z.string().optional(),
+      lightCardBg: z.string().optional(),
+      darkCardBg: z.string().optional(),
       lightText: z.string().optional(),
       darkText: z.string().optional(),
       customCSS: z.string().optional()
