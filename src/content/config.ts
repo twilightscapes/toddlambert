@@ -109,6 +109,7 @@ export const collections = {
         // CTA specific
         cta: z.string().optional(), // Reference to CTA slug
         showTags: z.boolean().optional(),
+        searchMethod: z.enum(['client', 'pagefind', 'hybrid']).optional(),
         hideCollapseButton: z.boolean().optional(),
       })).optional().default([]),
     }),

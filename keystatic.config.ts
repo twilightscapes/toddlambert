@@ -231,6 +231,16 @@ export default config({
               description: 'Show/hide the tag filter pills in Magic Search (only applies to Magic Search sections)',
               defaultValue: true
             }),
+            searchMethod: fields.select({
+              label: 'Search Method',
+              description: 'Choose search method for Magic Search: Client-side (fast, title/description only) or Pagefind (full content, requires build)',
+              options: [
+                { label: 'Client-side (Fast)', value: 'client' },
+                { label: 'Pagefind (Full Content)', value: 'pagefind' },
+                { label: 'Hybrid (Both)', value: 'hybrid' }
+              ],
+              defaultValue: 'client'
+            }),
             hideCollapseButton: fields.checkbox({
               label: 'Hide Collapse Button',
               description: 'Hide the collapse/expand button for this section. When unchecked, users can collapse this section and the state persists.',

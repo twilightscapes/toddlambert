@@ -12,6 +12,7 @@ interface Props {
   hideCollapseButton?: boolean;
   defaultView?: 'grid' | 'swipe';
   showTags?: boolean;
+  searchMethod?: 'client' | 'pagefind' | 'hybrid';
 }
 
 const { 
@@ -21,7 +22,8 @@ const {
   showTitle = true,
   hideCollapseButton = false,
   defaultView: propDefaultView,
-  showTags = true
+  showTags = true,
+  searchMethod = 'client'
 } = Astro.props;
 
 const allPosts = await getAllPosts();
@@ -47,6 +49,13 @@ const lang = {
   noResults: languageData?.data?.magicSearchNoResults || 'No posts found',
   noResultsDesc: languageData?.data?.magicSearchNoResultsDesc || 'Try adjusting your search or filter criteria',
 };
+
+// Update placeholder based on search method
+if (searchMethod === 'pagefind') {
+  lang.placeholder = 'Search posts by title, description, or content...';
+} else if (searchMethod === 'hybrid') {
+  lang.placeholder = 'Search posts (instant results + full content)...';
+}
 ---
 
 <div data-section-id={sectionId}>
@@ -212,7 +221,7 @@ const lang = {
   }
 </style>
 
-<script define:vars={{ MAX_POSTS, sectionId, lang }}>
+<script define:vars={{ MAX_POSTS, sectionId, lang, searchMethod }}>
   // Get all elements using the dynamic sectionId
   const searchInput = document.getElementById(`${sectionId}-search-input`);
   const clearButton = document.getElementById(`${sectionId}-clear-search`);
@@ -228,11 +237,57 @@ const lang = {
   let searchQuery = '';
   let showAllPosts = false;
   let tagsExpanded = false;
+  let pagefind = null;
+  let pagefindResults = new Set();
+  
+  // Initialize Pagefind if needed
+  async function initPagefind() {
+    if (searchMethod === 'client') return;
+    
+    try {
+      // @ts-ignore
+      if (window.pagefind) {
+        // @ts-ignore
+        pagefind = await window.pagefind.options({
+          baseUrl: window.location.origin
+        });
+      }
+    } catch (e) {
+      console.log('Pagefind not available, using client-side search only');
+    }
+  }
+  
+  // Search using Pagefind
+  async function searchWithPagefind(query) {
+    if (!query || !pagefind) {
+      pagefindResults.clear();
+      return;
+    }
+    
+    try {
+      const search = await pagefind.search(query);
+      pagefindResults.clear();
+      
+      search.results.forEach(result => {
+        // Extract slug from URL
+        const urlParts = result.url.split('/');
+        const slug = urlParts[urlParts.length - 2] || urlParts[urlParts.length - 1];
+        pagefindResults.add(slug);
+      });
+    } catch (e) {
+      console.error('Pagefind search error:', e);
+    }
+  }
   
   // Update results based on filters
-  function updateResults() {
+  async function updateResults() {
     let visibleCount = 0;
     let matchingPosts = 0;
+    
+    // If using pagefind or hybrid, perform pagefind search
+    if (searchQuery && (searchMethod === 'pagefind' || searchMethod === 'hybrid')) {
+      await searchWithPagefind(searchQuery);
+    }
     
     postItems.forEach((item, index) => {
       const tags = JSON.parse(item.dataset.tags || '[]');
@@ -241,10 +296,23 @@ const lang = {
       // Check tag filter
       const matchesTag = activeTag === 'all' || tags.includes(activeTag);
       
-      // Check search query
-      const matchesSearch = !searchQuery || 
-        postData.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        postData.description?.toLowerCase().includes(searchQuery.toLowerCase());
+      // Check search query based on method
+      let matchesSearch = !searchQuery;
+      
+      if (searchQuery) {
+        const clientMatch = 
+          postData.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          postData.description?.toLowerCase().includes(searchQuery.toLowerCase());
+        
+        if (searchMethod === 'client') {
+          matchesSearch = clientMatch;
+        } else if (searchMethod === 'pagefind') {
+          matchesSearch = pagefindResults.has(postData.slug);
+        } else if (searchMethod === 'hybrid') {
+          // Hybrid: match if either client-side OR pagefind finds it
+          matchesSearch = clientMatch || pagefindResults.has(postData.slug);
+        }
+      }
       
       const matchesFilters = matchesTag && matchesSearch;
       
@@ -284,7 +352,7 @@ const lang = {
   }
   
   // Handle search input
-  searchInput.addEventListener('input', (e) => {
+  searchInput.addEventListener('input', async (e) => {
     searchQuery = e.target.value.trim();
     
     // Show/hide clear button
@@ -296,21 +364,21 @@ const lang = {
       showAllPosts = false; // Reset to limited view when search is cleared
     }
     
-    updateResults();
+    await updateResults();
   });
   
   // Handle clear button
-  clearButton.addEventListener('click', () => {
+  clearButton.addEventListener('click', async () => {
     searchInput.value = '';
     searchQuery = '';
     showAllPosts = false;
     clearButton.classList.remove('visible');
-    updateResults();
+    await updateResults();
   });
   
   // Handle tag pills
   tagPills.forEach((pill) => {
-    pill.addEventListener('click', (e) => {
+    pill.addEventListener('click', async (e) => {
       const button = e.target;
       activeTag = button.dataset.tag || 'all';
       
@@ -325,7 +393,7 @@ const lang = {
         showAllPosts = false;
       }
       
-      updateResults();
+      await updateResults();
     });
   });
   
@@ -341,5 +409,10 @@ const lang = {
         toggleTagsButton.textContent = lang.showMoreTopics;
       }
     });
+  }
+  
+  // Initialize on page load
+  if (searchMethod !== 'client') {
+    initPagefind();
   }
 </script>

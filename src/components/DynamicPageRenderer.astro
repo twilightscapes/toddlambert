@@ -114,6 +114,7 @@ function getSectionWidthClass(width?: string) {
     const customDescription = section.customDescription || section.description;
     const showTitle = section.showTitle ?? true;
     const showTags = section.showTags ?? true;
+    const searchMethod = section.searchMethod ?? 'client';
     
     return (
       <div class={getSectionWidthClass(section.sectionWidth)} style="margin-bottom: 0rem;">
@@ -317,6 +318,7 @@ function getSectionWidthClass(width?: string) {
                     hideCollapseButton={hideCollapseButton}
                     defaultView={magicSearchView}
                     showTags={magicSearchShowTags}
+                    searchMethod={searchMethod}
                   />
                 </div>
               );
