@@ -38,7 +38,7 @@ const MAX_POSTS = siteSettings?.data?.MAX_POSTS ?? 5;
 const languageData = await getEntry('language', 'index');
 const copyright = languageData?.data?.copyright || '';
 const lang = {
-  placeholder: `Search ${copyright} Posts`,
+  placeholder: `Search ${copyright}'s Posts`,
   topics: languageData?.data?.magicSearchTopics || 'Topics:',
   all: languageData?.data?.magicSearchAll || 'All',
   showing: languageData?.data?.magicSearchShowing || 'Showing',
