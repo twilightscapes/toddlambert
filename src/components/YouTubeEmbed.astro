@@ -152,7 +152,7 @@ const playerVars: { [key: string]: number | string } = {
       id={`youtube-iframe-${videoId}`}
       width="100%"
       height="100%"
-      src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=${(autoplay || mute) ? 1 : 0}&mute=${mute ? 1 : 0}&controls=${controls ? 1 : 0}&loop=${loop ? 1 : 0}${loop ? `&playlist=${videoId}` : ''}${start ? `&start=${start}` : ''}${end > 0 ? `&end=${end}` : ''}&rel=0`}
+      src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=${(autoplay || mute) ? 1 : 0}&mute=${mute ? 1 : 0}&controls=${controls ? 1 : 0}&enablejsapi=1${start ? `&start=${start}` : ''}${end && end > 0 ? `&end=${end}` : ''}${loop && !start && !end ? `&loop=1&playlist=${videoId}` : ''}&rel=0`}
       title={title}
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -162,6 +162,7 @@ const playerVars: { [key: string]: number | string } = {
       style="aspect-ratio: 16/9; position: relative; z-index: 2;"
       onload="this.previousElementSibling.style.display = 'none'"
       data-preserve-settings={Astro.props['data-preserve-settings']}
+      data-auto-load="true"
     >
     </iframe>
   </div>
@@ -286,9 +287,11 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Build URL using stored preferences for mute, always autoplay when clicked
         let iframeSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=${shouldMute ? 1 : 0}&controls=1&enablejsapi=1`;
-        if (loop) iframeSrc += `&loop=1&playlist=${videoId}`;
+        // Add start and end parameters - YouTube will stop at end, then we restart
         if (start && start > 0) iframeSrc += `&start=${start}`;
         if (end && end > 0) iframeSrc += `&end=${end}`;
+        // Only add native loop if we don't have custom start/end times
+        if (loop && !start && !end) iframeSrc += `&loop=1&playlist=${videoId}`;
         iframeSrc += `&rel=0`;
         
         iframe.src = iframeSrc;
@@ -304,6 +307,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Set up mute toggle functionality
         if (muteToggle) {
           setupMuteToggle(muteToggle, iframe, shouldMute);
+        }
+        
+        // Set up simple loop checking for iframe with start/end times
+        if (loop && end && end > 0) {
+          setupSimpleIframeLoop(iframe);
         }
         
         // Start timer after iframe loads if needed
@@ -329,9 +337,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize click-to-load
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupClickToLoad);
+    document.addEventListener('DOMContentLoaded', () => {
+      setupClickToLoad();
+      setupAutoLoadLoop();
+    });
   } else {
     setupClickToLoad();
+    setupAutoLoadLoop();
+  }
+  
+  // Set up loop for auto-load iframe
+  function setupAutoLoadLoop() {
+    if (clickToLoad) return; // Only for auto-load mode
+    if (!loop || !end || end <= 0) return; // Only if loop is enabled with end time
+    
+    const autoLoadIframe = document.getElementById(`youtube-iframe-${videoId}`);
+    if (!autoLoadIframe) return;
+    
+    setupSimpleIframeLoop(autoLoadIframe);
   }
 
   const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
@@ -1008,12 +1031,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!isContentBlockVideo) {
           startPlaybackTimer(); // Start timer when video starts playing
         }
-      } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
-        stopPlaybackTimer(); // Stop timer when video is paused or ended
-        // Clear loop interval when video stops
+      } else if (event.data === YT.PlayerState.PAUSED) {
+        stopPlaybackTimer(); // Stop timer when video is paused
+        // Clear loop interval when video is paused
         if (loopCheckInterval) {
           clearInterval(loopCheckInterval);
           loopCheckInterval = null;
+        }
+      } else if (event.data === YT.PlayerState.ENDED) {
+        stopPlaybackTimer(); // Stop timer when video ends
+        // If we have custom loop with start/end, restart the video
+        if (loop && (start || end)) {
+          player.seekTo(start || 0, true);
+          player.playVideo();
         }
       }
     });
@@ -1073,14 +1103,212 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   let loopCheckInterval = null;
+  let iframePlayer = null;
+  
+  // Simple iframe loop - listen for video end and restart
+  function setupSimpleIframeLoop(iframe) {
+    const videoStart = start || 0;
+    const videoEnd = end;
+    
+    // Listen for state changes - when video pauses at end, restart it
+    const handler = (event) => {
+      if (event.origin !== 'https://www.youtube.com' && event.origin !== 'https://www.youtube-nocookie.com') return;
+      
+      try {
+        let data = event.data;
+        if (typeof data === 'string' && data.indexOf('{') === 0) {
+          data = JSON.parse(data);
+        }
+        
+        // Listen for player state changes
+        if (data && data.info !== undefined) {
+          const playerState = data.info;
+          
+          // State 2 = paused, State 0 = ended
+          // When video stops at end time, restart from beginning
+          if (playerState === 2 || playerState === 0) {
+            setTimeout(() => {
+              // Seek to start
+              iframe.contentWindow.postMessage(JSON.stringify({
+                event: 'command',
+                func: 'seekTo',
+                args: [videoStart, true]
+              }), '*');
+              
+              // Play video
+              setTimeout(() => {
+                iframe.contentWindow.postMessage(JSON.stringify({
+                  event: 'command',
+                  func: 'playVideo'
+                }), '*');
+              }, 100);
+            }, 100);
+          }
+        }
+      } catch(e) {}
+    };
+    
+    window.addEventListener('message', handler);
+    
+    // Subscribe to state change events after iframe loads
+    setTimeout(() => {
+      try {
+        iframe.contentWindow.postMessage(JSON.stringify({
+          event: 'listening'
+        }), '*');
+        
+        iframe.contentWindow.postMessage(JSON.stringify({
+          event: 'command',
+          func: 'addEventListener',
+          args: ['onStateChange']
+        }), '*');
+      } catch(e) {}
+    }, 1500);
+  }
+  
+  // Set up loop checking for iframe embeds using YT Player API
+  function setupIframeLoopWithAPI(iframe) {
+    const videoStart = start || 0;
+    const videoEnd = end && end > 0 ? end : null;
+    
+    if (!videoEnd) return;
+    
+    // Wait for YT API to be ready
+    const initPlayer = () => {
+      if (!window.YT || !window.YT.Player) {
+        setTimeout(initPlayer, 100);
+        return;
+      }
+      
+      try {
+        // Create player from iframe
+        iframePlayer = new YT.Player(iframe, {
+          events: {
+            'onReady': (event) => {
+              console.log('Iframe player ready, starting loop check');
+              startLoopChecking();
+            },
+            'onStateChange': (event) => {
+              if (event.data === YT.PlayerState.PLAYING) {
+                startLoopChecking();
+              } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
+                stopLoopChecking();
+              }
+            }
+          }
+        });
+      } catch(e) {
+        console.error('Error creating iframe player:', e);
+      }
+    };
+    
+    const startLoopChecking = () => {
+      if (loopCheckInterval) return; // Already running
+      
+      console.log(`Starting loop check: ${videoStart}s to ${videoEnd}s`);
+      
+      loopCheckInterval = setInterval(() => {
+        try {
+          if (iframePlayer && iframePlayer.getCurrentTime) {
+            const currentTime = iframePlayer.getCurrentTime();
+            
+            // Loop back when reaching end point
+            if (currentTime >= videoEnd - 0.2) {
+              console.log(`Looping back from ${currentTime}s to ${videoStart}s`);
+              iframePlayer.seekTo(videoStart, true);
+            }
+          }
+        } catch(e) {
+          console.error('Loop check error:', e);
+        }
+      }, 50);
+    };
+    
+    const stopLoopChecking = () => {
+      if (loopCheckInterval) {
+        clearInterval(loopCheckInterval);
+        loopCheckInterval = null;
+        console.log('Stopped loop checking');
+      }
+    };
+    
+    initPlayer();
+  }
+  
+  // Set up loop checking for iframe embeds (click-to-load) - DEPRECATED, keeping for fallback
+  function setupIframeLoopCheck(iframe) {
+    if (loopCheckInterval) {
+      clearInterval(loopCheckInterval);
+      loopCheckInterval = null;
+    }
+    
+    const videoStart = start || 0;
+    const videoEnd = end && end > 0 ? end : null;
+    
+    if (!videoEnd) return; // No end time, no custom loop needed
+    
+    // Use postMessage API to check video time
+    loopCheckInterval = setInterval(() => {
+      if (!iframe || !iframe.contentWindow) return;
+      
+      // Request current time from iframe
+      iframe.contentWindow.postMessage(JSON.stringify({
+        event: 'command',
+        func: 'getCurrentTime'
+      }), '*');
+    }, 50);
+    
+    // Listen for time updates from iframe
+    const messageHandler = (event) => {
+      if (event.origin !== 'https://www.youtube.com' && event.origin !== 'https://www.youtube-nocookie.com') return;
+      
+      try {
+        let data;
+        if (typeof event.data === 'string') {
+          try {
+            data = JSON.parse(event.data);
+          } catch(e) {
+            return;
+          }
+        } else {
+          data = event.data;
+        }
+        
+        // Check if this is a time update for our video
+        if (data.event === 'infoDelivery' && data.info && data.info.currentTime !== undefined) {
+          const currentTime = data.info.currentTime;
+          
+          // If we've reached or passed the end time, seek back to start
+          if (videoEnd && currentTime >= (videoEnd - 0.3)) {
+            iframe.contentWindow.postMessage(JSON.stringify({
+              event: 'command',
+              func: 'seekTo',
+              args: [videoStart, true]
+            }), '*');
+          }
+        }
+      } catch(e) {
+        console.error('Error handling iframe message:', e);
+      }
+    };
+    
+    window.addEventListener('message', messageHandler);
+    
+    // Store handler reference for cleanup
+    if (!window.iframeLoopHandlers) {
+      window.iframeLoopHandlers = new Map();
+    }
+    window.iframeLoopHandlers.set(videoId, messageHandler);
+  }
   
   function checkAndLoop() {
     // Clear any existing interval first
     if (loopCheckInterval) {
       clearInterval(loopCheckInterval);
+      loopCheckInterval = null;
     }
     
-    // Only set up custom loop checking if we have start or end times
+    // Only set up custom loop checking if we have start or end times and loop is enabled
     // Otherwise let YouTube's native loop handle it
     if (!loop || (!start && !end)) {
       return;
@@ -1090,19 +1318,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const videoEnd = end && end > 0 ? end : null;
     
     loopCheckInterval = setInterval(() => {
-      if (!player || !player.getCurrentTime) return;
+      if (!player || !player.getCurrentTime || !player.getPlayerState) return;
       
       const currentTime = player.getCurrentTime();
+      const playerState = player.getPlayerState();
       
-      // If we have an end time and reached it, loop back to start
-      if (videoEnd && currentTime >= videoEnd) {
+      // Only check if video is playing
+      if (playerState !== YT.PlayerState.PLAYING) return;
+      
+      // If we have an end time and reached it (with small buffer), loop back to start
+      if (videoEnd && currentTime >= (videoEnd - 0.3)) {
         player.seekTo(videoStart, true);
+        player.playVideo();
       }
       // If current time somehow went before start, bring it back
       else if (currentTime < videoStart && videoStart > 0) {
         player.seekTo(videoStart, true);
+        player.playVideo();
       }
-    }, 100);
+    }, 50); // Check every 50ms for tighter control
   }
 
 
