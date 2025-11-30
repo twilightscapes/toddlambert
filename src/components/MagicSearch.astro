@@ -256,9 +256,8 @@ const lang = {
     try {
       const pagefindModule = await import('/pagefind/pagefind.js');
       pagefind = pagefindModule;
-      console.log('Pagefind initialized successfully');
     } catch (e) {
-      console.log('Pagefind not available (may need to build first), using client-side search only');
+      // Pagefind not available in dev mode, will work on built site
     }
   }
   
@@ -270,16 +269,13 @@ const lang = {
     }
     
     try {
-      console.log('Searching with pagefind for:', query);
       const search = await pagefind.search(query);
-      console.log('Pagefind returned', search.results.length, 'results');
       pagefindResults.clear();
       
       for (const result of search.results) {
         const data = await result.data();
         // Extract slug from URL - handle both /posts/slug/ and /posts/slug formats
         const url = data.url;
-        console.log('Pagefind result URL:', url);
         
         // Try multiple patterns to extract slug
         const patterns = [
@@ -291,16 +287,13 @@ const lang = {
         for (const pattern of patterns) {
           const matches = url.match(pattern);
           if (matches && matches[1]) {
-            const slug = matches[1];
-            pagefindResults.add(slug);
-            console.log('Added pagefind match:', slug, 'from URL:', url);
+            pagefindResults.add(matches[1]);
             break;
           }
         }
       }
-      console.log('Pagefind results set:', Array.from(pagefindResults));
     } catch (e) {
-      console.error('Pagefind search error:', e);
+      // Pagefind search failed
     }
   }
   
@@ -345,10 +338,6 @@ const lang = {
             return cleanResultSlug === slugToMatch || cleanResultSlug.endsWith('/' + slugToMatch);
           });
           matchesSearch = clientMatch || pagefindMatch;
-          
-          if (matchesSearch) {
-            console.log('Match found:', postData.slug, 'client:', clientMatch, 'pagefind:', pagefindMatch);
-          }
         }
       }
       
@@ -451,8 +440,7 @@ const lang = {
   
   // Initialize on page load
   if (searchMethod !== 'client') {
-    initPagefind().then(() => {
-      console.log('Pagefind ready, search method:', searchMethod);
+  initPagefind().then(() => {
     });
   }
 </script>

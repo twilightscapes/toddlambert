@@ -124,10 +124,10 @@ function ViewModeSwitch({ sectionId, defaultView = 'grid', onViewChange = null }
     
     // Update the section's classes and add scroll functionality to all sections
     if (typeof window !== 'undefined') {
-      console.log('🔄 ViewModeSwitch: Updating classes for', { sectionId, viewMode });
+      // console.log('🔄 ViewModeSwitch: Updating classes for', { sectionId, viewMode });
       const sectionElement = document.querySelector(`[data-section-id="${sectionId}"]`);
       if (sectionElement) {
-        console.log('🔄 ViewModeSwitch: Found section element', sectionElement);
+        // console.log('🔄 ViewModeSwitch: Found section element', sectionElement);
         // Get ALL .section-content elements (for pages with multiple views like posts page)
         const contentContainers = sectionElement.querySelectorAll('.section-content');
         
@@ -140,13 +140,13 @@ function ViewModeSwitch({ sectionId, defaultView = 'grid', onViewChange = null }
         }
         
         if (contentContainers.length > 0) {
-          console.log('🔄 ViewModeSwitch: Found', contentContainers.length, 'content containers');
+          // console.log('🔄 ViewModeSwitch: Found', contentContainers.length, 'content containers');
           contentContainers.forEach((contentContainer) => {
-            console.log('🔄 ViewModeSwitch: Updating container', contentContainer, 'classes:', contentContainer.className);
+            // console.log('🔄 ViewModeSwitch: Updating container', contentContainer, 'classes:', contentContainer.className);
             if (viewMode === 'swipe') {
               contentContainer.classList.remove('grid-container');
               contentContainer.classList.add('slider');
-              console.log('🔄 ViewModeSwitch: Switched to swipe mode');
+              // console.log('🔄 ViewModeSwitch: Switched to swipe mode');
               
               // Add scroll functionality to all sliders with a small delay to ensure DOM updates
               setTimeout(() => addScrollFunctionality(contentContainer), 10);
@@ -159,10 +159,10 @@ function ViewModeSwitch({ sectionId, defaultView = 'grid', onViewChange = null }
             }
           });
         } else {
-          console.warn('🔄 ViewModeSwitch: No content container found (.section-content or .youtube-grid)');
+          // console.warn('🔄 ViewModeSwitch: No content container found (.section-content or .youtube-grid)');
         }
       } else {
-        console.warn('🔄 ViewModeSwitch: No section element found for', sectionId);
+        // console.warn('🔄 ViewModeSwitch: No section element found for', sectionId);
       }
     }
   }, [viewMode, sectionId, onViewChange]);
