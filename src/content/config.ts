@@ -36,14 +36,20 @@ const postSchema = z.object({
       useCustomPlayer: z.boolean().optional(),
       mute: z.boolean().optional(),
       loop: z.boolean().optional(),
-      start: z.number().optional().transform(val => {
-        if (val === null || val === undefined || isNaN(val)) return undefined;
-        return val;
-      }),
-      end: z.number().optional().transform(val => {
-        if (val === null || val === undefined || isNaN(val)) return undefined;
-        return val;
-      }),
+      start: z.preprocess(
+        (val) => {
+          if (val === null || val === undefined || val === '' || (typeof val === 'number' && isNaN(val))) return undefined;
+          return typeof val === 'string' ? parseFloat(val) : val;
+        },
+        z.number().optional()
+      ),
+      end: z.preprocess(
+        (val) => {
+          if (val === null || val === undefined || val === '' || (typeof val === 'number' && isNaN(val))) return undefined;
+          return typeof val === 'string' ? parseFloat(val) : val;
+        },
+        z.number().optional()
+      ),
       clickToLoad: z.boolean().optional(),
       videoOnly: z.boolean().optional(),
     }).optional()
