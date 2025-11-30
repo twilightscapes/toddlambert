@@ -36,8 +36,9 @@ const MAX_POSTS = siteSettings?.data?.MAX_POSTS ?? 5;
 
 // Get language strings
 const languageData = await getEntry('language', 'index');
+const copyright = languageData?.data?.copyright || 'Todd Lambert';
 const lang = {
-  placeholder: languageData?.data?.magicSearchPlaceholder || 'Search posts by title or description...',
+  placeholder: `Search ${copyright} Posts`,
   topics: languageData?.data?.magicSearchTopics || 'Topics:',
   all: languageData?.data?.magicSearchAll || 'All',
   showing: languageData?.data?.magicSearchShowing || 'Showing',
@@ -49,13 +50,6 @@ const lang = {
   noResults: languageData?.data?.magicSearchNoResults || 'No posts found',
   noResultsDesc: languageData?.data?.magicSearchNoResultsDesc || 'Try adjusting your search or filter criteria',
 };
-
-// Update placeholder based on search method
-if (searchMethod === 'pagefind') {
-  lang.placeholder = 'Search posts by title, description, or content...';
-} else if (searchMethod === 'hybrid') {
-  lang.placeholder = 'Search posts (instant results + full content)...';
-}
 ---
 
 <div data-section-id={sectionId}>
@@ -97,7 +91,7 @@ if (searchMethod === 'pagefind') {
           type="text"
           id={`${sectionId}-search-input`}
           placeholder={lang.placeholder}
-          style="width: 100%; padding: 1.25rem 3.5rem 1.25rem 1.25rem; border-radius: 0.5rem; border: 2px solid var(--accent); background: rgba(0, 0, 0, 0.4); color: var(--textColor); font-size: 1.25rem; font-weight: 500;"
+          style="width: 100%; padding: 1.25rem 3.5rem 1.25rem 1.25rem; border-radius: 0.5rem; border: 2px solid var(--accent); background: rgba(0, 0, 0, 0.4); color: var(--textColor); font-size: 1rem;"
         />
         <button
           id={`${sectionId}-clear-search`}

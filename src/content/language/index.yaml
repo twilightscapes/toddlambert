@@ -1,5 +1,5 @@
 homelink: Home
-copyright: Copyright
+copyright: Todd Lambert
 goback: Back
 top: Top
 viewmore: View More
@@ -29,3 +29,13 @@ siteDisclaimer: >-
 
   Video footage public youtube.com | Some imagery provided from DonkeyHotey,
   Wikipedia and other public sourced materials.
+magicSearchTopics: 'Topics:'
+magicSearchAll: All
+magicSearchShowing: Showing
+magicSearchOf: of
+magicSearchPosts: posts
+magicSearchPost: post
+magicSearchShowMoreTopics: Show More Topics ▼
+magicSearchShowLessTopics: Show Less Topics ▲
+magicSearchNoResults: No posts found
+magicSearchNoResultsDesc: Try adjusting your search or filter criteria
