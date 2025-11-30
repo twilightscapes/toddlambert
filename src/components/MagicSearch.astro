@@ -85,9 +85,9 @@ const lang = {
   <div class="search-controls" style="padding: 0 1rem; max-width: 1400px; margin: 0 auto;">
     <div class="search-filter-box" style="background: rgba(0, 0, 0, 0.3); padding: 1rem; border-radius: 0.75rem; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1);">
       
-      <!-- Search Bar with View All Button -->
-      <div style="display: flex; gap: 0.75rem; margin-bottom: 1.25rem; align-items: center;">
-        <div class="search-bar-container" style="position: relative; flex: 1;">
+      <!-- Search Bar with Clear Filters and View All Buttons -->
+      <div style="display: flex; gap: 0.75rem; margin-bottom: 1.25rem; align-items: center; flex-wrap: wrap;">
+        <div class="search-bar-container" style="position: relative; flex: 1; min-width: 250px;">
           <input
             type="text"
             id={`${sectionId}-search-input`}
@@ -104,6 +104,17 @@ const lang = {
             </svg>
           </button>
         </div>
+        
+        <!-- Clear All Filters Button -->
+        <button
+          id={`${sectionId}-clear-all`}
+          style="padding: 1.25rem 1.5rem; border-radius: 0.5rem; border: 2px solid var(--accent); background: rgba(255, 0, 0, 0.2); color: white; cursor: pointer; font-weight: 600; white-space: nowrap; transition: all 0.2s; display: none;"
+          onmouseover="this.style.background='rgba(255, 0, 0, 0.4)'"
+          onmouseout="this.style.background='rgba(255, 0, 0, 0.2)'"
+        >
+          Clear Filters
+        </button>
+        
         <a 
           href="/posts/" 
           style="padding: 1.25rem 1.5rem; border-radius: 0.5rem; border: 2px solid var(--accent); background: var(--accent); color: white; text-decoration: none; font-weight: 600; white-space: nowrap; transition: all 0.2s; display: flex; align-items: center; justify-content: center;"
@@ -234,6 +245,7 @@ const lang = {
   // Get all elements using the dynamic sectionId
   const searchInput = document.getElementById(`${sectionId}-search-input`);
   const clearButton = document.getElementById(`${sectionId}-clear-search`);
+  const clearAllButton = document.getElementById(`${sectionId}-clear-all`);
   const resultsCount = document.getElementById(`${sectionId}-results-count`);
   const resultsContainer = document.querySelector(`[data-section-id="${sectionId}"] .section-content`);
   const noResults = document.getElementById(`${sectionId}-no-results`);
@@ -382,13 +394,20 @@ const lang = {
   searchInput.addEventListener('input', async (e) => {
     searchQuery = e.target.value.trim();
     
-    // Show/hide clear button
+    // Show/hide clear button and clear all button
     if (searchQuery) {
       clearButton.classList.add('visible');
       showAllPosts = true; // Show all matching results when searching
     } else {
       clearButton.classList.remove('visible');
       showAllPosts = false; // Reset to limited view when search is cleared
+    }
+    
+    // Show clear all button if any filters are active
+    if (searchQuery || activeTag !== 'all') {
+      clearAllButton.style.display = 'block';
+    } else {
+      clearAllButton.style.display = 'none';
     }
     
     await updateResults();
@@ -400,6 +419,36 @@ const lang = {
     searchQuery = '';
     showAllPosts = false;
     clearButton.classList.remove('visible');
+    
+    // Update clear all button visibility
+    if (activeTag !== 'all') {
+      clearAllButton.style.display = 'block';
+    } else {
+      clearAllButton.style.display = 'none';
+    }
+    
+    await updateResults();
+  });
+  
+  // Handle clear all filters button
+  clearAllButton.addEventListener('click', async () => {
+    // Reset search
+    searchInput.value = '';
+    searchQuery = '';
+    clearButton.classList.remove('visible');
+    
+    // Reset tag filter
+    activeTag = 'all';
+    tagPills.forEach((p) => p.classList.remove('active'));
+    const allPill = document.querySelector(`.tag-pill[data-section="${sectionId}"][data-tag="all"]`);
+    if (allPill) allPill.classList.add('active');
+    
+    // Reset view
+    showAllPosts = false;
+    
+    // Hide clear all button
+    clearAllButton.style.display = 'none';
+    
     await updateResults();
   });
   
@@ -418,6 +467,13 @@ const lang = {
         showAllPosts = true;
       } else if (!searchQuery) {
         showAllPosts = false;
+      }
+      
+      // Show/hide clear all button
+      if (searchQuery || activeTag !== 'all') {
+        clearAllButton.style.display = 'block';
+      } else {
+        clearAllButton.style.display = 'none';
       }
       
       await updateResults();
