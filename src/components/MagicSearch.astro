@@ -111,7 +111,7 @@ const MAX_POSTS = siteSettings?.data?.MAX_POSTS ?? 5;
             id={`${sectionId}-toggle-tags`}
             style="margin-top: 0.75rem; padding: 0.25rem 0.75rem; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px; color: var(--textColor); cursor: pointer; font-size: 0.875rem;"
           >
-            Show More Tags ▼
+            Show More Topics ▼
           </button>
         )}
       </div>
@@ -315,10 +315,10 @@ const MAX_POSTS = siteSettings?.data?.MAX_POSTS ?? 5;
       tagsExpanded = !tagsExpanded;
       if (tagsExpanded) {
         tagPillsWrapper.style.maxHeight = 'none';
-        toggleTagsButton.textContent = 'Show Less Tags ▲';
+        toggleTagsButton.textContent = 'Show Less Topics ▲';
       } else {
         tagPillsWrapper.style.maxHeight = '2.5rem';
-        toggleTagsButton.textContent = 'Show More Tags ▼';
+        toggleTagsButton.textContent = 'Show More Topics ▼';
       }
     });
   }
