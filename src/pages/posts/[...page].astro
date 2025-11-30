@@ -89,7 +89,7 @@ const monthOrder = ['January', 'February', 'March', 'April', 'May', 'June', 'Jul
 		<!-- Search Component with Filters -->
 		<PostsPageSearch 
 			sectionId="posts-page"
-			defaultView={defaultView}
+			defaultView={defaultView as 'grid' | 'swipe'}
 			showTags={showTags}
 			searchMethod="hybrid"
 			allPosts={page.data}
