@@ -96,7 +96,7 @@ export const collections = {
       sections: z.array(z.object({
         type: z.enum([
           'contentblock', 'pitch', 'testimonials', 'faqs', 
-          'resume', 'ctas', 'youtubefeeds', 'youform', 'posts', 'photos', 'app', 'form'
+          'resume', 'ctas', 'youtubefeeds', 'youform', 'posts', 'magicsearch', 'photos', 'app', 'form'
         ]),
         customTitle: z.string().optional(),
         customDescription: z.string().optional(),

@@ -172,6 +172,7 @@ export default config({
                 { label: 'Form Section', value: 'form' },
                 { label: 'YouTube Feeds', value: 'youtubefeeds' },
                 { label: 'Posts Section', value: 'posts' },
+                { label: 'Magic Search', value: 'magicsearch' },
                 { label: 'Testimonials Section', value: 'testimonials' },
                 { label: 'FAQ Section', value: 'faqs' },
                 { label: 'Resume Section', value: 'resume' },
@@ -245,6 +246,7 @@ export default config({
               if (sectionType === 'contentblock' && contentBlockSlug) return `Content Block - ${contentBlockSlug}`;
               if (sectionType === 'youtubefeeds' && feedConfig) return `YouTube Feed - ${feedConfig}`;
               if (sectionType === 'ctas' && cta) return `CTA - ${cta}`;
+              if (sectionType === 'magicsearch') return 'Magic Search';
               return sectionType || 'Untitled Section';
             }
           }

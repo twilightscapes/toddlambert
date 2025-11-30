@@ -33,6 +33,7 @@
 /* Base styles */
 div[data-section-id*="posts-section"] .section-content.slider,
 div[data-section-id="posts-page"] .section-content.slider,
+div[data-section-id*="magic-search"] .section-content.slider,
 div[data-section-id*="youtube-feed-section"] .section-content.slider {
 	display: flex !important;
 	flex-direction: row !important;
@@ -684,6 +685,7 @@ body:has(.video) #footer{display: none !important;}
 	/* Posts section slider mode styles */
 	div[data-section-id*="posts-section"] .section-content.slider,
 	div[data-section-id="posts-page"] .section-content.slider,
+	div[data-section-id*="magic-search"] .section-content.slider,
 	div[data-section-id*="youtube-feed-section"] .section-content.slider,
 	div[data-section-id*="youtube-feed-section"] .youtube-grid.slider {
 		display: flex !important;

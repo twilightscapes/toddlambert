@@ -13,6 +13,7 @@ import YouTubeFeed from "@/components/YouTubeFeed.astro";
 import ViewModeSwitch from "@/components/ViewModeSwitch.jsx";
 import PhotoSection from "@/components/PhotoGallery.astro";
 import ContactForm from "@/components/ContactForm.astro";
+import MagicSearch from "@/components/MagicSearch.astro";
 import { renderMarkdown } from "../utils/utils";
 
 // Simple markdown-to-HTML converter for inline content - now using enhanced marked plugin
@@ -295,6 +296,25 @@ function getSectionWidthClass(width?: string) {
                       </div>
                     )}
                   </div>
+                </div>
+              );
+
+            case 'magicsearch':
+              const magicSearchTitle = customTitle || "Search Posts";
+              const magicSearchDescription = customDescription || "";
+              const magicSearchShowTitle = showTitle;
+              const magicSearchView = defaultView === 'list' ? 'grid' : defaultView;
+              
+              return (
+                <div data-section-id={`magic-search-${index}`}>
+                  <MagicSearch 
+                    sectionId={`magic-search-${index}`}
+                    title={magicSearchTitle}
+                    description={magicSearchDescription}
+                    showTitle={magicSearchShowTitle}
+                    hideCollapseButton={hideCollapseButton}
+                    defaultView={magicSearchView}
+                  />
                 </div>
               );
 
