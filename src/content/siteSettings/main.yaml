@@ -13,6 +13,6 @@ showTitles: true
 showDates: true
 enableImageBlur: true
 showSocial: false
-showTags: true
+showTags: false
 showShare: true
 videoTimeLimitMinutes: -1
