@@ -36,8 +36,14 @@ const postSchema = z.object({
       useCustomPlayer: z.boolean().optional(),
       mute: z.boolean().optional(),
       loop: z.boolean().optional(),
-      start: z.number().optional(),
-      end: z.number().optional(),
+      start: z.number().optional().transform(val => {
+        if (val === null || val === undefined || isNaN(val)) return undefined;
+        return val;
+      }),
+      end: z.number().optional().transform(val => {
+        if (val === null || val === undefined || isNaN(val)) return undefined;
+        return val;
+      }),
       clickToLoad: z.boolean().optional(),
       videoOnly: z.boolean().optional(),
     }).optional()

@@ -189,18 +189,18 @@ const playerVars: { [key: string]: number | string } = {
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const preferences = window.VideoPreferences?.getPreferences() || { muted: false };
-  window.VideoPreferences?.updateAllVideoMuteStates(preferences.muted);
+  const preferences = (window as any).VideoPreferences?.getPreferences() || { muted: false };
+  (window as any).VideoPreferences?.updateAllVideoMuteStates(preferences.muted);
   
   // Set up mute toggle buttons
   document.querySelectorAll('.mute-toggle-btn').forEach((element) => {
-    const btn = element;
+    const btn = element as HTMLButtonElement;
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
       
-      const currentlyMuted = window.VideoPreferences?.isMuted() || false;
-      window.VideoPreferences?.setMuted(!currentlyMuted);
+      const currentlyMuted = (window as any).VideoPreferences?.isMuted() || false;
+      (window as any).VideoPreferences?.setMuted(!currentlyMuted);
     });
   });
 });
@@ -287,8 +287,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Build URL using stored preferences for mute, always autoplay when clicked
         let iframeSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=${shouldMute ? 1 : 0}&controls=1&enablejsapi=1`;
         if (loop) iframeSrc += `&loop=1&playlist=${videoId}`;
-        if (start) iframeSrc += `&start=${start}`;
-        if (end > 0) iframeSrc += `&end=${end}`;
+        if (start && start > 0) iframeSrc += `&start=${start}`;
+        if (end && end > 0) iframeSrc += `&end=${end}`;
         iframeSrc += `&rel=0`;
         
         iframe.src = iframeSrc;
@@ -983,14 +983,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         updateMuteButton();
       });
-    }    if (loop) {
+    }    if (loop && (start || (end && end > 0))) {
       player.addEventListener('onStateChange', function(event) {
         if (event.data === YT.PlayerState.ENDED) {
-          player.cueVideoById({
-            videoId: videoId,
-            startSeconds: start,
-            endSeconds: end
-          });
+          // Seek to start time and play
+          player.seekTo(start || 0, true);
           player.playVideo();
         }
       });
@@ -1013,6 +1010,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
         stopPlaybackTimer(); // Stop timer when video is paused or ended
+        // Clear loop interval when video stops
+        if (loopCheckInterval) {
+          clearInterval(loopCheckInterval);
+          loopCheckInterval = null;
+        }
       }
     });
   }
@@ -1070,20 +1072,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  let loopCheckInterval = null;
+  
   function checkAndLoop() {
-    const checkInterval = setInterval(() => {
+    // Clear any existing interval first
+    if (loopCheckInterval) {
+      clearInterval(loopCheckInterval);
+    }
+    
+    // Only set up custom loop checking if we have start or end times
+    // Otherwise let YouTube's native loop handle it
+    if (!loop || (!start && !end)) {
+      return;
+    }
+    
+    const videoStart = start || 0;
+    const videoEnd = end && end > 0 ? end : null;
+    
+    loopCheckInterval = setInterval(() => {
+      if (!player || !player.getCurrentTime) return;
+      
       const currentTime = player.getCurrentTime();
-      const videoStart = start || 0;
-      if (end > 0) {
-        if (currentTime >= end || currentTime < videoStart) {
-          player.seekTo(videoStart, true);
-          player.playVideo();
-        }
-      } else {
-        if (currentTime >= player.getDuration()) {
-          player.seekTo(videoStart, true);
-          player.playVideo();
-        }
+      
+      // If we have an end time and reached it, loop back to start
+      if (videoEnd && currentTime >= videoEnd) {
+        player.seekTo(videoStart, true);
+      }
+      // If current time somehow went before start, bring it back
+      else if (currentTime < videoStart && videoStart > 0) {
+        player.seekTo(videoStart, true);
       }
     }, 100);
   }
@@ -1743,9 +1760,7 @@ return;
 }
 
 
-window.handleYouTubeEmbedThumbnailError = handleYouTubeEmbedThumbnailError;
-
-
+  (window as any).handleYouTubeEmbedThumbnailError = handleYouTubeEmbedThumbnailError;
 function handleIframeAutoplay() {
   const iframes = document.querySelectorAll('iframe[id^="youtube-iframe-"]');
 
