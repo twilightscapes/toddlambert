@@ -8,7 +8,7 @@
 		"dev:host": "astro dev --host 0.0.0.0",
 		"dev:netlify": "netlify dev",
 		"start": "astro dev",
-		"build": "npm run update-theme && astro build",
+		"build": "npm run update-theme && astro build && pagefind --site dist",
 		"update-theme": "bash ./update-theme.sh",
 		"preview": "astro preview",
 		"format": "prettier -w --cache . && prettier -w --cache **/*.astro",
