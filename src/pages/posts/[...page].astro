@@ -97,66 +97,69 @@ const monthOrder = ['January', 'February', 'March', 'April', 'May', 'June', 'Jul
 			uniqueTags={uniqueTags}
 		/>
 
-		<!-- Timeline View (Year/Month Spacers) -->
-		<div class="posts-timeline" data-section-id="posts-page">
-			<div class={`contentpanel section-content ${defaultView === 'swipe' ? 'slider' : 'grid-container'}`} style="">
-				<div class="sliderSpacer"></div>
-				{descYearKeys.map((yearKey) => {
-					const monthsInYear = groupedByYearMonth[yearKey];
-					const sortedMonthKeys = Object.keys(monthsInYear || {}).sort((a, b) => {
-						return monthOrder.indexOf(b) - monthOrder.indexOf(a);
-					});
-					
-					return (
-						<>
-							{sortedMonthKeys.map((monthKey) => (
-								<>
-									{typeof showDates !== 'undefined' && showDates && (
-										<div class="grid place-content-center">
-											<h2 class="title text-xl" style="margin-top: 2rem; margin-bottom: 0.25rem;">{yearKey}</h2>
-											<h3 class="title text-lg" style="margin-top: 0; opacity: 0.7;">{monthKey}</h3>
-										</div>
-									)}
-									{monthsInYear[monthKey]?.map((p) => (
-										<PostPreview post={p} />
-									))}
-								</>
-							))}
-						</>
-					);
-				})}
+		<!-- Posts Container -->
+		<div data-section-id="posts-page">
+			<!-- Timeline View (Year/Month Spacers) -->
+			<div class="posts-timeline">
+				<div class={`contentpanel section-content ${defaultView === 'swipe' ? 'slider' : 'grid-container'}`} style="">
+					<div class="sliderSpacer"></div>
+					{descYearKeys.map((yearKey) => {
+						const monthsInYear = groupedByYearMonth[yearKey];
+						const sortedMonthKeys = Object.keys(monthsInYear || {}).sort((a, b) => {
+							return monthOrder.indexOf(b) - monthOrder.indexOf(a);
+						});
+						
+						return (
+							<>
+								{sortedMonthKeys.map((monthKey) => (
+									<>
+										{typeof showDates !== 'undefined' && showDates && (
+											<div class="grid place-content-center">
+												<h2 class="title text-xl" style="margin-top: 2rem; margin-bottom: 0.25rem;">{yearKey}</h2>
+												<h3 class="title text-lg" style="margin-top: 0; opacity: 0.7;">{monthKey}</h3>
+											</div>
+										)}
+										{monthsInYear[monthKey]?.map((p) => (
+											<PostPreview post={p} />
+										))}
+									</>
+								))}
+							</>
+						);
+					})}
 
-				<div class="posts-pagination grid place-content-center min-w-[380px] min-h-[180px] max-h-[85%]">
-					<Pagination {...paginationProps} />
+					<div class="posts-pagination grid place-content-center min-w-[380px] min-h-[180px] max-h-[85%]">
+						<Pagination {...paginationProps} />
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<!-- Flat Filtered View (Hidden by Default) -->
-		<div class="posts-flat-view" style="display: none;">
-			<div class={`contentpanel section-content ${defaultView === 'swipe' ? 'slider' : 'grid-container'}`}>
-				<div class="sliderSpacer"></div>
-				{page.data.map((post) => {
-					const postDate = new Date(post.data.publishDate);
-					const year = postDate.getFullYear().toString();
-					const month = postDate.toLocaleDateString('en-US', { month: 'long' });
-					
-					return (
-						<div 
-							class="post-item"
-							data-tags={JSON.stringify(post.data.tags || [])}
-							data-post-data={JSON.stringify({
-								title: post.data.title,
-								description: post.data.description,
-								slug: post.slug
-							})}
-							data-year={year}
-							data-month={month}
-						>
-							<PostPreview post={post} />
-						</div>
-					);
-				})}
+			<!-- Flat Filtered View (Hidden by Default) -->
+			<div class="posts-flat-view" style="display: none;">
+				<div class={`contentpanel section-content ${defaultView === 'swipe' ? 'slider' : 'grid-container'}`}>
+					<div class="sliderSpacer"></div>
+					{page.data.map((post) => {
+						const postDate = new Date(post.data.publishDate);
+						const year = postDate.getFullYear().toString();
+						const month = postDate.toLocaleDateString('en-US', { month: 'long' });
+						
+						return (
+							<div 
+								class="post-item"
+								data-tags={JSON.stringify(post.data.tags || [])}
+								data-post-data={JSON.stringify({
+									title: post.data.title,
+									description: post.data.description,
+									slug: post.slug
+								})}
+								data-year={year}
+								data-month={month}
+							>
+								<PostPreview post={post} />
+							</div>
+						);
+					})}
+				</div>
 			</div>
 		</div>
 
