@@ -58,6 +58,11 @@ function ViewModeSwitch({ sectionId, defaultView = 'grid', onViewChange = null }
                 contentContainer.classList.add('grid-container');
                 removeScrollFunctionality(contentContainer);
               }
+              
+              // Dispatch event so gallery knows to filter images
+              window.dispatchEvent(new CustomEvent('viewModeChanged', {
+                detail: { sectionId, viewMode: storedValue }
+              }));
             }
           }
         }, 50);
