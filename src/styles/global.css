@@ -712,9 +712,9 @@ body:has(.video) #footer{display: none !important;}
 		
 	/* Posts page specific sizing in swipe mode - larger cards like gallery */
 	div[data-section-id="posts-page"] .section-content.slider .post-card1 {
-		min-width: 30% !important;
-		max-width: 30% !important;
-		width: 30% !important;
+		min-width: 10% !important;
+		max-width: 10% !important;
+		width: 10% !important;
 		height: auto !important;
 		min-height: unset !important;
 	}		/* Remove forced aspect ratio from post video container in swipe */
