@@ -94,6 +94,61 @@ const url = new URL(Astro.request.url);
     }
 
 .pwa-button{display:flex; justify-content: center;}
+
+#bottom-menu-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  z-index: 100;
+}
+
+#bottom-menu-btn {
+  pointer-events: auto;
+  margin-bottom: 10px;
+}
+
+#menu-popup {
+  position: fixed;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--theme-header);
+  border-radius: 8px;
+  padding: 1rem;
+  z-index: 100;
+  display: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  max-width: 90vw;
+}
+
+#menu-popup.show {
+  display: block;
+}
+
+#menu-popup ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#menu-popup a {
+  padding: 0.75rem 1rem;
+  display: block;
+  text-align: center;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+#menu-popup a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
 </style>
 
 
@@ -181,6 +236,35 @@ style="flex-direction: column;"
 
 </div>
 
+<!-- Bottom centered menu button -->
+<div id="bottom-menu-container">
+  <button
+    id="bottom-menu-btn"
+    aria-label="Toggle Menu"
+    class="flex h-12 w-12 items-center justify-center rounded-full ring-zinc-400 transition-all hover:ring-2"
+    style="background: var(--theme-header);"
+  >
+    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="pointer-events: none;">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+    </svg>
+  </button>
+</div>
+
+<!-- Menu popup -->
+{sortedMenuLinks.length > 0 && (
+  <div id="menu-popup">
+    <ul>
+      {sortedMenuLinks.map((link: { path: string; title: string }) => (
+        <li>
+          <a href={link.path} rel="prefetch" data-astro-reload>
+            {link.title}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
+
 {backgroundImage && (
   <img class="backimage w-2.5 h-2.5" src={backgroundImage} alt="Default Background" width="10" height="10" />
   )}
@@ -232,4 +316,51 @@ style="flex-direction: column;"
 
   // Re-initialize after each page navigation
   document.addEventListener('astro:after-swap', initializeBackToTopButton);
+
+  // Bottom menu toggle functionality
+  function initializeBottomMenu() {
+    console.log('🔍 Initializing bottom menu...');
+    const menuBtn = document.getElementById('bottom-menu-btn');
+    const menuPopup = document.getElementById('menu-popup');
+    
+    console.log('🔍 Menu elements:', { menuBtn, menuPopup });
+    
+    if (!menuBtn || !menuPopup) {
+      console.log('❌ Menu elements not found!');
+      return;
+    }
+    
+    console.log('✅ Menu elements found, attaching listeners...');
+    
+    menuBtn.addEventListener('click', (e) => {
+      console.log('🖱️ Menu button clicked!');
+      e.stopPropagation();
+      menuPopup.classList.toggle('show');
+      console.log('Menu popup classes:', menuPopup.className);
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      const target = e.target;
+      if (!menuPopup.contains(target) && !menuBtn.contains(target)) {
+        menuPopup.classList.remove('show');
+      }
+    });
+    
+    // Close menu when clicking a link
+    menuPopup.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuPopup.classList.remove('show');
+      });
+    });
+  }
+
+  // Initialize bottom menu
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeBottomMenu);
+  } else {
+    initializeBottomMenu();
+  }
+  
+  document.addEventListener('astro:after-swap', initializeBottomMenu);
 </script>
