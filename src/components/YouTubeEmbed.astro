@@ -439,9 +439,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         // Set up mute toggle functionality
-        if (muteToggle) {
-          setupMuteToggle(muteToggle, iframe, shouldMute);
-        }
+        // DISABLED: Mute button now acts as play/pause control (see global script section)
+        // if (muteToggle) {
+        //   setupMuteToggle(muteToggle, iframe, shouldMute);
+        // }
         
         // Set up simple loop checking for iframe with start/end times
         if (loop && end && end > 0) {
