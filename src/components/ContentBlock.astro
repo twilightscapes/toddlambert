@@ -139,9 +139,9 @@ if (cta) {
 // Generate CSS classes
 const widthClasses = {
   narrow: 'max-w-2xl mx-auto',
-  normal: 'max-w-7xl mx-auto',  // Increased from 6xl to 7xl for even better video display
-  wide: 'max-w-7xl mx-auto',   // Increased from 6xl to 7xl
-  full: 'w-full'
+  // normal: 'max-w-7xl mx-auto',  
+  // wide: 'max-w-7xl mx-auto',   
+  // full: 'w-full'
 };
 
 const spacingClasses = {
@@ -449,8 +449,11 @@ function getCTAButtonClasses(style = 'primary') {
   }
   
   .prose img {
-    @apply rounded-lg mb-4 max-w-full h-auto max-h-96 object-contain mx-auto;
+    @apply rounded-lg mb-4 max-w-full h-auto max-h-96 object-contain;
     max-width: min(100%, 600px); /* Never wider than 600px or container width */
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
   }
   
   /* Smaller images on mobile */
@@ -463,16 +466,22 @@ function getCTAButtonClasses(style = 'primary') {
   
   /* Content block specific image sizing */
   .content-section img {
-    @apply max-w-full h-auto rounded-lg mb-4 mx-auto;
+    @apply max-w-full h-auto rounded-lg mb-4;
     max-width: min(100%, 500px);
     max-height: 300px;
     object-fit: contain;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
   }
   
   /* Even smaller in secondary content column */
   .secondary-content img {
     max-width: min(100%, 400px);
     max-height: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
   }
   
   /* Video embed styling */
