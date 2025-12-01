@@ -51,6 +51,7 @@ const postSchema = z.object({
         z.number().optional()
       ),
       clickToLoad: z.boolean().optional(),
+      showMuteButton: z.boolean().optional(),
       videoOnly: z.boolean().optional(),
     }).optional()
   }).optional(),
@@ -78,6 +79,7 @@ const postSchema = z.object({
         z.number().optional()
       ),
       clickToLoad: z.boolean().optional(),
+      showMuteButton: z.boolean().optional(),
       videoOnly: z.boolean().optional(),
     }).optional()
   }).optional(),

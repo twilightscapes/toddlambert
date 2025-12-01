@@ -83,6 +83,7 @@ const { headings = [] } = (post.rendered as { headings?: any[] } | undefined) ??
                     start={secondaryVideo.value.start}
                     end={secondaryVideo.value.end}
                     clickToLoad={false}
+                    showMuteButton={secondaryVideo.value.showMuteButton}
                     useCustomPlayer={secondaryVideo.value.useCustomPlayer}
                   />
                 </div>
@@ -100,6 +101,7 @@ const { headings = [] } = (post.rendered as { headings?: any[] } | undefined) ??
                   start={youtube.value.start}
                   end={youtube.value.end}
                   clickToLoad={true}
+                  showMuteButton={youtube.value.showMuteButton}
                   useCustomPlayer={youtube.value.useCustomPlayer}
                   overlayImage={overlayImage}
                   overlayImageAlt={overlayImageAlt}

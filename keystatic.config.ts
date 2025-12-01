@@ -126,6 +126,11 @@ export default config({
                 description: 'Show thumbnail with play button instead of loading video immediately.',
                 defaultValue: true 
               }),
+              showMuteButton: fields.checkbox({ 
+                label: 'Show Mute/Play Button', 
+                description: 'Display the mute button (which also acts as play/pause control)',
+                defaultValue: false 
+              }),
               videoOnly: fields.checkbox({ label: 'Video Only', defaultValue: false }),
             }),
             false: fields.empty(),
@@ -164,6 +169,11 @@ export default config({
                 label: 'Click to Load Video', 
                 description: 'Show thumbnail with play button instead of loading video immediately.',
                 defaultValue: true 
+              }),
+              showMuteButton: fields.checkbox({ 
+                label: 'Show Mute/Play Button', 
+                description: 'Display the mute button (which also acts as play/pause control)',
+                defaultValue: false 
               }),
               videoOnly: fields.checkbox({ label: 'Video Only', defaultValue: false }),
             }),
