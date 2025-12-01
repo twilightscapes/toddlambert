@@ -1,3 +1,4 @@
+logoImage: /images/logo/logoImage.svg
 defaultView: grid
 themeMode: user
 MAX_POSTS: 6

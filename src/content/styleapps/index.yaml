@@ -14,3 +14,6 @@ darkText: rgba(243, 231, 231, 1)
 customCSS: >-
   article{font-size: clamp(1.3rem, 2vw, 2rem) !important;} h1, h2,
   h3{font-size:clamp(1rem, 1.6vw, 2rem) !important;}
+
+  .home .featured-image svg{ max-width:70vw;  object-fit: contain
+    !important;  opacity:.4 ; } body:has(.home) section:first-child{border:0px solid red !important; margin:0 !important; padding:0 !important;}
