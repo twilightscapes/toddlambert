@@ -2252,44 +2252,68 @@ setTimeout(() => {
       overlay.addEventListener('click', handleOverlayClick);
       overlay.addEventListener('touchend', handleOverlayClick);
       
+      // Define pause handler (used by both clickOverlay and mute button)
+      const handlePauseClick = (e) => {
+        console.log(`🎬 Click overlay clicked - pausing video`, e.type);
+        
+        // Prevent duplicate events (touchend + click)
+        if (e.type === 'touchend') {
+          e.preventDefault();
+        }
+        
+        // Pause the video
+        if (currentIframe) {
+          currentIframe.contentWindow?.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+        }
+        
+        // Pause secondary if primary
+        if (c.id === 'primary-player') {
+          const secondaryIframe = document.getElementById('secondary-player-iframe');
+          if (secondaryIframe) {
+            secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+          }
+        }
+        
+        // Show the overlay with play button (solid black background)
+        overlay.style.background = '#000';
+        overlay.style.display = 'flex';
+        
+        // Switch icons
+        const playIcon = overlay.querySelector('.play-icon');
+        const pauseIcon = overlay.querySelector('.pause-icon');
+        if (playIcon) playIcon.style.display = 'block';
+        if (pauseIcon) pauseIcon.style.display = 'none';
+        
+        isPlaying = false;
+      };
+      
       // Set up click overlay for pause/resume
       if (clickOverlay) {
-        const handlePauseClick = (e) => {
-          console.log(`🎬 Click overlay clicked - pausing video`, e.type);
-          
-          // Prevent duplicate events (touchend + click)
-          if (e.type === 'touchend') {
-            e.preventDefault();
-          }
-          
-          // Pause the video
-          if (currentIframe) {
-            currentIframe.contentWindow?.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-          }
-          
-          // Pause secondary if primary
-          if (c.id === 'primary-player') {
-            const secondaryIframe = document.getElementById('secondary-player-iframe');
-            if (secondaryIframe) {
-              secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-            }
-          }
-          
-          // Show the overlay with play button (solid black background)
-          overlay.style.background = '#000';
-          overlay.style.display = 'flex';
-          
-          // Switch icons
-          const playIcon = overlay.querySelector('.play-icon');
-          const pauseIcon = overlay.querySelector('.pause-icon');
-          if (playIcon) playIcon.style.display = 'block';
-          if (pauseIcon) pauseIcon.style.display = 'none';
-          
-          isPlaying = false;
-        };
-        
         clickOverlay.addEventListener('click', handlePauseClick);
         clickOverlay.addEventListener('touchend', handlePauseClick);
+      }
+      
+      // Set up "mute" button as a disguised play/pause button
+      const muteButton = c.querySelector('.overlay-mute-toggle');
+      if (muteButton) {
+        const handleMuteButtonClick = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          if (!isLoaded) {
+            // Video not loaded yet - trigger load and play
+            handleOverlayClick(e);
+          } else if (isPlaying) {
+            // Video is playing - pause it
+            handlePauseClick(e);
+          } else {
+            // Video is paused - resume it
+            handleOverlayClick(e);
+          }
+        };
+        
+        muteButton.addEventListener('click', handleMuteButtonClick);
+        muteButton.addEventListener('touchend', handleMuteButtonClick);
       }
     }
   });
