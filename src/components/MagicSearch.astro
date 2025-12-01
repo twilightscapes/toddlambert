@@ -36,9 +36,10 @@ const MAX_POSTS = siteSettings?.data?.MAX_POSTS ?? 5;
 
 // Get language strings
 const languageData = await getEntry('language', 'index');
-const copyright = languageData?.data?.copyright || '';
+const pwaSettings = await getEntry('pwaSettings', 'index');
+const shortName = pwaSettings?.data?.shortName || 'Site';
 const lang = {
-  placeholder: `Search ${copyright}'s Posts`,
+  placeholder: `Search ${shortName}'s Posts`,
   topics: languageData?.data?.magicSearchTopics || 'Topics:',
   all: languageData?.data?.magicSearchAll || 'All',
   showing: languageData?.data?.magicSearchShowing || 'Showing',

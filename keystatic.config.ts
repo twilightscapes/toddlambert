@@ -1417,6 +1417,7 @@ ui: {
       'siteSettings',
       'pwaSettings',
       'menuItems',
+      'footerMenuItems',
       'socialCard',
       'styleapps',
       'language',
