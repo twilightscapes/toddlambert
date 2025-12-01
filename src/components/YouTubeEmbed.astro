@@ -161,7 +161,7 @@ const playerVars: { [key: string]: number | string } = {
       id={id ? `${id}-iframe` : `youtube-iframe-${videoId}`}
       width="100%"
       height="100%"
-      src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=${(autoplay || mute) ? 1 : 0}&mute=${mute ? 1 : 0}&controls=${controls ? 1 : 0}&enablejsapi=1${start ? `&start=${start}` : ''}${end && end > 0 ? `&end=${end}` : ''}${loop && !start && !end ? `&loop=1&playlist=${videoId}` : ''}&rel=0`}
+      src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=${(autoplay || mute) ? 1 : 0}&mute=${mute ? 1 : 0}&controls=${controls ? 1 : 0}&enablejsapi=1${start ? `&start=${start}` : ''}${end && end > 0 ? `&end=${end}` : ''}${loop ? `&loop=1&playlist=${videoId}` : ''}&rel=0`}
       title={title}
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -2198,7 +2198,24 @@ setTimeout(() => {
               const secondaryIframe = document.getElementById('secondary-player-iframe');
               if (secondaryIframe) {
                 console.log('▶️ Starting secondary video');
-                secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                
+                // Get start time from iframe src
+                const src = secondaryIframe.src;
+                const startMatch = src.match(/[?&]start=(\d+)/);
+                const startTime = startMatch ? parseInt(startMatch[1]) : 0;
+                
+                // Pause first, seek to start time, then play
+                if (startTime > 0) {
+                  secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+                  setTimeout(() => {
+                    secondaryIframe.contentWindow?.postMessage(`{"event":"command","func":"seekTo","args":[${startTime}, true]}`, '*');
+                    setTimeout(() => {
+                      secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                    }, 100);
+                  }, 50);
+                } else {
+                  secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                }
               }
             }, 1000);
           }
@@ -2385,7 +2402,24 @@ function setupSynchronization(primaryIframe: HTMLIFrameElement, secondaryIframe:
             // Primary started playing - play secondary
             console.log('▶️ Primary playing - starting secondary');
             isPrimaryPlaying = true;
-            targetIframe?.contentWindow?.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            
+            // Get start time from secondary iframe src
+            const src = targetIframe?.src || '';
+            const startMatch = src.match(/[?&]start=(\d+)/);
+            const startTime = startMatch ? parseInt(startMatch[1]) : 0;
+            
+            // If there's a start time, pause first, then seek, then play
+            if (startTime > 0 && targetIframe) {
+              targetIframe.contentWindow?.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+              setTimeout(() => {
+                targetIframe.contentWindow?.postMessage(`{"event":"command","func":"seekTo","args":[${startTime}, true]}`, '*');
+                setTimeout(() => {
+                  targetIframe.contentWindow?.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                }, 100);
+              }, 50);
+            } else {
+              targetIframe?.contentWindow?.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            }
           } else if (state === 2 && isPrimaryPlaying) {
             // Primary paused - pause secondary
             console.log('⏸️ Primary paused - pausing secondary');
@@ -2399,6 +2433,9 @@ function setupSynchronization(primaryIframe: HTMLIFrameElement, secondaryIframe:
           }
         }
         
+        // Note: Time position syncing disabled to allow secondary video to play at its own start position
+        // If you want videos to play at the same timestamp, uncomment this:
+        /*
         // Sync time position periodically during playback
         if (data.event === 'infoDelivery' && data.info && 'currentTime' in data.info) {
           const currentTime = data.info.currentTime;
@@ -2418,6 +2455,7 @@ function setupSynchronization(primaryIframe: HTMLIFrameElement, secondaryIframe:
             );
           }
         }
+        */
       }
     } catch (e) {
       // Ignore parsing errors
