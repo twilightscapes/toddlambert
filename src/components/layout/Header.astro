@@ -18,6 +18,7 @@ let showCheck = false;
 let backgroundImage = '';
 let backgroundVideo = '';
 let topText = 'Top';
+let appName = 'Site Name';
 // Get menu items and sort them
 let sortedMenuLinks: Array<{title: string, path: string}> = [];
 try {
@@ -35,6 +36,8 @@ try {
 }
 
 const siteSettings = await getEntry('siteSettings', 'main');
+const pwaSettings = await getEntry('pwaSettings', 'index');
+
 try {
   const language = await getEntry('language', 'index');
   const styleapps = await getEntry('styleapps', 'index');
@@ -59,6 +62,10 @@ try {
 
   if (language?.data) {
     topText = language.data.top ?? 'Top';
+  }
+
+  if (pwaSettings?.data) {
+    appName = pwaSettings.data.name ?? 'Site Name';
   }
 } catch (error) {
   console.error('Error loading content:', error);
@@ -106,7 +113,7 @@ const url = new URL(Astro.request.url);
             style="max-height:60px; min-width: 50px;"
           />
         ) : (
-          <span class="text-lg font-bold logotext" style="margin-left:10px;">Dog Poopers</span>
+          <span class="text-lg font-bold logotext" style="margin-left:10px;">{appName}</span>
         )}
       </a>
     )}

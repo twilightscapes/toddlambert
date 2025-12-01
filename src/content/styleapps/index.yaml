@@ -1,14 +1,16 @@
 backgroundImage: /images/styleapps/backgroundImage.webp
-siteFont: Science Gothic
+siteFont: Special Elite
 borderRadius: 10px
 lightBg: rgba(243, 246, 249, 1)
-lightAccent2: rgba(54, 211, 230, 1)
+lightAccent2: rgba(0, 0, 0, 1)
 darkBg: rgba(0, 0, 0, 1)
-darkAccent2: rgba(243, 42, 108, 1)
+darkAccent2: rgba(0, 0, 0, 1)
 lightHeader: rgba(0, 0, 0, 0.88)
 darkHeader: rgba(45, 45, 45, 0.9)
 lightCardBg: rgba(190, 190, 190, 0.5)
 darkCardBg: rgba(29, 29, 29, 0.5)
 lightText: rgba(42, 42, 41, 1)
 darkText: rgba(243, 231, 231, 1)
-customCSS: 'article{font-size: clamp(1.3rem, 2vw, 2rem) !important;}'
+customCSS: >-
+  article{font-size: clamp(1.3rem, 2vw, 2rem) !important;} h1, h2,
+  h3{font-size:clamp(1rem, 1.6vw, 2rem) !important;}
