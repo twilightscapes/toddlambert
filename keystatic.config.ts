@@ -799,7 +799,17 @@ export default config({
       },
     }),
 
-
+    footerMenuItems: collection({
+      label: 'Footer Menu Items',
+      path: 'src/content/footerMenuItems/*',
+      slugField: 'name', 
+      schema: {
+        name: fields.text({ label: 'Name' }),
+        title: fields.text({ label: 'Title' }),
+        path: fields.text({ label: 'Path' }), 
+        order: fields.number({ label: 'Order' }),
+      },
+    }),
 
     rssFeeds: collection({
       label: 'RSS Feeds',

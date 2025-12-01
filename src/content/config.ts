@@ -191,11 +191,15 @@ export const collections = {
     }),
   }),
 
-
-
-
-
-
+  footerMenuItems: defineCollection({
+    type: 'data',
+    schema: z.object({
+      name: z.string().optional(),
+      title: z.string().optional(),
+      path: z.string().optional(),
+      order: z.number().optional(),
+    }),
+  }),
 
   socialLinks: defineCollection({
     type: 'data',
