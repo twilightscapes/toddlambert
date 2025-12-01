@@ -134,7 +134,7 @@ function ViewModeSwitch({ sectionId, defaultView = 'grid', onViewChange = null }
       if (sectionElement) {
         // console.log('🔄 ViewModeSwitch: Found section element', sectionElement);
         // Get ALL .section-content elements (for pages with multiple views like posts page)
-        const contentContainers = sectionElement.querySelectorAll('.section-content');
+        let contentContainers = sectionElement.querySelectorAll('.section-content');
         
         if (contentContainers.length === 0) {
           // Fallback to youtube-grid if no section-content found

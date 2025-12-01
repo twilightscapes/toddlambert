@@ -439,7 +439,7 @@ body:has(.videopage) .youtube-video-actions{position: relative; left: 90% !impor
 
 .post-video-info {
   padding: 0.75rem;
-  background: var(--theme-bg, #fff);
+  background: var(--theme-card-bg, var(--theme-bg, #fff));
   color: var(--theme-text, #333);
   flex: 1;
   display: flex;
