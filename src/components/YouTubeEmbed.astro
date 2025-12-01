@@ -9,6 +9,7 @@ const videoTimeLimitMinutes = siteSettings?.data?.videoTimeLimitMinutes ?? 1;
 
 
 interface Props {
+  id?: string; // Unique identifier for player synchronization
   url: string;
   title?: string;
   controls?: boolean;
@@ -28,6 +29,7 @@ interface Props {
 
 
 const { 
+  id,
   url = '', 
   title = '', 
   controls = true, 
@@ -74,7 +76,7 @@ const playerVars: { [key: string]: number | string } = {
 ---
 
 {(clickToLoad || title) ? (
-  <div class="iframe-youtube-player click-to-load" style="position: relative; width: 100%; aspect-ratio: 16/9; background: #000; cursor: pointer;" data-video-id={videoId}>
+  <div class="iframe-youtube-player click-to-load" id={id} style="position: relative; width: 100%; aspect-ratio: 16/9; background: #000; cursor: pointer;" data-video-id={videoId}>
     <img 
       src={`https://img.youtube.com/vi/${videoId}/sddefault.jpg`}
       alt={title || 'YouTube Video'}
@@ -85,6 +87,10 @@ const playerVars: { [key: string]: number | string } = {
     
     <!-- Placeholder for iframe - will be inserted on click -->
     <div class="iframe-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; display: none; pointer-events: auto;">
+    </div>
+    
+    <!-- Clickable overlay to toggle play/pause when video is playing -->
+    <div class="video-click-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 14; display: none; cursor: pointer; pointer-events: auto;">
     </div>
     
     <!-- Overlay image/SVG wrapper - shown on top of video with higher z-index -->
@@ -126,20 +132,23 @@ const playerVars: { [key: string]: number | string } = {
     )}
     
     <!-- Black overlay with title and play button -->
-    <div class="video-overlay-screen" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 15; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; pointer-events: auto;">
+    <div class="video-overlay-screen" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 50; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; pointer-events: auto;">
       {title && (
         <h2 class="video-overlay-title" style="color: white; font-size: clamp(1.5rem, 4vw, 3rem); text-align: center; margin: 0 1rem 2rem; font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.5); pointer-events: none;">{title}</h2>
       )}
-      <div class="play-button-overlay" style="background: rgba(255,255,255,0.2); border: 3px solid white; border-radius: 50%; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; pointer-events: auto;">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="white" style="margin-left: 4px; pointer-events: none;">
+      <div class="play-button-overlay" style="background: rgba(255,255,255,0.2); border: 3px solid white; border-radius: 50%; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; pointer-events: none;">
+        <svg class="play-icon" width="32" height="32" viewBox="0 0 24 24" fill="white" style="margin-left: 4px; pointer-events: none; display: block;">
           <path d="M8 5v14l11-7z"/>
+        </svg>
+        <svg class="pause-icon" width="32" height="32" viewBox="0 0 24 24" fill="white" style="pointer-events: none; display: none;">
+          <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
         </svg>
       </div>
     </div>
     
   </div>
 ) : (
-  <div class="iframe-youtube-player auto-load" style="position: relative; width: 100%; aspect-ratio: 16/9; background: #000;" data-video-id={videoId}>
+  <div class="iframe-youtube-player auto-load" id={id} style="position: relative; width: 100%; aspect-ratio: 16/9; background: #000;" data-video-id={videoId}>
     <img 
       src={`https://img.youtube.com/vi/${videoId}/sddefault.jpg`}
       alt={title || 'YouTube Video'}
@@ -149,7 +158,7 @@ const playerVars: { [key: string]: number | string } = {
     />
     
     <iframe
-      id={`youtube-iframe-${videoId}`}
+      id={id ? `${id}-iframe` : `youtube-iframe-${videoId}`}
       width="100%"
       height="100%"
       src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=${(autoplay || mute) ? 1 : 0}&mute=${mute ? 1 : 0}&controls=${controls ? 1 : 0}&enablejsapi=1${start ? `&start=${start}` : ''}${end && end > 0 ? `&end=${end}` : ''}${loop && !start && !end ? `&loop=1&playlist=${videoId}` : ''}&rel=0`}
@@ -208,6 +217,8 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script define:vars={{ videoId, playerVars, start, end, loop, videoTimeLimitMinutes, isContentBlockVideo, isTimerDisabled, autoplay, mute, clickToLoad }}>
+  console.log('🎬 Script running for videoId:', videoId, 'clickToLoad:', clickToLoad);
+  
   // Helper function to update mute button visual state
   function updateMuteButtonState(button, isMuted) {
     const muteIcon = button.querySelector('.mute-icon');
@@ -247,13 +258,85 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Click-to-load functionality for privacy (only when clickToLoad is true)
   function setupClickToLoad() {
+    console.log('🎬 setupClickToLoad called, clickToLoad:', clickToLoad);
     if (!clickToLoad) return; // Only run for click-to-load videos
     
     const clickToLoadContainer = document.querySelector(`.click-to-load[data-video-id="${videoId}"]`);
+    console.log('🎬 Found clickToLoadContainer:', !!clickToLoadContainer);
     if (!clickToLoadContainer) return;
 
     const iframeContainer = clickToLoadContainer.querySelector('.iframe-container');
     const thumbnail = clickToLoadContainer.querySelector('img');
+    const clickOverlay = clickToLoadContainer.querySelector('.video-click-overlay');
+    let currentIframe = null;
+    let isVideoLoaded = false;
+    let isPlaying = false;
+
+    function toggleVideo() {
+      console.log('🎬 toggleVideo called, isVideoLoaded:', isVideoLoaded, 'isPlaying:', isPlaying);
+      const overlayScreen = clickToLoadContainer.querySelector('.video-overlay-screen');
+      const playIcon = overlayScreen?.querySelector('.play-icon');
+      const pauseIcon = overlayScreen?.querySelector('.pause-icon');
+      
+      if (!isVideoLoaded) {
+        // First click - load and play video
+        console.log('🎬 Loading video for first time...');
+        loadVideo();
+        isVideoLoaded = true;
+        isPlaying = true;
+        // Show click overlay so user can pause later
+        if (clickOverlay) clickOverlay.style.display = 'block';
+        return;
+      }
+      
+      // Video is loaded - toggle play/pause
+      if (currentIframe) {
+        if (isPlaying) {
+          // Pause the video
+          currentIframe.contentWindow?.postMessage(JSON.stringify({
+            event: 'command',
+            func: 'pauseVideo'
+          }), '*');
+          
+          // Pause secondary video if it exists
+          const secondaryIframe = document.getElementById('secondary-player-iframe') as HTMLIFrameElement;
+          if (secondaryIframe) {
+            secondaryIframe.contentWindow?.postMessage(JSON.stringify({
+              event: 'command',
+              func: 'pauseVideo'
+            }), '*');
+          }
+          
+          // Show overlay with play icon
+          if (overlayScreen) {
+            overlayScreen.style.display = 'flex';
+            overlayScreen.style.background = 'rgba(0, 0, 0, 0.7)'; // Semi-transparent when paused
+          }
+          if (playIcon) playIcon.style.display = 'block';
+          if (pauseIcon) pauseIcon.style.display = 'none';
+          isPlaying = false;
+        } else {
+          // Play the video
+          currentIframe.contentWindow?.postMessage(JSON.stringify({
+            event: 'command',
+            func: 'playVideo'
+          }), '*');
+          
+          // Play secondary video if it exists
+          const secondaryIframe = document.getElementById('secondary-player-iframe') as HTMLIFrameElement;
+          if (secondaryIframe) {
+            secondaryIframe.contentWindow?.postMessage(JSON.stringify({
+              event: 'command',
+              func: 'playVideo'
+            }), '*');
+          }
+          
+          // Hide overlay
+          if (overlayScreen) overlayScreen.style.display = 'none';
+          isPlaying = true;
+        }
+      }
+    }
 
     function loadVideo() {
       // Use the mute setting from the post - always respect it
@@ -281,7 +364,8 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Create and insert iframe
         const iframe = document.createElement('iframe');
-        iframe.id = `youtube-iframe-${videoId}`;
+        const iframeId = clickToLoadContainer.id ? `${clickToLoadContainer.id}-iframe` : `youtube-iframe-${videoId}`;
+        iframe.id = iframeId;
         iframe.width = '100%';
         iframe.height = '100%';
         
@@ -303,6 +387,47 @@ document.addEventListener('DOMContentLoaded', () => {
         iframe.style.cssText = 'aspect-ratio: 16/9; width: 100%; height: 100%;';
         
         iframeContainer.appendChild(iframe);
+        currentIframe = iframe;
+        
+        // Listen for player state changes
+        window.addEventListener('message', (event) => {
+          if (event.origin !== 'https://www.youtube.com' && event.origin !== 'https://www.youtube-nocookie.com') {
+            return;
+          }
+          
+          try {
+            const data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+            
+            if (event.source === iframe.contentWindow && data.event === 'infoDelivery' && data.info && 'playerState' in data.info) {
+              const state = data.info.playerState;
+              const overlayScreen = clickToLoadContainer.querySelector('.video-overlay-screen');
+              
+              // 1 = playing, 2 = paused, 0 = ended
+              if (state === 1) {
+                isPlaying = true;
+                if (overlayScreen) overlayScreen.style.display = 'none';
+              } else if (state === 2 || state === 0) {
+                isPlaying = false;
+              }
+            }
+          } catch (e) {
+            // Ignore parsing errors
+          }
+        });
+        
+        // Enable listening to player state
+        iframe.contentWindow?.postMessage('{"event":"listening"}', '*');
+        
+        // If this is the primary player, trigger secondary player too
+        if (clickToLoadContainer.id === 'primary-player') {
+          setTimeout(() => {
+            const secondaryIframe = document.getElementById('secondary-player-iframe') as HTMLIFrameElement;
+            if (secondaryIframe) {
+              console.log('▶️ Primary video started - starting secondary video');
+              secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            }
+          }, 1000);
+        }
         
         // Set up mute toggle functionality
         if (muteToggle) {
@@ -322,14 +447,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add click handlers to overlay screen
     const overlayScreen = clickToLoadContainer.querySelector('.video-overlay-screen');
     if (overlayScreen) {
-      overlayScreen.addEventListener('click', loadVideo);
+      console.log('🎬 Setting up click handler for overlay screen');
+      overlayScreen.addEventListener('click', (e) => {
+        console.log('🎬 Overlay screen clicked!', e.target);
+        toggleVideo();
+      });
+    } else {
+      console.warn('🎬 No overlay screen found!');
+    }
+    
+    // Add click handler to the transparent overlay (for pausing while playing)
+    if (clickOverlay) {
+      clickOverlay.addEventListener('click', toggleVideo);
     }
     
     // Also allow clicking thumbnail directly
     if (thumbnail) {
       thumbnail.addEventListener('click', (e) => {
         if (e.target === thumbnail) {
-          loadVideo();
+          toggleVideo();
         }
       });
     }
@@ -1955,6 +2091,7 @@ input[type="range"]::-webkit-slider-thumb {
 <script>
 
 function handleYouTubeEmbedThumbnailError(img) {
+  console.log('🎬 GLOBAL SCRIPT RUNNING');
   const currentSrc = img.src;
 
   
@@ -1993,6 +2130,145 @@ return;
   }
 }
 
+// Debug: Log all click-to-load containers on page
+setTimeout(() => {
+  const containers = document.querySelectorAll('.click-to-load, .auto-load');
+  console.log('🎬 Found video containers:', containers.length);
+  containers.forEach((c, i) => {
+    console.log(`🎬 Container ${i}:`, c.className, 'ID:', c.id);
+    const overlay = c.querySelector('.video-overlay-screen');
+    console.log(`🎬 Has overlay:`, !!overlay);
+    
+    // Set up click handler for click-to-load containers
+    if (c.classList.contains('click-to-load') && overlay) {
+      console.log(`🎬 Setting up click handler for container ${i}`);
+      
+      let isLoaded = false;
+      let isPlaying = false;
+      const videoId = c.getAttribute('data-video-id');
+      const clickOverlay = c.querySelector('.video-click-overlay');
+      const iframeContainer = c.querySelector('.iframe-container');
+      const thumbnail = c.querySelector('img');
+      const overlayWrapper = c.querySelector('.overlay-wrapper');
+      let currentIframe = null;
+      
+      const handleOverlayClick = (e) => {
+        console.log(`🎬 Overlay clicked for container ${i}!`, e.type, e.target);
+        
+        // Prevent duplicate events (touchend + click)
+        if (e.type === 'touchend') {
+          e.preventDefault();
+        }
+        
+        if (!isLoaded && iframeContainer && videoId) {
+          console.log(`🎬 Loading video ${videoId}...`);
+          
+          // Hide overlay and thumbnail
+          overlay.style.display = 'none';
+          if (thumbnail) thumbnail.style.display = 'none';
+          
+          // Show overlay wrapper (image/SVG overlays)
+          if (overlayWrapper) overlayWrapper.style.display = 'block';
+          
+          // Show iframe container
+          iframeContainer.style.display = 'block';
+          
+          // Create iframe
+          const iframe = document.createElement('iframe');
+          iframe.id = c.id ? `${c.id}-iframe` : `youtube-iframe-${videoId}`;
+          iframe.width = '100%';
+          iframe.height = '100%';
+          iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&controls=1&enablejsapi=1&rel=0`;
+          iframe.frameBorder = '0';
+          iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+          iframe.allowFullscreen = true;
+          iframe.style.cssText = 'aspect-ratio: 16/9; width: 100%; height: 100%;';
+          
+          iframeContainer.appendChild(iframe);
+          currentIframe = iframe;
+          isLoaded = true;
+          isPlaying = true;
+          
+          // Show clickable overlay for pause
+          if (clickOverlay) clickOverlay.style.display = 'block';
+          
+          // Trigger secondary video if this is primary
+          if (c.id === 'primary-player') {
+            setTimeout(() => {
+              const secondaryIframe = document.getElementById('secondary-player-iframe');
+              if (secondaryIframe) {
+                console.log('▶️ Starting secondary video');
+                secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+              }
+            }, 1000);
+          }
+        } else if (isLoaded && !isPlaying) {
+          // Video paused - resume playing
+          console.log(`🎬 Resuming playback`);
+          overlay.style.display = 'none';
+          
+          if (currentIframe) {
+            currentIframe.contentWindow?.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+          }
+          
+          // Resume secondary if primary
+          if (c.id === 'primary-player') {
+            const secondaryIframe = document.getElementById('secondary-player-iframe');
+            if (secondaryIframe) {
+              secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            }
+          }
+          
+          isPlaying = true;
+        }
+      };
+      
+      overlay.addEventListener('click', handleOverlayClick);
+      overlay.addEventListener('touchend', handleOverlayClick);
+      
+      // Set up click overlay for pause/resume
+      if (clickOverlay) {
+        const handlePauseClick = (e) => {
+          console.log(`🎬 Click overlay clicked - pausing video`, e.type);
+          
+          // Prevent duplicate events (touchend + click)
+          if (e.type === 'touchend') {
+            e.preventDefault();
+          }
+          
+          // Pause the video
+          if (currentIframe) {
+            currentIframe.contentWindow?.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+          }
+          
+          // Pause secondary if primary
+          if (c.id === 'primary-player') {
+            const secondaryIframe = document.getElementById('secondary-player-iframe');
+            if (secondaryIframe) {
+              secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+            }
+          }
+          
+          // Show the overlay with play button
+          overlay.style.background = 'rgba(0, 0, 0, 0.7)';
+          overlay.style.display = 'flex';
+          
+          // Switch icons
+          const playIcon = overlay.querySelector('.play-icon');
+          const pauseIcon = overlay.querySelector('.pause-icon');
+          if (playIcon) playIcon.style.display = 'block';
+          if (pauseIcon) pauseIcon.style.display = 'none';
+          
+          isPlaying = false;
+        };
+        
+        clickOverlay.addEventListener('click', handlePauseClick);
+        clickOverlay.addEventListener('touchend', handlePauseClick);
+      }
+    }
+  });
+}, 500);
+
 
   (window as any).handleYouTubeEmbedThumbnailError = handleYouTubeEmbedThumbnailError;
 function handleIframeAutoplay() {
@@ -2029,6 +2305,149 @@ function handleIframeAutoplay() {
 
 document.addEventListener('DOMContentLoaded', handleIframeAutoplay);
 setTimeout(handleIframeAutoplay, 1000); 
+
+// Synchronize secondary video player with primary video player
+function synchronizeVideoPlayers() {
+  const primaryPlayer = document.getElementById('primary-player');
+  const secondaryPlayer = document.getElementById('secondary-player');
+  
+  if (!primaryPlayer || !secondaryPlayer) {
+    return; // No synchronized players on this page
+  }
+  
+  console.log('🎥 Synchronization: Found primary and secondary player containers');
+  
+  // Get the iframes by their specific IDs
+  let primaryIframe: HTMLIFrameElement | null = null;
+  let secondaryIframe: HTMLIFrameElement | null = null;
+  
+  // Function to find iframes within player containers
+  const findIframes = () => {
+    primaryIframe = document.getElementById('primary-player-iframe') as HTMLIFrameElement;
+    secondaryIframe = document.getElementById('secondary-player-iframe') as HTMLIFrameElement;
+    
+    if (!primaryIframe) {
+      primaryIframe = primaryPlayer.querySelector('iframe');
+    }
+    if (!secondaryIframe) {
+      secondaryIframe = secondaryPlayer.querySelector('iframe');
+    }
+  };
+  
+  // Check for iframes every 500ms for up to 10 seconds
+  let checkCount = 0;
+  const maxChecks = 20;
+  
+  const checkInterval = setInterval(() => {
+    findIframes();
+    checkCount++;
+    
+    if (primaryIframe && secondaryIframe) {
+      console.log('🎥 Synchronization: Found both iframes, setting up sync');
+      clearInterval(checkInterval);
+      setupSynchronization(primaryIframe, secondaryIframe);
+    } else if (checkCount >= maxChecks) {
+      console.warn('🎥 Synchronization: Timeout - could not find both iframes');
+      clearInterval(checkInterval);
+    }
+  }, 500);
+}
+
+function setupSynchronization(primaryIframe: HTMLIFrameElement, secondaryIframe: HTMLIFrameElement) {
+  // State tracking
+  let isPrimaryPlaying = false;
+  let lastSyncTime = 0;
+  
+  console.log('🎥 Setting up message listener for synchronization');
+  
+  // Listen for messages from YouTube IFrame API
+  const messageHandler = (event: MessageEvent) => {
+    if (event.origin !== 'https://www.youtube.com' && event.origin !== 'https://www.youtube-nocookie.com') {
+      return;
+    }
+    
+    try {
+      const data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+      
+      // Check if this message is from the primary player
+      if (event.source === primaryIframe?.contentWindow) {
+        // YouTube player state changed
+        if (data.event === 'infoDelivery' && data.info && 'playerState' in data.info) {
+          const state = data.info.playerState;
+          console.log('🎥 Primary player state:', state, '(1=play, 2=pause, 0=end)');
+          
+          // Re-check for secondary iframe in case it was dynamically created
+          const currentSecondaryIframe = document.getElementById('secondary-player-iframe') as HTMLIFrameElement;
+          const targetIframe = currentSecondaryIframe || secondaryIframe;
+          
+          // 1 = playing, 2 = paused, 0 = ended
+          if (state === 1 && !isPrimaryPlaying) {
+            // Primary started playing - play secondary
+            console.log('▶️ Primary playing - starting secondary');
+            isPrimaryPlaying = true;
+            targetIframe?.contentWindow?.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+          } else if (state === 2 && isPrimaryPlaying) {
+            // Primary paused - pause secondary
+            console.log('⏸️ Primary paused - pausing secondary');
+            isPrimaryPlaying = false;
+            targetIframe?.contentWindow?.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+          } else if (state === 0) {
+            // Primary ended - pause secondary (it may loop on its own if loop is enabled)
+            console.log('⏹️ Primary ended - pausing secondary');
+            isPrimaryPlaying = false;
+            targetIframe?.contentWindow?.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+          }
+        }
+        
+        // Sync time position periodically during playback
+        if (data.event === 'infoDelivery' && data.info && 'currentTime' in data.info) {
+          const currentTime = data.info.currentTime;
+          const now = Date.now();
+          
+          // Sync time every 5 seconds to prevent drift
+          if (now - lastSyncTime > 5000 && isPrimaryPlaying) {
+            lastSyncTime = now;
+            console.log('🕐 Syncing secondary to time:', currentTime);
+            secondaryIframe.contentWindow?.postMessage(
+              JSON.stringify({
+                event: 'command',
+                func: 'seekTo',
+                args: [currentTime, true]
+              }),
+              '*'
+            );
+          }
+        }
+      }
+    } catch (e) {
+      // Ignore parsing errors
+    }
+  };
+  
+  window.addEventListener('message', messageHandler);
+  
+  // Enable listening to player state changes
+  console.log('🎥 Enabling state change listeners on both players');
+  primaryIframe.contentWindow?.postMessage('{"event":"listening","id":"primary"}', '*');
+  secondaryIframe.contentWindow?.postMessage('{"event":"listening","id":"secondary"}', '*');
+  
+  // Also try the YouTube IFrame API ready event
+  setTimeout(() => {
+    console.log('🎥 Sending additional listening events');
+    primaryIframe.contentWindow?.postMessage('{"event":"listening"}', '*');
+    secondaryIframe.contentWindow?.postMessage('{"event":"listening"}', '*');
+  }, 1000);
+}
+
+// Initialize synchronization when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', synchronizeVideoPlayers);
+} else {
+  synchronizeVideoPlayers();
+}
+
+// Also check after a delay in case iframes load slowly
+setTimeout(synchronizeVideoPlayers, 2000);
 </script>
 
 

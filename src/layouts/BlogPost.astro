@@ -20,7 +20,7 @@ interface Props {
 const { post } = Astro.props;
 const { data } = post;
 const {
-    description, coverImage, publishDate, title, updatedDate, youtube, overlayImage, overlayImageAlt, overlaySvg, overlaySvgAlt, tags, draft
+    description, coverImage, publishDate, title, updatedDate, youtube, secondaryVideo, overlayImage, overlayImageAlt, overlaySvg, overlaySvgAlt, tags, draft
 } = data;
 
 // Helper function to extract YouTube video ID
@@ -69,22 +69,44 @@ const { headings = [] } = (post.rendered as { headings?: any[] } | undefined) ??
         {
           (youtube && youtube.discriminant && youtube.value && youtube.value.url) ? (
             <div class="video-container-with-overlay" style="position: relative;">
-              <YouTubeEmbed 
-                title={youtube.value.title}
-                url={youtube.value.url}
-                controls={youtube.value.controls}
-                mute={youtube.value.mute}
-                autoplay={youtube.value.mute ? true : false}
-                loop={youtube.value.loop}
-                start={youtube.value.start}
-                end={youtube.value.end}
-                clickToLoad={youtube.value.clickToLoad}
-                useCustomPlayer={youtube.value.useCustomPlayer}
-                overlayImage={overlayImage}
-                overlayImageAlt={overlayImageAlt}
-                overlaySvg={overlaySvg}
-                overlaySvgAlt={overlaySvgAlt}
-              />
+              {/* Secondary video - hidden behind main video, synchronized playback */}
+              {secondaryVideo && secondaryVideo.discriminant && secondaryVideo.value && secondaryVideo.value.url && (
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;">
+                  <YouTubeEmbed 
+                    id="secondary-player"
+                    title={secondaryVideo.value.title}
+                    url={secondaryVideo.value.url}
+                    controls={secondaryVideo.value.controls}
+                    mute={secondaryVideo.value.mute}
+                    autoplay={true}
+                    loop={secondaryVideo.value.loop}
+                    start={secondaryVideo.value.start}
+                    end={secondaryVideo.value.end}
+                    clickToLoad={false}
+                    useCustomPlayer={secondaryVideo.value.useCustomPlayer}
+                  />
+                </div>
+              )}
+              {/* Primary video - on top */}
+              <div style="position: relative; z-index: 1;">
+                <YouTubeEmbed 
+                  id="primary-player"
+                  title={youtube.value.title || "Video"}
+                  url={youtube.value.url}
+                  controls={youtube.value.controls}
+                  mute={youtube.value.mute}
+                  autoplay={youtube.value.mute ? true : false}
+                  loop={youtube.value.loop}
+                  start={youtube.value.start}
+                  end={youtube.value.end}
+                  clickToLoad={true}
+                  useCustomPlayer={youtube.value.useCustomPlayer}
+                  overlayImage={overlayImage}
+                  overlayImageAlt={overlayImageAlt}
+                  overlaySvg={overlaySvg}
+                  overlaySvgAlt={overlaySvgAlt}
+                />
+              </div>
             </div>
           ) : coverImage && coverImage.src ? (
             <div class=" mb-6">

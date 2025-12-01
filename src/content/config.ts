@@ -54,6 +54,33 @@ const postSchema = z.object({
       videoOnly: z.boolean().optional(),
     }).optional()
   }).optional(),
+  secondaryVideo: z.object({
+    discriminant: z.boolean(),
+    value: z.object({
+      url: z.string().optional(),
+      title: z.string().optional(),
+      controls: z.boolean().optional(),
+      useCustomPlayer: z.boolean().optional(),
+      mute: z.boolean().optional(),
+      loop: z.boolean().optional(),
+      start: z.preprocess(
+        (val) => {
+          if (val === null || val === undefined || val === '' || (typeof val === 'number' && isNaN(val))) return undefined;
+          return typeof val === 'string' ? parseFloat(val) : val;
+        },
+        z.number().optional()
+      ),
+      end: z.preprocess(
+        (val) => {
+          if (val === null || val === undefined || val === '' || (typeof val === 'number' && isNaN(val))) return undefined;
+          return typeof val === 'string' ? parseFloat(val) : val;
+        },
+        z.number().optional()
+      ),
+      clickToLoad: z.boolean().optional(),
+      videoOnly: z.boolean().optional(),
+    }).optional()
+  }).optional(),
 });
 
 export const collections = {

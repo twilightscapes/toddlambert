@@ -131,6 +131,45 @@ export default config({
             false: fields.empty(),
           }
         ),
+        secondaryVideo: fields.conditional(
+          fields.checkbox({ label: 'Include Secondary Video (hidden, synced with main)' }),
+          {
+            true: fields.object({
+              url: fields.text({ 
+                label: 'Secondary Video URL',
+                description: 'Enter the full YouTube video URL for secondary video'
+              }),
+              title: fields.text({ 
+                label: 'Video Title',
+                description: 'Enter a title for the secondary video (optional)',
+                validation: { isRequired: false }
+              }),
+              controls: fields.checkbox({ label: 'Use YouTube Player Controls' }),
+              useCustomPlayer: fields.checkbox({ 
+                label: 'Use Custom Player Controls', 
+                defaultValue: true 
+              }),
+              mute: fields.checkbox({ label: 'Mute Video', defaultValue: true }),
+              loop: fields.checkbox({ label: 'Loop Video' }),
+              start: fields.number({ 
+                label: 'Start Time (seconds)', 
+                defaultValue: 0,
+                validation: { min: 0 }
+              }),
+              end: fields.number({ 
+                label: 'End Time (seconds)', 
+                validation: { min: 0, isRequired: false }
+              }),
+              clickToLoad: fields.checkbox({ 
+                label: 'Click to Load Video', 
+                description: 'Show thumbnail with play button instead of loading video immediately.',
+                defaultValue: true 
+              }),
+              videoOnly: fields.checkbox({ label: 'Video Only', defaultValue: false }),
+            }),
+            false: fields.empty(),
+          }
+        ),
         divider1: fields.empty(),        
         tags: fields.array(fields.text({ label: 'Tag' }), {
           label: 'Tags',
