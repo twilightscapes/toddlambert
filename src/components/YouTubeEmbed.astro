@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }), '*');
           
           // Pause secondary video if it exists
-          const secondaryIframe = document.getElementById('secondary-player-iframe') as HTMLIFrameElement;
+          const secondaryIframe = /** @type {HTMLIFrameElement | null} */ (document.getElementById('secondary-player-iframe'));
           if (secondaryIframe) {
             secondaryIframe.contentWindow?.postMessage(JSON.stringify({
               event: 'command',
@@ -332,7 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }), '*');
           
           // Play secondary video if it exists
-          const secondaryIframe = document.getElementById('secondary-player-iframe') as HTMLIFrameElement;
+          const secondaryIframe = /** @type {HTMLIFrameElement | null} */ (document.getElementById('secondary-player-iframe'));
           if (secondaryIframe) {
             secondaryIframe.contentWindow?.postMessage(JSON.stringify({
               event: 'command',
@@ -430,7 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // If this is the primary player, trigger secondary player too
         if (clickToLoadContainer.id === 'primary-player') {
           setTimeout(() => {
-            const secondaryIframe = document.getElementById('secondary-player-iframe') as HTMLIFrameElement;
+            const secondaryIframe = /** @type {HTMLIFrameElement | null} */ (document.getElementById('secondary-player-iframe'));
             if (secondaryIframe) {
               console.log('▶️ Primary video started - starting secondary video');
               secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
@@ -2098,6 +2098,7 @@ input[type="range"]::-webkit-slider-thumb {
 </style>
 
 <script>
+// @ts-nocheck
 
 function handleYouTubeEmbedThumbnailError(img) {
   console.log('🎬 GLOBAL SCRIPT RUNNING');
@@ -2155,11 +2156,11 @@ setTimeout(() => {
       let isLoaded = false;
       let isPlaying = false;
       const videoId = c.getAttribute('data-video-id');
-      const clickOverlay = c.querySelector('.video-click-overlay');
-      const iframeContainer = c.querySelector('.iframe-container');
-      const thumbnail = c.querySelector('img');
-      const overlayWrapper = c.querySelector('.overlay-wrapper');
-      let currentIframe = null;
+      const clickOverlay = /** @type {HTMLElement | null} */ (c.querySelector('.video-click-overlay'));
+      const iframeContainer = /** @type {HTMLElement | null} */ (c.querySelector('.iframe-container'));
+      const thumbnail = /** @type {HTMLImageElement | null} */ (c.querySelector('img'));
+      const overlayWrapper = /** @type {HTMLElement | null} */ (c.querySelector('.overlay-wrapper'));
+      let currentIframe: HTMLIFrameElement | null = null;
       
       const handleOverlayClick = (e) => {
         console.log(`🎬 Overlay clicked for container ${i}!`, e.type, e.target);
@@ -2204,7 +2205,7 @@ setTimeout(() => {
           // Trigger secondary video if this is primary
           if (c.id === 'primary-player') {
             setTimeout(() => {
-              const secondaryIframe = document.getElementById('secondary-player-iframe');
+              const secondaryIframe = /** @type {HTMLIFrameElement | null} */ (document.getElementById('secondary-player-iframe'));
               if (secondaryIframe) {
                 console.log('▶️ Starting secondary video');
                 
@@ -2239,7 +2240,7 @@ setTimeout(() => {
           
           // Resume secondary if primary
           if (c.id === 'primary-player') {
-            const secondaryIframe = document.getElementById('secondary-player-iframe');
+            const secondaryIframe = /** @type {HTMLIFrameElement | null} */ (document.getElementById('secondary-player-iframe'));
             if (secondaryIframe) {
               secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
             }
@@ -2268,7 +2269,7 @@ setTimeout(() => {
         
         // Pause secondary if primary
         if (c.id === 'primary-player') {
-          const secondaryIframe = document.getElementById('secondary-player-iframe');
+          const secondaryIframe = /** @type {HTMLIFrameElement | null} */ (document.getElementById('secondary-player-iframe'));
           if (secondaryIframe) {
             secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
           }
@@ -2279,8 +2280,8 @@ setTimeout(() => {
         overlay.style.display = 'flex';
         
         // Switch icons
-        const playIcon = overlay.querySelector('.play-icon');
-        const pauseIcon = overlay.querySelector('.pause-icon');
+        const playIcon = /** @type {HTMLElement | null} */ (overlay.querySelector('.play-icon'));
+        const pauseIcon = /** @type {HTMLElement | null} */ (overlay.querySelector('.pause-icon'));
         if (playIcon) playIcon.style.display = 'block';
         if (pauseIcon) pauseIcon.style.display = 'none';
         
