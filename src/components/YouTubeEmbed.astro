@@ -26,6 +26,9 @@ interface Props {
   overlayImageAlt?: string;
   overlaySvg?: string;
   overlaySvgAlt?: string;
+  svgatorSync?: boolean; // If true, syncs SVGator animation with video playback
+  svgatorId?: string; // Unique ID for the SVGator instance
+  interactiveMode?: 'sync' | 'independent' | 'controller'; // How SVG and video interact
 }
 
 
@@ -45,7 +48,10 @@ const {
   overlayImage,
   overlayImageAlt,
   overlaySvg,
-  overlaySvgAlt
+  overlaySvgAlt,
+  svgatorSync = false,
+  svgatorId,
+  interactiveMode = 'sync'
 } = Astro.props;
 
 // Check if this is a content block video that should preserve settings and skip timer
@@ -78,7 +84,7 @@ const playerVars: { [key: string]: number | string } = {
 ---
 
 {clickToLoad ? (
-  <div class="iframe-youtube-player click-to-load" id={id} style="position: relative; width: 100%; aspect-ratio: 16/9; background: #000; cursor: pointer;" data-video-id={videoId}>
+  <div class="iframe-youtube-player click-to-load" id={id} style="position: relative; width: 100%; aspect-ratio: 16/9; background: #000; cursor: pointer;" data-video-id={videoId} data-mute={mute} data-start={start} data-end={end} data-loop={loop}>
     <img 
       src={`https://img.youtube.com/vi/${videoId}/sddefault.jpg`}
       alt={title || 'YouTube Video'}
@@ -91,11 +97,7 @@ const playerVars: { [key: string]: number | string } = {
     <div class="iframe-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; display: none; pointer-events: auto;">
     </div>
     
-    <!-- Clickable overlay to toggle play/pause when video is playing -->
-    <div class="video-click-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 14; display: none; cursor: pointer; pointer-events: auto;">
-    </div>
-    
-    <!-- Overlay image/SVG wrapper - shown on top of video with higher z-index -->
+    <!-- Overlay image/SVG wrapper - shown on top of video -->
     <div class="overlay-wrapper" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 65; pointer-events: none; display: none;">
       {overlayImage && (
         <img 
@@ -107,22 +109,29 @@ const playerVars: { [key: string]: number | string } = {
       )}
       {overlaySvg && (
         <object 
+          id={svgatorId || `svgator-${videoId}`}
           data={overlaySvg}
           type="image/svg+xml"
           aria-label={overlaySvgAlt || 'Video SVG overlay'}
           class="video-overlay-svg"
+          data-svgator-sync={svgatorSync}
+          data-interactive-mode={interactiveMode}
           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: auto;"
         ></object>
       )}
     </div>
     
-    <!-- Mute/Unmute button -->
+    <!-- Clickable overlay to toggle play/pause when video is playing - above SVG -->
+    <div class="video-click-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 68; display: none; cursor: pointer; pointer-events: auto;">
+    </div>
+    
+    <!-- Mute/Pause button - always on top -->
     {showMuteButton && (
       <button 
         class="overlay-mute-toggle"
         data-video-id={videoId}
-        style="position: absolute; bottom: 20px; right: 20px; z-index: 60; width: 50px; height: 50px; border-radius: 50%; background: rgba(0, 0, 0, 0.7); border: 2px solid white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;"
-        aria-label="Toggle mute"
+        style="position: absolute; bottom: 20px; right: 20px; z-index: 75; width: 50px; height: 50px; border-radius: 50%; background: rgba(0, 0, 0, 0.7); border: 2px solid white; cursor: pointer; display: none; align-items: center; justify-content: center; transition: all 0.3s ease;"
+        aria-label="Pause video"
       >
         <svg class="mute-icon" width="24" height="24" viewBox="0 0 24 24" fill="white" style="display: block;">
           <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
@@ -132,9 +141,8 @@ const playerVars: { [key: string]: number | string } = {
         </svg>
       </button>
     )}
-    
-    <!-- Black overlay with title and play button -->
-    <div class="video-overlay-screen" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 50; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; pointer-events: auto;">
+    <!-- Black overlay with title and play button - shows when paused, always above SVG -->
+    <div class="video-overlay-screen" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 70; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; pointer-events: auto;">
       {title && (
         <h2 class="video-overlay-title" style="color: white; font-size: clamp(1.5rem, 4vw, 3rem); text-align: center; margin: 0 1rem 2rem; font-weight: bold; text-shadow: 0 2px 4px rgba(0,0,0,0.5); pointer-events: none;">{title}</h2>
       )}
@@ -201,8 +209,17 @@ const playerVars: { [key: string]: number | string } = {
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+  // Only apply VideoPreferences to auto-load videos, not click-to-load
+  // Click-to-load videos will use their individual mute settings when loaded
   const preferences = (window as any).VideoPreferences?.getPreferences() || { muted: false };
-  (window as any).VideoPreferences?.updateAllVideoMuteStates(preferences.muted);
+  
+  // Only update auto-load iframes (those already in the DOM)
+  document.querySelectorAll('iframe[id^="youtube-iframe-"]').forEach((iframe) => {
+    const htmlIframe = iframe as HTMLIFrameElement;
+    if (htmlIframe.src && htmlIframe.src.includes('youtube')) {
+      (window as any).VideoPreferences?.updateAllVideoMuteStates(preferences.muted);
+    }
+  });
   
   // Set up mute toggle buttons
   document.querySelectorAll('.mute-toggle-btn').forEach((element) => {
@@ -218,8 +235,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-<script define:vars={{ videoId, playerVars, start, end, loop, videoTimeLimitMinutes, isContentBlockVideo, isTimerDisabled, autoplay, mute, clickToLoad }}>
-  console.log('🎬 Script running for videoId:', videoId, 'clickToLoad:', clickToLoad);
+<script define:vars={{ videoId, playerVars, start, end, loop, videoTimeLimitMinutes, isContentBlockVideo, isTimerDisabled, autoplay, mute, clickToLoad, svgatorSync, svgatorId, interactiveMode }}>
+  console.log('🎬 Script running for videoId:', videoId, 'clickToLoad:', clickToLoad, 'svgatorSync:', svgatorSync);
   
   // Helper function to update mute button visual state
   function updateMuteButtonState(button, isMuted) {
@@ -297,7 +314,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loadVideo();
         isVideoLoaded = true;
         isPlaying = true;
-        // Show click overlay so user can pause later
+        // Show click overlay
         if (clickOverlay) clickOverlay.style.display = 'block';
         return;
       }
@@ -320,13 +337,28 @@ document.addEventListener('DOMContentLoaded', () => {
             }), '*');
           }
           
-          // Show overlay with play icon
+          // Show overlay with play icon (above SVG)
           if (overlayScreen) {
             overlayScreen.style.display = 'flex';
-            overlayScreen.style.background = 'rgba(0, 0, 0, 0.7)'; // Semi-transparent when paused
+            overlayScreen.style.background = '#000'; // Solid black when paused
+            overlayScreen.style.zIndex = '70'; // Above SVG layer
           }
           if (playIcon) playIcon.style.display = 'block';
           if (pauseIcon) pauseIcon.style.display = 'none';
+          
+          // Pause SVGator animation if present
+          if (svgatorSync && (svgatorId || videoId)) {
+            const controller = (window as any).SVGatorController;
+            if (controller) {
+              controller.pause(svgatorId || `svgator-${videoId}`);
+              console.log('⏸ SVGator paused');
+            }
+          }
+          
+          
+          // Hide click overlay when paused
+          if (clickOverlay) clickOverlay.style.display = 'none';
+          
           isPlaying = false;
         } else {
           // Play the video
@@ -346,25 +378,53 @@ document.addEventListener('DOMContentLoaded', () => {
           
           // Hide overlay
           if (overlayScreen) overlayScreen.style.display = 'none';
+          
+          // Resume SVGator animation if present
+          if (svgatorSync && (svgatorId || videoId)) {
+            const controller = (window as any).SVGatorController;
+            if (controller) {
+              controller.play(svgatorId || `svgator-${videoId}`);
+              console.log('▶️ SVGator playing');
+            }
+          }
+          
+          // Show click overlay when playing
+          if (clickOverlay) clickOverlay.style.display = 'block';
+          
           isPlaying = true;
         }
       }
     }
 
     function loadVideo() {
-      // Use the mute setting from the post - always respect it
+      // Use the mute setting from the post - always respect it (don't use VideoPreferences for click-to-load)
       const shouldMute = mute;
+      console.log('🎬 loadVideo - mute prop:', mute, 'shouldMute:', shouldMute);
       
-      // Hide overlay screen
+      // Hide overlay screen (video is playing)
       const overlayScreen = clickToLoadContainer.querySelector('.video-overlay-screen');
       if (overlayScreen) overlayScreen.style.display = 'none';
       if (thumbnail) thumbnail.style.display = 'none';
+      
+      // Start SVGator animation if present
+      if (svgatorSync && (svgatorId || videoId)) {
+        setTimeout(() => {
+          const controller = (window as any).SVGatorController;
+          if (controller) {
+            controller.play(svgatorId || `svgator-${videoId}`);
+            console.log('▶️ SVGator started with video');
+          }
+        }, 500); // Small delay to ensure SVGator is initialized
+      }
       
       // Show overlay wrapper (image/SVG overlays)
       const overlayWrapper = clickToLoadContainer.querySelector('.overlay-wrapper');
       if (overlayWrapper) overlayWrapper.style.display = 'block';
       
-      // Show mute toggle button
+      // Show click overlay so video can be paused
+      if (clickOverlay) clickOverlay.style.display = 'block';
+      
+      // Show mute toggle button if enabled
       const muteToggle = clickToLoadContainer.querySelector('.overlay-mute-toggle');
       if (muteToggle) {
         muteToggle.style.display = 'flex';
@@ -384,6 +444,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Build URL using stored preferences for mute, always autoplay when clicked
         let iframeSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=${shouldMute ? 1 : 0}&controls=1&enablejsapi=1`;
+        console.log('🎬 Building iframe URL with mute:', shouldMute ? 1 : 0, 'Full URL:', iframeSrc);
         // Add start and end parameters - YouTube will stop at end, then we restart
         if (start && start > 0) iframeSrc += `&start=${start}`;
         if (end && end > 0) iframeSrc += `&end=${end}`;
@@ -401,6 +462,19 @@ document.addEventListener('DOMContentLoaded', () => {
         
         iframeContainer.appendChild(iframe);
         currentIframe = iframe;
+        
+        // If video should be unmuted, send unmute command after iframe loads
+        if (!shouldMute) {
+          iframe.addEventListener('load', () => {
+            setTimeout(() => {
+              iframe.contentWindow?.postMessage(JSON.stringify({
+                event: 'command',
+                func: 'unMute'
+              }), '*');
+              console.log('🔊 Unmuting video via postMessage');
+            }, 1000);
+          });
+        }
         
         // Listen for player state changes
         window.addEventListener('message', (event) => {
@@ -485,15 +559,81 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // SVGator Integration
+  async function setupSVGatorSync() {
+    if (!svgatorSync) return;
+    
+    const svgElement = document.getElementById(svgatorId || `svgator-${videoId}`);
+    if (!svgElement) {
+      console.warn('SVGator element not found:', svgatorId || `svgator-${videoId}`);
+      return;
+    }
+
+    try {
+      // Dynamically import the SVGator controller
+      const { default: controller } = await import('/src/utils/svgator.ts');
+      
+      // Register the SVGator instance
+      const instanceId = svgatorId || `svgator-${videoId}`;
+      await controller.register(instanceId, svgElement);
+      
+      console.log('✨ SVGator instance registered:', instanceId);
+
+      // Set up sync based on interactive mode
+      if (interactiveMode === 'sync') {
+        // Find the iframe for syncing
+        const findIframe = () => {
+          const clickToLoadContainer = document.querySelector(`.click-to-load[data-video-id="${videoId}"]`);
+          if (clickToLoadContainer) {
+            return clickToLoadContainer.querySelector('iframe');
+          }
+          return document.getElementById(`youtube-iframe-${videoId}`);
+        };
+
+        // Try to find iframe immediately, or wait for it to load
+        let iframe = findIframe();
+        if (iframe) {
+          controller.syncWithVideo(instanceId, iframe, interactiveMode);
+          console.log('✨ SVGator synced with video');
+        } else {
+          // Wait for iframe to be created (click-to-load scenario)
+          const observer = new MutationObserver(() => {
+            iframe = findIframe();
+            if (iframe) {
+              controller.syncWithVideo(instanceId, iframe, interactiveMode);
+              console.log('✨ SVGator synced with video (delayed)');
+              observer.disconnect();
+            }
+          });
+          
+          observer.observe(document.body, {
+            childList: true,
+            subtree: true
+          });
+        }
+      } else if (interactiveMode === 'independent') {
+        console.log('✨ SVGator in independent mode - separate controls');
+        // SVG and video operate independently
+      } else if (interactiveMode === 'controller') {
+        console.log('✨ SVGator in controller mode - implement custom click handlers');
+        // Custom implementation needed per SVG
+      }
+    } catch (error) {
+      console.error('Error setting up SVGator:', error);
+    }
+  }
+
   // Initialize click-to-load
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
       setupClickToLoad();
       setupAutoLoadLoop();
+      setupSVGatorSync();
     });
   } else {
     setupClickToLoad();
     setupAutoLoadLoop();
+    setupSVGatorSync();
   }
   
   // Set up loop for auto-load iframe
@@ -2179,6 +2319,13 @@ setTimeout(() => {
         if (!isLoaded && iframeContainer && videoId) {
           console.log(`🎬 Loading video ${videoId}...`);
           
+          // Get mute setting from data attribute
+          const shouldMute = c.dataset.mute === 'true';
+          const startTime = parseInt(c.dataset.start || '0');
+          const endTime = parseInt(c.dataset.end || '0');
+          const shouldLoop = c.dataset.loop === 'true';
+          console.log('🎬 Video settings - mute:', shouldMute, 'start:', startTime, 'end:', endTime, 'loop:', shouldLoop);
+          
           // Hide overlay and thumbnail
           overlay.style.display = 'none';
           if (thumbnail) thumbnail.style.display = 'none';
@@ -2187,14 +2334,23 @@ setTimeout(() => {
           if (overlayWrapper) overlayWrapper.style.display = 'block';
           
           // Show iframe container
-          iframeContainer.style.display = 'block';
+          if (iframeContainer) iframeContainer.style.display = 'block';
           
           // Create iframe
           const iframe = document.createElement('iframe');
           iframe.id = c.id ? `${c.id}-iframe` : `youtube-iframe-${videoId}`;
           iframe.width = '100%';
           iframe.height = '100%';
-          iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&controls=1&enablejsapi=1&rel=0`;
+          
+          // Build URL with all parameters
+          let iframeSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=${shouldMute ? 1 : 0}&controls=1&enablejsapi=1`;
+          if (startTime > 0) iframeSrc += `&start=${startTime}`;
+          if (endTime > 0) iframeSrc += `&end=${endTime}`;
+          if (shouldLoop && !startTime && !endTime) iframeSrc += `&loop=1&playlist=${videoId}`;
+          iframeSrc += `&rel=0`;
+          
+          iframe.src = iframeSrc;
+          console.log('🎬 Created iframe URL:', iframeSrc);
           iframe.frameBorder = '0';
           iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
           iframe.allowFullscreen = true;
