@@ -77,7 +77,7 @@ const playerVars: { [key: string]: number | string } = {
 
 ---
 
-{(clickToLoad || title) ? (
+{clickToLoad ? (
   <div class="iframe-youtube-player click-to-load" id={id} style="position: relative; width: 100%; aspect-ratio: 16/9; background: #000; cursor: pointer;" data-video-id={videoId}>
     <img 
       src={`https://img.youtube.com/vi/${videoId}/sddefault.jpg`}

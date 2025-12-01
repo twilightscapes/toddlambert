@@ -100,7 +100,7 @@ const { headings = [] } = (post.rendered as { headings?: any[] } | undefined) ??
                   loop={youtube.value.loop}
                   start={youtube.value.start}
                   end={youtube.value.end}
-                  clickToLoad={true}
+                  clickToLoad={youtube.value.clickToLoad}
                   showMuteButton={youtube.value.showMuteButton}
                   useCustomPlayer={youtube.value.useCustomPlayer}
                   overlayImage={overlayImage}
