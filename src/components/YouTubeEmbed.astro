@@ -467,9 +467,13 @@ document.addEventListener('DOMContentLoaded', () => {
         iframe.width = '100%';
         iframe.height = '100%';
         
-        // Always start muted for click-to-load to avoid mobile restrictions
-        let iframeSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&controls=1&enablejsapi=1`;
-        console.log('🎬 Building iframe URL - starting muted, will unmute if needed. Full URL:', iframeSrc);
+        // Check if secondary video exists - if so, start muted and unmute via postMessage
+        // If no secondary video, respect the mute setting from the post
+        const hasSecondaryVideo = !!document.getElementById('secondary-player');
+        const startMuted = hasSecondaryVideo ? true : mute; // Force mute only if secondary exists
+        
+        let iframeSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=${startMuted ? 1 : 0}&controls=1&enablejsapi=1`;
+        console.log('🎬 Building iframe URL - hasSecondaryVideo:', hasSecondaryVideo, 'startMuted:', startMuted, 'shouldUnmuteOnLoad:', shouldUnmuteOnLoad);
         // Add start and end parameters - YouTube will stop at end, then we restart
         if (start && start > 0) iframeSrc += `&start=${start}`;
         if (end && end > 0) iframeSrc += `&end=${end}`;
@@ -488,10 +492,9 @@ document.addEventListener('DOMContentLoaded', () => {
         iframeContainer.appendChild(iframe);
         currentIframe = iframe;
         
-        // If video should be unmuted, send unmute commands aggressively
-        // Must stay in sync with user gesture for mobile autoplay to work
-        if (shouldUnmuteOnLoad) {
-          console.log('🔊 Starting aggressive unmute sequence (synchronous with click)');
+        // Only need aggressive unmute if we started muted but want sound
+        if (shouldUnmuteOnLoad && startMuted) {
+          console.log('🔊 Starting aggressive unmute sequence (has secondary video)');
           
           // Send unmute commands repeatedly with increasing intervals
           const unmuteCommand = JSON.stringify({ event: 'command', func: 'unMute' });
