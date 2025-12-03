@@ -210,9 +210,9 @@ export default config({
                 label: 'SVGator Interactive Mode',
                 description: 'Control mode when SVGator sync is enabled',
                 options: [
-                  { label: 'Sync (SVG follows video)', value: 'sync' },
-                  { label: 'Independent (both play separately)', value: 'independent' },
-                  { label: 'Controller (SVG controls video)', value: 'controller' }
+                  { label: 'Sync', value: 'sync' },
+                  { label: 'Independent', value: 'independent' },
+                  { label: 'Controller', value: 'controller' }
                 ],
                 defaultValue: 'sync'
               }),
