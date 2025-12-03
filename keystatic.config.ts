@@ -132,6 +132,26 @@ export default config({
                 defaultValue: false 
               }),
               videoOnly: fields.checkbox({ label: 'Video Only', defaultValue: false }),
+              svgatorSync: fields.checkbox({
+                label: 'Sync with SVGator Animation',
+                description: 'Enable synchronization with overlay SVG animation',
+                defaultValue: false
+              }),
+              svgatorId: fields.text({
+                label: 'SVGator Animation ID',
+                description: 'Unique ID for the SVGator animation (required if sync is enabled)',
+                validation: { isRequired: false }
+              }),
+              interactiveMode: fields.select({
+                label: 'Interactive Mode',
+                description: 'How the animation interacts with video controls',
+                options: [
+                  { label: 'Sync', value: 'sync' },
+                  { label: 'Independent', value: 'independent' },
+                  { label: 'Controller', value: 'controller' }
+                ],
+                defaultValue: 'sync'
+              }),
             }),
             false: fields.empty(),
           }
@@ -176,6 +196,26 @@ export default config({
                 defaultValue: false 
               }),
               videoOnly: fields.checkbox({ label: 'Video Only', defaultValue: false }),
+              svgatorSync: fields.checkbox({ 
+                label: 'Sync with SVGator Animation',
+                description: 'Sync this video with an SVGator SVG animation',
+                defaultValue: false 
+              }),
+              svgatorId: fields.text({ 
+                label: 'SVGator SVG ID',
+                description: 'The ID of the SVGator SVG element to sync with this video',
+                validation: { isRequired: false }
+              }),
+              interactiveMode: fields.select({
+                label: 'SVGator Interactive Mode',
+                description: 'Control mode when SVGator sync is enabled',
+                options: [
+                  { label: 'Sync (SVG follows video)', value: 'sync' },
+                  { label: 'Independent (both play separately)', value: 'independent' },
+                  { label: 'Controller (SVG controls video)', value: 'controller' }
+                ],
+                defaultValue: 'sync'
+              }),
             }),
             false: fields.empty(),
           }

@@ -53,6 +53,9 @@ const postSchema = z.object({
       clickToLoad: z.boolean().optional(),
       showMuteButton: z.boolean().optional(),
       videoOnly: z.boolean().optional(),
+      svgatorSync: z.boolean().optional(),
+      svgatorId: z.string().optional(),
+      interactiveMode: z.enum(['sync', 'independent', 'controller']).optional(),
     }).optional()
   }).optional(),
   secondaryVideo: z.object({
@@ -81,6 +84,9 @@ const postSchema = z.object({
       clickToLoad: z.boolean().optional(),
       showMuteButton: z.boolean().optional(),
       videoOnly: z.boolean().optional(),
+      svgatorSync: z.boolean().optional(),
+      svgatorId: z.string().optional(),
+      interactiveMode: z.enum(['sync', 'independent', 'controller']).optional(),
     }).optional()
   }).optional(),
 });

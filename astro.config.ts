@@ -172,6 +172,12 @@ export default defineConfig({
     '/admin': '/keystatic'
   },
   vite: {
+    optimizeDeps: {
+      include: ['lodash'],
+    },
+    ssr: {
+      noExternal: ['lodash'],
+    },
     server: {
       fs: {
         strict: false,

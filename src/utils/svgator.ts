@@ -39,26 +39,41 @@ export class SVGatorController {
     if (this.scriptLoadPromise) return this.scriptLoadPromise;
 
     this.scriptLoadPromise = new Promise((resolve, reject) => {
-      // Check if SVGatorPlayer is already available
+      // Check if SVGatorPlayer is already available (from programmatic export)
       if (typeof (window as any).SVGatorPlayer !== 'undefined') {
+        console.log('✅ SVGatorPlayer already available (programmatic export)');
         this.scriptLoaded = true;
         resolve();
         return;
       }
 
-      // Load the script
+      // Try loading from CDN (for non-programmatic exports)
+      console.log('📦 Loading SVGator player from CDN...');
       const script = document.createElement('script');
       script.src = 'https://cdn.svgator.com/ply/latest/player.js';
       script.async = true;
       
       script.onload = () => {
+        console.log('✅ SVGator player loaded from CDN');
         this.scriptLoaded = true;
         resolve();
       };
       
       script.onerror = () => {
+        console.warn('⚠️ Failed to load SVGator player from CDN, checking if programmatic export...');
         this.scriptLoadPromise = null;
-        reject(new Error('Failed to load SVGator player script'));
+        
+        // Wait a bit and check again if SVGatorPlayer became available (programmatic export might load later)
+        setTimeout(() => {
+          if (typeof (window as any).SVGatorPlayer !== 'undefined') {
+            console.log('✅ SVGatorPlayer found (programmatic export loaded)');
+            this.scriptLoaded = true;
+            resolve();
+          } else {
+            console.warn('⚠️ CDN player not available. This is expected for embedded players.');
+            reject(new Error('CDN player not available. This is expected for embedded players.'));
+          }
+        }, 1000);
       };
 
       document.head.appendChild(script);
@@ -71,8 +86,6 @@ export class SVGatorController {
    * Register an SVGator instance (object or inline SVG)
    */
   async register(id: string, element: HTMLObjectElement | SVGSVGElement): Promise<SVGatorInstance> {
-    await this.loadScript();
-
     const type = element.tagName.toLowerCase() === 'object' ? 'object' : 'inline';
     const instance: SVGatorInstance = {
       id,
@@ -84,8 +97,20 @@ export class SVGatorController {
 
     this.instances.set(id, instance);
 
-    // Initialize the player
+    // Initialize the player (will check for embedded player first)
     await this.initializePlayer(instance);
+
+    // Only load CDN script if no embedded player was found
+    if (!instance.player) {
+      console.log('🎨 No embedded player found, trying CDN...');
+      try {
+        await this.loadScript();
+        // Try initializing again with CDN player
+        await this.initializePlayer(instance);
+      } catch (error) {
+        console.log('ℹ️ CDN player not available, but embedded player may initialize later');
+      }
+    }
 
     return instance;
   }
@@ -95,14 +120,6 @@ export class SVGatorController {
    */
   private async initializePlayer(instance: SVGatorInstance): Promise<void> {
     return new Promise((resolve) => {
-      const SVGatorPlayer = (window as any).SVGatorPlayer;
-      
-      if (!SVGatorPlayer) {
-        console.warn('SVGatorPlayer not available');
-        resolve();
-        return;
-      }
-
       // For object tags, wait for the object to load
       if (instance.type === 'object') {
         const obj = instance.element as HTMLObjectElement;
@@ -110,22 +127,64 @@ export class SVGatorController {
         const initPlayer = () => {
           try {
             const svgDoc = obj.contentDocument;
-            if (svgDoc) {
-              const svg = svgDoc.querySelector('svg');
-              if (svg) {
+            if (!svgDoc) {
+              console.warn(`Cannot access content document for object #${instance.id}`);
+              resolve();
+              return;
+            }
+            
+            const svg = svgDoc.querySelector('svg');
+            if (!svg) {
+              console.warn(`No SVG found in object #${instance.id}`);
+              resolve();
+              return;
+            }
+            
+            console.log('🎨 SVG found, checking for SVGator player...');
+            
+            // Check for embedded player (SVG + Vanilla JS export)
+            // The player is attached to the SVG element itself as .svgatorPlayer
+            let embeddedPlayer = (svg as any).svgatorPlayer;
+            if (embeddedPlayer) {
+              console.log('✅ Embedded player found on SVG element!');
+              instance.player = embeddedPlayer;
+              instance.isReady = true;
+              resolve();
+              return;
+            }
+            
+            console.log('🎨 No embedded player yet, waiting for scripts to execute...');
+            
+            // The scripts inside the SVG need time to execute and attach the player
+            // Wait and check again
+            setTimeout(() => {
+              embeddedPlayer = (svg as any).svgatorPlayer;
+              if (embeddedPlayer) {
+                console.log('✅ Embedded player initialized after wait!');
+                instance.player = embeddedPlayer;
+                instance.isReady = true;
+                resolve();
+                return;
+              }
+              
+              // Still no embedded player, try CDN player as fallback
+              const objWindow = (obj.contentWindow as any);
+              const SVGatorPlayer = objWindow?.SVGatorPlayer || (window as any).SVGatorPlayer;
+              
+              if (SVGatorPlayer) {
+                console.log('✅ CDN SVGatorPlayer available, creating instance...');
                 instance.player = new SVGatorPlayer(svg);
                 instance.player?.ready(() => {
                   instance.isReady = true;
+                  console.log('✅ SVGator player ready for:', instance.id);
                   resolve();
                 });
-              } else {
-                console.warn(`No SVG found in object #${instance.id}`);
-                resolve();
+                return;
               }
-            } else {
-              console.warn(`Cannot access content document for object #${instance.id}`);
+              
+              console.warn('⚠️ No SVGator player found - SVG may not have animations');
               resolve();
-            }
+            }, 500);
           } catch (error) {
             console.warn(`Error initializing SVGator for object #${instance.id}:`, error);
             resolve();

@@ -116,7 +116,7 @@ const playerVars: { [key: string]: number | string } = {
           class="video-overlay-svg"
           data-svgator-sync={svgatorSync}
           data-interactive-mode={interactiveMode}
-          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: auto;"
+          style={`position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: ${interactiveMode ? 'auto' : 'none'};`}
         ></object>
       )}
     </div>
@@ -155,6 +155,20 @@ const playerVars: { [key: string]: number | string } = {
         </svg>
       </div>
     </div>
+    
+    <!-- Always-visible play/pause button at bottom - above everything -->
+    <button 
+      class="video-control-button"
+      style="position: absolute; bottom: 20px; right: 20px; z-index: 75; width: 50px; height: 50px; border-radius: 50%; background: rgba(0, 0, 0, 0.8); border: 2px solid white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; pointer-events: none; opacity: 0;"
+      aria-label="Play/Pause video"
+    >
+      <svg class="play-icon" width="24" height="24" viewBox="0 0 24 24" fill="white" style="margin-left: 2px; display: block;">
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+      <svg class="pause-icon" width="24" height="24" viewBox="0 0 24 24" fill="white" style="display: none;">
+        <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+      </svg>
+    </button>
     
   </div>
 ) : (
@@ -348,7 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
           
           // Pause SVGator animation if present
           if (svgatorSync && (svgatorId || videoId)) {
-            const controller = (window as any).SVGatorController;
+            const controller = window.SVGatorController;
             if (controller) {
               controller.pause(svgatorId || `svgator-${videoId}`);
               console.log('⏸ SVGator paused');
@@ -381,7 +395,7 @@ document.addEventListener('DOMContentLoaded', () => {
           
           // Resume SVGator animation if present
           if (svgatorSync && (svgatorId || videoId)) {
-            const controller = (window as any).SVGatorController;
+            const controller = window.SVGatorController;
             if (controller) {
               controller.play(svgatorId || `svgator-${videoId}`);
               console.log('▶️ SVGator playing');
@@ -409,7 +423,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Start SVGator animation if present
       if (svgatorSync && (svgatorId || videoId)) {
         setTimeout(() => {
-          const controller = (window as any).SVGatorController;
+          const controller = window.SVGatorController;
           if (controller) {
             controller.play(svgatorId || `svgator-${videoId}`);
             console.log('▶️ SVGator started with video');
@@ -2299,6 +2313,7 @@ setTimeout(() => {
       console.log(`🎬 Setting up click handler for container ${i}`);
       
       let isLoaded = false;
+      let isLoading = false; // Prevent duplicate loads
       let isPlaying = false;
       const videoId = c.getAttribute('data-video-id');
       const clickOverlay = /** @type {HTMLElement | null} */ (c.querySelector('.video-click-overlay'));
@@ -2308,6 +2323,71 @@ setTimeout(() => {
       let currentIframe: HTMLIFrameElement | null = null;
       let hasPlayedOnce = false; // Track if video has been played at least once
       
+      // Get SVGator element and ID at container scope so it's accessible everywhere
+      const svgElement = /** @type {HTMLElement | null} */ (c.querySelector('[data-svgator-sync="true"]'));
+      const svgId = svgElement?.id;
+      
+      // Register SVGator animation if present
+      if (svgElement && svgId) {
+        console.log('🎨 Found SVGator element:', svgId, 'Type:', svgElement.tagName);
+        
+        // Wait for SVGator element to be ready
+        const initSVGator = async () => {
+          console.log('🎨 Initializing SVGator...');
+          const controller = window.SVGatorController;
+          if (!controller) {
+            console.error('❌ SVGatorController not available on window');
+            return;
+          }
+          
+          try {
+            // For object tags, wait for load
+            if (svgElement.tagName.toLowerCase() === 'object') {
+              const objElement = svgElement;
+              console.log('🎨 Object element, checking if loaded...');
+              
+              if (!objElement.contentDocument) {
+                console.log('🎨 Waiting for object to load...');
+                await new Promise(resolve => {
+                  objElement.addEventListener('load', () => {
+                    console.log('🎨 Object loaded!');
+                    resolve();
+                  }, { once: true });
+                });
+              } else {
+                console.log('🎨 Object already loaded');
+              }
+              
+              // Check if SVG has SVGator animation
+              const svgDoc = objElement.contentDocument;
+              const svg = svgDoc?.querySelector('svg');
+              console.log('🎨 SVG in object:', svg ? 'Found' : 'Not found');
+              if (svg) {
+                console.log('🎨 SVG has animations:', svg.querySelectorAll('animate, animateTransform').length);
+              }
+            }
+            
+            // Register the SVGator instance
+            console.log('🎨 Registering with controller...');
+            await controller.register(svgId, svgElement);
+            console.log('✅ SVGator registered successfully:', svgId);
+            
+            // Verify registration
+            const instance = controller.get(svgId);
+            console.log('🎨 Instance retrieved:', instance ? 'Yes' : 'No');
+            if (instance) {
+              console.log('🎨 Instance ready:', instance.isReady);
+              console.log('🎨 Instance player:', instance.player ? 'Available' : 'Not available');
+            }
+          } catch (error) {
+            console.error('❌ Failed to register SVGator:', error);
+          }
+        };
+        
+        // Initialize after a short delay to ensure scripts are loaded
+        setTimeout(initSVGator, 1000);
+      }
+      
       const handleOverlayClick = (e) => {
         console.log(`🎬 Overlay clicked for container ${i}!`, e.type, e.target);
         
@@ -2316,7 +2396,8 @@ setTimeout(() => {
           e.preventDefault();
         }
         
-        if (!isLoaded && iframeContainer && videoId) {
+        if (!isLoaded && !isLoading && iframeContainer && videoId) {
+          isLoading = true; // Immediately mark as loading to prevent duplicates
           console.log(`🎬 Loading video ${videoId}...`);
           
           // Get mute setting from data attribute
@@ -2336,6 +2417,15 @@ setTimeout(() => {
           // Show iframe container
           if (iframeContainer) iframeContainer.style.display = 'block';
           
+          // Clear any existing iframes to prevent duplicates
+          if (iframeContainer) {
+            const existingIframes = iframeContainer.querySelectorAll('iframe');
+            existingIframes.forEach(oldIframe => {
+              console.log('🗑️ Removing existing iframe to prevent duplicate');
+              oldIframe.remove();
+            });
+          }
+          
           // Create iframe
           const iframe = document.createElement('iframe');
           iframe.id = c.id ? `${c.id}-iframe` : `youtube-iframe-${videoId}`;
@@ -2345,9 +2435,15 @@ setTimeout(() => {
           // Build URL with all parameters
           let iframeSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=${shouldMute ? 1 : 0}&controls=1&enablejsapi=1`;
           if (startTime > 0) iframeSrc += `&start=${startTime}`;
-          if (endTime > 0) iframeSrc += `&end=${endTime}`;
+          // Don't use end parameter if looping - we'll handle it manually
+          if (endTime > 0 && !shouldLoop) iframeSrc += `&end=${endTime}`;
           if (shouldLoop && !startTime && !endTime) iframeSrc += `&loop=1&playlist=${videoId}`;
           iframeSrc += `&rel=0`;
+          
+          // Enable time updates if we need to loop with start/end times
+          if (shouldLoop && endTime > 0) {
+            console.log('🔄 Custom loop mode: will loop at', endTime, 'seconds (not using YouTube end parameter)');
+          }
           
           iframe.src = iframeSrc;
           console.log('🎬 Created iframe URL:', iframeSrc);
@@ -2361,6 +2457,114 @@ setTimeout(() => {
           isLoaded = true;
           isPlaying = true;
           hasPlayedOnce = true; // Mark that video has played
+          
+          // Start SVGator animation from beginning if present
+          if (svgElement && svgId) {
+            console.log('🎨 Starting SVGator animation:', svgId);
+            setTimeout(() => {
+              const controller = window.SVGatorController;
+              if (controller) {
+                const instance = controller.get(svgId);
+                console.log('🎨 Getting instance for restart:', instance ? 'Found' : 'Not found');
+                if (instance) {
+                  console.log('🎨 Instance isReady:', instance.isReady, 'has player:', !!instance.player);
+                }
+                controller.restart(svgId);
+                console.log('▶️ SVGator restart command sent');
+                
+                // Set up loop handler for SVGator - restart when animation completes
+                const handleComplete = () => {
+                  if (isPlaying && currentIframe) {
+                    console.log('🔄 SVGator completed, restarting...');
+                    controller.restart(svgId);
+                  }
+                };
+                
+                // Add complete event listener
+                controller.on(svgId, 'complete', handleComplete);
+                
+                // Store cleanup function
+                if (!window.svgatorCleanupFns) window.svgatorCleanupFns = new Map();
+                window.svgatorCleanupFns.set(svgId, () => {
+                  controller.off(svgId, 'complete', handleComplete);
+                });
+              }
+            }, 300); // Small delay to ensure video is playing
+          }
+          
+          // Update control button to show pause icon and enable it
+          const controlButton = /** @type {HTMLElement | null} */ (c.querySelector('.video-control-button'));
+          if (controlButton) {
+            const controlPlayIcon = /** @type {HTMLElement | null} */ (controlButton.querySelector('.play-icon'));
+            const controlPauseIcon = /** @type {HTMLElement | null} */ (controlButton.querySelector('.pause-icon'));
+            if (controlPlayIcon) controlPlayIcon.style.display = 'none';
+            if (controlPauseIcon) controlPauseIcon.style.display = 'block';
+            // Enable button now that video is loaded and playing
+            controlButton.style.pointerEvents = 'auto';
+            controlButton.style.opacity = '1';
+          }
+          
+          // Set up loop if needed
+          if (shouldLoop && endTime > 0) {
+            console.log('🔄 Setting up video loop handler for', startTime, '->', endTime);
+            
+            // Listen for player state changes and time updates
+            setTimeout(() => {
+              // Subscribe to time updates by listening to player info events
+              iframe.contentWindow?.postMessage(JSON.stringify({
+                event: 'listening',
+                id: iframe.id
+              }), '*');
+              
+            }, 1000); // Wait for iframe to be ready
+            
+            // Set up an interval to manually check time
+            const loopCheckInterval = setInterval(() => {
+              if (isPlaying && iframe.contentWindow) {
+                // Request current time
+                iframe.contentWindow.postMessage(JSON.stringify({
+                  event: 'command',
+                  func: 'getCurrentTime',
+                  args: ''
+                }), '*');
+              }
+            }, 100); // Check every 100ms
+            
+            // Store cleanup
+            if (!window.loopCleanupFns) window.loopCleanupFns = new Map();
+            window.loopCleanupFns.set(c.id, () => clearInterval(loopCheckInterval));
+            
+            // Listen for time updates from YouTube
+            let lastLoopTime = 0;
+            window.addEventListener('message', function loopHandler(event) {
+              if (event.origin !== 'https://www.youtube.com' && event.origin !== 'https://www.youtube-nocookie.com') return;
+              
+              try {
+                const data = JSON.parse(event.data);
+                
+                // Handle getCurrentTime response
+                if (data.event === 'infoDelivery' && data.info && data.info.currentTime !== undefined) {
+                  const currentTime = data.info.currentTime;
+                  
+                  // Loop if we've reached or passed the end time (with debounce to prevent multiple loops)
+                  if (currentTime >= (endTime - 0.3) && isPlaying && (Date.now() - lastLoopTime) > 500) {
+                    lastLoopTime = Date.now();
+                    console.log('🔄 Looping video back to start:', startTime, '(was at', currentTime, ')');
+                    
+                    iframe.contentWindow?.postMessage(JSON.stringify({
+                      event: 'command',
+                      func: 'seekTo',
+                      args: [startTime, true]
+                    }), '*');
+                    
+                    // Note: SVG plays its own timeline independently - don't restart it with video loop
+                  }
+                }
+              } catch (e) {
+                // Ignore parse errors
+              }
+            });
+          }
           
           // Show clickable overlay for pause
           if (clickOverlay) clickOverlay.style.display = 'block';
@@ -2409,6 +2613,26 @@ setTimeout(() => {
             }
           }
           
+          // Update control button to show pause icon and re-enable it
+          const controlButton = /** @type {HTMLElement | null} */ (c.querySelector('.video-control-button'));
+          if (controlButton) {
+            const controlPlayIcon = /** @type {HTMLElement | null} */ (controlButton.querySelector('.play-icon'));
+            const controlPauseIcon = /** @type {HTMLElement | null} */ (controlButton.querySelector('.pause-icon'));
+            if (controlPlayIcon) controlPlayIcon.style.display = 'none';
+            if (controlPauseIcon) controlPauseIcon.style.display = 'block';
+            controlButton.style.pointerEvents = 'auto';
+            controlButton.style.opacity = '1';
+          }
+          
+          // Restart SVGator animation from beginning if present
+          if (svgElement && svgId) {
+            const controller = window.SVGatorController;
+            if (controller) {
+              controller.restart(svgId);
+              console.log('▶️ SVGator restarted from beginning');
+            }
+          }
+          
           isPlaying = true;
         }
       };
@@ -2428,6 +2652,15 @@ setTimeout(() => {
         // Pause the video
         if (currentIframe) {
           currentIframe.contentWindow?.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+        }
+        
+        // Pause SVGator animation if present
+        if (svgElement && svgId) {
+          const controller = window.SVGatorController;
+          if (controller) {
+            controller.pause(svgId);
+            console.log('⏸ SVGator paused');
+          }
         }
         
         // Pause secondary if primary
@@ -2455,6 +2688,98 @@ setTimeout(() => {
       if (clickOverlay) {
         clickOverlay.addEventListener('click', handlePauseClick);
         clickOverlay.addEventListener('touchend', handlePauseClick);
+      }
+      
+      // Set up persistent play/pause control button (always visible at bottom)
+      const controlButton = c.querySelector('.video-control-button');
+      if (controlButton) {
+        const controlPlayIcon = /** @type {HTMLElement | null} */ (controlButton.querySelector('.play-icon'));
+        const controlPauseIcon = /** @type {HTMLElement | null} */ (controlButton.querySelector('.pause-icon'));
+        
+        const handleControlClick = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          console.log(`🎛️ Control button clicked - isLoaded: ${isLoaded}, isLoading: ${isLoading}, isPlaying: ${isPlaying}`);
+          
+          if (!isLoaded && !isLoading) {
+            // Video not loaded yet - trigger load via overlay click
+            overlay.click();
+          } else if (isPlaying) {
+            // Video playing - pause it
+            if (currentIframe) {
+              currentIframe.contentWindow?.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+            }
+            
+            // Pause secondary if primary
+            if (c.id === 'primary-player') {
+              const secondaryIframe = /** @type {HTMLIFrameElement | null} */ (document.getElementById('secondary-player-iframe'));
+              if (secondaryIframe) {
+                secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+              }
+            }
+            
+            // Show the black overlay
+            overlay.style.display = 'flex';
+            
+            // Pause SVGator animation if present
+            if (svgElement && svgId) {
+              const controller = window.SVGatorController;
+              if (controller) {
+                controller.pause(svgId);
+                console.log('⏸ SVGator paused from control button');
+              }
+            }
+            
+            // Update button state to play icon and disable it (overlay takes over)
+            if (controlPlayIcon) controlPlayIcon.style.display = 'block';
+            if (controlPauseIcon) controlPauseIcon.style.display = 'none';
+            controlButton.style.pointerEvents = 'none';
+            controlButton.style.opacity = '0.5';
+            
+            // Update overlay icons
+            const overlayPlayIcon = /** @type {HTMLElement | null} */ (overlay.querySelector('.play-icon'));
+            const overlayPauseIcon = /** @type {HTMLElement | null} */ (overlay.querySelector('.pause-icon'));
+            if (overlayPlayIcon) overlayPlayIcon.style.display = 'block';
+            if (overlayPauseIcon) overlayPauseIcon.style.display = 'none';
+            
+            isPlaying = false;
+          } else {
+            // Video paused - resume playing
+            overlay.style.display = 'none';
+            
+            if (currentIframe) {
+              currentIframe.contentWindow?.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            }
+            
+            // Resume secondary if primary
+            if (c.id === 'primary-player') {
+              const secondaryIframe = /** @type {HTMLIFrameElement | null} */ (document.getElementById('secondary-player-iframe'));
+              if (secondaryIframe) {
+                secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+              }
+            }
+            
+            // Update button state to pause icon and re-enable it
+            if (controlPlayIcon) controlPlayIcon.style.display = 'none';
+            if (controlPauseIcon) controlPauseIcon.style.display = 'block';
+            controlButton.style.pointerEvents = 'auto';
+            controlButton.style.opacity = '1';
+            
+            // Restart SVGator animation from beginning if present
+            if (svgElement && svgId) {
+              const controller = window.SVGatorController;
+              if (controller) {
+                controller.restart(svgId);
+                console.log('▶️ SVGator restarted from beginning (control button)');
+              }
+            }
+            
+            isPlaying = true;
+          }
+        };
+        
+        controlButton.addEventListener('click', handleControlClick);
+        controlButton.addEventListener('touchend', handleControlClick);
       }
       
       // Set up "mute" button as a disguised play/pause button
