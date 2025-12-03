@@ -2378,6 +2378,10 @@ setTimeout(() => {
             if (instance) {
               console.log('🎨 Instance ready:', instance.isReady);
               console.log('🎨 Instance player:', instance.player ? 'Available' : 'Not available');
+              
+              // Start the animation immediately after registration
+              console.log('▶️ Starting SVGator animation...');
+              controller.play(svgId);
             }
           } catch (error) {
             console.error('❌ Failed to register SVGator:', error);
