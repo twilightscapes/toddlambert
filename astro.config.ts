@@ -173,10 +173,37 @@ export default defineConfig({
   },
   vite: {
     optimizeDeps: {
-      include: ['lodash'],
+      include: [
+        'is-hotkey',
+        'direction', 
+        'use-sync-external-store/shim/index.js',
+        'lodash-es',
+        'lodash-es/throttle',
+        'lodash-es/debounce',
+        'cookie',
+        'remove-accents',
+        'brace-expansion',
+        'debug',
+        'acorn-jsx',
+        '@braintree/sanitize-url',
+        'escape-string-regexp',
+        'fast-deep-equal',
+        '@sindresorhus/slugify'
+      ],
+      exclude: ['@keystatic/core', '@keystatic/astro'],
+      esbuildOptions: {
+        target: 'esnext',
+      },
     },
     ssr: {
-      noExternal: ['lodash'],
+      noExternal: ['@keystatic/core', '@keystatic/astro'],
+    },
+    resolve: {
+      alias: {
+        'lodash/throttle': 'lodash-es/throttle',
+        'lodash/debounce': 'lodash-es/debounce',
+        'lodash': 'lodash-es',
+      },
     },
     server: {
       fs: {

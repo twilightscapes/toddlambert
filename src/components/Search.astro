@@ -1,7 +1,8 @@
 ---
 // Heavy inspiration taken from Astro Starlight -> https://github.com/withastro/starlight/blob/main/packages/starlight/components/Search.astro
 
-import "@pagefind/default-ui/css/ui.css";
+// Pagefind UI loads its own CSS, no need to import it here (causes 404 in dev)
+// import "@pagefind/default-ui/css/ui.css";
 import { getEntry } from "astro:content";
 
 // Add error handling and default values

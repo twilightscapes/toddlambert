@@ -47,6 +47,7 @@
 		"fetch-blob": "^4.0.0",
 		"has-property-descriptors": "^1.0.2",
 		"lodash": "^4.17.21",
+		"lodash-es": "^4.17.21",
 		"marked": "^16.1.2",
 		"mdast-util-to-string": "^4.0.0",
 		"node-fetch": "^3.3.2",

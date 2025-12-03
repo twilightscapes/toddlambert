@@ -154,9 +154,17 @@ const tagsWithCount: [string, number][] = uniqueTags.map(tag => [
   </div>
 </div>
 
-{(searchMethod === 'pagefind' || searchMethod === 'hybrid') && (
+{(searchMethod === 'pagefind' || searchMethod === 'hybrid') && import.meta.env.PROD && (
   <script is:inline src="/pagefind/pagefind-ui.js"></script>
-  <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+  <script is:inline>
+    // Load Pagefind CSS only in production
+    if (typeof window !== 'undefined') {
+      const link = document.createElement('link');
+      link.href = '/pagefind/pagefind-ui.css';
+      link.rel = 'stylesheet';
+      document.head.appendChild(link);
+    }
+  </script>
 )}
 
 <script define:vars={{ sectionId, searchMethod }}>
@@ -166,6 +174,7 @@ const tagsWithCount: [string, number][] = uniqueTags.map(tag => [
   // Initialize pagefind for full content search
   async function initPagefind() {
     if (searchMethod === 'client') return;
+    if (!import.meta.env.PROD) return; // Skip in development
     
     try {
       const pagefindModule = await import('/pagefind/pagefind.js');
