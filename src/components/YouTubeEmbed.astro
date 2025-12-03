@@ -488,39 +488,35 @@ document.addEventListener('DOMContentLoaded', () => {
         iframeContainer.appendChild(iframe);
         currentIframe = iframe;
         
-        // If video should be unmuted, poll for iframe readiness and unmute
-        // Must stay in sync with user gesture (no setTimeout breaks), use polling within same event loop
+        // If video should be unmuted, send unmute commands aggressively
+        // Must stay in sync with user gesture for mobile autoplay to work
         if (shouldUnmuteOnLoad) {
-          console.log('🔊 Starting unmute polling (synchronous with click)');
-          let attempts = 0;
-          const maxAttempts = 20; // Try for up to 1 second
+          console.log('🔊 Starting aggressive unmute sequence (synchronous with click)');
           
-          const tryUnmute = () => {
-            if (iframe.contentWindow && attempts < maxAttempts) {
-              iframe.contentWindow.postMessage(JSON.stringify({
-                event: 'command',
-                func: 'unMute'
-              }), '*');
-              console.log('🔊 Unmute attempt', attempts + 1, '- contentWindow available');
-              attempts = maxAttempts; // Stop after successful send
-            } else if (attempts < maxAttempts) {
-              attempts++;
-              setTimeout(tryUnmute, 50); // Retry every 50ms
-            } else {
-              console.log('⚠️ Failed to unmute after', maxAttempts, 'attempts');
-            }
-          };
+          // Send unmute commands repeatedly with increasing intervals
+          const unmuteCommand = JSON.stringify({ event: 'command', func: 'unMute' });
           
-          // Start polling immediately (synchronous with click)
-          tryUnmute();
+          // Immediate attempts (even though contentWindow might be null)
+          iframe.contentWindow?.postMessage(unmuteCommand, '*');
+          
+          // Rapid fire attempts over the next 2 seconds
+          const intervals = [50, 100, 150, 200, 300, 400, 500, 750, 1000, 1500, 2000];
+          intervals.forEach(delay => {
+            setTimeout(() => {
+              if (iframe.contentWindow) {
+                iframe.contentWindow.postMessage(unmuteCommand, '*');
+                console.log(`🔊 Unmute attempt at ${delay}ms`);
+              }
+            }, delay);
+          });
           
           // Also send after load as backup
           iframe.addEventListener('load', () => {
-            iframe.contentWindow?.postMessage(JSON.stringify({
-              event: 'command',
-              func: 'unMute'
-            }), '*');
-            console.log('🔊 Unmuting video after iframe load event (backup)');
+            // Send multiple times after load too
+            iframe.contentWindow?.postMessage(unmuteCommand, '*');
+            setTimeout(() => iframe.contentWindow?.postMessage(unmuteCommand, '*'), 100);
+            setTimeout(() => iframe.contentWindow?.postMessage(unmuteCommand, '*'), 500);
+            console.log('🔊 Unmuting video after iframe load event (backup sequence)');
           });
         }
         
