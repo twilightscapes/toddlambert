@@ -142,14 +142,70 @@ export class SVGatorController {
             
             console.log('🎨 SVG found, checking for SVGator player...');
             
-            // Check for embedded player (SVG + Vanilla JS export)
-            // The player is attached to the SVG element itself as .svgatorPlayer
-            let embeddedPlayer = (svg as any).svgatorPlayer;
-            if (embeddedPlayer) {
-              console.log('✅ Embedded player found on SVG element!');
-              instance.player = embeddedPlayer;
-              instance.isReady = true;
-              resolve();
+            // Check for embedded player via __SVGATOR_PLAYER__ global
+            const checkEmbeddedPlayer = () => {
+              // Check in the object's window first (where embedded players register)
+              const objWindow = (obj.contentWindow as any);
+              const objGlobalPlayer = objWindow?.__SVGATOR_PLAYER__;
+              
+              if (objGlobalPlayer && objGlobalPlayer[instance.id]) {
+                console.log('✅ Embedded player found in object window __SVGATOR_PLAYER__["' + instance.id + '"]!');
+                const playerFactory = objGlobalPlayer[instance.id];
+                
+                // Check if the SVG already has a player attached via svgatorPlayer property
+                const existingPlayer = (svg as any).svgatorPlayer;
+                if (existingPlayer) {
+                  console.log('✅ Using existing player from svg.svgatorPlayer');
+                  instance.player = existingPlayer;
+                  instance.isReady = true;
+                  resolve();
+                  return true;
+                }
+                
+                console.log('🔍 Player factory type:', typeof playerFactory);
+                console.log('🔍 Checking for svgatorPlayer property...');
+                
+                // Wait a bit more for the player to attach
+                setTimeout(() => {
+                  const attachedPlayer = (svg as any).svgatorPlayer;
+                  if (attachedPlayer) {
+                    console.log('✅ Player attached after wait!');
+                    instance.player = attachedPlayer;
+                    instance.isReady = true;
+                    resolve();
+                  } else {
+                    console.warn('⚠️ Embedded player factory found but no player attached to SVG');
+                    resolve();
+                  }
+                }, 200);
+                return true;
+              }
+              
+              // Check in parent window
+              const parentGlobalPlayer = (window as any).__SVGATOR_PLAYER__;
+              if (parentGlobalPlayer && parentGlobalPlayer[instance.id]) {
+                console.log('✅ Embedded player found in parent window __SVGATOR_PLAYER__["' + instance.id + '"]!');
+                instance.player = parentGlobalPlayer[instance.id];
+                instance.isReady = true;
+                resolve();
+                return true;
+              }
+              
+              // Fallback: Check for player attached to SVG element
+              const svgPlayer = (svg as any).svgatorPlayer;
+              if (svgPlayer) {
+                console.log('✅ Embedded player found on SVG element!');
+                instance.player = svgPlayer;
+                instance.isReady = true;
+                resolve();
+                return true;
+              }
+              
+              return false;
+            };
+            
+            // Try immediately
+            if (checkEmbeddedPlayer()) {
               return;
             }
             
@@ -158,12 +214,7 @@ export class SVGatorController {
             // The scripts inside the SVG need time to execute and attach the player
             // Wait and check again
             setTimeout(() => {
-              embeddedPlayer = (svg as any).svgatorPlayer;
-              if (embeddedPlayer) {
-                console.log('✅ Embedded player initialized after wait!');
-                instance.player = embeddedPlayer;
-                instance.isReady = true;
-                resolve();
+              if (checkEmbeddedPlayer()) {
                 return;
               }
               
