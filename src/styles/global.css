@@ -4,7 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
 	:root {
 		--theme-bg: var(--theme-bg-light);
@@ -56,15 +55,12 @@ html {
 body {
   margin-left: auto;
   margin-right: auto;
-  display: flex;
-  flex-direction: column;
   padding-left: 2rem;
   padding-right: 2rem;
   padding-top: 4rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: var(--font-family);
-  line-height: 1.5;
   background-color: var(--theme-bg);
   color: var(--theme-text);
   margin: 0 auto;
@@ -1077,3 +1073,4 @@ body:has(.video) #footer{display: none !important;}
     }
 
 .pwa-button{display:flex; justify-content: center;}
+
