@@ -9,7 +9,7 @@ function removeDupsAndLowerCase(array: string[]) {
 
 const postSchema = z.object({
   title: z.string(),
-  description: z.string().min(50).max(160),
+  description: z.string().min(10).max(160),
   publishDate: z.string().or(z.date()).transform((val) => new Date(val)),
   updatedDate: z.string().or(z.date()).transform((val) => new Date(val)).optional(),
   coverImage: z.object({

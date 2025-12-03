@@ -39,7 +39,7 @@ export default config({
           validation: { isRequired: false } 
         }),
         title: fields.slug({ name: { label: 'Title' } }),
-        description: fields.text({ label: 'Description', validation: { length: { min: 50, max: 160 } } }),
+        description: fields.text({ label: 'Description', validation: { length: { min: 10, max: 160 } } }),
         draft: fields.checkbox({ label: 'Draft', defaultValue: false }),
         order: fields.conditional(
           fields.checkbox({ label: 'Make Sticky On Homepage?' }),
