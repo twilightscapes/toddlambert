@@ -488,15 +488,31 @@ document.addEventListener('DOMContentLoaded', () => {
         iframeContainer.appendChild(iframe);
         currentIframe = iframe;
         
-        // If video should be unmuted, send unmute command IMMEDIATELY (synchronous with user gesture)
-        // This must happen in the same event loop as the click to work on mobile
-        if (shouldUnmute) {
-          console.log('🔊 Unmuting video immediately (synchronous with click)');
-          // Send unmute command right away - don't wait for load event
-          iframe.contentWindow?.postMessage(JSON.stringify({
-            event: 'command',
-            func: 'unMute'
-          }), '*');
+        // If video should be unmuted, poll for iframe readiness and unmute
+        // Must stay in sync with user gesture (no setTimeout breaks), use polling within same event loop
+        if (shouldUnmuteOnLoad) {
+          console.log('🔊 Starting unmute polling (synchronous with click)');
+          let attempts = 0;
+          const maxAttempts = 20; // Try for up to 1 second
+          
+          const tryUnmute = () => {
+            if (iframe.contentWindow && attempts < maxAttempts) {
+              iframe.contentWindow.postMessage(JSON.stringify({
+                event: 'command',
+                func: 'unMute'
+              }), '*');
+              console.log('🔊 Unmute attempt', attempts + 1, '- contentWindow available');
+              attempts = maxAttempts; // Stop after successful send
+            } else if (attempts < maxAttempts) {
+              attempts++;
+              setTimeout(tryUnmute, 50); // Retry every 50ms
+            } else {
+              console.log('⚠️ Failed to unmute after', maxAttempts, 'attempts');
+            }
+          };
+          
+          // Start polling immediately (synchronous with click)
+          tryUnmute();
           
           // Also send after load as backup
           iframe.addEventListener('load', () => {
@@ -504,7 +520,7 @@ document.addEventListener('DOMContentLoaded', () => {
               event: 'command',
               func: 'unMute'
             }), '*');
-            console.log('🔊 Unmuting video after iframe load (backup)');
+            console.log('🔊 Unmuting video after iframe load event (backup)');
           });
         }
         
