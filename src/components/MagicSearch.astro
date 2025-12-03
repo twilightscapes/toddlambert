@@ -250,7 +250,7 @@ const lang = {
   }
 </style>
 
-<script define:vars={{ MAX_POSTS, sectionId, lang, searchMethod }}>
+<script define:vars={{ MAX_POSTS, sectionId, lang, searchMethod, isProd: import.meta.env.PROD }}>
   // Get all elements using the dynamic sectionId
   const searchInput = document.getElementById(`${sectionId}-search-input`);
   const clearButton = document.getElementById(`${sectionId}-clear-search`);
@@ -273,7 +273,7 @@ const lang = {
   // Initialize Pagefind if needed
   async function initPagefind() {
     if (searchMethod === 'client') return;
-    if (!import.meta.env.PROD) return; // Skip in development
+    if (!isProd) return; // Skip in development
     
     try {
       const pagefindModule = await import('/pagefind/pagefind.js');
@@ -492,7 +492,9 @@ const lang = {
   
   // Handle toggle tags button
   if (toggleTagsButton && tagPillsWrapper) {
+    console.log('Toggle tags button found for section:', sectionId);
     toggleTagsButton.addEventListener('click', () => {
+      console.log('Toggle button clicked, current state:', tagsExpanded);
       tagsExpanded = !tagsExpanded;
       if (tagsExpanded) {
         tagPillsWrapper.style.maxHeight = 'none';
@@ -502,6 +504,9 @@ const lang = {
         toggleTagsButton.textContent = lang.showMoreTopics;
       }
     });
+  } else {
+    console.log('Toggle tags button or wrapper not found for section:', sectionId);
+    console.log('Button:', toggleTagsButton, 'Wrapper:', tagPillsWrapper);
   }
   
   // Initialize on page load
