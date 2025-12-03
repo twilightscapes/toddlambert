@@ -208,7 +208,7 @@ const lang = {
   </div>
 </div>
 
-{(searchMethod === 'pagefind' || searchMethod === 'hybrid') && (
+{(searchMethod === 'pagefind' || searchMethod === 'hybrid') && import.meta.env.PROD && (
   <script is:inline src="/pagefind/pagefind-ui.js"></script>
   <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
 )}
