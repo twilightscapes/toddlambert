@@ -1,5 +1,6 @@
 ---
 import { getEntry } from 'astro:content';
+import svgatorController from '../utils/svgator';
 
 const language = await getEntry('language', 'index');
 
@@ -220,6 +221,14 @@ const playerVars: { [key: string]: number | string } = {
   transform: scale(0.95);
 }
 </style>
+
+<script>
+// Initialize SVGator controller globally
+import svgatorController from '../utils/svgator';
+if (typeof window !== 'undefined') {
+  (window as any).SVGatorController = svgatorController;
+}
+</script>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -584,8 +593,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      // Dynamically import the SVGator controller
-      const { default: controller } = await import('/src/utils/svgator.ts');
+      // Use the imported SVGator controller (available globally via window.SVGatorController)
+      const controller = window.SVGatorController;
+      if (!controller) {
+        console.error('❌ SVGatorController not available on window');
+        return;
+      }
       
       // Register the SVGator instance
       const instanceId = svgatorId || `svgator-${videoId}`;
