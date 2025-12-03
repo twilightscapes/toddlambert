@@ -167,14 +167,14 @@ const tagsWithCount: [string, number][] = uniqueTags.map(tag => [
   </script>
 )}
 
-<script define:vars={{ sectionId, searchMethod }}>
+<script define:vars={{ sectionId, searchMethod, isProd: import.meta.env.PROD }}>
   let pagefind = null;
   const pagefindResults = new Set();
   
   // Initialize pagefind for full content search
   async function initPagefind() {
     if (searchMethod === 'client') return;
-    if (!import.meta.env.PROD) return; // Skip in development
+    if (!isProd) return; // Skip in development
     
     try {
       const pagefindModule = await import('/pagefind/pagefind.js');

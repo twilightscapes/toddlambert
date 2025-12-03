@@ -492,9 +492,7 @@ const lang = {
   
   // Handle toggle tags button
   if (toggleTagsButton && tagPillsWrapper) {
-    console.log('Toggle tags button found for section:', sectionId);
     toggleTagsButton.addEventListener('click', () => {
-      console.log('Toggle button clicked, current state:', tagsExpanded);
       tagsExpanded = !tagsExpanded;
       if (tagsExpanded) {
         tagPillsWrapper.style.maxHeight = 'none';
@@ -504,9 +502,6 @@ const lang = {
         toggleTagsButton.textContent = lang.showMoreTopics;
       }
     });
-  } else {
-    console.log('Toggle tags button or wrapper not found for section:', sectionId);
-    console.log('Button:', toggleTagsButton, 'Wrapper:', tagPillsWrapper);
   }
   
   // Initialize on page load

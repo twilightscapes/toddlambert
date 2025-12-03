@@ -420,9 +420,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function loadVideo() {
-      // Use the mute setting from the post - always respect it (don't use VideoPreferences for click-to-load)
-      const shouldMute = mute;
-      console.log('🎬 loadVideo - mute prop:', mute, 'shouldMute:', shouldMute);
+      // For click-to-load videos, ALWAYS start muted to avoid mobile autoplay restrictions
+      // We'll unmute immediately in the click handler (synchronously with user gesture)
+      const shouldStartMuted = true; // Always start muted for click-to-load
+      const shouldUnmute = !mute; // Remember if we need to unmute based on post settings
+      console.log('🎬 loadVideo - mute prop:', mute, 'shouldStartMuted:', shouldStartMuted, 'shouldUnmute:', shouldUnmute);
       
       // Hide overlay screen (video is playing)
       const overlayScreen = clickToLoadContainer.querySelector('.video-overlay-screen');
@@ -451,7 +453,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const muteToggle = clickToLoadContainer.querySelector('.overlay-mute-toggle');
       if (muteToggle) {
         muteToggle.style.display = 'flex';
-        updateMuteButtonState(muteToggle, shouldMute);
+        updateMuteButtonState(muteToggle, !shouldUnmute); // Show correct initial state
       }
       
       // Show iframe container
@@ -465,9 +467,9 @@ document.addEventListener('DOMContentLoaded', () => {
         iframe.width = '100%';
         iframe.height = '100%';
         
-        // Build URL using stored preferences for mute, always autoplay when clicked
-        let iframeSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=${shouldMute ? 1 : 0}&controls=1&enablejsapi=1`;
-        console.log('🎬 Building iframe URL with mute:', shouldMute ? 1 : 0, 'Full URL:', iframeSrc);
+        // Always start muted for click-to-load to avoid mobile restrictions
+        let iframeSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&controls=1&enablejsapi=1`;
+        console.log('🎬 Building iframe URL - starting muted, will unmute if needed. Full URL:', iframeSrc);
         // Add start and end parameters - YouTube will stop at end, then we restart
         if (start && start > 0) iframeSrc += `&start=${start}`;
         if (end && end > 0) iframeSrc += `&end=${end}`;
@@ -486,16 +488,23 @@ document.addEventListener('DOMContentLoaded', () => {
         iframeContainer.appendChild(iframe);
         currentIframe = iframe;
         
-        // If video should be unmuted, send unmute command after iframe loads
-        if (!shouldMute) {
+        // If video should be unmuted, send unmute command IMMEDIATELY (synchronous with user gesture)
+        // This must happen in the same event loop as the click to work on mobile
+        if (shouldUnmute) {
+          console.log('🔊 Unmuting video immediately (synchronous with click)');
+          // Send unmute command right away - don't wait for load event
+          iframe.contentWindow?.postMessage(JSON.stringify({
+            event: 'command',
+            func: 'unMute'
+          }), '*');
+          
+          // Also send after load as backup
           iframe.addEventListener('load', () => {
-            setTimeout(() => {
-              iframe.contentWindow?.postMessage(JSON.stringify({
-                event: 'command',
-                func: 'unMute'
-              }), '*');
-              console.log('🔊 Unmuting video via postMessage');
-            }, 1000);
+            iframe.contentWindow?.postMessage(JSON.stringify({
+              event: 'command',
+              func: 'unMute'
+            }), '*');
+            console.log('🔊 Unmuting video after iframe load (backup)');
           });
         }
         

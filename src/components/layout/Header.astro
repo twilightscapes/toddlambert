@@ -325,24 +325,16 @@ style="flex-direction: column;"
 
   // Bottom menu toggle functionality
   function initializeBottomMenu() {
-    console.log('🔍 Initializing bottom menu...');
     const menuBtn = document.getElementById('bottom-menu-btn');
     const menuPopup = document.getElementById('menu-popup');
     
-    console.log('🔍 Menu elements:', { menuBtn, menuPopup });
-    
     if (!menuBtn || !menuPopup) {
-      console.log('❌ Menu elements not found!');
       return;
     }
     
-    console.log('✅ Menu elements found, attaching listeners...');
-    
     menuBtn.addEventListener('click', (e) => {
-      console.log('🖱️ Menu button clicked!');
       e.stopPropagation();
       menuPopup.classList.toggle('show');
-      console.log('Menu popup classes:', menuPopup.className);
     });
     
     // Close menu when clicking outside
