@@ -2693,13 +2693,6 @@ setTimeout(() => {
               if (secondaryIframe) {
                 console.log('▶️ Starting secondary video');
                 
-                // On mobile, start muted to comply with autoplay policies
-                // Will unmute after first user interaction
-                const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-                if (isMobile) {
-                  secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"mute","args":""}', '*');
-                }
-                
                 // Get start time from iframe src
                 const src = secondaryIframe.src;
                 const startMatch = src.match(/[?&]start=(\d+)/);
@@ -2712,24 +2705,20 @@ setTimeout(() => {
                     secondaryIframe.contentWindow?.postMessage(`{"event":"command","func":"seekTo","args":[${startTime}, true]}`, '*');
                     setTimeout(() => {
                       secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-                      // Unmute after playback starts (mobile browsers allow this after user interaction)
-                      if (isMobile) {
-                        setTimeout(() => {
-                          secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"unMute","args":""}', '*');
-                          console.log('🔊 Unmuting secondary video after autoplay');
-                        }, 500);
-                      }
+                      // Unmute after the iframe starts playing (user has interacted with page)
+                      setTimeout(() => {
+                        secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"unMute","args":""}', '*');
+                        console.log('🔊 Unmuting secondary video after user interaction');
+                      }, 500);
                     }, 100);
                   }, 50);
                 } else {
                   secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-                  // Unmute after playback starts
-                  if (isMobile) {
-                    setTimeout(() => {
-                      secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"unMute","args":""}', '*');
-                      console.log('🔊 Unmuting secondary video after autoplay');
-                    }, 500);
-                  }
+                  // Unmute after the iframe starts playing
+                  setTimeout(() => {
+                    secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"unMute","args":""}', '*');
+                    console.log('🔊 Unmuting secondary video after user interaction');
+                  }, 500);
                 }
               }
             }, 1000);
