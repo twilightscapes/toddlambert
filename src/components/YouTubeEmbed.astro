@@ -2504,66 +2504,166 @@ setTimeout(() => {
             controlButton.style.opacity = '1';
           }
           
-          // Set up loop if needed
-          if (shouldLoop && endTime > 0) {
-            console.log('🔄 Setting up video loop handler for', startTime, '->', endTime);
+          // Set up loop if needed (only for primary video, not secondary audio-only videos)
+          if (shouldLoop && endTime > 0 && c.id === 'primary-player') {
+            console.log('🔄 Setting up video loop handler for PRIMARY video', startTime, '->', endTime);
             
-            // Listen for player state changes and time updates
-            setTimeout(() => {
-              // Subscribe to time updates by listening to player info events
-              iframe.contentWindow?.postMessage(JSON.stringify({
-                event: 'listening',
-                id: iframe.id
-              }), '*');
+            // Check if secondary player exists - if so, disable message-based polling to avoid interference
+            const hasSecondaryPlayer = !!document.getElementById('secondary-player');
+            
+            if (!hasSecondaryPlayer) {
+              // No secondary video - use standard message-based loop polling
+              console.log('📡 Using message-based loop polling (no secondary video)');
               
-            }, 1000); // Wait for iframe to be ready
-            
-            // Set up an interval to manually check time
-            const loopCheckInterval = setInterval(() => {
-              if (isPlaying && iframe.contentWindow) {
-                // Request current time
-                iframe.contentWindow.postMessage(JSON.stringify({
-                  event: 'command',
-                  func: 'getCurrentTime',
-                  args: ''
+              // Listen for player state changes and time updates
+              setTimeout(() => {
+                // Subscribe to time updates by listening to player info events
+                iframe.contentWindow?.postMessage(JSON.stringify({
+                  event: 'listening',
+                  id: iframe.id
                 }), '*');
-              }
-            }, 100); // Check every 100ms
-            
-            // Store cleanup
-            if (!window.loopCleanupFns) window.loopCleanupFns = new Map();
-            window.loopCleanupFns.set(c.id, () => clearInterval(loopCheckInterval));
-            
-            // Listen for time updates from YouTube
-            let lastLoopTime = 0;
-            window.addEventListener('message', function loopHandler(event) {
-              if (event.origin !== 'https://www.youtube.com' && event.origin !== 'https://www.youtube-nocookie.com') return;
+              }, 1000); // Wait for iframe to be ready
               
-              try {
-                const data = JSON.parse(event.data);
-                
-                // Handle getCurrentTime response
-                if (data.event === 'infoDelivery' && data.info && data.info.currentTime !== undefined) {
-                  const currentTime = data.info.currentTime;
+              // Set up an interval to manually check time
+              const loopCheckInterval = setInterval(() => {
+                if (isPlaying && iframe.contentWindow) {
+                  // Request current time
+                  iframe.contentWindow.postMessage(JSON.stringify({
+                    event: 'command',
+                    func: 'getCurrentTime',
+                    args: ''
+                  }), '*');
+                }
+              }, 100); // Check every 100ms
+              
+              // Store cleanup
+              if (!window.loopCleanupFns) window.loopCleanupFns = new Map();
+              window.loopCleanupFns.set(c.id, () => clearInterval(loopCheckInterval));
+              
+              // Set up message handler for loop
+              let lastLoopTime = 0;
+              let isLooping = false;
+              let lastKnownTime = 0;
+              
+              if (!window.videoLoopingStates) window.videoLoopingStates = {};
+              if (!window.primaryLoopHandler) {
+                window.primaryLoopHandler = function loopHandler(event) {
+                  if (event.origin !== 'https://www.youtube.com' && event.origin !== 'https://www.youtube-nocookie.com') return;
                   
-                  // Loop if we've reached or passed the end time (with debounce to prevent multiple loops)
-                  if (currentTime >= (endTime - 0.3) && isPlaying && (Date.now() - lastLoopTime) > 500) {
-                    lastLoopTime = Date.now();
-                    console.log('🔄 Looping video back to start:', startTime, '(was at', currentTime, ')');
+                  try {
+                    const data = JSON.parse(event.data);
                     
-                    iframe.contentWindow?.postMessage(JSON.stringify({
-                      event: 'command',
-                      func: 'seekTo',
-                      args: [startTime, true]
-                    }), '*');
-                    
-                    // Note: SVG plays its own timeline independently - don't restart it with video loop
+                    if (data.event === 'infoDelivery' && data.info && data.info.currentTime !== undefined) {
+                      const currentTime = data.info.currentTime;
+                      lastKnownTime = currentTime;
+                      
+                      if (currentTime >= (endTime - 0.2) && isPlaying && !isLooping && (Date.now() - lastLoopTime) > 300) {
+                        isLooping = true;
+                        window.videoLoopingStates['primary'] = true;
+                        lastLoopTime = Date.now();
+                        console.log('🔄 [PRIMARY] Looping video back to start:', startTime, '(was at', currentTime, ')');
+                        
+                        iframe.contentWindow?.postMessage(JSON.stringify({
+                          event: 'command',
+                          func: 'seekTo',
+                          args: [startTime, true]
+                        }), '*');
+                        
+                        setTimeout(() => {
+                          isLooping = false;
+                          lastKnownTime = startTime;
+                          window.videoLoopingStates['primary'] = false;
+                        }, 500);
+                      }
+                    }
+                  } catch (e) {}
+                };
+                
+                window.addEventListener('message', window.primaryLoopHandler);
+              }
+            } else {
+              // Secondary video exists - use direct DOM polling to avoid message conflicts
+              console.log('🎯 Using DOM-based loop polling (secondary video present)');
+              
+              const loopCheckInterval = setInterval(() => {
+                if (isPlaying && currentIframe) {
+                  try {
+                    // Try to get the YouTube player instance from the iframe
+                    const iframeWin = currentIframe.contentWindow;
+                    if (iframeWin && iframeWin.postMessage) {
+                      // Send a request for current time - but we'll handle it differently
+                      // Store a timestamp of when we sent the request
+                      if (!window.primaryLoopState) {
+                        window.primaryLoopState = { lastCheck: 0, lastSeek: 0 };
+                      }
+                      
+                      const now = Date.now();
+                      // Only check every 100ms
+                      if (now - window.primaryLoopState.lastCheck > 100) {
+                        window.primaryLoopState.lastCheck = now;
+                        
+                        // Use a unique channel for primary video loop checks
+                        iframeWin.postMessage(JSON.stringify({
+                          event: 'command',
+                          func: 'getCurrentTime',
+                          args: '',
+                          channel: 'primary-loop'
+                        }), '*');
+                      }
+                    }
+                  } catch (e) {
+                    console.error('Loop check error:', e);
                   }
                 }
-              } catch (e) {
-                // Ignore parse errors
+              }, 100);
+              
+              // Store cleanup
+              if (!window.loopCleanupFns) window.loopCleanupFns = new Map();
+              window.loopCleanupFns.set(c.id, () => clearInterval(loopCheckInterval));
+              
+              // Set up a dedicated message handler that looks for our channel
+              if (!window.primaryLoopHandlerDedicated) {
+                let lastLoopTime = 0;
+                let isLooping = false;
+                
+                window.primaryLoopHandlerDedicated = function(event) {
+                  if (event.origin !== 'https://www.youtube.com' && event.origin !== 'https://www.youtube-nocookie.com') return;
+                  
+                  try {
+                    const data = JSON.parse(event.data);
+                    
+                    // ONLY process messages that match our iframe and are currentTime responses
+                    if (data.event === 'infoDelivery' && data.info && typeof data.info.currentTime === 'number') {
+                      const currentTime = data.info.currentTime;
+                      
+                      // Additional validation: only process if time is in expected range for primary video
+                      if (currentTime >= (endTime - 0.3) && currentTime <= endTime + 0.5 && !isLooping) {
+                        const now = Date.now();
+                        if (now - lastLoopTime > 400) {
+                          isLooping = true;
+                          lastLoopTime = now;
+                          console.log('🔄 [PRIMARY-DEDICATED] Looping at', currentTime, 'back to', startTime);
+                          
+                          if (currentIframe && currentIframe.contentWindow) {
+                            currentIframe.contentWindow.postMessage(JSON.stringify({
+                              event: 'command',
+                              func: 'seekTo',
+                              args: [startTime, true]
+                            }), '*');
+                          }
+                          
+                          setTimeout(() => {
+                            isLooping = false;
+                          }, 400);
+                        }
+                      }
+                    }
+                  } catch (e) {}
+                };
+                
+                window.addEventListener('message', window.primaryLoopHandlerDedicated);
               }
-            });
+            }
           }
           
           // Show clickable overlay for pause
@@ -2910,6 +3010,13 @@ function setupSynchronization(primaryIframe: HTMLIFrameElement, secondaryIframe:
       
       // Check if this message is from the primary player
       if (event.source === primaryIframe?.contentWindow) {
+        // Check if we're in a loop operation - if so, ignore state changes from loop
+        const isLooping = window.videoLoopingStates && window.videoLoopingStates['primary'];
+        if (isLooping) {
+          console.log('🔄 Ignoring state change during loop operation');
+          return; // Don't process state changes during loop
+        }
+        
         // YouTube player state changed
         if (data.event === 'infoDelivery' && data.info && 'playerState' in data.info) {
           const state = data.info.playerState;
