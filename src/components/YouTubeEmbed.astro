@@ -2413,6 +2413,15 @@ setTimeout(() => {
           e.preventDefault();
         }
         
+        // IMMEDIATELY unmute secondary video in response to user click (mobile requirement)
+        if (c.id === 'primary-player') {
+          const secondaryIframe = /** @type {HTMLIFrameElement | null} */ (document.getElementById('secondary-player-iframe'));
+          if (secondaryIframe) {
+            secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"unMute","args":""}', '*');
+            console.log('🔊 Unmuting secondary video in click handler');
+          }
+        }
+        
         if (!isLoaded && !isLoading && iframeContainer && videoId) {
           isLoading = true; // Immediately mark as loading to prevent duplicates
           console.log(`🎬 Loading video ${videoId}...`);
@@ -2705,20 +2714,10 @@ setTimeout(() => {
                     secondaryIframe.contentWindow?.postMessage(`{"event":"command","func":"seekTo","args":[${startTime}, true]}`, '*');
                     setTimeout(() => {
                       secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-                      // Unmute after the iframe starts playing (user has interacted with page)
-                      setTimeout(() => {
-                        secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"unMute","args":""}', '*');
-                        console.log('🔊 Unmuting secondary video after user interaction');
-                      }, 500);
                     }, 100);
                   }, 50);
                 } else {
                   secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-                  // Unmute after the iframe starts playing
-                  setTimeout(() => {
-                    secondaryIframe.contentWindow?.postMessage('{"event":"command","func":"unMute","args":""}', '*');
-                    console.log('🔊 Unmuting secondary video after user interaction');
-                  }, 500);
                 }
               }
             }, 1000);
