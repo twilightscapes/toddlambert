@@ -324,6 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentIframe = null;
     let isVideoLoaded = false;
     let isPlaying = false;
+    let shouldUnmuteOnLoad = !mute; // Remember if we should unmute based on post settings
 
     function toggleVideo() {
       console.log('🎬 toggleVideo called, isVideoLoaded:', isVideoLoaded, 'isPlaying:', isPlaying);
@@ -421,10 +422,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function loadVideo() {
       // For click-to-load videos, ALWAYS start muted to avoid mobile autoplay restrictions
-      // We'll unmute immediately in the click handler (synchronously with user gesture)
+      // We'll unmute via API calls after the iframe loads if needed
       const shouldStartMuted = true; // Always start muted for click-to-load
-      const shouldUnmute = !mute; // Remember if we need to unmute based on post settings
-      console.log('🎬 loadVideo - mute prop:', mute, 'shouldStartMuted:', shouldStartMuted, 'shouldUnmute:', shouldUnmute);
+      console.log('🎬 loadVideo - mute prop:', mute, 'shouldStartMuted:', shouldStartMuted, 'shouldUnmuteOnLoad:', shouldUnmuteOnLoad);
       
       // Hide overlay screen (video is playing)
       const overlayScreen = clickToLoadContainer.querySelector('.video-overlay-screen');
@@ -453,7 +453,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const muteToggle = clickToLoadContainer.querySelector('.overlay-mute-toggle');
       if (muteToggle) {
         muteToggle.style.display = 'flex';
-        updateMuteButtonState(muteToggle, !shouldUnmute); // Show correct initial state
+        updateMuteButtonState(muteToggle, !shouldUnmuteOnLoad); // Show correct initial state
       }
       
       // Show iframe container
