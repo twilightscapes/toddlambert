@@ -1,0 +1,13 @@
+diff --git a/dist/keystar-ui-typography.js b/dist/keystar-ui-typography.js
+index c12d9ea565d3229051a505349baee21d4dd6a901..fe3ef707ced12f07ef4cf37cdd36ce0734e7de85 100644
+--- a/dist/keystar-ui-typography.js
++++ b/dist/keystar-ui-typography.js
+@@ -188,7 +188,7 @@ const overflowMap = {
+   },
+   breakword: {
+     // hyphens: 'auto', // too eager
+-    overflowWrap: 'break-word'
++    overflowWrap: 'normal'
+   }
+ };
+ 
