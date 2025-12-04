@@ -92,16 +92,15 @@ const paginationProps = {
 					<!-- Header with Title and View Toggle -->
 					<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
 						<h1 class="title text-2xl" style="margin: 0; text-transform: capitalize;">
-							<span style="color: var(--accent);">#{tag}</span> Posts
-						</h1>
-						<ViewModeSwitch 
-							sectionId={`tag-${tag}-page`} 
-							defaultView={defaultView} 
-							client:load
-						/>
-					</div>
-
-					<!-- Search Bar -->
+					<span style="color: var(--accent);">#{tag}</span> Posts
+					</h1>
+					{/* @ts-ignore - client:load is valid Astro directive */}
+					<ViewModeSwitch 
+						sectionId={`tag-${tag}-page`} 
+						defaultView={defaultView} 
+						client:load
+					/>
+				</div>					<!-- Search Bar -->
 					<div style="display: flex; gap: 0.75rem; margin-bottom: 1rem; align-items: center; flex-wrap: wrap;">
 						<div class="search-bar-container" style="position: relative; flex: 1; min-width: 250px;">
 							<input
@@ -244,15 +243,15 @@ const paginationProps = {
 <script define:vars={{ tag }}>
 	// Search and filter functionality
 	const sectionId = `tag-${tag}-page`;
-	const searchInput = document.getElementById(`${sectionId}-search-input`) as HTMLInputElement;
-	const clearSearchBtn = document.getElementById(`${sectionId}-clear-search`) as HTMLButtonElement;
-	const clearAllBtn = document.getElementById(`${sectionId}-clear-all`) as HTMLButtonElement;
-	const yearFilter = document.getElementById(`${sectionId}-year-filter`) as HTMLSelectElement;
-	const monthFilter = document.getElementById(`${sectionId}-month-filter`) as HTMLSelectElement;
-	const resultsCount = document.getElementById(`${sectionId}-results-count`) as HTMLElement;
-	const noResults = document.getElementById(`${sectionId}-no-results`) as HTMLElement;
-	const timelineView = document.querySelector('.posts-timeline') as HTMLElement;
-	const flatView = document.querySelector('.posts-flat-view') as HTMLElement;
+	const searchInput = document.getElementById(`${sectionId}-search-input`);
+	const clearSearchBtn = document.getElementById(`${sectionId}-clear-search`);
+	const clearAllBtn = document.getElementById(`${sectionId}-clear-all`);
+	const yearFilter = document.getElementById(`${sectionId}-year-filter`);
+	const monthFilter = document.getElementById(`${sectionId}-month-filter`);
+	const resultsCount = document.getElementById(`${sectionId}-results-count`);
+	const noResults = document.getElementById(`${sectionId}-no-results`);
+	const timelineView = document.querySelector('.posts-timeline');
+	const flatView = document.querySelector('.posts-flat-view');
 
 	function filterPosts() {
 		const searchTerm = searchInput?.value.toLowerCase().trim() || '';
@@ -285,10 +284,10 @@ const paginationProps = {
 					const matchesMonth = !selectedMonth || month === selectedMonth;
 
 					if (matchesSearch && matchesYear && matchesMonth) {
-						(item as HTMLElement).style.display = '';
+						item.style.display = '';
 						visibleCount++;
 					} else {
-						(item as HTMLElement).style.display = 'none';
+						item.style.display = 'none';
 					}
 				});
 
@@ -316,33 +315,30 @@ const paginationProps = {
 					const cardYear = card.getAttribute('data-year') || '';
 					const cardMonth = card.getAttribute('data-month') || '';
 					
-					const matchesYear = !selectedYear || cardYear === selectedYear;
-					const matchesMonth = !selectedMonth || cardMonth === selectedMonth;
-					
-					if (matchesYear && matchesMonth) {
-						(card as HTMLElement).style.display = '';
-					} else {
-						(card as HTMLElement).style.display = 'none';
-					}
-				});
 				
-				// Hide/show posts based on filters
+				const matchesYear = !selectedYear || cardYear === selectedYear;
+				const matchesMonth = !selectedMonth || cardMonth === selectedMonth;
+				
+				if (matchesYear && matchesMonth) {
+					card.style.display = '';
+				} else {
+					card.style.display = 'none';
+				}
+			});				// Hide/show posts based on filters
 				postItems.forEach(item => {
 					const year = item.getAttribute('data-year') || '';
 					const month = item.getAttribute('data-month') || '';
 					
-					const matchesYear = !selectedYear || year === selectedYear;
-					const matchesMonth = !selectedMonth || month === selectedMonth;
-					
-					if (matchesYear && matchesMonth) {
-						(item as HTMLElement).style.display = '';
-						visibleCount++;
-					} else {
-						(item as HTMLElement).style.display = 'none';
-					}
-				});
+				const matchesYear = !selectedYear || year === selectedYear;
+				const matchesMonth = !selectedMonth || month === selectedMonth;
 				
-				// Update results count
+				if (matchesYear && matchesMonth) {
+					item.style.display = '';
+					visibleCount++;
+				} else {
+					item.style.display = 'none';
+				}
+			});				// Update results count
 				const totalPosts = flatView.querySelectorAll('.post-item').length;
 				if (resultsCount) {
 					if (selectedYear || selectedMonth) {

@@ -108,9 +108,9 @@ const processedImages = allImages.map(image => ({
 
 
 
-
 <!-- Pass processed data to client component - load eagerly before gallery images -->
 <div data-auto-open={autoOpenLightbox ? 'true' : 'false'} style="display: none;"></div>
+{/* @ts-ignore - client:only is valid Astro directive */}
 <GalleryLightbox 
   client:only="react"
   images={processedImages} 

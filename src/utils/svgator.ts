@@ -250,7 +250,8 @@ export class SVGatorController {
       } else {
         // Inline SVG
         try {
-          instance.player = new SVGatorPlayer(instance.element);
+          const SVGatorPlayerClass = (window as any).SVGatorPlayer;
+          instance.player = new SVGatorPlayerClass(instance.element);
           instance.player?.ready(() => {
             instance.isReady = true;
             resolve();
