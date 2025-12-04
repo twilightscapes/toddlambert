@@ -34,6 +34,8 @@
 /* Base styles */
 div[data-section-id*="posts-section"] .section-content.slider,
 div[data-section-id="posts-page"] .section-content.slider,
+div[data-section-id*="tag-"] .section-content.slider,
+div[data-section-id="tags-page"] .section-content.slider,
 div[data-section-id*="magic-search"] .section-content.slider,
 div[data-section-id*="youtube-feed-section"] .section-content.slider {
 	display: flex !important;

@@ -224,23 +224,26 @@ const tagsWithCount: [string, number][] = uniqueTags.map(tag => [
     setupFilters();
   });
 
+  // Define shared variables at module scope so they're accessible to all functions
+  let searchQuery = '';
+  let activeTag = 'all';
+  let activeYear = '';
+  let activeMonth = '';
+
   function setupFilters() {
     const searchInput = document.getElementById(`${sectionId}-search-input`);
     const clearButton = document.getElementById(`${sectionId}-clear-search`);
     const clearAllButton = document.getElementById(`${sectionId}-clear-all`);
     const yearFilter = document.getElementById(`${sectionId}-year-filter`);
     const monthFilter = document.getElementById(`${sectionId}-month-filter`);
-    const resultsCount = document.getElementById(`${sectionId}-results-count`);
-    const visibleCountSpan = document.getElementById(`${sectionId}-visible-count`);
     
-    const timelineView = document.querySelector('.posts-timeline');
-    const flatView = document.querySelector('.posts-flat-view');
-    const paginationElement = document.querySelector('.posts-pagination');
-
-    let searchQuery = '';
-    let activeTag = 'all';
-    let activeYear = '';
-    let activeMonth = '';
+    // Initialize filter values from current select state (in case browser remembers)
+    if (yearFilter) {
+      activeYear = yearFilter.value;
+    }
+    if (monthFilter) {
+      activeMonth = monthFilter.value;
+    }
 
     // Search input handler
     if (searchInput) {
@@ -337,31 +340,107 @@ const tagsWithCount: [string, number][] = uniqueTags.map(tag => [
       });
     });
 
+    // Run initial filter if there are pre-selected values
+    if (activeYear || activeMonth) {
+      console.log('Running initial filter with pre-selected values');
+      updateView();
+    }
+
     async function updateView() {
+      // Query DOM elements each time (ensures they exist)
+      const timelineView = document.querySelector('.posts-timeline');
+      const flatView = document.querySelector('.posts-flat-view');
+      const paginationElement = document.querySelector('.posts-pagination');
+      const resultsCount = document.getElementById(`${sectionId}-results-count`);
+      const visibleCountSpan = document.getElementById(`${sectionId}-visible-count`);
+      const clearAllButton = document.getElementById(`${sectionId}-clear-all`);
+      
       const hasFilters = searchQuery || activeTag !== 'all' || activeYear || activeMonth;
+      const hasSearchOrTag = searchQuery || activeTag !== 'all';
       
       // Show/hide clear all button
       if (clearAllButton) {
         clearAllButton.style.display = hasFilters ? 'block' : 'none';
       }
       
-      // Show/hide timeline vs flat view
-      if (hasFilters) {
+      // Show/hide timeline vs flat view - only use flat view for search/tag filters
+      if (hasSearchOrTag) {
         if (timelineView) timelineView.style.display = 'none';
         if (flatView) flatView.style.display = 'block';
         if (paginationElement) paginationElement.style.display = 'none';
         if (resultsCount) resultsCount.style.display = 'block';
         
-        filterFlatView();
+        filterFlatView(flatView, resultsCount, visibleCountSpan);
       } else {
         if (timelineView) timelineView.style.display = 'block';
         if (flatView) flatView.style.display = 'none';
-        if (paginationElement) paginationElement.style.display = 'block';
-        if (resultsCount) resultsCount.style.display = 'none';
+        if (paginationElement) {
+          // Hide pagination when filtering by year/month
+          paginationElement.style.display = (activeYear || activeMonth) ? 'none' : 'block';
+        }
+        
+        // Filter timeline view by year/month only
+        if (timelineView) {
+          filterTimelineView(timelineView, resultsCount, visibleCountSpan);
+        }
+      }
+    }
+    
+    function filterTimelineView(timelineView, resultsCount, visibleCountSpan) {
+      if (!timelineView) return;
+      
+      const yearMonthCards = timelineView.querySelectorAll('.year-month-card');
+      const postItems = timelineView.querySelectorAll('.post-item');
+      let visibleCount = 0;
+      
+      // Hide/show year-month cards based on filters
+      yearMonthCards?.forEach(card => {
+        const cardYear = card.getAttribute('data-year') || '';
+        const cardMonth = card.getAttribute('data-month') || '';
+        
+        const matchesYear = !activeYear || cardYear === activeYear;
+        const matchesMonth = !activeMonth || cardMonth === activeMonth;
+        
+        if (matchesYear && matchesMonth) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      
+      // Hide/show posts based on filters
+      postItems?.forEach(item => {
+        const year = item.getAttribute('data-year') || '';
+        const month = item.getAttribute('data-month') || '';
+        
+        const matchesYear = !activeYear || year === activeYear;
+        const matchesMonth = !activeMonth || month === activeMonth;
+        
+        if (matchesYear && matchesMonth) {
+          item.style.display = 'contents';
+          visibleCount++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+      
+      // Update results count
+      if (activeYear || activeMonth) {
+        const totalPosts = timelineView.querySelectorAll('.post-item').length || 0;
+        if (resultsCount) {
+          resultsCount.style.display = 'block';
+          if (visibleCountSpan) {
+            visibleCountSpan.textContent = visibleCount.toString();
+          }
+        }
+      } else {
+        if (resultsCount) {
+          resultsCount.style.display = 'none';
+        }
       }
     }
 
-    async function filterFlatView() {
+    async function filterFlatView(flatView, resultsCount, visibleCountSpan) {
       const postItems = flatView?.querySelectorAll('.post-item');
       let visibleCount = 0;
 

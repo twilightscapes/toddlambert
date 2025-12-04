@@ -114,29 +114,46 @@ const monthOrder = ['January', 'February', 'March', 'April', 'May', 'June', 'Jul
 								{sortedMonthKeys.map((monthKey) => (
 									<>
 										{typeof showDates !== 'undefined' && showDates && (
-											<div class="year-month-card" style="
-												display: flex;
-												flex-direction: column;
-												align-items: center;
-												justify-content: center;
-												background: var(--theme-card-bg, rgba(0, 0, 0, 0.3));
-												border: 2px solid var(--accent);
-												border-radius: 1rem;
-												padding: 1.5rem 2rem;
-												margin: 2rem auto;
-												min-width: 300px;
-												width: fit-content;
-												backdrop-filter: blur(10px);
-												box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-												grid-column: 1 / -1;
-											">
+											<div 
+												class="year-month-card" 
+												data-year={yearKey}
+												data-month={monthKey}
+												style="
+													display: flex;
+													flex-direction: column;
+													align-items: center;
+													justify-content: center;
+													background: var(--theme-card-bg, rgba(0, 0, 0, 0.3));
+													border: 2px solid var(--accent);
+													border-radius: 1rem;
+													padding: 1.5rem 2rem;
+													margin: 2rem auto;
+													min-width: 300px;
+													width: fit-content;
+													backdrop-filter: blur(10px);
+													box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+													grid-column: 1 / -1;
+												">
 												<h2 class="title" style="margin: 0; margin-bottom: 0.5rem; text-align: center; font-size: 2.5rem; color: var(--accent); font-weight: bold;">{yearKey}</h2>
 												<h3 class="title" style="margin: 0; opacity: 0.8; text-align: center; color: var(--theme-text); font-size: 1.5rem;">{monthKey}</h3>
 											</div>
 										)}
-										{monthsInYear[monthKey]?.map((p) => (
-											<PostPreview post={p} />
-										))}
+										{monthsInYear[monthKey]?.map((p) => {
+											const postDate = new Date(p.data.publishDate);
+											const year = postDate.getFullYear().toString();
+											const month = postDate.toLocaleDateString('en-US', { month: 'long' });
+											
+											return (
+												<div 
+													class="post-item"
+													data-year={year}
+													data-month={month}
+													style="display: contents;"
+												>
+													<PostPreview post={p} />
+												</div>
+											);
+										})}
 									</>
 								))}
 							</>
