@@ -1,0 +1,8 @@
+# Cache control for video page to ensure fresh OG images
+/video
+  Cache-Control: no-cache, no-store, must-revalidate
+  X-Robots-Tag: all
+  
+/video/*
+  Cache-Control: no-cache, no-store, must-revalidate
+  X-Robots-Tag: all
