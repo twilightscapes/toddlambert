@@ -25,8 +25,8 @@ const videoIdParam = Astro.url.searchParams.get('videoId'); // Check for videoId
 const hideControlsMenu = Astro.url.searchParams.get('hideControlsMenu') === 'true';
 
 let videoId: string | null = null;
-let videoTitle = "Privacy First Video Player";  // Always use generic title for privacy
-let videoDescription = "Watch videos from YouTube, Vimeo, Twitch, Facebook, Dailymotion, and TikTok with no tracking or profiling";
+let videoTitle = "Todd's Video Privacy Player";  // Always use generic title for privacy
+let videoDescription = "Watch with no ads or tracking";
 let videoThumbnail = defaultImage; // Use dynamic default image
 
 // Use the same extractVideoId function from YouTubeFeed.astro
@@ -145,7 +145,7 @@ if (videoParam || videoIdParam) {
     
     if (videoId) {
       // Keep generic title for privacy - don't expose video ID
-      videoDescription = `Watch this video with no tracking or profiling`;
+      videoDescription = `Watch this video with no ads or profiling`;
       videoThumbnail = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
     }
   }
