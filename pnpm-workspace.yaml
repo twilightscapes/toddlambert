@@ -1,0 +1,2 @@
+patchedDependencies:
+  '@keystar/ui@0.7.0': patches/@keystar__ui@0.7.0.patch

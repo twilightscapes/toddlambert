@@ -403,7 +403,7 @@ export default config({
             { label: 'Snapchat', value: 'bi:snapchat' },
             { label: 'SoundCloud', value: 'mdi:soundcloud' },
             { label: 'WhatsApp', value: 'bi:whatsapp' },
-            { label: 'Wordpress', value: 'bi:wordpress' },
+            { label: 'Wordpress', value: 'bi:wordpress' }
           ],
           defaultValue: 'game-icons:pirate-flag'
         }),
