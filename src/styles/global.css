@@ -396,7 +396,6 @@ button.topper{background:var(--theme-header) !important;}
 
 	  .slider .iframe-container{ min-width: 50vw;}
 	  
-	  /* Override prose container max-width for slider content */
 	  .prose .slider {
 	    max-width: none !important;
 	  }
@@ -700,8 +699,8 @@ body:has(.video) #footer{display: none !important;}
 		div[data-section-id="posts-page"] .section-content.slider .post-card1,
 		div[data-section-id*="youtube-feed-section"] .section-content.slider .post-card1 {
 			flex: 0 0 auto !important;
-			min-width: 50vw !important;
-			max-width: 50vw !important;
+			min-width: 40vw !important;
+			max-width: 40vw !important;
 			scroll-snap-align: start !important;
 			display: block !important;
 			margin-bottom: 0 !important;
