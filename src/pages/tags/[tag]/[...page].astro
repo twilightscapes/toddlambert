@@ -44,6 +44,10 @@ interface Props {
 const { page, defaultView, showDates, allTagPosts } = Astro.props;
 const { tag } = Astro.params;
 
+// Get PWA short name
+const pwaSettings = await getEntry('pwaSettings', 'index');
+const shortName = pwaSettings?.data?.shortName || 'Todd Lambert';
+
 // Group posts by year and month
 const groupedByYearMonth = groupPostsByYearMonth(page.data);
 const descYearKeys = Object.keys(groupedByYearMonth).sort((a, b) => +b - +a);

@@ -22,11 +22,14 @@ const {
   uniqueTags = []
 } = Astro.props;
 
+// Get PWA short name
+const pwaSettings = await getEntry('pwaSettings', 'index');
+const shortName = pwaSettings?.data?.shortName || 'Todd Lambert';
+
 // Get language strings
 const languageData = await getEntry('language', 'index');
-const copyright = languageData?.data?.copyright || 'Todd Lambert';
 const lang = {
-  placeholder: `Search ${copyright} Posts`,
+  placeholder: `Search ${shortName}'s Posts`,
   topics: languageData?.data?.magicSearchTopics || 'Topics:',
   all: languageData?.data?.magicSearchAll || 'All',
   showing: languageData?.data?.magicSearchShowing || 'Showing',
