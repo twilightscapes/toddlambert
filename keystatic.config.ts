@@ -315,11 +315,6 @@ export default config({
               collection: 'CTAs',
               validation: { isRequired: false }
             }),
-            showTags: fields.checkbox({
-              label: 'Show Tags',
-              description: 'Show/hide the tag filter pills in Magic Search (only applies to Magic Search sections)',
-              defaultValue: true
-            }),
             searchMethod: fields.select({
               label: 'Search Method',
               description: 'Choose search method for Magic Search: Client-side (fast, title/description only) or Pagefind (full content, requires build)',
@@ -981,7 +976,8 @@ export default config({
           defaultValue: true 
         }),
         showSocial: fields.checkbox({ label: 'Show Social Links in Posts' }),
-        showTags: fields.checkbox({ label: 'Show Post Tags', description: 'Hide/Show the post tags', defaultValue: false }),
+        showTags: fields.checkbox({ label: 'Show Post Tags', description: 'Show/hide tags displayed on individual posts', defaultValue: false }),
+        showTagFilters: fields.checkbox({ label: 'Show Tag Filter Pills', description: 'Show/hide tag filter pills in search components on posts and tags pages', defaultValue: true }),
         showShare: fields.checkbox({ label: 'Show Share section on posts', description: 'Hide/Show the share this copy button on posts', defaultValue: false }),
         divider3: fields.empty(),
         videoTimeLimitMinutes: fields.number({ 

@@ -1,4 +1,3 @@
-logoImage: /images/logo/logoImage.svg
 defaultView: grid
 themeMode: user
 MAX_POSTS: 6
@@ -15,5 +14,6 @@ showDates: true
 enableImageBlur: true
 showSocial: false
 showTags: true
+showTagFilters: false
 showShare: true
 videoTimeLimitMinutes: -1

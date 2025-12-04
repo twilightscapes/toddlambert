@@ -13,6 +13,7 @@ interface SiteSettings {
   MAX_POSTS_PER_PAGE: number;
   defaultView: 'grid' | 'swipe';
   showTags: boolean;
+  showTagFilters: boolean;
   showDates: boolean;
 }
 
@@ -24,6 +25,7 @@ export const getStaticPaths = (async ({ paginate }) => {
     MAX_POSTS_PER_PAGE: siteSettings?.data?.MAX_POSTS_PER_PAGE ?? 10,
     defaultView: siteSettings?.data?.defaultView ?? 'grid',
     showTags: siteSettings?.data?.showTags ?? true,
+    showTagFilters: siteSettings?.data?.showTagFilters ?? true,
     showDates: siteSettings?.data?.showDates ?? true
   };
 
@@ -37,6 +39,7 @@ export const getStaticPaths = (async ({ paginate }) => {
       uniqueTags, 
       defaultView: settings.defaultView,
       showTags: settings.showTags,
+      showTagFilters: settings.showTagFilters,
       showDates: settings.showDates
     } 
   });
@@ -50,10 +53,11 @@ interface Props {
   uniqueTags: string[];
   defaultView: string;
   showTags: boolean;
+  showTagFilters: boolean;
   showDates: boolean;
 }
 
-const { page, uniqueTags, defaultView, showTags, showDates } = Astro.props;
+const { page, uniqueTags, defaultView, showTags, showTagFilters, showDates } = Astro.props;
 
 const meta = {
 	description: "Collection of posts",
@@ -90,7 +94,7 @@ const monthOrder = ['January', 'February', 'March', 'April', 'May', 'June', 'Jul
 		<PostsPageSearch 
 			sectionId="posts-page"
 			defaultView={defaultView as 'grid' | 'swipe'}
-			showTags={showTags}
+			showTags={showTagFilters}
 			searchMethod="hybrid"
 			allPosts={page.data}
 			groupedByYearMonth={groupedByYearMonth}

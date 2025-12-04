@@ -38,7 +38,7 @@ const { sections, pageContent } = Astro.props;
 
 // Get necessary data for section rendering
 const siteSettings = await getEntry('siteSettings', 'main');
-const { defaultView, MAX_POSTS } = siteSettings?.data ?? { defaultView: 'list', MAX_POSTS: 5 };
+const { defaultView, MAX_POSTS, showTagFilters: siteShowTagFilters } = siteSettings?.data ?? { defaultView: 'list', MAX_POSTS: 5, showTagFilters: true };
 const resumeSettings = await getEntry('resumeSettings', 'index');
 
 // Get posts for posts sections
@@ -306,7 +306,8 @@ function getSectionWidthClass(width?: string) {
               const magicSearchDescription = customDescription || "";
               const magicSearchShowTitle = showTitle;
               const magicSearchView = defaultView === 'list' ? 'grid' : defaultView;
-              const magicSearchShowTags = showTags ?? true;
+              // Use site-level showTagFilters setting
+              const magicSearchShowTags = siteShowTagFilters ?? true;
               
               return (
                 <div data-section-id={`magic-search-${index}`}>
