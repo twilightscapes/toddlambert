@@ -114,6 +114,7 @@ function getSectionWidthClass(width?: string) {
     const customDescription = section.customDescription || section.description;
     const showTitle = section.showTitle ?? true;
     const showTags = section.showTags ?? true;
+    const showSearch = section.showSearch ?? true;
     const searchMethod = section.searchMethod ?? 'client';
     
     return (
@@ -308,6 +309,7 @@ function getSectionWidthClass(width?: string) {
               const magicSearchView = defaultView === 'list' ? 'grid' : defaultView;
               // Use site-level showTagFilters setting
               const magicSearchShowTags = siteShowTagFilters ?? true;
+              const magicSearchShowSearch = showSearch ?? true;
               
               return (
                 <div data-section-id={`magic-search-${index}`}>
@@ -319,6 +321,7 @@ function getSectionWidthClass(width?: string) {
                     hideCollapseButton={hideCollapseButton}
                     defaultView={magicSearchView}
                     showTags={magicSearchShowTags}
+                    showSearch={magicSearchShowSearch}
                     searchMethod={searchMethod}
                   />
                 </div>

@@ -315,6 +315,11 @@ export default config({
               collection: 'CTAs',
               validation: { isRequired: false }
             }),
+            showSearch: fields.checkbox({
+              label: 'Show Search Bar',
+              description: 'Show/hide the search bar in Magic Search sections',
+              defaultValue: true
+            }),
             searchMethod: fields.select({
               label: 'Search Method',
               description: 'Choose search method for Magic Search: Client-side (fast, title/description only) or Pagefind (full content, requires build)',

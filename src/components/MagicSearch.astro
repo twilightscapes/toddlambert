@@ -12,6 +12,7 @@ interface Props {
   hideCollapseButton?: boolean;
   defaultView?: 'grid' | 'swipe';
   showTags?: boolean;
+  showSearch?: boolean;
   searchMethod?: 'client' | 'pagefind' | 'hybrid';
 }
 
@@ -23,6 +24,7 @@ const {
   hideCollapseButton = false,
   defaultView: propDefaultView,
   showTags = true,
+  showSearch = true,
   searchMethod = 'client'
 } = Astro.props;
 
@@ -83,48 +85,51 @@ const lang = {
   )}
   
   <!-- Search Controls -->
-  <div class="search-controls" style="padding: 0 1rem; max-width: 1400px; margin: 0 auto;">
-    <div class="search-filter-box" style="background: rgba(0, 0, 0, 0.3); padding: 1rem; border-radius: 0.75rem; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1);">
-      
-      <!-- Search Bar with Clear Filters and View All Buttons -->
-      <div style="display: flex; gap: 0.75rem; margin-bottom: 1.25rem; align-items: center; flex-wrap: wrap;">
-        <div class="search-bar-container" style="position: relative; flex: 1; min-width: 250px;">
-          <input
-            type="text"
-            id={`${sectionId}-search-input`}
-            placeholder={lang.placeholder}
-            style="width: 100%; padding: 1.25rem 3.5rem 1.25rem 1.25rem; border-radius: 0.5rem; border: 2px solid var(--accent); background: rgba(0, 0, 0, 0.4); color: var(--textColor); font-size: 1rem;"
-          />
+  {(showSearch || showTags) && (
+    <div class="search-controls" style="padding: 0 1rem; max-width: 1400px; margin: 0 auto;">
+      <div class="search-filter-box" style="background: rgba(0, 0, 0, 0.3); padding: 1rem; border-radius: 0.75rem; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1);">
+        
+        <!-- Search Bar with Clear Filters and View All Buttons -->
+        {showSearch && (
+        <div style="display: flex; gap: 0.75rem; margin-bottom: 1.25rem; align-items: center; flex-wrap: wrap;">
+          <div class="search-bar-container" style="position: relative; flex: 1; min-width: 250px;">
+            <input
+              type="text"
+              id={`${sectionId}-search-input`}
+              placeholder={lang.placeholder}
+              style="width: 100%; padding: 1.25rem 3.5rem 1.25rem 1.25rem; border-radius: 0.5rem; border: 2px solid var(--accent); background: rgba(0, 0, 0, 0.4); color: var(--textColor); font-size: 1rem;"
+            />
+            <button
+              id={`${sectionId}-clear-search`}
+              style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); padding: 0.5rem; background: transparent; border: none; cursor: pointer; display: none; color: var(--textColor);"
+              aria-label="Clear search"
+            >
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 6L6 18M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+          
+          <!-- Clear All Filters Button -->
           <button
-            id={`${sectionId}-clear-search`}
-            style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); padding: 0.5rem; background: transparent; border: none; cursor: pointer; display: none; color: var(--textColor);"
-            aria-label="Clear search"
+            id={`${sectionId}-clear-all`}
+            style="padding: 1.25rem 1.5rem; border-radius: 0.5rem; border: 2px solid var(--accent); background: rgba(255, 0, 0, 0.2); color: white; cursor: pointer; font-weight: 600; white-space: nowrap; transition: all 0.2s; display: none;"
+            onmouseover="this.style.background='rgba(255, 0, 0, 0.4)'"
+            onmouseout="this.style.background='rgba(255, 0, 0, 0.2)'"
           >
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M18 6L6 18M6 6l12 12"/>
-            </svg>
+            Clear Filters
           </button>
+          
+          <a 
+            href="/posts/" 
+            style="padding: 1.25rem 1.5rem; border-radius: 0.5rem; border: 2px solid var(--accent); background: var(--accent); color: white; text-decoration: none; font-weight: 600; white-space: nowrap; transition: all 0.2s; display: flex; align-items: center; justify-content: center;"
+            onmouseover="this.style.opacity='0.8'"
+            onmouseout="this.style.opacity='1'"
+          >
+            View All
+          </a>
         </div>
-        
-        <!-- Clear All Filters Button -->
-        <button
-          id={`${sectionId}-clear-all`}
-          style="padding: 1.25rem 1.5rem; border-radius: 0.5rem; border: 2px solid var(--accent); background: rgba(255, 0, 0, 0.2); color: white; cursor: pointer; font-weight: 600; white-space: nowrap; transition: all 0.2s; display: none;"
-          onmouseover="this.style.background='rgba(255, 0, 0, 0.4)'"
-          onmouseout="this.style.background='rgba(255, 0, 0, 0.2)'"
-        >
-          Clear Filters
-        </button>
-        
-        <a 
-          href="/posts/" 
-          style="padding: 1.25rem 1.5rem; border-radius: 0.5rem; border: 2px solid var(--accent); background: var(--accent); color: white; text-decoration: none; font-weight: 600; white-space: nowrap; transition: all 0.2s; display: flex; align-items: center; justify-content: center;"
-          onmouseover="this.style.opacity='0.8'"
-          onmouseout="this.style.opacity='1'"
-        >
-          View All
-        </a>
-      </div>
+      )}
       
       <!-- Tag Filter Pills -->
       {showTags && (
@@ -163,10 +168,11 @@ const lang = {
       
     </div>
   </div>
+  )}
   
   <!-- Results Count and View Toggle - Outside the dark box -->
   <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; max-width: 1400px; margin: 0 auto;">
-    <div id={`${sectionId}-results-count`} style="color: var(--textColor); font-size: 0.875rem; opacity: 0.7;">
+    <div id={`${sectionId}-results-count`} style="color: var(--textColor); font-size: 0.875rem; opacity: 0.7; visibility: hidden;">
       {lang.showing} {Math.min(MAX_POSTS, allPosts.length)} {lang.of} {allPosts.length} {lang.posts}
     </div>
     {/* @ts-ignore - client:load is valid Astro directive */}
@@ -401,66 +407,74 @@ const lang = {
   }
   
   // Handle search input
-  searchInput.addEventListener('input', async (e) => {
-    searchQuery = e.target.value.trim();
-    
-    // Show/hide clear button and clear all button
-    if (searchQuery) {
-      clearButton.classList.add('visible');
-      showAllPosts = true; // Show all matching results when searching
-    } else {
-      clearButton.classList.remove('visible');
-      showAllPosts = false; // Reset to limited view when search is cleared
-    }
-    
-    // Show clear all button if any filters are active
-    if (searchQuery || activeTag !== 'all') {
-      clearAllButton.style.display = 'block';
-    } else {
-      clearAllButton.style.display = 'none';
-    }
-    
-    await updateResults();
-  });
+  if (searchInput) {
+    searchInput.addEventListener('input', async (e) => {
+      searchQuery = e.target.value.trim();
+      
+      // Show/hide clear button and clear all button
+      if (searchQuery) {
+        if (clearButton) clearButton.classList.add('visible');
+        showAllPosts = true; // Show all matching results when searching
+      } else {
+        if (clearButton) clearButton.classList.remove('visible');
+        showAllPosts = false; // Reset to limited view when search is cleared
+      }
+      
+      // Show clear all button if any filters are active
+      if (clearAllButton && (searchQuery || activeTag !== 'all')) {
+        clearAllButton.style.display = 'block';
+      } else if (clearAllButton) {
+        clearAllButton.style.display = 'none';
+      }
+      
+      await updateResults();
+    });
+  }
   
   // Handle clear button
-  clearButton.addEventListener('click', async () => {
-    searchInput.value = '';
-    searchQuery = '';
-    showAllPosts = false;
-    clearButton.classList.remove('visible');
-    
-    // Update clear all button visibility
-    if (activeTag !== 'all') {
-      clearAllButton.style.display = 'block';
-    } else {
-      clearAllButton.style.display = 'none';
-    }
-    
-    await updateResults();
-  });
+  if (clearButton) {
+    clearButton.addEventListener('click', async () => {
+      if (searchInput) searchInput.value = '';
+      searchQuery = '';
+      showAllPosts = false;
+      clearButton.classList.remove('visible');
+      
+      // Update clear all button visibility
+      if (clearAllButton) {
+        if (activeTag !== 'all') {
+          clearAllButton.style.display = 'block';
+        } else {
+          clearAllButton.style.display = 'none';
+        }
+      }
+      
+      await updateResults();
+    });
+  }
   
   // Handle clear all filters button
-  clearAllButton.addEventListener('click', async () => {
-    // Reset search
-    searchInput.value = '';
-    searchQuery = '';
-    clearButton.classList.remove('visible');
-    
-    // Reset tag filter
-    activeTag = 'all';
-    tagPills.forEach((p) => p.classList.remove('active'));
-    const allPill = document.querySelector(`.tag-pill[data-section="${sectionId}"][data-tag="all"]`);
-    if (allPill) allPill.classList.add('active');
-    
-    // Reset view
-    showAllPosts = false;
-    
-    // Hide clear all button
-    clearAllButton.style.display = 'none';
-    
-    await updateResults();
-  });
+  if (clearAllButton) {
+    clearAllButton.addEventListener('click', async () => {
+      // Reset search
+      if (searchInput) searchInput.value = '';
+      searchQuery = '';
+      if (clearButton) clearButton.classList.remove('visible');
+      
+      // Reset tag filter
+      activeTag = 'all';
+      tagPills.forEach((p) => p.classList.remove('active'));
+      const allPill = document.querySelector(`.tag-pill[data-section="${sectionId}"][data-tag="all"]`);
+      if (allPill) allPill.classList.add('active');
+      
+      // Reset view
+      showAllPosts = false;
+      
+      // Hide clear all button
+      clearAllButton.style.display = 'none';
+      
+      await updateResults();
+    });
+  }
   
   // Handle tag pills
   tagPills.forEach((pill) => {
@@ -480,10 +494,12 @@ const lang = {
       }
       
       // Show/hide clear all button
-      if (searchQuery || activeTag !== 'all') {
-        clearAllButton.style.display = 'block';
-      } else {
-        clearAllButton.style.display = 'none';
+      if (clearAllButton) {
+        if (searchQuery || activeTag !== 'all') {
+          clearAllButton.style.display = 'block';
+        } else {
+          clearAllButton.style.display = 'none';
+        }
       }
       
       await updateResults();

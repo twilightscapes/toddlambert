@@ -145,6 +145,7 @@ export const collections = {
         feedConfig: z.string().optional(), // Reference to YouTube feed slug
         // CTA specific
         cta: z.string().optional(), // Reference to CTA slug
+        showSearch: z.boolean().optional(),
         searchMethod: z.enum(['client', 'pagefind', 'hybrid']).optional(),
         hideCollapseButton: z.boolean().optional(),
       })).optional().default([]),
