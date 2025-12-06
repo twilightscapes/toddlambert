@@ -253,7 +253,7 @@ body {
 
 	  /* #main section, #main article {padding:0 2%;} */
 	  
-
+section .main-content{padding:0 2rem;}
 	  
 	  header.header {height:0;}
 
