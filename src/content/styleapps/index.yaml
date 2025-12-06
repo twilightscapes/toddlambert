@@ -1,13 +1,13 @@
 backgroundImage: /images/styleapps/backgroundImage.webp
 siteFont: Special Elite
 borderRadius: 10px
-lightBg: rgba(243, 246, 249, 1)
-lightAccent2: rgba(0, 0, 0, 1)
-darkBg: rgba(0, 0, 0, 1)
-darkAccent2: rgba(0, 0, 0, 1)
-lightHeader: rgba(0, 0, 0, 0.88)
-darkHeader: rgba(45, 45, 45, 0.9)
-lightCardBg: rgba(190, 190, 190, 0.5)
+lightBg: rgba(234, 227, 230, 1)
+lightAccent2: rgba(63, 63, 63, 1)
+darkBg: rgba(34, 34, 34, 1)
+darkAccent2: rgba(34, 34, 34, 1)
+lightHeader: rgba(25, 25, 25, 1)
+darkHeader: rgba(25, 25, 25, 1)
+lightCardBg: rgba(191, 191, 191, 0.5)
 darkCardBg: rgba(29, 29, 29, 0.5)
 lightText: rgba(42, 42, 41, 1)
 darkText: rgba(243, 231, 231, 1)
@@ -16,4 +16,4 @@ customCSS: >-
   h3{font-size:clamp(1rem, 1.6vw, 2rem) !important;}
 
   .home .featured-image svg{ max-width:70vw;  object-fit: contain
-    !important;  opacity:.4 ; } body:has(.home) section:first-child{border:0px solid red !important; margin:0 !important; padding:0 !important;} #missioncontrol{background:transparent !important;} .posties{font-size:clamp(1rem, 3vw, 3rem) !important;}
+    !important;  opacity:.4 ; } body:has(.home) section:first-child{border:0px solid red !important; margin:0 !important; padding:0 !important;} #missioncontrol{background:transparent !important;} .posties{font-size:clamp(1rem, 3vw, 3rem) !important;} 
