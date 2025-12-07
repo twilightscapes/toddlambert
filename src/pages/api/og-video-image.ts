@@ -55,7 +55,7 @@ export const GET: APIRoute = async ({ url, request }) => {
       .jpeg({ quality: 90 })
       .toBuffer();
 
-    return new Response(compositedImage, {
+    return new Response(compositedImage.buffer.slice(compositedImage.byteOffset, compositedImage.byteOffset + compositedImage.byteLength), {
       headers: {
         'Content-Type': 'image/jpeg',
         'Cache-Control': 'no-cache, no-store, must-revalidate',
