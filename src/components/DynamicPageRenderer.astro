@@ -38,7 +38,7 @@ const { sections, pageContent } = Astro.props;
 
 // Get necessary data for section rendering
 const siteSettings = await getEntry('siteSettings', 'main');
-const { defaultView, MAX_POSTS, showTagFilters: siteShowTagFilters, showSearch: siteShowSearch, searchMethod: siteSearchMethod } = siteSettings?.data ?? { defaultView: 'list', MAX_POSTS: 5, showTagFilters: true, searchMethod: 'client' };
+const { defaultView, MAX_POSTS, showTagFilters: siteShowTagFilters, showSearch: siteShowSearch, searchMethod: siteSearchMethod } = siteSettings?.data ?? { defaultView: 'list', MAX_POSTS: 5, showTagFilters: true, showSearch: true, searchMethod: 'client' };
 const resumeSettings = await getEntry('resumeSettings', 'index');
 
 // Get posts for posts sections
