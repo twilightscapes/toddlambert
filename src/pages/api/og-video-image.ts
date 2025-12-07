@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import sharp from 'sharp';
 
 export const GET: APIRoute = async ({ url }) => {
   const thumbnailUrl = url.searchParams.get('thumbnail');
@@ -15,18 +16,16 @@ export const GET: APIRoute = async ({ url }) => {
     }
 
     const imageBuffer = await thumbnailResponse.arrayBuffer();
-    const base64Image = Buffer.from(imageBuffer).toString('base64');
-    const mimeType = thumbnailResponse.headers.get('content-type') || 'image/jpeg';
 
-    // Create an SVG that includes the image and play button overlay
-    const svg = `
-      <svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    // Create play button SVG (Bluesky style)
+    const playButtonSvg = `
+      <svg width="120" height="120" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="10"/>
-            <feOffset dx="0" dy="5" result="offsetblur"/>
+          <filter id="shadow">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+            <feOffset dx="0" dy="2" result="offsetblur"/>
             <feComponentTransfer>
-              <feFuncA type="linear" slope="0.6"/>
+              <feFuncA type="linear" slope="0.5"/>
             </feComponentTransfer>
             <feMerge>
               <feMergeNode/>
@@ -34,23 +33,32 @@ export const GET: APIRoute = async ({ url }) => {
             </feMerge>
           </filter>
         </defs>
-        
-        <!-- Background image -->
-        <image href="data:${mimeType};base64,${base64Image}" width="1200" height="630" preserveAspectRatio="xMidYMid slice"/>
-        
-        <!-- Semi-transparent overlay for better contrast -->
-        <rect width="1200" height="630" fill="rgba(0,0,0,0.2)"/>
-        
-        <!-- Play button matching Bluesky's style (scaled 5x and centered) -->
-        <g filter="url(#shadow)" transform="translate(540, 255) scale(5)">
-          <path fill="#1C2736" fill-rule="evenodd" clip-rule="evenodd" d="M6.514 2.143A1 1 0 0 0 5 3v18a1 1 0 0 0 1.514.858l15-9a1 1 0 0 0 0-1.716l-15-9Z"/>
-        </g>
+        <path fill="#1C2736" fill-rule="evenodd" clip-rule="evenodd" 
+              d="M6.514 2.143A1 1 0 0 0 5 3v18a1 1 0 0 0 1.514.858l15-9a1 1 0 0 0 0-1.716l-15-9Z"
+              filter="url(#shadow)"/>
       </svg>
     `;
 
-    return new Response(svg, {
+    const playButtonBuffer = Buffer.from(playButtonSvg);
+
+    // Resize thumbnail to OG image size and composite with play button
+    const compositedImage = await sharp(Buffer.from(imageBuffer))
+      .resize(1200, 630, {
+        fit: 'cover',
+        position: 'center'
+      })
+      .composite([
+        {
+          input: playButtonBuffer,
+          gravity: 'center'
+        }
+      ])
+      .jpeg({ quality: 90 })
+      .toBuffer();
+
+    return new Response(compositedImage.buffer, {
       headers: {
-        'Content-Type': 'image/svg+xml',
+        'Content-Type': 'image/jpeg',
         'Cache-Control': 'public, max-age=31536000, immutable'
       }
     });
