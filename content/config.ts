@@ -1,5 +1,4 @@
 import { defineCollection, z } from "astro:content";
-import { glob } from "astro/loaders";
 
 function removeDupsAndLowerCase(array: string[]) {
   if (!array.length) return array;
@@ -111,42 +110,13 @@ const postSchema = z.object({
 export const collections = {
   // Post collection
   post: defineCollection({
-    loader: glob({ pattern: '**/[^_]*.mdoc', base: './content/post' }),
+    type: 'content',
     schema: postSchema,
-  }),
-
-  // Pages collection
-  pages: defineCollection({
-    loader: glob({ pattern: '**/*.mdoc', base: './content/pages' }),
-    schema: z.object({
-      title: z.string(),
-      slug: z.string().optional(),
-      description: z.string().optional(),
-      layout: z.string().optional(),
-      draft: z.boolean().optional(),
-      useTemplateSystem: z.boolean().optional(),
-      sections: z.array(z.object({
-        type: z.enum([
-          'contentblock', 'pitch', 'testimonials', 'faqs', 
-          'resume', 'ctas', 'youtubefeeds', 'youform', 'posts', 'magicsearch', 'photos', 'app', 'form'
-        ]),
-        customTitle: z.string().optional(),
-        customDescription: z.string().optional(),
-        showTitle: z.boolean().optional(),
-        sectionWidth: z.enum(['narrow', 'normal', 'wide', 'full']).optional(),
-        contentBlockSlug: z.string().optional(),
-        feedConfig: z.string().optional(),
-        cta: z.string().optional(),
-        showSearch: z.boolean().optional(),
-        searchMethod: z.enum(['client', 'pagefind', 'hybrid']).optional(),
-        hideCollapseButton: z.boolean().optional(),
-      })).optional().default([]),
-    }),
   }),
 
   // StyleApps collection
   styleapps: defineCollection({
-    loader: glob({ pattern: '**/*.yaml', base: './content/styleapps' }),
+    type: 'data',
     schema: z.object({
       backgroundImage: z.string().optional(),
       backgroundVideo: z.string().optional(),
@@ -166,15 +136,45 @@ export const collections = {
     })
   }),
 
-  // Pitches collection
-  pitches: defineCollection({
-    loader: glob({ pattern: '**/*.mdoc', base: './content/pitches' }),
-    schema: z.any(),
+  pages: defineCollection({
+    type: 'content',
+    schema: z.object({
+      title: z.string(),
+      slug: z.string().optional(),
+      description: z.string().optional(),
+      layout: z.string().optional(),
+      draft: z.boolean().optional(),
+      // New template system - allows pages to use homepage components
+      useTemplateSystem: z.boolean().optional(),
+      sections: z.array(z.object({
+        type: z.enum([
+          'contentblock', 'pitch', 'testimonials', 'faqs', 
+          'resume', 'ctas', 'youtubefeeds', 'youform', 'posts', 'magicsearch', 'photos', 'app', 'form'
+        ]),
+        customTitle: z.string().optional(),
+        customDescription: z.string().optional(),
+        showTitle: z.boolean().optional(),
+        sectionWidth: z.enum(['narrow', 'normal', 'wide', 'full']).optional(),
+        // Content block specific
+        contentBlockSlug: z.string().optional(), // Reference to pitch slug
+        // YouTube feed specific
+        feedConfig: z.string().optional(), // Reference to YouTube feed slug
+        // CTA specific
+        cta: z.string().optional(), // Reference to CTA slug
+        showSearch: z.boolean().optional(),
+        searchMethod: z.enum(['client', 'pagefind', 'hybrid']).optional(),
+        hideCollapseButton: z.boolean().optional(),
+      })).optional().default([]),
+    }),
   }),
 
-  // FAQs collection
+  pitches: defineCollection({
+    type: 'content',
+    schema: z.any(), // Flexible schema to match Keystatic
+  }),
+
   faqs: defineCollection({
-    loader: glob({ pattern: '**/*.mdoc', base: './content/faqs' }),
+    type: 'content',
     schema: z.object({
       question: z.string().optional(),
       answer: z.string().optional(),
@@ -182,9 +182,8 @@ export const collections = {
     }),
   }),
 
-  // Resume collection
   resume: defineCollection({
-    loader: glob({ pattern: '**/*.mdoc', base: './content/resume' }),
+    type: 'content',
     schema: z.object({
       section: z.string().optional(),
       showTitle: z.boolean().optional(),
@@ -192,9 +191,8 @@ export const collections = {
     }),
   }),
 
-  // Testimonials collection
   testimonials: defineCollection({
-    loader: glob({ pattern: '**/*.yaml', base: './content/testimonials' }),
+    type: 'data',
     schema: z.object({
       name: z.string().optional(),
       location: z.string().optional(),
@@ -204,9 +202,11 @@ export const collections = {
     }),
   }),
 
-  // Menu Items collection
+
+
+  // Optional menuItems collection - can be empty if not needed
   menuItems: defineCollection({
-    loader: glob({ pattern: '**/*.yaml', base: './content/menuItems' }),
+    type: 'data',
     schema: z.object({
       name: z.string().optional(),
       title: z.string().optional(),
@@ -215,9 +215,8 @@ export const collections = {
     }),
   }),
 
-  // Footer Menu Items collection
   footerMenuItems: defineCollection({
-    loader: glob({ pattern: '**/*.yaml', base: './content/footerMenuItems' }),
+    type: 'data',
     schema: z.object({
       name: z.string().optional(),
       title: z.string().optional(),
@@ -226,9 +225,8 @@ export const collections = {
     }),
   }),
 
-  // Social Links collection
   socialLinks: defineCollection({
-    loader: glob({ pattern: '**/*.yaml', base: './content/socialLinks' }),
+    type: 'data',
     schema: z.object({
       friendlyName: z.string().optional(),
       link: z.string().optional(),
@@ -240,9 +238,8 @@ export const collections = {
     }),
   }),
 
-  // Site Settings singleton
   siteSettings: defineCollection({
-    loader: glob({ pattern: '**/*.yaml', base: './content/siteSettings' }),
+    type: 'data',
     schema: z.object({
       logoImage: z.string().optional(),
       showHeader: z.boolean().optional(),
@@ -250,6 +247,7 @@ export const collections = {
       showHome: z.boolean().optional(),
       showTheme: z.boolean().optional(),
       showSwitch: z.boolean().optional(),
+      // showSearch: z.boolean().optional(),
       showFooter: z.boolean().optional(),
       defaultView: z.enum(['grid', 'swipe']).optional(),
       themeMode: z.enum(['light', 'dark', 'user']).optional(),
@@ -268,9 +266,8 @@ export const collections = {
     }),
   }),
 
-  // PWA Settings singleton
   pwaSettings: defineCollection({
-    loader: glob({ pattern: '**/*.yaml', base: './content/pwaSettings' }),
+    type: 'data',
     schema: z.object({
       showRobots: z.boolean().optional(),
       siteUrl: z.string().optional(),
@@ -288,12 +285,12 @@ export const collections = {
     }),
   }),
 
-  // Form Settings singleton
   formSettings: defineCollection({
-    loader: glob({ pattern: '**/*.yaml', base: './content/formSettings' }),
+    type: 'data',
     schema: z.object({
       location: z.string().optional(),
       showMap: z.boolean().optional(),
+      // Contact form configuration
       showName: z.boolean().optional(),
       showPhone: z.boolean().optional(),
       showMessage: z.boolean().optional(),
@@ -303,6 +300,7 @@ export const collections = {
       showExtraField2: z.boolean().optional(),
       extraFieldLabel2: z.string().optional(),
       formContent: z.string().optional(),
+      // Map contact information
       mapTitle: z.string().optional(),
       mapDescription: z.string().optional(),
       businessName: z.string().optional(),
@@ -314,13 +312,15 @@ export const collections = {
     }),
   }),
 
-  // Photo Settings singleton
   photoSettings: defineCollection({
-    loader: glob({ pattern: '**/*.yaml', base: './content/photoSettings' }),
+    type: 'data',
     schema: z.object({
       galleryMode: z.enum(['directory', 'keystatic']).optional(),
       showCaptions: z.boolean().optional(),
       autoOpenLightbox: z.boolean().optional(),
+      // showFaqsOnPhotos: z.boolean().optional(),
+      // showTestimonialsOnPhotos: z.boolean().optional(),
+      // pitch: z.string().optional(),
       defaultDirectory: z.string().optional(),
       showGallerySelector: z.boolean().optional(),
       galleryImages: z.array(z.object({
@@ -330,9 +330,8 @@ export const collections = {
     }),
   }),
 
-  // Language singleton
   language: defineCollection({
-    loader: glob({ pattern: '**/*.yaml', base: './content/language' }),
+    type: 'data',
     schema: z.object({
       homelink: z.string().optional(),
       copyright: z.string().optional(),
@@ -341,6 +340,7 @@ export const collections = {
       viewmore: z.string().optional(),
       allimages: z.string().optional(),
       close: z.string().optional(),
+      // search: z.string().optional(),
       mute: z.string().optional(),
       volume: z.string().optional(),
       progress: z.string().optional(),
@@ -350,12 +350,16 @@ export const collections = {
       copyButton: z.string().optional(),
       siteDisclaimer: z.string().optional(),
       socialMessage: z.string().optional(),
+
     }),
   }),
 
-  // Resume Settings singleton
+
+
+
+
   resumeSettings: defineCollection({
-    loader: glob({ pattern: '**/*.yaml', base: './content/resumeSettings' }),
+    type: 'data',
     schema: z.object({
       title: z.string().optional(),
       showTitle: z.boolean().optional(),
@@ -366,9 +370,8 @@ export const collections = {
     }),
   }),
 
-  // CTAs collection
   CTAs: defineCollection({
-    loader: glob({ pattern: '**/*.yaml', base: './content/CTAs' }),
+    type: 'data',
     schema: z.object({
       title: z.string().optional(),
       ctaUrl: z.string().optional(),
@@ -378,9 +381,21 @@ export const collections = {
     })
   }),
 
-  // YouTube Feeds collection
+  // youtubeFeedCollections: defineCollection({
+  //   type: 'data',
+  //   schema: z.object({
+  //     name: z.string(),
+  //     description: z.string().optional(),
+  //     channels: z.array(z.object({
+  //       channelId: z.string(),
+  //       channelName: z.string().optional()
+  //     })).default([]),
+  //     category: z.enum(['tech', 'education', 'science', 'entertainment', 'news', 'politics', 'podcasts', 'gaming', 'lifestyle']).default('tech')
+  //   })
+  // }),
+
   youtubeFeeds: defineCollection({
-    loader: glob({ pattern: '**/*.yaml', base: './content/youtubeFeeds' }),
+    type: 'data',
     schema: z.object({
       title: z.string().optional(),
       description: z.string().optional(),
@@ -398,11 +413,11 @@ export const collections = {
     })
   }),
 
-  // Photo Upload singleton
+  // Social Card collection for default site image (from photoUpload directory)
   photoUpload: defineCollection({
-    loader: glob({ pattern: '**/*.yaml', base: './content/photoUpload' }),
+    type: 'data',
     schema: z.object({
-      socialCard: z.string().optional(),
+      socialCard: z.string().optional(), // Image path from Keystatic upload
     })
   }),
 };

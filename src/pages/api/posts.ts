@@ -43,14 +43,14 @@ export const GET: APIRoute = async ({ url }) => {
         }
 
         return {
-          id: `post-${post.slug}`,
+          id: `post-${post.id}`,
           title: post.data.title,
           thumbnail,
           publishDate: post.data.publishDate.toISOString(),
           description: post.data.description,
           channelTitle: 'Site Posts',
           type: 'post',
-          url: `/posts/${post.slug}/`,
+          url: `/posts/${post.id}/`,
           tags: post.data.tags || []
         };
       });

@@ -20,12 +20,12 @@ else
 fi
 
 # Backup user content and content config if present
-if [ -d src/content ]; then
+if [ -d content ]; then
     rm -rf user_content_backup || true
-    cp -a src/content user_content_backup
+    cp -a content user_content_backup
     log_change "Backed up user content to user_content_backup"
 else
-    log_change "No src/content to back up"
+    log_change "No content directory to back up"
 fi
 
 if [ -f src/content/config.ts ]; then
@@ -59,9 +59,9 @@ fi
 
 # Restore the original content directory from backup (preserve user content)
 if [ -d user_content_backup ]; then
-    rm -rf src/content || true
-    mv user_content_backup src/content
-    log_change "Restored original src/content from backup"
+    rm -rf content || true
+    mv user_content_backup content
+    log_change "Restored original content from backup"
 fi
 
 # If theme provides a new src/content/config.ts, copy it into user's content (overwriting user's config)

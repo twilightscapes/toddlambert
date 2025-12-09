@@ -14,14 +14,14 @@ export const GET: APIRoute = async ({ url }) => {
     const posts = allPosts
       .slice(0, maxPosts)
       .map(post => ({
-        id: `post-${post.slug}`,
+        id: `post-${post.id}`,
         title: post.data.title,
         thumbnail: post.data.coverImage?.src || '/images/default-post-thumbnail.jpg',
         publishDate: post.data.publishDate.toISOString(),
         description: post.data.description,
         channelTitle: 'Site Posts',
         type: 'post',
-        url: `/posts/${post.slug}/`,
+        url: `/posts/${post.id}/`,
         tags: post.data.tags || []
       }));
 
