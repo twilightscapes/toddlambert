@@ -65,11 +65,12 @@ if [ -d user_content_backup ]; then
 fi
 
 # If theme provides a new src/content/config.ts, copy it into user's content (overwriting user's config)
-if [ -f tmp_theme/src/content/config.ts ]; then
-    mkdir -p src/content
-    cp -f tmp_theme/src/content/config.ts src/content/config.ts
-    log_change "Updated src/content/config.ts from theme"
-fi
+# DISABLED: User config should be preserved
+# if [ -f tmp_theme/src/content/config.ts ]; then
+#     mkdir -p src/content
+#     cp -f tmp_theme/src/content/config.ts src/content/config.ts
+#     log_change "Updated src/content/config.ts from theme"
+# fi
 
 # Replace root configuration files if they exist in the theme
 for file in astro.config.mjs keystatic.config.ts package.json README.md tsconfig.json tailwind.config.ts postcss.config.js; do
