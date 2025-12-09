@@ -30,7 +30,7 @@ async function readYoutubeCollectionsFiles(): Promise<Record<string, string[]>> 
     const path = await import('path');
     
     // In Netlify functions, we need to resolve from the current working directory
-    const collectionsDir = path.join(process.cwd(), 'src', 'content');
+    const collectionsDir = path.join(process.cwd(), 'content', 'youtubeFeeds');
     
     // console.log(`Looking for collections in: ${collectionsDir}`);
     // console.log(`Current working directory: ${process.cwd()}`);
@@ -39,7 +39,7 @@ async function readYoutubeCollectionsFiles(): Promise<Record<string, string[]>> 
     if (!fs.existsSync(collectionsDir)) {
       // console.log('Collections directory does not exist');
       // Try alternative path
-      const altPath = path.join(process.cwd(), '..', '..', 'src', 'content');
+      const altPath = path.join(process.cwd(), '..', '..', 'content', 'youtubeFeeds');
       // console.log(`Trying alternative path: ${altPath}`);
       if (fs.existsSync(altPath)) {
         return await readFromDirectory(altPath, fs, path);
