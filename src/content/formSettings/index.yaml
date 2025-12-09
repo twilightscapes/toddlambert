@@ -1,0 +1,10 @@
+showMap: false
+showName: false
+showPhone: false
+showMessage: true
+showUpload: true
+showExtraField: false
+extraFieldLabel: Extra Field
+showExtraField2: false
+extraFieldLabel2: Extra Field 2
+formContent: 'For all inquiries, please complete the form below:'

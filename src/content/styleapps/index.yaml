@@ -13,7 +13,9 @@ lightText: rgba(42, 42, 41, 1)
 darkText: rgba(243, 231, 231, 1)
 customCSS: >-
   article{font-size: clamp(1.3rem, 2vw, 2rem) !important;} h1, h2,
-  h3{font-size:clamp(1rem, 1.6vw, 2rem) !important;}
+  h3{font-size:clamp(1rem, 1.8vw, 2.3rem) !important;}
+
+  h4{font-size:clamp(1.2rem, 2.8vw, 3rem) !important;}
 
   .home .featured-image svg{ max-width:70vw;  object-fit: contain
     !important;  opacity:.4 ; } body:has(.home) section:first-child{border:0px solid red !important; margin:0 !important; padding:0 !important;} #missioncontrol{background:transparent !important;} .posties{font-size:clamp(1rem, 3vw, 3rem) !important;} body:has(.legalese) .legalese {display:none;} body:has(.blogpost) .legalese{display:grid !important;}
