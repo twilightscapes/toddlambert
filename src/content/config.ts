@@ -181,7 +181,7 @@ export const collections = {
 
   // Pitches - loaded from content/pitches/
   pitches: defineCollection({
-    loader: glob({ pattern: '**/{index,secondaryContent}.mdoc', base: './content/pitches' }),
+    loader: glob({ pattern: '**/*.mdoc', base: './content/pitches' }),
     schema: pitchesSchema,
   }),
 
