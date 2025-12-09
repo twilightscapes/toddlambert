@@ -55,6 +55,86 @@ const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString();
 const { headings = [] } = (post.rendered as { headings?: any[] } | undefined) ?? {};
 ---
 
+<style is:global>
+/* Rotation notice overlay - only show in portrait mode on mobile */
+#rotation-notice {
+  display: none;
+  position: relative;
+  background: rgba(220, 38, 38, 0.9);
+  color: white;
+  padding: 8px 12px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  animation: pulse 2s ease-in-out infinite;
+  margin: 0;
+}
+
+#rotation-notice a {
+  color: white;
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+#rotation-notice.in-webview {
+  background: rgba(59, 130, 246, 0.9);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 1; }
+}
+
+@media (max-width: 58rem) and (orientation: portrait) {
+  #rotation-notice {
+    display: block;
+  }
+}
+
+/* Always show in webview on mobile */
+@media (max-width: 58rem) {
+  #rotation-notice.in-webview {
+    display: block;
+  }
+}
+
+/* Landscape orientation on mobile devices - full screen video/hero */
+@media (max-width: 58rem) and (orientation: landscape) {
+  #blog-hero {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 9999 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  #blog-hero .video-container-with-overlay,
+  #blog-hero > div {
+    height: 100vh !important;
+    width: 100vw !important;
+  }
+  
+  /* Hide header and rotation notice in landscape */
+  header,
+  #rotation-notice {
+    display: none !important;
+  }
+}
+
+/* Portrait orientation - normal layout */
+@media (max-width: 58rem) and (orientation: portrait) {
+  #blog-hero {
+    width: 100vw !important;
+    height: auto !important;
+  }
+}
+</style>
+
 <BaseLayout 
   title={title} 
   description={description} 
@@ -129,6 +209,38 @@ const { headings = [] } = (post.rendered as { headings?: any[] } | undefined) ??
           ) : null
         }
     </div>
+    
+    <!-- Rotation notice for mobile portrait mode -->
+    <div id="rotation-notice">
+      <span id="rotation-text">📱 Rotate your device for the best viewing experience</span>
+    </div>
+    
+    <script>
+      // Detect if running in a webview (social media apps, etc.)
+      function isInWebView() {
+        const ua = navigator.userAgent.toLowerCase();
+        // Check for common webview indicators
+        return (
+          ua.includes('fbav') || // Facebook
+          ua.includes('fban') || // Facebook
+          ua.includes('instagram') ||
+          ua.includes('twitter') ||
+          ua.includes('line/') ||
+          ua.includes('wv') || // Generic webview
+          (ua.includes('safari') && !ua.includes('version')) || // iOS webview
+          ua.includes('bluesky') // Bluesky
+        );
+      }
+      
+      const notice = document.getElementById('rotation-notice');
+      const textEl = document.getElementById('rotation-text');
+      
+      if (isInWebView() && notice && textEl) {
+        notice.classList.add('in-webview');
+        const currentUrl = window.location.href;
+        textEl.innerHTML = `🌐 For best experience, <a href="${currentUrl}" target="_blank" rel="noopener">open in your browser</a>`;
+      }
+    </script>
     
     <!-- Share options below video -->
     {showShare && (
