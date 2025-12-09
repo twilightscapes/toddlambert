@@ -30,24 +30,26 @@ try {
   if (typeof process !== 'undefined' && process.versions && process.versions.node) {
     const fs = await import('fs');
     const path = await import('path');
+    const { fileURLToPath } = await import('url');
     
     // Try multiple possible paths where the content directory might be
     const possiblePaths = [
       path.join(process.cwd(), 'content/pitches', slug, 'secondaryContent.mdoc'),
-      path.join(__dirname, '..', '..', 'content/pitches', slug, 'secondaryContent.mdoc'),
       path.join('/var/task', 'content/pitches', slug, 'secondaryContent.mdoc'),
     ];
     
     console.log(`[ContentBlock] Loading secondary content for slug: ${slug}`);
     console.log(`[ContentBlock] CWD: ${process.cwd()}`);
-    console.log(`[ContentBlock] __dirname: ${typeof __dirname !== 'undefined' ? __dirname : 'not defined'}`);
     
     let secondaryContentPath = '';
     for (const testPath of possiblePaths) {
+      console.log(`[ContentBlock] Trying path: ${testPath}`);
       if (fs.existsSync(testPath)) {
         secondaryContentPath = testPath;
-        console.log(`[ContentBlock] Found file at: ${testPath}`);
+        console.log(`[ContentBlock] ✓ Found file at: ${testPath}`);
         break;
+      } else {
+        console.log(`[ContentBlock] ✗ Not found at: ${testPath}`);
       }
     }
     
@@ -55,21 +57,35 @@ try {
       secondaryContentText = fs.readFileSync(secondaryContentPath, 'utf-8');
       console.log(`[ContentBlock] Loaded ${secondaryContentText.length} characters`);
     } else {
-      console.log(`[ContentBlock] Secondary content file not found. Tried:`);
-      possiblePaths.forEach(p => console.log(`  - ${p}`));
+      console.log(`[ContentBlock] Secondary content file not found in any location`);
       
       // Try to list what IS available
       console.log(`[ContentBlock] Listing cwd contents:`);
       try {
         const cwdContents = fs.readdirSync(process.cwd());
-        console.log(`[ContentBlock] CWD contains:`, cwdContents.slice(0, 10));
+        console.log(`[ContentBlock] CWD contains:`, cwdContents.slice(0, 20));
+        
+        // Check if content directory exists
+        const contentPath = path.join(process.cwd(), 'content');
+        if (fs.existsSync(contentPath)) {
+          console.log(`[ContentBlock] content/ directory exists`);
+          const contentContents = fs.readdirSync(contentPath);
+          console.log(`[ContentBlock] content/ contains:`, contentContents);
+          
+          const pitchesPath = path.join(contentPath, 'pitches');
+          if (fs.existsSync(pitchesPath)) {
+            console.log(`[ContentBlock] content/pitches/ exists`);
+            const pitchesContents = fs.readdirSync(pitchesPath);
+            console.log(`[ContentBlock] content/pitches/ contains:`, pitchesContents);
+          }
+        }
       } catch (e) {
-        console.log(`[ContentBlock] Could not list cwd:`, e);
+        console.log(`[ContentBlock] Could not list directories:`, e);
       }
     }
   }
 } catch (error) {
-  console.error('Error loading secondary content:', error);
+  console.error('[ContentBlock] Error loading secondary content:', error);
 }
 
 const { 
