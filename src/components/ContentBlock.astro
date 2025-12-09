@@ -26,13 +26,20 @@ try {
 // Try to load secondary content from the collection
 let secondaryContentText = '';
 try {
+  // Debug: List all pitches entries to see what IDs exist
+  const { getCollection } = await import('astro:content');
+  const allPitches = await getCollection('pitches');
+  console.log(`[ContentBlock] All pitch entries:`, allPitches.map(p => p.id));
+  
   // Try to get secondary content from the pitches collection
-  const secondaryContentEntry = await getEntry('pitches', `${slug}/secondaryContent`);
+  // Note: Astro converts IDs to lowercase, so we need to use lowercase here
+  const secondaryContentEntry = await getEntry('pitches', `${slug}/secondarycontent`);
+  console.log(`[ContentBlock] Looking for: ${slug}/secondarycontent`);
+  console.log(`[ContentBlock] Found:`, secondaryContentEntry ? 'YES' : 'NO');
+  
   if (secondaryContentEntry) {
-    console.log(`[ContentBlock] Found secondary content in collection for: ${slug}`);
+    console.log(`[ContentBlock] Secondary content body:`, secondaryContentEntry.body);
     secondaryContentText = secondaryContentEntry.body || '';
-  } else {
-    console.log(`[ContentBlock] No secondary content found in collection for: ${slug}`);
   }
 } catch (error) {
   console.error('[ContentBlock] Error loading secondary content from collection:', error);
@@ -112,10 +119,11 @@ let renderedSecondaryContent: any = null;
 if (layout === 'two-column' || layout === 'two-column-equal') {
   // Use the secondary content from file if available
   if (secondaryContentText && secondaryContentText.trim()) {
+    console.log(`[ContentBlock] Processing secondary content for ${slug}:`, secondaryContentText);
     actualSecondaryContent = processMarkdown(secondaryContentText);
-    // console.log('Secondary content loaded and processed for:', slug);
+    console.log(`[ContentBlock] Processed result:`, actualSecondaryContent);
   } else {
-    // console.log('No secondary content found for:', slug);
+    console.log(`[ContentBlock] No secondary content to process for ${slug}`);
   }
 }
 
