@@ -23,69 +23,19 @@ try {
   return null;
 }
 
-// Try to load secondary content from separate file if it exists
+// Try to load secondary content from the collection
 let secondaryContentText = '';
 try {
-  // Only run filesystem operations in Node.js environment (server-side)
-  if (typeof process !== 'undefined' && process.versions && process.versions.node) {
-    const fs = await import('fs');
-    const path = await import('path');
-    const { fileURLToPath } = await import('url');
-    
-    // Try multiple possible paths where the content directory might be
-    const possiblePaths = [
-      path.join(process.cwd(), 'content/pitches', slug, 'secondaryContent.mdoc'),
-      path.join('/var/task', 'content/pitches', slug, 'secondaryContent.mdoc'),
-    ];
-    
-    console.log(`[ContentBlock] Loading secondary content for slug: ${slug}`);
-    console.log(`[ContentBlock] CWD: ${process.cwd()}`);
-    
-    let secondaryContentPath = '';
-    for (const testPath of possiblePaths) {
-      console.log(`[ContentBlock] Trying path: ${testPath}`);
-      if (fs.existsSync(testPath)) {
-        secondaryContentPath = testPath;
-        console.log(`[ContentBlock] ✓ Found file at: ${testPath}`);
-        break;
-      } else {
-        console.log(`[ContentBlock] ✗ Not found at: ${testPath}`);
-      }
-    }
-    
-    if (secondaryContentPath) {
-      secondaryContentText = fs.readFileSync(secondaryContentPath, 'utf-8');
-      console.log(`[ContentBlock] Loaded ${secondaryContentText.length} characters`);
-    } else {
-      console.log(`[ContentBlock] Secondary content file not found in any location`);
-      
-      // Try to list what IS available
-      console.log(`[ContentBlock] Listing cwd contents:`);
-      try {
-        const cwdContents = fs.readdirSync(process.cwd());
-        console.log(`[ContentBlock] CWD contains:`, cwdContents.slice(0, 20));
-        
-        // Check if content directory exists
-        const contentPath = path.join(process.cwd(), 'content');
-        if (fs.existsSync(contentPath)) {
-          console.log(`[ContentBlock] content/ directory exists`);
-          const contentContents = fs.readdirSync(contentPath);
-          console.log(`[ContentBlock] content/ contains:`, contentContents);
-          
-          const pitchesPath = path.join(contentPath, 'pitches');
-          if (fs.existsSync(pitchesPath)) {
-            console.log(`[ContentBlock] content/pitches/ exists`);
-            const pitchesContents = fs.readdirSync(pitchesPath);
-            console.log(`[ContentBlock] content/pitches/ contains:`, pitchesContents);
-          }
-        }
-      } catch (e) {
-        console.log(`[ContentBlock] Could not list directories:`, e);
-      }
-    }
+  // Try to get secondary content from the pitches collection
+  const secondaryContentEntry = await getEntry('pitches', `${slug}/secondaryContent`);
+  if (secondaryContentEntry) {
+    console.log(`[ContentBlock] Found secondary content in collection for: ${slug}`);
+    secondaryContentText = secondaryContentEntry.body || '';
+  } else {
+    console.log(`[ContentBlock] No secondary content found in collection for: ${slug}`);
   }
 } catch (error) {
-  console.error('[ContentBlock] Error loading secondary content:', error);
+  console.error('[ContentBlock] Error loading secondary content from collection:', error);
 }
 
 const { 
