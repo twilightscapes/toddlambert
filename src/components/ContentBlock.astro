@@ -32,10 +32,24 @@ try {
     const path = await import('path');
     
     const secondaryContentPath = path.join(process.cwd(), 'content/pitches', slug, 'secondaryContent.mdoc');
+    console.log(`[ContentBlock] Loading secondary content for slug: ${slug}`);
+    console.log(`[ContentBlock] Path: ${secondaryContentPath}`);
+    console.log(`[ContentBlock] CWD: ${process.cwd()}`);
+    console.log(`[ContentBlock] File exists: ${fs.existsSync(secondaryContentPath)}`);
+    
     if (fs.existsSync(secondaryContentPath)) {
       secondaryContentText = fs.readFileSync(secondaryContentPath, 'utf-8');
+      console.log(`[ContentBlock] Loaded ${secondaryContentText.length} characters`);
     } else {
-      // No secondary content file found
+      console.log(`[ContentBlock] Secondary content file not found at: ${secondaryContentPath}`);
+      // Try to list what IS in the directory
+      const pitchDir = path.join(process.cwd(), 'content/pitches', slug);
+      if (fs.existsSync(pitchDir)) {
+        const files = fs.readdirSync(pitchDir);
+        console.log(`[ContentBlock] Files in ${pitchDir}:`, files);
+      } else {
+        console.log(`[ContentBlock] Directory does not exist: ${pitchDir}`);
+      }
     }
   }
 } catch (error) {
