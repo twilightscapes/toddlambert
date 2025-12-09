@@ -3,6 +3,9 @@
 ## Summary
 After migrating from `src/content/` to `content/` directory structure for Astro 5 Content Layer API, several configuration issues prevent content blocks (pitches) from loading in production builds.
 
+## Critical Discovery
+**A duplicate `content/config.ts` file was found at the project root.** Astro loads `src/content/config.ts` by convention, but having a file at `content/config.ts` interfered with collection loading. This file should NOT exist - only `src/content/config.ts` should be present.
+
 ## Issues Found
 
 ### 1. **CRITICAL: Pitches Collection Pattern Mismatch**
@@ -150,6 +153,29 @@ After implementing these fixes:
 
 ---
 
+### 6. **Netlify Function Path Issue**
+**Location:** `netlify/functions/youtube-feed.ts` line ~33
+
+**Problem:** The YouTube feed function looks for collections in `src/content` instead of `content/youtubeFeeds`.
+
+**Current (WRONG):**
+```typescript
+const collectionsDir = path.join(process.cwd(), 'src', 'content');
+// ...
+const altPath = path.join(process.cwd(), '..', '..', 'src', 'content');
+```
+
+**Should be:**
+```typescript
+const collectionsDir = path.join(process.cwd(), 'content', 'youtubeFeeds');
+// ...
+const altPath = path.join(process.cwd(), '..', '..', 'content', 'youtubeFeeds');
+```
+
+**Impact:** YouTube feeds won't load on pages that use them (e.g., watch page).
+
+---
+
 ## Impact on Child Projects
 
 Once fixed in the pirate template:
@@ -162,5 +188,6 @@ Once fixed in the pirate template:
 ## Notes
 
 - The `update-theme.sh` script overwrites `src/content/config.ts` from the parent template, so fixes MUST be made in the pirate repository
+- **IMPORTANT:** Check for duplicate `content/config.ts` file at project root - this should NOT exist, only `src/content/config.ts`
 - This issue only affects production builds; local dev worked because it has different caching/loading behavior
 - The schema `pitchesSchema` is set to `z.any()` which correctly accepts any structure
