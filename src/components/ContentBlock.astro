@@ -31,7 +31,7 @@ try {
     const fs = await import('fs');
     const path = await import('path');
     
-    const secondaryContentPath = path.join(process.cwd(), 'content/pitches', slug, 'secondaryContent.mdoc');
+    const secondaryContentPath = path.join(process.cwd(), 'src/content/pitches', slug, 'secondaryContent.mdoc');
     if (fs.existsSync(secondaryContentPath)) {
       secondaryContentText = fs.readFileSync(secondaryContentPath, 'utf-8');
     } else {

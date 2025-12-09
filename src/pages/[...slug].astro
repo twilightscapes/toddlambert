@@ -21,7 +21,8 @@ export async function getStaticPaths() {
 		const allEntries = [...pages, ...posts];
 
 		return allEntries.map((entry) => {
-			const cleanSlug = entry.data.slug ||
+			const cleanSlug =
+				entry.slug ||
 				entry.id
 					.split("/")
 					.pop()
