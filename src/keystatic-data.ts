@@ -15,7 +15,7 @@ type ReaderType = {
   };
 };
 
-export const reader = createReader('src/content', config) as ReaderType;
+export const reader = createReader('content', config) as ReaderType;
 
 export const getSiteSettings = async () => {
   return await reader.singletons.siteSettings.read();

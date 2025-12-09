@@ -52,7 +52,26 @@ const output = 'server'; // Use server mode for both platforms to enable dynamic
 
 ---
 
-### 3. **Prerender Flags on Dynamic Pages**
+### 3. **Secondary Content Path in ContentBlock**
+**Location:** `src/components/ContentBlock.astro` line ~34
+
+**Problem:** Hardcoded path still references old `src/content/pitches` location.
+
+**Current (WRONG):**
+```typescript
+const secondaryContentPath = path.join(process.cwd(), 'src/content/pitches', slug, 'secondaryContent.mdoc');
+```
+
+**Should be:**
+```typescript
+const secondaryContentPath = path.join(process.cwd(), 'content/pitches', slug, 'secondaryContent.mdoc');
+```
+
+**Impact:** Secondary content images (like in the about block) won't load without this fix.
+
+---
+
+### 4. **Prerender Flags on Dynamic Pages**
 **Locations:**
 - `src/pages/[...slug].astro` line 2
 - `src/pages/posts/[...page].astro` line 2
@@ -114,8 +133,9 @@ The collection "pitches" does not exist. Please ensure it is defined in your con
 ## Implementation Order for Pirate Template
 
 1. **First:** Fix `src/content/config.ts` pitches pattern (`.yaml` → `.mdoc`)
-2. **Second:** Fix `astro.config.ts` output mode (`'static'` → `'server'`)
-3. **Third:** Fix prerender flags in dynamic pages (`true` → `false`)
+2. **Second:** Fix `src/components/ContentBlock.astro` secondary content path (`src/content/pitches` → `content/pitches`)
+3. **Third:** Fix `astro.config.ts` output mode (`'static'` → `'server'`)
+4. **Fourth:** Fix prerender flags in dynamic pages (`true` → `false`)
 
 ---
 
