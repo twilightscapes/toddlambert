@@ -59,28 +59,20 @@ const sortedFaqs = allFaqs.sort((a, b) => {
 
 // Get YouTube feeds for YouTube sections
 const allYouTubeFeeds = await getCollection('youtubeFeeds');
-console.log('YouTube Feeds loaded:', allYouTubeFeeds.length, 'feeds');
-allYouTubeFeeds.forEach(feed => console.log('  - Feed ID:', feed.id, 'Title:', feed.data?.title));
 
 // Get section data for CTAs and content blocks - need to load these for sections that reference them
 const sectionData = await Promise.all(
   sections.map(async (section, index) => {
     if (section.type === 'ctas' && section.cta) {
       try {
-        console.log('Attempting to load CTA with ID:', section.cta);
-        const ctaEntry = await getEntry('CTAs', section.cta);
-        console.log('CTA loaded:', ctaEntry ? 'success' : 'null');
-        return { type: 'cta', data: ctaEntry };
+        return { type: 'cta', data: await getEntry('CTAs', section.cta) };
       } catch (error) {
         console.log(`CTA not found: ${section.cta}`);
         return { type: 'cta', data: null };
       }
     } else if ((section.type === 'content' || section.type === 'contentblock') && section.contentBlockSlug) {
       try {
-        console.log('Attempting to load content block with slug:', section.contentBlockSlug);
-        const pitchEntry = await getEntry('pitches', section.contentBlockSlug);
-        console.log('Content block loaded:', pitchEntry ? 'success' : 'null');
-        return { type: 'content', data: pitchEntry };
+        return { type: 'content', data: await getEntry('contentBlocks', section.contentBlockSlug) };
       } catch (error) {
         console.log(`Content block not found: ${section.contentBlockSlug}`);
         return { type: 'content', data: null };

@@ -120,7 +120,7 @@ const socialLinksSchema = z.any();
 const resumeSchema = z.any();
 const testimonialsSchema = z.any();
 const faqsSchema = z.any();
-const pitchesSchema = z.any();
+const contentBlocksSchema = z.any();
 const ctasSchema = z.any();
 const menuItemsSchema = z.any();
 
@@ -179,10 +179,11 @@ export const collections = {
     schema: faqsSchema,
   }),
 
-  // Pitches - loaded from content/pitches/
-  pitches: defineCollection({
-    loader: glob({ pattern: '**/*.mdoc', base: './content/pitches' }),
-    schema: pitchesSchema,
+  // Content Blocks - loaded from content/contentBlocks/
+  // Uses Keystatic format with markdoc content in separate files
+  contentBlocks: defineCollection({
+    loader: glob({ pattern: '**/*.{yaml,mdoc}', base: './content/contentBlocks' }),
+    schema: contentBlocksSchema,
   }),
 
   // CTAs - loaded from content/CTAs/

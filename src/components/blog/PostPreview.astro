@@ -273,7 +273,7 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
                         loading="eager"
                         fetchpriority="high"
                         width={defaultImageWidth}
-                        height={Math.round(defaultImageWidth * 0.5625)}
+                        inferSize
                     />
                 ) : (
                     <Image
@@ -283,7 +283,7 @@ const useCustomPlayer = post.data.youtube?.value?.useCustomPlayer ?? true;
                         loading="eager"
                         src={defaultImageSrc}
                         width={defaultImageWidth}
-                        height={Math.round(defaultImageWidth * 0.5625)}
+                        inferSize
                     />
                 )}
             </div>

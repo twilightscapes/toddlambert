@@ -16,12 +16,8 @@ import keystaticConfig from './keystatic.config';
 export const reader = createReader(process.cwd(), keystaticConfig);
 
 const isVercel = !!process.env.VERCEL;
-const adapter = isVercel ? vercel() : netlify({
-  imageCDN: false,
-  functionPerRoute: false,
-  edgeMiddleware: false,
-});
-const output = 'server'; // Use server mode for both platforms to enable dynamic OG images
+const adapter = isVercel ? vercel() : netlify();
+const output: 'static' | 'server' = 'server'; // Use server mode with prerender=true for static pages
 
 const pwaSettings = await reader.singletons.pwaSettings.read();
 
@@ -177,37 +173,7 @@ export default defineConfig({
   },
   vite: {
     optimizeDeps: {
-      include: [
-        'is-hotkey',
-        'direction', 
-        'use-sync-external-store/shim/index.js',
-        'lodash-es',
-        'lodash-es/throttle',
-        'lodash-es/debounce',
-        'cookie',
-        'remove-accents',
-        'brace-expansion',
-        'debug',
-        'acorn-jsx',
-        '@braintree/sanitize-url',
-        'escape-string-regexp',
-        'fast-deep-equal',
-        '@sindresorhus/slugify'
-      ],
-      exclude: ['@keystatic/core', '@keystatic/astro'],
-      esbuildOptions: {
-        target: 'esnext',
-      },
-    },
-    ssr: {
-      noExternal: ['@keystatic/core', '@keystatic/astro'],
-    },
-    resolve: {
-      alias: {
-        'lodash/throttle': 'lodash-es/throttle',
-        'lodash/debounce': 'lodash-es/debounce',
-        'lodash': 'lodash-es',
-      },
+      include: ['@keystatic/core', '@keystatic/astro', 'lodash/throttle', 'lodash/debounce', 'is-hotkey', 'direction', 'use-sync-external-store/shim']
     },
     server: {
       fs: {
