@@ -1,0 +1,134 @@
+
+✓ [UPDATE] Update started at Tue Dec  9 20:13:46 CST 2025
+
+✓ [UPDATE] Updating src/ directory...
+Transfer starting: 102 files
+env.d.ts
+keystatic-data.ts
+pwa.ts
+site.config.ts
+types.ts
+api/posts.ts
+components/App.astro
+components/BaseHead.astro
+components/CTAs.astro
+components/ChannelSubscribeButton.astro
+components/ColorPicker.tsx
+components/ContactForm.astro
+components/ContentBlock.astro
+components/DynamicPageRenderer.astro
+components/DynamicTheme.astro
+components/Faqs.astro
+components/FavoriteButton.astro
+components/FormattedDate.astro
+components/GalleryLightbox.jsx
+components/GoBack.astro
+components/InfoBlock.astro
+components/MagicSearch.astro
+components/MarkdownRenderer.astro
+components/MemberFavorites.astro
+components/Paginator.astro
+components/PhotoGallery.astro
+components/PhotoSection.astro
+components/Pitch.astro
+components/PostsPageSearch.astro
+components/Resume.astro
+components/Search.astro
+components/Share.astro
+components/SkipLink.astro
+components/SocialList.astro
+components/Switch.jsx
+components/Testimonials.astro
+components/ThemeProvider.astro
+components/ThemeToggle.astro
+components/TickerOverlay.astro
+components/ViewModeSwitch.jsx
+components/YouForm.astro
+components/YouTubeEmbed.astro
+components/YouTubeFeed.astro
+components/features.astro
+components/menuLinks.ts
+components/blog/Hero.astro
+components/blog/PostPreview.astro
+components/blog/TOC.astro
+components/blog/TOCHeading.astro
+components/layout/Footer.astro
+components/layout/Header.astro
+data/post.ts
+layouts/Base.astro
+layouts/BlogPost.astro
+pages/404.astro
+pages/[...slug].astro
+pages/backup.astro
+pages/index.astro
+pages/robots.txt.ts
+pages/rss.xml.ts
+pages/search.astro
+pages/thanks.astro
+pages/video.astro
+pages/api/membership-token.ts
+pages/api/metadata.ts
+pages/api/og-video-image.ts
+pages/api/posts.ts
+pages/api/validate-membership.ts
+pages/api/validate-stripe-email.ts
+pages/api/video-metadata.ts
+pages/api/video.ts
+pages/api/youtube-feed.ts
+pages/posts/[...page].astro
+pages/posts/[slug].astro
+pages/tags/index.astro
+pages/tags/[tag]/[...page].astro
+scripts/swipe-enhancements.js
+styles/global.css
+utils/date.ts
+utils/domElement.ts
+utils/generateToc.ts
+utils/getDefaultImage.ts
+utils/getPwaSettings.ts
+utils/index.ts
+utils/svgator.ts
+utils/utils.ts
+utils/videoPreferences.ts
+
+sent 980537 bytes  received 2024 bytes  39145856 bytes/sec
+total size is 971602  speedup is 0.99
+✓ [UPDATE] Source files updated
+
+✓ [UPDATE] Checking root configuration files...
+✓ [UPDATE] Updated: package.json
+✓ [UPDATE] Updated: tsconfig.json
+✓ [UPDATE] Updated: postcss.config.js
+✓ [UPDATE] Updated: README.md
+
+✓ [UPDATE] Checking customizable files for local modifications...
+
+✓ [UPDATE] Updating content configuration...
+✓ [UPDATE] Updated content config
+
+✓ [UPDATE] Updating keystatic.config.ts...
+✓ [UPDATE] Preserved Keystatic project ID
+
+✓ [UPDATE] Cleaning up...
+
+================================================
+  Update Summary
+================================================
+
+✓ Updated files (6):
+  - src/site.config.ts
+  - src/components/layout/Header.astro
+  - src/components/layout/Footer.astro
+  - src/styles/global.css
+  - astro.config.ts
+  - tailwind.config.ts
+
+📋 Full update log saved to: theme-update-20251209-201346.log
+
+Next steps:
+  1. Review changes: git diff
+  2. Test the site: npm run dev
+  3. Update dependencies: npm install
+
+✓ [UPDATE] Theme update completed at Tue Dec  9 20:13:46 CST 2025
+
