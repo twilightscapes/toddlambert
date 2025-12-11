@@ -13,7 +13,7 @@ showDates: true
 enableImageBlur: true
 showSocial: true
 showTags: true
-showTagFilters: false
+showTagFilters: true
 showShare: true
-showSearch: false
+showSearch: true
 searchMethod: hybrid
