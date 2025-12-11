@@ -125,6 +125,7 @@ const url = new URL(Astro.request.url);
   z-index: 100;
   display: none;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  min-width: 250px;
   max-width: 90vw;
 }
 
@@ -144,7 +145,7 @@ const url = new URL(Astro.request.url);
 #menu-popup a {
   padding: 1rem 1rem;
   display: block;
-  text-align: center;
+  /* text-align: center; */
   border-radius: 4px;
   transition: background 0.2s;
   color: #fff;
@@ -284,12 +285,22 @@ style="flex-direction: column;"
     allowfullscreen
     class="vidbox"
     style="height:100vh !important;"
-    loading="lazy"
+    id="background-video-iframe"
+    data-preserve-settings
 ></iframe>
 )}
 
 
 <script lang="ts">
+  // Ensure background video loads before other components initialize
+  (function() {
+    const videoIframe = document.querySelector('#background-video-iframe');
+    if (videoIframe) {
+      // Set a flag that the video is ready
+      window.backgroundVideoReady = true;
+    }
+  })();
+
   function initializeBackToTopButton() {
     const scrollBtn = document.getElementById("to-top-btn");
     const targetHeader = document.getElementById("top");
