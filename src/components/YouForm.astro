@@ -36,7 +36,7 @@ const {
   /* border: 1px solid rgba(255,255,255,0.1);
   box-shadow: 0 8px 32px rgba(0,0,0,0.3); */
   max-width: 600px;
-  width:90vw;
+
 
   color: white;
 
@@ -200,7 +200,7 @@ const {
 
   @media (max-width: 768px) {
     .you-form-container {
-      padding: 0 ;
+      padding: inherit ;
       /* min-height: 30vh; */
     }
     
@@ -315,10 +315,10 @@ const {
   }
 
   .hero-tagline {
-    font-size: 1.5rem;
+    font-size: clamp(1.1rem, 1vw, 1.4rem);
     font-weight: 600;
     color: #60a5fa;
-    padding: 0 1rem;
+    padding: 0 ;
     margin-bottom: 0rem;
   }
 
@@ -368,11 +368,10 @@ const {
 
   .hero-section {
     text-align: center;
-    padding: 1rem 0;
+    padding: 1rem;
     background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
     border-radius: 20px;
     margin-bottom: 4rem;
-    max-width: 90%;
     position: relative;
     overflow: hidden;
   }
@@ -395,7 +394,7 @@ const {
   }
 
   .hero-title {
-    font-size: clamp(1.2rem, 4.5vw, 4rem);
+    font-size: clamp(1.8rem, 4.5vw, 4rem);
     font-weight: 900;
     margin-bottom: 1rem;
     background: linear-gradient(45deg, #ef4444, #f97316, #eab308);
@@ -415,7 +414,7 @@ const {
   }
 
   .hero-tagline {
-    font-size: 1.5rem;
+    font-size: clamp(1.3rem, 1vw, 1.4rem);
     font-weight: 600;
     color: #60a5fa;
     margin-bottom: 3rem;
@@ -616,7 +615,7 @@ const {
     }
 
     .hero-title {
-          font-size: clamp(1rem, 1.5vw, 2rem);
+          font-size: clamp(1.8rem, 1.5vw, 2rem);
     }
 
     .hero-subtitle {
@@ -711,8 +710,9 @@ const {
   <section class="hero-section">
     <div class="hero-content">
     <h1 class="hero-title">Video Privacy</h1>
-      <p class="hero-subtitle">Your privacy first video portal</p>
-      <p class="hero-tagline">👤 They're Watching. We're Not.</p>
+    <p class="hero-tagline">👤 They're Watching. We're Not.</p>
+
+      
 
       <p class="hero-tagline2">Supports: YouTube, TikTok, Vimeo, Twitch, Dailymotion</p>
     </div>
@@ -772,11 +772,13 @@ const {
       <div class="feature-card">
         <h3>📺 Browser Plugin</h3>
         <p>Install the Chrome or Firefox browser plugin and just click the button on any video page.</p>
-        <p><strong>Download:</strong></p>
-        <a class="cta-button" href="https://chromewebstore.google.com/detail/lnnhagplnlkjmjhhedckjeklhbfkjbib?utm_source=item-share-cb">Chrome Plugin</a>
+        <p style="text-align:center;"><strong>Download:</strong></p>
+
+        <div style="display:flex; justify-content:center;">
+          <a class="cta-button" href="https://chromewebstore.google.com/detail/lnnhagplnlkjmjhhedckjeklhbfkjbib?utm_source=item-share-cb">Chrome Plugin</a>
 
         &nbsp;&nbsp;&nbsp;<a class="cta-button" href="https://addons.mozilla.org/en-US/firefox/addon/video-privacy/">Firefox Plugin</a>
-
+</div>
 
       </div>
       
@@ -892,7 +894,7 @@ const {
           <p class="mb-4 opacity-80">
             Download a backup file containing all your settings, favorites, and preferences. Manage or delete your information too.
           </p>
-          <a class="btn" style="margin:0 auto" href="/backup" id="backup-btn" class="btn-primary">
+          <a style="margin:0 auto" href="/backup" id="backup-btn" class="btn-primary">
             Manage Your Data Now
           </a>
         </div>
