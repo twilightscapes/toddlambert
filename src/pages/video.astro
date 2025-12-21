@@ -2366,9 +2366,23 @@ async function handleVideoFavorite() {
   try {
     let videoData: any = {};
     
-    // For YouTube, use the existing API
+    // First, try to get the title from the page (SSR metadata)
+    const pageTitle = document.title;
+    const isGenericTitle = pageTitle === "Privacy First Video Player";
+    
+    // For YouTube, fetch metadata if we don't have a good title
     if (detected.platform === 'youtube') {
-      videoData = await fetchVideoData(detected.id);
+      if (!isGenericTitle && pageTitle) {
+        // Use the page title from SSR
+        videoData = {
+          title: pageTitle,
+          thumbnail: `https://img.youtube.com/vi/${detected.id}/hqdefault.jpg`,
+          author: 'YouTube'
+        };
+      } else {
+        // Fetch from API if no title available
+        videoData = await fetchVideoData(detected.id);
+      }
     } else {
       // For other platforms, try to get metadata from oEmbed or construct basic data
       const metadata = await extractVideoMetadata(videoInput, detected.platform, detected.id);
@@ -2578,18 +2592,8 @@ async function handleChannelBookmark() {
 
 async function fetchVideoData(videoId: string) {
   try {
-    
-    // Use the same API endpoint that MemberFavorites uses for channel resolution
-    const response = await fetch('/api/youtube-feed', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        action: 'resolve',
-        input: `https://www.youtube.com/watch?v=${videoId}`
-      })
-    });
+    // Use the Netlify Function endpoint to get video details
+    const response = await fetch(`/.netlify/functions/youtube-feed?action=video&videoId=${videoId}`);
     
     if (!response.ok) {
       throw new Error(`Failed to fetch video data: ${response.status}`);
@@ -2603,13 +2607,13 @@ async function fetchVideoData(videoId: string) {
     
     // Return data in the format expected by the bookmark system
     return {
-      title: data.videoTitle || `Video ${videoId}`,
-      thumbnail: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
-      author: data.name || 'Unknown Channel',
+      title: data.title || `Video ${videoId}`,
+      thumbnail: data.thumbnail || `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
+      author: data.channelTitle || 'Unknown Channel',
       channelId: data.channelId || null,
-      published: new Date().toLocaleDateString(),
-      duration: '',
-      views: ''
+      published: data.publishedAt || new Date().toLocaleDateString(),
+      duration: data.duration || '',
+      views: data.viewCount || ''
     };
   } catch (error) {
     console.error('Error fetching video data:', error);

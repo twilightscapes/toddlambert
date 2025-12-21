@@ -9,7 +9,7 @@ interface Props {
   formName?: string;
 }
 
-const { showTitle = true, customTitle, customDescription, formName = 'contact' } = Astro.props;
+const { showTitle = true, customTitle, customDescription, formName = 'form' } = Astro.props;
 
 const formSettings = await getEntry('formSettings', 'index');
 
@@ -123,13 +123,12 @@ const displayDescription = customDescription;
   
   <div class="flexbutt" style={`gap: 4vw; padding: 0 4%; ${showMap ? '' : 'justify-content: center;'}`}>
     <form
-      class="flexcheek"
+      class="flexcheek contact-form"
       name={formName}
       method="POST"
       data-netlify="true"
       data-netlify-honeypot="bot-field"
       action="/thanks/"
-      enctype="multipart/form-data"
       style="justify-content: center; width: 100%; padding: 5vh 0 0 0; max-width: 500px; margin: 0 auto;"
     >
       <input type="hidden" name="form-name" value={formName} />
