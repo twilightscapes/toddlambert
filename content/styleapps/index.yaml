@@ -18,4 +18,4 @@ customCSS: >-
   h4{font-size:clamp(1.2rem, 2.8vw, 3rem) !important;}
 
   .home .featured-image svg{ max-width:70vw;  object-fit: contain
-    !important;  opacity:.4 ; } body:has(.home) section:first-child{border:0px solid red !important; margin:0 !important; padding:0 !important;} #missioncontrol{opacity: .9 !important;} .posties{font-size:clamp(1rem, 3vw, 3rem) !important;} body:has(.legalese) .legalese {display:none;} body:has(.blogpost) .legalese{display:grid !important;} #menu-popup a{text-align:left !important;}
+    !important;  opacity:.4 ; } body:has(.home) section:first-child{border:0px solid red !important; margin:0 !important; padding:0 !important;} #missioncontrol{opacity: .9 !important;} .posties{font-size:clamp(1rem, 3vw, 3rem) !important;} body:has(.legalese) .legalese {display:none;} body:has(.blogpost) .legalese{display:grid !important;} #menu-popup a{text-align:left !important;} .prose{backdrop-filter: blur(12px) !important;}
