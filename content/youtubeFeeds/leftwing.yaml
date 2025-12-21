@@ -12,5 +12,5 @@ maxVideos: 6
 showTitles: true
 showSectionTitle: true
 defaultView: grid
-includeSitePosts: true
+includeSitePosts: false
 maxSitePosts: 1
