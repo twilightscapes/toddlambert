@@ -16,8 +16,8 @@ import keystaticConfig from './keystatic.config';
 export const reader = createReader(process.cwd(), keystaticConfig);
 
 const isVercel = !!process.env.VERCEL;
-const adapter = isVercel ? vercel() : netlify();
-const output: 'static' | 'server' = 'server'; // Use server mode with prerender=true for static pages
+const adapter = isVercel ? vercel() : netlify({ edgeMiddleware: false });
+const output: 'static' | 'server' = 'static'; 
 
 const pwaSettings = await reader.singletons.pwaSettings.read();
 
