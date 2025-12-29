@@ -394,6 +394,45 @@ export default config({
       slugField: 'friendlyName'
       
     }),
+
+    pwaMenuItems: collection({
+      label: 'PWA Menu Items',
+      path: 'content/pwaMenuItems/*',
+      schema: {
+        friendlyName: fields.text({ label: 'Friendly Name' }),
+        link: fields.text({ label: 'Link URL' }),
+        
+        icon: fields.select({
+          label: 'Icon',
+          options: [
+            { label: 'YouTube', value: 'bi:youtube' },
+            { label: 'TikTok', value: 'bi:tiktok' },
+            { label: 'Twitch', value: 'bi:twitch' },
+            { label: 'Bluesky', value: 'simple-icons:bluesky' },
+            { label: 'X/Twitter', value: 'bi:twitter-x' },
+            { label: 'Threads', value: 'bi:threads' },
+            { label: 'Facebook', value: 'bi:facebook' },
+            { label: 'Instagram', value: 'bi:instagram' },
+            { label: 'Reddit', value: 'bi:reddit' },
+            { label: 'Discord', value: 'bi:discord' },
+            { label: 'Spotify', value: 'bi:spotify' },
+            { label: 'SoundCloud', value: 'mdi:soundcloud' },
+            { label: 'Patreon', value: 'mdi:patreon' },
+            { label: 'LinkedIn', value: 'bi:linkedin' },
+            { label: 'GitHub', value: 'bi:github' },
+            { label: 'Pirate', value: 'game-icons:pirate-flag' },
+          ],
+          defaultValue: 'bi:youtube'
+        }),
+
+        order: fields.number({ 
+          label: 'Order',
+          description: 'Optional: Leave blank for alphabetical sorting',
+          validation: { isRequired: false }
+        }),
+      },
+      slugField: 'friendlyName'
+    }),
     
     // youtubeFeedCollections: collection({
     //   label: 'YouTube Channel Collections',
@@ -967,6 +1006,28 @@ export default config({
           defaultValue: 'hybrid'
         }),
         divider3: fields.empty(),
+        // Settings Page Sections
+        showAppearanceSection: fields.checkbox({
+          label: 'Show Appearance Section',
+          description: 'Show/hide the Appearance section on the Settings page (theme switcher)',
+          defaultValue: true
+        }),
+        showCustomizeSection: fields.checkbox({
+          label: 'Show Customize Section',
+          description: 'Show/hide the Customize section on the Settings page (colors, menu position)',
+          defaultValue: true
+        }),
+        showPwaSettingsSection: fields.checkbox({
+          label: 'Show PWA Settings Section',
+          description: 'Show/hide the PWA Settings section on the Settings page (custom links, start page)',
+          defaultValue: true
+        }),
+        showBackupSection: fields.checkbox({
+          label: 'Show Backup Section',
+          description: 'Show/hide the Backup section on the Settings page (backup/restore/clear data)',
+          defaultValue: true
+        }),
+        divider4: fields.empty(),
         // videoTimeLimitMinutes: fields.number({ 
         //   label: 'Video Time Limit (Minutes)', 
         //   description: 'Set to -1 to disable timer, 0 for immediate paywall, or 1-30 minutes for timed limit',
@@ -991,8 +1052,6 @@ export default config({
         name: fields.text({ label: 'App Name' }),
         shortName: fields.text({ label: 'Short Name' }),
 
-        divider: fields.empty(),
-
         screenshot: fields.image({
           label: 'Screenshot',
           description: 'This image is used on Android in the PWA install dialogue window (Image should be in JPG or PNG format and sized at 320x640)',
@@ -1000,17 +1059,15 @@ export default config({
           publicPath: '/images/pwa',
         }),
 
-  
-
-        divider2: fields.empty(),
-
-        themeColor: colorPicker({ 
-          label: 'Theme Color', 
-          showOpacity: false
+        themeColor: fields.text({ 
+          label: 'Theme Color',
+          description: 'Enter color in rgba format, e.g., rgba(0, 0, 0, 1)',
+          defaultValue: 'rgba(0, 0, 0, 1)'
         }),
-        backgroundColor: colorPicker({ 
-          label: 'Background Color', 
-          showOpacity: false
+        backgroundColor: fields.text({ 
+          label: 'Background Color',
+          description: 'Enter color in rgba format, e.g., rgba(0, 0, 0, 1)',
+          defaultValue: 'rgba(0, 0, 0, 1)'
         }),
         startUrl: fields.text({
           label: 'PWA Start URL',
@@ -1441,6 +1498,7 @@ ui: {
       'formSettings',
       'menuItems',
       'footerMenuItems',
+      'pwaMenuItems',
       'socialCard',
       'styleapps',
       'language',

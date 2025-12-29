@@ -1,0 +1,1409 @@
+---
+import Base from '../layouts/Base.astro';
+import { getEntry } from 'astro:content';
+
+const title = 'Settings';
+const description = 'Manage your appearance, social links, and backup your data.';
+
+// Load section visibility settings from Keystatic
+let showAppearanceSection = true;
+let showCustomizeSection = true;
+let showPwaSettingsSection = true;
+let showBackupSection = true;
+
+try {
+  const siteSettings = await getEntry('siteSettings', 'main');
+  if (siteSettings?.data) {
+    showAppearanceSection = siteSettings.data.showAppearanceSection ?? true;
+    showCustomizeSection = siteSettings.data.showCustomizeSection ?? true;
+    showPwaSettingsSection = siteSettings.data.showPwaSettingsSection ?? true;
+    showBackupSection = siteSettings.data.showBackupSection ?? true;
+  }
+} catch (error) {
+  console.error('Failed to load site settings:', error);
+}
+---
+
+<Base title={title} description={description}>
+  <main class="main-content">
+    <div class="membership-container">
+      <!-- Header -->
+      <div class="membership-header">
+        <h1>Settings</h1>
+        <p>Customize your experience and manage your data.</p>
+      </div>
+
+      <!-- Premium Status Check -->
+      <div id="premium-check" class="current-status">
+        <div class="flex items-center justify-center">
+          <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-accent"></div>
+          <span class="ml-2">Checking status...</span>
+        </div>
+      </div>
+
+      <!-- Backup/Restore Interface (hidden until premium status confirmed) -->
+      <div id="backup-interface" class="hidden">
+        
+
+        {showAppearanceSection && (
+        <div class="plan-card mb-6">
+          <!-- Appearance Settings -->
+          <h2 class="text-2xl font-bold mb-4 flex items-center justify-center">
+            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+            </svg>
+            Appearance
+          </h2>
+          <p class="mb-4 opacity-80">
+            Switch between light and dark themes.
+          </p>
+
+          <!-- Theme Toggle -->
+          <div class="p-4 rounded border border-gray-600">
+            <h3 class="font-bold mb-3">Color Theme</h3>
+            <div class="flex items-center justify-between">
+              <span class="text-sm">Current theme: <span id="current-theme-display" class="font-semibold">Dark</span></span>
+              <button
+                id="settings-theme-toggle"
+                class="relative h-10 w-10 rounded-md p-2 ring-zinc-400 transition-all hover:ring-2"
+                style="background: var(--theme-header); color: white;"
+                type="button"
+                aria-label="Toggle theme"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="absolute start-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 transition-all moon-icon"
+                  style="scale: 0; opacity: 0;"
+                  fill="none"
+                  stroke-width="1.5"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18Z"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                  <path d="M22 12L23 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M12 2V1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M12 23V22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M20 20L19 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M20 4L19 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M4 20L5 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M4 4L5 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="M1 12L2 12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                <svg
+                  aria-hidden="true"
+                  class="absolute start-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 transition-all sun-icon"
+                  style="scale: 1; opacity: 1;"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M0 0h24v24H0z" fill="none" stroke="none"></path>
+                  <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path>
+                  <path d="M17 4a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"></path>
+                  <path d="M19 11h2m-1 -1v2"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        )}
+
+        {showCustomizeSection && (
+        <div class="plan-card mb-6">
+          <!-- Customize Settings -->
+          <h2 class="text-2xl font-bold mb-4 flex items-center justify-center">
+            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+            </svg>
+            Customize
+          </h2>
+          <p class="mb-4 opacity-80">
+            Customize colors and menu position.
+          </p>
+
+          <!-- Mission Control Background -->
+          <div class="mb-6">
+            <h3 class="font-bold mb-3 flex items-center gap-2">
+              Menu Button
+              <button id="reset-bar-color" class="text-xs px-2 py-1 bg-gray-600 hover:bg-gray-500 rounded text-white" title="Reset to default">Reset</button>
+            </h3>
+            <div class="space-y-3">
+              <div class="flex gap-3 items-center">
+                <input type="color" id="bar-color" class="w-16 h-12 rounded cursor-pointer">
+                <div class="flex-1">
+                  <label class="block text-sm mb-1">Color</label>
+                  <input type="text" id="bar-color-value" class="w-full p-2 rounded bg-gray-800 border border-gray-600 text-sm text-white" readonly>
+                </div>
+              </div>
+              <div class="flex gap-3 items-center">
+                <label class="text-sm" style="width: 80px;">Opacity:</label>
+                <input type="range" id="bar-opacity" min="0" max="1" step="0.01" value="1" class="flex-1">
+                <span id="bar-opacity-value" class="text-sm" style="width: 50px; text-align: right;">100%</span>
+              </div>
+              <div class="p-3 rounded border border-gray-600 flex items-center gap-2">
+                <span class="text-sm">Preview:</span>
+                <div id="bar-preview" class="flex-1 h-8 rounded"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Menu Popup Background -->
+          <div class="mb-4">
+            <h3 class="font-bold mb-3 flex items-center gap-2">
+              Menu Popup and Icons
+              <button id="reset-menu-color" class="text-xs px-2 py-1 bg-gray-600 hover:bg-gray-500 rounded text-white" title="Reset to default">Reset</button>
+            </h3>
+            <div class="space-y-3">
+              <div class="flex gap-3 items-center">
+                <input type="color" id="menu-color" class="w-16 h-12 rounded cursor-pointer">
+                <div class="flex-1">
+                  <label class="block text-sm mb-1">Color</label>
+                  <input type="text" id="menu-color-value" class="w-full p-2 rounded bg-gray-800 border border-gray-600 text-sm text-white" readonly>
+                </div>
+              </div>
+              <div class="flex gap-3 items-center">
+                <label class="text-sm" style="width: 80px;">Opacity:</label>
+                <input type="range" id="menu-opacity" min="0" max="1" step="0.01" value="1" class="flex-1">
+                <span id="menu-opacity-value" class="text-sm" style="width: 50px; text-align: right;">100%</span>
+              </div>
+              <div class="p-3 rounded border border-gray-600 flex items-center gap-2">
+                <span class="text-sm">Preview:</span>
+                <div id="menu-preview" class="flex-1 h-8 rounded"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Menu Button Position -->
+          <div class="mb-4">
+            <h3 class="font-bold mb-3 flex items-center gap-2">
+              Menu Button Position
+              <button id="reset-menu-position" class="text-xs px-2 py-1 bg-gray-600 hover:bg-gray-500 rounded text-white" title="Reset to default">Reset</button>
+            </h3>
+            <p class="text-sm opacity-80 mb-3">Choose where the menu button appears on your screen</p>
+            <select id="menu-position" class="w-full p-2 rounded bg-gray-800 border border-gray-600 text-white">
+              <option value="bottom-center">Bottom Center (Default)</option>
+              <option value="bottom-left">Bottom Left</option>
+              <option value="bottom-right">Bottom Right</option>
+              <option value="top-center">Top Center</option>
+              <option value="top-left">Top Left</option>
+              <option value="top-right">Top Right</option>
+            </select>
+          </div>
+        </div>
+        )}
+
+        {showPwaSettingsSection && (
+        <div class="plan-card mb-6">
+          <!-- PWA Settings -->
+          <h2 class="text-2xl font-bold mb-4 flex items-center justify-center">
+            <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+            PWA Settings
+          </h2>
+          <p class="mb-4 opacity-80">
+            Configure your Progressive Web App settings, including custom links and start page.
+          </p>
+
+          <!-- Start Page Selector -->
+          <div class="p-4 rounded-lg mb-4 border border-gray-600">
+            <h3 class="font-bold mb-3">PWA Start Page</h3>
+            <p class="text-sm opacity-80 mb-3">Choose which page opens when you launch the PWA</p>
+            <select id="start-page-select" class="w-full p-2 rounded bg-gray-800 border border-gray-600 text-white">
+              <option value="/settings">Settings (Default)</option>
+              <option value="/video">Videos</option>
+              <option value="/">Index </option>
+              {/* <option value="/posts">Posts</option> */}
+              {/* <option value="/photos">Photos</option> */}
+              {/* <option value="/resume">Resume</option> */}
+              {/* <option value="/contact">Contact</option> */}
+              {/* <option value="/install">install</option> */}
+            </select>
+          </div>
+
+          <!-- Add New Link Form -->
+          <div class="p-4 rounded-lg mb-4" id="add-link-form">
+            <h3 class="font-bold mb-3">Add New Link</h3>
+            <div class="space-y-3">
+              <div>
+                <label class="block text-sm mb-1">Friendly Name</label>
+                <input type="text" id="link-name" placeholder="e.g., My YouTube" class="w-full p-2 rounded bg-gray-800 border border-gray-600 text-white">
+              </div>
+              <div>
+                <label class="block text-sm mb-1">URL</label>
+                <input type="url" id="link-url" placeholder="https://youtube.com/@username" class="w-full p-2 rounded bg-gray-800 border border-gray-600 text-white">
+              </div>
+              <div>
+                <label class="block text-sm mb-1">Icon (optional)</label>
+                <select id="link-icon" class="w-full p-2 rounded bg-gray-800 border border-gray-600 text-white">
+                  <option value="">Select Icon (use initials)</option>
+                  <option value="simple-icons:youtube">YouTube</option>
+                  <option value="simple-icons:tiktok">TikTok</option>
+                  <option value="simple-icons:twitch">Twitch</option>
+                  <option value="simple-icons:bluesky">Bluesky</option>
+                  <option value="simple-icons:x">X/Twitter</option>
+                  <option value="simple-icons:threads">Threads</option>
+                  <option value="simple-icons:facebook">Facebook</option>
+                  <option value="simple-icons:instagram">Instagram</option>
+                  <option value="simple-icons:reddit">Reddit</option>
+                  <option value="simple-icons:discord">Discord</option>
+                  <option value="simple-icons:linkedin">LinkedIn</option>
+                  <option value="simple-icons:github">GitHub</option>
+                </select>
+              </div>
+              <button id="add-link-btn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition-colors w-full">
+                + Add Link
+              </button>
+            </div>
+          </div>
+
+          <!-- Current Links List -->
+          <div id="social-links-list" class="space-y-2">
+            <!-- Will be populated by JavaScript -->
+          </div>
+        </div>
+        )}
+
+        {showBackupSection && (
+        <>
+        <!-- Data Overview -->
+        <div class="pricing-grid mb-8">
+          <div class="plan-card">
+            <h2 class="text-xl font-bold mb-4 flex items-center justify-center">
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              Current Data
+            </h2>
+            <div id="data-overview" class="space-y-3 text-sm">
+              <!-- Will be populated by JavaScript -->
+            </div>
+          </div>
+
+          <div class="plan-card">
+            <h2 class="text-xl font-bold mb-4 flex items-center justify-center">
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M13 6a3 3 0 11-6 0 3 3 0 616 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+              </svg>
+              Last Backup
+            </h2>
+            <div id="backup-info" class="text-sm">
+              <p>No backup found</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Backup Section -->
+        <div class="plan-card mb-6">
+          <h2 class="text-2xl font-bold mb-4 flex items-center justify-center">
+            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"/>
+            </svg>
+            Create Backup
+          </h2>
+          <p class="mb-4 opacity-80">
+            Download a backup file containing all your settings, favorites, and preferences.
+          </p>
+          <button id="backup-btn" class="btn-primary">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+            </svg>
+            Download Backup
+          </button>
+        </div>
+
+        <!-- Restore Section -->
+        <div class="plan-card mb-6">
+          <h2 class="text-2xl font-bold mb-4 flex items-center justify-center">
+            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+            </svg>
+            Restore from Backup
+          </h2>
+          <p class="mb-4 opacity-80">
+            Upload a backup file to restore your settings. This will replace all current data.
+          </p>
+          
+          <div class="border-2 border-dashed border-gray-600 rounded-lg p-6 text-center mb-4" id="drop-zone">
+            <svg class="mx-auto h-8 w-8 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+            </svg>
+            <p class="text-gray-400">Drag and drop your backup file here, or</p>
+            <input type="file" id="restore-input" accept=".json" class="hidden">
+            <button id="browse-btn" class="mt-2 bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition-colors">
+              Browse Files
+            </button>
+          </div>
+          
+          <div id="restore-preview" class="hidden bg-gray-700 p-4 rounded-lg mb-4">
+            <h3 class="font-bold text-accent mb-2">Backup Preview:</h3>
+            <div id="restore-details" class="text-sm text-gray-300"></div>
+          </div>
+          
+          <button id="restore-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center" disabled style="margin:0 auto;">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+            </svg>
+            Restore Data
+          </button>
+        </div>
+
+        <!-- Clear Data Section -->
+        <div class=" border border-red-600/30 p-6 rounded-lg" style="max-width: 400px; margin:0 auto; display:grid; place-self: center; justify-content: center;">
+          <h2 class="font-bold mb-2 text-red-400 flex items-center">
+            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+            </svg>
+            Clear All Data
+          </h2>
+          <p class=" mb-4">
+            <strong>Warning:</strong> This will permanently delete all your Watchlist, channel subscriptions, and settings.
+          </p>
+          <button id="clear-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+            Clear All Data
+          </button>
+        </div>
+        </>
+        )}
+      </div>
+
+      <!-- Non-Premium Notice -->
+      <div id="non-premium-notice" class="hidden text-center bg-gray-800 p-8 rounded-lg border border-gray-700">
+        <svg class="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+        </svg>
+        <h2 class="text-2xl font-bold text-gray-300 mb-4">Premium Feature</h2>
+        <p class="text-gray-400 mb-6">
+          Data backup and restore is available for premium members only.
+        </p>
+        <a href="/features" class="bg-accent hover:bg-accent/80 text-gray-300 font-bold py-3 px-6 rounded-lg transition-colors inline-flex items-center">
+          <svg class="w-5 h-5 mr-2" fill="#fff" viewBox="0 0 20 20">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          Upgrade to Premium
+        </a>
+      </div>
+    </div>
+  </main>
+</Base>
+
+<script>
+  class BackupManager {
+    constructor() {
+      this.initializeEventListeners();
+      this.checkPremiumStatus();
+      this.initializeAppearance();
+    }
+
+    // Define all localStorage keys that should be backed up
+    getBackupKeys() {
+      return {
+        memberData: [
+          'memberFavorites',
+          'memberChannels', 
+          'channelOrder'
+        ],
+        membership: [
+          'membershipCode',
+          'membershipStatus',
+          'membershipCacheTime'
+        ],
+        preferences: [
+          'video-preferences',
+          'videoPreference_muted',
+          'memberFavorites-collapsed'
+        ],
+        customData: [
+          'customSocialLinks',
+          'customBarColor',
+          'customMenuColor',
+          'customMenuPosition',
+          'customStartPage'
+        ],
+        uiState: [] // Will be populated dynamically for channel-collapsed-* keys
+      };
+    }
+
+    async checkPremiumStatus() {
+      const statusElement = document.getElementById('premium-check');
+      const interfaceElement = document.getElementById('backup-interface');
+      const noticeElement = document.getElementById('non-premium-notice');
+
+      try {
+        // Wait for global membership utils to be available
+        let attempts = 0;
+        while (!globalThis.checkUnifiedMembershipStatus && attempts < 50) {
+          await new Promise(resolve => setTimeout(resolve, 100));
+          attempts++;
+        }
+
+        if (!globalThis.checkUnifiedMembershipStatus) {
+          throw new Error('Membership utilities not available');
+        }
+
+        // Check membership status using the same method as other components
+        const result = await globalThis.checkUnifiedMembershipStatus();
+
+        if (result.isValid && result.tier !== 'free') {
+          // Premium user - show interface
+          statusElement?.classList.add('hidden');
+          interfaceElement?.classList.remove('hidden');
+          this.updateDataOverview();
+        } else {
+          throw new Error('Not premium member');
+        }
+      } catch (error) {
+        console.log('Premium check failed:', error);
+        // Not premium or error - show upgrade notice
+        statusElement?.classList.add('hidden');
+        noticeElement?.classList.remove('hidden');
+      }
+    }
+
+    updateDataOverview() {
+      const overview = document.getElementById('data-overview');
+      if (!overview) return;
+      
+      const keys = this.getBackupKeys();
+      
+      let html = '';
+      let totalItems = 0;
+
+      // Check member data
+      const favorites = JSON.parse(localStorage.getItem('memberFavorites') || '[]');
+      const channels = JSON.parse(localStorage.getItem('memberChannels') || '[]');
+      const channelOrder = JSON.parse(localStorage.getItem('channelOrder') || '[]');
+      
+      html += `<div class="flex justify-between"><span>Favorite Videos:</span><span class="text-accent">${favorites.length}</span></div>`;
+      html += `<div class="flex justify-between"><span>Subscribed Channels:</span><span class="text-accent">${channels.length}</span></div>`;
+      html += `<div class="flex justify-between"><span>Channel Order:</span><span class="text-accent">${channelOrder.length > 0 ? 'Set' : 'Default'}</span></div>`;
+      
+      // Check preferences
+      const hasVideoPrefs = localStorage.getItem('video-preferences') || localStorage.getItem('videoPreference_muted');
+      html += `<div class="flex justify-between"><span>Video Preferences:</span><span class="text-accent">${hasVideoPrefs ? 'Set' : 'Default'}</span></div>`;
+      
+      // Check UI state
+      const uiKeys = Object.keys(localStorage).filter(key => 
+        key.startsWith('channel-collapsed-') || key === 'memberFavorites-collapsed'
+      );
+      html += `<div class="flex justify-between"><span>UI Preferences:</span><span class="text-accent">${uiKeys.length} items</span></div>`;
+      
+      // Check custom social links
+      const socialLinks = JSON.parse(localStorage.getItem('customSocialLinks') || '[]');
+      html += `<div class="flex justify-between"><span>Custom Social Links:</span><span class="text-accent">${socialLinks.length}</span></div>`;
+      
+      // Check membership
+      // const membershipCode = localStorage.getItem('membershipCode');
+      // html += `<div class="flex justify-between"><span>Membership:</span><span class="text-accent">${membershipCode ? 'Active' : 'None'}</span></div>`;
+
+      overview.innerHTML = html;
+
+      // Update backup info
+      this.updateBackupInfo();
+    }
+
+    updateBackupInfo() {
+      const backupInfo = document.getElementById('backup-info');
+      if (!backupInfo) return;
+      
+      const lastBackup = localStorage.getItem('lastBackupDate');
+      
+      if (lastBackup) {
+        const date = new Date(parseInt(lastBackup));
+        backupInfo.innerHTML = `
+          <p class="text-green-400">✓ Last backup: ${date.toLocaleDateString()} at ${date.toLocaleTimeString()}</p>
+          <p class="text-xs text-gray-400 mt-1">Regular backups help protect your data</p>
+        `;
+      } else {
+        backupInfo.innerHTML = `
+          <p class="text-yellow-400">⚠ No backup found</p>
+          <p class="text-xs text-gray-400 mt-1">Create your first backup to protect your data</p>
+        `;
+      }
+    }
+
+    createBackup() {
+      try {
+        const keys = this.getBackupKeys();
+        const backup = {
+          version: '1.0',
+          timestamp: Date.now(),
+          date: new Date().toISOString(),
+          data: {}
+        };
+
+        // Backup member data
+        keys.memberData.forEach(key => {
+          const value = localStorage.getItem(key);
+          if (value) {
+            backup.data[key] = JSON.parse(value);
+          }
+        });
+
+        // Backup membership info
+        keys.membership.forEach(key => {
+          const value = localStorage.getItem(key);
+          if (value) {
+            backup.data[key] = key.endsWith('Status') ? JSON.parse(value) : value;
+          }
+        });
+
+        // Backup preferences
+        keys.preferences.forEach(key => {
+          const value = localStorage.getItem(key);
+          if (value) {
+            backup.data[key] = key.includes('preferences') ? JSON.parse(value) : value;
+          }
+        });
+
+        // Backup custom data
+        keys.customData.forEach(key => {
+          const value = localStorage.getItem(key);
+          if (value) {
+            backup.data[key] = JSON.parse(value);
+          }
+        });
+
+        // Backup dynamic UI state
+        Object.keys(localStorage).forEach(key => {
+          if (key.startsWith('channel-collapsed-') || key.startsWith('viewMode-')) {
+            backup.data[key] = localStorage.getItem(key);
+          }
+        });
+
+        // Create and download file
+        const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `privacyvideo-backup-${new Date().toISOString().split('T')[0]}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        // Update last backup time
+        localStorage.setItem('lastBackupDate', Date.now().toString());
+        this.updateBackupInfo();
+
+        // Show success message
+        this.showMessage('Backup created successfully!', 'success');
+      } catch (error) {
+        console.error('Backup creation failed:', error);
+        this.showMessage('Failed to create backup. Please try again.', 'error');
+      }
+    }
+
+    async restoreBackup(file) {
+      try {
+        const text = await file.text();
+        const backup = JSON.parse(text);
+
+        // Validate backup format
+        if (!backup.version || !backup.data) {
+          throw new Error('Invalid backup file format');
+        }
+
+        // Show confirmation dialog
+        const confirmMessage = `This will restore data from ${new Date(backup.timestamp).toLocaleDateString()}.\n\nThis will replace ALL current data including:\n• ${Object.keys(backup.data).length} settings\n• All favorites and subscriptions\n• All preferences\n\nAre you sure you want to continue?`;
+        
+        if (!confirm(confirmMessage)) {
+          return;
+        }
+
+        // Clear existing data first
+        this.clearAllData(false);
+
+        // Restore data
+        Object.entries(backup.data).forEach(([key, value]) => {
+          if (value !== undefined) {
+            if (typeof value === 'object') {
+              localStorage.setItem(key, JSON.stringify(value));
+            } else {
+              localStorage.setItem(key, String(value));
+            }
+          }
+        });
+
+        this.showMessage('Data restored successfully! Refreshing page...', 'success');
+        
+        // Refresh page after a short delay
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+
+      } catch (error) {
+        console.error('Restore failed:', error);
+        this.showMessage('Failed to restore backup. Please check the file and try again.', 'error');
+      }
+    }
+
+    clearAllData(showConfirmation = true) {
+      if (showConfirmation) {
+        const confirmMessage = 'This will permanently delete ALL your data including:\n\n• All favorite videos\n• All channel subscriptions\n• All preferences and settings\n• Membership information\n\nThis action cannot be undone. Are you sure?';
+        
+        if (!confirm(confirmMessage)) {
+          return;
+        }
+      }
+
+      // Get all keys to clear
+      const keys = this.getBackupKeys();
+      const allKeys = [
+        ...keys.memberData,
+        ...keys.membership,
+        ...keys.preferences,
+        ...keys.customData
+      ];
+
+      // Add dynamic keys
+      Object.keys(localStorage).forEach(key => {
+        if (key.startsWith('channel-collapsed-') || key.startsWith('viewMode-') || key === 'lastBackupDate') {
+          allKeys.push(key);
+        }
+      });
+
+      // Clear all keys
+      allKeys.forEach(key => {
+        localStorage.removeItem(key);
+      });
+
+      if (showConfirmation) {
+        this.showMessage('All data cleared successfully!', 'success');
+        this.updateDataOverview();
+      }
+    }
+
+    showMessage(message, type = 'info') {
+      // Create toast message
+      const toast = document.createElement('div');
+      toast.className = `fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg max-w-sm ${
+        type === 'success' ? 'bg-green-600 text-white' :
+        type === 'error' ? 'bg-red-600 text-white' :
+        'bg-blue-600 text-white'
+      }`;
+      toast.textContent = message;
+      
+      document.body.appendChild(toast);
+      
+      // Remove after 3 seconds
+      setTimeout(() => {
+        if (document.body.contains(toast)) {
+          document.body.removeChild(toast);
+        }
+      }, 3000);
+    }
+
+    // Social Links Management
+    getSocialLinks() {
+      const links = localStorage.getItem('customSocialLinks');
+      return links ? JSON.parse(links) : [];
+    }
+
+    saveSocialLinks(links) {
+      localStorage.setItem('customSocialLinks', JSON.stringify(links));
+      this.renderSocialLinks();
+      this.updateDataOverview();
+      
+      // Dispatch custom event to update PWA menu in real-time
+      window.dispatchEvent(new CustomEvent('customLinksUpdated'));
+    }
+
+    addSocialLink(name, url, icon) {
+      if (!name || !url) {
+        this.showMessage('Please fill in all required fields', 'error');
+        return;
+      }
+
+      const links = this.getSocialLinks();
+      const newLink = {
+        id: Date.now(),
+        name: name.trim(),
+        url: url.trim(),
+        icon: icon,
+        order: links.length
+      };
+
+      links.push(newLink);
+      this.saveSocialLinks(links);
+      this.showMessage('Link added successfully!', 'success');
+
+      // Clear form
+      const nameInput = document.getElementById('link-name') as HTMLInputElement;
+      const urlInput = document.getElementById('link-url') as HTMLInputElement;
+      const iconSelect = document.getElementById('link-icon') as HTMLSelectElement;
+      if (nameInput) nameInput.value = '';
+      if (urlInput) urlInput.value = '';
+      if (iconSelect) iconSelect.selectedIndex = 0;
+    }
+
+    deleteSocialLink(id) {
+      if (!confirm('Are you sure you want to delete this link?')) {
+        return;
+      }
+
+      const links = this.getSocialLinks();
+      const filtered = links.filter(link => link.id !== id);
+      this.saveSocialLinks(filtered);
+      this.showMessage('Link deleted successfully!', 'success');
+    }
+
+    moveSocialLink(id, direction) {
+      const links = this.getSocialLinks();
+      const index = links.findIndex(link => link.id === id);
+      
+      if (index === -1) return;
+      
+      const newIndex = direction === 'up' ? index - 1 : index + 1;
+      
+      if (newIndex < 0 || newIndex >= links.length) return;
+      
+      // Swap
+      [links[index], links[newIndex]] = [links[newIndex], links[index]];
+      
+      // Update orders
+      links.forEach((link, idx) => link.order = idx);
+      
+      this.saveSocialLinks(links);
+    }
+
+    renderSocialLinks() {
+      const container = document.getElementById('social-links-list');
+      if (!container) return;
+
+      const links = this.getSocialLinks();
+
+      if (links.length === 0) {
+        container.innerHTML = '<p class="text-gray-400 text-center py-4">No links added yet. Add your first link above!</p>';
+        return;
+      }
+
+      container.innerHTML = links.map((link, index) => `
+        <div class="flex items-start gap-2 p-3 rounded-lg border border-gray-700">
+          <div class="flex-1 min-w-0">
+            <div class="font-bold truncate">${this.escapeHtml(link.name)}</div>
+            <div class="text-sm text-gray-400 truncate">${this.escapeHtml(link.url)}</div>
+            ${link.icon ? `<div class="text-xs text-gray-500">Icon: ${link.icon}</div>` : ''}
+          </div>
+          <div class="flex gap-1 flex-shrink-0">
+            ${index > 0 ? `<button onclick="backupManager.moveSocialLink(${link.id}, 'up')" class="p-2 bg-gray-600 hover:bg-gray-500 rounded text-sm" title="Move up">↑</button>` : ''}
+            ${index < links.length - 1 ? `<button onclick="backupManager.moveSocialLink(${link.id}, 'down')" class="p-2 bg-gray-600 hover:bg-gray-500 rounded text-sm" title="Move down">↓</button>` : ''}
+            <a href="${this.escapeHtml(link.url)}" target="_blank" class="p-2 bg-blue-600 hover:bg-blue-500 rounded text-sm" title="Visit">🔗</a>
+            <button onclick="backupManager.deleteSocialLink(${link.id})" class="p-2 bg-red-600 hover:bg-red-500 rounded text-sm" title="Delete">🗑️</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // Appearance methods
+    hexToRgba(hex: string, alpha: number = 1): string {
+      const r = parseInt(hex.slice(1, 3), 16);
+      const g = parseInt(hex.slice(3, 5), 16);
+      const b = parseInt(hex.slice(5, 7), 16);
+      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+
+    rgbaToHex(rgba: string): { hex: string, alpha: number } {
+      const match = rgba.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)/);
+      if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const a = match[4] ? parseFloat(match[4]) : 1;
+        const hex = '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
+        return { hex, alpha: a };
+      }
+      return { hex: '#000000', alpha: 1 };
+    }
+
+    initializeAppearance() {
+      // Get default color from CSS variable
+      const defaultColor = getComputedStyle(document.documentElement).getPropertyValue('--theme-header').trim() || 'rgba(31, 41, 55, 1)';
+      
+      // Load saved colors or use defaults
+      const savedBarColor = localStorage.getItem('customBarColor') || defaultColor;
+      const savedMenuColor = localStorage.getItem('customMenuColor') || defaultColor;
+
+      // Initialize Bar Color
+      this.setupColorPicker('bar', savedBarColor);
+      
+      // Initialize Menu Color  
+      this.setupColorPicker('menu', savedMenuColor);
+      
+      // Apply colors to the page
+      this.applyColors();
+
+      // Reset buttons
+      document.getElementById('reset-bar-color')?.addEventListener('click', () => {
+        localStorage.removeItem('customBarColor');
+        this.setupColorPicker('bar', defaultColor);
+        this.applyColors();
+      });
+
+      document.getElementById('reset-menu-color')?.addEventListener('click', () => {
+        localStorage.removeItem('customMenuColor');
+        this.setupColorPicker('menu', defaultColor);
+        this.applyColors();
+      });
+
+      // Menu Position
+      const savedPosition = localStorage.getItem('customMenuPosition') || 'bottom-center';
+      const positionSelect = document.getElementById('menu-position') as HTMLSelectElement;
+      if (positionSelect) {
+        positionSelect.value = savedPosition;
+        positionSelect.addEventListener('change', (e) => {
+          const target = e.target as HTMLSelectElement;
+          localStorage.setItem('customMenuPosition', target.value);
+          window.dispatchEvent(new CustomEvent('menuPositionUpdated'));
+        });
+      }
+
+      document.getElementById('reset-menu-position')?.addEventListener('click', () => {
+        localStorage.removeItem('customMenuPosition');
+        if (positionSelect) {
+          positionSelect.value = 'bottom-center';
+        }
+        window.dispatchEvent(new CustomEvent('menuPositionUpdated'));
+      });
+
+      // PWA Start Page
+      const savedStartPage = localStorage.getItem('customStartPage') || '/';
+      const startPageSelect = document.getElementById('start-page-select') as HTMLSelectElement;
+      if (startPageSelect) {
+        startPageSelect.value = savedStartPage;
+        startPageSelect.addEventListener('change', (e) => {
+          const target = e.target as HTMLSelectElement;
+          localStorage.setItem('customStartPage', target.value);
+        });
+      }
+    }
+
+    setupColorPicker(type: 'bar' | 'menu', initialColor: string) {
+      const colorInput = document.getElementById(`${type}-color`) as HTMLInputElement;
+      const opacityInput = document.getElementById(`${type}-opacity`) as HTMLInputElement;
+      const valueDisplay = document.getElementById(`${type}-color-value`) as HTMLInputElement;
+      const opacityDisplay = document.getElementById(`${type}-opacity-value`);
+      const preview = document.getElementById(`${type}-preview`);
+
+      if (!colorInput || !opacityInput || !valueDisplay || !opacityDisplay || !preview) return;
+
+      // Parse initial color
+      const { hex, alpha } = this.rgbaToHex(initialColor);
+      
+      // Set initial values
+      colorInput.value = hex;
+      opacityInput.value = alpha.toString();
+      opacityDisplay.textContent = `${Math.round(alpha * 100)}%`;
+      
+      const rgba = this.hexToRgba(hex, alpha);
+      valueDisplay.value = rgba;
+      preview.style.background = rgba;
+
+      // Update on color change
+      colorInput.addEventListener('input', (e) => {
+        const target = e.target as HTMLInputElement;
+        const newHex = target.value;
+        const currentAlpha = parseFloat(opacityInput.value);
+        const newRgba = this.hexToRgba(newHex, currentAlpha);
+        
+        valueDisplay.value = newRgba;
+        preview.style.background = newRgba;
+        
+        localStorage.setItem(`custom${type.charAt(0).toUpperCase() + type.slice(1)}Color`, newRgba);
+        this.applyColors();
+      });
+
+      // Update on opacity change
+      opacityInput.addEventListener('input', (e) => {
+        const target = e.target as HTMLInputElement;
+        const newAlpha = parseFloat(target.value);
+        opacityDisplay.textContent = `${Math.round(newAlpha * 100)}%`;
+        
+        const currentHex = colorInput.value;
+        const newRgba = this.hexToRgba(currentHex, newAlpha);
+        
+        valueDisplay.value = newRgba;
+        preview.style.background = newRgba;
+        
+        localStorage.setItem(`custom${type.charAt(0).toUpperCase() + type.slice(1)}Color`, newRgba);
+        this.applyColors();
+      });
+    }
+
+    applyColors() {
+      const barColor = localStorage.getItem('customBarColor');
+      const menuColor = localStorage.getItem('customMenuColor');
+      
+      // Get default color from CSS variable
+      const defaultColor = getComputedStyle(document.documentElement).getPropertyValue('--theme-header').trim() || 'rgba(31, 41, 55, 1)';
+
+      // Apply or reset bottom menu button background
+      const bottomMenu = document.getElementById('bottom-menu-btn');
+      if (bottomMenu) {
+        bottomMenu.style.background = barColor || defaultColor;
+      }
+
+      // Apply or reset menu popup background
+      const menuPopup = document.getElementById('menu-popup');
+      if (menuPopup) {
+        menuPopup.style.background = menuColor || defaultColor;
+      }
+
+      // Apply or reset PWA menu items background
+      const pwaLinks = document.querySelectorAll('.pwa-site-link, .pwa-custom-link');
+      pwaLinks.forEach((link) => {
+        // @ts-ignore - querySelectorAll returns Element, but we know these are HTMLElements
+        link.style.background = menuColor || defaultColor;
+      });
+
+      // Dispatch event so Header can pick up changes
+      window.dispatchEvent(new CustomEvent('appearanceUpdated'));
+    }
+
+    initializeEventListeners() {
+      // Backup button
+      document.getElementById('backup-btn')?.addEventListener('click', () => {
+        this.createBackup();
+      });
+
+      // File input
+      const fileInput = document.getElementById('restore-input') as HTMLInputElement;
+      const browseBtn = document.getElementById('browse-btn');
+      const dropZone = document.getElementById('drop-zone');
+      const restoreBtn = document.getElementById('restore-btn') as HTMLButtonElement;
+
+      browseBtn?.addEventListener('click', () => {
+        fileInput?.click();
+      });
+
+      fileInput?.addEventListener('change', (e) => {
+        const target = e.target as HTMLInputElement;
+        const file = target?.files?.[0];
+        if (file) {
+          this.previewBackup(file);
+        }
+      });
+
+      // Drag and drop
+      dropZone?.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('border-accent');
+      });
+
+      dropZone?.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('border-accent');
+      });
+
+      dropZone?.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('border-accent');
+        const file = e.dataTransfer?.files?.[0];
+        if (file && file.type === 'application/json') {
+          this.previewBackup(file);
+        }
+      });
+
+      // Restore button
+      restoreBtn?.addEventListener('click', () => {
+        const file = fileInput?.files?.[0];
+        if (file) {
+          this.restoreBackup(file);
+        }
+      });
+
+      // Clear button
+      document.getElementById('clear-btn')?.addEventListener('click', () => {
+        this.clearAllData();
+      });
+
+      // Social Links - Add button
+      document.getElementById('add-link-btn')?.addEventListener('click', () => {
+        const name = (document.getElementById('link-name') as HTMLInputElement)?.value;
+        const url = (document.getElementById('link-url') as HTMLInputElement)?.value;
+        const icon = (document.getElementById('link-icon') as HTMLSelectElement)?.value;
+        this.addSocialLink(name, url, icon);
+      });
+
+      // Social Links - Enter key support
+      const linkInputs = ['link-name', 'link-url'];
+      linkInputs.forEach(id => {
+        document.getElementById(id)?.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            document.getElementById('add-link-btn')?.click();
+          }
+        });
+      });
+
+      // Render social links on initialization
+      this.renderSocialLinks();
+
+      // Theme Toggle
+      this.initializeThemeToggle();
+    }
+
+    initializeThemeToggle() {
+      const themeToggle = document.getElementById('settings-theme-toggle');
+      const themeDisplay = document.getElementById('current-theme-display');
+      const moonIcon = themeToggle?.querySelector('.moon-icon') as HTMLElement;
+      const sunIcon = themeToggle?.querySelector('.sun-icon') as HTMLElement;
+      
+      // Function to check if root is in dark mode
+      const rootInDarkMode = (): boolean => {
+        return document.documentElement.dataset.theme === 'dark';
+      };
+
+      // Function to update icons
+      const updateIcons = () => {
+        const isDark = rootInDarkMode();
+        if (moonIcon && sunIcon && themeDisplay) {
+          if (isDark) {
+            // Dark mode - show moon icon
+            moonIcon.style.scale = '1';
+            moonIcon.style.opacity = '1';
+            sunIcon.style.scale = '0';
+            sunIcon.style.opacity = '0';
+            themeDisplay.textContent = 'Dark';
+          } else {
+            // Light mode - show sun icon
+            sunIcon.style.scale = '1';
+            sunIcon.style.opacity = '1';
+            moonIcon.style.scale = '0';
+            moonIcon.style.opacity = '0';
+            themeDisplay.textContent = 'Light';
+          }
+        }
+      };
+
+      // Initialize icons on load
+      updateIcons();
+      
+      // Apply theme styles on load
+      const currentTheme = document.documentElement.dataset.theme || 'dark';
+      this.applyThemeStyles(currentTheme);
+
+      // Click handler
+      themeToggle?.addEventListener('click', () => {
+        const currentTheme = document.documentElement.dataset.theme;
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        document.documentElement.dataset.theme = newTheme;
+        localStorage.setItem('theme', newTheme);
+        
+        // Force immediate visual update
+        this.applyThemeStyles(newTheme);
+        
+        updateIcons();
+        
+        // Dispatch event for other components
+        window.dispatchEvent(new CustomEvent('theme-change', { 
+          detail: { theme: newTheme } 
+        }));
+      });
+
+      // Listen for theme changes from other toggles
+      window.addEventListener('theme-change', (e: Event) => {
+        const customEvent = e as CustomEvent;
+        if (customEvent.detail?.theme) {
+          document.documentElement.dataset.theme = customEvent.detail.theme;
+          this.applyThemeStyles(customEvent.detail.theme);
+        }
+        updateIcons();
+      });
+    }
+
+    applyThemeStyles(theme: string) {
+      const body = document.body;
+      const html = document.documentElement;
+      
+      if (theme === 'light') {
+        body.style.background = '#f9fafb';
+        html.style.background = '#f9fafb';
+      } else {
+        body.style.background = '';
+        html.style.background = '';
+      }
+    }
+
+    async previewBackup(file) {
+      try {
+        const text = await file.text();
+        const backup = JSON.parse(text);
+        
+        const preview = document.getElementById('restore-preview');
+        const details = document.getElementById('restore-details');
+        const restoreBtn = document.getElementById('restore-btn') as HTMLButtonElement;
+
+        if (!backup.version || !backup.data) {
+          throw new Error('Invalid backup format');
+        }
+
+        const dataCount = Object.keys(backup.data).length;
+        const date = new Date(backup.timestamp).toLocaleDateString();
+        
+        if (details) {
+          details.innerHTML = `
+            <p><strong>Backup Date:</strong> ${date}</p>
+            <p><strong>Version:</strong> ${backup.version}</p>
+            <p><strong>Data Items:</strong> ${dataCount}</p>
+            <p class="text-xs text-gray-400 mt-2">File: ${file.name}</p>
+          `;
+        }
+
+        preview?.classList.remove('hidden');
+        if (restoreBtn) {
+          restoreBtn.disabled = false;
+          restoreBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+        }
+
+      } catch (error) {
+        this.showMessage('Invalid backup file format', 'error');
+      }
+    }
+  }
+
+  // Declare global type
+  declare global {
+    interface Window {
+      backupManager: BackupManager;
+    }
+  }
+
+  // Initialize when page loads and make it globally accessible
+  let backupManager: BackupManager;
+  document.addEventListener('DOMContentLoaded', () => {
+    backupManager = new BackupManager();
+    window.backupManager = backupManager;
+  });
+</script>
+
+<style>
+  .main-content {
+    min-height: calc(100vh - 120px);
+    /* background:#333; 
+    color: white; */
+  }
+  
+  #drop-zone.border-accent {
+    border-color: #ffd700;
+    background-color: rgba(255, 215, 0, 0.1);
+  }
+
+  /* Membership page styling */
+  .membership-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .membership-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .membership-header h1 {
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  background: linear-gradient(45deg,#ef4444,#f97316,#eab308);
+    background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+
+  }
+
+
+
+
+
+  .membership-header p {
+    font-size: 1.25rem;
+    /* color: #d1d5db; */
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .current-status {
+    text-align: center;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    border-radius: 1rem;
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .plan-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .plan-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .plan-card:hover::before {
+    left: 100%;
+  }
+
+  .plan-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 215, 0, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #000;
+    font-weight: bold;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .btn-primary:hover {
+    background: linear-gradient(135deg, #ffed4e, #ffd700);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+  }
+
+  /* Dark mode support */
+  [data-theme="dark"] .membership-header h1 {
+    background: linear-gradient(135deg, #fff, #ffd700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  [data-theme="light"] .membership-header h1 {
+    background: linear-gradient(135deg, #1f2937, #ffd700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  [data-theme="light"] .membership-header p {
+    color: #6b7280;
+  }
+
+  [data-theme="light"] .plan-card {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.02));
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  [data-theme="light"] .current-status {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(0, 0, 0, 0.02));
+    border: 1px solid rgba(255, 215, 0, 0.2);
+  }
+
+  /* Settings page theme support */
+  [data-theme="light"] .main-content {
+    background: #f9fafb !important;
+  }
+
+  [data-theme="light"] .plan-card {
+    background: white !important;
+    border: 1px solid #e5e7eb !important;
+    color: #1f2937 !important;
+  }
+
+  [data-theme="light"] .plan-card::before {
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.05), transparent) !important;
+  }
+
+  [data-theme="light"] .plan-card:hover {
+    border-color: #ffd700 !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* Input fields in light mode - only for light bg inputs */
+  [data-theme="light"] input[type="text"]:not(.text-white),
+  [data-theme="light"] input[type="url"]:not(.text-white),
+  [data-theme="light"] select:not(.text-white) {
+    background: #f3f4f6 !important;
+    border-color: #d1d5db !important;
+    color: #1f2937 !important;
+  }
+
+  [data-theme="light"] input[readonly]:not(.text-white) {
+    background: #e5e7eb !important;
+    color: #1f2937 !important;
+  }
+
+  /* Buttons in light mode - except those with hardcoded white text */
+  [data-theme="light"] button:not(.btn-primary):not(#settings-theme-toggle):not(.text-white) {
+    background: #e5e7eb !important;
+    color: #1f2937 !important;
+  }
+
+  [data-theme="light"] button:not(.btn-primary):not(#settings-theme-toggle):not(.text-white):hover {
+    background: #d1d5db !important;
+  }
+
+  /* Borders in light mode */
+  [data-theme="light"] .border-gray-600 {
+    border-color: #d1d5db !important;
+  }
+
+  /* Social link items in light mode */
+  [data-theme="light"] #social-links-list > div {
+    background: #f3f4f6 !important;
+    border-color: #d1d5db !important;
+  }
+
+  /* Color preview boxes */
+  [data-theme="light"] #bar-preview,
+  [data-theme="light"] #menu-preview {
+    border-color: #d1d5db !important;
+  }
+
+  /* Membership container in light mode */
+  [data-theme="light"] .membership-container {
+    color: #1f2937 !important;
+  }
+
+  /* Current status in light mode */
+  [data-theme="light"] .current-status {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.05)) !important;
+    border: 1px solid rgba(255, 215, 0, 0.3) !important;
+    color: #1f2937 !important;
+  }
+</style>
