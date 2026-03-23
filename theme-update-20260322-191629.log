@@ -1,0 +1,63 @@
+
+✓ [UPDATE] Update started at Sun Mar 22 19:16:29 CDT 2026
+
+✓ [UPDATE] Updating src/ directory...
+  ⏭️  Skipped (modified): components/layout/Header.astro
+  ⏭️  Skipped (modified): components/MemberFavorites.astro
+  ⏭️  Skipped (modified): components/DynamicPageRenderer.astro
+  ⏭️  Skipped (modified): pages/video.astro
+  ⏭️  Skipped (modified): pages/settings.astro
+✓ [UPDATE] Source files processed (updated: 0, skipped: 0)
+
+✓ [UPDATE] Checking root configuration files...
+✓ [UPDATE] Updated: package.json
+✓ [UPDATE] Updated: tsconfig.json
+✓ [UPDATE] Updated: postcss.config.js
+✓ [UPDATE] Updated: README.md
+
+✓ [UPDATE] Checking customizable files for local modifications...
+
+📝 File has local modifications: src/components/layout/Header.astro
+   Options:
+   [k] Keep local version (skip update)
+   [u] Update from theme (overwrite local changes)
+   [d] Show diff
+   [b] Backup local and update
+   Choose [k/u/d/b]: ✓ [UPDATE] Updated: src/components/layout/Header.astro
+
+📝 File has local modifications: astro.config.ts
+   Options:
+   [k] Keep local version (skip update)
+   [u] Update from theme (overwrite local changes)
+   [d] Show diff
+   [b] Backup local and update
+   Choose [k/u/d/b]: ✓ [UPDATE] Updated: astro.config.ts
+
+✓ [UPDATE] Updating content configuration...
+
+✓ [UPDATE] Updating keystatic.config.ts...
+✓ [UPDATE] Preserved Keystatic project ID
+
+✓ [UPDATE] Cleaning up...
+
+================================================
+  Update Summary
+================================================
+
+✓ Updated files (6):
+  - src/site.config.ts
+  - src/components/layout/Header.astro
+  - src/components/layout/Footer.astro
+  - src/styles/global.css
+  - astro.config.ts
+  - tailwind.config.ts
+
+📋 Full update log saved to: theme-update-20260322-191629.log
+
+Next steps:
+  1. Review changes: git diff
+  2. Test the site: npm run dev
+  3. Update dependencies: npm install
+
+✓ [UPDATE] Theme update completed at Sun Mar 22 19:16:49 CDT 2026
+

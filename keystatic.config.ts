@@ -1,6 +1,102 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { config, fields, collection, singleton } from '@keystatic/core';
-import { colorPicker } from './src/components/ColorPicker.tsx';
+import type { BasicFormField, FormFieldStoredValue } from "@keystatic/core";
+
+function hexToRgba(hex: string, alpha: number = 1): string {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+function rgbaToHex(rgba: string): { hex: string, alpha: number } {
+  const match = rgba.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)/);
+  if (match) {
+    const r = parseInt(match[1]);
+    const g = parseInt(match[2]);
+    const b = parseInt(match[3]);
+    const a = match[4] ? parseFloat(match[4]) : 1;
+    const hex = '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
+    return { hex, alpha: a };
+  }
+  return { hex: '#000000', alpha: 1 };
+}
+
+function colorPicker({
+  label,
+  defaultValue,
+  description,
+}: {
+  label: string;
+  defaultValue?: string;
+  description?: string;
+}): BasicFormField<string> {
+  return {
+    kind: "form",
+    formKind: undefined,
+    label,
+    Input(props) {
+      const [color, setColor] = useState(rgbaToHex(props.value || defaultValue || 'rgba(0,0,0,1)'));
+
+      useEffect(() => {
+        props.onChange(hexToRgba(color.hex, color.alpha));
+      }, [color]);
+
+      return React.createElement('div', { style: { display: 'flex', flexDirection: 'column', gap: '12px' } },
+        React.createElement('div', { style: { fontWeight: '500', fontSize: '14px', marginBottom: '4px' } }, label),
+        description && React.createElement('div', { style: { fontSize: '13px', color: '#666', marginBottom: '8px' } }, description),
+        React.createElement('div', { style: { display: 'flex', gap: '12px', alignItems: 'center' } },
+          React.createElement('input', {
+            type: 'color',
+            value: color.hex,
+            onChange: (e: any) => setColor(prev => ({ ...prev, hex: e.target.value })),
+            style: { width: '50px', height: '50px' }
+          }),
+          React.createElement('input', {
+            type: 'text',
+            value: hexToRgba(color.hex, color.alpha),
+            onChange: (e: any) => setColor(rgbaToHex(e.target.value)),
+            style: { flex: 1, padding: '8px', borderRadius: '4px', border: '1px solid #ccc', fontSize: '14px' }
+          })
+        ),
+        React.createElement('div', { style: { display: 'flex', gap: '8px', alignItems: 'center' } },
+          React.createElement('span', { style: { flexShrink: 0, width: '60px', fontSize: '14px' } }, 'Opacity:'),
+          React.createElement('input', {
+            type: 'range',
+            min: '0',
+            max: '1',
+            step: '0.01',
+            value: color.alpha,
+            onChange: (e: any) => setColor(prev => ({ ...prev, alpha: parseFloat(e.target.value) })),
+            style: { width: '150px' }
+          }),
+          React.createElement('span', { style: { flexShrink: 0, width: '40px', textAlign: 'right', fontSize: '14px' } },
+            `${Math.round(color.alpha * 100)}%`
+          )
+        )
+      );
+    },
+    defaultValue() {
+      return defaultValue || "";
+    },
+    parse(value: FormFieldStoredValue) {
+      return typeof value === 'string' ? value : '';
+    },
+    serialize(value) {
+      return { value };
+    },
+    validate(value) {
+      return value;
+    },
+    reader: {
+      parse(value: FormFieldStoredValue) {
+        return typeof value === 'string' ? value : '';
+      },
+    },
+  };
+}
+
 export default config({
   storage: (typeof import.meta !== 'undefined' && import.meta.env?.PROD)
     ? { kind: 'cloud' }
@@ -256,7 +352,8 @@ export default config({
                 { label: 'Resume Section', value: 'resume' },
                 { label: 'CTAs', value: 'ctas' },
                 { label: 'Map/Video Section', value: 'app' },
-                { label: 'Photos Section', value: 'photos' }
+                { label: 'Photos Section', value: 'photos' },
+                { label: 'Install Guide', value: 'installguide' }
               ],
               defaultValue: 'contentblock'
             }),
@@ -326,6 +423,7 @@ export default config({
               if (sectionType === 'youtubefeeds' && feedConfig) return `YouTube Feed - ${feedConfig}`;
               if (sectionType === 'ctas' && cta) return `CTA - ${cta}`;
               if (sectionType === 'magicsearch') return 'Magic Search';
+              if (sectionType === 'installguide') return 'Install Guide';
               return sectionType || 'Untitled Section';
             }
           }
@@ -1017,6 +1115,11 @@ export default config({
           description: 'Show/hide the Customize section on the Settings page (colors, menu position)',
           defaultValue: true
         }),
+        showStorageSection: fields.checkbox({
+          label: 'Show Storage Section',
+          description: 'Show/hide the Storage Usage section on the Settings page (localStorage monitoring)',
+          defaultValue: true
+        }),
         showPwaSettingsSection: fields.checkbox({
           label: 'Show PWA Settings Section',
           description: 'Show/hide the PWA Settings section on the Settings page (custom links, start page)',
@@ -1059,14 +1162,14 @@ export default config({
           publicPath: '/images/pwa',
         }),
 
-        themeColor: fields.text({ 
+        themeColor: colorPicker({ 
           label: 'Theme Color',
-          description: 'Enter color in rgba format, e.g., rgba(0, 0, 0, 1)',
+          description: 'PWA theme color - affects the browser UI color',
           defaultValue: 'rgba(0, 0, 0, 1)'
         }),
-        backgroundColor: fields.text({ 
+        backgroundColor: colorPicker({ 
           label: 'Background Color',
-          description: 'Enter color in rgba format, e.g., rgba(0, 0, 0, 1)',
+          description: 'PWA background color - shown during app launch',
           defaultValue: 'rgba(0, 0, 0, 1)'
         }),
         startUrl: fields.text({
@@ -1215,42 +1318,37 @@ export default config({
           validation: { isRequired: false }
         }),
         mapAdditionalText: fields.text({
-          label: 'Additional Text',
-          description: 'Any additional text to display below contact information',
-          multiline: true,
-          validation: { isRequired: false }
+          label: 'Additional Information',
+          description: 'Any additional contact information',
+          validation: { isRequired: false },
+          multiline: true
         }),
-      }
+      },
     }),
+
     photoSettings: singleton({
-      label: 'Photo Gallery',
+      label: 'Photo Gallery Settings',
       path: 'content/photoSettings/',
       schema: {
         galleryMode: fields.select({
           label: 'Gallery Mode',
-          description: 'Choose how gallery images are provided',
+          description: 'Choose between directory-based or CMS-managed gallery',
           options: [
             { label: 'Directory-based', value: 'directory' },
-            { label: 'CMS-managed', value: 'keystatic' }
+            { label: 'CMS-managed', value: 'cms' }
           ],
           defaultValue: 'directory'
         }),
-
         showCaptions: fields.checkbox({
-          label: 'Show Photo Titles',
-          defaultValue: true,
+          label: 'Show Image Captions',
+          description: 'Display captions below images in the gallery',
+          defaultValue: true
         }),
-
         autoOpenLightbox: fields.checkbox({
-          label: 'Auto-Open Lightbox on Page Load',
-          description: 'Automatically open the lightbox gallery when the page loads',
-          defaultValue: false,
+          label: 'Auto Open Lightbox',
+          description: 'Automatically open lightbox when clicking images',
+          defaultValue: false
         }),
-
-        divider: fields.empty(),
-
-
-
         defaultDirectory: fields.text({
           label: '(Directory-based Mode) Default Directory',
           description: "Enter the EXACT name of the Default Directory to be displayed (case-sensitive). Leave blank to show all directories.",
@@ -1299,66 +1397,53 @@ export default config({
         backgroundImage: fields.image({
           label: 'Site Background Image',
           directory: 'public/images/styleapps',
-          publicPath: '/images/styleapps'
+          publicPath: '/images/styleapps',
+          validation: { isRequired: false }
         }),
-        backgroundVideo: fields.text({ label: 'Background Video', defaultValue: '', description: 'Copy the url of an embed from youtube and paste here - just the url' }),
+        backgroundVideo: fields.text({ label: 'Background Video', defaultValue: '', description: 'Copy the url of an embed from youtube and paste here - just the url', validation: { isRequired: false } }),
 
         siteFont: fields.text({ label: 'Site Font', defaultValue: 'Bowlby One', description: 'Enter the name of any Google Font' }),
         borderRadius: fields.text({ label: 'Border Radius', description: 'Border Radius of elements on page (0) for square', validation: { isRequired: false }, defaultValue: "0px" }),
-        divider5: fields.empty(),
         lightBg: colorPicker({ 
           label: 'Light Background Color', 
-          description: '(light) Page Background - can use any color value',
+          defaultValue: 'rgba(228, 228, 228, 1)'
         }),
-        // lightAccent: colorPicker({ 
-        //   label: 'Light Accent Color', 
-        //   description: '(light) Accent - can use any color value',
-        // }),
         lightAccent2: colorPicker({ 
           label: 'Light Button Color', 
-          description: '(light) Accent2 - can use any color value',
+          defaultValue: 'rgba(0, 0, 0, 1)'
         }),
-        divider6: fields.empty(),
         darkBg: colorPicker({ 
           label: 'Dark Background Color', 
-          description: '(dark) Page Background - can use any color value',
+          defaultValue: 'rgba(34, 34, 34, 1)'
         }),
-        // darkAccent: colorPicker({ 
-        //   label: 'Dark Accent Color', 
-        //   description: '(dark) Accent Color - can use any color value',
-        // }),
         darkAccent2: colorPicker({ 
           label: 'Dark Button Color', 
-          description: '(dark) Accent Color2 - can use any color value',
+          defaultValue: 'rgba(0, 0, 0, 1)'
         }),
-        divider7: fields.empty(),
         lightHeader: colorPicker({ 
           label: 'Light Header Color', 
-          description: '(light) Header Color - can use any color value',
+          defaultValue: 'rgba(0, 0, 0, 0.9)'
         }),
         darkHeader: colorPicker({ 
           label: 'Dark Header Color', 
-          description: '(dark) Quote Color2 - can use any color value',
+          defaultValue: 'rgba(0, 0, 0, 0.9)'
         }),
-        divider8: fields.empty(),
         lightCardBg: colorPicker({ 
           label: 'Light Post Card Background', 
-          description: '(light) Background color for post cards',
+          defaultValue: 'rgba(177, 177, 177, 1)'
         }),
         darkCardBg: colorPicker({ 
           label: 'Dark Post Card Background', 
-          description: '(dark) Background color for post cards',
+          defaultValue: 'rgba(0, 0, 0, 1)'
         }),
-        divider8b: fields.empty(),
         lightText: colorPicker({ 
           label: 'Light Text Color', 
-          description: '(light) Text Color - can use any color value',
+          defaultValue: 'rgba(0, 0, 0, 1)'
         }),
         darkText: colorPicker({ 
           label: 'Dark Text Color', 
-          description: '(dark) Text Color - can use any color value',
-        }),
-        divider9: fields.empty(),  
+          defaultValue: 'rgba(243, 231, 231, 1)'
+        }),  
         // divider9: fields.empty(),
         // lightLink: colorPicker({ 
         //   label: 'Light Link Color', 

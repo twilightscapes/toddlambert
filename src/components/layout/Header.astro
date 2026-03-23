@@ -270,7 +270,7 @@ const currentPath = normalizePath(url.pathname);
   color: #fff;
   border-radius: 8px;
   padding: .5rem;
-  z-index: 100;
+  z-index: 500;
   display: none;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   width:60%;
@@ -675,6 +675,14 @@ style="flex-direction: column;"
     const menuPopup = document.getElementById('menu-popup');
     const pwaMenu = document.getElementById('pwa-menu-items');
     const menuContainer = document.getElementById('bottom-menu-container');
+    
+    // Move menu popup and PWA menu to body to escape any stacking context issues
+    if (menuPopup && menuPopup.parentElement !== document.body) {
+      document.body.appendChild(menuPopup);
+    }
+    if (pwaMenu && pwaMenu.parentElement !== document.body) {
+      document.body.appendChild(pwaMenu);
+    }
     
     console.log('initializeBottomMenu called');
     

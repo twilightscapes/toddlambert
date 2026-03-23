@@ -9,14 +9,12 @@ import AstroPWA from '@vite-pwa/astro';
 import markdoc from "@astrojs/markdoc";
 import keystatic from '@keystatic/astro';
 import netlify from "@astrojs/netlify";
-import vercel from '@astrojs/vercel/serverless';
 import { createReader } from '@keystatic/core/reader';
 import keystaticConfig from './keystatic.config';
 
 export const reader = createReader(process.cwd(), keystaticConfig);
 
-const isVercel = !!process.env.VERCEL;
-const adapter = isVercel ? vercel() : netlify({ edgeMiddleware: false });
+const adapter = netlify({ edgeMiddleware: false });
 const output: 'static' | 'server' = 'static'; 
 
 const pwaSettings = await reader.singletons.pwaSettings.read();
@@ -90,7 +88,6 @@ export default defineConfig({
   }), sitemap(), keystatic(),
   AstroPWA({
     registerType: 'autoUpdate',
-    includeAssets: ['robots.txt', 'manifest.webmanifest'],
     manifest: {
       id: pwaSettings?.siteUrl || '/',
       name: pwaConfig.name || 'PIRATE',
@@ -138,11 +135,45 @@ export default defineConfig({
     },
     workbox: {
       navigateFallback: '/',
-      globPatterns: ['**/*.{css,js,html,svg,png,ico,txt}'],
+      navigateFallbackDenylist: [/^\/video/], // Don't fallback to / for video pages
+      globPatterns: ['**/*.{css,js,html,svg,png,ico}'],
       globIgnores: [
         '**/keystatic-page.*', // Exclude large Keystatic bundle from cache
+        '**/robots.txt',
+        '**/manifest.webmanifest',
       ],
       maximumFileSizeToCacheInBytes: 3 * 1024 * 1024, // 3MB limit
+      runtimeCaching: [
+        {
+          urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'google-fonts-cache',
+            expiration: {
+              maxEntries: 10,
+              maxAgeSeconds: 60 * 60 * 24 * 365 // 1 year
+            },
+            cacheableResponse: {
+              statuses: [0, 200]
+            }
+          }
+        },
+        {
+          urlPattern: /\/user$/,
+          handler: 'NetworkFirst',
+          options: {
+            cacheName: 'user-page-cache',
+            networkTimeoutSeconds: 3,
+          }
+        },
+        {
+          urlPattern: /\.(js|css|woff2?)$/,
+          handler: 'StaleWhileRevalidate',
+          options: {
+            cacheName: 'static-resources',
+          }
+        }
+      ]
     }
   }),  
   markdoc()],

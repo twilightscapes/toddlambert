@@ -1,0 +1,3629 @@
+---
+import BaseLayout from '../layouts/Base.astro';
+import { getEntry } from 'astro:content';
+
+const pwaSettings = await getEntry('pwaSettings', 'index');
+
+const meta = {
+  title: 'One/App',
+  description: 'Customize your personal page',
+};
+---
+
+<BaseLayout meta={meta}>
+  <div class="user-page">
+    <div class="background-overlay"></div>
+    
+    <!-- Sticky Notes Container (Top Left) -->
+    <div id="sticky-notes-container" class="sticky-notes-container"></div>
+    
+    <div class="page-header" id="page-header">
+      <!-- Sticky Control Bar at Top -->
+      <div class="page-control-bar" id="page-control-bar" style="display: none;">
+        <div id="opacity-control" class="opacity-control">opacity
+          <input type="range" id="opacity-slider" class="opacity-slider" min="0" max="100" value="60" title="Adjust opacity">
+        </div>
+        <div id="page-icon-tray" class="page-icon-tray"></div>
+        <button id="save-page-btn" class="btn-save-page">Save</button>
+        <button id="close-page-modal" class="btn-close-modal" title="Close">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display: block; margin: 0 auto;">
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      
+      <h1 id="page-title" contenteditable="true" spellcheck="false">One/App</h1>
+      
+      <!-- Formatting toolbar (between title and subtitle) -->
+      <div id="page-toolbar" class="page-toolbar" style="display: none;"></div>
+      
+      <div id="page-subtitle" class="subtitle" contenteditable="true" spellcheck="false" data-placeholder="Your personal workspace...">Your personal workspace</div>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Control Bar -->
+    <div class="control-bar">
+      <button id="clear-notes-btn" class="btn-control-bar btn-danger" title="Delete All Notes">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 6h18M8 6V4h8v2M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6"></path>
+        </svg>
+      </button>
+      <div class="search-wrapper">
+        <input type="text" id="search-notes" class="search-input" placeholder="Search notes..." autocomplete="off">
+        <button id="clear-search-btn" class="clear-search-btn" title="Clear search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <button id="view-all-btn" class="btn-control-bar" title="View All Notes">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+        </svg>
+      </button>
+      <select id="sort-notes" class="sort-select">
+        <option value="">Posted Notes</option>
+        <option value="watchlist">📺 Watchlist</option>
+        <option value="channels">📺 Subscribed</option>
+        <option value="date">Sort by Date</option>
+        <option value="images">Has Images</option>
+        <option value="text">Text Only</option>
+        <option value="empty">Empty Notes</option>
+        <option value="color-white">⚪ White</option>
+        <option value="color-yellow">🟡 Yellow</option>
+        <option value="color-red">🔴 Red</option>
+        <option value="color-blue">🔵 Blue</option>
+        <option value="color-green">🟢 Green</option>
+        <option value="color-purple">🟣 Purple</option>
+        <option value="color-orange">🟠 Orange</option>
+      </select>
+      <button id="add-note-btn" class="btn-control-bar btn-add">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Notes Sidebar -->
+    <div id="notes-sidebar" class="notes-sidebar">
+      <div id="collapsed-notes"></div>
+    </div>
+
+    <!-- Toggle Notes Button -->
+    <button id="toggle-notes-btn" class="btn-toggle-notes" title="Hide Notes">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M5 12h14M12 5l7 7-7 7"></path>
+      </svg>
+      <span>Hide Notes</span>
+    </button>
+
+    <!-- Expanded Notes Container -->
+    <div id="notes-container"></div>
+
+    <!-- View All Panel (Hidden by default) -->
+    <div id="view-all-panel" class="view-all-panel" style="display: none;">
+      <div class="view-all-header">
+        <h2>All Notes</h2>
+        <button id="close-view-all-btn" class="btn-close-panel">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div id="view-all-content" class="view-all-content"></div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  interface StickyNote {
+    id: string;
+    title: string;
+    content: string;
+    color: string;
+    collapsed: boolean;
+    sticky: boolean;
+    createdAt: number;
+    order: number;
+    isNew?: boolean;
+  }
+
+  // IndexedDB Helper
+  class NotesDB {
+    private dbName = 'StickyNotesDB';
+    private storeName = 'notes';
+    private db: IDBDatabase | null = null;
+    private useIndexedDB = true;
+
+    constructor() {
+      // Check if IndexedDB is available
+      if (!window.indexedDB) {
+        console.warn('IndexedDB not available, will use localStorage fallback');
+        this.useIndexedDB = false;
+      }
+    }
+
+    async init(): Promise<void> {
+      if (!this.useIndexedDB) {
+        console.log('Using localStorage fallback');
+        return Promise.resolve();
+      }
+
+      return new Promise((resolve, reject) => {
+        try {
+          const request = indexedDB.open(this.dbName, 1);
+
+          request.onerror = () => {
+            console.error('IndexedDB open error:', request.error);
+            this.useIndexedDB = false;
+            this.db = null;
+            console.log('Falling back to localStorage');
+            resolve();
+          };
+          
+          request.onsuccess = () => {
+            this.db = request.result;
+            
+            // Verify the object store exists
+            if (!this.db.objectStoreNames.contains(this.storeName)) {
+              console.error('Object store not found, reinitializing database');
+              this.db.close();
+              this.db = null;
+              
+              // Delete and recreate the database
+              const deleteRequest = indexedDB.deleteDatabase(this.dbName);
+              deleteRequest.onsuccess = () => {
+                console.log('Database deleted, recreating...');
+                // Reinitialize
+                this.init().then(resolve).catch(() => {
+                  this.useIndexedDB = false;
+                  resolve();
+                });
+              };
+              deleteRequest.onerror = () => {
+                console.error('Failed to delete database, using localStorage');
+                this.useIndexedDB = false;
+                resolve();
+              };
+            } else {
+              console.log('IndexedDB opened successfully with object store:', this.storeName);
+              resolve();
+            }
+          };
+
+          request.onupgradeneeded = (event) => {
+            const db = (event.target as IDBOpenDBRequest).result;
+            console.log('Database upgrade needed, creating object store');
+            if (!db.objectStoreNames.contains(this.storeName)) {
+              db.createObjectStore(this.storeName, { keyPath: 'id' });
+              console.log('Object store created:', this.storeName);
+            }
+          };
+        } catch (error) {
+          console.error('IndexedDB exception:', error);
+          this.useIndexedDB = false;
+          console.log('Falling back to localStorage');
+          resolve();
+        }
+      });
+    }
+
+    async getAllNotes(): Promise<StickyNote[]> {
+      if (!this.useIndexedDB) {
+        // Use localStorage fallback
+        const stored = localStorage.getItem('stickyNotes');
+        return stored ? JSON.parse(stored) : [];
+      }
+
+      if (!this.db) await this.init();
+      
+      if (!this.useIndexedDB) {
+        const stored = localStorage.getItem('stickyNotes');
+        return stored ? JSON.parse(stored) : [];
+      }
+
+      return new Promise((resolve, reject) => {
+        const transaction = this.db!.transaction([this.storeName], 'readonly');
+        const store = transaction.objectStore(this.storeName);
+        const request = store.getAll();
+
+        request.onsuccess = () => resolve(request.result || []);
+        request.onerror = () => reject(request.error);
+      });
+    }
+
+    async saveNote(note: StickyNote): Promise<void> {
+      if (!this.useIndexedDB) {
+        // Use localStorage fallback
+        const stored = localStorage.getItem('stickyNotes');
+        const notes: StickyNote[] = stored ? JSON.parse(stored) : [];
+        const index = notes.findIndex(n => n.id === note.id);
+        if (index >= 0) {
+          notes[index] = note;
+        } else {
+          notes.push(note);
+        }
+        localStorage.setItem('stickyNotes', JSON.stringify(notes));
+        console.log('Note saved to localStorage:', note.id);
+        return Promise.resolve();
+      }
+
+      if (!this.db) {
+        console.log('DB not initialized, initializing now...');
+        await this.init();
+      }
+
+      if (!this.useIndexedDB) {
+        // Fallback after init attempt failed
+        const stored = localStorage.getItem('stickyNotes');
+        const notes: StickyNote[] = stored ? JSON.parse(stored) : [];
+        const index = notes.findIndex(n => n.id === note.id);
+        if (index >= 0) {
+          notes[index] = note;
+        } else {
+          notes.push(note);
+        }
+        localStorage.setItem('stickyNotes', JSON.stringify(notes));
+        console.log('Note saved to localStorage (after failed IndexedDB):', note.id);
+        return Promise.resolve();
+      }
+
+      return new Promise((resolve, reject) => {
+        try {
+          const transaction = this.db!.transaction([this.storeName], 'readwrite');
+          const store = transaction.objectStore(this.storeName);
+          const request = store.put(note);
+
+          request.onsuccess = () => {
+            console.log('Note saved to IndexedDB successfully:', note.id);
+            resolve();
+          };
+          request.onerror = () => {
+            console.error('IndexedDB save error:', request.error);
+            reject(request.error);
+          };
+          transaction.onerror = () => {
+            console.error('Transaction error:', transaction.error);
+            reject(transaction.error);
+          };
+        } catch (err) {
+          console.error('Exception in saveNote:', err);
+          reject(err);
+        }
+      });
+    }
+
+    async deleteNote(id: string): Promise<void> {
+      if (!this.useIndexedDB) {
+        const stored = localStorage.getItem('stickyNotes');
+        const notes: StickyNote[] = stored ? JSON.parse(stored) : [];
+        const filtered = notes.filter(n => n.id !== id);
+        localStorage.setItem('stickyNotes', JSON.stringify(filtered));
+        return Promise.resolve();
+      }
+
+      if (!this.db) await this.init();
+
+      if (!this.useIndexedDB) {
+        const stored = localStorage.getItem('stickyNotes');
+        const notes: StickyNote[] = stored ? JSON.parse(stored) : [];
+        const filtered = notes.filter(n => n.id !== id);
+        localStorage.setItem('stickyNotes', JSON.stringify(filtered));
+        return Promise.resolve();
+      }
+
+      return new Promise((resolve, reject) => {
+        const transaction = this.db!.transaction([this.storeName], 'readwrite');
+        const store = transaction.objectStore(this.storeName);
+        const request = store.delete(id);
+
+        request.onsuccess = () => resolve();
+        request.onerror = () => reject(request.error);
+      });
+    }
+
+    async clearAllNotes(): Promise<void> {
+      if (!this.useIndexedDB) {
+        localStorage.removeItem('stickyNotes');
+        return Promise.resolve();
+      }
+
+      if (!this.db) await this.init();
+
+      if (!this.useIndexedDB) {
+        localStorage.removeItem('stickyNotes');
+        return Promise.resolve();
+      }
+
+      return new Promise((resolve, reject) => {
+        const transaction = this.db!.transaction([this.storeName], 'readwrite');
+        const store = transaction.objectStore(this.storeName);
+        const request = store.clear();
+
+        request.onsuccess = () => resolve();
+        request.onerror = () => reject(request.error);
+      });
+    }
+  }
+
+  class StickyNotesManager {
+    private notes: StickyNote[] = [];
+    private notesContainer: HTMLElement | null;
+    private collapsedContainer: HTMLElement | null;
+    private activeNoteId: string | null = null;
+    private db: NotesDB;
+
+    private colors = [
+      '#fef08a', // yellow
+      '#fca5a5', // red
+      '#bfdbfe', // blue
+      '#bbf7d0', // green
+      '#e9d5ff', // purple
+      '#fed7aa', // orange
+      '#ffffff', // white
+    ];
+
+    constructor() {
+      this.notesContainer = document.getElementById('notes-container');
+      this.collapsedContainer = document.getElementById('collapsed-notes');
+      this.db = new NotesDB();
+      this.initialize();
+    }
+
+    async initialize() {
+      try {
+        console.log('Initializing StickyNotesManager...');
+        await this.db.init();
+        console.log('DB initialized');
+        await this.migrateFromLocalStorage();
+        console.log('Migration complete');
+        await this.loadNotes();
+        console.log('Notes loaded:', this.notes.length);
+        
+        // Reset sort dropdown and search input BEFORE setting up listeners
+        const sortSelect = document.getElementById('sort-notes') as HTMLSelectElement;
+        if (sortSelect) {
+          sortSelect.value = '';
+        }
+        const searchInput = document.getElementById('search-notes') as HTMLInputElement;
+        if (searchInput) {
+          searchInput.value = '';
+        }
+        
+        this.setupEventListeners();
+        this.renderAllNotes();
+        console.log('StickyNotesManager initialized successfully');
+      } catch (error) {
+        console.error('Failed to initialize StickyNotesManager:', error);
+        alert('Failed to initialize notes system. Please refresh the page.');
+      }
+    }
+
+    async migrateFromLocalStorage() {
+      const oldNotes = localStorage.getItem('stickyNotes');
+      if (oldNotes) {
+        try {
+          const notes = JSON.parse(oldNotes);
+          console.log('Migrating', notes.length, 'notes from localStorage to IndexedDB...');
+          
+          for (const note of notes) {
+            await this.db.saveNote(note);
+          }
+          
+          // Keep a backup in localStorage for now
+          localStorage.setItem('stickyNotes_backup', oldNotes);
+          localStorage.removeItem('stickyNotes');
+          console.log('Migration complete!');
+        } catch (error) {
+          console.error('Migration error:', error);
+        }
+      }
+    }
+
+    setupEventListeners() {
+      const addBtn = document.getElementById('add-note-btn');
+      addBtn?.addEventListener('click', async () => {
+        const newNote = await this.createNote();
+        await this.expandNote(newNote.id);
+      });
+
+      const clearBtn = document.getElementById('clear-notes-btn');
+      clearBtn?.addEventListener('click', () => this.clearAllNotes());
+
+      const viewAllBtn = document.getElementById('view-all-btn');
+      viewAllBtn?.addEventListener('click', () => this.showViewAllPanel());
+
+      const closeViewAllBtn = document.getElementById('close-view-all-btn');
+      closeViewAllBtn?.addEventListener('click', () => this.hideViewAllPanel());
+
+      const searchInput = document.getElementById('search-notes') as HTMLInputElement;
+      const clearSearchBtn = document.getElementById('clear-search-btn');
+      
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          const value = (e.target as HTMLInputElement).value;
+          // Show clear button if there's text
+          if (clearSearchBtn) {
+            if (value) {
+              clearSearchBtn.classList.add('visible');
+            } else {
+              clearSearchBtn.classList.remove('visible');
+            }
+          }
+          this.handleSearch(value);
+        });
+      }
+      
+      if (clearSearchBtn) {
+        clearSearchBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (searchInput) {
+            searchInput.value = '';
+            clearSearchBtn.classList.remove('visible');
+            this.handleSearch('');
+            searchInput.focus();
+          }
+        });
+      }
+
+      const sortSelect = document.getElementById('sort-notes') as HTMLSelectElement;
+      sortSelect?.addEventListener('change', (e) => this.handleSort((e.target as HTMLSelectElement).value));
+
+      const toggleNotesBtn = document.getElementById('toggle-notes-btn');
+      toggleNotesBtn?.addEventListener('click', () => this.toggleNotesInterface());
+    }
+
+    async loadNotes() {
+      try {
+        this.notes = await this.db.getAllNotes();
+        // Ensure all notes have required properties
+        this.notes = this.notes.map((note: any, index: number) => ({
+          ...note,
+          collapsed: note.collapsed !== undefined ? note.collapsed : true,
+          sticky: note.sticky !== undefined ? note.sticky : false,
+          createdAt: note.createdAt || Date.now(),
+          order: note.order !== undefined ? note.order : index,
+        }));
+      } catch (error) {
+        console.error('Error loading notes:', error);
+        this.notes = [];
+      }
+    }
+
+    async saveNote(note: StickyNote) {
+      try {
+        console.log('Attempting to save note:', note.id, note.title);
+        await this.db.saveNote(note);
+        console.log('Note saved successfully');
+      } catch (error) {
+        console.error('Error saving note:', error);
+        const errorMsg = error instanceof Error ? error.message : String(error);
+        alert(`Failed to save note: ${errorMsg}. Check console for details.`);
+        throw error;
+      }
+    }
+
+    async createNote() {
+      const noteNumber = this.notes.length + 1;
+      const maxOrder = this.notes.reduce((max, n) => Math.max(max, n.order || 0), 0);
+      const note: StickyNote = {
+        id: Date.now().toString(),
+        title: `Note ${noteNumber}`,
+        content: '',
+        color: '#ffffff',
+        collapsed: true,
+        sticky: false,
+        createdAt: Date.now(),
+        order: maxOrder + 1,
+        isNew: true, // Mark as unsaved new note
+      };
+
+      this.notes.push(note);
+      // Don't save to database yet - wait for explicit save
+      
+      return note;
+    }
+
+    renderAllNotes() {
+      this.notes.forEach(note => {
+        if (note.collapsed) {
+          this.renderCollapsedNote(note);
+        }
+        // Don't auto-expand notes on page load
+      });
+      this.renderStickyNotes();
+    }
+
+    renderCollapsedNote(note: StickyNote) {
+      if (!this.collapsedContainer) return;
+
+      // Check if tab already exists to prevent duplicates
+      const existingTab = this.collapsedContainer.querySelector(`[data-id="${note.id}"]`);
+      if (existingTab) {
+        existingTab.remove();
+      }
+
+      const tab = document.createElement('div');
+      tab.className = 'collapsed-note-tab';
+      tab.dataset.id = note.id;
+      tab.style.cssText = `background-color: ${note.color}; cursor: pointer; padding: 0.75rem; margin-bottom: 0.5rem; border-radius: 8px 0 0 8px; box-shadow: -2px 2px 4px rgba(0,0,0,0.2); transition: all 0.2s; width: 150px; max-width: 150px;`;
+      tab.innerHTML = `<div style="font-weight: 600; color: #333; font-size: 0.9rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${this.escapeHtml(note.title)}</div>`;
+      
+      tab.addEventListener('click', () => this.expandNote(note.id, tab));
+      tab.addEventListener('mouseenter', () => {
+        tab.style.transform = 'translateX(-5px)';
+      });
+      tab.addEventListener('mouseleave', () => {
+        tab.style.transform = 'translateX(0)';
+      });
+
+      this.collapsedContainer.prepend(tab);
+    }
+
+    renderExpandedNote(note: StickyNote, container: HTMLElement | null) {
+      if (!container) return;
+
+      const noteEl = document.createElement('div');
+      noteEl.className = 'sticky-note-expanded';
+      noteEl.dataset.id = note.id;
+      
+      noteEl.style.cssText = `
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      `;
+      
+      // Trigger animation after a frame
+      requestAnimationFrame(() => {
+        noteEl.style.opacity = '1';
+      });
+      
+      // Create header
+      const header = document.createElement('div');
+      header.style.cssText = 'display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0.5rem; border-bottom: 2px solid rgba(0, 0, 0, 0.15); flex-shrink: 0;';
+      
+      // Create title input
+      const titleInput = document.createElement('input');
+      titleInput.type = 'text';
+      titleInput.value = note.title;
+      titleInput.placeholder = 'Title';
+      titleInput.style.cssText = 'flex: 1; min-width: 0; border: none; background: transparent; font-size: 1rem; font-weight: 600; color: #333; outline: none; padding: 0.25rem; cursor: text; pointer-events: auto;';
+      titleInput.setAttribute('tabindex', '0');
+      
+      // Create hidden file input
+      const fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.accept = 'image/*';
+      fileInput.style.display = 'none';
+      
+      // Create bottom icon tray (fixed at bottom)
+      const iconTray = document.createElement('div');
+      iconTray.style.cssText = 'position: absolute; bottom: 0; left: 0; right: 0; height: 48px; display: flex; align-items: center; justify-content: center; gap: 12px; padding: 8px; background: rgba(0, 0, 0, 0.05); border-top: 1px solid rgba(0, 0, 0, 0.1); flex-shrink: 0; pointer-events: auto;';
+      
+      // Create delete button with SVG icon
+      const deleteBtn = document.createElement('button');
+      deleteBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
+      deleteBtn.title = 'Delete note';
+      deleteBtn.setAttribute('type', 'button');
+      deleteBtn.style.cssText = 'width: 36px; height: 36px; min-width: 36px; border: none; background: rgba(0, 0, 0, 0.1); border-radius: 6px; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; padding: 0; pointer-events: auto; transition: background 0.2s; color: #555;';
+      
+      // Create color picker (hidden by default, shown as popup)
+      const colorPicker = document.createElement('div');
+      colorPicker.style.cssText = 'display: none; gap: 4px; flex-shrink: 0; pointer-events: auto; position: absolute; bottom: 52px; left: 50%; transform: translateX(-50%); background: white; padding: 8px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 20;';
+      this.colors.forEach(color => {
+        const colorDot = document.createElement('button');
+        colorDot.setAttribute('type', 'button');
+        colorDot.style.cssText = `
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          background-color: ${color};
+          border: ${note.color === color ? '3px solid #333' : '2px solid rgba(0,0,0,0.2)'};
+          cursor: pointer;
+          transition: transform 0.2s;
+          pointer-events: auto;
+          padding: 0;
+          flex-shrink: 0;
+        `;
+        colorDot.title = `Change to ${color}`;
+        
+        colorDot.addEventListener('click', async (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          note.color = color;
+          noteEl.style.backgroundColor = color;
+          await this.saveNote(note);
+          this.renderStickyNotes();
+          
+          // Update all color dots borders
+          colorPicker.querySelectorAll('button').forEach((dot, i) => {
+            (dot as HTMLElement).style.border = this.colors[i] === color ? '3px solid #333' : '2px solid rgba(0,0,0,0.2)';
+          });
+        });
+        
+        colorDot.addEventListener('mouseenter', () => {
+          colorDot.style.transform = 'scale(1.2)';
+        });
+        
+        colorDot.addEventListener('mouseleave', () => {
+          colorDot.style.transform = 'scale(1)';
+        });
+        
+        colorPicker.appendChild(colorDot);
+      });
+      
+      // Create color palette button with SVG icon
+      const colorIndicator = document.createElement('button');
+      colorIndicator.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path></svg>`;
+      colorIndicator.title = 'Change color';
+      colorIndicator.setAttribute('type', 'button');
+      colorIndicator.style.cssText = 'width: 36px; height: 36px; min-width: 36px; border: none; background: rgba(0, 0, 0, 0.1); border-radius: 6px; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; padding: 0; pointer-events: auto; position: relative; transition: background 0.2s; color: #555;';
+      
+      colorIndicator.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isVisible = colorPicker.style.display === 'flex';
+        colorPicker.style.display = isVisible ? 'none' : 'flex';
+      });
+      
+      // Close picker when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!colorPicker.contains(e.target as Node) && !colorIndicator.contains(e.target as Node)) {
+          colorPicker.style.display = 'none';
+        }
+      });
+      
+      // Create sticky/pin button with SVG icon
+      const stickyBtn = document.createElement('button');
+      stickyBtn.innerHTML = note.sticky 
+        ? `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M16 9V4h1c.55 0 1-.45 1-1s-.45-1-1-1H7c-.55 0-1 .45-1 1s.45 1 1 1h1v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1 1-1v-7H19v-2c-1.66 0-3-1.34-3-3z"/></svg>`
+        : `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 9V4h1c.55 0 1-.45 1-1s-.45-1-1-1H7c-.55 0-1 .45-1 1s.45 1 1 1h1v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1 1-1v-7H19v-2c-1.66 0-3-1.34-3-3z"/></svg>`;
+      stickyBtn.title = note.sticky ? 'Unpin note' : 'Pin note';
+      stickyBtn.setAttribute('type', 'button');
+      stickyBtn.style.cssText = 'width: 36px; height: 36px; min-width: 36px; border: none; background: rgba(0, 0, 0, 0.1); border-radius: 6px; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; padding: 0; pointer-events: auto; transition: background 0.2s; color: #555;';
+      
+      // Create minimize button
+      const minimizeBtn = document.createElement('button');
+      minimizeBtn.innerHTML = '−';
+      minimizeBtn.setAttribute('type', 'button');
+      minimizeBtn.style.cssText = 'width: 36px; height: 36px; min-width: 36px; border: none; background: rgba(0, 0, 0, 0.1); border-radius: 6px; cursor: pointer; font-size: 1.5rem; color: #333; flex-shrink: 0; display: flex; align-items: center; justify-content: center; padding: 0; pointer-events: auto;';
+      
+      // Create formatting toolbar
+      const toolbar = document.createElement('div');
+      toolbar.style.cssText = 'display: flex; gap: 4px; padding: 0.5rem; border-bottom: 1px solid rgba(0, 0, 0, 0.1); flex-shrink: 0; background: rgba(0, 0, 0, 0.03);';
+      
+      const formatButtons = [
+        { cmd: 'bold', icon: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path></svg>', title: 'Bold (Cmd/Ctrl+B)' },
+        { cmd: 'italic', icon: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="4" x2="10" y2="4"></line><line x1="14" y1="20" x2="5" y2="20"></line><line x1="15" y1="4" x2="9" y2="20"></line></svg>', title: 'Italic (Cmd/Ctrl+I)' },
+        { cmd: 'underline', icon: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v7a6 6 0 0 0 6 6 6 6 0 0 0 6-6V3"></path><line x1="4" y1="21" x2="20" y2="21"></line></svg>', title: 'Underline (Cmd/Ctrl+U)' },
+        { cmd: 'formatBlock-h1', icon: '<span style="font-weight: bold; font-size: 14px;">H1</span>', title: 'Heading 1' },
+        { cmd: 'formatBlock-h2', icon: '<span style="font-weight: bold; font-size: 12px;">H2</span>', title: 'Heading 2' },
+        { cmd: 'formatBlock-h3', icon: '<span style="font-weight: bold; font-size: 11px;">H3</span>', title: 'Heading 3' },
+        { cmd: 'justifyLeft', icon: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="17" y1="10" x2="3" y2="10"></line><line x1="21" y1="6" x2="3" y2="6"></line><line x1="21" y1="14" x2="3" y2="14"></line><line x1="17" y1="18" x2="3" y2="18"></line></svg>', title: 'Align Left' },
+        { cmd: 'justifyCenter', icon: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="10" x2="6" y2="10"></line><line x1="21" y1="6" x2="3" y2="6"></line><line x1="21" y1="14" x2="3" y2="14"></line><line x1="18" y1="18" x2="6" y2="18"></line></svg>', title: 'Align Center' },
+        { cmd: 'justifyRight', icon: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="21" y1="10" x2="7" y2="10"></line><line x1="21" y1="6" x2="3" y2="6"></line><line x1="21" y1="14" x2="3" y2="14"></line><line x1="21" y1="18" x2="7" y2="18"></line></svg>', title: 'Align Right' },
+        { cmd: 'insertUnorderedList', icon: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>', title: 'Bullet List' },
+        { cmd: 'insertOrderedList', icon: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="10" y1="6" x2="21" y2="6"></line><line x1="10" y1="12" x2="21" y2="12"></line><line x1="10" y1="18" x2="21" y2="18"></line><path d="M4 6h1v4"></path><path d="M4 10h2"></path><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"></path></svg>', title: 'Numbered List' },
+      ];
+      
+      formatButtons.forEach(btn => {
+        const button = document.createElement('button');
+        button.innerHTML = btn.icon;
+        button.title = btn.title;
+        button.setAttribute('type', 'button');
+        button.style.cssText = 'width: 32px; height: 32px; border: none; background: rgba(0, 0, 0, 0.05); border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; pointer-events: auto; transition: background 0.2s; color: #555;';
+        
+        button.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (btn.cmd.startsWith('formatBlock-')) {
+            // Extract the tag from the command (e.g., 'formatBlock-h1' -> 'h1')
+            const tag = btn.cmd.replace('formatBlock-', '');
+            
+            // Ensure there's a block element to format
+            if (contentArea) {
+              const hasBlockChildren = Array.from(contentArea.childNodes).some(node => {
+                return node.nodeType === 1 && ['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'DIV', 'BLOCKQUOTE'].includes((node as Element).tagName);
+              });
+              
+              if (!hasBlockChildren && contentArea.textContent) {
+                // Wrap all content in a p tag
+                const content = contentArea.innerHTML;
+                contentArea.innerHTML = `<p>${content}</p>`;
+              }
+            }
+            
+            document.execCommand('formatBlock', false, `<${tag}>`);
+            
+            // Apply inline styles to the newly created header
+            setTimeout(() => {
+              const selection = window.getSelection();
+              let headerElement = null;
+              
+              if (selection && selection.rangeCount > 0) {
+                const range = selection.getRangeAt(0);
+                headerElement = range.startContainer.parentElement;
+                
+                // Walk up the DOM to find the actual header element
+                while (headerElement && !['H1', 'H2', 'H3'].includes(headerElement.tagName)) {
+                  headerElement = headerElement.parentElement;
+                }
+              }
+              
+              // If we found a header element, apply styles
+              if (headerElement) {
+                const tagName = headerElement.tagName.toLowerCase();
+                if (tagName === 'h1') {
+                  headerElement.style.cssText = 'font-size: 2.2em !important; font-weight: bold !important; margin: 1rem 0 0.5rem 0 !important; color: inherit !important; text-shadow: none !important;';
+                } else if (tagName === 'h2') {
+                  headerElement.style.cssText = 'font-size: 1.8em !important; font-weight: bold !important; margin: 1rem 0 0.5rem 0 !important; color: inherit !important; text-shadow: none !important;';
+                } else if (tagName === 'h3') {
+                  headerElement.style.cssText = 'font-size: 1.4em !important; font-weight: bold !important; margin: 0.8rem 0 0.4rem 0 !important; color: inherit !important; text-shadow: none !important;';
+                }
+              }
+            }, 0);
+            
+            contentArea.focus();
+          } else {
+            document.execCommand(btn.cmd, false);
+            contentArea.focus();
+          }
+        });
+        
+        button.addEventListener('mouseenter', () => {
+          button.style.background = 'rgba(0, 0, 0, 0.15)';
+        });
+        
+        button.addEventListener('mouseleave', () => {
+          button.style.background = 'rgba(0, 0, 0, 0.05)';
+        });
+        
+        toolbar.appendChild(button);
+      });
+      
+      // Create content area with contenteditable div for rich content
+      const contentArea = document.createElement('div');
+      contentArea.contentEditable = 'true';
+      contentArea.innerHTML = this.renderContent(note.content);
+      contentArea.setAttribute('data-placeholder', 'Write your note... (you can paste images too)');
+      contentArea.style.cssText = 'flex: 1; border: none; background: transparent; padding: 1rem; padding-bottom: 56px; font-size: 1rem; color: #333; outline: none; cursor: text; line-height: 1.5; width: 100%; box-sizing: border-box; font-family: inherit; pointer-events: auto; overflow-y: auto; white-space: pre-wrap; word-wrap: break-word;';
+      contentArea.setAttribute('tabindex', '0');
+      
+      // Add placeholder styling
+      const style = document.createElement('style');
+      style.textContent = `
+        [contenteditable][data-placeholder]:empty:before {
+          content: attr(data-placeholder);
+          color: #333;
+          pointer-events: none;
+        }
+        [contenteditable] img {
+          max-width: 100%;
+          height: auto;
+          border-radius: 4px;
+          margin: 0.5rem 0;
+          display: block;
+        }
+      `;
+      document.head.appendChild(style);
+      
+      // Handle image paste - supports both image blobs and image URLs (iOS Safari)
+      contentArea.addEventListener('paste', async (e) => {
+        const items = e.clipboardData?.items;
+        if (!items) return;
+
+        // First: check if there's an actual image blob in the clipboard
+        let hasImageBlob = false;
+        for (let i = 0; i < items.length; i++) {
+          if (items[i].type.indexOf('image') !== -1) {
+            hasImageBlob = true;
+            break;
+          }
+        }
+
+        // If we found image blob, handle it
+        if (hasImageBlob) {
+          e.preventDefault();
+          
+          for (let i = 0; i < items.length; i++) {
+            const item = items[i];
+            
+            if (item.type.indexOf('image') !== -1) {
+              try {
+                const blob = item.getAsFile();
+                if (!blob) {
+                  console.log('No blob from getAsFile for type:', item.type);
+                  continue;
+                }
+
+                // Check image size (max 2MB for pasted images)
+                if (blob.size > 2048 * 1024) {
+                  alert('Pasted image is too large. Please use images under 2MB.');
+                  return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                  const imageData = event.target?.result as string;
+                  this.insertImageIntoNote(contentArea, imageData, note.id);
+                };
+                
+                reader.onerror = (error) => {
+                  console.error('Error reading image:', error);
+                  alert('Failed to paste image. Please try again or use the upload button.');
+                };
+                
+                reader.readAsDataURL(blob);
+                return;
+              } catch (error) {
+                console.error('Error pasting image:', error);
+                alert('Failed to paste image. Please try the upload button instead.');
+                return;
+              }
+            }
+          }
+        }
+      });
+      
+      // Additional handler: detect image URLs after paste (for iOS Safari)
+      let inputTimeout: number;
+      contentArea.addEventListener('input', async () => {
+        clearTimeout(inputTimeout);
+        inputTimeout = window.setTimeout(async () => {
+          // Get all text nodes and check for image URLs
+          const text = contentArea.textContent?.trim() || '';
+          console.log('Checking for image URLs in text:', text);
+          
+          // Match any image URL in the text
+          const imageUrlPattern = /https?:\/\/[^\s]+\.(jpg|jpeg|png|gif|webp|bmp|svg)(\?[^\s]*)?/gi;
+          const matches = text.match(imageUrlPattern);
+          
+          if (matches && matches.length > 0) {
+            console.log('Found image URLs:', matches);
+            
+            for (const url of matches) {
+              try {
+                console.log('Fetching image:', url);
+                
+                // Remove the URL from content
+                const walker = document.createTreeWalker(contentArea, NodeFilter.SHOW_TEXT);
+                let node: Node | null;
+                while (node = walker.nextNode()) {
+                  if (node.textContent?.includes(url)) {
+                    node.textContent = node.textContent.replace(url, '');
+                  }
+                }
+                
+                // Fetch and insert the image
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Failed to fetch');
+                
+                const blob = await response.blob();
+                if (blob.size > 2048 * 1024) {
+                  alert('Image is too large. Please use images under 2MB.');
+                  continue;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                  const imageData = event.target?.result as string;
+                  console.log('Inserting image into note');
+                  this.insertImageIntoNote(contentArea, imageData, note.id);
+                };
+                reader.readAsDataURL(blob);
+              } catch (error) {
+                console.error('Failed to auto-fetch image URL:', error);
+              }
+            }
+          }
+        }, 300); // Debounce for 300ms
+      });
+      
+      // Assemble the note
+      header.appendChild(titleInput);
+      header.appendChild(minimizeBtn);
+      noteEl.appendChild(header);
+      noteEl.appendChild(toolbar);
+      noteEl.appendChild(contentArea);
+      
+      // Assemble icon tray
+      colorIndicator.appendChild(colorPicker);
+      iconTray.appendChild(deleteBtn);
+      iconTray.appendChild(colorIndicator);
+      iconTray.appendChild(stickyBtn);
+      noteEl.appendChild(iconTray);
+      noteEl.appendChild(fileInput);
+
+      // Event handlers
+      titleInput.addEventListener('input', (e) => {
+        const target = e.target as HTMLInputElement;
+        this.updateNoteTitle(note.id, target.value);
+      });
+
+      contentArea.addEventListener('input', () => {
+        this.updateNoteContent(note.id, contentArea.innerHTML);
+      });
+
+      stickyBtn.addEventListener('click', () => this.toggleSticky(note.id));
+      stickyBtn.addEventListener('mouseenter', () => {
+        stickyBtn.style.background = 'rgba(0, 0, 0, 0.2)';
+      });
+      stickyBtn.addEventListener('mouseleave', () => {
+        stickyBtn.style.background = 'rgba(0, 0, 0, 0.1)';
+      });
+      
+      colorIndicator.addEventListener('mouseenter', () => {
+        colorIndicator.style.background = 'rgba(0, 0, 0, 0.2)';
+      });
+      colorIndicator.addEventListener('mouseleave', () => {
+        colorIndicator.style.background = 'rgba(0, 0, 0, 0.1)';
+      });
+
+      minimizeBtn.addEventListener('click', () => this.collapseNote(note.id));
+      minimizeBtn.addEventListener('mouseenter', () => {
+        minimizeBtn.style.background = 'rgba(0, 0, 0, 0.2)';
+      });
+      minimizeBtn.addEventListener('mouseleave', () => {
+        minimizeBtn.style.background = 'rgba(0, 0, 0, 0.1)';
+      });
+
+      deleteBtn.addEventListener('click', () => {
+        if (confirm(`Delete "${note.title}"? This cannot be undone.`)) {
+          this.deleteNote(note.id);
+        }
+      });
+      deleteBtn.addEventListener('mouseenter', () => {
+        deleteBtn.style.background = 'rgba(0, 0, 0, 0.2)';
+      });
+      deleteBtn.addEventListener('mouseleave', () => {
+        deleteBtn.style.background = 'rgba(0, 0, 0, 0.1)';
+      });
+
+      container.appendChild(noteEl);
+    }
+
+    async expandNote(id: string, sourceElement?: HTMLElement) {
+      // Collapse currently active note if any
+      if (this.activeNoteId && this.activeNoteId !== id) {
+        await this.collapseNote(this.activeNoteId);
+      }
+
+      const note = this.notes.find(n => n.id === id);
+      if (!note) return;
+
+      note.collapsed = false;
+      await this.saveNote(note);
+
+      // Remove from collapsed view
+      const tab = this.collapsedContainer?.querySelector(`[data-id="${id}"]`);
+      tab?.remove();
+
+      // Load note into page editor
+      const pageTitle = document.getElementById('page-title');
+      const pageSubtitle = document.getElementById('page-subtitle');
+      const pageHeader = document.getElementById('page-header');
+      const toolbar = document.getElementById('page-toolbar');
+      const iconTray = document.getElementById('page-icon-tray');
+      const closeBtn = document.getElementById('close-page-modal');
+      const opacitySlider = document.getElementById('opacity-slider') as HTMLInputElement;
+      
+      if (pageTitle) pageTitle.textContent = note.title;
+      if (pageSubtitle) pageSubtitle.innerHTML = note.content;
+      
+      if (pageHeader) {
+        pageHeader.classList.add('editing');
+        
+        // Apply saved opacity
+        const savedOpacity = localStorage.getItem('modalOpacity') || '60';
+        const value = parseInt(savedOpacity);
+        const opacity = value / 100;
+        const blur = (value / 100) * 10;
+        pageHeader.style.background = `rgba(0, 0, 0, ${opacity})`;
+        pageHeader.style.backdropFilter = `blur(${blur}px)`;
+      }
+      
+      if (toolbar) {
+        toolbar.style.display = 'flex';
+        // Call the user page manager to populate toolbar
+        const userPageManager = (window as any).userPageManager;
+        if (userPageManager) {
+          userPageManager.populatePageToolbar();
+        }
+      }
+      
+      if (iconTray) {
+        iconTray.style.display = 'flex';
+        iconTray.innerHTML = ''; // Clear previous
+        this.populatePageIconTray();
+      }
+      
+      if (closeBtn) {
+        closeBtn.style.display = 'block';
+        // Override close button to collapse note instead
+        closeBtn.onclick = () => this.collapseNote(id);
+      }
+      
+      // Show the control bar
+      const controlBar = document.getElementById('page-control-bar') as HTMLElement;
+      if (controlBar) controlBar.style.display = 'flex';
+      const opacityControl = document.getElementById('opacity-control') as HTMLElement;
+      if (opacityControl) {
+        opacityControl.style.display = 'flex';
+        opacityControl.style.visibility = 'visible';
+        // Apply saved opacity value to slider
+        const savedOpacity = localStorage.getItem('modalOpacity') || '60';
+        if (opacitySlider) {
+          opacitySlider.value = savedOpacity;
+          opacitySlider.style.display = 'block';
+        }
+      }
+      
+      // Double-check after a frame to ensure it's visible
+      requestAnimationFrame(() => {
+        const opControl = document.getElementById('opacity-control') as HTMLElement;
+        if (opControl) {
+          opControl.style.display = 'flex';
+          opControl.style.visibility = 'visible';
+        }
+      });
+
+      // Show save button for new unsaved notes
+      const saveBtn = document.getElementById('save-page-btn');
+      const isNewNote = (note as any).isNew;
+      
+      if (saveBtn) {
+        if (isNewNote) {
+          saveBtn.style.display = 'block';
+          saveBtn.textContent = 'Save';
+          saveBtn.onclick = async () => {
+            // Mark note as saved
+            (note as any).isNew = false;
+            note.title = pageTitle?.textContent?.trim() || `Note ${this.notes.indexOf(note) + 1}`;
+            note.content = pageSubtitle?.innerHTML?.trim() || '';
+            await this.saveNote(note);
+            
+            // Re-render to show saved note
+            this.renderCollapsedNote(note);
+            this.renderStickyNotes();
+            
+            // Close the editor
+            await this.collapseNote(id);
+          };
+        } else {
+          saveBtn.style.display = 'none';
+        }
+      }
+
+      this.activeNoteId = id;
+      
+      // For new notes, don't auto-save until explicitly saved
+      if (!isNewNote) {
+        // Auto-save on content change for existing notes
+        if (pageSubtitle) {
+          pageSubtitle.oninput = async () => {
+            note.content = pageSubtitle.innerHTML;
+            await this.saveNote(note);
+          };
+        }
+        
+        if (pageTitle) {
+          pageTitle.oninput = async () => {
+            note.title = pageTitle.textContent || 'Untitled';
+          await this.saveNote(note);
+        };
+      }
+      }
+    }
+
+    async collapseNote(id: string) {
+      const note = this.notes.find(n => n.id === id);
+      if (!note) return;
+
+      // If this is a new unsaved note with no meaningful content, delete it instead of saving
+      const isNewNote = (note as any).isNew;
+      const titleText = note.title?.trim() || '';
+      const contentText = note.content?.trim() || '';
+      const isDefaultTitle = /^Note \d+$/.test(titleText);
+      const isEmpty = titleText === '' || isDefaultTitle;
+      
+      if (isNewNote && isEmpty && contentText === '') {
+        // Delete the empty new note from memory
+        this.notes = this.notes.filter(n => n.id !== id);
+        // Don't need to delete from DB since it was never saved
+        console.log('Deleted empty new note:', id);
+      } else {
+        note.collapsed = true;
+        await this.saveNote(note);
+        // Re-add note to sidebar since it's now collapsed
+        this.renderCollapsedNote(note);
+      }
+
+      // Restore page editor to default state
+      const pageHeader = document.getElementById('page-header');
+      const pageTitle = document.getElementById('page-title');
+      const pageSubtitle = document.getElementById('page-subtitle');
+      const toolbar = document.getElementById('page-toolbar');
+      const iconTray = document.getElementById('page-icon-tray');
+      const closeBtn = document.getElementById('close-page-modal');
+      const opacitySlider = document.getElementById('opacity-slider');
+      
+      if (pageTitle) {
+        pageTitle.textContent = 'One/App';
+        pageTitle.oninput = null; // Remove auto-save
+      }
+      
+      if (pageSubtitle) {
+        pageSubtitle.innerHTML = 'Your personal workspace';
+        pageSubtitle.oninput = null; // Remove auto-save
+      }
+      
+      if (pageHeader) {
+        pageHeader.classList.remove('editing');
+        pageHeader.style.background = '';
+        pageHeader.style.backdropFilter = '';
+      }
+      
+      if (toolbar) toolbar.style.display = 'none';
+      
+      // Hide control bar
+      const controlBar = document.getElementById('page-control-bar') as HTMLElement;
+      if (controlBar) controlBar.style.display = 'none';
+
+      // Only render collapsed if note still exists (wasn't deleted as empty)
+      if (this.notes.find(n => n.id === id)) {
+        this.renderCollapsedNote(note);
+      } else {
+        // Note was deleted, refresh sidebar
+        this.renderStickyNotes();
+      }
+
+      if (this.activeNoteId === id) {
+        this.activeNoteId = null;
+      }
+    }
+
+    async updateNoteTitle(id: string, title: string) {
+      const note = this.notes.find(n => n.id === id);
+      if (note) {
+        note.title = title;
+        await this.saveNote(note);
+        
+        // Update collapsed tab if it exists
+        const tab = this.collapsedContainer?.querySelector(`[data-id="${id}"] div`);
+        if (tab) {
+          tab.textContent = title;
+        }
+      }
+    }
+
+    insertImageIntoNote(contentArea: HTMLElement, imageSrc: string, noteId: string) {
+      // Create and insert image element
+      const img = document.createElement('img');
+      img.src = imageSrc;
+      img.style.cssText = 'max-width: 100%; height: auto; border-radius: 4px; margin: 0.5rem 0; display: block;';
+      
+      // Insert at cursor position or append
+      const selection = window.getSelection();
+      if (selection && selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0);
+        range.deleteContents();
+        range.insertNode(img);
+        
+        // Add a line break after the image
+        const br = document.createElement('br');
+        range.setStartAfter(img);
+        range.insertNode(br);
+        
+        // Move cursor after the break
+        range.setStartAfter(br);
+        range.setEndAfter(br);
+        selection.removeAllRanges();
+        selection.addRange(range);
+      } else {
+        contentArea.appendChild(img);
+        contentArea.appendChild(document.createElement('br'));
+      }
+      
+      // Update note content
+      this.updateNoteContent(noteId, contentArea.innerHTML);
+    }
+
+    async updateNoteContent(id: string, content: string) {
+      const note = this.notes.find(n => n.id === id);
+      if (note) {
+        note.content = content;
+        await this.saveNote(note);
+      }
+    }
+
+    async deleteNote(id: string) {
+      // Close the modal BEFORE removing the note from the array
+      if (this.activeNoteId === id) {
+        this.activeNoteId = null;
+        await this.collapseNote(id);
+      }
+
+      // Now remove the note from the array and database
+      this.notes = this.notes.filter(n => n.id !== id);
+      await this.db.deleteNote(id);
+      
+      const noteEl = this.notesContainer?.querySelector(`[data-id="${id}"]`);
+      noteEl?.remove();
+      
+      const tab = this.collapsedContainer?.querySelector(`[data-id="${id}"]`);
+      tab?.remove();
+
+      // Re-render sticky notes to remove deleted note if it was pinned
+      this.renderStickyNotes();
+    }
+
+    async reorderNotes(draggedId: string, targetId: string) {
+      console.log('reorderNotes called:', draggedId, targetId);
+      const draggedNote = this.notes.find(n => n.id === draggedId);
+      const targetNote = this.notes.find(n => n.id === targetId);
+      
+      console.log('draggedNote:', draggedNote, 'targetNote:', targetNote);
+      
+      if (!draggedNote || !targetNote) {
+        console.error('Could not find notes to reorder');
+        return;
+      }
+
+      // Swap order values
+      const tempOrder = draggedNote.order;
+      draggedNote.order = targetNote.order;
+      targetNote.order = tempOrder;
+
+      console.log('After swap - draggedNote.order:', draggedNote.order, 'targetNote.order:', targetNote.order);
+
+      // Save both notes
+      await this.saveNote(draggedNote);
+      await this.saveNote(targetNote);
+
+      // Re-render sticky notes to reflect new order
+      this.renderStickyNotes();
+    }
+
+    async clearAllNotes() {
+      if (confirm('Delete all notes? This cannot be undone.')) {
+        this.notes = [];
+        await this.db.clearAllNotes();
+        if (this.notesContainer) {
+          this.notesContainer.innerHTML = '';
+        }
+        if (this.collapsedContainer) {
+          this.collapsedContainer.innerHTML = '';
+        }
+        this.activeNoteId = null;
+        this.renderStickyNotes();
+      }
+    }
+
+    async toggleSticky(id: string) {
+      const note = this.notes.find(n => n.id === id);
+      if (!note) return;
+
+      note.sticky = !note.sticky;
+      await this.saveNote(note);
+      
+      // Update the sticky button in the expanded note
+      const noteEl = this.notesContainer?.querySelector(`[data-id="${id}"]`);
+      const stickyBtn = noteEl?.querySelector('button[title*="Pin"]') as HTMLButtonElement;
+      if (stickyBtn) {
+        stickyBtn.innerHTML = note.sticky ? '📌' : '📍';
+        stickyBtn.title = note.sticky ? 'Unpin note' : 'Pin note';
+      }
+      
+      this.renderStickyNotes();
+    }
+
+    renderStickyNotes() {
+      const stickyContainer = document.getElementById('sticky-notes-container');
+      if (!stickyContainer) return;
+
+      stickyContainer.innerHTML = '';
+      const stickyNotes = this.notes.filter(n => n.sticky).sort((a, b) => a.order - b.order);
+      console.log('renderStickyNotes called - Total notes:', this.notes.length, 'Sticky notes:', stickyNotes.length);
+      console.log('Sticky notes being rendered:', stickyNotes.map(n => ({ id: n.id, title: n.title, sticky: n.sticky })));
+
+      stickyNotes.forEach((note, index) => {
+        const stickyNote = document.createElement('div');
+        stickyNote.className = 'sticky-note-card';
+        stickyNote.dataset.id = note.id;
+        stickyNote.draggable = true;
+        stickyNote.style.cssText = `
+          background-color: ${note.color};
+          cursor: grab;
+          width: 180px;
+          min-height: 120px;
+          padding: 1rem;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+          transition: transform 0.2s, opacity 0.2s;
+          overflow: hidden;
+        `;
+
+        const title = document.createElement('div');
+        title.style.cssText = 'font-weight: 600; color: #333; font-size: 0.95rem; margin-bottom: 0.5rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; position: relative; z-index: 2;';
+        title.textContent = (note.sticky ? '📌 ' : '') + note.title;
+
+        stickyNote.appendChild(title);
+
+        // Check if note has an image - if so, use it as background cover
+        if (note.content.includes('<img')) {
+          // Create a temporary DOM element to properly parse and extract the first image
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = note.content;
+          const firstImg = tempDiv.querySelector('img');
+          
+          if (firstImg && firstImg.src) {
+            // Use image as background cover
+            stickyNote.style.backgroundImage = `url(${firstImg.src})`;
+            stickyNote.style.backgroundSize = 'cover';
+            stickyNote.style.backgroundPosition = 'center';
+            stickyNote.style.backgroundRepeat = 'no-repeat';
+            
+            // Add semi-transparent overlay for text readability
+            stickyNote.style.position = 'relative';
+            
+            // Make title background semi-transparent so text is readable over image
+            title.style.backgroundColor = 'rgba(255, 255, 255, 0.85)';
+            title.style.padding = '0.25rem 0.5rem';
+            title.style.borderRadius = '4px';
+            title.style.color = '#333';
+          }
+        } else {
+          // No image, show text content only
+          const content = document.createElement('div');
+          content.style.cssText = 'color: #555; font-size: 0.85rem; line-height: 1.4; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;';
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = note.content;
+          content.textContent = tempDiv.textContent?.trim() || '';
+          stickyNote.appendChild(content);
+        }
+
+        stickyNote.addEventListener('click', async (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          console.log('Sticky note clicked:', note.id);
+          await this.expandNote(note.id, stickyNote);
+        });
+        stickyNote.addEventListener('mouseenter', () => {
+          stickyNote.style.transform = 'translateY(-4px)';
+        });
+        stickyNote.addEventListener('mouseleave', () => {
+          stickyNote.style.transform = 'translateY(0)';
+        });
+
+        // Drag and drop handlers
+        stickyNote.addEventListener('dragstart', (e) => {
+          console.log('Dragstart on note:', note.id);
+          e.dataTransfer!.effectAllowed = 'move';
+          e.dataTransfer!.setData('text/plain', note.id);
+          console.log('Set dataTransfer data to:', note.id);
+          stickyNote.style.opacity = '0.5';
+          stickyNote.style.cursor = 'grabbing';
+        });
+
+        stickyNote.addEventListener('dragend', (e) => {
+          stickyNote.style.opacity = '1';
+          stickyNote.style.cursor = 'grab';
+          // Remove all drag-over classes
+          document.querySelectorAll('.sticky-note-card').forEach(card => {
+            card.classList.remove('drag-over');
+          });
+        });
+
+        stickyNote.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          e.dataTransfer!.dropEffect = 'move';
+          // Just add the class on any dragover - we'll check the data on drop
+          stickyNote.classList.add('drag-over');
+        });
+
+        stickyNote.addEventListener('dragleave', (e) => {
+          stickyNote.classList.remove('drag-over');
+        });
+
+        stickyNote.addEventListener('drop', async (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          console.log('Drop event fired on note:', note.id);
+          const draggedId = e.dataTransfer!.getData('text/plain');
+          console.log('Dragged ID from dataTransfer:', draggedId);
+          if (draggedId !== note.id) {
+            console.log('Calling reorderNotes with draggedId:', draggedId, 'targetId:', note.id);
+            await this.reorderNotes(draggedId, note.id);
+          }
+          stickyNote.classList.remove('drag-over');
+        });
+
+        // Add click handler that doesn't interfere with dragging
+        let isDragging = false;
+        stickyNote.addEventListener('mousedown', () => {
+          isDragging = false;
+        });
+
+        stickyNote.addEventListener('mousemove', () => {
+          isDragging = true;
+        });
+
+        stickyNote.addEventListener('click', async (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          // Only open note if not dragging
+          if (!isDragging) {
+            console.log('Sticky note clicked:', note.id);
+            await this.expandNote(note.id, stickyNote);
+          }
+        });
+
+        // Touch event handlers for mobile drag and drop
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let isTouchDragging = false;
+        let draggedNoteId: string | null = null;
+
+        stickyNote.addEventListener('touchstart', (e) => {
+          if (e.touches.length === 1) {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            draggedNoteId = note.id;
+            isTouchDragging = false;
+            stickyNote.style.opacity = '0.7';
+          }
+        }, { passive: true });
+
+        stickyNote.addEventListener('touchmove', (e) => {
+          if (draggedNoteId === note.id && e.touches.length === 1) {
+            const deltaX = Math.abs(e.touches[0].clientX - touchStartX);
+            const deltaY = Math.abs(e.touches[0].clientY - touchStartY);
+            // If moved more than 10px, consider it a drag
+            if (deltaX > 10 || deltaY > 10) {
+              isTouchDragging = true;
+            }
+          }
+        }, { passive: true });
+
+        stickyNote.addEventListener('touchend', async (e) => {
+          if (draggedNoteId === note.id && isTouchDragging) {
+            // Find the element at the end touch position
+            const endX = e.changedTouches[0].clientX;
+            const endY = e.changedTouches[0].clientY;
+            const elementAtEnd = document.elementFromPoint(endX, endY);
+            
+            // Find the nearest sticky note card at that position
+            let targetNote = elementAtEnd?.closest('.sticky-note-card') as HTMLElement | null;
+            if (targetNote && targetNote !== stickyNote) {
+              const targetId = targetNote.dataset.id as string;
+              console.log('Touch drop - dragging:', draggedNoteId, 'onto:', targetId);
+              await this.reorderNotes(draggedNoteId, targetId);
+            }
+          }
+          
+          // Reset state
+          stickyNote.style.opacity = '1';
+          draggedNoteId = null;
+          isTouchDragging = false;
+          document.querySelectorAll('.sticky-note-card').forEach(card => {
+            card.classList.remove('drag-over');
+          });
+        });
+
+        stickyContainer.appendChild(stickyNote);
+      });
+    }
+
+    showViewAllPanel() {
+      const panel = document.getElementById('view-all-panel');
+      const content = document.getElementById('view-all-content');
+      if (!panel || !content) return;
+
+      content.innerHTML = '';
+      
+      this.notes.sort((a, b) => b.createdAt - a.createdAt).forEach(note => {
+        const noteCard = document.createElement('div');
+        noteCard.className = 'view-all-note-card';
+        noteCard.style.cssText = `
+          background-color: ${note.color};
+          padding: 1rem;
+          border-radius: 8px;
+          margin-bottom: 1rem;
+          cursor: pointer;
+          transition: transform 0.2s;
+          overflow: hidden;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+          position: relative;
+          min-height: 100px;
+        `;
+
+        const title = document.createElement('div');
+        title.style.cssText = 'font-weight: 600; color: #333; font-size: 1rem; margin-bottom: 0.5rem; overflow-wrap: break-word; word-break: break-word; position: relative; z-index: 2;';
+        title.textContent = (note.sticky ? '📌 ' : '') + note.title;
+
+        noteCard.appendChild(title);
+
+        // Check if note has an image - if so, use it as background cover
+        if (note.content.includes('<img')) {
+          const imgMatch = note.content.match(/<img[^>]+src="([^"]+)"/);
+          if (imgMatch) {
+            // Use image as background cover
+            noteCard.style.backgroundImage = `url(${imgMatch[1]})`;
+            noteCard.style.backgroundSize = 'cover';
+            noteCard.style.backgroundPosition = 'center';
+            noteCard.style.backgroundRepeat = 'no-repeat';
+            
+            // Make title background semi-transparent so text is readable over image
+            title.style.backgroundColor = 'rgba(255, 255, 255, 0.85)';
+            title.style.padding = '0.25rem 0.5rem';
+            title.style.borderRadius = '4px';
+            title.style.color = '#333';
+          }
+        } else {
+          // No image, show text content
+          const contentDiv = document.createElement('div');
+          contentDiv.style.cssText = 'color: #555; font-size: 0.9rem; line-height: 1.5; overflow-wrap: break-word; word-break: break-word; max-width: 100%; position: relative; z-index: 2;';
+          contentDiv.innerHTML = note.content;
+          noteCard.appendChild(contentDiv);
+        }
+
+        noteCard.addEventListener('click', () => {
+          this.hideViewAllPanel();
+          this.expandNote(note.id, noteCard);
+        });
+        noteCard.addEventListener('mouseenter', () => {
+          noteCard.style.transform = 'translateX(4px)';
+        });
+        noteCard.addEventListener('mouseleave', () => {
+          noteCard.style.transform = 'translateX(0)';
+        });
+
+        content.appendChild(noteCard);
+      });
+
+      panel.style.display = 'flex';
+    }
+
+    hideViewAllPanel() {
+      const panel = document.getElementById('view-all-panel');
+      if (panel) {
+        panel.style.display = 'none';
+      }
+    }
+
+    displayWatchlistVideos() {
+      const stickyContainer = document.getElementById('sticky-notes-container');
+      if (!stickyContainer) return;
+
+      const favorites = JSON.parse(localStorage.getItem('memberFavorites') || '[]');
+      stickyContainer.innerHTML = '';
+
+      if (favorites.length === 0) {
+        const noResults = document.createElement('div');
+        noResults.style.cssText = 'color: white; padding: 1rem; text-align: center;';
+        noResults.textContent = 'No watchlist videos';
+        stickyContainer.appendChild(noResults);
+        return;
+      }
+
+      favorites.forEach(video => {
+        const card = document.createElement('div');
+        card.className = 'sticky-note-card';
+        card.style.cssText = `
+          background-color: #fff;
+          cursor: pointer;
+          width: 180px;
+          min-height: 120px;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+          transition: transform 0.2s;
+          overflow: hidden;
+          position: relative;
+          display: flex;
+          flex-direction: column;
+        `;
+
+        if (video.thumbnail) {
+          card.style.backgroundImage = `url(${video.thumbnail})`;
+          card.style.backgroundSize = 'cover';
+          card.style.backgroundPosition = 'center';
+          card.style.backgroundRepeat = 'no-repeat';
+        }
+
+        const title = document.createElement('div');
+        title.style.cssText = 'padding: 0.5rem; font-weight: 600; color: #fff; font-size: 0.85rem; line-height: 1.2; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; background: rgba(0, 0, 0, 0.7); position: relative; z-index: 2; margin-top: auto;';
+        title.textContent = video.title || '';
+
+        const channel = document.createElement('div');
+        channel.style.cssText = 'padding: 0 0.5rem 0.5rem; color: #ccc; font-size: 0.75rem; background: rgba(0, 0, 0, 0.7); position: relative; z-index: 2;';
+        channel.textContent = video.channelTitle || '';
+
+        card.appendChild(title);
+        card.appendChild(channel);
+
+        card.addEventListener('click', () => {
+          window.location.href = `/video?videoId=${video.videoId}`;
+        });
+        card.addEventListener('mouseenter', () => {
+          card.style.transform = 'translateY(-4px)';
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'translateY(0)';
+        });
+
+        stickyContainer.appendChild(card);
+      });
+    }
+
+    displaySubscribedChannels() {
+      const stickyContainer = document.getElementById('sticky-notes-container');
+      if (!stickyContainer) return;
+
+      const channels = JSON.parse(localStorage.getItem('memberChannels') || '[]');
+      stickyContainer.innerHTML = '';
+
+      if (channels.length === 0) {
+        const noResults = document.createElement('div');
+        noResults.style.cssText = 'color: white; padding: 1rem; text-align: center;';
+        noResults.textContent = 'No subscribed channels';
+        stickyContainer.appendChild(noResults);
+        return;
+      }
+
+      channels.forEach(channel => {
+        const card = document.createElement('div');
+        card.className = 'sticky-note-card';
+        card.style.cssText = `
+          background-color: #e0e0e0;
+          cursor: pointer;
+          width: 180px;
+          padding: 1rem;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+          transition: transform 0.2s;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.5rem;
+        `;
+
+        const icon = document.createElement('div');
+        icon.style.cssText = 'font-size: 3rem;';
+        icon.textContent = '📺';
+
+        const title = document.createElement('div');
+        title.style.cssText = 'font-weight: 600; color: #333; font-size: 0.9rem; text-align: center; word-break: break-word;';
+        title.textContent = channel.channelName || '';
+
+        card.appendChild(icon);
+        card.appendChild(title);
+
+        card.addEventListener('click', () => {
+          // Navigate directly to this specific channel's feed section
+          if (channel.channelId) {
+            window.location.href = `/video#channel-${channel.channelId}`;
+          } else {
+            window.location.href = '/video#channels-section';
+          }
+        });
+        card.addEventListener('mouseenter', () => {
+          card.style.transform = 'translateY(-4px)';
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'translateY(0)';
+        });
+
+        stickyContainer.appendChild(card);
+      });
+    }
+
+    toggleNotesInterface() {
+      const stickyContainer = document.getElementById('sticky-notes-container');
+      const controlBar = document.querySelector('.control-bar') as HTMLElement;
+      const notesSidebar = document.getElementById('notes-sidebar');
+      const notesContainer = document.getElementById('notes-container');
+      const toggleBtn = document.getElementById('toggle-notes-btn');
+      
+      const isHidden = stickyContainer?.style.display === 'none';
+      
+      if (isHidden) {
+        // Show notes interface
+        if (stickyContainer) stickyContainer.style.display = '';
+        if (controlBar) controlBar.style.display = '';
+        if (notesSidebar) notesSidebar.style.display = '';
+        if (notesContainer) notesContainer.style.display = '';
+        if (toggleBtn) {
+          toggleBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg><span>Hide Notes</span>';
+          toggleBtn.title = 'Hide Notes';
+        }
+      } else {
+        // Hide notes interface
+        if (stickyContainer) stickyContainer.style.display = 'none';
+        if (controlBar) controlBar.style.display = 'none';
+        if (notesSidebar) notesSidebar.style.display = 'none';
+        if (notesContainer) notesContainer.style.display = 'none';
+        if (toggleBtn) {
+          toggleBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg><span>Show Notes</span>';
+          toggleBtn.title = 'Show Notes';
+        }
+      }
+    }
+
+    handleSearch(query: string) {
+      const lowerQuery = query.toLowerCase().trim();
+      
+      if (!lowerQuery) {
+        this.renderStickyNotes();
+        return;
+      }
+
+      const stickyContainer = document.getElementById('sticky-notes-container');
+      if (!stickyContainer) return;
+
+      stickyContainer.innerHTML = '';
+      const filteredNotes = this.notes.filter(note => 
+        note.title.toLowerCase().includes(lowerQuery) || 
+        note.content.toLowerCase().includes(lowerQuery)
+      );
+
+      if (filteredNotes.length === 0) {
+        const noResults = document.createElement('div');
+        noResults.style.cssText = 'color: white; padding: 1rem; text-align: center;';
+        noResults.textContent = 'No notes found';
+        stickyContainer.appendChild(noResults);
+        return;
+      }
+
+      filteredNotes.forEach(note => {
+        const noteCard = document.createElement('div');
+        noteCard.className = 'sticky-note-card';
+        noteCard.dataset.id = note.id;
+        noteCard.style.cssText = `
+          background-color: ${note.color};
+          cursor: pointer;
+          width: 180px;
+          min-height: 120px;
+          padding: 1rem;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+          transition: transform 0.2s;
+          margin-bottom: 1rem;
+          overflow: hidden;
+          position: relative;
+        `;
+
+        const title = document.createElement('div');
+        title.style.cssText = 'font-weight: 600; color: #333; font-size: 0.95rem; margin-bottom: 0.5rem; position: relative; z-index: 2;';
+        title.textContent = (note.sticky ? '📌 ' : '') + note.title;
+
+        noteCard.appendChild(title);
+
+        // Check if note has an image - if so, use it as background cover
+        if (note.content.includes('<img')) {
+          const imgMatch = note.content.match(/<img[^>]+src="([^"]+)"/);
+          if (imgMatch) {
+            noteCard.style.backgroundImage = `url(${imgMatch[1]})`;
+            noteCard.style.backgroundSize = 'cover';
+            noteCard.style.backgroundPosition = 'center';
+            noteCard.style.backgroundRepeat = 'no-repeat';
+            title.style.backgroundColor = 'rgba(255, 255, 255, 0.85)';
+            title.style.padding = '0.25rem 0.5rem';
+            title.style.borderRadius = '4px';
+            title.style.color = '#333';
+          }
+        } else {
+          const content = document.createElement('div');
+          content.style.cssText = 'color: #555; font-size: 0.85rem; line-height: 1.4; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;';
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = note.content;
+          content.textContent = tempDiv.textContent || '';
+          noteCard.appendChild(content);
+        }
+
+        noteCard.addEventListener('click', () => this.expandNote(note.id, noteCard));
+        noteCard.addEventListener('mouseenter', () => {
+          noteCard.style.transform = 'translateY(-4px)';
+        });
+        noteCard.addEventListener('mouseleave', () => {
+          noteCard.style.transform = 'translateY(0)';
+        });
+
+        stickyContainer.appendChild(noteCard);
+      });
+    }
+
+    handleSort(sortType: string) {
+      let sortedNotes = [...this.notes];
+      
+      // Color mapping
+      const colorMap: Record<string, string> = {
+        'color-white': '#ffffff',
+        'color-yellow': '#fef08a',
+        'color-red': '#fca5a5',
+        'color-blue': '#bfdbfe',
+        'color-green': '#bbf7d0',
+        'color-purple': '#e9d5ff',
+        'color-orange': '#fed7aa',
+      };
+      
+      switch (sortType) {
+        case 'date':
+          sortedNotes.sort((a, b) => b.createdAt - a.createdAt);
+          break;
+        case 'images':
+          sortedNotes = sortedNotes.filter(note => note.content.includes('<img'));
+          break;
+        case 'text':
+          sortedNotes = sortedNotes.filter(note => {
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = note.content;
+            const textContent = tempDiv.textContent?.trim() || '';
+            const hasImages = note.content.includes('<img');
+            // Has text content but no images
+            return textContent !== '' && !hasImages;
+          });
+          break;
+        case 'empty':
+          sortedNotes = sortedNotes.filter(note => {
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = note.content;
+            const textContent = tempDiv.textContent?.trim() || '';
+            // Also check if content has no images
+            const hasImages = note.content.includes('<img');
+            return textContent === '' && !hasImages;
+          });
+          break;
+        case 'watchlist':
+          this.displayWatchlistVideos();
+          return;
+        case 'channels':
+          this.displaySubscribedChannels();
+          return;
+        default:
+          // Check if it's a color filter
+          if (sortType.startsWith('color-')) {
+            const targetColor = colorMap[sortType];
+            if (targetColor) {
+              sortedNotes = sortedNotes.filter(note => note.color === targetColor);
+            }
+          } else if (sortType === '') {
+            // Default view - call renderStickyNotes to show stickied notes with proper drag handlers
+            this.renderStickyNotes();
+            return;
+          }
+      }
+
+      const stickyContainer = document.getElementById('sticky-notes-container');
+      if (!stickyContainer) return;
+
+      stickyContainer.innerHTML = '';
+      
+      sortedNotes.forEach(note => {
+        const noteCard = document.createElement('div');
+        noteCard.className = 'sticky-note-card';
+        noteCard.dataset.id = note.id;
+        noteCard.style.cssText = `
+          background-color: ${note.color};
+          cursor: pointer;
+          width: 180px;
+          min-height: 120px;
+          padding: 1rem;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+          transition: transform 0.2s;
+          margin-bottom: 1rem;
+          overflow: hidden;
+          position: relative;
+        `;
+
+        const title = document.createElement('div');
+        title.style.cssText = 'font-weight: 600; color: #333; font-size: 0.95rem; margin-bottom: 0.5rem; position: relative; z-index: 2;';
+        title.textContent = (note.sticky ? '📌 ' : '') + note.title;
+
+        noteCard.appendChild(title);
+
+        // Check if note has an image - if so, use it as background cover
+        if (note.content.includes('<img')) {
+          const imgMatch = note.content.match(/<img[^>]+src="([^"]+)"/);
+          if (imgMatch) {
+            // Use image as background cover
+            noteCard.style.backgroundImage = `url(${imgMatch[1]})`;
+            noteCard.style.backgroundSize = 'cover';
+            noteCard.style.backgroundPosition = 'center';
+            noteCard.style.backgroundRepeat = 'no-repeat';
+            
+            // Make title background semi-transparent so text is readable over image
+            title.style.backgroundColor = 'rgba(255, 255, 255, 0.85)';
+            title.style.padding = '0.25rem 0.5rem';
+            title.style.borderRadius = '4px';
+            title.style.color = '#333';
+          }
+        } else {
+          // No image, show text content
+          const content = document.createElement('div');
+          content.style.cssText = 'color: #555; font-size: 0.85rem; line-height: 1.4; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;';
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = note.content;
+          content.textContent = tempDiv.textContent || '';
+          noteCard.appendChild(content);
+        }
+
+        noteCard.addEventListener('click', () => this.expandNote(note.id, noteCard));
+        noteCard.addEventListener('mouseenter', () => {
+          noteCard.style.transform = 'translateY(-4px)';
+        });
+        noteCard.addEventListener('mouseleave', () => {
+          noteCard.style.transform = 'translateY(0)';
+        });
+
+        stickyContainer.appendChild(noteCard);
+      });
+    }
+
+    escapeHtml(text: string): string {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    renderContent(htmlContent: string): string {
+      // Content is already HTML with images, just return it
+      return htmlContent;
+    }
+
+    populatePageIconTray() {
+      const iconTray = document.getElementById('page-icon-tray');
+      if (!iconTray) return;
+      
+      // Clear existing buttons
+      iconTray.innerHTML = '';
+      
+      // Get the current note being edited (if any)
+      const getCurrentNote = () => {
+        return this.activeNoteId ? this.notes.find(n => n.id === this.activeNoteId) : null;
+      };
+      
+      // Delete button
+      const deleteBtn = document.createElement('button');
+      deleteBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>`;
+      deleteBtn.title = 'Delete note';
+      deleteBtn.setAttribute('type', 'button');
+      deleteBtn.style.cssText = 'width: 36px; height: 36px; min-width: 36px; border: none; background: rgba(255, 255, 255, 0.1); border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; transition: background 0.2s; color: #fff;';
+      deleteBtn.addEventListener('click', async () => {
+        const note = getCurrentNote();
+        if (note && confirm(`Delete "${note.title}"? This cannot be undone.`)) {
+          await this.deleteNote(note.id);
+        }
+      });
+      deleteBtn.addEventListener('mouseenter', () => { deleteBtn.style.background = 'rgba(255, 255, 255, 0.2)'; });
+      deleteBtn.addEventListener('mouseleave', () => { deleteBtn.style.background = 'rgba(255, 255, 255, 0.1)'; });
+      
+      // Color picker container
+      const colorPicker = document.createElement('div');
+      colorPicker.style.cssText = 'display: none; gap: 4px; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); margin-top: 6px; background: rgba(0, 0, 0, 0.9); padding: 8px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.2); z-index: 1000;';
+      
+      const note = getCurrentNote();
+      this.colors.forEach(color => {
+        const colorDot = document.createElement('button');
+        colorDot.setAttribute('type', 'button');
+        const isSelected = note && note.color === color;
+        colorDot.style.cssText = `width: 24px; height: 24px; border-radius: 50%; background-color: ${color}; border: ${isSelected ? '3px solid #fff' : '2px solid rgba(255,255,255,0.3)'}; cursor: pointer; transition: transform 0.2s; padding: 0;`;
+        colorDot.title = `Change to ${color}`;
+        colorDot.addEventListener('click', async () => {
+          const currentNote = getCurrentNote();
+          if (currentNote) {
+            currentNote.color = color;
+            await this.saveNote(currentNote);
+            this.renderStickyNotes();
+            colorPicker.querySelectorAll('button').forEach((dot, i) => {
+              (dot as HTMLElement).style.border = this.colors[i] === color ? '3px solid #fff' : '2px solid rgba(255,255,255,0.3)';
+            });
+          }
+        });
+        colorDot.addEventListener('mouseenter', () => { colorDot.style.transform = 'scale(1.2)'; });
+        colorDot.addEventListener('mouseleave', () => { colorDot.style.transform = 'scale(1)'; });
+        colorPicker.appendChild(colorDot);
+      });
+      
+      // Color palette button
+      const colorBtn = document.createElement('button');
+      colorBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path></svg>`;
+      colorBtn.title = 'Change color';
+      colorBtn.setAttribute('type', 'button');
+      colorBtn.style.cssText = 'width: 36px; height: 36px; min-width: 36px; border: none; background: rgba(255, 255, 255, 0.1); border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; transition: background 0.2s; color: #fff;';
+      colorBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        colorPicker.style.display = colorPicker.style.display === 'flex' ? 'none' : 'flex';
+      });
+      colorBtn.addEventListener('mouseenter', () => { colorBtn.style.background = 'rgba(255, 255, 255, 0.2)'; });
+      colorBtn.addEventListener('mouseleave', () => { colorBtn.style.background = 'rgba(255, 255, 255, 0.1)'; });
+      
+      // Pin button
+      const pinBtn = document.createElement('button');
+      const updatePinButton = (isSticky: boolean) => {
+        if (isSticky) {
+          pinBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><path d="M16 9V4h1c.55 0 1-.45 1-1s-.45-1-1-1H7c-.55 0-1 .45-1 1s.45 1 1 1h1v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1 1-1v-7H19v-2c-1.66 0-3-1.34-3-3z"/></svg>`;
+          pinBtn.style.background = 'rgba(255, 193, 7, 0.3)';
+          pinBtn.style.color = '#ffc107';
+          pinBtn.title = 'Unpin note (currently pinned)';
+        } else {
+          pinBtn.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 9V4h1c.55 0 1-.45 1-1s-.45-1-1-1H7c-.55 0-1 .45-1 1s.45 1 1 1h1v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1 1-1v-7H19v-2c-1.66 0-3-1.34-3-3z"/></svg>`;
+          pinBtn.style.background = 'rgba(255, 255, 255, 0.1)';
+          pinBtn.style.color = '#fff';
+          pinBtn.title = 'Pin note';
+        }
+      };
+      
+      pinBtn.setAttribute('type', 'button');
+      pinBtn.style.cssText = 'width: 36px; height: 36px; min-width: 36px; border: none; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; transition: all 0.2s; font-weight: 500;';
+      updatePinButton(note?.sticky || false);
+      
+      pinBtn.addEventListener('click', async () => {
+        const currentNote = getCurrentNote();
+        if (currentNote) {
+          await this.toggleSticky(currentNote.id);
+          updatePinButton(currentNote.sticky);
+        }
+      });
+      pinBtn.addEventListener('mouseenter', () => { 
+        pinBtn.style.opacity = '0.8';
+      });
+      pinBtn.addEventListener('mouseleave', () => { 
+        pinBtn.style.opacity = '1';
+      });
+      
+      // Close picker when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!colorPicker.contains(e.target as Node) && !colorBtn.contains(e.target as Node)) {
+          colorPicker.style.display = 'none';
+        }
+      });
+      
+      colorBtn.appendChild(colorPicker);
+      iconTray.appendChild(deleteBtn);
+      iconTray.appendChild(colorBtn);
+      iconTray.appendChild(pinBtn);
+    }
+  }
+
+  class UserPageManager {
+    private backgroundOverlay: HTMLElement | null;
+    private pageTitle: HTMLElement | null;
+    private pageSubtitle: HTMLElement | null;
+
+    constructor() {
+      this.backgroundOverlay = document.querySelector('.background-overlay') as HTMLElement;
+      this.pageTitle = document.getElementById('page-title');
+      this.pageSubtitle = document.getElementById('page-subtitle');
+      
+      this.loadBackground();
+      this.loadPageText();
+      this.setupPageTextEditing();
+    }
+
+    populatePageToolbar() {
+      const toolbar = document.getElementById('page-toolbar');
+      if (!toolbar) return;
+      
+      // Clear existing buttons
+      toolbar.innerHTML = '';
+      
+      const formatButtons = [
+        { cmd: 'bold', icon: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path></svg>', title: 'Bold (Cmd/Ctrl+B)' },
+        { cmd: 'italic', icon: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="4" x2="10" y2="4"></line><line x1="14" y1="20" x2="5" y2="20"></line><line x1="15" y1="4" x2="9" y2="20"></line></svg>', title: 'Italic (Cmd/Ctrl+I)' },
+        { cmd: 'underline', icon: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v7a6 6 0 0 0 6 6 6 6 0 0 0 6-6V3"></path><line x1="4" y1="21" x2="20" y2="21"></line></svg>', title: 'Underline (Cmd/Ctrl+U)' },
+        { cmd: 'insertUnorderedList', icon: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>', title: 'Bullet List' },
+        { cmd: 'insertOrderedList', icon: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="10" y1="6" x2="21" y2="6"></line><line x1="10" y1="12" x2="21" y2="12"></line><line x1="10" y1="18" x2="21" y2="18"></line><path d="M4 6h1v4"></path><path d="M4 10h2"></path><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"></path></svg>', title: 'Numbered List' },
+        { cmd: 'upload-photo', icon: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>', title: 'Upload Photo' },
+      ];
+      
+      // Headings dropdown group
+      const headingsGroup = document.createElement('div');
+      headingsGroup.style.cssText = 'position: relative; display: inline-block;';
+      
+      const headingsBtn = document.createElement('button');
+      headingsBtn.innerHTML = '<span style="font-weight: bold; font-size: 12px;">H</span>';
+      headingsBtn.title = 'Headings';
+      headingsBtn.setAttribute('type', 'button');
+      headingsBtn.style.cssText = 'width: 32px; height: 32px; border: none; background: rgba(255, 255, 255, 0.1); border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; transition: background 0.2s; color: #fff;';
+      
+      const headingsMenu = document.createElement('div');
+      headingsMenu.style.cssText = 'display: none; position: absolute; top: 100%; left: 0; background: rgba(0, 0, 0, 0.8); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px; z-index: 1000; min-width: 80px;';
+      
+      const headingOptions = [
+        { cmd: 'formatBlock-h1', label: 'Heading 1', tag: 'h1' },
+        { cmd: 'formatBlock-h2', label: 'Heading 2', tag: 'h2' },
+        { cmd: 'formatBlock-h3', label: 'Heading 3', tag: 'h3' },
+      ];
+      
+      headingOptions.forEach(opt => {
+        const menuItem = document.createElement('button');
+        menuItem.textContent = opt.label;
+        menuItem.setAttribute('type', 'button');
+        menuItem.style.cssText = 'display: block; width: 100%; padding: 0.5rem; text-align: left; border: none; background: transparent; color: #fff; cursor: pointer; font-size: 12px; transition: background 0.2s;';
+        
+        menuItem.addEventListener('mouseenter', () => {
+          menuItem.style.background = 'rgba(255, 255, 255, 0.2)';
+        });
+        
+        menuItem.addEventListener('mouseleave', () => {
+          menuItem.style.background = 'transparent';
+        });
+        
+        menuItem.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          const tag = opt.tag;
+          
+          // Ensure there's a block element to format
+          if (this.pageSubtitle) {
+            const hasBlockChildren = Array.from(this.pageSubtitle.childNodes).some(node => {
+              return node.nodeType === 1 && ['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'DIV', 'BLOCKQUOTE'].includes((node as Element).tagName);
+            });
+            
+            if (!hasBlockChildren && this.pageSubtitle.textContent) {
+              const content = this.pageSubtitle.innerHTML;
+              this.pageSubtitle.innerHTML = `<p>${content}</p>`;
+            }
+          }
+          
+          document.execCommand('formatBlock', false, `<${tag}>`);
+          
+          // Apply inline styles and save content
+          setTimeout(() => {
+            if (this.pageSubtitle) {
+              const selection = window.getSelection();
+              let headerElement = null;
+              
+              if (selection && selection.rangeCount > 0) {
+                const range = selection.getRangeAt(0);
+                headerElement = range.startContainer.parentElement;
+                
+                while (headerElement && !['H1', 'H2', 'H3'].includes(headerElement.tagName)) {
+                  headerElement = headerElement.parentElement;
+                }
+              }
+              
+              if (headerElement) {
+                const tagName = headerElement.tagName.toLowerCase();
+                if (tagName === 'h1') {
+                  headerElement.style.cssText = 'font-size: 2.2em !important; font-weight: bold !important; margin: 1rem 0 0.5rem 0 !important; color: inherit !important; text-shadow: none !important;';
+                } else if (tagName === 'h2') {
+                  headerElement.style.cssText = 'font-size: 1.8em !important; font-weight: bold !important; margin: 1rem 0 0.5rem 0 !important; color: inherit !important; text-shadow: none !important;';
+                } else if (tagName === 'h3') {
+                  headerElement.style.cssText = 'font-size: 1.4em !important; font-weight: bold !important; margin: 0.8rem 0 0.4rem 0 !important; color: inherit !important; text-shadow: none !important;';
+                }
+              }
+              
+              // Save the formatted content
+              const notesManager = (window as any).stickyNotesManager;
+              if (notesManager && notesManager.activeNoteId) {
+                const activeNote = notesManager.notes.find((n: any) => n.id === notesManager.activeNoteId);
+                if (activeNote) {
+                  activeNote.content = this.pageSubtitle.innerHTML;
+                  notesManager.saveNote(activeNote);
+                }
+              }
+            }
+          }, 0);
+          
+          this.pageSubtitle?.focus();
+          headingsMenu.style.display = 'none';
+        });
+        
+        headingsMenu.appendChild(menuItem);
+      });
+      
+      headingsBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        headingsMenu.style.display = headingsMenu.style.display === 'none' ? 'block' : 'none';
+      });
+      
+      headingsBtn.addEventListener('mouseenter', () => {
+        headingsBtn.style.background = 'rgba(255, 255, 255, 0.2)';
+      });
+      
+      headingsBtn.addEventListener('mouseleave', () => {
+        if (headingsMenu.style.display === 'none') {
+          headingsBtn.style.background = 'rgba(255, 255, 255, 0.1)';
+        }
+      });
+      
+      headingsGroup.appendChild(headingsBtn);
+      headingsGroup.appendChild(headingsMenu);
+      toolbar.appendChild(headingsGroup);
+      
+      // Alignment dropdown group
+      const alignmentGroup = document.createElement('div');
+      alignmentGroup.style.cssText = 'position: relative; display: inline-block;';
+      
+      const alignmentBtn = document.createElement('button');
+      alignmentBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="17" y1="10" x2="3" y2="10"></line><line x1="21" y1="6" x2="3" y2="6"></line><line x1="21" y1="14" x2="3" y2="14"></line><line x1="17" y1="18" x2="3" y2="18"></line></svg>';
+      alignmentBtn.title = 'Text Alignment';
+      alignmentBtn.setAttribute('type', 'button');
+      alignmentBtn.style.cssText = 'width: 32px; height: 32px; border: none; background: rgba(255, 255, 255, 0.1); border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; transition: background 0.2s; color: #fff;';
+      
+      const alignmentMenu = document.createElement('div');
+      alignmentMenu.style.cssText = 'display: none; position: absolute; top: 100%; left: 0; background: rgba(0, 0, 0, 0.8); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px; z-index: 1000; min-width: 100px;';
+      
+      const alignmentOptions = [
+        { cmd: 'justifyLeft', label: 'Align Left' },
+        { cmd: 'justifyCenter', label: 'Align Center' },
+        { cmd: 'justifyRight', label: 'Align Right' },
+      ];
+      
+      alignmentOptions.forEach(opt => {
+        const menuItem = document.createElement('button');
+        menuItem.textContent = opt.label;
+        menuItem.setAttribute('type', 'button');
+        menuItem.style.cssText = 'display: block; width: 100%; padding: 0.5rem; text-align: left; border: none; background: transparent; color: #fff; cursor: pointer; font-size: 12px; transition: background 0.2s;';
+        
+        menuItem.addEventListener('mouseenter', () => {
+          menuItem.style.background = 'rgba(255, 255, 255, 0.2)';
+        });
+        
+        menuItem.addEventListener('mouseleave', () => {
+          menuItem.style.background = 'transparent';
+        });
+        
+        menuItem.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          document.execCommand(opt.cmd, false);
+          
+          // Save the formatted content
+          if (this.pageSubtitle) {
+            const notesManager = (window as any).stickyNotesManager;
+            if (notesManager && notesManager.activeNoteId) {
+              const activeNote = notesManager.notes.find((n: any) => n.id === notesManager.activeNoteId);
+              if (activeNote) {
+                activeNote.content = this.pageSubtitle.innerHTML;
+                notesManager.saveNote(activeNote);
+              }
+            }
+          }
+          
+          this.pageSubtitle?.focus();
+          alignmentMenu.style.display = 'none';
+        });
+        
+        alignmentMenu.appendChild(menuItem);
+      });
+      
+      alignmentBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        alignmentMenu.style.display = alignmentMenu.style.display === 'none' ? 'block' : 'none';
+      });
+      
+      alignmentBtn.addEventListener('mouseenter', () => {
+        alignmentBtn.style.background = 'rgba(255, 255, 255, 0.2)';
+      });
+      
+      alignmentBtn.addEventListener('mouseleave', () => {
+        if (alignmentMenu.style.display === 'none') {
+          alignmentBtn.style.background = 'rgba(255, 255, 255, 0.1)';
+        }
+      });
+      
+      alignmentGroup.appendChild(alignmentBtn);
+      alignmentGroup.appendChild(alignmentMenu);
+      toolbar.appendChild(alignmentGroup);
+      
+      // Close dropdowns when clicking outside
+      const closeDropdowns = (e: MouseEvent) => {
+        if (!headingsGroup.contains(e.target as Node)) {
+          headingsMenu.style.display = 'none';
+          headingsBtn.style.background = 'rgba(255, 255, 255, 0.1)';
+        }
+        if (!alignmentGroup.contains(e.target as Node)) {
+          alignmentMenu.style.display = 'none';
+          alignmentBtn.style.background = 'rgba(255, 255, 255, 0.1)';
+        }
+      };
+      
+      document.addEventListener('click', closeDropdowns);
+      
+      // Regular buttons
+      formatButtons.forEach(btn => {
+        const button = document.createElement('button');
+        button.innerHTML = btn.icon;
+        button.title = btn.title;
+        button.setAttribute('type', 'button');
+        button.style.cssText = 'width: 32px; height: 32px; border: none; background: rgba(255, 255, 255, 0.1); border-radius: 4px; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; transition: background 0.2s; color: #fff;';
+        
+        button.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (btn.cmd === 'upload-photo') {
+            // Create a hidden file input and trigger it
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = 'image/*';
+            fileInput.onchange = async (event) => {
+              const file = (event.target as HTMLInputElement).files?.[0];
+              if (file) {
+                // Read file as data URL
+                const reader = new FileReader();
+                reader.onload = async (e) => {
+                  const dataUrl = e.target?.result as string;
+                  // Insert image into content area
+                  const img = document.createElement('img');
+                  img.src = dataUrl;
+                  img.style.cssText = 'max-width: 100%; height: auto; border-radius: 4px; margin: 0.5rem 0; display: block;';
+                  this.pageSubtitle?.appendChild(img);
+                  this.pageSubtitle?.focus();
+                  
+                  // If editing an existing note, save it immediately with the new image
+                  const notesManager = (window as any).stickyNotesManager;
+                  if (notesManager && notesManager.activeNoteId) {
+                    const activeNote = notesManager.notes.find((n: any) => n.id === notesManager.activeNoteId);
+                    if (activeNote && this.pageSubtitle) {
+                      activeNote.content = this.pageSubtitle.innerHTML;
+                      await notesManager.saveNote(activeNote);
+                      // Re-render sticky notes to show the new image in the thumbnail
+                      if (activeNote.sticky) {
+                        notesManager.renderStickyNotes();
+                      }
+                    }
+                  }
+                };
+                reader.readAsDataURL(file);
+              }
+            };
+            fileInput.click();
+          } else {
+            document.execCommand(btn.cmd, false);
+            
+            // Save the formatted content
+            if (this.pageSubtitle) {
+              const notesManager = (window as any).stickyNotesManager;
+              if (notesManager && notesManager.activeNoteId) {
+                const activeNote = notesManager.notes.find((n: any) => n.id === notesManager.activeNoteId);
+                if (activeNote) {
+                  activeNote.content = this.pageSubtitle.innerHTML;
+                  notesManager.saveNote(activeNote);
+                }
+              }
+            }
+            
+            this.pageSubtitle?.focus();
+          }
+        });
+        
+        button.addEventListener('mouseenter', () => {
+          button.style.background = 'rgba(255, 255, 255, 0.2)';
+        });
+        
+        button.addEventListener('mouseleave', () => {
+          button.style.background = 'rgba(255, 255, 255, 0.1)';
+        });
+        
+        toolbar.appendChild(button);
+      });
+    }
+
+    loadBackground() {
+      const savedBackground = localStorage.getItem('userPageBackground');
+      if (savedBackground && this.backgroundOverlay) {
+        this.backgroundOverlay.style.backgroundImage = `url(${savedBackground})`;
+        this.backgroundOverlay.style.opacity = '1';
+      }
+    }
+
+    loadPageText() {
+      // Always start with default title and subtitle (don't load from localStorage)
+      if (this.pageTitle) {
+        this.pageTitle.textContent = 'One/App';
+      }
+      
+      if (this.pageSubtitle) {
+        this.pageSubtitle.innerHTML = 'Your personal workspace';
+      }
+    }
+
+    setupPageTextEditing() {
+      const pageHeader = document.getElementById('page-header');
+      const saveBtn = document.getElementById('save-page-btn');
+      const closeBtn = document.getElementById('close-page-modal');
+      const opacitySlider = document.getElementById('opacity-slider') as HTMLInputElement;
+      const toolbar = document.getElementById('page-toolbar');
+      const iconTray = document.getElementById('page-icon-tray');
+      
+      const showSaveButton = () => {
+        // Don't interfere if we're editing a note
+        const notesManager = (window as any).stickyNotesManager;
+        if (notesManager?.activeNoteId) return;
+        
+        if (saveBtn) saveBtn.style.display = 'block';
+        if (closeBtn) closeBtn.style.display = 'block';
+        const opacityControl = document.getElementById('opacity-control') as HTMLElement;
+        if (opacityControl) {
+          opacityControl.style.display = 'flex';
+          opacityControl.style.visibility = 'visible';
+        }
+        if (opacitySlider) {
+          // Apply saved opacity value
+          const savedOpacity = localStorage.getItem('modalOpacity') || '60';
+          opacitySlider.value = savedOpacity;
+          opacitySlider.style.display = 'block';
+          opacitySlider.style.visibility = 'visible';
+        }
+        // Double-check after a frame
+        requestAnimationFrame(() => {
+          const opControl = document.getElementById('opacity-control') as HTMLElement;
+          if (opControl) {
+            opControl.style.display = 'flex';
+            opControl.style.visibility = 'visible';
+          }
+          const opSlider = document.getElementById('opacity-slider') as HTMLInputElement;
+          if (opSlider) {
+            opSlider.style.display = 'block';
+            opSlider.style.visibility = 'visible';
+          }
+        });
+        if (toolbar) {
+          toolbar.style.display = 'flex';
+          this.populatePageToolbar();
+        }
+        if (iconTray) {
+          iconTray.style.display = 'flex';
+          // Call the sticky notes manager to populate the icon tray
+          if (notesManager) {
+            notesManager.populatePageIconTray();
+          }
+        }
+        if (pageHeader) {
+          pageHeader.classList.add('editing');
+          
+          // Apply saved opacity when entering editing mode
+          const savedOpacity = localStorage.getItem('modalOpacity') || '60';
+          const value = parseInt(savedOpacity);
+          const opacity = value / 100;
+          const blur = (value / 100) * 10;
+          pageHeader.style.background = `rgba(0, 0, 0, ${opacity})`;
+          pageHeader.style.backdropFilter = `blur(${blur}px)`;
+        }
+      };
+      
+      const hideSaveButton = () => {
+        // Don't hide if we're editing a note (it has its own close handler)
+        const notesManager = (window as any).stickyNotesManager;
+        if (notesManager?.activeNoteId) return;
+        
+        if (saveBtn) saveBtn.style.display = 'none';
+        if (closeBtn) closeBtn.style.display = 'none';
+        if (opacitySlider) opacitySlider.style.display = 'none';
+        const opacityControl = document.getElementById('opacity-control') as HTMLElement;
+        if (opacityControl) opacityControl.style.display = 'none';
+        if (toolbar) toolbar.style.display = 'none';
+        if (iconTray) iconTray.style.display = 'none';
+        
+        // Reset text to defaults
+        if (this.pageTitle) this.pageTitle.textContent = 'One/App';
+        if (this.pageSubtitle) this.pageSubtitle.innerHTML = 'Your personal workspace';
+        
+        if (pageHeader) {
+          pageHeader.classList.remove('editing');
+          
+          // Reset to transparent when exiting editing mode
+          pageHeader.style.background = '';
+          pageHeader.style.backdropFilter = '';
+        }
+      };
+      
+      const savePageContent = async () => {
+        const titleText = this.pageTitle?.textContent?.trim() || '';
+        const subtitleHTML = this.pageSubtitle?.innerHTML?.trim() || '';
+        
+        // Check if there's an active note being edited
+        const notesManager = (window as any).stickyNotesManager;
+        if (notesManager) {
+          if (notesManager.activeNoteId) {
+            // Save the existing note that's being edited
+            const activeNote = notesManager.notes.find((n: any) => n.id === notesManager.activeNoteId);
+            if (activeNote) {
+              activeNote.title = titleText || 'Untitled Note';
+              activeNote.content = subtitleHTML;
+              (activeNote as any).isNew = false;
+              await notesManager.saveNote(activeNote);
+            }
+          } else if (titleText && titleText !== 'One/App' && (titleText || subtitleHTML)) {
+            // Only create a note if title has been substantially changed from default
+            const newNote = await notesManager.createNote();
+            newNote.title = titleText || 'Untitled Note';
+            newNote.content = subtitleHTML;
+            await notesManager.saveNote(newNote);
+            notesManager.renderStickyNotes();
+            notesManager.renderCollapsedNote(newNote);
+          }
+        }
+        
+        // Reset fields to defaults - must be done after creating note
+        setTimeout(() => {
+          if (this.pageTitle) this.pageTitle.textContent = 'One/App';
+          if (this.pageSubtitle) this.pageSubtitle.innerHTML = 'Your personal workspace';
+        }, 100);
+        
+        hideSaveButton();
+      };
+
+      if (this.pageTitle) {
+        this.pageTitle.addEventListener('focus', showSaveButton);
+        this.pageTitle.addEventListener('click', showSaveButton);
+        
+        this.pageTitle.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            this.pageSubtitle?.focus();
+          }
+        });
+      }
+
+      if (this.pageSubtitle) {
+        this.pageSubtitle.addEventListener('focus', showSaveButton);
+        this.pageSubtitle.addEventListener('click', showSaveButton);
+        
+        // Handle image paste
+        this.pageSubtitle.addEventListener('paste', async (e) => {
+          const items = e.clipboardData?.items;
+          if (!items) return;
+
+          let hasImageBlob = false;
+          for (let i = 0; i < items.length; i++) {
+            if (items[i].type.indexOf('image') !== -1) {
+              hasImageBlob = true;
+              break;
+            }
+          }
+
+          if (hasImageBlob) {
+            e.preventDefault();
+            
+            for (let i = 0; i < items.length; i++) {
+              const item = items[i];
+              
+              if (item.type.indexOf('image') !== -1) {
+                try {
+                  const blob = item.getAsFile();
+                  if (!blob) continue;
+
+                  if (blob.size > 2048 * 1024) {
+                    alert('Pasted image is too large. Please use images under 2MB.');
+                    return;
+                  }
+
+                  const reader = new FileReader();
+                  reader.onload = (event) => {
+                    const imageData = event.target?.result as string;
+                    const img = document.createElement('img');
+                    img.src = imageData;
+                    img.style.maxWidth = '100%';
+                    img.style.height = 'auto';
+                    img.style.borderRadius = '4px';
+                    img.style.margin = '0.5rem 0';
+                    img.style.display = 'block';
+                    
+                    const selection = window.getSelection();
+                    if (selection && selection.rangeCount > 0) {
+                      const range = selection.getRangeAt(0);
+                      range.deleteContents();
+                      range.insertNode(img);
+                      range.setStartAfter(img);
+                      range.collapse(true);
+                      selection.removeAllRanges();
+                      selection.addRange(range);
+                    } else if (this.pageSubtitle) {
+                      this.pageSubtitle.appendChild(img);
+                    }
+                  };
+                  
+                  reader.readAsDataURL(blob);
+                  return;
+                } catch (error) {
+                  console.error('Error pasting image:', error);
+                  alert('Failed to paste image.');
+                  return;
+                }
+              }
+            }
+          }
+        });
+      }
+      
+      if (saveBtn) {
+        saveBtn.addEventListener('click', savePageContent);
+      }
+      
+      // Close button just exits editing mode without resetting
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+          hideSaveButton();
+        });
+      }
+      
+      // Load saved opacity setting
+      const savedOpacity = localStorage.getItem('modalOpacity');
+      if (opacitySlider && savedOpacity) {
+        opacitySlider.value = savedOpacity;
+      }
+      
+      // Opacity slider adjusts background opacity and blur
+      if (opacitySlider) {
+        opacitySlider.addEventListener('input', () => {
+          const value = parseInt(opacitySlider.value);
+          const opacity = value / 100;
+          const blur = (value / 100) * 10; // 0 to 10px blur
+          
+          if (pageHeader) {
+            pageHeader.style.background = `rgba(0, 0, 0, ${opacity})`;
+            pageHeader.style.backdropFilter = `blur(${blur}px)`;
+          }
+          
+          // Save setting to localStorage
+          localStorage.setItem('modalOpacity', value.toString());
+        });
+      }
+      
+      // Click outside to hide save button
+      document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        if (!pageHeader?.contains(target)) {
+          hideSaveButton();
+        }
+      });
+    }
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      (window as any).stickyNotesManager = new StickyNotesManager();
+      (window as any).userPageManager = new UserPageManager();
+    });
+  } else {
+    (window as any).stickyNotesManager = new StickyNotesManager();
+    (window as any).userPageManager = new UserPageManager();
+  }
+</script>
+
+<style>
+  .user-page {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 0;
+  }
+
+  .background-overlay::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+  }
+
+  .content-wrapper {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem;
+    max-width: 600px;
+    width: 100%;
+  }
+
+  .page-header {
+    position: fixed;
+    top: 280px;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 900px;
+    width: 90%;
+    text-align: center;
+    padding: 2rem;
+    z-index: 1;
+    transition: all 0.3s;
+    border-radius: 12px;
+  }
+
+  .page-header.editing {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    max-width: 1200px;
+    height: 80vh;
+    max-height: 80vh;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    z-index: 400;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+    padding: 0;
+  }
+
+  .page-header.editing::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+  }
+
+  .btn-close-modal {
+    position: static;
+    top: auto;
+    right: auto;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
+  }
+
+  .btn-close-modal:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  #page-subtitle h1 {
+    font-size: 2.2em !important;
+    font-weight: bold !important;
+    margin: 1rem 0 0.5rem 0 !important;
+    color: inherit !important;
+    text-shadow: none !important;
+  }
+
+  #page-subtitle h2 {
+    font-size: 1.8em !important;
+    font-weight: bold !important;
+    margin: 1rem 0 0.5rem 0 !important;
+    color: inherit !important;
+    text-shadow: none !important;
+  }
+
+  #page-subtitle h3 {
+    font-size: 1.4em !important;
+    font-weight: bold !important;
+    margin: 0.8rem 0 0.4rem 0 !important;
+    color: inherit !important;
+    text-shadow: none !important;
+  }
+
+  #page-subtitle p {
+    margin: 0.5rem 0 !important;
+  }
+
+  .page-toolbar {
+    display: flex;
+    gap: 4px;
+    padding: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+    background: rgba(0, 0, 0, 0.2);
+    margin: 1rem auto;
+    border-radius: 6px;
+    width: fit-content;
+    justify-content: center;
+  }
+
+  .page-icon-tray {
+    position: static;
+    top: auto;
+    left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    padding: 0;
+    background: transparent;
+    border-radius: 6px;
+    z-index: auto;
+  }
+
+  .opacity-slider {
+    width: 100px;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    min-width: 100px;
+    display: block !important;
+  }
+
+  #page-title {
+    padding: 2rem 2rem 0 2rem;
+  }
+
+  #page-subtitle {
+    padding: 0 2rem 2rem 2rem;
+  }
+
+  .page-control-bar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    display: none !important;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 50;
+    flex-wrap: wrap;
+    margin: 0;
+    box-sizing: border-box;
+    justify-content: space-between;
+  }
+  
+  .page-header.editing .page-control-bar {
+    display: flex !important;
+  }
+
+  .opacity-control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    pointer-events: auto;
+    position: static;
+    top: auto;
+    left: auto;
+    right: auto;
+    margin-bottom: 0;
+    font-size:12px;
+  }
+
+  .opacity-label {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+
+  .opacity-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .opacity-slider::-webkit-slider-thumb:hover {
+    background: white;
+    transform: scale(1.2);
+  }
+
+  .opacity-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+  }
+
+  .opacity-slider::-moz-range-thumb:hover {
+    background: white;
+    transform: scale(1.2);
+  }
+
+  .btn-save-page {
+    position: static;
+    top: auto;
+    right: auto;
+    padding: 0.5rem 1.5rem;
+    background: rgba(76, 175, 80, 0.9);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
+  }
+
+  .btn-save-page:hover {
+    background: rgba(76, 175, 80, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  @media (max-width: 640px) {
+    .page-header {
+      top: 200px;
+    }
+    
+    .page-header.editing {
+      width: 95vw;
+      height: 90vh;
+      max-height: 90vh;
+      padding: 0;
+    }
+    
+    .page-control-bar {
+      flex-direction: row;
+      gap: 0.5rem;
+      padding: 0.5rem 0;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    
+    .opacity-control {
+      order: 1;
+      flex-shrink: 0;
+      width: 110px;
+      padding: 0.5rem 0.15rem;
+      gap: 0.25rem;
+      position: static;
+      top: auto;
+      left: auto;
+      display: flex !important;
+    }
+    
+    .opacity-slider {
+      width: 40px !important;
+      flex-shrink: 0;
+    }
+    
+    .page-icon-tray {
+      order: 2;
+      flex-shrink: 0;
+      gap: 0.4rem;
+      justify-content: flex-start;
+      position: static;
+      top: auto;
+      left: auto;
+      display: flex !important;
+    }
+    
+    .page-icon-tray button {
+      width: 36px !important;
+      height: 36px !important;
+      min-width: 36px !important;
+      position: static !important;
+      left: auto !important;
+      top: auto !important;
+      right: auto !important;
+      flex-shrink: 0;
+    }
+    
+    /* Color button needs relative positioning for dropdown */
+    .page-icon-tray button:nth-child(2) {
+      position: relative !important;
+    }
+    
+    #save-page-btn {
+      order: 3;
+      flex-shrink: 0;
+      padding: 0.5rem 0.75rem !important;
+      font-size: 0.9rem !important;
+      position: static;
+      top: auto;
+      right: auto;
+      width: auto !important;
+    }
+    
+    #close-page-modal {
+      order: 4;
+      margin-left: auto;
+      flex-shrink: 0;
+      width: 36px !important;
+      height: 36px !important;
+      padding: 0 !important;
+      position: static;
+      top: auto;
+      right: auto;
+    }
+    
+    #page-title {
+      padding: 1rem 1rem 0 1rem;
+    }
+    
+    #page-subtitle {
+      padding: 0 1rem 1rem 1rem;
+    }
+  }
+
+  .page-header h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.6);
+    outline: none;
+    cursor: text;
+    display: block;
+    min-width: 100px;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: background 0.2s;
+  }
+
+  .page-header h1:hover,
+  .page-header h1:focus {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .page-header h1:empty:before {
+    content: 'One/App';
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .page-header h1.edited-empty:before {
+    content: '';
+  }
+
+  .welcome-section {
+    margin-bottom: 2rem;
+  }
+
+  .welcome-section h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--theme-text);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    color: #ffffff;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.6);
+    outline: none;
+    cursor: text;
+    display: block;
+    min-width: 150px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: background 0.2s;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    line-height: 1.6;
+  }
+
+  .subtitle:hover,
+  .subtitle:focus {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .subtitle[data-placeholder]:empty:before {
+    content: attr(data-placeholder);
+    color: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+  }
+
+  .subtitle.edited-empty:before {
+    content: '';
+  }
+
+  .subtitle img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 0.5rem auto;
+    display: block;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Notes Sidebar */
+  .notes-sidebar {
+    position: fixed !important;
+    right: 0 !important;
+    top: 70px !important;
+    bottom: 150px !important;
+    display: flex;
+    flex-direction: column !important;
+    gap: 0.5rem;
+    padding: 1rem 0 1rem 10px;
+    max-height: calc(100vh - 220px) !important;
+    overflow-y: auto;
+    overflow-x: visible;
+    z-index: 150;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  }
+
+  .btn-toggle-notes {
+    position: fixed;
+    bottom: 130px;
+    right: 0;
+    width: 160px;
+    height: 44px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    border: none;
+    border-radius: 8px 0 0 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    z-index: 160;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .btn-toggle-notes:hover {
+    background: rgba(0, 0, 0, 0.95);
+    box-shadow: -4px 4px 12px rgba(0, 0, 0, 0.4);
+    transform: translateX(-5px);
+  }
+
+  .notes-sidebar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .notes-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .notes-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+  }
+
+  .notes-sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  .collapsed-note-tab {
+    max-width: 150px;
+    min-width: 100px;
+  }
+
+  /* Sticky Notes Container */
+  .sticky-notes-container {
+    position: fixed;
+    top: 70px;
+    left: 2rem;
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    width: 250px;
+    max-width: 250px;
+    height: calc(100vh - 160px);
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    pointer-events: auto;
+  }
+
+  .sticky-note-card {
+    pointer-events: auto !important;
+    flex-shrink: 0;
+  }
+
+  .sticky-note-card.drag-over {
+    transform: scale(1.05) !important;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5), inset 0 0 0 2px rgba(59, 130, 246, 0.5) !important;
+  }
+
+  @media (max-width: 640px) {
+    .sticky-notes-container {
+      top: 4.5rem !important;
+      bottom: auto !important;
+      height: calc(100vh - 10rem) !important;
+      max-height: calc(100vh - 10rem) !important;
+      left: 0.5rem !important;
+      width: 200px !important;
+      max-width: 200px !important;
+      -webkit-overflow-scrolling: touch !important;
+      touch-action: pan-y !important;
+    }
+
+    .sticky-note-card {
+      touch-action: pan-y !important;
+    }
+  }
+
+  /* Scrollbar for sticky notes */
+  .sticky-notes-container::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .sticky-notes-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .sticky-notes-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+  }
+
+  .sticky-notes-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  /* Control Bar */
+  .control-bar {
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 200;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    padding: 0.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    max-width: calc(100% - 2rem);
+    flex-wrap: nowrap;
+    justify-content: center;
+  }
+
+  .btn-control-bar {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .btn-control-bar:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+  }
+
+  .btn-danger {
+    background: rgba(239, 68, 68, 0.6);
+  }
+
+  .btn-danger:hover {
+    background: rgba(239, 68, 68, 0.8);
+  }
+
+  .search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-input {
+    width: 200px;
+    padding: 0.5rem;
+    padding-right: 2rem;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-size: 16px;
+    outline: none;
+  }
+
+  .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .search-input:focus {
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  .clear-search-btn {
+    position: absolute;
+    right: 0.5rem;
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    padding: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+  }
+
+  .clear-search-btn.visible {
+    display: flex;
+  }
+
+  .clear-search-btn:hover {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .sort-select {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .sort-select:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  .sort-select option {
+    background: #1a1a1a;
+    color: white;
+  }
+
+  /* View All Panel */
+  .view-all-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 300;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    overflow: hidden;
+  }
+
+  .view-all-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .view-all-header h2 {
+    color: white;
+    font-size: 1.8rem;
+    margin: 0;
+  }
+
+  .btn-close-panel {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(239, 68, 68, 0.8);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .btn-close-panel:hover {
+    background: rgba(239, 68, 68, 1);
+    transform: scale(1.1);
+  }
+
+  .view-all-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 1rem;
+  }
+
+  .view-all-content::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .view-all-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+
+  .view-all-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+  }
+
+  .view-all-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  /* Control Buttons */
+  .note-controls {
+    position: fixed;
+    right: 10px;
+    bottom: 124px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    z-index: 150;
+  }
+
+  .btn-control {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+  }
+
+  .btn-add {
+    background: rgba(34, 197, 94, 0.8);
+    color: white;
+  }
+
+  .btn-add:hover {
+    background: rgba(34, 197, 94, 1);
+    transform: scale(1.1);
+  }
+
+  .btn-clear {
+    background: rgba(239, 68, 68, 0.8);
+    color: white;
+  }
+
+  .btn-clear:hover {
+    background: rgba(239, 68, 68, 1);
+    transform: scale(1.1);
+  }
+
+  /* Expanded Notes */
+  #notes-container {
+    display: none;
+  }
+
+  #notes-container.active {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+  }
+
+  #notes-container * {
+    box-sizing: border-box;
+  }
+
+  .sticky-note-expanded {
+    pointer-events: auto;
+  }
+
+  @media (max-width: 640px) {
+    .control-bar {
+      gap: 0.25rem;
+      padding: 0.375rem;
+      flex-wrap: nowrap;
+    }
+
+    .search-input {
+      width: 120px;
+      font-size: 16px;
+      padding: 0.375rem;
+      padding-right: 1.75rem;
+      flex-shrink: 0;
+    }
+
+    .sort-select {
+      font-size: 0.75rem;
+      padding: 0.375rem 0.25rem;
+    }
+
+    .btn-control-bar {
+      width: 32px;
+      height: 32px;
+    }
+
+    .page-header {
+      top: 200px; /* Below sticky notes area (2 rows on mobile) */
+    }
+
+    .page-header h1 {
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+    }
+
+    .btn-control {
+      width: 44px;
+      height: 44px;
+    }
+
+    .sticky-note-expanded {
+      width: 90vw !important;
+    }
+
+    .notes-sidebar {
+      top: 70px !important;
+      bottom: 150px !important;
+      max-height: calc(100vh - 220px) !important;
+    }
+
+    .collapsed-note-tab {
+      max-width: 120px;
+      font-size: 0.85rem;
+    }
+  }
+</style>
