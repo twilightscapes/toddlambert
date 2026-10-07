@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Open Floor: a concept for AI-facilitated direct democracy where every voter files directly, an open AI keeps the record, and every voice weighs exactly one.">
+<meta property="og:title" content="Open Floor">
+<meta property="og:description" content="Every voter holds the floor. A concept for replacing the congressional bottleneck with an open, auditable facilitator and one-weight-per-person voting.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://toddlambert.com/aicongress/">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#F2F4F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B1220" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://toddlambert.com/aicongress/">
+<title>Open Floor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a proposal being drafted. Articles (§) run down a 66ch reading column beside a mono margin rail;
+   the funnel, the two pipelines, the Floor demo and the Commons break out to full width. */
+:root{
+  --bg:#F2F4F7; --sheet:#FFFFFF; --fg:#0F1B2D; --fg-2:#56627A; --line:#D5DBE5;
+  --accent:#2443C9; --accent-ink:#FFFFFF; --accent-soft:#E3E8FB;
+  --yea:#1F8F5B; --nay:#C9362C; --old:#8A6B3A;
+  --font-display:'Big Shoulders Display','Arial Narrow',Impact,sans-serif;
+  --font-body:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B1220; --sheet:#121B2E; --fg:#E8EDF5; --fg-2:#9AA7BC; --line:#273349;
+    --accent:#8AA0FF; --accent-ink:#0B1220; --accent-soft:#1A2547;
+    --yea:#43C285; --nay:#F26A60; --old:#C9A96B; color-scheme:dark
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B1220; --sheet:#121B2E; --fg:#E8EDF5; --fg-2:#9AA7BC; --line:#273349;
+  --accent:#8AA0FF; --accent-ink:#0B1220; --accent-soft:#1A2547;
+  --yea:#43C285; --nay:#F26A60; --old:#C9A96B; color-scheme:dark
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1100px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+.eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-2)}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:52px}
+.brand{font-family:var(--font-display);font-weight:900;font-size:22px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;color:var(--fg);white-space:nowrap}
+.navlinks{display:flex;gap:18px;font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;overflow-x:auto;min-width:0;scrollbar-width:none}
+.navlinks::-webkit-scrollbar{display:none}
+.navlinks a{color:var(--fg-2);text-decoration:none;white-space:nowrap;padding-block:16px}
+.navlinks a:hover{color:var(--accent)}
+
+/* hero */
+.hero{padding-block:clamp(48px,9vw,112px) clamp(32px,6vw,72px)}
+h1{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(60px,11.5vw,150px);line-height:.88;letter-spacing:.005em;margin:14px 0 26px;text-wrap:balance;max-width:11ch}
+h1 em{font-style:normal;color:var(--accent)}
+.lede{font-size:clamp(18px,2.2vw,22px);max-width:60ch;margin:0 0 28px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;padding:12px 18px;border:1.5px solid var(--fg);border-radius:4px;text-decoration:none;color:var(--fg);font-weight:600;font-size:15px}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.weights{margin-top:44px;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--line);border-block:1px solid var(--line)}
+.weights div{background:var(--bg);padding:14px 16px 14px 0;min-width:0}
+.weights div+div{padding-left:16px}
+.weights b{display:block;font-family:var(--font-display);font-weight:900;font-size:44px;line-height:1;font-variant-numeric:tabular-nums}
+.weights b.zero{color:var(--nay)}
+.weights span{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-2);margin-top:6px}
+
+/* articles */
+.article{padding-block:clamp(48px,8vw,96px);border-top:1px solid var(--line)}
+.art-head{display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:start}
+.art-head>div{min-width:0}
+.art-num{font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;padding-top:16px}
+h2{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(38px,6vw,76px);line-height:.95;margin:0 0 18px;text-wrap:balance}
+.prose{max-width:66ch}
+.prose p{margin:0 0 1em}
+.prose p:last-child{margin-bottom:0}
+@media (max-width:720px){.art-head{grid-template-columns:1fr;gap:8px}.art-num{padding-top:0}}
+
+/* funnel */
+.funnel{margin:36px 0 8px;background:var(--sheet);border:1px solid var(--line);padding:20px 20px 12px;overflow-x:auto}
+.funnel svg{display:block;width:100%;max-width:100%;height:auto;min-width:420px}
+.funnel .dot{fill:var(--fg-2);opacity:.75}
+.funnel .ray{stroke:var(--old);stroke-width:1;opacity:.55}
+.funnel .rep{fill:var(--old)}
+.funnel .rep-num{fill:var(--sheet);font-family:var(--font-display);font-weight:900;font-size:44px}
+.funnel-cap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2);margin-bottom:28px}
+.funnel-cap b{color:var(--old);font-weight:500}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:28px 0}
+.stat{background:var(--sheet);padding:22px 20px;min-width:0}
+.stat b{display:block;font-family:var(--font-display);font-weight:900;font-size:58px;line-height:1;letter-spacing:.01em;font-variant-numeric:tabular-nums}
+.stat span{display:block;margin-top:8px;color:var(--fg);font-size:15px}
+.stat small{display:block;margin-top:10px;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2)}
+
+.callout{border-left:4px solid var(--accent);padding:6px 0 6px 20px;margin:36px 0 0;max-width:66ch}
+.callout strong{font-family:var(--font-display);font-size:32px;font-weight:900;text-transform:uppercase;display:block;line-height:1;margin-bottom:8px}
+.callout p{margin:0}
+
+/* pipelines */
+.pipes{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:36px}
+@media (max-width:760px){.pipes{grid-template-columns:1fr}}
+.pipe{background:var(--sheet);border:1px solid var(--line);padding:24px;min-width:0}
+.pipe h3{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 22px;padding-bottom:12px;border-bottom:1px solid var(--line);font-weight:500}
+.pipe.old h3{color:var(--old)}
+.pipe.new h3{color:var(--accent)}
+.steps{list-style:none;margin:0;padding:0}
+.step{position:relative;padding:0 0 22px 34px}
+.step::before{content:"";position:absolute;left:9px;top:8px;width:2px;height:100%;background:var(--line)}
+.step:last-child{padding-bottom:0}
+.step:last-child::before{display:none}
+.step::after{content:"";position:absolute;left:3px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--sheet);border:2.5px solid var(--old)}
+.pipe.new .step::after{border-color:var(--accent);background:var(--accent)}
+.step b{display:block;font-weight:600}
+.step span{display:block;color:var(--fg-2);font-size:15px}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.filters i{font-style:normal;font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;padding:3px 8px;border:1px solid var(--old);color:var(--old);border-radius:2px}
+.step.dead b{color:var(--fg-2);text-decoration:line-through;text-decoration-color:var(--old)}
+
+/* facilitator */
+.duty{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:36px}
+@media (max-width:760px){.duty{grid-template-columns:1fr}}
+.duty h3{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px;font-weight:500}
+.does h3{color:var(--yea)}
+.never h3{color:var(--nay)}
+.duty ul{list-style:none;margin:0;padding:0}
+.duty li{padding:10px 0 10px 26px;border-top:1px solid var(--line);position:relative;font-size:16px}
+.duty li::before{position:absolute;left:0;top:9px;font-family:var(--font-mono);font-weight:500;font-size:17px}
+.does li::before{content:"+";color:var(--yea)}
+.never li::before{content:"\00d7";color:var(--nay)}
+
+/* the floor (demo) */
+.floor{background:var(--sheet);border:1px solid var(--line);margin-top:36px}
+.floor-bar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding:12px 20px;border-bottom:1px solid var(--line);font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-2)}
+.floor-bar .live{color:var(--yea)}
+.floor-bar .live::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--yea);margin-right:8px;vertical-align:1px}
+.floor-grid{display:grid;grid-template-columns:1fr 1.25fr}
+@media (max-width:860px){.floor-grid{grid-template-columns:1fr}}
+.floor-col{padding:24px 20px;min-width:0}
+.floor-col+.floor-col{border-left:1px solid var(--line)}
+@media (max-width:860px){.floor-col+.floor-col{border-left:0;border-top:1px solid var(--line)}}
+.floor h3{font-family:var(--font-display);font-size:30px;font-weight:900;text-transform:uppercase;margin:0 0 14px;line-height:1}
+label{display:block;font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-2);margin-bottom:6px}
+textarea{width:100%;font:inherit;font-size:15px;line-height:1.45;padding:10px 12px;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--fg);min-height:96px;resize:vertical}
+.frow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px}
+.hint{font-size:13px;color:var(--fg-2);margin:10px 0 0}
+.filed{margin-top:14px;padding:12px 14px;background:var(--accent-soft);border-radius:4px;font-size:14px}
+.items{list-style:none;margin:0;padding:0}
+.item{padding:12px 0;border-top:1px solid var(--line)}
+.item:first-child{border-top:0;padding-top:0}
+.item-head{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.item-head b{font-weight:600;min-width:0}
+.item-head span{font-family:var(--font-mono);font-size:12px;color:var(--fg-2);white-space:nowrap}
+.bar{height:6px;background:var(--line);border-radius:3px;margin-top:8px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);transition:width .5s ease}
+.item.fresh .bar i{background:var(--fg-2)}
+.item.flash{animation:flash 1.2s ease}
+@keyframes flash{0%{background:var(--accent-soft)}100%{background:transparent}}
+.vote{padding:24px 20px;border-top:1px solid var(--line)}
+.vote-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;align-items:baseline}
+.vote-head p{margin:4px 0 0;color:var(--fg-2);font-size:15px;max-width:60ch}
+.tally{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}
+@media (max-width:560px){.tally{grid-template-columns:1fr}}
+.t{padding:14px;border:1px solid var(--line);border-radius:4px;min-width:0}
+.t b{display:block;font-family:var(--font-display);font-size:36px;font-weight:900;line-height:1;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.t span{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-2)}
+.t.yea b{color:var(--yea)}
+.t.nay b{color:var(--nay)}
+.vbtns{display:flex;flex-wrap:wrap;gap:10px}
+.vbtn{font:inherit;font-weight:600;font-size:15px;padding:11px 18px;border-radius:4px;border:1.5px solid var(--line);background:var(--sheet);color:var(--fg);cursor:pointer}
+.vbtn:hover{border-color:var(--fg)}
+.vbtn.yea[aria-pressed="true"]{background:var(--yea);border-color:var(--yea);color:var(--accent-ink)}
+.vbtn.nay[aria-pressed="true"]{background:var(--nay);border-color:var(--nay);color:var(--accent-ink)}
+.vbtn.abs[aria-pressed="true"]{background:var(--fg);border-color:var(--fg);color:var(--bg)}
+.btn-file{font:inherit;font-weight:600;font-size:15px;padding:11px 18px;border-radius:4px;border:1.5px solid var(--accent);background:var(--accent);color:var(--accent-ink);cursor:pointer}
+.weightline{margin:14px 0 0;font-family:var(--font-mono);font-size:12px;color:var(--fg-2);letter-spacing:.04em}
+.weightline b{color:var(--fg);font-weight:500}
+
+/* commons */
+.commons{display:grid;grid-template-columns:1fr auto 1.15fr auto 1fr;gap:14px;align-items:stretch;margin-top:36px}
+@media (max-width:860px){.commons{grid-template-columns:1fr}.arrow{transform:rotate(90deg);justify-self:center}}
+.box{background:var(--sheet);border:1px solid var(--line);padding:20px;min-width:0}
+.box.core{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.box h3{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 12px;font-weight:500;color:var(--fg-2)}
+.box.core h3{color:var(--accent)}
+.box ul{margin:0;padding-left:18px;font-size:15px}
+.box li{margin-bottom:6px}
+.box li b{font-weight:600}
+.arrow{align-self:center;color:var(--fg-2);display:flex}
+
+/* guardrails */
+.qa{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:36px}
+.q{background:var(--sheet);padding:24px 22px;min-width:0}
+.q h3{font-family:var(--font-display);font-size:30px;font-weight:900;text-transform:uppercase;line-height:1;margin:0 0 10px;text-wrap:balance}
+.q p{margin:0;font-size:15.5px}
+
+/* precedents */
+.prec{list-style:none;margin:36px 0 0;padding:0;border-bottom:1px solid var(--line)}
+.prec li{display:grid;grid-template-columns:80px 190px 1fr;gap:16px;padding:14px 0;border-top:1px solid var(--line)}
+@media (max-width:640px){.prec li{grid-template-columns:80px 1fr}.prec li p{grid-column:1/-1}}
+.prec .yr{font-family:var(--font-mono);font-size:13px;color:var(--accent);padding-top:2px}
+.prec .where{font-weight:600}
+.prec p{margin:0;color:var(--fg-2);font-size:15px}
+
+/* roadmap */
+.phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:36px}
+.phase{background:var(--sheet);border:1px solid var(--line);border-top:4px solid var(--accent);padding:20px;min-width:0}
+.phase .n{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;color:var(--fg-2);text-transform:uppercase}
+.phase h3{font-family:var(--font-display);font-size:32px;font-weight:900;text-transform:uppercase;margin:6px 0 8px;line-height:1}
+.phase p{margin:0;font-size:15px}
+
+footer{border-top:1px solid var(--line);padding-block:40px 64px;color:var(--fg-2);font-size:14px}
+footer ol{padding-left:18px;margin:12px 0 0}
+footer li{margin-bottom:6px}
+footer a{overflow-wrap:anywhere}
+
+@media (prefers-reduced-motion:no-preference){
+  .hero .up{animation:up .7s cubic-bezier(.2,.7,.2,1) both}
+  .hero .up:nth-child(2){animation-delay:.07s}
+  .hero .up:nth-child(3){animation-delay:.14s}
+  .hero .up:nth-child(4){animation-delay:.21s}
+  .hero .up:nth-child(5){animation-delay:.28s}
+  @keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.bar i{transition:none}.item.flash{animation:none}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">Open Floor</a>
+    <div class="navlinks">
+      <a href="#bottleneck">§1 Bottleneck</a>
+      <a href="#rewrite">§2 Rewrite</a>
+      <a href="#facilitator">§3 Facilitator</a>
+      <a href="#floor">§4 The Floor</a>
+      <a href="#commons">§5 Commons</a>
+      <a href="#guardrails">§6 Guardrails</a>
+      <a href="#precedents">§7 Precedents</a>
+      <a href="#roadmap">§8 Roadmap</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero wrap" id="top">
+  <p class="eyebrow up">Open Floor &middot; working concept &middot; draft 0.1</p>
+  <h1 class="up">Every voter holds <em>the floor.</em></h1>
+  <p class="lede up">Congress takes about 760,000 people, squeezes them into one representative, and lets that person's beliefs, donors and mood that day decide. Open Floor removes the bottleneck. You file directly. An open, auditable AI keeps the record. Every voice weighs exactly one.</p>
+  <div class="cta up">
+    <a class="btn primary" href="#floor">Try the Floor</a>
+    <a class="btn" href="#guardrails">Read the guardrails</a>
+  </div>
+  <div class="weights up" aria-label="Voting weight by person">
+    <div><b>1.00</b><span>You</span></div>
+    <div><b>1.00</b><span>A senator</span></div>
+    <div><b>1.00</b><span>A billionaire</span></div>
+    <div><b class="zero">0.00</b><span>A lobbyist's check</span></div>
+  </div>
+</header>
+
+<main>
+
+<section class="article" id="bottleneck">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§1 &middot; The bottleneck</div>
+      <div>
+        <h2>One person. One mood. 760,000 votes.</h2>
+        <div class="prose">
+          <p>A House member speaks for about 760,000 people. Those people disagree with each other on almost everything. The member can only cast one vote. So every one of their beliefs, grudges, donors and bad mornings gets multiplied by 760,000.</p>
+          <p>That is the design. It is not a bug you can fix with a better candidate. A different person in the seat is still one person in the seat.</p>
+        </div>
+
+        <div class="funnel">
+          <svg id="funnel" viewBox="0 0 560 210" role="img" aria-label="Many small dots on the left converge through thin lines into a single large circle on the right, labeled 1."></svg>
+        </div>
+        <div class="funnel-cap">
+          <span>760,000 people &middot; each dot &asymp; 2,900</span>
+          <span><b>1 representative &middot; 1 vote</b> &middot; &times; party &times; donors &times; mood</span>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><b>86%</b><span>of Americans disapprove of how Congress is doing its job.</span><small>Gallup &middot; April 2026</small></div>
+          <div class="stat"><b>64.7</b><span>median age of a senator. The country's median age is about 39.</span><small>Pew Research &middot; 119th Congress</small></div>
+          <div class="stat"><b>$5.08B</b><span>spent lobbying the federal government in 2025. A record, up 14% in a year.</span><small>OpenSecrets &middot; 2025</small></div>
+          <div class="stat"><b>&gt;50%</b><span>of members have been millionaires since 2012. About 1 in 100 Americans were.</span><small>Center for Responsive Politics</small></div>
+        </div>
+
+        <div class="callout">
+          <strong>Emotion is not the bug. Concentration is.</strong>
+          <p>Voters are emotional too. The difference is scale. On the Floor, 150 million feelings average into a signal. In Congress, one feeling counts 760,000 times.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="rewrite">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§2 &middot; The rewrite</div>
+      <div>
+        <h2>Take the person out of the middle.</h2>
+        <div class="prose">
+          <p>Representation was a workaround for distance. In 1789 a farmer could not ride to Philadelphia every week, so he sent someone. The workaround became the system, and the system became the thing to capture. Lobbying is cheap because the target list is only 535 names long.</p>
+        </div>
+
+        <div class="pipes">
+          <div class="pipe old">
+            <h3>Now &middot; how a law happens</h3>
+            <ol class="steps">
+              <li class="step"><b>You vote once every two years.</b><span>For a bundle of positions you mostly did not pick, attached to a person you have never met.</span></li>
+              <li class="step"><b>Your representative decides.</b><span>Your 760,000-way disagreement collapses into one person, filtered through:</span>
+                <div class="filters"><i>party whip</i><i>donors</i><i>re-election math</i><i>personal belief</i><i>mood</i></div></li>
+              <li class="step"><b>Staff and lobbyists write the bill.</b><span>A thousand pages. Nobody who votes on it reads it.</span></li>
+              <li class="step dead"><b>Law.</b><span>Or, more often, a shutdown, a stalemate, a continuing resolution.</span></li>
+            </ol>
+          </div>
+          <div class="pipe new">
+            <h3>Open Floor &middot; how a law happens</h3>
+            <ol class="steps">
+              <li class="step"><b>You file.</b><span>Any day, any topic, from your phone. A complaint, a proposal, a vote. It goes on the public record under your verified name.</span></li>
+              <li class="step"><b>The Facilitator reads everything.</b><span>It merges duplicates into items, shows where people agree and where they split, drafts plain-language text, and checks every draft against the Rights Charter.</span></li>
+              <li class="step"><b>You ratify.</b><span>Every voter's weight is one. The result, the reasoning and the dissent are published together.</span></li>
+              <li class="step"><b>Law.</b><span>Enacted, funded from the Commons, audited in the open. Replayable by any citizen.</span></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="facilitator">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§3 &middot; The Facilitator</div>
+      <div>
+        <h2>A clerk, not a king.</h2>
+        <div class="prose">
+          <p>The AI in Open Floor does the job Congress was supposed to do and never could at scale: listen to everyone, find the overlap, write it down clearly, and keep the books. It does not get a vote. It does not get an opinion.</p>
+          <p>This was impossible in 1789 and still impossible in 2015. Reading, merging and summarizing 150 million filings a day is now a solved problem. The decision layer is the only part that has not caught up.</p>
+        </div>
+        <div class="duty">
+          <div class="does">
+            <h3>What it does</h3>
+            <ul>
+              <li>Reads every filing, every day</li>
+              <li>Merges duplicates into items people can vote on</li>
+              <li>Shows where the country agrees and where it splits, by region, by age, by income</li>
+              <li>Drafts in plain language a 14-year-old can read</li>
+              <li>Checks every draft against the Rights Charter before it reaches a ballot</li>
+              <li>Runs ratification and publishes the count</li>
+              <li>Allocates the Commons to ratified priorities, line by line, in public</li>
+              <li>Logs its own reasoning so any decision can be replayed</li>
+            </ul>
+          </div>
+          <div class="never">
+            <h3>What it never does</h3>
+            <ul>
+              <li>Vote</li>
+              <li>Hold a position on any item</li>
+              <li>Take money, from anyone, for anything</li>
+              <li>Run for anything</li>
+              <li>Override a ratified result</li>
+              <li>Draft against the Rights Charter</li>
+              <li>Act without an audit trail</li>
+              <li>Run as a single model from a single vendor</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="floor">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§4 &middot; The Floor</div>
+      <div>
+        <h2>Try it.</h2>
+        <div class="prose">
+          <p>This is a demo with sample data. File a concern and watch the Facilitator merge it with people who already said the same thing. Then cast a vote on the item currently on the floor.</p>
+        </div>
+
+        <div class="floor">
+          <div class="floor-bar">
+            <span class="live">The Floor &middot; demo</span>
+            <span>Sample data &middot; nothing leaves this page</span>
+          </div>
+          <div class="floor-grid">
+            <div class="floor-col">
+              <h3>Raise a concern</h3>
+              <form id="fileForm">
+                <label for="concern">Your filing</label>
+                <textarea id="concern" name="concern" placeholder="Try: &quot;Members of Congress shouldn't be allowed to trade stocks&quot; or &quot;My insulin costs $400 a month&quot;" required></textarea>
+                <div class="frow">
+                  <button class="btn-file" type="submit">File it</button>
+                  <span class="hint" style="margin:0">Filed under a verified name. Weight: 1.</span>
+                </div>
+              </form>
+              <div class="filed" id="filed" hidden></div>
+              <p class="hint">The Facilitator matches your filing to open items. New topics open for ratification once 1,000 people join them.</p>
+            </div>
+            <div class="floor-col">
+              <h3>Open items</h3>
+              <ul class="items" id="items"></ul>
+            </div>
+          </div>
+          <div class="vote">
+            <div class="vote-head">
+              <div>
+                <span class="eyebrow">On the floor now &middot; ratification</span>
+                <h3 style="margin-top:6px">Ban stock trading by sitting lawmakers</h3>
+                <p>Members, spouses and dependents place holdings in a blind trust for the full term. Drafted by the Facilitator from 4.1M filings. Passed the Rights Charter check.</p>
+              </div>
+            </div>
+            <div class="tally">
+              <div class="t yea"><b id="tYea">0</b><span>Yea</span></div>
+              <div class="t nay"><b id="tNay">0</b><span>Nay</span></div>
+              <div class="t"><b id="tAbs">0</b><span>Abstain</span></div>
+            </div>
+            <div class="vbtns" role="group" aria-label="Cast your vote">
+              <button class="vbtn yea" id="vYea" type="button" aria-pressed="false">Yea</button>
+              <button class="vbtn nay" id="vNay" type="button" aria-pressed="false">Nay</button>
+              <button class="vbtn abs" id="vAbs" type="button" aria-pressed="false">Abstain</button>
+            </div>
+            <p class="weightline" id="weightline">Not cast yet. Your weight is waiting: <b>1</b>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="commons">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§5 &middot; The Commons</div>
+      <div>
+        <h2>Money follows the vote, not the other way around.</h2>
+        <div class="prose">
+          <p>Today money flows toward the people who decide, which is why five billion dollars a year goes into lobbying 535 of them. On the Floor there is nobody to lobby. Public money goes into one Commons and comes out by ratified priority, with an equal floor under every person first.</p>
+        </div>
+
+        <div class="commons">
+          <div class="box">
+            <h3>In</h3>
+            <ul>
+              <li><b>Taxes</b>, with rates set on the Floor</li>
+              <li><b>Returns on public stakes</b> in land, minerals, spectrum, data and infrastructure</li>
+              <li><b>A public wealth fund</b> that owns a slice of everything, the way Norway's does</li>
+            </ul>
+          </div>
+          <div class="arrow" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 28 28"><path d="M6 14h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
+          <div class="box core">
+            <h3>The Commons</h3>
+            <ul>
+              <li><b>One ledger</b>, public to the cent</li>
+              <li><b>The Facilitator allocates</b> to priorities voters ranked, in the order they ranked them</li>
+              <li><b>No earmarks</b>, because there is nobody to earmark for</li>
+              <li><b>Every line item replayable</b>: who asked, what was ranked, what was paid</li>
+            </ul>
+          </div>
+          <div class="arrow" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 28 28"><path d="M6 14h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
+          <div class="box">
+            <h3>Out</h3>
+            <ul>
+              <li><b>The floor</b>: an equal baseline for every person. Housing, health, food, education. Paid first, never ranked.</li>
+              <li><b>Priorities</b>: everything else, funded in ranked order until the money runs out</li>
+              <li><b>The dividend</b>: whatever is left, paid to every person equally</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>The plumbing already exists.</strong>
+          <p>Alaska has paid every resident an equal dividend from oil since 1982. Norway's public fund owns about 1.5% of every listed company on earth. What is missing is not the money. It is the decision layer.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="guardrails">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§6 &middot; The guardrails</div>
+      <div>
+        <h2>The questions that kill this idea if you do not answer them.</h2>
+        <div class="prose">
+          <p>Every reader will reach for one of these within thirty seconds. The concept lives or dies on the answers.</p>
+        </div>
+        <div class="qa">
+          <div class="q"><h3>Who controls the AI?</h3><p>Nobody, and everybody. Open weights, open training data, open logs. At least three independently built models must agree before anything reaches a ballot. Voters elect an audit board that can halt the whole system with one vote. Any citizen can replay any decision and get the same answer.</p></div>
+          <div class="q"><h3>What stops 51% from crushing 49%?</h3><p>A Rights Charter the Facilitator cannot draft against, and voters cannot amend without a two-thirds supermajority in two separate years. Majority rule for policy. Supermajority for rights. Same as a constitution, minus the people in the middle.</p></div>
+          <div class="q"><h3>Bots, trolls, foreign money?</h3><p>One verified person, one account, one weight. Filings are public and attributable. There is no official to bribe and no ad buy that changes a count. Influence has to persuade actual people, in the open, one at a time.</p></div>
+          <div class="q"><h3>Nobody has time to vote on everything.</h3><p>You don't. Follow the topics you care about. For the rest, lend your weight to a person or a stance you trust, and take it back any time. Your weight is always yours to recall.</p></div>
+          <div class="q"><h3>People vote on emotion too.</h3><p>Yes. 150 million emotions average out. One does not. The Facilitator also shows you what a draft costs and who it affects before you vote, which is more than any member of Congress gets today.</p></div>
+          <div class="q"><h3>What happens to Congress?</h3><p>It keeps its vote at first and loses its excuses. Then it becomes the audit board. See the roadmap.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="precedents">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§7 &middot; Precedents</div>
+      <div>
+        <h2>None of this is science fiction.</h2>
+        <div class="prose">
+          <p>Every piece of Open Floor is running somewhere today. Nobody has connected them.</p>
+        </div>
+        <ul class="prec">
+          <li><span class="yr">1982</span><span class="where">Alaska</span><p>Permanent Fund Dividend. Every resident gets an equal share of oil revenue, every year, no questions asked.</p></li>
+          <li><span class="yr">1989</span><span class="where">Porto Alegre, Brazil</span><p>Participatory budgeting. Residents set part of the city budget directly. Now used in thousands of cities worldwide.</p></li>
+          <li><span class="yr">2005</span><span class="where">Estonia</span><p>Internet voting in national elections. About half of all votes are now cast online, with a verified digital identity.</p></li>
+          <li><span class="yr">2015</span><span class="where">Taiwan</span><p>vTaiwan. An AI-assisted consensus tool surfaced ride-share rules thousands of people could agree on, which became law.</p></li>
+          <li><span class="yr">2016</span><span class="where">Barcelona</span><p>Decidim. Open-source platform where residents propose, debate and vote on city plans. Adopted by hundreds of institutions since.</p></li>
+          <li><span class="yr">Ongoing</span><span class="where">Switzerland</span><p>Binding national referendums several times a year on tax, immigration, pensions and more. The country has not fallen apart.</p></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="roadmap">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§8 &middot; Roadmap</div>
+      <div>
+        <h2>How you get there without a revolution.</h2>
+        <div class="prose">
+          <p>Nobody hands over the country to a new system in one step. Each phase is useful on its own and makes the next one obvious.</p>
+        </div>
+        <div class="phases">
+          <div class="phase"><div class="n">Phase 1 &middot; years 1&ndash;2</div><h3>The mirror</h3><p>Open Floor runs as an advisory layer. It reads what each district files and publishes, next to every roll-call vote, what the district actually wanted. Representatives keep their vote. They lose the excuse.</p></div>
+          <div class="phase"><div class="n">Phase 2 &middot; years 2&ndash;5</div><h3>The city</h3><p>Cities adopt binding Floor votes for their budgets. Participatory budgeting with a Facilitator instead of a town hall nobody attends.</p></div>
+          <div class="phase"><div class="n">Phase 3 &middot; years 5&ndash;10</div><h3>The state</h3><p>State ballot measures move onto the Floor. Signature drives are replaced by filings. The Rights Charter is tested in court and survives.</p></div>
+          <div class="phase"><div class="n">Phase 4 &middot; year 10+</div><h3>The floor</h3><p>Federal law is ratified on the Floor. The Commons replaces appropriations. Congress becomes the audit board that can halt the system, and nothing else.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="eyebrow">Draft 0.1 &middot; a concept, not a product &middot; October 2026</p>
+    <p>"Open Floor" is a working name. The numbers in §1 are the latest published figures at time of writing. Check them before you print anything.</p>
+    <ol>
+      <li>Gallup, <a href="https://news.gallup.com/poll/1600/congress-public.aspx">Congress and the Public</a>, April 2026 survey: 86% disapprove.</li>
+      <li>Pew Research Center, <a href="https://www.pewresearch.org/short-reads/2025/01/16/age-and-generation-in-the-119th-congress-somewhat-younger-with-fewer-boomers-and-more-gen-xers/">Age and generation in the 119th Congress</a>, January 2025: Senate median 64.7, House median 57.5.</li>
+      <li>OpenSecrets, <a href="https://www.opensecrets.org/federal-lobbying">Federal lobbying</a>: $5.08 billion in 2025, up 14% year over year.</li>
+      <li>Center for Responsive Politics, <a href="https://www.opensecrets.org/news/2014/01/millionaires-club-for-first-time-most-lawmakers-are-worth-1-million-plus/">Millionaires' Club</a>, January 2014: a majority of members worth $1 million or more, based on 2012 disclosures.</li>
+      <li>U.S. Census Bureau, national median age, about 39.</li>
+    </ol>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* funnel */
+  var svg=document.getElementById('funnel');
+  if(svg){
+    var NS='http://www.w3.org/2000/svg';
+    var cols=26,rows=10,x0=14,y0=22,dx=9.2,dy=18;
+    var xe=x0+(cols-1)*dx+10, tx=468, ty=103;
+    for(var r=0;r<rows;r++){
+      var l=document.createElementNS(NS,'line');
+      l.setAttribute('x1',xe);l.setAttribute('y1',y0+r*dy);
+      l.setAttribute('x2',tx-40);l.setAttribute('y2',ty);
+      l.setAttribute('class','ray');svg.appendChild(l);
+    }
+    for(var r2=0;r2<rows;r2++){for(var c=0;c<cols;c++){
+      var d=document.createElementNS(NS,'circle');
+      d.setAttribute('cx',x0+c*dx);d.setAttribute('cy',y0+r2*dy);d.setAttribute('r',2.4);
+      d.setAttribute('class','dot');svg.appendChild(d);
+    }}
+    var big=document.createElementNS(NS,'circle');
+    big.setAttribute('cx',tx);big.setAttribute('cy',ty);big.setAttribute('r',38);big.setAttribute('class','rep');svg.appendChild(big);
+    var t=document.createElementNS(NS,'text');
+    t.setAttribute('x',tx);t.setAttribute('y',ty+15);t.setAttribute('text-anchor','middle');t.setAttribute('class','rep-num');t.textContent='1';svg.appendChild(t);
+  }
+
+  /* the floor: items */
+  var items=[
+    {title:'Ban stock trading by sitting lawmakers',voices:4120000,support:86,keys:['stock','trading','trade','insider','invest','portfolio']},
+    {title:'Term limits for Congress',voices:3650000,support:78,keys:['term','limit','age','retire','too old','career']},
+    {title:'Cap prescription drug prices',voices:2980000,support:71,keys:['drug','insulin','prescription','pharma','medic','pill','copay']},
+    {title:'Fund rural broadband',voices:1410000,support:64,keys:['internet','broadband','rural','wifi','fiber','connection']},
+    {title:'Build housing on public land',voices:1230000,support:58,keys:['housing','rent','home','afford','mortgage','landlord','apartment']}
+  ];
+  function fmt(n){return n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e3?Math.round(n/1e3)+'K':String(n);}
+  function full(n){return n.toLocaleString('en-US');}
+  var list=document.getElementById('items');
+  function render(flashIdx){
+    list.innerHTML='';
+    items.forEach(function(it,i){
+      var li=document.createElement('li');
+      li.className='item'+(it.fresh?' fresh':'')+(i===flashIdx?' flash':'');
+      var head=document.createElement('div');head.className='item-head';
+      var b=document.createElement('b');b.textContent=it.title;
+      var s=document.createElement('span');
+      s.textContent=it.fresh?(full(it.voices)+' filing'+(it.voices===1?'':'s')+' · opens at 1,000'):(fmt(it.voices)+' filings · '+it.support+'% yea');
+      head.appendChild(b);head.appendChild(s);
+      var bar=document.createElement('div');bar.className='bar';
+      var fill=document.createElement('i');fill.style.width=(it.fresh?Math.min(100,it.voices/10):it.support)+'%';
+      bar.appendChild(fill);
+      li.appendChild(head);li.appendChild(bar);list.appendChild(li);
+    });
+  }
+  render(-1);
+
+  var form=document.getElementById('fileForm'),ta=document.getElementById('concern'),filed=document.getElementById('filed');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var text=ta.value.trim();if(!text)return;
+    var low=text.toLowerCase(),hit=-1;
+    for(var i=0;i<items.length;i++){
+      if(items[i].fresh){ if(items[i].title.toLowerCase()===low.slice(0,70)){hit=i;break;} continue; }
+      if(items[i].keys.some(function(k){return low.indexOf(k)>-1;})){hit=i;break;}
+    }
+    if(hit>-1){
+      items[hit].voices+=1;
+      filed.textContent='Filed. The Facilitator merged it with '+full(items[hit].voices-1)+' others on "'+items[hit].title+'". Your weight on that item: 1.';
+      render(hit);
+    }else{
+      var title=text.length>70?text.slice(0,67).replace(/\s+\S*$/,'')+'…':text;
+      items.unshift({title:title,voices:1,support:null,keys:[],fresh:true});
+      filed.textContent='Filed as a new item. It opens for ratification when 1,000 people join it. You are the first.';
+      render(0);
+    }
+    filed.hidden=false;ta.value='';
+  });
+
+  /* the floor: vote */
+  var base={yea:41203118,nay:6702455,abs:1118920},my=null;
+  var el={yea:document.getElementById('tYea'),nay:document.getElementById('tNay'),abs:document.getElementById('tAbs')};
+  var btn={yea:document.getElementById('vYea'),nay:document.getElementById('vNay'),abs:document.getElementById('vAbs')};
+  var wl=document.getElementById('weightline');
+  function tally(){
+    var total=0;
+    ['yea','nay','abs'].forEach(function(k){var n=base[k]+(my===k?1:0);total+=n;el[k].textContent=full(n);btn[k].setAttribute('aria-pressed',my===k?'true':'false');});
+    wl.innerHTML=my?('Recorded. Your weight: <b>1</b> of '+full(total)+'. The same as every other name on the count. Tap again to withdraw.'):('Not cast yet. Your weight is waiting: <b>1</b>.');
+  }
+  ['yea','nay','abs'].forEach(function(k){btn[k].addEventListener('click',function(){my=(my===k)?null:k;tally();});});
+  tally();
+})();
+</script>
+</body>
+</html>
