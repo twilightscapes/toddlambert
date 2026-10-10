@@ -4,10 +4,6 @@ import { getEntry } from 'astro:content';
 import MemberFavorites from "@/components/MemberFavorites.astro";
 import { getDefaultImage } from "../utils/getDefaultImage";
 
-// Disable prerender to allow dynamic OG images based on URL parameters
-// This page uses SSR in hybrid mode to fetch video metadata
-export const prerender = false;
-
 // Get site settings for video time limit
 const siteSettings = await getEntry('siteSettings', 'main');
 const pwaSettings = await getEntry('pwaSettings', 'index');
@@ -3092,4 +3088,26 @@ console.info('🛡️ Privacy-focused YouTube embed: API disabled, tracking mini
 <br />
 <br />
 <br />
+
+<script is:inline>
+  // Save current videoId to localStorage when viewing a video
+  // Redirect to last video if visiting /video without params
+  (function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const videoId = urlParams.get('videoId') || urlParams.get('video');
+    
+    if (videoId) {
+      // Save the current video ID
+      localStorage.setItem('lastVideoId', videoId);
+    } else {
+      // No video ID in URL - check if we have a saved one
+      const lastVideoId = localStorage.getItem('lastVideoId');
+      if (lastVideoId) {
+        // Redirect to the last video
+        window.location.href = `/video?videoId=${lastVideoId}`;
+      }
+    }
+  })();
+</script>
+
 </PageLayout>
