@@ -1,0 +1,1127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="The Buildout: why data center electricity stayed flat for a decade, who is behind the forecasts that say we need hundreds more, what the subsidies cost, who really gets paid, how crypto mining plays the grid, and what AI actually needs. Interactive charts and a state-by-state map.">
+<meta property="og:title" content="The Buildout">
+<meta property="og:description" content="Who really needs all these data centers? Ten years of data, a subsidy map, the money loop, and an honest look at what AI uses.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://toddlambert.com/datacenters/">
+<meta property="og:site_name" content="toddlambert.com">
+<meta property="og:image" content="https://toddlambert.com/datacenters/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Who really needs all these data centers? A decade of flat electricity use, then a cliff of forecasts.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Buildout">
+<meta name="twitter:description" content="Who really needs all these data centers? Ten years of data, a subsidy map, the money loop, and an honest look at what AI uses.">
+<meta name="twitter:image" content="https://toddlambert.com/datacenters/og.png">
+<meta name="theme-color" content="#F2F4F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B1220" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://toddlambert.com/datacenters/">
+<title>The Buildout</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an explainer with a reading column beside a mono margin rail. Charts, the map and the
+   control panels break out to full width. Every section ends in a "Dig deeper" drawer. */
+:root{
+  --bg:#F2F4F7; --sheet:#FFFFFF; --fg:#0F1B2D; --fg-2:#56627A; --line:#D5DBE5; --grid:#E6EAF1;
+  --accent:#0E7C86; --accent-ink:#FFFFFF; --accent-soft:#DCF1F3;
+  --yea:#1F8F5B; --nay:#C9362C;
+  --c-gas:#1baf7a; --c-crude:#2a78d6; --c-diesel:#eb6834; --c-dist:#eda100; --c-mute:#9AA5B8;
+  --font-display:'Big Shoulders Display','Arial Narrow',Impact,sans-serif;
+  --font-body:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B1220; --sheet:#121B2E; --fg:#E8EDF5; --fg-2:#9AA7BC; --line:#273349; --grid:#1D2840;
+    --accent:#5AD3DC; --accent-ink:#0B1220; --accent-soft:#12303A;
+    --yea:#43C285; --nay:#F26A60;
+    --c-gas:#199e70; --c-crude:#3987e5; --c-diesel:#d95926; --c-dist:#c98500; --c-mute:#5C6B85; color-scheme:dark
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B1220; --sheet:#121B2E; --fg:#E8EDF5; --fg-2:#9AA7BC; --line:#273349; --grid:#1D2840;
+  --accent:#5AD3DC; --accent-ink:#0B1220; --accent-soft:#12303A;
+  --yea:#43C285; --nay:#F26A60;
+  --c-gas:#199e70; --c-crude:#3987e5; --c-diesel:#d95926; --c-dist:#c98500; --c-mute:#5C6B85; color-scheme:dark
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1100px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+.eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-2)}
+.mono{font-family:var(--font-mono)}
+button{font:inherit}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:52px}
+.brand{font-family:var(--font-display);font-weight:900;font-size:22px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;color:var(--fg);white-space:nowrap}
+.navlinks{display:flex;gap:18px;font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;overflow-x:auto;min-width:0;scrollbar-width:none;align-items:center}
+.navlinks::-webkit-scrollbar{display:none}
+.navlinks a{color:var(--fg-2);text-decoration:none;white-space:nowrap;padding-block:16px}
+.navlinks a:hover{color:var(--accent)}
+.expandall{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);background:var(--sheet);color:var(--fg);padding:6px 10px;border-radius:3px;cursor:pointer;white-space:nowrap}
+.expandall:hover{border-color:var(--accent);color:var(--accent)}
+
+/* hero */
+.hero{padding-block:clamp(48px,9vw,112px) clamp(32px,6vw,72px)}
+h1{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(58px,11vw,146px);line-height:.88;letter-spacing:.005em;margin:14px 0 26px;text-wrap:balance;max-width:12ch}
+h1 em{font-style:normal;color:var(--accent)}
+.lede{font-size:clamp(18px,2.2vw,22px);max-width:62ch;margin:0 0 28px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;padding:12px 18px;border:1.5px solid var(--fg);border-radius:4px;text-decoration:none;color:var(--fg);font-weight:600;font-size:15px}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.ticker{margin-top:44px;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--line);border-block:1px solid var(--line)}
+.ticker div{background:var(--bg);padding:14px 16px 14px 0;min-width:0}
+.ticker div+div{padding-left:16px}
+.ticker b{display:block;font-family:var(--font-display);font-weight:900;font-size:44px;line-height:1}
+.ticker b.hot{color:var(--accent)}
+.ticker b.cool{color:var(--c-crude)}
+.ticker span{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-2);margin-top:6px}
+
+/* articles */
+.article{padding-block:clamp(48px,8vw,96px);border-top:1px solid var(--line)}
+.art-head{display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:start}
+.art-head>div{min-width:0}
+.art-num{font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;padding-top:16px}
+h2{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(38px,6vw,76px);line-height:.95;margin:0 0 18px;text-wrap:balance}
+h3.sub{font-family:var(--font-display);font-size:30px;font-weight:900;text-transform:uppercase;line-height:1;margin:36px 0 12px}
+.prose{max-width:66ch}
+.prose p{margin:0 0 1em}
+.prose p:last-child{margin-bottom:0}
+.prose ul{padding-left:20px;margin:0 0 1em}
+.prose li{margin-bottom:6px}
+@media (max-width:720px){.art-head{grid-template-columns:1fr;gap:8px}.art-num{padding-top:0}}
+
+/* panels & charts */
+.panel{background:var(--sheet);border:1px solid var(--line);margin-top:28px;min-width:0}
+.panel-bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px 16px;padding:12px 18px;border-bottom:1px solid var(--line);font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-2)}
+.panel-bar b{color:var(--fg);font-weight:500}
+.panel-body{padding:16px 18px 12px;position:relative}
+.panel-foot{padding:10px 18px 14px;font-size:13px;color:var(--fg-2);border-top:1px solid var(--line)}
+.panel-foot a{color:var(--fg-2)}
+.controls{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;padding:12px 18px;border-bottom:1px solid var(--line);font-size:13px}
+.controls label{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-2);display:flex;align-items:center;gap:6px;margin:0}
+.controls select{font:inherit;font-size:13px;padding:5px 8px;border:1px solid var(--line);border-radius:3px;background:var(--bg);color:var(--fg)}
+.seg{display:inline-flex;flex-wrap:wrap;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;max-width:100%}
+.seg button{border:0;background:var(--sheet);color:var(--fg-2);padding:6px 10px;cursor:pointer;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;flex:1 1 auto}
+.seg button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.chk{display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2);cursor:pointer}
+.chk input{accent-color:var(--accent);margin:0}
+.chart{position:relative;width:100%}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart text{font-family:var(--font-mono);font-size:11px;fill:var(--fg-2)}
+.chart .grid line{stroke:var(--grid);stroke-width:1}
+.chart .axis line{stroke:var(--line)}
+.chart .ln{fill:none;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.chart .ln.gas{stroke:var(--c-gas)}
+.chart .ln.crude{stroke:var(--c-crude)}
+.chart .ln.diesel{stroke:var(--c-diesel)}
+.chart .ln.mute{stroke:var(--c-mute);stroke-width:1.5}
+.chart .area.gas{fill:var(--c-gas);opacity:.08}
+.chart .area.crude{fill:var(--c-crude);opacity:.08}
+.chart .term{fill:var(--fg);opacity:.035}
+.chart .term-l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;fill:var(--fg-2)}
+.chart .lab{fill:var(--fg);font-weight:500}
+.chart .lab.bg{paint-order:stroke;stroke:var(--sheet);stroke-width:4px;stroke-linejoin:round}
+.chart .ev{cursor:pointer}
+.chart .ev circle{fill:var(--sheet);stroke:var(--c-gas);stroke-width:2}
+.chart .ev text{fill:var(--fg);font-size:9px;font-weight:500;text-anchor:middle;pointer-events:none}
+.chart .ev:hover circle,.chart .ev.on circle{fill:var(--c-gas)}
+.chart .ev:hover text,.chart .ev.on text{fill:var(--accent-ink)}
+.chart .xh{stroke:var(--fg-2);stroke-width:1;pointer-events:none}
+.chart .dot{stroke:var(--sheet);stroke-width:2;pointer-events:none}
+.chart .dot.gas{fill:var(--c-gas)}.chart .dot.crude{fill:var(--c-crude)}.chart .dot.diesel{fill:var(--c-diesel)}.chart .dot.mute{fill:var(--c-mute)}
+.chart .hit{fill:transparent}
+.tip{position:absolute;z-index:5;pointer-events:none;background:var(--sheet);border:1px solid var(--line);box-shadow:0 6px 20px rgba(0,0,0,.12);padding:8px 10px;font-size:13px;min-width:150px;border-radius:3px;display:none}
+.tip .d{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2);margin-bottom:4px}
+.tip .r{display:flex;justify-content:space-between;gap:14px;align-items:baseline}
+.tip .r b{font-weight:600;font-variant-numeric:tabular-nums}
+.tip .k{display:inline-block;width:12px;height:0;border-top:2px solid;vertical-align:middle;margin-right:6px}
+.tip .r span{color:var(--fg-2);font-size:12px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;padding:0 18px 10px;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2)}
+.legend i{display:inline-block;width:14px;border-top:2px solid;vertical-align:middle;margin-right:6px}
+.legend i.sw{width:12px;height:12px;border:0;border-radius:2px;vertical-align:-2px}
+.tbl{display:none;padding:0 18px 14px;overflow:auto;max-height:360px}
+.tbl.on{display:block}
+.tbl table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+.tbl th,.tbl td{text-align:right;padding:5px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl th:first-child,.tbl td:first-child{text-align:left;font-family:var(--font-mono);font-size:12px}
+.tbl th{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2);font-weight:500;position:sticky;top:0;background:var(--sheet)}
+.tbtn{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);background:transparent;color:var(--fg-2);padding:4px 8px;border-radius:3px;cursor:pointer}
+.tbtn[aria-pressed="true"],.tbtn:hover{color:var(--fg);border-color:var(--fg)}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:28px 0 0}
+.stat{background:var(--sheet);padding:22px 20px;min-width:0}
+.stat b{display:block;font-family:var(--font-display);font-weight:900;font-size:56px;line-height:1;letter-spacing:.01em}
+.stat b.hot{color:var(--accent)}
+.stat span{display:block;margin-top:8px;color:var(--fg);font-size:15px}
+.stat small{display:block;margin-top:10px;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2)}
+.callout{border-left:4px solid var(--accent);padding:6px 0 6px 20px;margin:36px 0 0;max-width:66ch}
+.callout strong{font-family:var(--font-display);font-size:32px;font-weight:900;text-transform:uppercase;display:block;line-height:1;margin-bottom:8px}
+.callout p{margin:0}
+
+/* events */
+.events{list-style:none;margin:28px 0 0;padding:0;border-top:1px solid var(--line)}
+.event{border-bottom:1px solid var(--line)}
+.event>button{all:unset;display:grid;grid-template-columns:40px 110px 1fr auto;gap:14px;align-items:baseline;width:100%;padding:14px 0;cursor:pointer;box-sizing:border-box}
+.event>button:hover .et{color:var(--accent)}
+.event .en{font-family:var(--font-display);font-weight:900;font-size:26px;line-height:1;color:var(--c-gas)}
+.event .ed{font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;color:var(--fg-2);text-transform:uppercase}
+.event .et{font-weight:600;min-width:0}
+.event .et small{display:block;font-weight:400;color:var(--fg-2);font-size:14px;margin-top:2px}
+.event .ep{font-family:var(--font-display);font-weight:900;font-size:26px;line-height:1;white-space:nowrap}
+.event .eb{display:none;padding:0 0 18px 54px;max-width:70ch;font-size:15.5px}
+.event .eb p{margin:0 0 .8em}
+.event.open .eb{display:block}
+.event.open>button .et{color:var(--accent)}
+@media (max-width:640px){.event>button{grid-template-columns:34px 1fr auto;gap:10px}.event .ed{grid-column:2/4;order:3;margin-top:-6px}.event .eb{padding-left:0}}
+
+/* dig deeper drawers */
+.deeper{margin-top:28px;border:1px solid var(--line);background:var(--sheet);max-width:none}
+.deeper summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:500}
+.deeper summary::-webkit-details-marker{display:none}
+.deeper summary::after{content:"+";font-size:20px;line-height:1;font-weight:400}
+.deeper[open] summary::after{content:"\2212"}
+.deeper summary:hover{background:var(--accent-soft)}
+.deeper .dbody{padding:6px 18px 20px;border-top:1px solid var(--line);font-size:15.5px;max-width:none}
+.deeper .dbody p{max-width:70ch;margin:.8em 0}
+.deeper .dbody h4{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-2);margin:18px 0 6px;font-weight:500}
+.deeper .dbody ul{padding-left:20px;max-width:70ch}
+.deeper .dbody li{margin-bottom:6px}
+.deeper table{border-collapse:collapse;font-size:14px;margin:8px 0}
+.deeper td,.deeper th{padding:6px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.deeper th{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2);font-weight:500}
+
+/* gallon */
+.gallon{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;margin-top:28px}
+@media (max-width:820px){.gallon{grid-template-columns:1fr}}
+.stackwrap{padding:16px 18px}
+.stack{display:flex;height:44px;gap:2px}
+.stack i{display:block;height:100%;border-radius:2px;transition:flex-basis .35s ease;min-width:4px;position:relative}
+.stack i.crude{background:var(--c-crude)}.stack i.refine{background:var(--c-diesel)}.stack i.dist{background:var(--c-dist)}.stack i.tax{background:var(--c-gas)}
+.stackkey{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:14px}
+.stackkey div{font-size:13px;color:var(--fg-2);padding-left:14px;position:relative}
+.stackkey div::before{content:"";position:absolute;left:0;top:5px;width:8px;height:8px;border-radius:2px}
+.stackkey .crude::before{background:var(--c-crude)}.stackkey .refine::before{background:var(--c-diesel)}.stackkey .dist::before{background:var(--c-dist)}.stackkey .tax::before{background:var(--c-gas)}
+.stackkey b{display:block;color:var(--fg);font-family:var(--font-display);font-size:26px;font-weight:900;line-height:1}
+.calc{padding:16px 18px}
+.calc .big{font-family:var(--font-display);font-weight:900;font-size:64px;line-height:1;margin:6px 0 2px}
+.calc .big small{font-size:22px;color:var(--fg-2);font-weight:700;margin-left:6px}
+.calc input[type=range]{width:100%;accent-color:var(--accent);margin:14px 0 4px}
+.calc .rng{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:11px;color:var(--fg-2);letter-spacing:.06em}
+.calc p{font-size:14px;color:var(--fg-2);margin:12px 0 0}
+.taxrow{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:24px}
+@media (max-width:560px){.taxrow{grid-template-columns:1fr}}
+.taxrow div{background:var(--sheet);padding:16px 18px}
+.taxrow b{display:block;font-family:var(--font-display);font-size:40px;font-weight:900;line-height:1}
+.taxrow span{display:block;font-size:14px;margin-top:6px}
+.taxrow small{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2);margin-top:8px}
+
+/* map */
+.map{position:relative}
+.map svg{display:block;width:100%;height:auto}
+.map .tile{cursor:pointer;transition:opacity .15s}
+.map .tile rect{rx:3;stroke:var(--sheet);stroke-width:2}
+.map .tile text{font-family:var(--font-mono);pointer-events:none;text-anchor:middle}
+.map .tile .ab{font-size:13px;font-weight:500}
+.map .tile .vl{font-size:10px}
+.map .tile.dim{opacity:.35}
+.map .tile.sel rect{stroke:var(--fg);stroke-width:2.5}
+.maplegend{display:flex;align-items:center;gap:10px;padding:0 18px 12px;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;color:var(--fg-2);flex-wrap:wrap}
+.maplegend .ramp{display:flex;gap:2px}
+.maplegend .ramp i{display:block;width:26px;height:12px;border-radius:2px}
+.mapdetail{border-top:1px solid var(--line);padding:16px 18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;align-items:start}
+.mapdetail h4{grid-column:1/-1;margin:0;font-family:var(--font-display);font-size:30px;font-weight:900;text-transform:uppercase;line-height:1}
+.mapdetail h4 small{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;color:var(--fg-2);font-weight:400;text-transform:uppercase;margin-left:10px}
+.mapdetail b{display:block;font-family:var(--font-display);font-size:34px;font-weight:900;line-height:1}
+.mapdetail span{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2);margin-top:4px}
+.mapdetail p{grid-column:1/-1;margin:0;font-size:14.5px;color:var(--fg-2);max-width:80ch}
+
+/* control panel */
+.cp{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:28px}
+.cpc{background:var(--sheet);padding:20px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.cpc h3{font-family:var(--font-display);font-size:28px;font-weight:900;text-transform:uppercase;line-height:1;margin:0}
+.cpc .meta{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2);display:flex;flex-wrap:wrap;gap:4px 12px}
+.grip{display:flex;gap:3px;margin:2px 0}
+.grip i{display:block;width:22px;height:8px;border-radius:2px;background:var(--line)}
+.grip i.on{background:var(--c-gas)}
+.cpc p{margin:0;font-size:14.5px;color:var(--fg)}
+.cpc details{margin-top:auto;font-size:14px}
+.cpc summary{cursor:pointer;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);list-style:none;padding-top:6px}
+.cpc summary::-webkit-details-marker{display:none}
+.cpc summary::before{content:"+ "}
+.cpc details[open] summary::before{content:"\2212 "}
+.cpc details p{margin-top:8px;color:var(--fg-2)}
+
+/* levers */
+.levers{margin-top:28px;border-top:1px solid var(--line)}
+.lever{border-bottom:1px solid var(--line)}
+.lever>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:1.3fr 1fr 1fr 1.2fr auto;gap:14px;align-items:center;padding:14px 0}
+.lever>summary::-webkit-details-marker{display:none}
+.lever>summary:hover .ln{color:var(--accent)}
+.lever .ln{font-weight:600}
+.lever .ln small{display:block;font-weight:400;color:var(--fg-2);font-size:13.5px}
+.lever .lm{font-family:var(--font-mono);font-size:12px;color:var(--fg-2);letter-spacing:.02em}
+.lever .lm b{display:block;font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-2);font-weight:400;opacity:.8}
+.lever .lm strong{color:var(--fg);font-weight:500;font-size:13px}
+.lever .pm{font-size:18px;color:var(--accent);width:18px;text-align:center}
+.lever[open] .pm::before{content:"\2212"}
+.lever:not([open]) .pm::before{content:"+"}
+.lever .lb{padding:0 0 18px;max-width:72ch;font-size:15px;color:var(--fg)}
+.lever .lb p{margin:0 0 .8em}
+.lever .lb p:last-child{margin:0}
+.lhead{display:grid;grid-template-columns:1.3fr 1fr 1fr 1.2fr auto;gap:14px;padding:8px 0;font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-2);margin-top:28px}
+@media (max-width:880px){.lever>summary,.lhead{grid-template-columns:1fr auto}.lever .lm,.lhead span:not(:first-child){display:none}.lever .ln small{font-size:13px}}
+
+/* can / cannot */
+.duty{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:36px}
+@media (max-width:760px){.duty{grid-template-columns:1fr}}
+.duty h3{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px;font-weight:500}
+.does h3{color:var(--yea)}
+.never h3{color:var(--nay)}
+.duty ul{list-style:none;margin:0;padding:0}
+.duty li{padding:10px 0 10px 26px;border-top:1px solid var(--line);position:relative;font-size:15.5px}
+.duty li::before{position:absolute;left:0;top:9px;font-family:var(--font-mono);font-weight:500;font-size:17px}
+.does li::before{content:"+";color:var(--yea)}
+.never li::before{content:"\00d7";color:var(--nay)}
+.duty li small{display:block;color:var(--fg-2);font-size:13.5px}
+
+/* world bars */
+.bars{padding:10px 18px 6px}
+.bars svg{display:block;width:100%;height:auto}
+.bars text{font-family:var(--font-mono);font-size:11px;fill:var(--fg-2)}
+.bars .nm{fill:var(--fg);font-family:var(--font-body);font-size:12.5px}
+.bars rect{fill:var(--c-mute)}
+.bars rect.us{fill:var(--c-gas)}
+.bars .avg{stroke:var(--fg);stroke-dasharray:none;stroke-width:1}
+.bars .vl{fill:var(--fg);font-weight:500}
+
+/* symmetry table */
+.sym{display:grid;grid-template-columns:180px 1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:28px;font-size:14.5px}
+.sym div{background:var(--sheet);padding:12px 14px;min-width:0}
+.sym .h{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-2)}
+.sym .k{font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;color:var(--fg-2)}
+@media (max-width:640px){.sym{grid-template-columns:1fr 1fr}.sym .k{grid-column:1/-1;background:var(--bg)}}
+
+/* small multiples */
+.sm{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:28px}
+@media (max-width:820px){.sm{grid-template-columns:1fr}}
+.sm .panel{margin-top:0}
+
+footer{border-top:1px solid var(--line);padding-block:40px 64px;color:var(--fg-2);font-size:14px}
+footer ol{padding-left:18px;margin:12px 0 0}
+footer li{margin-bottom:6px}
+footer a{overflow-wrap:anywhere}
+
+@media (prefers-reduced-motion:no-preference){
+  .hero .up{animation:up .7s cubic-bezier(.2,.7,.2,1) both}
+  .hero .up:nth-child(2){animation-delay:.07s}
+  .hero .up:nth-child(3){animation-delay:.14s}
+  .hero .up:nth-child(4){animation-delay:.21s}
+  .hero .up:nth-child(5){animation-delay:.28s}
+  @keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.stack i{transition:none}}
+@media print{.nav,.expandall,.controls{display:none}.deeper .dbody,.event .eb{display:block}}
+
+/* data center page additions */
+.chart .band{fill:var(--c-gas);opacity:.14}
+.chart .band-l{font-size:10px;letter-spacing:.08em;text-transform:uppercase;fill:var(--fg-2)}
+.chart .bar{fill:var(--c-gas)}.chart .bar.fc{fill:var(--c-crude)}.chart .bar.money{fill:var(--c-diesel)}.chart .bar.mute{fill:var(--c-mute)}
+.chart .bar.hl{fill:var(--c-diesel)}
+.chart .blab{fill:var(--fg);font-weight:500}
+.chart .ref{stroke:var(--fg);stroke-width:1}
+.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:12px;align-items:stretch;margin-top:28px}
+@media (max-width:860px){.flow{grid-template-columns:1fr}.flow .arrow{transform:rotate(90deg);justify-self:center}}
+.box{background:var(--sheet);border:1px solid var(--line);padding:18px;min-width:0}
+.box.core{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.box h3{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 10px;font-weight:500;color:var(--fg-2)}
+.box.core h3{color:var(--accent)}
+.box ul{margin:0;padding-left:18px;font-size:14.5px}
+.box li{margin-bottom:6px}
+.box li b{font-weight:600}
+.arrow{align-self:center;color:var(--fg-2);display:flex}
+.loop{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:24px}
+@media (max-width:760px){.loop{grid-template-columns:1fr 1fr}}
+.loop div{background:var(--sheet);padding:16px;font-size:14px;min-width:0}
+.loop b{display:block;font-family:var(--font-display);font-size:26px;font-weight:900;text-transform:uppercase;line-height:1;margin-bottom:6px}
+.loop span{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.calcgrid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:28px}
+@media (max-width:820px){.calcgrid{grid-template-columns:1fr}}
+.calc .row{display:grid;grid-template-columns:1fr 70px;gap:12px;align-items:center;margin-top:14px}
+.calc .row label{display:block;margin:0 0 4px}
+.calc .row output{font-family:var(--font-mono);font-size:13px;text-align:right;color:var(--fg)}
+.calc .row input[type=range]{margin:0}
+.cmp{list-style:none;margin:14px 0 0;padding:0;font-size:14px;color:var(--fg-2)}
+.cmp li{padding:8px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px}
+.cmp li b{color:var(--fg);font-variant-numeric:tabular-nums}
+.rangebar{margin-top:10px}
+.rangebar .rr{display:grid;grid-template-columns:150px 1fr 90px;gap:12px;align-items:center;padding:8px 0;border-top:1px solid var(--line);font-size:14px}
+@media (max-width:560px){.rangebar .rr{grid-template-columns:1fr}}
+.rangebar .tr{height:10px;background:var(--grid);border-radius:3px;position:relative}
+.rangebar .tr i{position:absolute;top:0;height:100%;border-radius:3px;background:var(--c-gas)}
+.rangebar .tr i.v{background:var(--c-diesel)}
+.rangebar .tr i.t{background:var(--c-crude)}
+.rangebar .vl{font-family:var(--font-mono);font-size:12px;color:var(--fg-2);text-align:right}
+.jobs{margin-top:28px;border-top:1px solid var(--line)}
+.jobs .jr{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14.5px;align-items:baseline}
+.jobs .jh{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-2);border-bottom:1px solid var(--line)}
+.jobs .jr b{font-family:var(--font-display);font-size:26px;font-weight:900;line-height:1}
+.jobs .jr small{display:block;color:var(--fg-2);font-size:13px}
+@media (max-width:640px){.jobs .jr{grid-template-columns:1fr 1fr}.jobs .jh span:nth-child(n+3){display:none}.jobs .jr span[data-l]::before{content:attr(data-l);display:block;font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-2);margin-bottom:2px}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">The Buildout</a>
+    <div class="navlinks">
+      <a href="#flat">§1 The flat decade</a>
+      <a href="#forecast">§2 The forecast</a>
+      <a href="#bill">§3 Your bill</a>
+      <a href="#subsidy">§4 The subsidy map</a>
+      <a href="#money">§5 Follow the money</a>
+      <a href="#crypto">§6 Crypto</a>
+      <a href="#ai">§7 Does AI need it?</a>
+      <a href="#backlash">§8 The backlash</a>
+      <a href="#scorecard">§9 Scorecard</a>
+      <button class="expandall" id="expandAll" type="button" aria-pressed="false">Expand everything</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero wrap" id="top">
+  <p class="eyebrow up">The Buildout &middot; an explainer &middot; data through October 2026</p>
+  <h1 class="up">Who really needs <em>all these data centers?</em></h1>
+  <p class="lede up">For a decade the internet grew six-fold and the data centers running it used almost no more electricity. Then the forecasts arrived: hundreds of gigawatts, trillions of dollars, a shortage you never noticed. This page is about who wrote those forecasts, who is paying for the buildings, who is collecting, and what the chatbot on your phone actually costs to run.</p>
+  <div class="cta up">
+    <a class="btn primary" href="#flat">Start with the chart</a>
+    <a class="btn" href="#subsidy">See your state</a>
+  </div>
+  <div class="ticker up" aria-label="Headline figures">
+    <div><b class="cool">+6%</b><span>Data center electricity, 2010&ndash;2018, while computing rose 550%</span></div>
+    <div><b>4.4%</b><span>of U.S. electricity went to data centers in 2023</span></div>
+    <div><b class="hot">166 GW</b><span>Utilities' five-year forecast, up from 24 GW three years ago</span></div>
+    <div><b class="hot">14%</b><span>of Americans would welcome a data center nearby</span></div>
+  </div>
+</header>
+
+<main>
+
+<section class="article" id="flat">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§1 &middot; The flat decade</div>
+      <div>
+        <h2>You never saw a data center shortage.</h2>
+        <div class="prose">
+          <p>Between 2010 and 2018, the number of computing jobs running in the world's data centers rose about 550%, internet traffic rose ten-fold, and storage rose 25-fold. Electricity use rose 6%. Every year a new study predicted the cloud would eat the grid, and every year engineers made servers four times more efficient per computation, moved work into hyperscale buildings that waste a tenth of what a corporate server closet does, and the line stayed flat. Netflix, Zoom, the pandemic, your photos: none of it ran out of room.</p>
+          <p>Then, around 2019, the line bent. Not because you started streaming more. Because a new kind of server showed up, built around graphics chips that draw ten times the power of the old ones, to train and run AI models. That is the whole story of the chart below: a decade of nothing, then a climb that is real, and then a cliff of forecasts that may or may not be.</p>
+        </div>
+
+        <div class="panel">
+          <div class="panel-bar"><span><b>U.S. data center electricity</b> &middot; terawatt-hours a year</span><span>Lawrence Berkeley National Lab &middot; IEA</span></div>
+          <div class="controls" role="group" aria-label="Chart controls">
+            <label class="chk"><input type="checkbox" id="chkProj" checked> Show 2028 &amp; 2030 forecast ranges</label>
+            <label class="chk"><input type="checkbox" id="chkShare"> Label as % of U.S. electricity</label>
+            <button class="tbtn" type="button" id="tblDcBtn" aria-pressed="false" style="margin-left:auto">Table</button>
+          </div>
+          <div class="panel-body"><div class="chart" id="chartDc"></div><div class="tip" id="tipDc"></div></div>
+          <div class="legend"><span><i style="border-color:var(--c-gas)"></i>Estimated use</span><span><i class="sw" style="background:var(--c-gas);opacity:.3"></i>Forecast range (low to high scenario)</span></div>
+          <div class="tbl" id="tblDc"></div>
+          <div class="panel-foot">2014 and 2023 are LBNL's published estimates (58 and 176 TWh); years between are drawn at LBNL's reported growth rates (7% a year to 2018, 18% a year after). 2024 is the IEA estimate. The 2028 range is LBNL's 2024 report; the 2030 range is its June 2026 update, whose reference case is 649 TWh, about 11.8% of U.S. electricity. The IEA's own 2030 figure for the U.S. is 426 TWh.</div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><b class="cool">4&times;</b><span>improvement in electricity per computation for a typical server, 2010 to 2018. The reason the decade was flat.</span><small>Masanet et al., Science, 2020</small></div>
+          <div class="stat"><b>~15%</b><span>of data center electricity in 2024 went to AI servers. The rest is the ordinary internet, which is not short of anything.</span><small>IEA, Energy and AI, 2025</small></div>
+          <div class="stat"><b class="hot">~half</b><span>of all U.S. electricity demand growth in 2025 came from data centers.</span><small>IEA Global Energy Review 2026</small></div>
+          <div class="stat"><b>1.4%</b><span>vacancy in North American data centers, mid-2026, and 80% of new construction is pre-leased. The shortage is real for one customer: AI.</span><small>CBRE, H1 2026</small></div>
+        </div>
+
+        <div class="callout">
+          <strong>Two different sentences.</strong>
+          <p>"The country is running out of data centers" is false; the internet you use has never had less room than it needed. "AI companies want to build more capacity than has ever existed, ahead of any proven demand for it, and would like you to pay for the grid to reach it" is true. Most of what follows is the gap between those two sentences.</p>
+        </div>
+
+        <details class="deeper">
+          <summary>Dig deeper: how a flat line became a cliff</summary>
+          <div class="dbody">
+            <h4>The efficiency decade</h4>
+            <p>The 2020 study in <em>Science</em> that recalibrated the numbers found three things happening at once from 2010 to 2018: processors got far more efficient and wasted less power idling; work consolidated from small, badly cooled company server rooms into hyperscale buildings where the overhead for cooling and power delivery fell to a few percent; and storage moved to drives that use a fraction of the energy per terabyte. Compute rose 550%. Electricity rose 6%. Earlier forecasts, including some that predicted data centers would consume a fifth of world electricity by the 2020s, had simply extrapolated the growth of computing without the efficiency.</p>
+            <h4>What changed in 2019</h4>
+            <p>Training and running large AI models uses graphics processors that draw 700 to 1,200 watts each, packed into racks that draw 100 kilowatts or more where a conventional rack drew 5 to 10. LBNL's 2024 report attributes most of the growth from 2017 to 2023 to this class of server. Its 2025 update puts the 2030 reference case at 649 TWh, 11.8% of U.S. electricity, with a range of 9.5% to 15.3% depending on how many chips ship and how hard they run.</p>
+            <h4>Why the forecasts disagree so much</h4>
+            <p>Two inputs dominate: how many AI chips ship, and how much of the time they run. A shorter assumed chip lifetime cuts LBNL's 2030 estimate to 590 TWh; higher idle power raises it to 782. The IEA, modeling the same country, lands at 426 TWh for 2030. The honest statement is that nobody knows within a factor of two, which matters when utilities are using the high end to justify thirty-year investments.</p>
+            <h4>Global context</h4>
+            <p>Worldwide, data centers used about 415 TWh in 2024, 1.5% of electricity, and the IEA expects about 945 TWh by 2030. The U.S. is 45% of the world total, more than China and Europe combined, which is why the fight over who pays is mostly an American fight.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="forecast">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§2 &middot; The forecast</div>
+      <div>
+        <h2>The number went up six-fold in three years. The country did not.</h2>
+        <div class="prose">
+          <p>Every utility files a five-year peak-demand forecast with federal regulators. In 2022 those forecasts added up to 24 gigawatts of growth. In 2025 they added up to 166. Nothing about the physical country changed six-fold in that time. What changed is that developers started shopping the same data center to five utilities at once, utilities started counting every request, and a request became a forecast became a reason to build a power plant.</p>
+        </div>
+
+        <div class="panel">
+          <div class="panel-bar"><span><b>Five-year peak load growth forecast</b> &middot; gigawatts, sum of all utility filings</span><span>Grid Strategies, 2022&ndash;2025 editions</span></div>
+          <div class="panel-body"><div class="chart" id="chartFc"></div><div class="tip" id="tipFc"></div></div>
+          <div class="panel-foot">Data centers are about 90 GW of the 166 GW. Independent analysts who track chip shipments and actual construction expect data centers to need no more than about 65 GW through 2030, so Grid Strategies estimates the utility figure is overstated by roughly 25 GW, or about 40%. The 2024 edition originally reported 128 GW before federal data corrections.</div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><b class="hot">474 GW</b><span>of grid connection requests pending in Texas in August 2026, more than five times the state's record peak demand. About 90% were data centers.</span><small>Gov. Abbott's audit order</small></div>
+          <div class="stat"><b>5&ndash;10&times;</b><span>more interconnection requests than data centers actually being built, by one former Google infrastructure lead's estimate.</span><small>Camus Energy</small></div>
+          <div class="stat"><b>30&rarr;13 GW</b><span>AEP Ohio cut its large-load forecast by more than half after regulators demanded that customers commit to paying for what they requested.</span><small>PUCO, 2025</small></div>
+          <div class="stat"><b>150&rarr;300 MW</b><span>The average size of a proposed U.S. data center doubled in one year. The average one actually operating is 30 to 60 MW.</span><small>Grid Strategies</small></div>
+        </div>
+
+        <details class="deeper">
+          <summary>Dig deeper: phantom load, and why utilities like it</summary>
+          <div class="dbody">
+            <h4>How a request becomes a forecast</h4>
+            <p>A developer with a site option and no tenant files a request for 500 megawatts with the local utility. It files the same request in two other states to see who offers the cheapest power and the biggest tax break. Each utility adds 500 MW to its forecast. The forecast goes into the regional grid operator's plan, which goes into the capacity auction (see §3), which sets the price every household pays. Three "phantom" data centers have now raised your bill before a shovel has moved. Grid Strategies found that utility forecasts collectively overstate data-center-driven growth by about 40% against a proprietary database of real projects.</p>
+            <h4>The incentive</h4>
+            <p>A regulated utility earns a guaranteed return, usually 9 to 11%, on every dollar it invests in plants and wires. More forecast means more investment means more profit. The industry's trade group expects its members to spend $1.1 trillion from 2025 to 2029, nearly matching the previous ten years combined, and is open that data centers are the reason. A forecast that turns out to be too high is not the utility's loss; the plant is built and ratepayers pay for it either way. A forecast that is too low gets a utility blamed for blackouts. The asymmetry points one direction.</p>
+            <h4>What a real forecast looks like</h4>
+            <p>Ohio made AEP require new data centers to pay for 85% of the power they asked for whether they used it or not. The request list fell from 30 GW to 13 GW almost immediately. Texas ordered an audit of every project in its 474 GW queue in August 2026 and then halted new environmental permits for data centers in September until it finishes. Federal regulators ordered every regional grid operator in June 2026 to justify how it handles large-load requests. The pattern in every case: ask developers to put money behind the number, and the number shrinks.</p>
+            <h4>Who the load factor helps</h4>
+            <p>Utilities assume data centers run flat out, 24 hours a day, near 100% of their rated power. Real facilities, even AI ones, average well under that. Grid Strategies flagged that some forecasts use "unrealistically high load factors," which inflates energy forecasts even more than peak forecasts. Every percentage point of assumed utilization is another plant someone gets to build.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="bill">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§3 &middot; Your bill</div>
+      <div>
+        <h2>The data center isn't built yet. You're already paying for it.</h2>
+        <div class="prose">
+          <p>In the grid that serves 67 million people from Chicago to Washington, generators are paid in an annual auction for promising to be available three years out. The price of that promise was $29 per megawatt-day in 2024. It is $333 today, the legal maximum, and the grid's own market monitor says data centers, most of them not yet built, are the reason. That cost lands on every electric bill in thirteen states.</p>
+        </div>
+
+        <div class="panel">
+          <div class="panel-bar"><span><b>PJM capacity price</b> &middot; dollars per megawatt-day</span><span>PJM auction results, 2023&ndash;2025</span></div>
+          <div class="panel-body"><div class="chart" id="chartPjm"></div><div class="tip" id="tipPjm"></div></div>
+          <div class="panel-foot">The 2026/27 and 2027/28 auctions both cleared at the price cap. PJM estimates the last one would have cleared near $531 without it. The 2027/28 auction also fell about 6,500 MW short of the grid's reliability target for the first time in its history.</div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><b class="hot">$23.1B</b><span>in extra capacity costs across three auctions that the market monitor attributes to data center load, existing and forecast.</span><small>Monitoring Analytics, Mar 2026</small></div>
+          <div class="stat"><b>$6.2B</b><span>of the 2027/28 cost is for data centers that do not exist yet but are forecast to.</span><small>Monitoring Analytics</small></div>
+          <div class="stat"><b>+6&ndash;29%</b><span>projected rise in U.S. wholesale electricity prices by 2030 from data center and crypto growth, up to 57% in the hardest-hit regions.</span><small>CMU / NC State, Environmental Research Letters, 2026</small></div>
+          <div class="stat"><b>$16&ndash;18</b><span>a month added to a typical household bill in Ohio and western Maryland from the 2025/26 auction alone.</span><small>State estimates via Pew</small></div>
+        </div>
+
+        <div class="callout">
+          <strong>The fair-share fight is where the action is.</strong>
+          <p>Whether a data center raises your bill depends entirely on rules your state utility commission writes. Ohio, Georgia, Virginia and Texas have started making large loads sign long contracts and pay for their own grid upgrades. Most states have not. The difference is worth billions, and it is decided in hearings almost nobody attends.</p>
+        </div>
+
+        <details class="deeper">
+          <summary>Dig deeper: who pays for the wires, state by state</summary>
+          <div class="dbody">
+            <h4>How a capacity market moves your bill</h4>
+            <p>Your utility buys enough "capacity" to cover its share of forecast peak demand plus a reserve. When the forecast jumps because of data center requests, the utility must buy more capacity at auction, supply is fixed in the short run, and the price clears at the cap. The charge is passed through to every customer in proportion to use. A household did nothing different and pays more. The market monitor estimated data centers caused 63% of the 2025/26 price increase ($9.3 billion) and 40% of the 2027/28 cost ($6.5 billion).</p>
+            <h4>The rules that decide who pays</h4>
+            <table>
+              <tr><th>Where</th><th>Rule</th><th>What it does</th></tr>
+              <tr><td>Ohio (AEP)</td><td>Data center tariff, 2025</td><td>Pay for at least 85% of requested power for up to 12 years, used or not; exit fees if a project is canceled.</td></tr>
+              <tr><td>Georgia</td><td>PSC rules, 2025</td><td>Loads of 100 MW or more sign custom 15-year contracts and can be billed for upstream generation and transmission, not just the hookup.</td></tr>
+              <tr><td>Virginia (Dominion)</td><td>GS-5 rate class, effective 2027</td><td>Loads of 25 MW or more sign 14-year contracts with minimum charges covering 85% of wires costs and 60% of generation, plus upfront collateral.</td></tr>
+              <tr><td>Texas</td><td>SB 6, 2025</td><td>Loads of 75 MW or more contribute to interconnection costs and must curtail in emergencies; regional transmission still mostly socialized.</td></tr>
+              <tr><td>Federal (FERC)</td><td>Show-cause orders, June 2026</td><td>Every regional grid operator must justify its large-load rules; the Energy Department proposed 100% cost responsibility for upgrades.</td></tr>
+              <tr><td>Oklahoma, New Jersey, Oregon</td><td>Ratepayer protection laws, 2025&ndash;26</td><td>Separate data center rate classes so that new generation built for them is not spread across households.</td></tr>
+            </table>
+            <h4>The counter-evidence, honestly</h4>
+            <p>Rutgers' policy lab reviewed residential bills across 24 states in 2026 and found no large, detectable increase attributable to data centers yet; its title was "Mostly Not. Yet." An EPRI study argued that from 2015 to 2024, data centers slightly lowered average rates by spreading fixed costs over more sales. Both are consistent with the PJM story: the costs are front-loaded into capacity and transmission charges that reach bills on a lag, and they are concentrated in the regions building the most. The question is not whether you are paying today but whether the rules will stop you from paying tomorrow.</p>
+            <h4>What else shows up</h4>
+            <p>Gas plants. Entergy will build ten gas-fired units, more than 7 gigawatts, to power Meta's Louisiana campus. Meta pays for the first 15 years; the plants are financed over 30. Consumer advocates asked who pays the second half. In Memphis, xAI ran dozens of gas turbines beside its facility before permits for most of them existed. Water: U.S. data centers consumed about 17 billion gallons directly in 2023 and 211 billion indirectly through the power plants that feed them. Google's Oregon facilities alone used 550 million gallons in 2025, about 40% of The Dalles' total.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="subsidy">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§4 &middot; The subsidy map</div>
+      <div>
+        <h2>Thirty-seven states tax the tire and exempt the chip.</h2>
+        <div class="prose">
+          <p>When a carmaker buys a tire, it pays no sales tax, because the customer will pay it on the car. When Amazon buys a $40,000 AI chip for its own data center, 37 states charge no sales tax either, though there is no customer down the line. That one exemption now costs Georgia, Virginia, Texas and Ohio more than a billion dollars a year each. Fourteen states with the same exemption will not say what it costs them. Switch the map to see which states have begun pushing back.</p>
+        </div>
+
+        <div class="panel">
+          <div class="controls" role="group" aria-label="Map layers">
+            <div class="seg" role="group" aria-label="Layer">
+              <button type="button" data-layer="sub" aria-pressed="true">Tax break cost</button>
+              <button type="button" data-layer="ban" aria-pressed="false">Backlash status</button>
+            </div>
+            <span class="eyebrow" id="mapNote" style="margin-left:auto">Good Jobs First &middot; June 2026</span>
+            <button class="tbtn" type="button" id="tblMapBtn" aria-pressed="false">Table</button>
+          </div>
+          <div class="panel-body"><div class="map" id="mapWrap"></div><div class="tip" id="tipMap"></div></div>
+          <div class="maplegend" id="mapLegend"></div>
+          <div class="mapdetail" id="mapDetail"></div>
+          <div class="tbl" id="tblMap"></div>
+          <div class="panel-foot">Tax break cost: the most recent annual revenue loss each state has disclosed for its data center sales and use tax exemption, compiled by Good Jobs First (June 2026); scopes differ (some state-only, some state plus local, Oregon and Oklahoma are property abatements). Gray tiles have not disclosed a figure or have no exemption. Backlash status: datacenterbans.com tracker as of October 5, 2026, which classifies each state by its strongest action, including local moratoriums. Tiles are a cartogram.</div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><b class="hot">$1M+</b><span>in subsidies per permanent data center job, routinely. A 2016 study of the biggest deals found $1.95 million per job; Apple's North Carolina deal was $6.4 million.</span><small>Good Jobs First</small></div>
+          <div class="stat"><b>52&cent;</b><span>lost by Virginia for every dollar of data center tax it exempts, by the legislature's own auditors. The industry's study found a gain instead.</span><small>JLARC, 2024</small></div>
+          <div class="stat"><b>12&times;</b><span>Ohio's 2025 cost ($1.6 billion) versus what the state projected ($136 million). The governor paused the program days after the number came out.</span><small>Ohio Dept. of Taxation, May 2026</small></div>
+          <div class="stat"><b>$29M&rarr;$1.3B</b><span>Texas's projection for its exemption, made in 2020, versus what it now costs. The comptroller says even that is already obsolete.</span><small>Texas Comptroller</small></div>
+        </div>
+
+        <h3 class="sub">Jobs per billion</h3>
+        <div class="jobs">
+          <div class="jr jh"><span>Project</span><span>Investment</span><span>Permanent jobs</span><span>Jobs per $1B</span></div>
+          <div class="jr"><span>Meta Hyperion, Louisiana<small>1,000 by 2036; 7,500 construction at peak; 10 new gas plants</small></span><span><b>$50B+</b><small>reported up to $250B with chips</small></span><span data-l="Permanent jobs"><b>1,000</b></span><span data-l="Jobs per $1B"><b>20</b><small>4 on the higher figure</small></span></div>
+          <div class="jr"><span>Stargate, Abilene, Texas<small>85% property tax abatement; local housing crisis; expansion canceled Mar 2026</small></span><span><b>~$40B</b><small>Crusoe / Oracle campus</small></span><span data-l="Permanent jobs"><b>357</b><small>committed by Crusoe</small></span><span data-l="Jobs per $1B"><b>~9</b></span></div>
+          <div class="jr"><span>Amazon, New Carlisle, Indiana<small>10-year 50% property abatement plus state credits; 83% of Indiana's exemption went to Amazon in 2025</small></span><span><b>$11B</b></span><span data-l="Permanent jobs"><b>400</b><small>direct; "at least 1,000" announced</small></span><span data-l="Jobs per $1B"><b>36</b></span></div>
+          <div class="jr"><span>Project Blue, Tucson<small>Rejected by the city, approved by the county and state; 500,000 gallons of water a month in drought</small></span><span><b>$3.6B</b></span><span data-l="Permanent jobs"><b>180</b></span><span data-l="Jobs per $1B"><b>50</b></span></div>
+          <div class="jr"><span>Facebook, Forest City, N.C. (2010)<small>The template: 500 construction jobs, then a quiet building</small></span><span><b>$450M</b></span><span data-l="Permanent jobs"><b>42</b></span><span data-l="Jobs per $1B"><b>93</b></span></div>
+          <div class="jr"><span>For comparison: an auto assembly plant<small>Typical large plant</small></span><span><b>$2&ndash;5B</b></span><span data-l="Permanent jobs"><b>3,000&ndash;5,000</b></span><span data-l="Jobs per $1B"><b>~1,000+</b></span></div>
+        </div>
+
+        <details class="deeper">
+          <summary>Dig deeper: the stadium playbook, the Foxconn precedent, and what the chips are really for</summary>
+          <div class="dbody">
+            <h4>The stadium parallel</h4>
+            <p>Economists have studied publicly funded sports stadiums for forty years and reached one of the strongest consensuses in the field: they do not pay for themselves. In a 2005 survey of American Economic Association members, 85% said state and local governments should stop subsidizing franchises; in a 2017 University of Chicago panel, 80% agreed subsidies cost taxpayers more than they return. Cities build them anyway, because the ribbon-cutting is visible and the cost is spread thin across decades. Data centers are the stadium with the ribbon-cutting removed: a billion-dollar building, a few hundred jobs, a thirty-year tax abatement, and no one in the seats.</p>
+            <h4>Why data centers are a worse deal than stadiums</h4>
+            <ul>
+              <li><strong>The subsidy scales with the hardware, not the jobs.</strong> A sales tax exemption on chips grows every time chips are replaced, which in AI facilities is every three to five years. Texas's exemption grew from a $29 million projection to a $1.3 billion cost because of chip purchases nobody modeled.</li>
+              <li><strong>Half of the programs don't require a single job.</strong> Sixteen of 36 state data center subsidies had no job-creation requirement at all. Of Texas's 138 exempt facilities, 20 have been audited and six of those failed the job rules.</li>
+              <li><strong>Local governments lose money they never voted on.</strong> A state exemption usually wipes out the local share of sales tax too. Georgia's counties and cities are projected to lose $1.1 billion in 2026 to a break the state legislature granted.</li>
+              <li><strong>The subsidy isn't what decides the location.</strong> Industry surveys find 3% of operators call incentives the biggest siting factor; power and land are. North Carolina's governor put it plainly in 2026: "The market is already delivering the incentives."</li>
+            </ul>
+            <h4>The Foxconn precedent</h4>
+            <p>In 2017 Wisconsin promised about $4 billion in incentives for a Foxconn factory that was to employ 13,000 people in Mount Pleasant. The village and county borrowed hundreds of millions to prepare the site. The factory was never built as promised and employment peaked at about a tenth of the pledge. Microsoft now owns part of the site and is building a data center on it. In September 2026, under its "community-first" pledge, Microsoft waived the $5 million annual incentive the village had offered and redirected it to local tax relief, the first time a Wisconsin economist could recall a company returning one. It is also a measure of how far the ground has shifted: the largest tenant in the industry now advertises that it will pay full property tax and its own grid costs, because communities stopped saying yes.</p>
+            <h4>What the chips are really for</h4>
+            <p>A hyperscale AI building is 55 to 60% chips by cost. Those chips are bought from one company at a 71 to 75% gross margin, depreciate in a few years, and are tax-exempt in 37 states on every replacement cycle. The building that holds them is tax-abated for decades. The electricity that runs them is, in Texas and several other states, also exempt from sales tax. Strip the exemptions out and a 1-gigawatt campus is a $40 to $50 billion purchase of taxable equipment; with them, it is a $40 to $50 billion purchase on which the public collects almost nothing and provides the roads, the water and, through the capacity market, part of the power plant.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="money">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§5 &middot; Follow the money</div>
+      <div>
+        <h2>The buildout pays the builders. That's the plan.</h2>
+        <div class="prose">
+          <p>Four companies will spend about $730 billion on data centers in 2026, nearly double 2025 and five times 2023. Where it goes is not a mystery: more than half to one chipmaker, the rest to construction firms, landowners, power equipment makers, utilities earning a guaranteed return, and the developers and lenders who own the shells. Where it comes from is more interesting: cash flow from ads and software, hundreds of billions in new debt, and a loop in which the chipmaker invests in its customers so they can buy its chips.</p>
+        </div>
+
+        <div class="sm">
+          <div class="panel">
+            <div class="panel-bar"><span><b>Big Tech data center spending</b> &middot; billions of dollars</span><span>Company reports; 2026 is guidance</span></div>
+            <div class="panel-body"><div class="chart" id="chartCapex"></div><div class="tip" id="tipCapex"></div></div>
+            <div class="panel-foot">Capital spending by Microsoft, Alphabet, Amazon and Meta, approximate calendar-year totals. 2026 is the midpoint of the companies' latest guidance, raised repeatedly during the year, partly for higher memory-chip prices. Add Oracle and the 2026 figure approaches $800 billion.</div>
+          </div>
+          <div class="panel">
+            <div class="panel-bar"><span><b>Nvidia revenue</b> &middot; billions of dollars, fiscal years ending January</span><span>SEC filings</span></div>
+            <div class="panel-body"><div class="chart" id="chartNvda"></div><div class="tip" id="tipNvda"></div></div>
+            <div class="panel-foot">About 90% is data center chips. Gross margin was 71% in fiscal 2026 and 75% in the quarter ended July 2026, when quarterly revenue reached $96 billion. The company is the single largest recipient of the money in the left chart.</div>
+          </div>
+        </div>
+
+        <div class="flow">
+          <div class="box">
+            <h3>Where it comes from</h3>
+            <ul>
+              <li><b>Ad and software profits</b> from Google, Meta, Microsoft and Amazon, the only companies that can fund this from cash</li>
+              <li><b>Debt</b>: Oracle carries more than $100 billion and has negative free cash flow; private credit funds and bond markets supply the rest</li>
+              <li><b>Public money</b>: sales tax exemptions, property abatements, grid upgrades paid through everyone's bill, water at municipal rates</li>
+              <li><b>The loop</b>: Nvidia invests in OpenAI, OpenAI signs a $300 billion cloud contract with Oracle, Oracle borrows to buy Nvidia chips</li>
+            </ul>
+          </div>
+          <div class="arrow" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 28 28"><path d="M6 14h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
+          <div class="box core">
+            <h3>The buildout</h3>
+            <ul>
+              <li><b>$35&ndash;55 billion per gigawatt</b> of AI capacity, all in</li>
+              <li><b>55&ndash;60% chips</b>, replaced every 3 to 5 years</li>
+              <li><b>30&ndash;35% building, power and cooling</b>, $10 to $25 million per megawatt before any chip arrives</li>
+              <li><b>7,481 MW</b> under construction in North America in mid-2026, a record, 80% pre-leased</li>
+            </ul>
+          </div>
+          <div class="arrow" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 28 28"><path d="M6 14h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
+          <div class="box">
+            <h3>Who collects</h3>
+            <ul>
+              <li><b>Nvidia</b>: $216 billion in fiscal 2026 at a 71% margin</li>
+              <li><b>Utilities</b>: $1.1 trillion of rate-based investment through 2029 at a 9 to 11% guaranteed return</li>
+              <li><b>Developers and REITs</b>: shells leased for 15 to 20 years; Riot's single Anthropic lease is worth $9.1 billion</li>
+              <li><b>Construction, land, turbines, transformers</b>: a 7,500-worker peak at one Louisiana site</li>
+              <li><b>Not on the list</b>: the county, after the construction crews leave</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 class="sub">The loop, step by step</h3>
+        <div class="loop">
+          <div><span>Step 1</span><b>Chipmaker funds customer</b>Nvidia signed a letter of intent in September 2025 to invest up to $100 billion in OpenAI as it deployed 10 gigawatts of Nvidia systems. The commitment later shrank to a $30 billion stake; its CEO called the original figure "never a commitment."</div>
+          <div><span>Step 2</span><b>Customer signs cloud deal</b>OpenAI committed about $300 billion over five years to Oracle for computing capacity it did not yet have the revenue to pay for.</div>
+          <div><span>Step 3</span><b>Cloud provider borrows</b>Oracle took on more than $100 billion in debt to build data centers for that contract, buying chips from Nvidia, whose revenue then reflects the sale.</div>
+          <div><span>Step 4</span><b>Everyone books growth</b>Each company's numbers rise. In March 2026 Oracle and OpenAI canceled the expansion of their flagship Texas campus over financing. The original site kept building; a competitor was reported to be interested in the leftover capacity.</div>
+        </div>
+
+        <details class="deeper">
+          <summary>Dig deeper: utilities, REITs and the private-credit layer</summary>
+          <div class="dbody">
+            <h4>The utility business model, in one paragraph</h4>
+            <p>An investor-owned utility does not make money selling electricity; it makes money owning things. Regulators let it earn an allowed return, typically 9.5 to 10.5%, on the capital it has invested in plants and wires, recovered through rates. Growth in that "rate base" is the whole earnings story. NiSource targets 9 to 11% rate base growth a year through 2033 and credits data centers. Sempra plans a record $65 billion through 2030, mostly in Texas, and expects its rate base to nearly double. The trade association expects $240 billion of utility capital spending in 2026 alone. Every one of those dollars earns a return from ratepayers whether the data center that justified it ever draws power.</p>
+            <h4>Who owns the buildings</h4>
+            <p>Most hyperscale capacity is leased, not owned, by the tech companies. The landlords are data center REITs (Equinix, Digital Realty), private equity-backed developers (QTS under Blackstone, Vantage, Crusoe, Aligned) and, increasingly, former bitcoin miners who already had power contracts. The leases run 15 to 20 years with investment-grade tenants, which makes the buildings easy to finance with debt. If the tenant's AI business does not materialize, the lease is still owed; if the tenant walks, the building is a very expensive shed in a county that gave up its property tax to get it.</p>
+            <h4>The cancellations</h4>
+            <p>Microsoft was reported to have walked away from leases totaling a couple of gigawatts in early 2025, which analysts read as oversupply against its own demand forecast. Oracle and OpenAI dropped the Abilene expansion in March 2026. Industry trackers put the share of U.S. 2026 capacity that has been delayed or canceled somewhere between a third and half, though the figures mix opposition, permitting, financing and power delays. None of this has slowed guidance: every hyperscaler raised its 2026 spending plan at least once during the year, and the stated reason is often not demand but the rising price of memory chips.</p>
+            <h4>The jobs number, honestly</h4>
+            <p>Construction employment is real and large: 7,500 at the peak of Meta's Louisiana build, thousands at Abilene, enough to cause a housing crisis in a city of 130,000. It is also temporary and largely imported. The permanent payroll of a hyperscale campus is a few hundred technicians and security staff. A typical measure of what the public gets per dollar, permanent jobs per billion invested, runs from 4 to 50 for data centers against roughly 1,000 for an auto plant.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="crypto">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§6 &middot; Crypto</div>
+      <div>
+        <h2>The playbook was written by bitcoin miners.</h2>
+        <div class="prose">
+          <p>Before AI, the industry that taught developers how to get a municipality to pay for a building full of chips was bitcoin mining. The model: find cheap power and a county that wants investment, get the state's data center tax exemption (most do not exclude crypto), sign up for grid programs that pay you to switch off, run the machines when power is cheap, and sell the whole thing as a "data center" when the AI money arrives. In one month in 2023 the largest U.S. miner made three and a half times more from not mining than from mining.</p>
+        </div>
+
+        <div class="panel">
+          <div class="panel-bar"><span><b>How much electricity</b> &middot; terawatt-hours a year, United States</span><span>EIA, LBNL, Cambridge</span></div>
+          <div class="panel-body" style="padding-bottom:18px">
+            <div class="rangebar" role="img" aria-label="Range bars comparing electricity use">
+              <div class="rr"><span>Crypto mining, U.S. (2023)</span><div class="tr"><i class="v" style="left:4.3%;width:11.4%"></i></div><span class="vl">25&ndash;91 TWh</span></div>
+              <div class="rr"><span>All U.S. data centers (2023)</span><div class="tr"><i style="left:0;width:30.3%"></i></div><span class="vl">176 TWh</span></div>
+              <div class="rr"><span>All U.S. data centers, 2030 range</span><div class="tr"><i style="left:0;width:100%;opacity:.35"></i><i style="left:89.8%;width:10.2%"></i></div><span class="vl">521&ndash;843 TWh</span></div>
+              <div class="rr"><span>Bitcoin network, worldwide (2025)</span><div class="tr"><i class="v" style="left:0;width:23.8%"></i></div><span class="vl">138 TWh</span></div>
+              <div class="rr"><span>The state of New York (all uses)</span><div class="tr"><i class="t" style="left:0;width:25%"></i></div><span class="vl">~145 TWh</span></div>
+            </div>
+          </div>
+          <div class="panel-foot">The federal estimate for crypto mining is a range, 0.6% to 2.3% of U.S. electricity, because the government's attempt to survey miners was withdrawn after the industry sued. The U.S. hosts roughly 37% of the world's bitcoin hashrate. Bars are scaled to 580 TWh.</div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><b class="hot">$31.7M</b><span>paid to Riot Platforms by the Texas grid in August 2023 for powering down during a heat wave. Its bitcoin revenue that month: $8.9 million.</span><small>Riot, ERCOT</small></div>
+          <div class="stat"><b>52%</b><span>of the Texas grid's emergency demand-response program is bitcoin mining, by the industry's own count. Households pay for the program.</span><small>ERCOT ERS portfolio, 2026</small></div>
+          <div class="stat"><b>85 dB</b><span>measured near a 300 MW mine in Granbury, Texas. Residents sued over health effects; Texas law bars counties from regulating noise.</span><small>Earthjustice, Hood County suit</small></div>
+          <div class="stat"><b>191 MW</b><span>of former bitcoin mining capacity Riot leased to Anthropic for 20 years in 2026, worth $9.1 billion. It sold 9,665 bitcoin to fund the conversion.</span><small>Riot filings, 2026</small></div>
+        </div>
+
+        <details class="deeper">
+          <summary>Dig deeper: the mining-to-AI pipeline and why it works</summary>
+          <div class="dbody">
+            <h4>The asset was never the bitcoin</h4>
+            <p>A bitcoin mine is a power contract with computers attached. Miners went where power was cheapest and least regulated, mostly Texas, signed long fixed-price contracts with generators, and enrolled in the grid's demand-response programs, which pay large customers to drop load when the grid is stressed. In a heat wave, a miner earns more by selling its contracted power back to the grid than by mining. Senators Warren and Markey called the payments subsidies; the industry calls its load a "demand-side battery." Both are describing the same transfer: from everyone's bill to a company that agreed to turn off something it only turned on because the power was cheap.</p>
+            <h4>The tax break came free</h4>
+            <p>Most state data center sales tax exemptions were written before anyone imagined a building full of ASICs, and most do not exclude crypto mining. A miner in a qualifying state buys its machines and often its electricity tax-free, like any other "data center." Good Jobs First's first recommendation for any state that keeps its exemption is to disqualify crypto facilities from it.</p>
+            <h4>The pivot</h4>
+            <p>When the AI boom arrived, miners discovered their power contracts and interconnections were the scarcest asset in the industry. Core Scientific, TeraWulf, Cipher, IREN and Riot converted mining halls into GPU hosting and signed leases with AI companies that dwarf their old revenue. Riot's first tenant was AMD at 50 MW; its second was a 20-year, 191 MW lease with Anthropic worth about $9.1 billion through 2048. The county that approved a bitcoin mine with a tax abatement now hosts an AI campus with the same abatement, and the municipality that paid to upgrade a substation for a business that could switch off at any time now serves one that cannot.</p>
+            <h4>The noise</h4>
+            <p>Mining and AI facilities both run tens of thousands of fans. Residents of Granbury, Texas recorded about 85 decibels, the level of a running blender, from Marathon's 300 MW mine beside a gas plant, and reported migraines, vertigo and hearing damage. A court allowed their suit to proceed in 2025. Texas does not allow counties or its environmental agency to regulate noise, which is one reason the mine is in Texas.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="ai">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§7 &middot; Does AI need it?</div>
+      <div>
+        <h2>Your chatbot costs almost nothing. The buildout is not for your chatbot.</h2>
+        <div class="prose">
+          <p>A text prompt uses about as much electricity as nine seconds of television. An image, roughly a phone charge's worth at most. A short AI video is the expensive one. Add up a heavy day of all three and you get less than the energy to make one cup of coffee. That is the honest number, and it is also why the energy argument about AI is usually made badly in both directions: your use is trivial, and the buildout is enormous, and both are true because the buildout is not sized to what people use. It is sized to what companies hope to sell, and to training runs that now draw as much power as a small city.</p>
+        </div>
+
+        <div class="calcgrid">
+          <div class="panel calc" style="margin-top:0">
+            <span class="eyebrow">Your AI day</span>
+            <div class="row"><div><label for="rPrompts">Text prompts a day</label><input type="range" id="rPrompts" min="0" max="300" step="5" value="30"></div><output id="oPrompts">30</output></div>
+            <div class="row"><div><label for="rImages">Images generated a day</label><input type="range" id="rImages" min="0" max="60" step="1" value="3"></div><output id="oImages">3</output></div>
+            <div class="row"><div><label for="rVideos">Short video clips a day</label><input type="range" id="rVideos" min="0" max="30" step="1" value="1"></div><output id="oVideos">1</output></div>
+            <div class="row"><div><label for="selModel">Assume the models are</label><select id="selModel" style="font:inherit;font-size:13px;padding:5px 8px;border:1px solid var(--line);border-radius:3px;background:var(--bg);color:var(--fg);width:100%"><option value="eff">Efficient (Google's measured Gemini, small image model, light video)</option><option value="typ" selected>Typical (published averages)</option><option value="heavy">Heavy (largest open models, 720p video)</option></select></div><output></output></div>
+            <span class="eyebrow" style="display:block;margin-top:18px">your AI uses about</span>
+            <div class="big" id="calcWh">0<small>Wh / day</small></div>
+            <ul class="cmp" id="calcCmp"></ul>
+          </div>
+          <div class="panel" style="margin-top:0">
+            <div class="panel-bar"><span><b>Energy per task</b> &middot; watt-hours</span><span>Google, MIT Technology Review, Hugging Face</span></div>
+            <div class="panel-body" style="padding-bottom:16px">
+              <div class="rangebar" role="img" aria-label="Energy per AI task">
+                <div class="rr"><span>Text prompt</span><div class="tr"><i style="left:0;width:1%"></i></div><span class="vl">0.24&ndash;1.9 Wh</span></div>
+                <div class="rr"><span>Image</span><div class="tr"><i style="left:0;width:1.5%"></i></div><span class="vl">0.6&ndash;2.9 Wh</span></div>
+                <div class="rr"><span>5-second video</span><div class="tr"><i style="left:0;width:44%"></i></div><span class="vl">20&ndash;415 Wh</span></div>
+                <div class="rr"><span>Phone charge</span><div class="tr"><i class="t" style="left:0;width:1.3%"></i></div><span class="vl">~12 Wh</span></div>
+                <div class="rr"><span>Microwave, one minute</span><div class="tr"><i class="t" style="left:0;width:2.1%"></i></div><span class="vl">~20 Wh</span></div>
+                <div class="rr"><span>One mile in an electric car</span><div class="tr"><i class="t" style="left:0;width:32%"></i></div><span class="vl">~300 Wh</span></div>
+                <div class="rr"><span>Train GPT-4, once (estimate)</span><div class="tr"><i class="v" style="left:0;width:100%"></i></div><span class="vl">~50,000,000,000 Wh</span></div>
+              </div>
+            </div>
+            <div class="panel-foot">Bars scaled to 940 Wh except the last. Google measured 0.24 Wh for a median Gemini text prompt in May 2025; MIT Technology Review measured 1.9 Wh for a 405-billion-parameter open model. Images: 0.63 Wh (Stable Diffusion 3 Medium) to 2.9 Wh (SDXL). Video: 20 to 415 Wh for a 5-second clip depending on the generator, with Sora estimated near 944. GPT-4's training run is an outside estimate of roughly 50 gigawatt-hours.</div>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><b class="cool">33&times;</b><span>less energy per Gemini text prompt in May 2025 than a year earlier, by Google's measurement.</span><small>Google, Aug 2025</small></div>
+          <div class="stat"><b class="hot">+37%</b><span>Google's total electricity use in 2025 anyway, to 43.6 TWh, its sharpest rise ever. Emissions rose 18%, water use 34%.</span><small>Google environmental report, Jun 2026</small></div>
+          <div class="stat"><b>100&ndash;150 MW</b><span>drawn by a single frontier training run today. Forecasts put the largest runs at 1 to 2 gigawatts by 2028 and 4 to 16 by 2030.</span><small>EPRI, Epoch AI</small></div>
+          <div class="stat"><b>~half</b><span>of the growth in data center electricity to 2030 is expected to be AI servers. Conventional servers grow about 9% a year, AI servers about 30%.</span><small>IEA</small></div>
+        </div>
+
+        <div class="callout">
+          <strong>Jevons, in one company.</strong>
+          <p>Google cut the energy of a prompt by 33 times and its electricity bill rose 37% in the same year. Efficiency does not reduce the buildout; it lowers the price of a prompt until there are more prompts, more models, more video, and more buildings. The buildings are not a response to your demand. They are a bet that making AI cheap enough will create it.</p>
+        </div>
+
+        <details class="deeper">
+          <summary>Dig deeper: training vs. using, idle chips, and what "need" means</summary>
+          <div class="dbody">
+            <h4>Two different loads</h4>
+            <p><strong>Inference</strong>, answering your prompts, is small per task and large in aggregate only at planetary scale. Even a heavy user's day is under a tenth of a kilowatt-hour. If every American ran the calculator's "typical" day, the country's AI use would be roughly 7% of what data centers already consume. <strong>Training</strong> is the opposite: a handful of runs a year, each drawing 100 megawatts or more continuously for months, with the next generation planned at a gigawatt or more. Training is what the gigawatt campuses in Texas, Louisiana, Georgia and Indiana are for, and it is a bet on models that do not exist yet.</p>
+            <h4>Built ahead of demand</h4>
+            <p>The chips are bought before the customers are. Microsoft said in late 2025 that it had chips in inventory it could not plug in because buildings and power were not ready; Oracle built the Abilene campus for one customer whose revenue cannot yet cover the contract; Meta's Louisiana campus is being sized to 5 gigawatts for products nobody has used. None of that is a shortage in the sense a household experiences one. It is capacity purchased on the expectation that demand will arrive, financed partly by the public, with the downside held by ratepayers and counties if it does not.</p>
+            <h4>What the per-task numbers hide</h4>
+            <p>Published per-prompt figures are mostly for text and for a company's own median; a long reasoning answer can use ten to fifty times the median. Video generation is the category to watch: measurements span a 3,000-to-1 range depending on the model and settings, and the expensive end is the one being marketed. Image and video are also where the "generated imagery" demand is growing fastest. The fair summary: text is nearly free, images are cheap, video is not, and the aggregate depends on how much of it companies can convince people to make.</p>
+            <h4>What would "need" look like?</h4>
+            <p>A build that followed demand would show chips running near capacity before the next campus is announced, forecasts that match shipments, and tenants paying for their own power. What the record shows instead is utilization nobody publishes, forecasts 40% above shipments, canceled expansions, and the public asked to underwrite the gap. Whether the bet pays off is a question for investors. Who holds the downside is a question for voters.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="backlash">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§8 &middot; The backlash</div>
+      <div>
+        <h2>The only thing that has worked is saying no.</h2>
+        <div class="prose">
+          <p>In the first three months of 2026, local opponents blocked or delayed 75 data center projects worth $130 billion, the most since anyone started counting. New York imposed the first statewide moratorium in July. Texas, the industry's favorite state, froze permits in September pending an audit. California passed a seven-bill package the same week. The issue has crossed every party line there is: 14% of Americans say they would welcome a data center in their community, and candidates in both parties have noticed.</p>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><b class="hot">$130B</b><span>of projects blocked or delayed in Q1 2026, then $68 billion more in Q2. 843 opposition groups in 49 states.</span><small>Data Center Watch</small></div>
+          <div class="stat"><b>27 of 50</b><span>states restricting or considering restrictions on data centers as of October 2026; 20 have an active ban or moratorium somewhere within them.</span><small>datacenterbans.com</small></div>
+          <div class="stat"><b>18</b><span>Ohio communities voting on data center measures in November 2026, in a state whose tax break cost 12 times its projection.</span><small>Ohio Secretary of State</small></div>
+          <div class="stat"><b>Jul 14, 2026</b><span>New York's executive order halting new data centers of 50 MW or more for up to a year, the first statewide pause.</span><small>Executive Order 62</small></div>
+        </div>
+
+        <div class="duty">
+          <div class="does">
+            <h3>What a county or city can demand</h3>
+            <ul>
+              <li>No property tax abatement<small>Microsoft now pledges to pay full tax everywhere; others will when asked</small></li>
+              <li>Pay for your own grid<small>A large-load tariff with a minimum bill, like Ohio's 85% rule, so phantom requests cost the requester</small></li>
+              <li>No non-disclosure agreements<small>Pennsylvania banned them by executive order in August 2026; most "Project Blue" deals depend on them</small></li>
+              <li>Water and power disclosure, annually<small>Tucson learned its project's water use from an advocacy group's records request</small></li>
+              <li>Clawbacks tied to permanent jobs<small>Six of twenty audited Texas facilities missed their job requirements</small></li>
+              <li>Bring your own power<small>Maryland's bill would allow data centers only if co-located with new generation</small></li>
+              <li>A pause while you count<small>Good Jobs First's own recommendation: a moratorium long enough to learn the costs</small></li>
+            </ul>
+          </div>
+          <div class="never">
+            <h3>What the pitch will tell you</h3>
+            <ul>
+              <li>"Thousands of jobs"<small>Construction jobs, for two years, mostly from out of town</small></li>
+              <li>"Millions in new tax revenue"<small>Net of the abatement that is the condition of the deal</small></li>
+              <li>"They'll build it somewhere else"<small>Power and land decide siting; 3% of operators say incentives do</small></li>
+              <li>"It will lower everyone's rates by spreading costs"<small>True in 2015, when data centers were small; the capacity market says otherwise now</small></li>
+              <li>"The water is recycled"<small>Direct use is modest; the power plant that feeds it is where most of the water goes</small></li>
+              <li>"If we don't build, we lose the AI race"<small>The race is between four companies, and your county is not in it</small></li>
+            </ul>
+          </div>
+        </div>
+
+        <details class="deeper">
+          <summary>Dig deeper: what states did in 2026</summary>
+          <div class="dbody">
+            <table>
+              <tr><th>When</th><th>Where</th><th>What</th></tr>
+              <tr><td>Jan 13</td><td>Microsoft</td><td>"Community-First" pledge: pay full property taxes, pay rates that cover new generation and grid upgrades, no NDAs with local governments</td></tr>
+              <tr><td>Apr&ndash;May</td><td>Florida, Oklahoma</td><td>Hyperscale Data Center Act (Fla.) and Data Center Consumer Ratepayer Protection Act (Okla.) create separate rate classes so households don't fund new plants</td></tr>
+              <tr><td>May</td><td>Ohio</td><td>Governor pauses the sales tax exemption for new applicants after the $1.6 billion cost is revealed</td></tr>
+              <tr><td>Jun 4 / Jul 14</td><td>New York</td><td>Legislature passes a moratorium bill; governor instead signs an executive order pausing new 50 MW+ facilities for up to a year</td></tr>
+              <tr><td>Jun 18</td><td>FERC</td><td>Show-cause orders to all six regional grid operators on large-load interconnection rules</td></tr>
+              <tr><td>Aug 3 / Sep 21</td><td>Texas</td><td>Governor orders an audit of 474 GW of requests, then halts new environmental permits for data centers until it is done</td></tr>
+              <tr><td>Aug 18</td><td>Pennsylvania</td><td>Executive order bars non-disclosure agreements with data center developers</td></tr>
+              <tr><td>Sep 8</td><td>Massachusetts</td><td>Executive order imposing statewide restrictions</td></tr>
+              <tr><td>Sep 21</td><td>California</td><td>Governor signs a seven-bill data center package, the most comprehensive state law</td></tr>
+              <tr><td>Sep 28&ndash;29</td><td>Microsoft / Mount Pleasant</td><td>Microsoft waives a $5 million annual incentive at the former Foxconn site; the village applies it to property tax relief</td></tr>
+              <tr><td>Nov 3</td><td>Ohio, Florida, others</td><td>Local ballot measures on data center moratoriums and bans; data centers a declared issue in dozens of congressional and gubernatorial races</td></tr>
+            </table>
+            <p>Not every "restriction" restricts. Several of the 2026 state laws are ratepayer-protection measures that make the buildout easier to approve by moving its cost off households, which is the industry's preferred outcome. The projects that actually stopped were stopped by zoning boards, county commissions and city councils, usually over water, noise, farmland or an abatement, and usually after residents found out what the NDA was hiding.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="scorecard">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§9 &middot; Scorecard</div>
+      <div>
+        <h2>Who wins, who pays, who decides.</h2>
+        <div class="prose">
+          <p>The same ledger, as plainly as the data allows.</p>
+        </div>
+
+        <div class="sym">
+          <div class="h">&nbsp;</div><div class="h">Who collects</div><div class="h">Who pays</div>
+          <div class="k">The chips</div><div>Nvidia: $216 billion a year at a 71&ndash;75% margin, sales-tax-free in 37 states</div><div>States: $1 billion-plus a year each in Georgia, Virginia, Texas and Ohio; counties lose the local share they never voted on</div>
+          <div class="k">The power</div><div>Utilities: a 9&ndash;11% guaranteed return on $1.1 trillion of new plants and wires</div><div>Ratepayers: $23 billion in extra capacity charges in one grid, $6 billion of it for data centers that don't exist</div>
+          <div class="k">The building</div><div>Developers, REITs and former miners: 15-to-20-year leases, 85% property abatements, $9 billion from a single tenant</div><div>The county: a tax-abated shed, a few hundred jobs, roads and water at municipal rates, and the noise</div>
+          <div class="k">The construction</div><div>Contractors and 7,500 peak workers at one site</div><div>The town: a housing crisis while they're there, an empty parking lot when they leave</div>
+          <div class="k">The forecast</div><div>Everyone above, whose revenue rises with the number</div><div>Everyone below, who pays for the plants built to meet it</div>
+          <div class="k">The AI</div><div>Four companies betting $730 billion that cheap intelligence will find a market</div><div>You, whose chatbot costs nine seconds of television and whose electric bill is where the downside goes</div>
+          <div class="k">The decision</div><div>Made in utility commission hearings and county zoning meetings, under NDA</div><div>Reversible only there, which is why 2026 was the year people started showing up</div>
+        </div>
+
+        <div class="callout">
+          <strong>The honest version.</strong>
+          <p>AI uses real electricity and some of the buildout is needed. But "needed" has been stretched to cover forecasts inflated by 40%, subsidies that scale with hardware instead of jobs, grid costs socialized onto households, and a financing loop in which the seller funds the buyer. Nobody has to decide whether AI is good to decide that the people building its warehouses should pay for their own power, their own taxes and their own water. That is the only question on your local ballot, and it is the only one that has ever changed the outcome.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="eyebrow">The Buildout &middot; an explainer, not a forecast &middot; October 2026</p>
+    <p>Figures are the most recent published at time of writing. The 2026 policy events are recent and some details will be revised; the subsidy figures use each state's own disclosures as compiled by Good Jobs First and are not directly comparable across states. Check the sources before you print anything.</p>
+    <ol>
+      <li>Lawrence Berkeley National Laboratory, <a href="https://eta-publications.lbl.gov/publications/2024-lbnl-data-center-energy-usage-report">2024 United States Data Center Energy Usage Report</a> (December 2024) and <a href="https://eta-publications.lbl.gov/publications/united-states-data-center-energy-2025">2025 Update</a> (June 2026).</li>
+      <li>Masanet, Shehabi, Lei, Smith and Koomey, "Recalibrating global data center energy-use estimates," <em>Science</em>, February 28, 2020.</li>
+      <li>International Energy Agency, <a href="https://www.iea.org/reports/energy-and-ai">Energy and AI</a> (April 2025) and Global Energy Review 2026; CBRE, <a href="https://www.cbre.com/press-releases/north-american-data-center-demand-continues-to-outpace-supply-despite-record-construction">North America Data Center Trends H1 2026</a>.</li>
+      <li>Grid Strategies, <a href="https://gridstrategiesllc.com/wp-content/uploads/Grid-Strategies-National-Load-Growth-Report-2025.pdf">National Load Growth Report</a> (November 2025) and "Forecasting for Large Loads" (December 2025); Office of the Texas Governor, <a href="https://gov.texas.gov/news/post/governor-abbott-directs-comprehensive-data-center-audit">data center audit directive</a>, August 3, 2026.</li>
+      <li>PJM, <a href="https://www.pjm.com/-/media/DotCom/markets-ops/rpm/rpm-auction-info/2027-2028/2027-2028-bra-report.pdf">2027/2028 Base Residual Auction Report</a> (December 17, 2025); Monitoring Analytics, <a href="https://www.monitoringanalytics.com/reports/Reports/2026/IMM_Analysis_of_the_20272028_RPM_Base_Residual_Auction_Part_A_20260105.pdf">analysis of the 2027/2028 auction</a> (January 2026) and March 12, 2026 report; IEEFA.</li>
+      <li>Carnegie Mellon University and NC State, Open Energy Outlook, <em>Environmental Research Letters</em>, May 2026; Rutgers State Policy Lab, "Are Data Centers Raising Your Electric Bill? Mostly Not. Yet." (2026); Pew Research Center, <a href="https://www.pewresearch.org/short-reads/2025/10/24/what-we-know-about-energy-use-at-us-data-centers-amid-the-ai-boom/">What we know about energy use at U.S. data centers</a>, October 2025.</li>
+      <li>Good Jobs First, <a href="https://goodjobsfirst.org/even-cloudier-with-a-greater-loss-of-spending-control-how-data-center-tax-abatements-undermine-public-budgets/">Even Cloudier with a Greater Loss of Spending Control</a> (June 2026), "Cloudy Data, Costly Deals" (November 2025), "Money Lost to the Cloud" (2016); Virginia JLARC, data center incentives review (December 2024); Texas Comptroller and Texas Tribune reporting (April and July 2026); Ohio Department of Taxation via Signal Ohio (May 2026).</li>
+      <li>Bradbury, Coates and Humphreys, "Public policy toward professional sports stadiums: A review," <em>Journal of Policy Analysis and Management</em>, 2024; IGM Forum economists' panel, 2017; AEA member survey, 2005.</li>
+      <li>Company filings: Nvidia Forms 10-K and 10-Q for fiscal 2026 and 2027; Microsoft, Alphabet, Amazon, Meta and Oracle earnings releases and guidance, 2025&ndash;2026; Riot Platforms earnings releases, 2026; Google 2026 Environmental Report; Google Cloud, <a href="https://cloud.google.com/blog/products/infrastructure/measuring-the-environmental-impact-of-ai-inference">Measuring the environmental impact of AI inference</a>, August 21, 2025.</li>
+      <li>Edison Electric Institute capital expenditure projections (2025); Bloomberg, "Oracle and OpenAI End Plans to Expand Flagship Data Center," March 6, 2026; CNBC, March 9, 2026; OpenAI and Nvidia partnership announcement, September 22, 2025.</li>
+      <li>U.S. Energy Information Administration, <a href="https://www.eia.gov/todayinenergy/detail.php?id=61364">preliminary estimate of cryptocurrency mining electricity use</a> (February 2024); Cambridge Centre for Alternative Finance, Bitcoin mining report (April 2025); Houston Chronicle and Utility Dive on ERCOT payments to Riot (September 2023); Earthjustice on the Granbury suit (2025).</li>
+      <li>MIT Technology Review, "We did the math on AI's energy footprint" (May 2025) and image-generation energy reporting (December 2023); Luccioni, Jernite and Strubell, "Power Hungry Processing" (2023); EPRI and Epoch AI on training-run power (2025).</li>
+      <li>Data Center Watch quarterly reports, Q1 and Q2 2026; <a href="https://www.datacenterbans.com/">datacenterbans.com</a> state tracker, October 5, 2026; Reuters/Ipsos polling on data centers, 2026; Bloomberg, NBC and Axios reporting on the 2026 midterms; New York Executive Order 62 (July 14, 2026); Texas TCEQ permit directive (September 21, 2026).</li>
+      <li>PUCO order on AEP Ohio's data center tariff (2025); Georgia PSC large-load rules (January 2025); Virginia SCC order creating Dominion's GS-5 class (November 2025); Texas SB 6 (2025); FERC Docket RM26-4 (2026).</li>
+      <li>Reporting on individual projects: Houston Public Media and Texas Observer on Abilene (2026); Louisiana Illuminator, 404 Media and Bloomberg on Meta's Hyperion and Entergy; Southern Environmental Law Center on xAI in Memphis; KJZZ, Axios Phoenix and AZ Luminaria on Project Blue; Inside Indiana Business and Good Jobs First on Amazon in New Carlisle; WPR and Racine County Eye on Microsoft in Mount Pleasant (September 2026).</li>
+    </ol>
+  </div>
+</footer>
+<script>
+var DATA={"dc":[[2014,58],[2015,62],[2016,66],[2017,71],[2018,76],[2019,90],[2020,106],[2021,125],[2022,148],[2023,176],[2024,183]],"proj":{"2028":[325,580],"2030":[521,843],"2030ref":649,"iea2030":426},"usTotal":{"2014":3900,"2023":3900,"2024":4097,"2025":4190},"glob":[[2010,194],[2018,205],[2024,415],[2030,945]],"fc":[[2022,24],[2023,38],[2024,64],[2025,166]],"pjm":[["2023/24",28.92],["2024/25",28.92],["2025/26",269.92],["2026/27",329.17],["2027/28",333.44]],"capex":[[2023,141],[2024,230],[2025,402],[2026,730]],"nvda":[["FY23",27.0],["FY24",60.9],["FY25",130.5],["FY26",215.9]],"states":[{"a":"AL","n":"Alabama","c":7,"r":6,"sub":null,"subY":null,"subN":null,"nod":true,"ban":0,"banN":"Alabama offers tax incentives for data center development, but local pushback spread rapidly in mid-2026. Birmingham enacted a 6-month moratorium on large data centers (>20 MW) in March 2026, and in June 2026 Leeds, Home"},{"a":"AK","n":"Alaska","c":0,"r":0,"sub":null,"subY":null,"subN":null,"nod":false,"ban":1,"banN":"No statewide data center legislation, but Anchorage has adopted preemptive zoning regulations requiring conditional use permits and setbacks for large data centers. Local Actions 1 active ban 1 of 30 counties ( 3 %) Municipality of Anc"},{"a":"AZ","n":"Arizona","c":2,"r":5,"sub":38.5,"subY":"2025","subN":"state","nod":false,"ban":4,"banN":"Arizona's statewide debate sharpened in September 2026: Attorney General Kris Mayes called for a statewide moratorium on new data center approvals, while Governor Katie Hobbs opposed a blanket pause; APS simultaneousl"},{"a":"AR","n":"Arkansas","c":5,"r":5,"sub":null,"subY":null,"subN":null,"nod":true,"ban":4,"banN":"Arkansas has no statewide moratorium or restriction legislation and still courts large projects, but county-level restriction spread rapidly in August 2026 and several of the pauses are among the longest in the coun"},{"a":"CA","n":"California","c":1,"r":4,"sub":null,"subY":null,"subN":null,"nod":false,"ban":4,"banN":"California now has the most comprehensive statewide data center laws in the nation. On September 21, 2026 Governor Newsom signed a seven-bill package \u2014 SB 1168 (McNerney), SB 886 (Padilla), SB 887, AB 1577, AB 2"},{"a":"CO","n":"Colorado","c":3,"r":4,"sub":null,"subY":null,"subN":null,"nod":false,"ban":2,"banN":"No statewide moratorium. Denver City Council voted unanimously on May 18, 2026 to enact a one-year moratorium on new data center zoning permits and site development plans, prompted by Stage 1 drought conditions and Denver Wa"},{"a":"CT","n":"Connecticut","c":10,"r":3,"sub":6,"subY":"2026","subN":"state","nod":false,"ban":3,"banN":"Connecticut's SB 43 to update data center tax credits (5-year minimum use period) remains in committee. In the week of September 7-10, 2026, Governor Ned Lamont declared that Connecticut 'will not host massive AI"},{"a":"DE","n":"Delaware","c":10,"r":4,"sub":null,"subY":null,"subN":null,"nod":false,"ban":2,"banN":"No statewide moratorium legislation, but New Castle County enacted comprehensive data center zoning regulations and DNREC denied a major data center under the Coastal Zone Act. On August 18, 2026 Harrington's council unanimo"},{"a":"DC","n":"District of Columbia","c":9,"r":5,"sub":null,"subY":null,"subN":null,"nod":false,"ban":null,"banN":""},{"a":"FL","n":"Florida","c":8,"r":7,"sub":null,"subY":null,"subN":null,"nod":false,"ban":4,"banN":"Governor Ron DeSantis signed SB 484 \u2014 the Florida Hyperscale Data Center Act \u2014 into law on May 7, 2026 (effective July 1). The law classifies data centers consuming 50+ MW at peak demand as 'large-scale,' bars utiliti"},{"a":"GA","n":"Georgia","c":8,"r":6,"sub":2500,"subY":"2026","subN":"state + local, projected","nod":false,"ban":4,"banN":"All statewide data center bills (HB 1012 moratorium, SB 408 and SB 410 tax exemption repeal) failed when the 2026 legislative session ended. Local momentum continues: Camden County's Board of Commissioners voted on Ma"},{"a":"HI","n":"Hawaii","c":1,"r":7,"sub":null,"subY":null,"subN":null,"nod":false,"ban":1,"banN":"No known data center moratorium or restriction legislation. Related News Latest News Live Last updated: 2026-04-09"},{"a":"ID","n":"Idaho","c":2,"r":2,"sub":null,"subY":null,"subN":null,"nod":true,"ban":1,"banN":"No statewide data center legislation, but Kootenai County enacted a moratorium (now expired, replaced by permanent aquifer protections) and Ada County is developing data center zoning amendments. Governor Brad Little joined President Tru"},{"a":"IL","n":"Illinois","c":6,"r":2,"sub":361,"subY":"2023","subN":"last disclosed","nod":false,"ban":3,"banN":"HB 4172 (three-month moratorium) stalled in committee. On June 5, 2026 Governor Pritzker formally directed DCEO to pause processing new Data Center Investment Program agreements starting July 1, 2026 (a two-year adminis"},{"a":"IN","n":"Indiana","c":6,"r":3,"sub":655.6,"subY":"2019\u201325","subN":"state only, cumulative","nod":false,"ban":4,"banN":"Indiana HB 1333 passed the House 54-45 (February 2026) but stalled in the Senate Utilities Committee; the controversial 'permitted use' farmland provision was explicitly rejected. The core 1% revenue-sharing provision"},{"a":"IA","n":"Iowa","c":5,"r":3,"sub":null,"subY":null,"subN":null,"nod":true,"ban":2,"banN":"No statewide moratorium, but Iowa has significant local action. Clarke and Johnson counties enacted moratoriums, Linn County passed one of the nation's strictest data center zoning ordinances with 1,000-foot setbacks and water study"},{"a":"KS","n":"Kansas","c":4,"r":5,"sub":null,"subY":null,"subN":null,"nod":false,"ban":2,"banN":"No statewide data center legislation, but Kansas local action accelerated sharply in July 2026. Lawrence city commissioners unanimously adopted a two-year moratorium on large-scale data centers on July 14, 2026 \u2014 doubling an ori"},{"a":"KY","n":"Kentucky","c":6,"r":4,"sub":5,"subY":"2026","subN":"state","nod":false,"ban":4,"banN":"Kentucky has no statewide data center moratorium and continues to court large projects, but its largest city has now paused new development. Louisville Metro Council voted 24-1 on August 13, 2026 to adopt a six-mont"},{"a":"LA","n":"Louisiana","c":5,"r":6,"sub":null,"subY":null,"subN":null,"nod":true,"ban":2,"banN":"No statewide moratorium legislation, but New Orleans enacted a one-year citywide ban on data center construction in January 2026. Louisiana continues to attract major data center investment in northern parishes. Governor J"},{"a":"ME","n":"Maine","c":11,"r":0,"sub":null,"subY":null,"subN":null,"nod":false,"ban":2,"banN":"On April 29, 2026, Maine's Legislature failed to override Governor Mills' veto of LD 307 \u2014 the House voted 72-65 and the Senate 20-11, both falling short of the two-thirds majority required. The decisive defeat ends the path for w"},{"a":"MD","n":"Maryland","c":9,"r":4,"sub":22,"subY":"2026","subN":"via records request","nod":false,"ban":4,"banN":"Maryland HB 120 (data center construction moratorium unless co-located with generation) died in committee when the General Assembly adjourned in early April 2026, but county governments have made Maryland one of the"},{"a":"MA","n":"Massachusetts","c":10,"r":2,"sub":null,"subY":null,"subN":null,"nod":false,"ban":4,"banN":"Massachusetts imposed statewide restrictions by executive action. On September 8, 2026 Governor Maura Healey signed an executive order requiring proposed data centers with peak electricity demand above 25"},{"a":"MI","n":"Michigan","c":8,"r":2,"sub":null,"subY":null,"subN":null,"nod":true,"ban":4,"banN":"Michigan introduced a bipartisan House bill package (HB 5594-5596) proposing a one-year moratorium preventing EGLE and local governments from issuing data center permits until April 2027. Governor Whitmer has explic"},{"a":"MN","n":"Minnesota","c":5,"r":2,"sub":115,"subY":"2026","subN":"state only","nod":false,"ban":4,"banN":"Minnesota enacted SF 608 (June 2025) restricting enterprise data centers to industrial districts statewide. The 2026 statewide moratorium bills (HF 4888 and SF 4298) died when the Legislature adjourned sine die on"},{"a":"MS","n":"Mississippi","c":6,"r":6,"sub":null,"subY":null,"subN":null,"nod":true,"ban":2,"banN":"Mississippi offers tax incentives to attract data center development, including property tax exemptions for qualifying facilities, and has drawn major projects including xAI's Southaven retrofit. Local resistance emerg"},{"a":"MO","n":"Missouri","c":5,"r":4,"sub":null,"subY":null,"subN":null,"nod":true,"ban":2,"banN":"No statewide moratorium legislation, but Missouri is a hotbed of local action. St. Charles enacted a citywide moratorium and is considering a permanent ban. Kansas City and St. Louis enacted zoning restrictions, and Columbia"},{"a":"MT","n":"Montana","c":3,"r":2,"sub":null,"subY":null,"subN":null,"nod":false,"ban":2,"banN":"No statewide moratorium despite significant lobbying efforts, but county-level action has begun. On July 9, 2026 Missoula County commissioners approved an interim zoning moratorium of up to one year on new data centers while p"},{"a":"NE","n":"Nebraska","c":4,"r":4,"sub":6,"subY":"2025","subN":"state; exemption ended 2026","nod":false,"ban":2,"banN":"Nebraska has significant data center activity with Google facilities in Papillion, Omaha, and Lincoln, plus new mega-proposals. Gage County's Planning & Zoning Commission unanimously recommended an 18-month moratorium on Jun"},{"a":"NV","n":"Nevada","c":2,"r":3,"sub":109,"subY":"2025","subN":"local sales + property","nod":false,"ban":4,"banN":"Nevada, particularly the Reno-Sparks area, is a major data center market with state tax abatements for qualifying facilities. On May 14, 2026 the Reno City Council voted 6-1 for a temporary moratorium on new data center"},{"a":"NH","n":"New Hampshire","c":11,"r":1,"sub":null,"subY":null,"subN":null,"nod":false,"ban":3,"banN":"New Hampshire's HB 1265 proposes a one-year moratorium on data center construction (public hearing held February 11, 2026), and SB 439 on municipal data center zoning authority was enacted. Governor Kelly Ayot"},{"a":"NJ","n":"New Jersey","c":9,"r":3,"sub":null,"subY":null,"subN":null,"nod":false,"ban":4,"banN":"New Jersey enacted its first data center ratepayer-protection law: A796/S731 (the 'Data Center Fair Share'/large-load tariff act) passed both chambers on June 30, 2026 and Governor Mikie Sherrill signed it into"},{"a":"NM","n":"New Mexico","c":3,"r":5,"sub":null,"subY":null,"subN":null,"nod":false,"ban":3,"banN":"New Mexico Democratic lawmakers have announced a statewide data center moratorium bill for the 2027 session and gave it its first public airing on August 11, 2026 before the interim Science, Technology and Telecommu"},{"a":"NY","n":"New York","c":9,"r":2,"sub":12,"subY":"2026","subN":"state share","nod":false,"ban":4,"banN":"New York now has the nation's first statewide data center moratorium, imposed by executive action. On July 14, 2026 Governor Hochul signed Executive Order No. 62, directing DEC to hold in abeyance all new and pendin"},{"a":"NC","n":"North Carolina","c":7,"r":5,"sub":51,"subY":"2025","subN":"state, $45\u201357M","nod":false,"ban":4,"banN":"North Carolina has no statewide moratorium bill, but local restriction has become the norm rather than the exception \u2014 more than 30 North Carolina jurisdictions have enacted temporary data center morator"},{"a":"ND","n":"North Dakota","c":4,"r":2,"sub":null,"subY":null,"subN":null,"nod":true,"ban":2,"banN":"No statewide moratorium. Morton, Mercer, and Dunn counties retain active moratoriums on data center construction; Oliver County repealed its moratorium on May 1, 2026. A state Data Center Model Ordinance Working Grou"},{"a":"OH","n":"Ohio","c":7,"r":3,"sub":1600,"subY":"2025","subN":"state only, actual","nod":false,"ban":2,"banN":"Ohio legislators are reviewing data center energy and community impacts. In April 2026, the Ohio Ballot Board approved a statewide constitutional amendment initiative \u2014 the 'Prohibition of Construction of a Data Center' \u2014 allowing s"},{"a":"OK","n":"Oklahoma","c":4,"r":6,"sub":38.7,"subY":"2025","subN":"Google, Mayes County only","nod":false,"ban":4,"banN":"Governor Stitt signed HB 2992 \u2014 the Data Center Consumer Ratepayer Protection Act of 2026 \u2014 into law on May 11, 2026 (effective July 1). It requires large-load customers adding 75 MW or more (including data centers,"},{"a":"OR","n":"Oregon","c":1,"r":3,"sub":233,"subY":"2025","subN":"property abatements, 4 companies","nod":false,"ban":4,"banN":"Oregon is implementing the 2025 POWER Act (HB 3546), under which the PUC approved a separate PGE data center tariff on July 7, 2026 (~29% increase for data centers). On September 8, 2026, Governor Tina Kotek announced a"},{"a":"PA","n":"Pennsylvania","c":8,"r":3,"sub":115,"subY":"2026","subN":"state only","nod":false,"ban":4,"banN":"Pennsylvania moved from disclosure requirements to gatekeeping in August 2026. On August 18, 2026 Governor Josh Shapiro signed Executive Order 2026-05, directing the Department of Environmental Protection to"},{"a":"RI","n":"Rhode Island","c":11,"r":2,"sub":null,"subY":null,"subN":null,"nod":false,"ban":1,"banN":"No statewide moratorium legislation. On May 5, 2026 the Town of Smithfield enacted a zoning ordinance banning data centers in all districts for about two years (4-1 vote), one day after Hanton City Investments filed an appl"},{"a":"SC","n":"South Carolina","c":8,"r":5,"sub":0.83,"subY":"2025","subN":"one-time report","nod":false,"ban":3,"banN":"South Carolina's H. 5286 bars state and local governments from granting permits, approvals, or incentives for new data centers until January 2028. Covers rezoning, special use permits, building permits, and"},{"a":"SD","n":"South Dakota","c":4,"r":3,"sub":null,"subY":null,"subN":null,"nod":false,"ban":0,"banN":"South Dakota rejected moratorium bills (SB 232, HB 1301) but enacted SB 135 and HB 1038, requiring data centers with 10+ MW to pay for increased electricity rates and preserving local governments' ability to re"},{"a":"TN","n":"Tennessee","c":6,"r":5,"sub":105,"subY":"2026","subN":"state + local","nod":false,"ban":2,"banN":"No statewide moratorium legislation, but local pauses are spreading. Washington County enacted a ~15-month moratorium on data centers and crypto mines in March 2026, Johnson City adopted a one-year moratorium in the heavy"},{"a":"TX","n":"Texas","c":4,"r":7,"sub":1300,"subY":"2026","subN":"state only, projected","nod":false,"ban":4,"banN":"Texas escalated to a full statewide permitting freeze. On September 21, 2026 Governor Abbott directed the Texas Commission on Environmental Quality to halt issuance of all permits for data center projects statewide until"},{"a":"UT","n":"Utah","c":2,"r":4,"sub":null,"subY":null,"subN":null,"nod":true,"ban":0,"banN":"Utah offers tax incentives for data center development and has seen significant growth in the Salt Lake City area, but local pushback has begun: on May 26, 2026 Iron County approved a 180-day moratorium on new data center and"},{"a":"VT","n":"Vermont","c":10,"r":1,"sub":null,"subY":null,"subN":null,"nod":false,"ban":2,"banN":"Governor Phil Scott vetoed H.727, the Sustainable Data Center Deployment Act, on May 28, 2026, citing existing Act 250, Public Utility Commission, and municipal zoning authority. The bill had passed with tripartisan support (S"},{"a":"VA","n":"Virginia","c":8,"r":4,"sub":1940,"subY":"2025","subN":"state + local, actual","nod":false,"ban":4,"banN":"Virginia's HB 1515 moratorium was carried over to the 2027 session (effectively dead for 2026), and HB 2084 directing the SCC to review data center rate classifications was enacted. The months-long budget standoff o"},{"a":"WA","n":"Washington","c":1,"r":2,"sub":132,"subY":"2026","subN":"state + local","nod":false,"ban":3,"banN":"Washington enacted SB 5982 requiring large data center customers to meet the same clean energy deadlines as utilities and directing the UTC to establish reporting requirements. HB 2515 \u2014 a broader data center regula"},{"a":"WV","n":"West Virginia","c":7,"r":4,"sub":null,"subY":null,"subN":null,"nod":false,"ban":0,"banN":"West Virginia offers tax incentives for data center development and is marketing its low energy costs to attract facilities. Related News Latest News Live Last updated: 2026-04-09"},{"a":"WI","n":"Wisconsin","c":7,"r":2,"sub":269,"subY":"proj.","subN":"annual after build-out, projected","nod":false,"ban":3,"banN":"The Wisconsin 2025-26 legislature ended its session without passing a statewide data center bill: a GOP ratepayer/water-protection measure (AB 840) passed the Assembly 53-44 but died in the Senate, and a Democratic 'v"},{"a":"WY","n":"Wyoming","c":3,"r":3,"sub":null,"subY":null,"subN":null,"nod":false,"ban":2,"banN":"Wyoming has taken no statewide legislative action to restrict data centers and remains generally favorable to large-load development, but local governments have begun to engage. Cheyenne rejected a proposed moratorium in May 2"}]};
+(function(){
+'use strict';
+var D=DATA, NS='http://www.w3.org/2000/svg';
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function el(tag,attrs,parent){var e=document.createElementNS(NS,tag);if(attrs)for(var k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+function txt(e,s){e.textContent=s;return e;}
+function fmtN(v,d){return v==null?'—':v.toLocaleString('en-US',{maximumFractionDigits:d==null?0:d,minimumFractionDigits:d==null?0:d});}
+function niceStep(range,n){var raw=range/n,p=Math.pow(10,Math.floor(Math.log10(raw))),m=raw/p;return (m<1.5?1:m<3.5?2:m<7.5?5:10)*p;}
+function lum(hex){var c=hex.replace('#','');var r=parseInt(c.substr(0,2),16)/255,g=parseInt(c.substr(2,2),16)/255,b=parseInt(c.substr(4,2),16)/255;return .2126*r+.7152*g+.0722*b;}
+function placeTip(tip,wrap,sx,top){tip.style.display='block';var tw=tip.offsetWidth,ww=wrap.clientWidth;var left=sx+14;if(left+tw>ww)left=sx-14-tw;if(left<0)left=0;tip.style.left=left+'px';tip.style.top=top+'px';}
+function tipRows(tip,label,rows){tip.innerHTML='';var d=document.createElement('div');d.className='d';d.textContent=label;tip.appendChild(d);rows.forEach(function(r){var row=document.createElement('div');row.className='r';var b=document.createElement('b');if(r.cls){var k=document.createElement('i');k.className='k';k.style.borderColor='var(--c-'+r.cls+')';b.appendChild(k);}b.appendChild(document.createTextNode(r.v));var s=document.createElement('span');s.textContent=r.name;row.appendChild(b);row.appendChild(s);tip.appendChild(row);});}
+
+/* ---------- line chart (x = year number) ---------- */
+function LineChart(wrap,tip,cfg){this.wrap=wrap;this.tip=tip;this.cfg=cfg||{};this.series=[];this.opts={};var self=this;if(window.ResizeObserver){new ResizeObserver(function(){self.render();}).observe(wrap);}else window.addEventListener('resize',function(){self.render();});}
+LineChart.prototype.set=function(series,opts){this.series=series;this.opts=opts||{};this.render();};
+LineChart.prototype.render=function(){
+  var wrap=this.wrap,cfg=this.cfg,opts=this.opts,series=this.series,self=this;
+  var W=wrap.clientWidth||800,H=cfg.height||300,ML=cfg.ml||48,MR=cfg.mr||60,MT=cfg.mt||22,MB=28;if(W<520){MR=48;ML=42;}
+  wrap.innerHTML='';var svg=el('svg',{viewBox:'0 0 '+W+' '+H,width:W,height:H,role:'img','aria-label':cfg.aria||''},wrap);
+  var all=[];series.forEach(function(s){s.pts.forEach(function(p){if(p[1]!=null)all.push(p);});});
+  var ymaxRaw=Math.max.apply(null,all.map(function(p){return p[1];}));
+  if(opts.bands)opts.bands.forEach(function(b){ymaxRaw=Math.max(ymaxRaw,b.y1);});
+  var x0=opts.xmin!=null?opts.xmin:Math.min.apply(null,all.map(function(p){return p[0];})),x1=opts.xmax!=null?opts.xmax:Math.max.apply(null,all.map(function(p){return p[0];}));
+  var step=niceStep(ymaxRaw||1,4),ymax=Math.ceil((ymaxRaw*1.06)/step)*step,ymin=0;
+  var PW=W-ML-MR,PH=H-MT-MB;var X=function(x){return ML+(x-x0)/(x1-x0||1)*PW;},Y=function(y){return MT+(ymax-y)/(ymax-ymin)*PH;};this.X=X;this.Y=Y;this.x0=x0;this.x1=x1;
+  var gg=el('g',{'class':'grid'},svg);for(var y=ymin;y<=ymax+1e-9;y+=step){el('line',{x1:ML,x2:W-MR,y1:Y(y),y2:Y(y)},gg);var ty=el('text',{x:ML-6,y:Y(y)+4,'text-anchor':'end'},gg);txt(ty,cfg.yfmt?cfg.yfmt(y):y);}
+  var gx=el('g',{'class':'axis'},svg);el('line',{x1:ML,x2:W-MR,y1:MT+PH,y2:MT+PH},gx);
+  var yrs=[];for(var yy=Math.ceil(x0);yy<=x1;yy++)yrs.push(yy);var every=W<560?4:2;yrs.forEach(function(yv,i){if((yv%every)!==0)return;el('line',{x1:X(yv),x2:X(yv),y1:MT+PH,y2:MT+PH+4},gx);var t=el('text',{x:X(yv),y:MT+PH+16,'text-anchor':'middle'},gx);txt(t,String(yv));});
+  if(opts.bands){var gb=el('g',null,svg);opts.bands.forEach(function(b){el('rect',{x:X(b.x0),y:Y(b.y1),width:Math.max(2,X(b.x1)-X(b.x0)),height:Y(b.y0)-Y(b.y1),'class':'band',rx:2},gb);var tl=el('text',{x:X((b.x0+b.x1)/2),y:Y(b.y1)-6,'text-anchor':'middle','class':'band-l'},gb);txt(tl,b.label);var th=el('text',{x:X((b.x0+b.x1)/2),y:Y(b.y0)+14,'text-anchor':'middle','class':'band-l'},gb);txt(th,b.sub||'');});}
+  var gs=el('g',null,svg);
+  series.forEach(function(s){var d='',pen=false;s.pts.forEach(function(p){if(p[1]==null){pen=false;return;}d+=(pen?'L':'M')+X(p[0]).toFixed(1)+' '+Y(p[1]).toFixed(1);pen=true;});
+    if(s.area){var pts=s.pts.filter(function(p){return p[1]!=null;});el('path',{d:d+'L'+X(pts[pts.length-1][0]).toFixed(1)+' '+Y(0)+'L'+X(pts[0][0]).toFixed(1)+' '+Y(0)+'Z','class':'area '+s.cls},gs);}
+    el('path',{d:d,'class':'ln '+s.cls},gs);
+    if(s.dots)s.pts.forEach(function(p){if(p[1]!=null)el('circle',{cx:X(p[0]),cy:Y(p[1]),r:3.5,'class':'dot '+s.cls},gs);});
+  });
+  var prim=series[0],pp=prim.pts.filter(function(p){return p[1]!=null;});
+  if(pp.length){var last=pp[pp.length-1],first=pp[0];var gl=el('g',null,svg);el('circle',{cx:X(last[0]),cy:Y(last[1]),r:4,'class':'dot '+prim.cls},gl);var tl2=el('text',{x:X(last[0])+8,y:Y(last[1])+4,'class':'lab bg'},gl);txt(tl2,cfg.lfmt?cfg.lfmt(last):(cfg.yfmt?cfg.yfmt(last[1]):last[1]));
+    if(cfg.labelFirst){var tf=el('text',{x:X(first[0]),y:Y(first[1])-10,'text-anchor':'start','class':'lab bg'},gl);txt(tf,cfg.lfmt?cfg.lfmt(first):(cfg.yfmt?cfg.yfmt(first[1]):first[1]));}}
+  if(opts.notes){var gn=el('g',null,svg);opts.notes.forEach(function(n){var t=el('text',{x:X(n.x),y:Y(n.y)-(n.dy||10),'text-anchor':n.anchor||'middle','class':'lab bg'},gn);txt(t,n.t);});}
+  var gh=el('g',null,svg);this.gh=gh;
+  var hit=el('rect',{x:ML,y:MT,width:PW,height:PH,'class':'hit',tabindex:'0','aria-label':'Chart values. Use arrow keys to move.'},svg);
+  hit.addEventListener('pointermove',function(e){var r=svg.getBoundingClientRect();var px=(e.clientX-r.left)*(W/r.width);self.hover(x0+(px-ML)/PW*(x1-x0));});
+  hit.addEventListener('pointerleave',function(){self.hover(null);});
+  hit.addEventListener('keydown',function(e){var pts=series[0].pts;var i=self.hi==null?pts.length-1:self.hi;if(e.key==='ArrowLeft')i=Math.max(0,i-1);else if(e.key==='ArrowRight')i=Math.min(pts.length-1,i+1);else if(e.key==='Escape'){self.hover(null);return;}else return;e.preventDefault();self.hover(pts[i][0]);});
+  hit.addEventListener('blur',function(){self.hover(null);});
+  this.MT=MT;this.PH=PH;
+};
+LineChart.prototype.hover=function(x){var gh=this.gh;if(!gh)return;while(gh.firstChild)gh.removeChild(gh.firstChild);if(x==null){this.tip.style.display='none';this.hi=null;return;}
+  var pts=this.series[0].pts,best=0,bd=Infinity;for(var i=0;i<pts.length;i++){var d=Math.abs(pts[i][0]-x);if(d<bd){bd=d;best=i;}}this.hi=best;var p=pts[best],X=this.X,Y=this.Y,self=this;
+  el('line',{x1:X(p[0]),x2:X(p[0]),y1:this.MT,y2:this.MT+this.PH,'class':'xh'},gh);var rows=[];
+  this.series.forEach(function(s){var q=s.pts.filter(function(z){return z[0]===p[0]&&z[1]!=null;})[0];if(!q)return;el('circle',{cx:X(q[0]),cy:Y(q[1]),r:4.5,'class':'dot '+s.cls},gh);rows.push({name:s.name,cls:s.cls,v:self.cfg.tfmt?self.cfg.tfmt(q):(self.cfg.yfmt?self.cfg.yfmt(q[1]):q[1])});});
+  if(this.cfg.extraRows)rows=rows.concat(this.cfg.extraRows(p));
+  tipRows(this.tip,this.cfg.tipLabel?this.cfg.tipLabel(p):String(p[0]),rows);placeTip(this.tip,this.wrap,X(p[0]),this.MT+6);};
+
+/* ---------- bar chart ---------- */
+function BarChart(wrap,tip,cfg){this.wrap=wrap;this.tip=tip;this.cfg=cfg||{};this.data=[];var self=this;if(window.ResizeObserver){new ResizeObserver(function(){self.render();}).observe(wrap);}else window.addEventListener('resize',function(){self.render();});}
+BarChart.prototype.set=function(data){this.data=data;this.render();};
+BarChart.prototype.render=function(){
+  var wrap=this.wrap,cfg=this.cfg,data=this.data,self=this,tip=this.tip;if(!data.length)return;
+  var W=wrap.clientWidth||800,H=cfg.height||260,ML=cfg.ml||52,MR=16,MT=26,MB=30;if(W<520)ML=44;
+  wrap.innerHTML='';var svg=el('svg',{viewBox:'0 0 '+W+' '+H,width:W,height:H,role:'img','aria-label':cfg.aria||''},wrap);
+  var ymaxRaw=Math.max.apply(null,data.map(function(d){return d.v;}));var step=niceStep(ymaxRaw,4),ymax=Math.ceil((ymaxRaw*1.08)/step)*step;
+  var PW=W-ML-MR,PH=H-MT-MB,Y=function(y){return MT+(ymax-y)/ymax*PH;};
+  var gg=el('g',{'class':'grid'},svg);for(var y=0;y<=ymax+1e-9;y+=step){el('line',{x1:ML,x2:W-MR,y1:Y(y),y2:Y(y)},gg);var ty=el('text',{x:ML-6,y:Y(y)+4,'text-anchor':'end'},gg);txt(ty,cfg.yfmt?cfg.yfmt(y):y);}
+  var gx=el('g',{'class':'axis'},svg);el('line',{x1:ML,x2:W-MR,y1:MT+PH,y2:MT+PH},gx);
+  var n=data.length,slot=PW/n,bw=Math.min(cfg.maxBar||56,slot*.6);
+  data.forEach(function(d,i){var cx=ML+slot*(i+.5),x=cx-bw/2,h=Math.max(0,Y(0)-Y(d.v));
+    var g=el('g',{tabindex:'0',role:'img','aria-label':d.l+': '+(cfg.yfmt?cfg.yfmt(d.v):d.v)},svg);
+    var r=el('rect',{x:x,y:Y(d.v),width:bw,height:h,rx:3,'class':'bar'+(d.cls?' '+d.cls:'')},g);
+    if(h<6)r.setAttribute('ry',0);
+    var vl=el('text',{x:cx,y:Y(d.v)-6,'text-anchor':'middle','class':'blab'},g);txt(vl,cfg.vfmt?cfg.vfmt(d.v):(cfg.yfmt?cfg.yfmt(d.v):d.v));
+    var xl=el('text',{x:cx,y:MT+PH+16,'text-anchor':'middle'},g);txt(xl,d.l);
+    var hit=el('rect',{x:ML+slot*i,y:MT,width:slot,height:PH,'class':'hit'},g);
+    function show(){tipRows(tip,d.l,[{name:d.note||cfg.name||'',v:cfg.tfmt?cfg.tfmt(d):(cfg.yfmt?cfg.yfmt(d.v):d.v)}]);placeTip(tip,wrap,cx,MT+6);r.style.opacity='.8';}
+    function hide(){tip.style.display='none';r.style.opacity='';}
+    hit.addEventListener('pointerenter',show);hit.addEventListener('pointermove',show);hit.addEventListener('pointerleave',hide);g.addEventListener('focus',show);g.addEventListener('blur',hide);
+  });
+};
+
+/* ---------- §1 data center electricity ---------- */
+var dcState={proj:true,share:false,table:false};
+var dcChart=new LineChart($('#chartDc'),$('#tipDc'),{height:340,yfmt:function(v){return fmtN(v);},aria:'U.S. data center electricity use by year with forecast ranges',labelFirst:true,
+  lfmt:function(p){return dcState.share?pct(p):fmtN(p[1])+' TWh';},tfmt:function(p){return fmtN(p[1])+' TWh'+(dcState.share?' · '+pct(p):'');},tipLabel:function(p){return String(p[0])+(p[0]>2023?' (IEA estimate)':p[0]===2014||p[0]===2023?' (LBNL)':' (interpolated)');}});
+function usTotal(y){return y<=2023?3900:y===2024?4097:4190;}
+function pct(p){return (p[1]/usTotal(p[0])*100).toFixed(1)+'%';}
+function drawDc(){var bands=dcState.proj?[{x0:2027.6,x1:2028.4,y0:D.proj['2028'][0],y1:D.proj['2028'][1],label:'2028: 325–580',sub:'6.7–12%'},{x0:2029.6,x1:2030.4,y0:D.proj['2030'][0],y1:D.proj['2030'][1],label:'2030: 521–843',sub:'9.5–15.3%'}]:null;
+  dcChart.set([{name:'U.S. data centers',cls:'gas',pts:D.dc,area:true,dots:true}],{xmin:2014,xmax:dcState.proj?2031:2025,bands:bands,notes:dcState.proj?[{x:2030,y:D.proj['2030ref'],t:'ref. 649',dy:-4}]:null});
+  var t=$('#tblDc');if(!dcState.table){t.classList.remove('on');return;}t.classList.add('on');t.innerHTML='';var tbl=document.createElement('table'),tr=document.createElement('tr');['Year','TWh','% of U.S. electricity','Basis'].forEach(function(h){var th=document.createElement('th');th.textContent=h;tr.appendChild(th);});tbl.appendChild(tr);
+  D.dc.forEach(function(p){var row=document.createElement('tr');[String(p[0]),fmtN(p[1]),pct(p),p[0]===2014||p[0]===2023?'LBNL estimate':p[0]===2024?'IEA estimate':'Interpolated at LBNL growth rate'].forEach(function(v){var td=document.createElement('td');td.textContent=v;row.appendChild(td);});tbl.appendChild(row);});
+  [['2028','325–580','6.7–12%','LBNL 2024 scenarios'],['2030','521–843 (ref. 649)','9.5–15.3%','LBNL 2025 update'],['2030','426','~9%','IEA base case']].forEach(function(r){var row=document.createElement('tr');r.forEach(function(v){var td=document.createElement('td');td.textContent=v;row.appendChild(td);});tbl.appendChild(row);});t.appendChild(tbl);}
+$('#chkProj').addEventListener('change',function(e){dcState.proj=e.target.checked;drawDc();});
+$('#chkShare').addEventListener('change',function(e){dcState.share=e.target.checked;drawDc();});
+$('#tblDcBtn').addEventListener('click',function(){dcState.table=!dcState.table;this.setAttribute('aria-pressed',dcState.table?'true':'false');drawDc();});
+drawDc();
+
+/* ---------- §2 forecast bars ---------- */
+var fcChart=new BarChart($('#chartFc'),$('#tipFc'),{height:260,yfmt:function(v){return fmtN(v)+' GW';},vfmt:function(v){return fmtN(v)+' GW';},name:'five-year peak growth forecast',aria:'Utility five-year load growth forecasts by report year'});
+fcChart.set(D.fc.map(function(p){return {l:String(p[0]),v:p[1],cls:'fc',note:p[0]===2025?'166 GW, of which ~90 GW data centers':p[0]===2024?'64 GW after federal data corrections (128 as first reported)':'five-year peak growth forecast'};}));
+
+/* ---------- §3 PJM bars ---------- */
+var pjmChart=new BarChart($('#chartPjm'),$('#tipPjm'),{height:260,yfmt:function(v){return '$'+fmtN(v);},vfmt:function(v){return '$'+fmtN(v,0);},name:'per MW-day, RTO-wide',aria:'PJM capacity auction clearing price by delivery year'});
+pjmChart.set(D.pjm.map(function(p){return {l:p[0],v:p[1],cls:p[1]>300?'hl':'money',note:p[1]>300?'cleared at the price cap':p[1]>200?'data centers ≈ 63% of the increase':'per MW-day, RTO-wide'};}));
+
+/* ---------- §5 capex & nvidia ---------- */
+var capexChart=new BarChart($('#chartCapex'),$('#tipCapex'),{height:240,yfmt:function(v){return '$'+fmtN(v)+'B';},vfmt:function(v){return '$'+fmtN(v)+'B';},name:'Microsoft + Alphabet + Amazon + Meta',aria:'Hyperscaler capital spending by year'});
+capexChart.set(D.capex.map(function(p){return {l:String(p[0]),v:p[1],cls:'money',note:p[0]===2026?'2026 guidance midpoint, four companies':'four companies, approximate'};}));
+var nvdaChart=new BarChart($('#chartNvda'),$('#tipNvda'),{height:240,yfmt:function(v){return '$'+fmtN(v)+'B';},vfmt:function(v){return '$'+fmtN(v,1)+'B';},name:'total revenue',aria:'Nvidia revenue by fiscal year'});
+nvdaChart.set(D.nvda.map(function(p){return {l:p[0],v:p[1],cls:'money',note:p[0]==='FY26'?'ended Jan 2026; 71% gross margin':'total revenue'};}));
+
+/* ---------- §4 map ---------- */
+var RAMP_O=['#FBE3D4','#F6C4A4','#F0A074','#E97A47','#D95926','#B2431A','#7F2E10'],RAMP_B=['#D5E4FA','#AECBF4','#7FAEEA','#4F8EDC','#1C4382'];
+var BAN_NAMES=['Favorable / incentives','No action','Under discussion','Legislation advancing','Active ban or moratorium'];
+var mapState={layer:'sub',sel:null,table:false};
+function subVal(s){return s.sub;}
+function money(m){return m==null?'—':m>=1000?'$'+(m/1000).toFixed(m>=10000?0:1)+'B':m>=10?'$'+Math.round(m)+'M':'$'+m+'M';}
+function subColor(s){if(s.sub==null)return null;var v=Math.log10(Math.max(1,s.sub));var mn=0,mx=Math.log10(2500);var i=Math.min(RAMP_O.length-1,Math.floor((v-mn)/(mx-mn)*RAMP_O.length));return RAMP_O[i];}
+var mapWrap=$('#mapWrap'),tipMap=$('#tipMap');
+function drawMap(){var W=mapWrap.clientWidth||800,cols=12,rows=8,gap=3,T=(W-gap*(cols-1))/cols,H=T*rows+gap*(rows-1);mapWrap.innerHTML='';
+  var svg=el('svg',{viewBox:'0 0 '+W+' '+H,width:W,height:H,role:'img','aria-label':'Tile map of U.S. states showing '+(mapState.layer==='sub'?'data center tax break cost':'data center backlash status')},mapWrap);
+  D.states.forEach(function(s){var g=el('g',{'class':'tile'+(mapState.sel===s.a?' sel':''),tabindex:'0',role:'button','aria-label':s.n+': '+tileLabel(s,true)},svg);
+    var x=s.c*(T+gap),y=s.r*(T+gap);var fill=mapState.layer==='sub'?subColor(s):(s.ban==null?null:RAMP_B[s.ban]);var isGray=!fill;if(isGray)fill='#9AA5B8';
+    var rect=el('rect',{x:x,y:y,width:T,height:T,fill:fill},g);if(isGray)rect.setAttribute('opacity','.35');
+    var ink=isGray?'#0F1B2D':(lum(fill)>.5?'#0F1B2D':'#FFFFFF');
+    var ab=el('text',{x:x+T/2,y:y+T/2+(T>44?-2:4),'class':'ab',fill:ink,'font-size':Math.max(9,Math.min(14,T*.27))},g);txt(ab,s.a);
+    if(T>44){var vl=el('text',{x:x+T/2,y:y+T/2+13,'class':'vl',fill:ink,'font-size':Math.max(9,Math.min(11,T*.2))},g);txt(vl,tileLabel(s,false));}
+    function show(){showMapTip(s,x+T/2,y);}g.addEventListener('pointerenter',show);g.addEventListener('pointermove',show);g.addEventListener('pointerleave',function(){tipMap.style.display='none';});g.addEventListener('focus',show);g.addEventListener('blur',function(){tipMap.style.display='none';});
+    g.addEventListener('click',function(){mapState.sel=mapState.sel===s.a?null:s.a;drawMap();renderDetail();});g.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();mapState.sel=s.a;drawMap();renderDetail();}});});
+  $('#mapNote').textContent=mapState.layer==='sub'?'Good Jobs First · June 2026':'datacenterbans.com · Oct 5, 2026';
+  var leg=$('#mapLegend');leg.innerHTML='';
+  if(mapState.layer==='sub'){var a=document.createElement('span');a.textContent='$1M';var r=document.createElement('span');r.className='ramp';RAMP_O.forEach(function(c){var i=document.createElement('i');i.style.background=c;r.appendChild(i);});var b=document.createElement('span');b.textContent='$2.5B a year';leg.appendChild(a);leg.appendChild(r);leg.appendChild(b);var g2=document.createElement('span');g2.innerHTML='<i style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#9AA5B8;opacity:.35;margin:0 6px 0 14px;vertical-align:-1px"></i>no figure disclosed · tap a state';leg.appendChild(g2);}
+  else{BAN_NAMES.forEach(function(n,i){var sp=document.createElement('span');var ic=document.createElement('i');ic.style.cssText='display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px;background:'+RAMP_B[i];sp.appendChild(ic);sp.appendChild(document.createTextNode(n));sp.style.marginRight='12px';leg.appendChild(sp);});}
+  renderMapTable();}
+function tileLabel(s,long){if(mapState.layer==='sub'){if(s.sub==null)return long?(s.nod?'exemption, cost not disclosed':'no figure disclosed'):(s.nod?'n/d':'—');return long?money(s.sub)+' a year ('+s.subY+', '+s.subN+')':money(s.sub);}
+  if(s.ban==null)return long?'not tracked':'—';return long?BAN_NAMES[s.ban]:['incent.','none','talk','bill','BAN'][s.ban];}
+function showMapTip(s,px,py){var rows=[[s.sub==null?(s.nod?'not disclosed':'—'):money(s.sub)+' / yr','tax break cost'+(s.subY?' ('+s.subY+')':'')],[s.ban==null?'—':BAN_NAMES[s.ban],'backlash status']];tipRows(tipMap,s.n,rows.map(function(r){return {name:r[1],v:r[0]};}));placeTip(tipMap,mapWrap,px,Math.max(0,py-10));}
+var BLURB={VA:'The world\'s largest data center market and the most expensive subsidy: $1.94 billion in state and local sales tax forgone in FY2025, up from $1.02 billion a year earlier. The legislature\'s auditors found the state loses 52 cents per dollar abated; the 2026 budget kept the exemption and added a 1.1-cent-per-kWh electricity tax capped at $600 million.',TX:'The exemption Texas projected would cost $29 million in 2025 now costs $1.3 billion, with $9 billion expected by 2030; electricity purchases are exempt too. Of 138 exempt facilities, 20 have been audited and six failed their job requirements. In August 2026 the governor ordered an audit of 474 GW of grid requests and in September halted new data center permits.',GA:'Georgia raised its FY2026 cost estimate by 664% to $2.5 billion and expects nearly $3 billion in FY2027; its counties and cities lose $1.1 billion of that to a break the state granted. Moratorium and repeal bills all died in the 2026 session, so the action moved to localities like Lovejoy, which banned construction outright.',OH:'Ohio\'s exemption cost $1.6 billion in 2025, twelve times the state\'s projection; the governor paused it for new applicants days after the number came out. AEP Ohio\'s tariff, requiring data centers to pay for 85% of what they request, cut its queue from 30 GW to 13. Eighteen communities vote on data center measures in November 2026.',IN:'Indiana denied having material losses until Good Jobs First pressed; it then disclosed $655 million since 2019, 93% of it to Amazon, whose New Carlisle campus got a 10-year, 50% property abatement on top. A statewide moratorium bill passed the House 54-45 in 2026 and stalled in the Senate.',IL:'Illinois has not disclosed an annual figure since 2023, when it was $361 million. The governor directed the state to pause processing new data center incentive applications in June 2026.',NY:'New York imposed the nation\'s first statewide moratorium by executive order on July 14, 2026, pausing new facilities of 50 MW or more for up to a year. A broader legislative bill awaits the governor. The state\'s own exemption costs about $12 million, rated at the lowest reliability level.',CA:'California signed a seven-bill data center package on September 21, 2026, the most comprehensive state law, covering energy, water and ratepayer protections. Vacancy in its markets is near zero and power is the constraint.',AZ:'Arizona\'s subsidy cost doubled in a year to $38.5 million; Phoenix found it involuntarily forgoes $12 million a year. Tucson rejected Project Blue; Pima County and the state approved it anyway, and the attorney general called for a statewide moratorium in September 2026.',OR:'Oregon\'s property abatements for Amazon, Apple, Alphabet and Meta reached $233 million in 2025, up 762% in a decade. Google\'s The Dalles facilities used 550 million gallons of water in 2025, 40% of the city\'s total. A separate PGE data center tariff took effect in July 2026.',NV:'Local sales and property abatements cost Nevada\'s cities, counties and school districts $132 million in 2024 and $109 million in 2025. The Reno-Sparks market is one of the fastest-growing in the country.',PA:'Pennsylvania\'s exemption cost rises from $41 million to $260 million by 2028. The governor banned non-disclosure agreements with developers in August 2026, the first state to do so.',WA:'Washington requires large data centers to meet the same clean-energy deadlines as utilities and is designing a large-load tariff; its exemption costs about $132 million a year.',MN:'Minnesota restricted data centers to industrial districts statewide in 2025 and reports $115 million in state losses, without counting local shares.',NC:'North Carolina\'s 2015 fiscal note projected $4 million a year; the cost is now $45 to $57 million and planned projects would add $1.5 to $2.3 billion during construction. The governor asked his energy task force in April 2026 to consider ending the break. More than 30 localities have enacted restrictions.',WI:'Wisconsin\'s fiscal bureau projects $1.5 billion lost during construction of four planned projects and $269 million a year afterward. Microsoft is building on the former Foxconn site in Mount Pleasant and waived a $5 million annual incentive there in September 2026.',MS:'Mississippi offers 10-year sales, income and property tax exemptions and granted Amazon a permanent sales tax exemption, and has disclosed none of the cost.',MT:'Montana assesses data center property at 0.9%, below farmland (2.16%) and homes (1.35%); the cost has never been estimated.',WV:'West Virginia treats data center equipment as salvage, assessing it at 5% of cost, and markets itself on that basis.',LA:'Meta\'s Hyperion campus in Richland Parish will be powered by ten new Entergy gas plants, more than 7 GW; Meta covers 15 years of a 30-year financing. New Orleans banned data center construction for a year in January 2026. The state discloses no exemption cost.',TN:'Memphis is weighing a 12-month pause after xAI ran dozens of gas turbines beside its facility before most had permits; Washington County enacted a 15-month moratorium on data centers and crypto mines.',MD:'Maryland learned its $22 million annual loss through a records request; the state has not published a required tax expenditure report since 2022. A bill to allow data centers only when co-located with generation died in committee.',OK:'Google\'s Mayes County complex alone received $363 million in property tax abatements since 2013. Oklahoma passed a ratepayer protection act in May 2026 and discloses no exemption cost.',KY:'Louisville paused new development; Scott and Mercer counties extended moratoriums. The state exemption is projected at $15 million a year.',MI:'A bipartisan one-year moratorium package is pending; Kalamazoo enacted a one-year pause and Wixom replaced its pause with strict zoning. The state does not publish its exemption cost.',FL:'Florida\'s Hyperscale Data Center Act (May 2026) creates a separate rate class so households do not fund new generation. Edgewater votes in November on a permanent ban covering AI data centers and crypto mining.',MA:'Massachusetts imposed statewide restrictions by executive order on September 8, 2026.',NJ:'New Jersey enacted a "fair share" large-load tariff law so data centers pay for the generation built for them, and offers transferable AI tax credits that can be sold to unrelated companies.',UT:'Utah offers incentives and has not disclosed costs; local pushback began in 2026 in the Salt Lake area.',AL:'Alabama offers incentives and discloses no cost; Birmingham enacted a six-month moratorium in 2026.',AR:'Arkansas courts projects statewide while county-level restrictions spread in 2026; no cost disclosed.',ND:'Data centers were 15% of North Dakota\'s electricity use in 2023, second only to Virginia; three counties hold active moratoriums. No cost disclosed.',NE:'Nebraska ended its data center sales tax exemption in 2026, though companies can still stack sales, income and property breaks through another program. Data centers were 12% of state electricity in 2023.',IA:'Data centers were 11% of Iowa\'s electricity in 2023; the state publishes its exemption cost only every five years, so residents wait until 2027 to see the AI boom\'s bill.',CO:'Denver enacted a one-year moratorium on data center zoning permits in May 2026.',SC:'A bill would bar state and local permits and incentives for new data centers; the state disclosed a one-time cost of $830,000.',CT:'Connecticut\'s exemption costs about $6 million a year; a bill to require a five-year minimum use period remains in committee.',KS:'Lawrence adopted a two-year moratorium in July 2026.',MO:'St. Charles enacted a citywide moratorium and is considering a permanent ban; the state does not publish its cost.',ID:'Kootenai County\'s moratorium expired and was replaced by permanent aquifer protections; Idaho has stopped publishing its exemption cost.',SD:'South Dakota rejected moratorium bills but now requires data centers of 10 MW or more to pay for the grid upgrades they cause.',NM:'Lawmakers announced a statewide moratorium bill for the 2027 session.',NH:'A one-year moratorium bill had its hearing in February 2026.',VT:'The governor vetoed a data center siting act in May 2026, citing existing land-use law.',DE:'New Castle County enacted comprehensive data center zoning and the state denied a major project under existing rules.',RI:'Smithfield banned data centers in all zoning districts in May 2026.',WY:'Generally favorable to large loads; the 2026 Republican House nominee won his primary on ads promising to stop data centers.',AK:'Anchorage adopted preemptive zoning requiring conditional-use permits and setbacks for large data centers.',HI:'No known data center restriction legislation.',DC:'Not tracked separately.'};
+function renderDetail(){var box=$('#mapDetail');box.innerHTML='';var s=D.states.filter(function(o){return o.a===mapState.sel;})[0];var h=document.createElement('h4');
+  if(!s){h.textContent='Tap a state';var sm=document.createElement('small');sm.textContent='or use the table';h.appendChild(sm);box.appendChild(h);
+    [['37','states exempt data center purchases from sales tax'],['14','of them will not say what it costs'],['4','states lose more than $1 billion a year'],['20','states have an active ban or moratorium somewhere']].forEach(function(r){var d=document.createElement('div');var b=document.createElement('b');b.textContent=r[0];var sp=document.createElement('span');sp.textContent=r[1];d.appendChild(b);d.appendChild(sp);box.appendChild(d);});
+    var p=document.createElement('p');p.textContent='The costliest exemptions are in the states with the most data centers, and the fastest-growing costs are in states that only recently discovered what they had signed.';box.appendChild(p);return;}
+  h.textContent=s.n;var sm2=document.createElement('small');sm2.textContent=s.ban==null?'':BAN_NAMES[s.ban];h.appendChild(sm2);box.appendChild(h);
+  [[s.sub==null?(s.nod?'n/d':'—'):money(s.sub),s.sub==null?(s.nod?'exemption; cost not disclosed':'no disclosed figure'):'tax break cost per year ('+s.subY+')'],[s.subN||'—','scope of that figure'],[s.ban==null?'—':['Favorable','No action','Discussion','Bill advancing','Active ban'][s.ban],'backlash status, Oct 2026']].forEach(function(r){var d=document.createElement('div');var b=document.createElement('b');b.textContent=r[0];b.style.fontSize=r[0].length>12?'20px':'';var sp=document.createElement('span');sp.textContent=r[1];d.appendChild(b);d.appendChild(sp);box.appendChild(d);});
+  var p2=document.createElement('p');p2.textContent=BLURB[s.a]||(s.banN||'');box.appendChild(p2);if(BLURB[s.a]&&s.banN){var p3=document.createElement('p');p3.textContent='Tracker note: '+s.banN;box.appendChild(p3);}}
+function renderMapTable(){var t=$('#tblMap');if(!mapState.table){t.classList.remove('on');return;}t.classList.add('on');t.innerHTML='';var tbl=document.createElement('table'),tr=document.createElement('tr');['State','Tax break cost / yr','Year','Scope','Backlash status'].forEach(function(h){var th=document.createElement('th');th.textContent=h;tr.appendChild(th);});tbl.appendChild(tr);
+  D.states.slice().sort(function(a,b){return (b.sub||0)-(a.sub||0)||a.n.localeCompare(b.n);}).forEach(function(s){var row=document.createElement('tr');[s.n,s.sub==null?(s.nod?'not disclosed':'—'):money(s.sub),s.subY||'—',s.subN||'—',s.ban==null?'—':BAN_NAMES[s.ban]].forEach(function(v){var td=document.createElement('td');td.textContent=v;row.appendChild(td);});tbl.appendChild(row);});t.appendChild(tbl);}
+$$('[data-layer]').forEach(function(b){b.addEventListener('click',function(){mapState.layer=b.getAttribute('data-layer');$$('[data-layer]').forEach(function(o){o.setAttribute('aria-pressed',o===b?'true':'false');});drawMap();renderDetail();});});
+$('#tblMapBtn').addEventListener('click',function(){mapState.table=!mapState.table;this.setAttribute('aria-pressed',mapState.table?'true':'false');renderMapTable();});
+if(window.ResizeObserver)new ResizeObserver(function(){drawMap();}).observe(mapWrap);else window.addEventListener('resize',drawMap);
+drawMap();renderDetail();
+
+/* ---------- §7 calculator ---------- */
+var MODELS={eff:{t:0.24,i:0.63,v:20},typ:{t:0.3,i:2.0,v:90},heavy:{t:1.9,i:2.9,v:415}};
+function calc(){var n=+$('#rPrompts').value,im=+$('#rImages').value,vd=+$('#rVideos').value,m=MODELS[$('#selModel').value];$('#oPrompts').value=n;$('#oImages').value=im;$('#oVideos').value=vd;
+  var wh=n*m.t+im*m.i+vd*m.v;$('#calcWh').innerHTML=(wh<10?wh.toFixed(1):fmtN(wh))+'<small>Wh / day</small>';
+  var us=wh*340e6/1e9; var dcDay=176e12/365/1e9;
+  var rows=[['Phone charges a day',(wh/12).toFixed(wh/12<10?1:0)],['Minutes of a microwave',(wh/20).toFixed(wh/20<10?1:0)],['Miles in an electric car',(wh/300).toFixed(2)],['Share of a U.S. household\'s daily use',(wh/29600*100).toFixed(wh/29600*100<1?2:1)+'%'],['If all 340M Americans did this, per day',fmtN(us,us<10?1:0)+' GWh'],['…as a share of what data centers already use',(us/dcDay*100).toFixed(1)+'%']];
+  var ul=$('#calcCmp');ul.innerHTML='';rows.forEach(function(r){var li=document.createElement('li');var sp=document.createElement('span');sp.textContent=r[0];var b=document.createElement('b');b.textContent=r[1];li.appendChild(sp);li.appendChild(b);ul.appendChild(li);});}
+['rPrompts','rImages','rVideos','selModel'].forEach(function(id){$('#'+id).addEventListener('input',calc);$('#'+id).addEventListener('change',calc);});calc();
+
+/* ---------- expand all ---------- */
+var allOpen=false;$('#expandAll').addEventListener('click',function(){allOpen=!allOpen;$$('details').forEach(function(d){d.open=allOpen;});this.setAttribute('aria-pressed',allOpen?'true':'false');this.textContent=allOpen?'Collapse everything':'Expand everything';});
+})();
+</script>
+</body>
+</html>
