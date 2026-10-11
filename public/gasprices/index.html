@@ -1,0 +1,1285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="At the Pump: ten years of U.S. gas prices (2016 to 2026) in interactive charts and maps, plus a plain-language guide to what sets the price, who controls it, and what the President and Congress can and cannot do about it.">
+<meta property="og:title" content="At the Pump">
+<meta property="og:description" content="Who really sets the price of gas? Ten years of data, a state-by-state map, and an honest scorecard of what the President and Congress can actually do.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://toddlambert.com/gasprices/">
+<meta property="og:site_name" content="toddlambert.com">
+<meta property="og:image" content="https://toddlambert.com/gasprices/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Who really sets the price at the pump? A ten-year gas price line from $1.72 in 2016 to $5.01 in 2022 to $4.36 today.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="At the Pump">
+<meta name="twitter:description" content="Who really sets the price of gas? Ten years of data, a state-by-state map, and an honest scorecard of what the President and Congress can actually do.">
+<meta name="twitter:image" content="https://toddlambert.com/gasprices/og.png">
+<meta name="theme-color" content="#F2F4F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B1220" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://toddlambert.com/gasprices/">
+<title>At the Pump</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an explainer with a reading column beside a mono margin rail. Charts, the map and the
+   control panels break out to full width. Every section ends in a "Dig deeper" drawer. */
+:root{
+  --bg:#F2F4F7; --sheet:#FFFFFF; --fg:#0F1B2D; --fg-2:#56627A; --line:#D5DBE5; --grid:#E6EAF1;
+  --accent:#C8511C; --accent-ink:#FFFFFF; --accent-soft:#FBE8DE;
+  --yea:#1F8F5B; --nay:#C9362C;
+  --c-gas:#eb6834; --c-crude:#2a78d6; --c-diesel:#1baf7a; --c-dist:#eda100; --c-mute:#9AA5B8;
+  --font-display:'Big Shoulders Display','Arial Narrow',Impact,sans-serif;
+  --font-body:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B1220; --sheet:#121B2E; --fg:#E8EDF5; --fg-2:#9AA7BC; --line:#273349; --grid:#1D2840;
+    --accent:#FF9A66; --accent-ink:#0B1220; --accent-soft:#3A2416;
+    --yea:#43C285; --nay:#F26A60;
+    --c-gas:#d95926; --c-crude:#3987e5; --c-diesel:#199e70; --c-dist:#c98500; --c-mute:#5C6B85; color-scheme:dark
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B1220; --sheet:#121B2E; --fg:#E8EDF5; --fg-2:#9AA7BC; --line:#273349; --grid:#1D2840;
+  --accent:#FF9A66; --accent-ink:#0B1220; --accent-soft:#3A2416;
+  --yea:#43C285; --nay:#F26A60;
+  --c-gas:#d95926; --c-crude:#3987e5; --c-diesel:#199e70; --c-dist:#c98500; --c-mute:#5C6B85; color-scheme:dark
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1100px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+.eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-2)}
+.mono{font-family:var(--font-mono)}
+button{font:inherit}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:52px}
+.brand{font-family:var(--font-display);font-weight:900;font-size:22px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;color:var(--fg);white-space:nowrap}
+.navlinks{display:flex;gap:18px;font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;overflow-x:auto;min-width:0;scrollbar-width:none;align-items:center}
+.navlinks::-webkit-scrollbar{display:none}
+.navlinks a{color:var(--fg-2);text-decoration:none;white-space:nowrap;padding-block:16px}
+.navlinks a:hover{color:var(--accent)}
+.expandall{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);background:var(--sheet);color:var(--fg);padding:6px 10px;border-radius:3px;cursor:pointer;white-space:nowrap}
+.expandall:hover{border-color:var(--accent);color:var(--accent)}
+
+/* hero */
+.hero{padding-block:clamp(48px,9vw,112px) clamp(32px,6vw,72px)}
+h1{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(58px,11vw,146px);line-height:.88;letter-spacing:.005em;margin:14px 0 26px;text-wrap:balance;max-width:12ch}
+h1 em{font-style:normal;color:var(--accent)}
+.lede{font-size:clamp(18px,2.2vw,22px);max-width:62ch;margin:0 0 28px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;padding:12px 18px;border:1.5px solid var(--fg);border-radius:4px;text-decoration:none;color:var(--fg);font-weight:600;font-size:15px}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.ticker{margin-top:44px;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--line);border-block:1px solid var(--line)}
+.ticker div{background:var(--bg);padding:14px 16px 14px 0;min-width:0}
+.ticker div+div{padding-left:16px}
+.ticker b{display:block;font-family:var(--font-display);font-weight:900;font-size:44px;line-height:1}
+.ticker b.hot{color:var(--accent)}
+.ticker b.cool{color:var(--c-crude)}
+.ticker span{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-2);margin-top:6px}
+
+/* articles */
+.article{padding-block:clamp(48px,8vw,96px);border-top:1px solid var(--line)}
+.art-head{display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:start}
+.art-head>div{min-width:0}
+.art-num{font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;padding-top:16px}
+h2{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(38px,6vw,76px);line-height:.95;margin:0 0 18px;text-wrap:balance}
+h3.sub{font-family:var(--font-display);font-size:30px;font-weight:900;text-transform:uppercase;line-height:1;margin:36px 0 12px}
+.prose{max-width:66ch}
+.prose p{margin:0 0 1em}
+.prose p:last-child{margin-bottom:0}
+.prose ul{padding-left:20px;margin:0 0 1em}
+.prose li{margin-bottom:6px}
+@media (max-width:720px){.art-head{grid-template-columns:1fr;gap:8px}.art-num{padding-top:0}}
+
+/* panels & charts */
+.panel{background:var(--sheet);border:1px solid var(--line);margin-top:28px;min-width:0}
+.panel-bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px 16px;padding:12px 18px;border-bottom:1px solid var(--line);font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-2)}
+.panel-bar b{color:var(--fg);font-weight:500}
+.panel-body{padding:16px 18px 12px;position:relative}
+.panel-foot{padding:10px 18px 14px;font-size:13px;color:var(--fg-2);border-top:1px solid var(--line)}
+.panel-foot a{color:var(--fg-2)}
+.controls{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;padding:12px 18px;border-bottom:1px solid var(--line);font-size:13px}
+.controls label{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-2);display:flex;align-items:center;gap:6px;margin:0}
+.controls select{font:inherit;font-size:13px;padding:5px 8px;border:1px solid var(--line);border-radius:3px;background:var(--bg);color:var(--fg)}
+.seg{display:inline-flex;flex-wrap:wrap;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;max-width:100%}
+.seg button{border:0;background:var(--sheet);color:var(--fg-2);padding:6px 10px;cursor:pointer;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;flex:1 1 auto}
+.seg button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.chk{display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2);cursor:pointer}
+.chk input{accent-color:var(--accent);margin:0}
+.chart{position:relative;width:100%}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart text{font-family:var(--font-mono);font-size:11px;fill:var(--fg-2)}
+.chart .grid line{stroke:var(--grid);stroke-width:1}
+.chart .axis line{stroke:var(--line)}
+.chart .ln{fill:none;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.chart .ln.gas{stroke:var(--c-gas)}
+.chart .ln.crude{stroke:var(--c-crude)}
+.chart .ln.diesel{stroke:var(--c-diesel)}
+.chart .ln.mute{stroke:var(--c-mute);stroke-width:1.5}
+.chart .area.gas{fill:var(--c-gas);opacity:.08}
+.chart .area.crude{fill:var(--c-crude);opacity:.08}
+.chart .term{fill:var(--fg);opacity:.035}
+.chart .term-l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;fill:var(--fg-2)}
+.chart .lab{fill:var(--fg);font-weight:500}
+.chart .lab.bg{paint-order:stroke;stroke:var(--sheet);stroke-width:4px;stroke-linejoin:round}
+.chart .ev{cursor:pointer}
+.chart .ev circle{fill:var(--sheet);stroke:var(--c-gas);stroke-width:2}
+.chart .ev text{fill:var(--fg);font-size:9px;font-weight:500;text-anchor:middle;pointer-events:none}
+.chart .ev:hover circle,.chart .ev.on circle{fill:var(--c-gas)}
+.chart .ev:hover text,.chart .ev.on text{fill:var(--accent-ink)}
+.chart .xh{stroke:var(--fg-2);stroke-width:1;pointer-events:none}
+.chart .dot{stroke:var(--sheet);stroke-width:2;pointer-events:none}
+.chart .dot.gas{fill:var(--c-gas)}.chart .dot.crude{fill:var(--c-crude)}.chart .dot.diesel{fill:var(--c-diesel)}.chart .dot.mute{fill:var(--c-mute)}
+.chart .hit{fill:transparent}
+.tip{position:absolute;z-index:5;pointer-events:none;background:var(--sheet);border:1px solid var(--line);box-shadow:0 6px 20px rgba(0,0,0,.12);padding:8px 10px;font-size:13px;min-width:150px;border-radius:3px;display:none}
+.tip .d{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2);margin-bottom:4px}
+.tip .r{display:flex;justify-content:space-between;gap:14px;align-items:baseline}
+.tip .r b{font-weight:600;font-variant-numeric:tabular-nums}
+.tip .k{display:inline-block;width:12px;height:0;border-top:2px solid;vertical-align:middle;margin-right:6px}
+.tip .r span{color:var(--fg-2);font-size:12px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;padding:0 18px 10px;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2)}
+.legend i{display:inline-block;width:14px;border-top:2px solid;vertical-align:middle;margin-right:6px}
+.legend i.sw{width:12px;height:12px;border:0;border-radius:2px;vertical-align:-2px}
+.tbl{display:none;padding:0 18px 14px;overflow:auto;max-height:360px}
+.tbl.on{display:block}
+.tbl table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+.tbl th,.tbl td{text-align:right;padding:5px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl th:first-child,.tbl td:first-child{text-align:left;font-family:var(--font-mono);font-size:12px}
+.tbl th{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2);font-weight:500;position:sticky;top:0;background:var(--sheet)}
+.tbtn{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);background:transparent;color:var(--fg-2);padding:4px 8px;border-radius:3px;cursor:pointer}
+.tbtn[aria-pressed="true"],.tbtn:hover{color:var(--fg);border-color:var(--fg)}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:28px 0 0}
+.stat{background:var(--sheet);padding:22px 20px;min-width:0}
+.stat b{display:block;font-family:var(--font-display);font-weight:900;font-size:56px;line-height:1;letter-spacing:.01em}
+.stat b.hot{color:var(--accent)}
+.stat span{display:block;margin-top:8px;color:var(--fg);font-size:15px}
+.stat small{display:block;margin-top:10px;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2)}
+.callout{border-left:4px solid var(--accent);padding:6px 0 6px 20px;margin:36px 0 0;max-width:66ch}
+.callout strong{font-family:var(--font-display);font-size:32px;font-weight:900;text-transform:uppercase;display:block;line-height:1;margin-bottom:8px}
+.callout p{margin:0}
+
+/* events */
+.events{list-style:none;margin:28px 0 0;padding:0;border-top:1px solid var(--line)}
+.event{border-bottom:1px solid var(--line)}
+.event>button{all:unset;display:grid;grid-template-columns:40px 110px 1fr auto;gap:14px;align-items:baseline;width:100%;padding:14px 0;cursor:pointer;box-sizing:border-box}
+.event>button:hover .et{color:var(--accent)}
+.event .en{font-family:var(--font-display);font-weight:900;font-size:26px;line-height:1;color:var(--c-gas)}
+.event .ed{font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;color:var(--fg-2);text-transform:uppercase}
+.event .et{font-weight:600;min-width:0}
+.event .et small{display:block;font-weight:400;color:var(--fg-2);font-size:14px;margin-top:2px}
+.event .ep{font-family:var(--font-display);font-weight:900;font-size:26px;line-height:1;white-space:nowrap}
+.event .eb{display:none;padding:0 0 18px 54px;max-width:70ch;font-size:15.5px}
+.event .eb p{margin:0 0 .8em}
+.event.open .eb{display:block}
+.event.open>button .et{color:var(--accent)}
+@media (max-width:640px){.event>button{grid-template-columns:34px 1fr auto;gap:10px}.event .ed{grid-column:2/4;order:3;margin-top:-6px}.event .eb{padding-left:0}}
+
+/* dig deeper drawers */
+.deeper{margin-top:28px;border:1px solid var(--line);background:var(--sheet);max-width:none}
+.deeper summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:500}
+.deeper summary::-webkit-details-marker{display:none}
+.deeper summary::after{content:"+";font-size:20px;line-height:1;font-weight:400}
+.deeper[open] summary::after{content:"\2212"}
+.deeper summary:hover{background:var(--accent-soft)}
+.deeper .dbody{padding:6px 18px 20px;border-top:1px solid var(--line);font-size:15.5px;max-width:none}
+.deeper .dbody p{max-width:70ch;margin:.8em 0}
+.deeper .dbody h4{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-2);margin:18px 0 6px;font-weight:500}
+.deeper .dbody ul{padding-left:20px;max-width:70ch}
+.deeper .dbody li{margin-bottom:6px}
+.deeper table{border-collapse:collapse;font-size:14px;margin:8px 0}
+.deeper td,.deeper th{padding:6px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.deeper th{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2);font-weight:500}
+
+/* gallon */
+.gallon{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;margin-top:28px}
+@media (max-width:820px){.gallon{grid-template-columns:1fr}}
+.stackwrap{padding:16px 18px}
+.stack{display:flex;height:44px;gap:2px}
+.stack i{display:block;height:100%;border-radius:2px;transition:flex-basis .35s ease;min-width:4px;position:relative}
+.stack i.crude{background:var(--c-crude)}.stack i.refine{background:var(--c-diesel)}.stack i.dist{background:var(--c-dist)}.stack i.tax{background:var(--c-gas)}
+.stackkey{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:14px}
+.stackkey div{font-size:13px;color:var(--fg-2);padding-left:14px;position:relative}
+.stackkey div::before{content:"";position:absolute;left:0;top:5px;width:8px;height:8px;border-radius:2px}
+.stackkey .crude::before{background:var(--c-crude)}.stackkey .refine::before{background:var(--c-diesel)}.stackkey .dist::before{background:var(--c-dist)}.stackkey .tax::before{background:var(--c-gas)}
+.stackkey b{display:block;color:var(--fg);font-family:var(--font-display);font-size:26px;font-weight:900;line-height:1}
+.calc{padding:16px 18px}
+.calc .big{font-family:var(--font-display);font-weight:900;font-size:64px;line-height:1;margin:6px 0 2px}
+.calc .big small{font-size:22px;color:var(--fg-2);font-weight:700;margin-left:6px}
+.calc input[type=range]{width:100%;accent-color:var(--accent);margin:14px 0 4px}
+.calc .rng{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:11px;color:var(--fg-2);letter-spacing:.06em}
+.calc p{font-size:14px;color:var(--fg-2);margin:12px 0 0}
+.taxrow{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:24px}
+@media (max-width:560px){.taxrow{grid-template-columns:1fr}}
+.taxrow div{background:var(--sheet);padding:16px 18px}
+.taxrow b{display:block;font-family:var(--font-display);font-size:40px;font-weight:900;line-height:1}
+.taxrow span{display:block;font-size:14px;margin-top:6px}
+.taxrow small{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2);margin-top:8px}
+
+/* map */
+.map{position:relative}
+.map svg{display:block;width:100%;height:auto}
+.map .tile{cursor:pointer;transition:opacity .15s}
+.map .tile rect{rx:3;stroke:var(--sheet);stroke-width:2}
+.map .tile text{font-family:var(--font-mono);pointer-events:none;text-anchor:middle}
+.map .tile .ab{font-size:13px;font-weight:500}
+.map .tile .vl{font-size:10px}
+.map .tile.dim{opacity:.35}
+.map .tile.sel rect{stroke:var(--fg);stroke-width:2.5}
+.maplegend{display:flex;align-items:center;gap:10px;padding:0 18px 12px;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;color:var(--fg-2);flex-wrap:wrap}
+.maplegend .ramp{display:flex;gap:2px}
+.maplegend .ramp i{display:block;width:26px;height:12px;border-radius:2px}
+.mapdetail{border-top:1px solid var(--line);padding:16px 18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;align-items:start}
+.mapdetail h4{grid-column:1/-1;margin:0;font-family:var(--font-display);font-size:30px;font-weight:900;text-transform:uppercase;line-height:1}
+.mapdetail h4 small{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;color:var(--fg-2);font-weight:400;text-transform:uppercase;margin-left:10px}
+.mapdetail b{display:block;font-family:var(--font-display);font-size:34px;font-weight:900;line-height:1}
+.mapdetail span{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2);margin-top:4px}
+.mapdetail p{grid-column:1/-1;margin:0;font-size:14.5px;color:var(--fg-2);max-width:80ch}
+
+/* control panel */
+.cp{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:28px}
+.cpc{background:var(--sheet);padding:20px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.cpc h3{font-family:var(--font-display);font-size:28px;font-weight:900;text-transform:uppercase;line-height:1;margin:0}
+.cpc .meta{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2);display:flex;flex-wrap:wrap;gap:4px 12px}
+.grip{display:flex;gap:3px;margin:2px 0}
+.grip i{display:block;width:22px;height:8px;border-radius:2px;background:var(--line)}
+.grip i.on{background:var(--c-gas)}
+.cpc p{margin:0;font-size:14.5px;color:var(--fg)}
+.cpc details{margin-top:auto;font-size:14px}
+.cpc summary{cursor:pointer;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);list-style:none;padding-top:6px}
+.cpc summary::-webkit-details-marker{display:none}
+.cpc summary::before{content:"+ "}
+.cpc details[open] summary::before{content:"\2212 "}
+.cpc details p{margin-top:8px;color:var(--fg-2)}
+
+/* levers */
+.levers{margin-top:28px;border-top:1px solid var(--line)}
+.lever{border-bottom:1px solid var(--line)}
+.lever>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:1.3fr 1fr 1fr 1.2fr auto;gap:14px;align-items:center;padding:14px 0}
+.lever>summary::-webkit-details-marker{display:none}
+.lever>summary:hover .ln{color:var(--accent)}
+.lever .ln{font-weight:600}
+.lever .ln small{display:block;font-weight:400;color:var(--fg-2);font-size:13.5px}
+.lever .lm{font-family:var(--font-mono);font-size:12px;color:var(--fg-2);letter-spacing:.02em}
+.lever .lm b{display:block;font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-2);font-weight:400;opacity:.8}
+.lever .lm strong{color:var(--fg);font-weight:500;font-size:13px}
+.lever .pm{font-size:18px;color:var(--accent);width:18px;text-align:center}
+.lever[open] .pm::before{content:"\2212"}
+.lever:not([open]) .pm::before{content:"+"}
+.lever .lb{padding:0 0 18px;max-width:72ch;font-size:15px;color:var(--fg)}
+.lever .lb p{margin:0 0 .8em}
+.lever .lb p:last-child{margin:0}
+.lhead{display:grid;grid-template-columns:1.3fr 1fr 1fr 1.2fr auto;gap:14px;padding:8px 0;font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-2);margin-top:28px}
+@media (max-width:880px){.lever>summary,.lhead{grid-template-columns:1fr auto}.lever .lm,.lhead span:not(:first-child){display:none}.lever .ln small{font-size:13px}}
+
+/* can / cannot */
+.duty{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:36px}
+@media (max-width:760px){.duty{grid-template-columns:1fr}}
+.duty h3{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px;font-weight:500}
+.does h3{color:var(--yea)}
+.never h3{color:var(--nay)}
+.duty ul{list-style:none;margin:0;padding:0}
+.duty li{padding:10px 0 10px 26px;border-top:1px solid var(--line);position:relative;font-size:15.5px}
+.duty li::before{position:absolute;left:0;top:9px;font-family:var(--font-mono);font-weight:500;font-size:17px}
+.does li::before{content:"+";color:var(--yea)}
+.never li::before{content:"\00d7";color:var(--nay)}
+.duty li small{display:block;color:var(--fg-2);font-size:13.5px}
+
+/* world bars */
+.bars{padding:10px 18px 6px}
+.bars svg{display:block;width:100%;height:auto}
+.bars text{font-family:var(--font-mono);font-size:11px;fill:var(--fg-2)}
+.bars .nm{fill:var(--fg);font-family:var(--font-body);font-size:12.5px}
+.bars rect{fill:var(--c-mute)}
+.bars rect.us{fill:var(--c-gas)}
+.bars .avg{stroke:var(--fg);stroke-dasharray:none;stroke-width:1}
+.bars .vl{fill:var(--fg);font-weight:500}
+
+/* symmetry table */
+.sym{display:grid;grid-template-columns:180px 1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:28px;font-size:14.5px}
+.sym div{background:var(--sheet);padding:12px 14px;min-width:0}
+.sym .h{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-2)}
+.sym .k{font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;color:var(--fg-2)}
+@media (max-width:640px){.sym{grid-template-columns:1fr 1fr}.sym .k{grid-column:1/-1;background:var(--bg)}}
+
+/* small multiples */
+.sm{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:28px}
+@media (max-width:820px){.sm{grid-template-columns:1fr}}
+.sm .panel{margin-top:0}
+
+footer{border-top:1px solid var(--line);padding-block:40px 64px;color:var(--fg-2);font-size:14px}
+footer ol{padding-left:18px;margin:12px 0 0}
+footer li{margin-bottom:6px}
+footer a{overflow-wrap:anywhere}
+
+@media (prefers-reduced-motion:no-preference){
+  .hero .up{animation:up .7s cubic-bezier(.2,.7,.2,1) both}
+  .hero .up:nth-child(2){animation-delay:.07s}
+  .hero .up:nth-child(3){animation-delay:.14s}
+  .hero .up:nth-child(4){animation-delay:.21s}
+  .hero .up:nth-child(5){animation-delay:.28s}
+  @keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.stack i{transition:none}}
+@media print{.nav,.expandall,.controls{display:none}.deeper .dbody,.event .eb{display:block}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">At the Pump</a>
+    <div class="navlinks">
+      <a href="#decade">§1 Ten years</a>
+      <a href="#gallon">§2 The gallon</a>
+      <a href="#map">§3 The map</a>
+      <a href="#control">§4 Who controls it</a>
+      <a href="#president">§5 The President</a>
+      <a href="#congress">§6 Congress</a>
+      <a href="#world">§7 The world</a>
+      <a href="#supply">§8 Supply</a>
+      <a href="#blame">§9 Blame</a>
+      <button class="expandall" id="expandAll" type="button" aria-pressed="false">Expand everything</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero wrap" id="top">
+  <p class="eyebrow up">At the Pump &middot; an explainer &middot; data through October 2026</p>
+  <h1 class="up">Who really sets the price <em>at the pump?</em></h1>
+  <p class="lede up">Not the President. Not Congress. Not even the oil companies, mostly. The number on the sign is the sum of a global crude market, a few hundred refineries, your state legislature, the weather and the corner station, added up fresh every morning. Here is ten years of that number, what is inside it, and the short honest list of what Washington can actually do about it.</p>
+  <div class="cta up">
+    <a class="btn primary" href="#decade">See the ten years</a>
+    <a class="btn" href="#president">What the President can do</a>
+  </div>
+  <div class="ticker up" aria-label="Headline gas prices">
+    <div><b class="hot" id="tkToday">$4.36</b><span>Today &middot; AAA Oct 11, 2026</span></div>
+    <div><b id="tkYear">$3.13</b><span>One year ago</span></div>
+    <div><b class="cool">$1.72</b><span>The low &middot; Feb 2016</span></div>
+    <div><b>$5.01</b><span>The record &middot; Jun 2022</span></div>
+  </div>
+</header>
+
+<main>
+
+<section class="article" id="decade">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§1 &middot; Ten years</div>
+      <div>
+        <h2>From $1.72 to $5.01 and back to $4.36.</h2>
+        <div class="prose">
+          <p>Every line on this chart is the U.S. Energy Information Administration's monthly average for a gallon of regular. Pick a region to see how far your corner of the country sits from the national line. Flip to today's dollars to see the inflation-adjusted picture. The numbered markers are the moments that moved the price. Tap one.</p>
+        </div>
+
+        <div class="panel">
+          <div class="panel-bar"><span><b>Regular gasoline</b> &middot; dollars per gallon</span><span id="chartNote">Monthly average &middot; EIA</span></div>
+          <div class="controls" role="group" aria-label="Chart controls">
+            <label for="regionSel">Region
+              <select id="regionSel">
+                <option value="US">U.S. average</option>
+                <option value="PADD1">East Coast (PADD 1)</option>
+                <option value="PADD2">Midwest (PADD 2)</option>
+                <option value="PADD3">Gulf Coast (PADD 3)</option>
+                <option value="PADD4">Rocky Mountain (PADD 4)</option>
+                <option value="PADD5">West Coast (PADD 5)</option>
+                <option value="CA">California</option>
+                <option value="CO">Colorado</option>
+                <option value="FL">Florida</option>
+                <option value="MA">Massachusetts</option>
+                <option value="MN">Minnesota</option>
+                <option value="NY">New York</option>
+                <option value="OH">Ohio</option>
+                <option value="TX">Texas</option>
+                <option value="WA">Washington</option>
+              </select>
+            </label>
+            <div class="seg" role="group" aria-label="Time range">
+              <button type="button" data-range="all" aria-pressed="true">2016&ndash;2026</button>
+              <button type="button" data-range="2022" aria-pressed="false">2022</button>
+              <button type="button" data-range="2026" aria-pressed="false">2026</button>
+            </div>
+            <div class="seg" role="group" aria-label="Dollars">
+              <button type="button" data-dollars="nominal" aria-pressed="true">Nominal</button>
+              <button type="button" data-dollars="real" aria-pressed="false">Today's dollars</button>
+            </div>
+            <label class="chk"><input type="checkbox" id="chkDiesel"> Diesel</label>
+            <label class="chk"><input type="checkbox" id="chkTerms"> Presidents</label>
+            <label class="chk"><input type="checkbox" id="chkEvents" checked> Events</label>
+            <button class="tbtn" type="button" id="tblGasBtn" aria-pressed="false" style="margin-left:auto">Table</button>
+          </div>
+          <div class="panel-body">
+            <div class="chart" id="chartGas"></div>
+            <div class="tip" id="tipGas"></div>
+          </div>
+          <div class="legend" id="legGas"></div>
+          <div class="tbl" id="tblGas"></div>
+          <div class="panel-bar" style="border-top:1px solid var(--line);border-bottom:0"><span><b>Crude oil</b> &middot; dollars per barrel &middot; same months</span><span>WTI &amp; Brent spot &middot; EIA</span></div>
+          <div class="panel-body">
+            <div class="chart" id="chartCrude"></div>
+            <div class="tip" id="tipCrude"></div>
+          </div>
+          <div class="legend"><span><i style="border-color:var(--c-crude)"></i>WTI (U.S. benchmark)</span><span><i style="border-color:var(--c-mute)"></i>Brent (world benchmark)</span></div>
+          <div class="panel-foot">The crude line explains most of the gas line, two to four weeks later. A $10 move in a barrel is about 24 cents in a gallon. Inflation adjustment uses CPI-U, indexed to August 2026.</div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><b class="cool">$1.72</b><span>Feb 15, 2016. The cheapest week of the decade. About $2.44 in today's money.</span><small>EIA weekly &middot; shale glut</small></div>
+          <div class="stat"><b>$5.01</b><span>Jun 13, 2022. The all-time record. About $5.66 today. The 2008 peak of $4.11 would be $6.26.</span><small>EIA weekly &middot; Russia invades Ukraine</small></div>
+          <div class="stat"><b class="hot">$4.50</b><span>May 11, 2026. The Hormuz peak. The highest since 2022, but not a record.</span><small>EIA weekly &middot; Strait of Hormuz closed</small></div>
+          <div class="stat"><b class="hot">$4.33</b><span>September 2026 monthly average. The most expensive September ever recorded.</span><small>AAA &middot; re-escalation</small></div>
+        </div>
+
+        <h3 class="sub">The moments that moved it</h3>
+        <ol class="events" id="events"></ol>
+
+        <details class="deeper">
+          <summary>Dig deeper: how to read a gas price chart</summary>
+          <div class="dbody">
+            <p><strong>Nominal vs. real.</strong> The nominal line is what the sign said. The "today's dollars" line scales every month by the Consumer Price Index so a 2016 dollar and a 2026 dollar buy the same basket. In real terms the decade's floor was about $2.44, the 2022 record about $5.66, and 2026's spring peak sits a little under $4.50 because it is already recent.</p>
+            <p><strong>Annual averages, nominal.</strong></p>
+            <table>
+              <tr><th>Year</th><th>Avg</th><th>Year</th><th>Avg</th><th>Year</th><th>Avg</th></tr>
+              <tr><td>2016</td><td>$2.15</td><td>2020</td><td>$2.17</td><td>2024</td><td>$3.31</td></tr>
+              <tr><td>2017</td><td>$2.42</td><td>2021</td><td>$3.00</td><td>2025</td><td>$3.10</td></tr>
+              <tr><td>2018</td><td>$2.72</td><td>2022</td><td>$3.96</td><td>2026 (Jan&ndash;Sep)</td><td>$3.82</td></tr>
+              <tr><td>2019</td><td>$2.60</td><td>2023</td><td>$3.52</td><td></td><td></td></tr>
+            </table>
+            <p><strong>Why the regions never match.</strong> The Gulf Coast sits on top of half the country's refining capacity and almost always has the cheapest gas. The West Coast is an island: few pipelines reach it from the Gulf, California requires its own cleaner blend that out-of-state refineries rarely make, and the state adds the nation's highest fuel taxes plus carbon-market costs. The Midwest swings hardest when a single big refinery goes down. The East Coast imports a lot of its gasoline and feels the Colonial Pipeline's health directly.</p>
+            <p><strong>Seasonality.</strong> Prices usually climb from February into May as refineries do spring maintenance and switch to a more expensive, lower-evaporation summer blend required from about May 1 to September 15. They usually fall after Labor Day. 2026 broke the fall pattern; September was the most expensive September on record because the Gulf war premium came back.</p>
+            <p><strong>Rockets and feathers.</strong> Economists have documented for decades that pump prices rise faster when crude rises than they fall when crude falls. It is real, it is small (days, not months) and it mostly reflects stations protecting margins on inventory they already paid for.</p>
+            <p><strong>Where the numbers come from.</strong> EIA surveys about 1,000 stations every Monday. AAA pulls daily credit-card transactions from roughly 130,000 stations through OPIS. The two track each other within a few cents; EIA is used for history here because it is the official series, AAA for "today" because it is daily.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="gallon">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§2 &middot; The gallon</div>
+      <div>
+        <h2>What you are actually paying for.</h2>
+        <div class="prose">
+          <p>A gallon of regular is four bills stacked on top of each other. The biggest one is the crude oil itself, priced on a world market that does not know or care where you live. Then the refinery's cut, then the pipeline, the truck and the station, then taxes. Drag the crude price and watch the sign change.</p>
+        </div>
+
+        <div class="gallon">
+          <div class="panel" style="margin-top:0">
+            <div class="panel-bar"><span><b>What's in a gallon</b></span><span id="stackNote">May 2026 &middot; $4.48 &middot; EIA</span></div>
+            <div class="stackwrap">
+              <div class="stack" id="stack" role="img" aria-label="Stacked bar of the four cost components of a gallon of gasoline">
+                <i class="crude" style="flex-basis:52%"></i><i class="refine" style="flex-basis:22%"></i><i class="dist" style="flex-basis:15%"></i><i class="tax" style="flex-basis:12%"></i>
+              </div>
+              <div class="stackkey">
+                <div class="crude"><b id="skCrude">$2.33</b>Crude oil<br><span id="skCrudeP">52%</span></div>
+                <div class="refine"><b id="skRefine">$0.99</b>Refining<br><span id="skRefineP">22%</span></div>
+                <div class="dist"><b id="skDist">$0.67</b>Distribution &amp; marketing<br><span id="skDistP">15%</span></div>
+                <div class="tax"><b id="skTax">$0.54</b>Federal &amp; state taxes<br><span id="skTaxP">12%</span></div>
+              </div>
+            </div>
+            <div class="panel-foot">Shares from EIA's May 2026 breakdown. Refining, distribution and taxes are held at their May 2026 dollar amounts when you move the slider; in reality refining margins swing too.</div>
+          </div>
+          <div class="panel calc" style="margin-top:0">
+            <span class="eyebrow">If a barrel of crude costs</span>
+            <div class="big" id="calcCrude">$100<small>/ barrel</small></div>
+            <input type="range" id="crudeRange" min="20" max="160" step="1" value="100" aria-label="Crude oil price per barrel">
+            <div class="rng"><span>$20</span><span>$60</span><span>$100</span><span>$140</span><span>$160</span></div>
+            <span class="eyebrow" style="display:block;margin-top:18px">the sign on the corner reads about</span>
+            <div class="big" id="calcPump">$4.58<small>/ gallon</small></div>
+            <p id="calcNote">A barrel holds 42 gallons, so every $10 on a barrel is about 24 cents on a gallon. At $100 crude, the oil alone is $2.38 of the price.</p>
+          </div>
+        </div>
+
+        <div class="taxrow">
+          <div><b>18.4&cent;</b><span>Federal tax per gallon. Set October 1, 1993. Never raised since. Worth about 42&cent; in today's dollars.</span><small>Congress</small></div>
+          <div><b>33.8&cent;</b><span>Average state taxes and fees. From 9&cent; in Alaska to 74&cent; in California. Diesel averages 35.9&cent;.</span><small>State legislatures &middot; EIA July 2026</small></div>
+          <div><b>&asymp;52&cent;</b><span>Total tax in an average gallon. About 12% of the price at $4.36, but 24% back when gas was $2.17.</span><small>Taxes don't float with the price</small></div>
+        </div>
+
+        <details class="deeper">
+          <summary>Dig deeper: the four layers, one by one</summary>
+          <div class="dbody">
+            <h4>1 &middot; Crude oil (about half)</h4>
+            <p>Crude is a global commodity. A refinery in Texas pays roughly the same for a barrel as one in Rotterdam or Singapore, give or take shipping and grade. The benchmark Americans hear about, West Texas Intermediate, is priced in Cushing, Oklahoma; the world benchmark, Brent, is priced in the North Sea. When the Strait of Hormuz closed in 2026, Brent jumped more than WTI, because the barrels that could not leave the Gulf were Brent-priced barrels. U.S. producers do not sell at a discount to Americans. They sell at the world price, because they can.</p>
+            <h4>2 &middot; Refining (about a fifth)</h4>
+            <p>Refiners buy crude and sell gasoline, diesel and jet fuel. Their margin, called the "crack spread", is the second-biggest and second-most-volatile piece. It balloons when refineries go offline (hurricanes, fires, maintenance) or when one product is scarce. In 2026 diesel margins hit their highest level since 2022 because the Gulf exports a lot of diesel and jet fuel and the Middle East's refineries were cut off. The U.S. has 130 operable refineries, two fewer than a year earlier, and no new large one has been built since 1977.</p>
+            <h4>3 &middot; Distribution and marketing (about 15%)</h4>
+            <p>Pipelines, terminals, tanker trucks, the station's rent, the credit-card fee (2 to 3% of the sale) and the station's own margin, which is usually 10 to 20 cents and can go negative for a week when wholesale prices spike. Most stations are independently owned and make more money inside the store than at the pump. Branded stations pay for the name.</p>
+            <h4>4 &middot; Taxes (about 12%)</h4>
+            <p>The federal excise tax is 18.3 cents plus a 0.1-cent underground-tank cleanup fee, flat since 1993. It funds the Highway Trust Fund, which is why "gas tax holiday" fights are really fights about road money. State taxes range from 8.95 cents (Alaska) to 73.6 cents (California), and some states layer a sales tax on top, so their take rises with the price. Counties and cities can add more; EIA's figures do not include local taxes.</p>
+            <h4>What a barrel becomes</h4>
+            <p>A 42-gallon barrel of crude yields roughly 19 to 20 gallons of gasoline, 11 to 12 gallons of diesel and heating oil, 4 gallons of jet fuel, and a few gallons of propane, asphalt and other products. That is why diesel and gas prices can diverge: they come out of the same barrel but serve different markets.</p>
+            <h4>Summer vs. winter gasoline</h4>
+            <p>Summer gasoline must evaporate less (lower Reid vapor pressure) to reduce smog, which makes it a few cents to 15 cents more expensive to make. The EPA can waive the rule in an emergency, which is what the E15 waivers in 2022 and 2026 did: they let stations keep selling the 15% ethanol blend through the summer, which is typically 10 to 25 cents cheaper, at the roughly 3,000 stations that carry it.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="map">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§3 &middot; The map</div>
+      <div>
+        <h2>Same crude. Different sign.</h2>
+        <div class="prose">
+          <p>On October 11, 2026, a gallon of regular cost $3.81 in Georgia and $6.31 in California. Nobody in California is paying more for crude. They are paying for taxes, a cleaner blend, carbon fees, two closed refineries and an island market with no pipeline to the cheap Gulf Coast supply. Switch layers to see how much of each state's price is tax, and which refining region it belongs to.</p>
+        </div>
+
+        <div class="panel">
+          <div class="controls" role="group" aria-label="Map layers">
+            <div class="seg" role="group" aria-label="Layer">
+              <button type="button" data-layer="price" aria-pressed="true">Price today</button>
+              <button type="button" data-layer="tax" aria-pressed="false">State taxes</button>
+              <button type="button" data-layer="net" aria-pressed="false">Price minus taxes</button>
+              <button type="button" data-layer="padd" aria-pressed="false">Refining region</button>
+            </div>
+            <span class="eyebrow" id="mapNote" style="margin-left:auto">AAA &middot; Oct 11, 2026</span>
+            <button class="tbtn" type="button" id="tblMapBtn" aria-pressed="false">Table</button>
+          </div>
+          <div class="panel-body">
+            <div class="map" id="mapWrap"></div>
+            <div class="tip" id="tipMap"></div>
+          </div>
+          <div class="maplegend" id="mapLegend"></div>
+          <div class="mapdetail" id="mapDetail"></div>
+          <div class="tbl" id="tblMap"></div>
+          <div class="panel-foot">Prices: AAA state averages for regular, October 11, 2026. Taxes: EIA state motor fuel taxes and fees, July 2026 (statutory rates; Georgia and Ohio had temporary suspensions in effect in the fall). Refining regions are the five federal Petroleum Administration for Defense Districts. Tiles are a cartogram: every state the same size, roughly where it sits.</div>
+        </div>
+
+        <details class="deeper">
+          <summary>Dig deeper: why California, why the Gulf, why the spread</summary>
+          <div class="dbody">
+            <h4>California: a $2.50 gap and six reasons</h4>
+            <ul>
+              <li><strong>Taxes and fees:</strong> 73.6 cents a gallon in state excise and fees, the highest in the country, plus the 18.4-cent federal tax.</li>
+              <li><strong>Carbon programs:</strong> the cap-and-trade program and the Low Carbon Fuel Standard add roughly 30 to 50 cents depending on credit prices.</li>
+              <li><strong>A special blend:</strong> CARB gasoline is cleaner-burning and only a handful of refineries, almost all inside the state, make it. When one goes down there is no spare supply next door.</li>
+              <li><strong>An island:</strong> no major pipeline brings fuel from the Gulf Coast over the Rockies. Imports arrive by ship, which takes weeks.</li>
+              <li><strong>Closing refineries:</strong> Phillips 66 shut its Los Angeles refinery in late 2025, and Valero announced the closure of Benicia for 2026. California lost roughly a fifth of its refining capacity in a year.</li>
+              <li><strong>Everything else costs more:</strong> land, labor, and the state's higher station operating costs show up in the margin too.</li>
+            </ul>
+            <h4>The Gulf Coast: the discount for living next to the refinery</h4>
+            <p>Texas, Louisiana, Mississippi and Alabama sit on top of about half of all U.S. refining capacity and the pipelines that feed the rest of the country. Low state taxes (Texas 20 cents, Mississippi 24.4) finish the job. The Gulf is also where hurricanes hit, which is why a storm in the Gulf moves prices in Ohio.</p>
+            <h4>The Northeast and the Colonial Pipeline</h4>
+            <p>Most gasoline between Houston and New Jersey travels one 5,500-mile pipeline. When ransomware shut it for six days in May 2021, stations across the Southeast ran dry within 72 hours. The Northeast also imports gasoline from Europe and Canada, which is why the Jones Act, a 1920 law requiring U.S.-built, U.S.-crewed ships between U.S. ports, gets waived in emergencies to let foreign tankers carry Gulf fuel north.</p>
+            <h4>Price-gouging laws are state laws</h4>
+            <p>There is no federal price-gouging statute. About three dozen states have one, usually triggered by a declared emergency and usually aimed at retailers rather than refiners or traders. The House passed a federal fuel price-gouging bill in May 2022; the Senate never took it up.</p>
+            <h4>State tax holidays in 2026</h4>
+            <p>Georgia suspended its 33-cent gas tax for 60 days in the spring, extended it, and suspended it again in late September. Ohio passed a 90-day suspension. Utah cut its rate about 15% through year-end. Illinois and Kentucky froze scheduled increases. Studies of the 2022 holidays found that roughly 60 to 90% of the cut reached drivers, and that prices drifted back up within weeks as demand rose. Fewer states followed Georgia in 2026 than in 2022 because state budgets are tighter.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="control">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§4 &middot; Who controls it</div>
+      <div>
+        <h2>Nine hands on the pump. One of them is yours.</h2>
+        <div class="prose">
+          <p>The bars under each name are a rough measure of how much of the price that player can move, and the small print says how fast. The honest version of the chart has the global crude market on top and the White House near the bottom, with one giant asterisk: the President can't set the price of oil, but the President can start the things that do.</p>
+        </div>
+
+        <div class="cp">
+          <div class="cpc">
+            <h3>The world crude market</h3>
+            <div class="meta"><span>~50% of the price</span><span>Moves in hours</span></div>
+            <div class="grip" aria-label="Grip 5 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+            <p>OPEC+ (Saudi Arabia, Russia and twenty-odd others) decides how much to pump. U.S. shale companies decide whether $60 oil is worth drilling. China decides how much to buy. Traders price the next war before it happens. Nobody is in charge, which is the point.</p>
+            <details><summary>More</summary><p>OPEC+ controls about 40% of world supply and nearly all of the spare capacity, which is the only lever that can add barrels within weeks. The U.S. is the world's largest producer (13.9 million barrels a day) but has almost no spare capacity: shale wells either run or they don't. Futures markets in New York and London set the price every second; the physical barrel follows. Roughly 20% of the world's oil moves through the Strait of Hormuz, which is why one strait closing in 2026 moved the price in Kansas.</p></details>
+          </div>
+          <div class="cpc">
+            <h3>Refiners</h3>
+            <div class="meta"><span>~15&ndash;25%</span><span>Weeks</span></div>
+            <div class="grip" aria-label="Grip 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+            <p>130 refineries turn crude into fuel. Their margin swells when supply is tight, a plant catches fire, a hurricane floods the Gulf, or the summer blend switch arrives. It shrinks when demand sags. They do not set the crude price and mostly cannot change how much they can process.</p>
+            <details><summary>More</summary><p>Refining capacity fell by about 250,000 barrels a day in 2025 as two large plants closed. Capacity is a years-long decision; margins are a weekly one. When politicians accuse refiners of gouging, this is the layer they mean, and it is the layer the FTC has investigated repeatedly (2006, 2011, 2022) without finding illegal coordination.</p></details>
+          </div>
+          <div class="cpc">
+            <h3>Your state legislature</h3>
+            <div class="meta"><span>Up to ~15%</span><span>Years, or overnight</span></div>
+            <div class="grip" aria-label="Grip 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div>
+            <p>States set the biggest tax in the gallon, from 9 cents to 74 cents, decide whether to require a cleaner blend, and run carbon programs. A tax holiday can shave 20 to 50 cents in a week. It can also drain a road budget just as fast.</p>
+            <details><summary>More</summary><p>State fuel taxes pay for roughly a quarter of state and local road spending. Twenty-six states changed their gas tax between January 2025 and January 2026; most raised it. California, Washington and Oregon run carbon pricing that adds a visible per-gallon cost. State price-gouging laws exist in about 37 states, but they are triggered by emergencies and aimed at retailers.</p></details>
+          </div>
+          <div class="cpc">
+            <h3>Distributors and your station</h3>
+            <div class="meta"><span>~10&ndash;15%</span><span>Days</span></div>
+            <div class="grip" aria-label="Grip 2 of 5"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+            <p>The pipeline, the terminal, the truck, the card fee and the store's own 10 to 20 cents. Local competition does most of the work here, which is why two stations a mile apart can differ by 40 cents and why prices are higher where there is only one.</p>
+            <details><summary>More</summary><p>About 60% of U.S. stations are single-store independents. They buy wholesale at the "rack" price that changes daily and pass it on with a lag, which is the mechanism behind "rockets and feathers." The brand on the sign (Shell, Exxon) usually does not own the station.</p></details>
+          </div>
+          <div class="cpc">
+            <h3>Weather</h3>
+            <div class="meta"><span>Regional spikes</span><span>Weeks</span></div>
+            <div class="grip" aria-label="Grip 2 of 5"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+            <p>Hurricanes shut Gulf platforms and refineries. Harvey took a quarter of U.S. refining offline in 2017 and added 30 cents in two weeks. Deep freezes do the same to Texas. Hurricane Isaias shut two-thirds of Gulf production in October 2026.</p>
+            <details><summary>More</summary><p>Offshore production usually returns within days of a storm. Refineries are the slow part: a flooded plant can take weeks to restart, and the Gulf's refineries supply the Southeast and, via the Colonial Pipeline, the East Coast. The Energy Department loaned 4 million barrels from the reserve to two refiners after Isaias to keep them running.</p></details>
+          </div>
+          <div class="cpc">
+            <h3>The President</h3>
+            <div class="meta"><span>Direct: pennies</span><span>Indirect: dollars</span></div>
+            <div class="grip" aria-label="Grip 2 of 5"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+            <p>Can release the reserve, waive fuel rules, waive the Jones Act, change sanctions and tariffs, lean on allies, and ask Congress for things. Cannot set a price, order a company to drill, or tell OPEC anything. Can start or end a war, which outweighs all of the above.</p>
+            <details><summary>More</summary><p>See §5. The 2022 reserve release, the largest in history, is estimated by Treasury to have cut the price by 17 to 42 cents. The 2026 decision to strike Iran added about $1.50 within ten weeks. The asymmetry is the whole story.</p></details>
+          </div>
+          <div class="cpc">
+            <h3>Congress</h3>
+            <div class="meta"><span>18.4&cent; directly</span><span>Rarely acts</span></div>
+            <div class="grip" aria-label="Grip 1 of 5"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+            <p>Owns the federal gas tax, the rules of the strategic reserve, export law, fuel-economy mandates and the power to tax windfalls. Has not changed the gas tax since 1993 and did not pass a single gas-price bill in 2022 or 2026.</p>
+            <details><summary>More</summary><p>See §6. Congress's biggest historical moves were slow ones: creating the reserve (1975), banning and then un-banning crude exports (1975, 2015), and fuel-economy rules that cut how much gas the country burns per mile.</p></details>
+          </div>
+          <div class="cpc">
+            <h3>The Federal Reserve and the dollar</h3>
+            <div class="meta"><span>Indirect</span><span>Months</span></div>
+            <div class="grip" aria-label="Grip 1 of 5"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+            <p>Oil is priced in dollars. A stronger dollar makes a barrel cheaper for Americans and pricier for everyone else; higher interest rates cool demand. The Fed never mentions gasoline and moves it anyway.</p>
+            <details><summary>More</summary><p>Energy is also the most volatile piece of the inflation the Fed targets. A gas spike raises headline inflation, which pushes the Fed toward higher rates, which slows the economy, which lowers oil demand. The loop takes a year.</p></details>
+          </div>
+          <div class="cpc">
+            <h3>You</h3>
+            <div class="meta"><span>Demand: 135 billion gallons a year</span><span>Years</span></div>
+            <div class="grip" aria-label="Grip 1 of 5"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+            <p>Americans burn about 8.9 million barrels of gasoline a day. Demand barely flinches when prices rise, which is why spikes are so sharp. The slow levers, more efficient cars, electric cars, driving less, are the only ones that permanently shrink the bill.</p>
+            <details><summary>More</summary><p>U.S. gasoline demand peaked in 2018 and has drifted down since, even as miles driven recovered, because the fleet keeps getting more efficient and about one in ten new cars is electric. Economists estimate a 10% price rise cuts gasoline demand only 2 to 3% in the short run.</p></details>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>Small direct hand. Enormous indirect one.</strong>
+          <p>Everything a President can do on purpose to lower gas prices is worth pennies to a few dimes. Several things a President can do for other reasons, sanctions, tariffs, a blockade, a war, are worth dollars. That is why the scorecard in §5 has two columns.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="president">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§5 &middot; The President</div>
+      <div>
+        <h2>The levers in the Oval Office, with the price tag on each.</h2>
+        <div class="prose">
+          <p>Each lever below shows how fast it works, roughly how much it can move a gallon, and the last time it was pulled. The size estimates come from Treasury, EIA and independent analysts; they are ranges, not promises. Open any row for the history.</p>
+        </div>
+
+        <div class="lhead"><span>Lever</span><span>Speed</span><span>Size</span><span>Last pulled</span><span></span></div>
+        <div class="levers">
+          <details class="lever">
+            <summary><span class="ln">Release the Strategic Petroleum Reserve<small>Sell or loan barrels from the government's salt caverns in Texas and Louisiana</small></span><span class="lm"><b>Speed</b><strong>Days to weeks</strong></span><span class="lm"><b>Size</b><strong>17&ndash;42&cent; (2022)</strong></span><span class="lm"><b>Last</b><strong>Mar 11, 2026 &middot; 172M bbl</strong></span><span class="pm"></span></summary>
+            <div class="lb">
+              <p>The reserve was built after the 1973 embargo to cover a supply cutoff, not to manage prices, but every President since Bush has used it that way. Biden ordered 180 million barrels released in 2022, about a million a day for six months, the largest ever. Treasury later estimated it lowered gasoline by 17 to 42 cents a gallon. Trump ordered 172 million released on March 11, 2026 as the U.S. share of a 400-million-barrel coordinated release by International Energy Agency members. Refiners initially took only about half the barrels offered.</p>
+              <p>The catch is the cushion gets thinner each time. The reserve held 695 million barrels in 2016. It holds 283 million as of October 2, 2026, the lowest since 1982 and near the 250-to-300-million level engineers consider the operational floor. Refilling at $80 oil costs more than selling at $100 raised. Congress has also ordered sales to pay for budgets, about 290 million barrels across 2017 to 2028.</p>
+            </div>
+          </details>
+          <details class="lever">
+            <summary><span class="ln">Waive fuel rules (E15, summer blend)<small>EPA emergency waivers that let cheaper or higher-ethanol gasoline be sold through summer</small></span><span class="lm"><b>Speed</b><strong>Days</strong></span><span class="lm"><b>Size</b><strong>10&ndash;25&cent;, where sold</strong></span><span class="lm"><b>Last</b><strong>Mar 2026</strong></span><span class="pm"></span></summary>
+            <div class="lb">
+              <p>E15 is gasoline with 15% ethanol instead of 10%. It is usually 10 to 25 cents cheaper and is normally barred from June 1 to September 15 in most states for smog reasons. Biden waived the rule in April 2022; Trump's EPA issued a nationwide emergency waiver in March 2026. The savings are real but reach only the roughly 3,000 stations (about 2 to 3%) that sell E15, concentrated in the Midwest. Waiving the summer-blend rule itself would save a few cents more broadly but worsen ozone.</p>
+            </div>
+          </details>
+          <details class="lever">
+            <summary><span class="ln">Waive the Jones Act<small>Let foreign-flag tankers carry fuel between U.S. ports</small></span><span class="lm"><b>Speed</b><strong>Days</strong></span><span class="lm"><b>Size</b><strong>Cents, regional</strong></span><span class="lm"><b>Last</b><strong>Mar 17, 2026 &middot; to Nov 15</strong></span><span class="pm"></span></summary>
+            <div class="lb">
+              <p>The 1920 Jones Act requires ships moving cargo between U.S. ports to be U.S.-built and U.S.-crewed, and there are very few such tankers. Waivers let cheap Gulf Coast gasoline reach the Northeast and West Coast by sea instead of those regions importing from abroad. Waivers were issued after Harvey (2017), Ida (2021), and on March 17, 2026, when Homeland Security granted a broad waiver at the Pentagon's request, since extended to November 15 with a narrower product list. Shipbuilders and unions oppose extensions; a House oversight letter argued it showed little effect at the pump.</p>
+            </div>
+          </details>
+          <details class="lever">
+            <summary><span class="ln">Sanctions, tariffs and blockades<small>Decide whose oil can be sold, and whose can enter the U.S.</small></span><span class="lm"><b>Speed</b><strong>Weeks to months</strong></span><span class="lm"><b>Size</b><strong>$5&ndash;$20 a barrel either way</strong></span><span class="lm"><b>Last</b><strong>2025&ndash;26</strong></span><span class="pm"></span></summary>
+            <div class="lb">
+              <p>This is the biggest lever and it mostly points up. Sanctions on Iran (2018, 2025), Venezuela (2019) and Russia's largest producers (October 2025) each removed barrels from the market or forced them into discounted gray channels. Tariffs on Canadian and Mexican crude, floated in 2025, would have raised Midwest and Gulf refining costs because those refineries are built for heavy crude. The 2026 naval blockade of Iran and the strikes that preceded it are the reason this page's chart has a second mountain on it.</p>
+              <p>Pointing down: lifting sanctions (the 2016 Iran deal added about a million barrels a day), or granting waivers, as in November 2018 when eight countries were allowed to keep buying Iranian oil and crude fell 40% in two months.</p>
+            </div>
+          </details>
+          <details class="lever">
+            <summary><span class="ln">Lean on OPEC and allies<small>Phone calls, tweets, summits</small></span><span class="lm"><b>Speed</b><strong>Weeks, if ever</strong></span><span class="lm"><b>Size</b><strong>0 to a lot</strong></span><span class="lm"><b>Last</b><strong>Oct 9, 2026 &middot; Russia diesel deal</strong></span><span class="pm"></span></summary>
+            <div class="lb">
+              <p>Trump's 2018 tweets at OPEC preceded modest output increases. In April 2020 he brokered a 9.7-million-barrel-a-day OPEC+ cut to stop oil from going to zero, the one time a President moved the price up on purpose. Biden flew to Jeddah in July 2022 and got a token 100,000-barrel increase, then a 2-million cut three months later. In October 2026 Trump announced a deal for Russia to ship diesel to ease a record $6.53 diesel price. Allies act in their own interest; sometimes those interests align.</p>
+            </div>
+          </details>
+          <details class="lever">
+            <summary><span class="ln">Restrict fuel exports<small>Ban or cap exports of gasoline, diesel or crude</small></span><span class="lm"><b>Speed</b><strong>Weeks</strong></span><span class="lm"><b>Size</b><strong>Uncertain, possibly negative</strong></span><span class="lm"><b>Last</b><strong>Crude: 1975&ndash;2015 &middot; Fuel: never</strong></span><span class="pm"></span></summary>
+            <div class="lb">
+              <p>The U.S. exports about 1 million barrels a day of gasoline and 1.3 million of diesel, mostly from the Gulf Coast to Latin America and Europe. Keeping it home sounds like more supply, but the Northeast and West Coast cannot physically receive Gulf product without ships (see the Jones Act), so Gulf refiners would cut runs instead, which analysts estimate could reduce gasoline output by up to 750,000 barrels a day. The President has limited authority here without Congress; the crude export ban was a law (1975) and so was its repeal (2015). In September 2026 Trump called for a diesel export ban and the administration said it was "examining" it. As of mid-October, no ban had been imposed.</p>
+            </div>
+          </details>
+          <details class="lever">
+            <summary><span class="ln">Open federal land and approve pipelines<small>Lease sales, drilling permits, Keystone-style approvals</small></span><span class="lm"><b>Speed</b><strong>Years</strong></span><span class="lm"><b>Size</b><strong>~0 this year</strong></span><span class="lm"><b>Last</b><strong>Jan 20, 2025 &middot; energy emergency order</strong></span><span class="pm"></span></summary>
+            <div class="lb">
+              <p>Federal land and waters produce about a quarter of U.S. oil. A lease sold today produces oil in three to ten years. Companies drill when the price justifies it, not when a permit allows it: U.S. output hit a record 13.99 million barrels a day in October 2025 under rules that had barely changed, and shale companies in 2026 announced buybacks rather than rigs even at $100 oil. "Drill, baby, drill" and "ban fracking" both describe the 2030s price, not this year's.</p>
+            </div>
+          </details>
+          <details class="lever">
+            <summary><span class="ln">Price controls<small>Freeze or cap the price by decree</small></span><span class="lm"><b>Speed</b><strong>Immediate</strong></span><span class="lm"><b>Size</b><strong>Shortages</strong></span><span class="lm"><b>Last</b><strong>1971&ndash;1981</strong></span><span class="pm"></span></summary>
+            <div class="lb">
+              <p>Nixon froze prices in August 1971 under a wartime-style law. When the 1973 embargo hit, controlled prices could not rise to ration demand, so the country rationed by waiting: odd-even days, hours-long lines and stations with no gas. Carter began decontrol in 1979, Reagan finished it in January 1981, and prices eventually fell. The authority has lapsed; a President today would need Congress. No one has asked.</p>
+            </div>
+          </details>
+        </div>
+
+        <div class="duty">
+          <div class="does">
+            <h3>What a President can do</h3>
+            <ul>
+              <li>Release or loan oil from the reserve<small>Pennies to dimes, for months</small></li>
+              <li>Waive E15, summer-blend and Jones Act rules<small>Pennies, in places</small></li>
+              <li>Lift, impose or waive sanctions and tariffs<small>Dollars, slowly, either direction</small></li>
+              <li>Start or end a conflict that touches oil<small>Dollars, fast</small></li>
+              <li>Ask Congress for a gas tax holiday, export rules or price-gouging law<small>Biden asked in 2022. Trump floated it in 2026. Congress passed neither.</small></li>
+              <li>Direct the FTC to investigate<small>Done in 2006, 2011, 2022. No findings of collusion.</small></li>
+            </ul>
+          </div>
+          <div class="never">
+            <h3>What a President cannot do</h3>
+            <ul>
+              <li>Set the price of gasoline or crude<small>No authority since 1981</small></li>
+              <li>Order OPEC, Saudi Arabia or Russia to pump more</li>
+              <li>Order U.S. companies to drill, refine or sell at home<small>They sell at the world price because they can</small></li>
+              <li>Change the federal gas tax<small>That is a law. Congress only.</small></li>
+              <li>Build a refinery or a pipeline this year</li>
+              <li>Stop a hurricane, a cold snap, or a fire at a refinery</li>
+            </ul>
+          </div>
+        </div>
+
+        <details class="deeper">
+          <summary>Dig deeper: the reserve, by the numbers</summary>
+          <div class="dbody">
+            <p>Congress created the Strategic Petroleum Reserve in the Energy Policy and Conservation Act of 1975, two years after the Arab embargo. It is four salt-dome sites on the Texas and Louisiana coast with about 714 million barrels of capacity. Peak fill was 727 million barrels in 2009. Emergency drawdowns before 2022 were small: 17 million barrels for the 1991 Gulf War, 11 million after Katrina, 30 million for Libya in 2011.</p>
+            <table>
+              <tr><th>When</th><th>Who</th><th>What</th><th>Level after</th></tr>
+              <tr><td>2016</td><td>&mdash;</td><td>Full, essentially untouched</td><td>695M</td></tr>
+              <tr><td>2017&ndash;2021</td><td>Congress</td><td>Mandated sales to fund budgets</td><td>594M</td></tr>
+              <tr><td>Nov 2021</td><td>Biden</td><td>50M coordinated release</td><td>&mdash;</td></tr>
+              <tr><td>Mar&ndash;Oct 2022</td><td>Biden</td><td>180M, 1M bbl/day, largest ever</td><td>347M</td></tr>
+              <tr><td>2023&ndash;2025</td><td>Biden, Trump</td><td>Refill at ~$75&ndash;$80</td><td>415M</td></tr>
+              <tr><td>Mar 2026</td><td>Trump</td><td>172M ordered (IEA 400M total)</td><td>283M (Oct 2)</td></tr>
+              <tr><td>Oct 2026</td><td>Trump</td><td>4M loaned to refiners after Hurricane Isaias</td><td>&mdash;</td></tr>
+            </table>
+            <p>The chart in §8 shows the whole curve. Note the shape: a decade of politics has turned a 700-million-barrel cushion into a 280-million one, and the next emergency starts from there.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="congress">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§6 &middot; Congress</div>
+      <div>
+        <h2>Congress owns the biggest switches and never flips them.</h2>
+        <div class="prose">
+          <p>The federal gas tax, the reserve's rules, export law, fuel-economy mandates, windfall taxes and a federal price-gouging law are all Congress's to write. In both of the decade's price crises, 2022 and 2026, members introduced bills on every one of them and passed none.</p>
+        </div>
+
+        <div class="lhead"><span>Power</span><span>Speed</span><span>Size</span><span>Status</span><span></span></div>
+        <div class="levers">
+          <details class="lever">
+            <summary><span class="ln">Suspend the federal gas tax<small>A "gas tax holiday"</small></span><span class="lm"><b>Speed</b><strong>Days after passage</strong></span><span class="lm"><b>Size</b><strong>Up to 18.4&cent;, likely 11&ndash;16&cent;</strong></span><span class="lm"><b>Status</b><strong>Four bills in 2026, none passed</strong></span><span class="pm"></span></summary>
+            <div class="lb">
+              <p>The tax raises roughly $25 billion a year from gasoline for the Highway Trust Fund, which the Congressional Budget Office already expects to run short by 2028. Biden asked for a three-month holiday on June 22, 2022; neither chamber voted. In 2026 Senators Kelly and Blumenthal filed the Gas Prices Relief Act (S.4032, House companion H.R.7919) in March, Senator Hawley the Gas Tax Suspension Act (S.4485) on May 11, and Representative Boyle a bill that would suspend the tax automatically whenever the national average tops $4. Trump floated the idea the same day as Hawley's bill. Majority Leader Thune was cool to it. The Bipartisan Policy Center put a five-month holiday's cost at $17 billion. Studies of 2022's state holidays found 60 to 90% of the cut reached drivers.</p>
+            </div>
+          </details>
+          <details class="lever">
+            <summary><span class="ln">Ban or restrict exports<small>Crude, gasoline, diesel</small></span><span class="lm"><b>Speed</b><strong>Weeks</strong></span><span class="lm"><b>Size</b><strong>Contested</strong></span><span class="lm"><b>Status</b><strong>H.R.8266 in committee</strong></span><span class="pm"></span></summary>
+            <div class="lb">
+              <p>Congress banned most crude exports in 1975 and repealed the ban in December 2015, which is a big reason U.S. production doubled afterward: producers could sell anywhere. Representative Khanna's Gasoline Export Ban Act (H.R.8266, April 14, 2026) would order a ban whenever the national average stays at or above $3.12 for a week. Senator Grassley and others pushed a diesel export ban in September 2026. Refiners and most analysts say a ban would cut Gulf refinery runs and could raise prices in regions that cannot receive Gulf product by pipeline.</p>
+            </div>
+          </details>
+          <details class="lever">
+            <summary><span class="ln">A federal price-gouging law<small>Make "unconscionably excessive" fuel prices illegal during emergencies</small></span><span class="lm"><b>Speed</b><strong>Enforcement takes years</strong></span><span class="lm"><b>Size</b><strong>Unknown</strong></span><span class="lm"><b>Status</b><strong>Passed House 2022, died in Senate</strong></span><span class="pm"></span></summary>
+            <div class="lb">
+              <p>The Consumer Fuel Price Gouging Prevention Act passed the House 217 to 207 on May 19, 2022 and was never taken up by the Senate. It would have let the FTC fine sellers for "unconscionably excessive" prices during a declared emergency. Critics on both sides noted it did not define the term. State laws already cover retailers in about 37 states; the gap is at the refining and trading layers, where every federal investigation to date has found high margins but no illegal coordination.</p>
+            </div>
+          </details>
+          <details class="lever">
+            <summary><span class="ln">Sue OPEC (NOPEC)<small>Strip OPEC members of sovereign immunity in U.S. antitrust court</small></span><span class="lm"><b>Speed</b><strong>Years</strong></span><span class="lm"><b>Size</b><strong>Unknown, risks retaliation</strong></span><span class="lm"><b>Status</b><strong>Cleared committee 2022, never a floor vote</strong></span><span class="pm"></span></summary>
+            <div class="lb">
+              <p>The No Oil Producing and Exporting Cartels Act has been introduced in every Congress since 2000 and cleared the Senate Judiciary Committee in May 2022. Every administration of both parties has opposed it, fearing Saudi retaliation against U.S. assets and the loss of the one producer that keeps spare capacity. It remains the bill most members co-sponsor and least want to pass.</p>
+            </div>
+          </details>
+          <details class="lever">
+            <summary><span class="ln">Run the reserve<small>Fund it, mandate sales, set the rules for releases</small></span><span class="lm"><b>Speed</b><strong>Budget cycle</strong></span><span class="lm"><b>Size</b><strong>Sets the cushion</strong></span><span class="lm"><b>Status</b><strong>Ongoing</strong></span><span class="pm"></span></summary>
+            <div class="lb">
+              <p>Congress created the reserve, decides its size and has repeatedly sold it down to pay for other things: about 290 million barrels of mandated sales were written into laws from 2015 to 2018, scheduled through 2028. In 2024 Congress ordered the small Northeast Gasoline Supply Reserve closed; the Energy Department sold its 1 million barrels that May. Refilling after 2026 will cost tens of billions that Congress must appropriate.</p>
+            </div>
+          </details>
+          <details class="lever">
+            <summary><span class="ln">Tax windfall profits<small>A surtax on oil company profits above a baseline</small></span><span class="lm"><b>Speed</b><strong>Next tax year</strong></span><span class="lm"><b>Size</b><strong>Zero at the pump, by design</strong></span><span class="lm"><b>Status</b><strong>1980&ndash;1988; proposed 2022, 2026</strong></span><span class="pm"></span></summary>
+            <div class="lb">
+              <p>The Crude Oil Windfall Profit Tax of 1980 raised far less than projected, reduced domestic output by an estimated 3 to 6%, and was repealed in 1988. The 2022 Big Oil Windfall Profits Tax (Whitehouse, Khanna) would have rebated the proceeds to drivers; it never got a vote. The point of such a tax is fairness or revenue, not the price; economists mostly agree it does not lower prices and may slightly raise them.</p>
+            </div>
+          </details>
+          <details class="lever">
+            <summary><span class="ln">Fuel economy and electrification<small>CAFE standards, EV credits, charging money</small></span><span class="lm"><b>Speed</b><strong>Decades</strong></span><span class="lm"><b>Size</b><strong>The only permanent lever</strong></span><span class="lm"><b>Status</b><strong>Loosened 2025</strong></span><span class="pm"></span></summary>
+            <div class="lb">
+              <p>Fuel-economy rules written in 1975 and tightened in 2007 and 2012 are why a 2026 car burns about half the gas per mile of a 1975 car, and why U.S. gasoline demand peaked in 2018 even as the country drove more. The 2022 climate law's EV credits were repealed in 2025 and the 2024 fuel-economy targets rolled back. These rules move the bill, not the price, and they do it by making the price matter less.</p>
+            </div>
+          </details>
+        </div>
+
+        <div class="callout">
+          <strong>Why nothing passes.</strong>
+          <p>Every fast lever costs money a party does not want to spend (the Highway Trust Fund), helps a region it does not represent (export rules), or hands a win to a President of the other party (everything, in an election year). Prices usually fall before the bill does. Both 2022 and 2026 followed the script.</p>
+        </div>
+
+        <details class="deeper">
+          <summary>Dig deeper: the timeline of federal gas-price law</summary>
+          <div class="dbody">
+            <table>
+              <tr><th>Year</th><th>Law or action</th><th>What it did</th></tr>
+              <tr><td>1932</td><td>Revenue Act</td><td>First federal gas tax, 1 cent</td></tr>
+              <tr><td>1956</td><td>Highway Revenue Act</td><td>3 cents, dedicated to the Highway Trust Fund</td></tr>
+              <tr><td>1971</td><td>Nixon price freeze</td><td>Wage and price controls, later extended to oil; gas lines in 1973&ndash;74</td></tr>
+              <tr><td>1975</td><td>Energy Policy and Conservation Act</td><td>Created the SPR, CAFE fuel-economy standards, and the crude export ban</td></tr>
+              <tr><td>1980</td><td>Windfall Profit Tax</td><td>Surtax on oil profits; repealed 1988</td></tr>
+              <tr><td>1981</td><td>Reagan decontrol</td><td>Ended remaining oil price controls</td></tr>
+              <tr><td>1993</td><td>Omnibus Budget Reconciliation Act</td><td>Gas tax to 18.4 cents, where it still is</td></tr>
+              <tr><td>2005, 2007</td><td>Energy Policy Act, EISA</td><td>Renewable Fuel Standard (ethanol mandate), higher CAFE targets</td></tr>
+              <tr><td>2015</td><td>Consolidated Appropriations Act</td><td>Repealed the crude export ban; mandated SPR sales</td></tr>
+              <tr><td>2022</td><td>House vote</td><td>Price-gouging bill passed House 217&ndash;207, died in Senate; Inflation Reduction Act EV credits and mandated lease sales</td></tr>
+              <tr><td>2025</td><td>Reconciliation law</td><td>Repealed EV credits; expanded leasing; rolled back fuel-economy targets</td></tr>
+              <tr><td>2026</td><td>S.4032, H.R.7919, S.4485, H.R.8266</td><td>Gas tax holidays and a gasoline export ban introduced; none enacted as of October</td></tr>
+            </table>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="world">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§7 &middot; The world</div>
+      <div>
+        <h2>Everyone buys the same barrel. Nobody pays the same gallon.</h2>
+        <div class="prose">
+          <p>Crude costs about the same in every port on earth. What differs is what governments do on top of it: tax it heavily (most of Europe), subsidize it (the Gulf and Venezuela), or mostly leave it alone (the United States). American gas is cheap by rich-country standards, and the reason is almost entirely the bottom bar of the gallon.</p>
+        </div>
+
+        <div class="panel">
+          <div class="panel-bar"><span><b>Price of gasoline</b> &middot; U.S. dollars per gallon</span><span>GlobalPetrolPrices.com &middot; Oct 5, 2026</span></div>
+          <div class="bars" id="chartWorld"></div>
+          <div class="panel-foot">Octane-95 pump prices converted at 3.785 liters per gallon. The U.S. figure here ($4.65) is higher than AAA's regular-grade average because 95-octane is premium in U.S. terms. World average: $6.02.</div>
+        </div>
+
+        <details class="deeper">
+          <summary>Dig deeper: taxes, subsidies and what they buy</summary>
+          <div class="dbody">
+            <p><strong>Europe taxes fuel to pay for everything else.</strong> In the Netherlands, Italy and the U.K., taxes are 50 to 60% of the pump price. Those countries also have smaller cars, denser cities and rail, partly because of the tax. Germany and several others cut fuel taxes temporarily in the spring of 2026, as they did in 2022.</p>
+            <p><strong>The Gulf and Venezuela subsidize it.</strong> Saudi gasoline is about $2.35 a gallon; Iran's and Venezuela's are effectively free, which produces smuggling, shortages and the odd spectacle of oil exporters importing gasoline because their refineries are starved of investment. Subsidies cost those governments tens of billions a year and are politically almost impossible to remove.</p>
+            <p><strong>Hong Kong is the most expensive on earth</strong> at roughly $16 a gallon, by policy: it wants very few private cars on a very small island.</p>
+            <p><strong>The U.S. sits below the world average</strong> because its combined tax is about 52 cents a gallon, versus $3 to $4 in much of Europe. That is also why American prices swing harder in percentage terms when crude moves: there is less fixed tax to dampen the swing.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="supply">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§8 &middot; Supply</div>
+      <div>
+        <h2>Record production. Record prices. Same year.</h2>
+        <div class="prose">
+          <p>The United States pumped more oil in 2025 than any country in history, about 13.9 million barrels a day, and exported more crude and fuel than it imported. Gas still hit $4.50 the following spring. The two charts below are why "energy independence" does not mean price independence: American oil sells at the world price, and the government's cushion against a shock has been spent down for a decade.</p>
+        </div>
+
+        <div class="sm">
+          <div class="panel">
+            <div class="panel-bar"><span><b>U.S. crude production</b> &middot; million barrels a day</span><span>EIA monthly</span></div>
+            <div class="panel-body"><div class="chart" id="chartProd"></div><div class="tip" id="tipProd"></div></div>
+            <div class="panel-foot">Record 13.99 million in October 2025. The 2020 dip is the pandemic; the 2021 notch is the Texas freeze.</div>
+          </div>
+          <div class="panel">
+            <div class="panel-bar"><span><b>Strategic Petroleum Reserve</b> &middot; million barrels</span><span>EIA weekly</span></div>
+            <div class="panel-body"><div class="chart" id="chartSPR"></div><div class="tip" id="tipSPR"></div></div>
+            <div class="panel-foot">695 million in 2016. 283 million on October 2, 2026, the lowest since 1982. The two cliffs are 2022 and 2026.</div>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><b>130</b><span>operable refineries, January 2026. Two fewer than a year earlier. The newest large one opened in 1977.</span><small>EIA refinery capacity report</small></div>
+          <div class="stat"><b>18.2M</b><span>barrels a day of refining capacity, down about 250,000 in a year after closures in Houston and Los Angeles.</span><small>EIA</small></div>
+          <div class="stat"><b>~60%</b><span>of imported crude comes from Canada. Gulf and Midwest refineries are built for its heavy oil.</span><small>EIA 2025 monthly data</small></div>
+          <div class="stat"><b>~20%</b><span>of the world's oil passes through the Strait of Hormuz. It was effectively closed from February 28 to mid-June 2026.</span><small>EIA</small></div>
+        </div>
+
+        <details class="deeper">
+          <summary>Dig deeper: independence vs. insulation</summary>
+          <div class="dbody">
+            <p><strong>Net exporter, price taker.</strong> The U.S. became a net petroleum exporter in 2020. It still imports about 6 million barrels of crude a day (mostly heavy Canadian oil that Gulf refineries are designed for) and exports about 4 million of light shale crude plus 6 million of refined products. The flows go both ways because refineries are picky about grades, not because of politics.</p>
+            <p><strong>Why shale doesn't rescue the price.</strong> Shale wells decline fast and are drilled on Wall Street's timetable. After losing money for a decade, producers now return cash to shareholders rather than chase price spikes. Rig counts barely moved at $100 oil in 2026. Saudi Arabia's spare capacity, roughly 2 to 3 million barrels a day, is the only fast supply on earth, and it was behind a closed strait.</p>
+            <p><strong>Refineries are the real bottleneck.</strong> Capacity peaked in 2019. Five large refineries have closed or converted to renewable diesel since 2020, and California alone lost about a fifth of its capacity in 2025 and 2026. A refinery takes a decade and billions to build, nobody is proposing one, and the ones that exist run near full tilt in summer. That is why hurricanes and fires move the price more than oil-field news.</p>
+            <p><strong>What a cushion is for.</strong> The reserve covers a supply cutoff; at 283 million barrels it holds about 45 days of net crude imports, down from 150-plus a decade ago. Releasing it in a price spike trades future security for present relief, which is a legitimate choice, but it is a choice that gets harder every time it is made.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="blame">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§9 &middot; Blame</div>
+      <div>
+        <h2>The President gets the bill either way.</h2>
+        <div class="prose">
+          <p>Voters hold the President responsible for gas prices with a consistency that has nothing to do with the levers in §5. In 2022, 61% blamed Biden; "I did that" stickers went on pumps nationwide. In April 2026, 65% blamed Trump; by May, three-quarters said his administration bore at least a fair amount of responsibility. The two crises rhyme in almost every detail, including what Washington did about them.</p>
+        </div>
+
+        <div class="sym">
+          <div class="h">&nbsp;</div><div class="h">2022 &middot; Biden</div><div class="h">2026 &middot; Trump</div>
+          <div class="k">The shock</div><div>Russia invades Ukraine, Feb 24. U.S. bans Russian oil, Mar 8.</div><div>U.S. and Israel strike Iran, Feb 28. Iran closes the Strait of Hormuz.</div>
+          <div class="k">Crude peak</div><div>Brent $128 (Mar 8)</div><div>Brent about $118&ndash;128 (Apr 2)</div>
+          <div class="k">Gas peak</div><div>$5.01 (Jun 13), an all-time record</div><div>$4.50 (May 11), highest since 2022; $4.48 again Sep 21</div>
+          <div class="k">Rise from pre-shock</div><div>About +$1.50 in 15 weeks</div><div>About +$1.50 in 10 weeks</div>
+          <div class="k">Reserve release</div><div>180M barrels, largest ever (Mar 31)</div><div>172M barrels, second largest (Mar 11)</div>
+          <div class="k">Fuel waivers</div><div>E15 summer waiver (Apr 29)</div><div>E15 nationwide emergency waiver (Mar), Jones Act waiver (Mar 17)</div>
+          <div class="k">Gas tax holiday</div><div>Requested Jun 22. No vote.</div><div>Floated May 11. Four bills. No vote.</div>
+          <div class="k">Export restrictions</div><div>Considered, not imposed</div><div>Diesel ban "under examination," not imposed</div>
+          <div class="k">Congress passed</div><div>House price-gouging bill; died in Senate</div><div>Nothing, as of October</div>
+          <div class="k">Diplomacy</div><div>Jeddah trip, Jul 15; OPEC+ cut 2M in Oct anyway</div><div>Ceasefire Apr 8; reopening deal Jun 15; Russia diesel deal Oct 9</div>
+          <div class="k">Blame poll</div><div>61% blamed Biden (Quinnipiac, Mar 2022)</div><div>65% blamed Trump (Quinnipiac, Apr 2026)</div>
+          <div class="k">What ended it</div><div>Demand cooled, SPR flowed, 98 straight days of declines to $3.68 by September</div><div>Strait deal in June brought $3.91 by July; the September re-escalation sent it back to $4.48</div>
+        </div>
+
+        <div class="callout">
+          <strong>The honest scorecard.</strong>
+          <p>Credit and blame should follow the levers. The levers that move the price by dollars are foreign policy and war; the levers that move it by pennies are the ones Presidents hold press conferences about. If you want to know who moved your gas price, look at the crude chart first, then at the map, then at your state capitol, and only then at the White House.</p>
+        </div>
+
+        <details class="deeper">
+          <summary>Dig deeper: what the research says about presidents and the pump</summary>
+          <div class="dbody">
+            <p><strong>Presidential approval tracks gas prices</strong> more closely than almost any other single number, a finding that has held since the 1970s. Political scientists find the effect is partly direct (people feel it weekly) and partly a proxy for inflation generally. The effect is symmetric: falling prices in late 2022 and late 2025 coincided with modest approval recoveries for Biden and Trump respectively.</p>
+            <p><strong>The market knows this.</strong> Prediction markets priced a new record gas price in 2026 in September; Republican strategists openly said their midterm chances rose and fell with the pump. Incumbents have an incentive to pull every lever in §5 before an election regardless of size, which is why reserve releases cluster in election years (2000, 2022, 2026).</p>
+            <p><strong>What would actually insulate the U.S.?</strong> Less demand (efficiency, EVs, transit), a fuller reserve, more refining capacity in the West and Northeast, and fewer wars in the Gulf. None fit in a news cycle. The levers that fit in a news cycle are the ones this page measured in pennies.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="eyebrow">At the Pump &middot; an explainer, not a forecast &middot; October 2026</p>
+    <p>Prices are U.S. Energy Information Administration monthly and weekly averages for regular gasoline unless marked AAA. Policy dates are as reported at time of writing; the 2026 events are recent and some details will be revised. Check the sources before you print anything.</p>
+    <ol>
+      <li>EIA, <a href="https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&amp;s=EMM_EPMR_PTE_NUS_DPG&amp;f=M">U.S. Regular All Formulations Retail Gasoline Prices</a>, monthly and weekly, and the regional and state series on the same page; release of October 6, 2026.</li>
+      <li>EIA, <a href="https://www.eia.gov/dnav/pet/hist/RWTCm.htm">WTI</a> and <a href="https://www.eia.gov/dnav/pet/hist/RBRTEm.htm">Brent</a> spot prices; <a href="https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&amp;s=MCRFPUS2&amp;f=M">U.S. field production of crude oil</a>; <a href="https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&amp;s=WCSSTUS1&amp;f=W">weekly SPR stocks</a>; <a href="https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&amp;s=EMD_EPD2D_PTE_NUS_DPG&amp;f=M">diesel retail prices</a>.</li>
+      <li>EIA, <a href="https://www.eia.gov/petroleum/gasdiesel/">Gasoline and Diesel Fuel Update</a>, "What we pay for in a gallon," May 2026; <a href="https://www.eia.gov/petroleum/marketing/monthly/xls/fueltaxes.xlsx">Federal and state motor fuels taxes</a>, July 2026 revised; <a href="https://www.eia.gov/todayinenergy/detail.php?id=67165">state fuel tax changes</a>, February 2026; <a href="https://www.eia.gov/todayinenergy/detail.php?id=67424">first-quarter 2026 price increases</a>, April 2026; <a href="https://www.eia.gov/petroleum/refinerycapacity/">Refinery Capacity Report</a>, June 2026.</li>
+      <li>AAA, <a href="https://gasprices.aaa.com/state-gas-price-averages/">state gas price averages</a>, October 11, 2026, and weekly news releases of May 7, 21 and 28, September 17 and 24, and October 8, 2026.</li>
+      <li>U.S. Bureau of Labor Statistics, CPI-U all items (CUUR0000SA0), through August 2026, used for inflation adjustment.</li>
+      <li>GlobalPetrolPrices.com, <a href="https://www.globalpetrolprices.com/gasoline_prices/">gasoline prices by country</a>, October 5, 2026.</li>
+      <li>U.S. Treasury, <a href="https://home.treasury.gov/news/press-releases/jy0887">analysis of the 2022 SPR release</a>, July 26, 2022 (17 to 42 cents per gallon).</li>
+      <li>Congress.gov: <a href="https://www.congress.gov/bill/119th-congress/senate-bill/4032">S.4032</a>, <a href="https://www.congress.gov/bill/119th-congress/house-bill/7919">H.R.7919</a>, <a href="https://www.congress.gov/bill/119th-congress/senate-bill/4485">S.4485</a>, <a href="https://www.congress.gov/bill/119th-congress/house-bill/8266">H.R.8266</a> (119th Congress); H.R.7688, Consumer Fuel Price Gouging Prevention Act (117th), House vote of May 19, 2022.</li>
+      <li>Reuters/Ipsos poll, May 11, 2026; Quinnipiac University polls, March 2022 and April 2026; Bipartisan Policy Center, "The Hidden Cost of a Gas Tax Holiday," 2026.</li>
+      <li>Reporting on the 2026 crisis from Reuters, Bloomberg, AP, CNBC, Axios, The Washington Post, Maritime Executive and AAA, February through October 2026, including the March 11 reserve order, the March 17 Jones Act waiver, the March E15 waiver, the June 15 reopening agreement, the September 10&ndash;13 pipeline and shipping attacks, the September 22 diesel record of $6.53, and Hurricane Isaias, October 9&ndash;10.</li>
+    </ol>
+  </div>
+</footer>
+<script>
+var DATA={"months":["2016-01","2016-02","2016-03","2016-04","2016-05","2016-06","2016-07","2016-08","2016-09","2016-10","2016-11","2016-12","2017-01","2017-02","2017-03","2017-04","2017-05","2017-06","2017-07","2017-08","2017-09","2017-10","2017-11","2017-12","2018-01","2018-02","2018-03","2018-04","2018-05","2018-06","2018-07","2018-08","2018-09","2018-10","2018-11","2018-12","2019-01","2019-02","2019-03","2019-04","2019-05","2019-06","2019-07","2019-08","2019-09","2019-10","2019-11","2019-12","2020-01","2020-02","2020-03","2020-04","2020-05","2020-06","2020-07","2020-08","2020-09","2020-10","2020-11","2020-12","2021-01","2021-02","2021-03","2021-04","2021-05","2021-06","2021-07","2021-08","2021-09","2021-10","2021-11","2021-12","2022-01","2022-02","2022-03","2022-04","2022-05","2022-06","2022-07","2022-08","2022-09","2022-10","2022-11","2022-12","2023-01","2023-02","2023-03","2023-04","2023-05","2023-06","2023-07","2023-08","2023-09","2023-10","2023-11","2023-12","2024-01","2024-02","2024-03","2024-04","2024-05","2024-06","2024-07","2024-08","2024-09","2024-10","2024-11","2024-12","2025-01","2025-02","2025-03","2025-04","2025-05","2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06","2026-07","2026-08","2026-09"],"gas":{"US":[1.949,1.764,1.969,2.113,2.268,2.366,2.239,2.178,2.219,2.249,2.182,2.254,2.349,2.304,2.325,2.417,2.391,2.347,2.3,2.38,2.645,2.505,2.564,2.477,2.555,2.587,2.591,2.757,2.901,2.891,2.849,2.836,2.836,2.86,2.647,2.366,2.248,2.309,2.516,2.798,2.859,2.716,2.74,2.621,2.592,2.627,2.598,2.555,2.548,2.442,2.234,1.841,1.87,2.082,2.183,2.182,2.183,2.158,2.108,2.195,2.334,2.501,2.81,2.858,2.985,3.064,3.136,3.158,3.175,3.291,3.395,3.307,3.315,3.517,4.222,4.109,4.444,4.929,4.559,3.975,3.7,3.815,3.685,3.21,3.339,3.389,3.422,3.603,3.555,3.571,3.597,3.84,3.836,3.613,3.318,3.134,3.075,3.212,3.426,3.611,3.603,3.455,3.484,3.389,3.214,3.137,3.053,3.018,3.076,3.121,3.096,3.171,3.15,3.15,3.125,3.133,3.166,3.06,3.05,2.894,2.809,2.908,3.638,4.103,4.479,4.05,3.932,4.058,4.355],"PADD1":[1.935,1.771,1.905,2.072,2.237,2.289,2.177,2.108,2.179,2.225,2.198,2.273,2.365,2.294,2.275,2.373,2.345,2.288,2.242,2.326,2.697,2.496,2.514,2.455,2.53,2.577,2.543,2.703,2.846,2.82,2.783,2.787,2.78,2.788,2.588,2.341,2.231,2.274,2.475,2.7,2.741,2.596,2.654,2.538,2.488,2.471,2.466,2.476,2.501,2.382,2.182,1.863,1.837,2.004,2.103,2.107,2.132,2.118,2.074,2.167,2.309,2.473,2.746,2.757,2.888,2.958,3.013,3.029,3.071,3.211,3.342,3.269,3.253,3.478,4.146,3.98,4.367,4.761,4.404,3.881,3.501,3.468,3.552,3.192,3.307,3.32,3.291,3.468,3.425,3.417,3.471,3.714,3.635,3.417,3.196,3.124,3.061,3.176,3.311,3.461,3.5,3.383,3.422,3.314,3.116,3.038,3.002,2.976,3.033,3.026,2.965,3.016,2.983,3.002,3.003,3.001,3.021,2.937,2.942,2.853,2.771,2.828,3.484,3.95,4.299,3.911,3.847,3.91,4.199],"PADD2":[1.756,1.599,1.91,2.027,2.219,2.384,2.148,2.142,2.153,2.146,2.032,2.185,2.272,2.199,2.222,2.334,2.281,2.231,2.207,2.285,2.473,2.386,2.498,2.365,2.473,2.448,2.469,2.62,2.803,2.793,2.769,2.753,2.755,2.748,2.462,2.126,2.035,2.186,2.442,2.704,2.74,2.617,2.682,2.542,2.486,2.466,2.423,2.419,2.409,2.309,2.036,1.542,1.748,2.014,2.098,2.072,2.047,2.023,1.957,2.076,2.231,2.409,2.724,2.776,2.882,2.973,3.035,3.034,3.044,3.158,3.211,3.069,3.112,3.357,4.024,3.915,4.26,4.879,4.496,3.809,3.59,3.744,3.587,3.014,3.217,3.231,3.27,3.512,3.454,3.471,3.436,3.701,3.666,3.371,3.138,2.887,2.829,3.044,3.318,3.441,3.43,3.312,3.411,3.338,3.091,3.016,2.888,2.881,2.942,2.956,2.954,3.029,3.013,3.019,3.004,3.028,3.012,2.856,2.876,2.672,2.633,2.674,3.371,3.833,4.389,3.858,3.714,3.893,4.166],"PADD3":[1.694,1.553,1.754,1.882,2.025,2.118,2.027,1.957,1.977,2.037,1.954,2.03,2.134,2.072,2.082,2.196,2.159,2.114,2.043,2.143,2.474,2.28,2.275,2.2,2.282,2.306,2.309,2.496,2.65,2.673,2.598,2.578,2.56,2.59,2.342,2.027,1.917,2.013,2.27,2.51,2.516,2.355,2.425,2.31,2.275,2.266,2.238,2.231,2.244,2.114,1.952,1.572,1.532,1.752,1.865,1.853,1.855,1.832,1.775,1.885,2.041,2.207,2.547,2.579,2.699,2.74,2.815,2.818,2.822,2.954,3.054,2.943,2.971,3.213,3.918,3.768,4.1,4.574,4.093,3.483,3.158,3.218,3.065,2.715,2.996,3.007,3.043,3.249,3.086,3.127,3.211,3.426,3.378,3.11,2.794,2.648,2.687,2.844,3.042,3.186,3.159,3.001,3.076,2.975,2.76,2.707,2.628,2.601,2.677,2.711,2.683,2.74,2.732,2.747,2.728,2.713,2.732,2.62,2.588,2.474,2.4,2.484,3.272,3.705,3.949,3.545,3.511,3.605,3.858],"PADD4":[1.919,1.724,1.875,2.041,2.248,2.321,2.283,2.237,2.263,2.267,2.209,2.138,2.254,2.247,2.3,2.355,2.397,2.414,2.34,2.435,2.6,2.536,2.54,2.494,2.458,2.487,2.458,2.709,2.926,2.981,2.947,2.956,3.011,2.98,2.863,2.572,2.296,2.179,2.297,2.65,2.961,2.927,2.767,2.677,2.664,2.721,2.818,2.738,2.594,2.487,2.293,1.901,1.837,2.218,2.323,2.355,2.321,2.258,2.194,2.18,2.226,2.361,2.8,2.967,3.102,3.258,3.519,3.66,3.613,3.564,3.535,3.425,3.341,3.344,4.06,4.156,4.296,4.902,4.864,4.25,3.906,3.874,3.662,3.18,3.287,3.767,3.66,3.494,3.558,3.704,3.786,3.978,4.02,3.743,3.274,2.896,2.737,2.86,3.137,3.408,3.412,3.312,3.377,3.419,3.401,3.237,2.981,2.836,2.902,3.013,3.015,3.132,3.126,3.138,3.13,3.152,3.179,3.021,2.917,2.58,2.464,2.659,3.484,3.935,4.469,4.037,3.881,4.234,4.437],"PADD5":[2.569,2.251,2.422,2.583,2.649,2.726,2.72,2.577,2.632,2.682,2.624,2.571,2.674,2.745,2.845,2.875,2.901,2.88,2.816,2.874,3.02,2.943,3.055,2.977,3.022,3.138,3.2,3.369,3.442,3.439,3.374,3.322,3.34,3.472,3.377,3.133,2.969,2.922,3.024,3.512,3.674,3.49,3.351,3.255,3.328,3.64,3.551,3.293,3.19,3.144,2.981,2.558,2.481,2.673,2.802,2.84,2.842,2.795,2.767,2.778,2.875,3.038,3.399,3.518,3.668,3.77,3.868,3.937,3.93,3.998,4.158,4.155,4.155,4.228,5.105,5.134,5.347,5.815,5.481,4.941,4.896,5.402,4.81,4.102,3.992,4.163,4.372,4.482,4.529,4.558,4.554,4.798,5.076,5.027,4.474,4.125,4.005,4.033,4.341,4.757,4.661,4.355,4.179,4.065,4.099,4.02,3.907,3.804,3.839,4.083,4.107,4.25,4.231,4.152,4.033,4.051,4.225,4.178,4.119,3.867,3.68,3.98,4.887,5.376,5.593,5.213,4.941,5.129,5.538],"CA":[2.768,2.423,2.625,2.768,2.8,2.875,2.857,2.692,2.747,2.807,2.732,2.681,2.79,2.888,3.001,3.009,3.043,3.023,2.95,3.017,3.164,3.08,3.235,3.13,3.21,3.359,3.417,3.558,3.621,3.601,3.53,3.481,3.515,3.686,3.558,3.292,3.156,3.158,3.268,3.82,3.947,3.717,3.595,3.482,3.609,4.04,3.869,3.531,3.411,3.364,3.184,2.744,2.685,2.889,3.021,3.074,3.091,3.052,3.029,3.057,3.176,3.347,3.692,3.822,3.982,4.094,4.165,4.232,4.222,4.31,4.51,4.508,4.495,4.568,5.562,5.598,5.774,6.201,5.807,5.239,5.272,5.805,5.071,4.317,4.265,4.487,4.682,4.682,4.633,4.674,4.717,5.023,5.412,5.439,4.826,4.446,4.369,4.424,4.72,5.145,5.005,4.663,4.471,4.332,4.455,4.392,4.236,4.123,4.187,4.464,4.49,4.65,4.629,4.452,4.275,4.29,4.44,4.423,4.454,4.182,4.007,4.337,5.262,5.733,5.949,5.547,5.305,5.458,5.924],"TX":[1.694,1.549,1.757,1.89,2.023,2.13,2.043,1.969,1.966,2.02,1.944,2.018,2.132,2.068,2.082,2.208,2.174,2.135,2.056,2.154,2.504,2.286,2.261,2.186,2.277,2.287,2.313,2.485,2.665,2.703,2.614,2.574,2.558,2.572,2.31,1.998,1.902,2.007,2.26,2.521,2.534,2.368,2.449,2.333,2.285,2.25,2.225,2.211,2.218,2.085,1.929,1.519,1.486,1.729,1.859,1.843,1.836,1.8,1.735,1.855,2.009,2.184,2.512,2.53,2.668,2.71,2.785,2.791,2.782,2.9,2.997,2.891,2.93,3.18,3.863,3.707,4.09,4.59,4.061,3.45,3.107,3.144,2.977,2.629,2.939,2.948,3.012,3.248,3.052,3.114,3.224,3.41,3.345,3.066,2.728,2.588,2.655,2.823,3.014,3.192,3.162,2.98,3.071,2.955,2.727,2.665,2.575,2.557,2.643,2.671,2.657,2.728,2.743,2.748,2.719,2.704,2.712,2.596,2.573,2.447,2.373,2.475,3.271,3.692,3.916,3.469,3.462,3.564,3.799],"NY":[2.107,1.944,1.999,2.186,2.344,2.385,2.341,2.27,2.267,2.309,2.334,2.378,2.477,2.41,2.367,2.449,2.454,2.42,2.37,2.435,2.757,2.597,2.61,2.56,2.626,2.678,2.633,2.798,2.974,2.987,2.925,2.91,2.907,2.908,2.797,2.605,2.444,2.398,2.555,2.772,2.897,2.79,2.799,2.75,2.655,2.602,2.6,2.596,2.632,2.53,2.377,2.128,2.081,2.149,2.197,2.188,2.194,2.163,2.147,2.206,2.353,2.529,2.796,2.812,2.95,3.054,3.12,3.149,3.224,3.35,3.494,3.441,3.419,3.651,4.295,4.11,4.632,4.854,4.594,4.175,3.689,3.596,3.76,3.419,3.369,3.393,3.361,3.513,3.586,3.589,3.617,3.849,3.809,3.68,3.464,3.295,3.158,3.192,3.293,3.493,3.604,3.49,3.508,3.424,3.233,3.126,3.076,3.07,3.079,3.089,3.022,3.033,3.042,3.065,3.079,3.072,3.129,3.037,3.039,2.986,2.879,2.882,3.482,4.043,4.476,4.181,4.033,4.08,4.356],"FL":[1.889,1.73,1.942,2.026,2.175,2.276,2.124,2.06,2.145,2.182,2.089,2.237,2.335,2.223,2.231,2.384,2.303,2.256,2.145,2.247,2.673,2.417,2.43,2.342,2.461,2.542,2.488,2.636,2.781,2.732,2.715,2.724,2.723,2.747,2.496,2.229,2.146,2.242,2.504,2.697,2.635,2.468,2.568,2.376,2.398,2.384,2.351,2.421,2.455,2.327,2.129,1.804,1.77,1.948,2.065,2.069,2.11,2.096,1.974,2.139,2.266,2.44,2.759,2.787,2.816,2.886,2.952,2.945,3.006,3.141,3.268,3.194,3.186,3.439,4.104,4.02,4.346,4.723,4.249,3.629,3.383,3.258,3.41,3.044,3.315,3.3,3.278,3.53,3.439,3.356,3.411,3.713,3.592,3.305,3.041,2.986,3.033,3.189,3.365,3.466,3.439,3.266,3.367,3.281,3.111,3.044,3.024,3.028,3.079,3.018,2.998,3.0,2.943,2.973,2.969,2.955,2.977,2.883,2.902,2.801,2.71,2.814,3.553,3.969,4.246,3.726,3.805,3.788,4.115],"WA":[2.329,2.044,2.171,2.284,2.502,2.614,2.634,2.551,2.643,2.684,2.624,2.536,2.679,2.698,2.798,2.876,2.871,2.816,2.776,2.858,3.029,2.916,2.967,2.922,2.9,2.964,3.039,3.2,3.331,3.362,3.32,3.281,3.292,3.393,3.356,3.078,2.84,2.741,2.833,3.248,3.445,3.324,3.17,3.092,3.057,3.221,3.271,3.085,2.948,2.911,2.793,2.361,2.274,2.499,2.668,2.719,2.736,2.679,2.648,2.617,2.622,2.756,3.118,3.244,3.402,3.529,3.723,3.789,3.783,3.772,3.781,3.752,3.831,3.868,4.556,4.529,4.854,5.357,5.154,4.707,4.557,5.009,4.57,3.902,3.829,4.027,4.098,4.311,4.509,4.726,4.849,4.954,4.961,4.772,4.304,4.078,3.895,3.826,4.137,4.508,4.504,4.251,4.126,4.047,3.979,3.9,3.853,3.797,3.78,3.947,3.967,4.165,4.158,4.248,4.26,4.298,4.432,4.331,4.095,3.894,3.674,3.945,4.773,5.243,5.571,5.298,4.914,5.139,5.489],"OH":[1.723,1.618,1.897,2.062,2.301,2.528,2.102,2.12,2.103,2.138,2.064,2.273,2.196,2.08,2.157,2.336,2.262,2.209,2.192,2.239,2.372,2.335,2.504,2.288,2.413,2.321,2.406,2.604,2.774,2.672,2.738,2.73,2.732,2.659,2.375,2.031,1.958,2.198,2.402,2.616,2.657,2.55,2.695,2.57,2.536,2.502,2.468,2.552,2.46,2.315,1.934,1.44,1.815,2.058,2.091,2.076,2.021,2.035,1.946,2.098,2.259,2.44,2.676,2.751,2.856,2.986,3.063,2.978,3.024,3.161,3.216,3.003,3.054,3.306,4.007,3.789,4.219,4.895,4.414,3.641,3.515,3.745,3.663,3.023,3.319,3.228,3.29,3.587,3.476,3.473,3.318,3.533,3.565,3.222,3.098,2.803,2.867,3.168,3.354,3.474,3.476,3.323,3.45,3.371,3.089,2.983,2.827,2.987,2.997,2.934,2.92,3.042,3.015,3.026,2.972,3.147,2.976,2.91,2.981,2.663,2.695,2.758,3.439,3.778,4.627,4.006,3.768,3.988,4.193],"CO":[1.798,1.61,1.893,1.997,2.163,2.251,2.195,2.109,2.167,2.158,2.056,2.071,2.227,2.159,2.165,2.275,2.312,2.287,2.211,2.299,2.513,2.439,2.523,2.449,2.409,2.435,2.39,2.561,2.756,2.819,2.763,2.747,2.847,2.897,2.705,2.363,2.075,2.017,2.286,2.617,2.808,2.763,2.621,2.496,2.579,2.706,2.773,2.725,2.588,2.446,2.138,1.758,1.731,2.271,2.435,2.364,2.277,2.196,2.112,2.16,2.262,2.398,2.788,2.905,3.026,3.234,3.465,3.592,3.552,3.508,3.466,3.308,3.242,3.288,3.882,3.909,4.063,4.795,4.74,3.95,3.568,3.542,3.29,2.852,3.341,4.005,3.753,3.436,3.322,3.468,3.809,3.93,3.884,3.599,3.052,2.687,2.606,2.799,2.961,3.041,3.222,3.212,3.28,3.314,3.369,3.175,2.921,2.809,2.84,2.953,2.89,3.012,3.025,3.019,2.954,2.976,3.066,2.793,2.636,2.3,2.324,2.614,3.536,3.78,4.441,3.872,3.784,4.174,4.192],"MN":[1.755,1.605,1.951,1.963,2.171,2.253,2.117,2.144,2.172,2.14,1.991,2.107,2.303,2.26,2.253,2.301,2.292,2.26,2.228,2.299,2.463,2.391,2.494,2.398,2.47,2.539,2.485,2.523,2.746,2.784,2.754,2.75,2.738,2.784,2.546,2.213,2.036,2.144,2.445,2.681,2.711,2.606,2.587,2.537,2.497,2.482,2.448,2.378,2.396,2.285,2.07,1.581,1.695,1.996,2.063,2.049,2.064,1.972,1.929,2.047,2.217,2.375,2.713,2.707,2.776,2.849,2.964,2.998,2.991,3.072,3.164,3.084,3.122,3.352,3.889,3.861,4.063,4.704,4.537,3.925,3.666,3.691,3.488,3.057,3.196,3.284,3.238,3.47,3.482,3.456,3.467,3.758,3.842,3.505,3.188,2.918,2.807,2.981,3.212,3.307,3.273,3.221,3.298,3.285,3.085,3.064,2.955,2.869,2.96,3.002,3.002,3.086,2.993,2.998,2.964,2.933,3.014,2.88,2.93,2.802,2.673,2.682,3.296,3.674,4.218,3.841,3.805,3.95,4.24],"MA":[1.944,1.79,1.87,2.072,2.257,2.323,2.239,2.119,2.149,2.203,2.168,2.221,2.287,2.238,2.223,2.308,2.376,2.319,2.27,2.35,2.732,2.613,2.58,2.528,2.54,2.59,2.538,2.674,2.873,2.904,2.878,2.864,2.843,2.828,2.718,2.562,2.41,2.347,2.434,2.648,2.818,2.707,2.694,2.659,2.572,2.548,2.539,2.535,2.555,2.488,2.281,1.9,1.895,2.018,2.088,2.095,2.093,2.062,2.043,2.14,2.294,2.452,2.707,2.738,2.861,2.931,3.004,3.023,3.075,3.223,3.395,3.358,3.318,3.482,4.212,4.066,4.534,4.96,4.601,4.21,3.683,3.564,3.775,3.428,3.31,3.306,3.221,3.344,3.428,3.501,3.541,3.739,3.717,3.594,3.411,3.226,3.099,3.125,3.208,3.426,3.545,3.448,3.473,3.377,3.144,3.027,2.964,2.981,2.982,2.983,2.921,2.906,2.944,2.984,3.004,3.043,3.06,2.933,2.96,2.919,2.823,2.842,3.43,3.922,4.408,4.079,3.918,4.011,4.27]},"wti":[31.68,30.32,37.55,40.75,46.71,48.76,44.65,44.72,45.18,49.78,45.66,51.97,52.5,53.47,49.33,51.06,48.48,45.18,46.63,48.04,49.82,51.58,56.64,57.88,63.7,62.23,62.73,66.25,69.98,67.87,70.98,68.06,70.23,70.75,56.96,49.52,51.38,54.95,58.15,63.86,60.83,54.66,57.35,54.81,56.95,53.96,57.03,59.88,57.52,50.54,29.21,16.55,28.56,38.31,40.71,42.34,39.63,39.4,40.94,47.02,52.0,59.04,62.33,61.72,65.17,71.38,72.49,67.73,71.65,81.48,79.15,71.71,83.22,91.64,108.5,101.78,109.55,114.84,101.62,93.67,84.26,87.55,84.37,76.44,78.12,76.83,73.28,79.45,71.58,70.25,76.07,81.39,89.43,85.64,77.69,71.9,74.15,77.25,81.28,85.35,80.02,79.77,81.8,76.68,70.24,71.99,69.95,70.12,75.74,71.53,68.24,63.54,62.17,68.17,68.39,64.86,63.96,60.89,60.06,57.97,60.04,64.51,91.38,100.32,102.13,84.81,80.46,83.9,97.31],"brent":[30.7,32.18,38.21,41.58,46.74,48.25,44.95,45.84,46.57,49.52,44.73,53.31,54.58,54.87,51.59,52.31,50.33,46.37,48.48,51.7,56.15,57.51,62.71,64.37,69.08,65.32,66.02,72.11,76.98,74.41,74.25,72.53,78.89,81.03,64.75,57.36,59.41,63.96,66.14,71.23,71.32,64.22,63.92,59.04,62.83,59.71,63.21,67.31,63.65,55.66,32.01,18.38,29.38,40.27,43.24,44.74,40.91,40.19,42.69,49.99,54.77,62.28,65.41,64.81,68.53,73.16,75.17,70.75,74.49,83.54,81.05,74.17,86.51,97.13,117.25,104.58,113.34,122.71,111.93,100.45,89.76,93.33,91.42,80.92,82.5,82.59,78.43,84.64,75.47,74.84,80.11,86.15,93.72,90.6,82.94,77.63,80.12,83.48,85.41,89.94,81.75,82.25,85.15,80.36,74.02,75.63,74.35,73.86,79.27,75.44,72.73,68.13,64.45,71.44,71.04,67.87,67.99,64.54,63.8,62.54,66.6,70.89,103.13,117.29,107.14,85.4,83.76,91.08,114.16],"diesel":[2.143,1.998,2.09,2.152,2.315,2.423,2.405,2.351,2.394,2.454,2.439,2.51,2.58,2.568,2.554,2.583,2.56,2.511,2.496,2.595,2.785,2.794,2.909,2.909,3.018,3.046,2.988,3.096,3.244,3.253,3.233,3.218,3.262,3.365,3.3,3.123,2.98,2.997,3.076,3.121,3.161,3.089,3.045,3.005,3.016,3.053,3.069,3.055,3.048,2.91,2.729,2.493,2.392,2.408,2.434,2.429,2.414,2.389,2.432,2.585,2.681,2.847,3.152,3.13,3.217,3.287,3.339,3.35,3.384,3.612,3.727,3.641,3.724,4.032,5.105,5.12,5.571,5.754,5.486,5.013,4.993,5.211,5.255,4.714,4.576,4.413,4.211,4.099,3.915,3.802,3.882,4.37,4.563,4.507,4.254,3.972,3.854,4.044,4.022,4.002,3.822,3.722,3.81,3.7,3.558,3.585,3.522,3.494,3.634,3.675,3.585,3.567,3.499,3.599,3.779,3.744,3.748,3.679,3.822,3.615,3.523,3.722,4.921,5.501,5.6,5.024,4.955,5.462,6.291],"prod":[9.21,9.07,9.12,8.89,8.85,8.69,8.68,8.7,8.55,8.82,8.92,8.83,8.88,9.12,9.18,9.12,9.2,9.12,9.27,9.27,9.53,9.68,10.1,10.01,10.02,10.3,10.48,10.51,10.45,10.66,10.92,11.42,11.47,11.53,11.91,11.97,11.89,11.69,11.93,12.16,12.17,12.24,11.93,12.5,12.61,12.83,13.02,13.0,12.88,12.88,12.82,11.93,9.73,10.46,11.02,10.61,10.98,10.5,11.24,11.2,11.17,9.95,11.39,11.37,11.44,11.41,11.43,11.33,10.97,11.65,11.88,11.78,11.47,11.52,11.9,11.85,11.78,11.94,12.03,12.16,12.45,12.46,12.51,12.22,12.66,12.64,12.89,12.76,12.76,12.83,12.95,13.03,13.2,13.25,13.34,13.32,12.55,13.17,13.2,13.32,13.25,13.24,13.23,13.42,13.23,13.58,13.49,13.53,13.17,13.27,13.53,13.56,13.54,13.66,13.72,13.84,13.92,13.99,13.93,13.81,13.3,13.71,13.73,13.98,13.81,13.84,13.95],"cpi":[236.916,237.111,238.132,239.261,240.229,241.018,240.628,240.849,241.428,241.729,241.353,241.432,242.839,243.603,243.801,244.524,244.733,244.955,244.786,245.519,246.819,246.663,246.669,246.524,247.867,248.991,249.554,250.546,251.588,251.989,252.006,252.146,252.439,252.885,252.038,251.233,251.712,252.776,254.202,255.548,256.092,256.143,256.571,256.558,256.759,257.346,257.208,256.974,257.971,258.678,258.115,256.389,256.394,257.797,259.101,259.918,260.28,260.388,260.229,260.474,261.582,263.014,264.877,267.054,269.195,271.696,273.003,273.567,274.31,276.589,277.948,278.802,281.148,283.716,287.504,289.109,292.296,296.311,296.276,296.171,296.808,298.012,297.711,296.797,299.17,300.84,301.836,303.363,304.127,305.109,305.691,307.026,307.789,307.671,307.051,306.746,308.417,310.326,312.332,313.548,314.069,314.175,314.54,314.796,315.301,315.664,315.493,315.605,317.671,319.082,319.799,320.795,321.465,322.561,323.048,323.976,324.8,324.8,324.122,324.054,325.252,326.785,330.213,333.02,335.123,333.952,333.918,334.98,334.98],"weekly":[["2016-01-04",2.028],["2016-01-11",1.996],["2016-01-18",1.914],["2016-01-25",1.856],["2016-02-01",1.822],["2016-02-08",1.759],["2016-02-15",1.724],["2016-02-22",1.73],["2016-02-29",1.783],["2016-03-07",1.841],["2016-03-14",1.961],["2016-03-21",2.007],["2016-03-28",2.066],["2016-04-04",2.083],["2016-04-11",2.069],["2016-04-18",2.137],["2016-04-25",2.162],["2016-05-02",2.24],["2016-05-09",2.22],["2016-05-16",2.242],["2016-05-23",2.3],["2016-05-30",2.339],["2016-06-06",2.381],["2016-06-13",2.399],["2016-06-20",2.353],["2016-06-27",2.329],["2016-07-04",2.291],["2016-07-11",2.253],["2016-07-18",2.23],["2016-07-25",2.182],["2016-08-01",2.159],["2016-08-08",2.15],["2016-08-15",2.149],["2016-08-22",2.193],["2016-08-29",2.237],["2016-09-05",2.223],["2016-09-12",2.202],["2016-09-19",2.225],["2016-09-26",2.224],["2016-10-03",2.245],["2016-10-10",2.272],["2016-10-17",2.257],["2016-10-24",2.243],["2016-10-31",2.23],["2016-11-07",2.233],["2016-11-14",2.184],["2016-11-21",2.155],["2016-11-28",2.154],["2016-12-05",2.208],["2016-12-12",2.236],["2016-12-19",2.264],["2016-12-26",2.309],["2017-01-02",2.377],["2017-01-09",2.388],["2017-01-16",2.358],["2017-01-23",2.326],["2017-01-30",2.296],["2017-02-06",2.293],["2017-02-13",2.307],["2017-02-20",2.302],["2017-02-27",2.314],["2017-03-06",2.341],["2017-03-13",2.323],["2017-03-20",2.321],["2017-03-27",2.315],["2017-04-03",2.36],["2017-04-10",2.424],["2017-04-17",2.436],["2017-04-24",2.449],["2017-05-01",2.411],["2017-05-08",2.372],["2017-05-15",2.369],["2017-05-22",2.399],["2017-05-29",2.406],["2017-06-05",2.414],["2017-06-12",2.366],["2017-06-19",2.318],["2017-06-26",2.288],["2017-07-03",2.26],["2017-07-10",2.297],["2017-07-17",2.278],["2017-07-24",2.312],["2017-07-31",2.352],["2017-08-07",2.378],["2017-08-14",2.384],["2017-08-21",2.36],["2017-08-28",2.399],["2017-09-04",2.679],["2017-09-11",2.685],["2017-09-18",2.634],["2017-09-25",2.583],["2017-10-02",2.565],["2017-10-09",2.504],["2017-10-16",2.489],["2017-10-23",2.479],["2017-10-30",2.488],["2017-11-06",2.561],["2017-11-13",2.592],["2017-11-20",2.568],["2017-11-27",2.533],["2017-12-04",2.5],["2017-12-11",2.485],["2017-12-18",2.45],["2017-12-25",2.472],["2018-01-01",2.52],["2018-01-08",2.522],["2018-01-15",2.557],["2018-01-22",2.567],["2018-01-29",2.607],["2018-02-05",2.637],["2018-02-12",2.607],["2018-02-19",2.557],["2018-02-26",2.548],["2018-03-05",2.56],["2018-03-12",2.559],["2018-03-19",2.598],["2018-03-26",2.648],["2018-04-02",2.7],["2018-04-09",2.694],["2018-04-16",2.747],["2018-04-23",2.798],["2018-04-30",2.846],["2018-05-07",2.845],["2018-05-14",2.873],["2018-05-21",2.923],["2018-05-28",2.962],["2018-06-04",2.94],["2018-06-11",2.911],["2018-06-18",2.879],["2018-06-25",2.833],["2018-07-02",2.844],["2018-07-09",2.857],["2018-07-16",2.865],["2018-07-23",2.831],["2018-07-30",2.846],["2018-08-06",2.852],["2018-08-13",2.843],["2018-08-20",2.821],["2018-08-27",2.827],["2018-09-03",2.824],["2018-09-10",2.833],["2018-09-17",2.841],["2018-09-24",2.844],["2018-10-01",2.866],["2018-10-08",2.903],["2018-10-15",2.879],["2018-10-22",2.841],["2018-10-29",2.811],["2018-11-05",2.753],["2018-11-12",2.686],["2018-11-19",2.611],["2018-11-26",2.539],["2018-12-03",2.451],["2018-12-10",2.421],["2018-12-17",2.369],["2018-12-24",2.321],["2018-12-31",2.266],["2019-01-07",2.237],["2019-01-14",2.247],["2019-01-21",2.251],["2019-01-28",2.256],["2019-02-04",2.254],["2019-02-11",2.276],["2019-02-18",2.317],["2019-02-25",2.39],["2019-03-04",2.422],["2019-03-11",2.471],["2019-03-18",2.548],["2019-03-25",2.623],["2019-04-01",2.691],["2019-04-08",2.745],["2019-04-15",2.828],["2019-04-22",2.841],["2019-04-29",2.887],["2019-05-06",2.897],["2019-05-13",2.866],["2019-05-20",2.852],["2019-05-27",2.822],["2019-06-03",2.807],["2019-06-10",2.732],["2019-06-17",2.67],["2019-06-24",2.654],["2019-07-01",2.713],["2019-07-08",2.743],["2019-07-15",2.779],["2019-07-22",2.75],["2019-07-29",2.715],["2019-08-05",2.688],["2019-08-12",2.624],["2019-08-19",2.598],["2019-08-26",2.574],["2019-09-02",2.563],["2019-09-09",2.55],["2019-09-16",2.552],["2019-09-23",2.654],["2019-09-30",2.642],["2019-10-07",2.645],["2019-10-14",2.629],["2019-10-21",2.638],["2019-10-28",2.596],["2019-11-04",2.605],["2019-11-11",2.615],["2019-11-18",2.592],["2019-11-25",2.579],["2019-12-02",2.575],["2019-12-09",2.561],["2019-12-16",2.536],["2019-12-23",2.532],["2019-12-30",2.571],["2020-01-06",2.578],["2020-01-13",2.57],["2020-01-20",2.537],["2020-01-27",2.506],["2020-02-03",2.455],["2020-02-10",2.419],["2020-02-17",2.428],["2020-02-24",2.466],["2020-03-02",2.423],["2020-03-09",2.375],["2020-03-16",2.248],["2020-03-23",2.12],["2020-03-30",2.005],["2020-04-06",1.924],["2020-04-13",1.853],["2020-04-20",1.812],["2020-04-27",1.773],["2020-05-04",1.789],["2020-05-11",1.851],["2020-05-18",1.878],["2020-05-25",1.96],["2020-06-01",1.974],["2020-06-08",2.036],["2020-06-15",2.098],["2020-06-22",2.129],["2020-06-29",2.174],["2020-07-06",2.177],["2020-07-13",2.195],["2020-07-20",2.186],["2020-07-27",2.175],["2020-08-03",2.176],["2020-08-10",2.166],["2020-08-17",2.166],["2020-08-24",2.182],["2020-08-31",2.222],["2020-09-07",2.211],["2020-09-14",2.183],["2020-09-21",2.168],["2020-09-28",2.169],["2020-10-05",2.172],["2020-10-12",2.167],["2020-10-19",2.15],["2020-10-26",2.143],["2020-11-02",2.112],["2020-11-09",2.096],["2020-11-16",2.111],["2020-11-23",2.102],["2020-11-30",2.12],["2020-12-07",2.156],["2020-12-14",2.158],["2020-12-21",2.224],["2020-12-28",2.243],["2021-01-04",2.249],["2021-01-11",2.317],["2021-01-18",2.379],["2021-01-25",2.392],["2021-02-01",2.409],["2021-02-08",2.461],["2021-02-15",2.501],["2021-02-22",2.633],["2021-03-01",2.711],["2021-03-08",2.771],["2021-03-15",2.853],["2021-03-22",2.865],["2021-03-29",2.852],["2021-04-05",2.857],["2021-04-12",2.849],["2021-04-19",2.855],["2021-04-26",2.872],["2021-05-03",2.89],["2021-05-10",2.961],["2021-05-17",3.028],["2021-05-24",3.02],["2021-05-31",3.027],["2021-06-07",3.035],["2021-06-14",3.069],["2021-06-21",3.06],["2021-06-28",3.091],["2021-07-05",3.122],["2021-07-12",3.133],["2021-07-19",3.153],["2021-07-26",3.136],["2021-08-02",3.159],["2021-08-09",3.172],["2021-08-16",3.174],["2021-08-23",3.145],["2021-08-30",3.139],["2021-09-06",3.176],["2021-09-13",3.165],["2021-09-20",3.184],["2021-09-27",3.175],["2021-10-04",3.19],["2021-10-11",3.267],["2021-10-18",3.322],["2021-10-25",3.383],["2021-11-01",3.39],["2021-11-08",3.41],["2021-11-15",3.399],["2021-11-22",3.395],["2021-11-29",3.38],["2021-12-06",3.341],["2021-12-13",3.315],["2021-12-20",3.295],["2021-12-27",3.275],["2022-01-03",3.281],["2022-01-10",3.295],["2022-01-17",3.306],["2022-01-24",3.323],["2022-01-31",3.368],["2022-02-07",3.444],["2022-02-14",3.487],["2022-02-21",3.53],["2022-02-28",3.608],["2022-03-07",4.102],["2022-03-14",4.315],["2022-03-21",4.239],["2022-03-28",4.231],["2022-04-04",4.17],["2022-04-11",4.091],["2022-04-18",4.066],["2022-04-25",4.107],["2022-05-02",4.182],["2022-05-09",4.328],["2022-05-16",4.491],["2022-05-23",4.593],["2022-05-30",4.624],["2022-06-06",4.876],["2022-06-13",5.006],["2022-06-20",4.962],["2022-06-27",4.872],["2022-07-04",4.771],["2022-07-11",4.646],["2022-07-18",4.49],["2022-07-25",4.33],["2022-08-01",4.192],["2022-08-08",4.038],["2022-08-15",3.938],["2022-08-22",3.88],["2022-08-29",3.827],["2022-09-05",3.746],["2022-09-12",3.69],["2022-09-19",3.654],["2022-09-26",3.711],["2022-10-03",3.782],["2022-10-10",3.912],["2022-10-17",3.871],["2022-10-24",3.769],["2022-10-31",3.742],["2022-11-07",3.796],["2022-11-14",3.762],["2022-11-21",3.648],["2022-11-28",3.534],["2022-12-05",3.39],["2022-12-12",3.239],["2022-12-19",3.12],["2022-12-26",3.091],["2023-01-02",3.223],["2023-01-09",3.259],["2023-01-16",3.31],["2023-01-23",3.415],["2023-01-30",3.489],["2023-02-06",3.444],["2023-02-13",3.39],["2023-02-20",3.379],["2023-02-27",3.342],["2023-03-06",3.389],["2023-03-13",3.456],["2023-03-20",3.422],["2023-03-27",3.421],["2023-04-03",3.497],["2023-04-10",3.596],["2023-04-17",3.663],["2023-04-24",3.656],["2023-05-01",3.6],["2023-05-08",3.533],["2023-05-15",3.536],["2023-05-22",3.534],["2023-05-29",3.571],["2023-06-05",3.541],["2023-06-12",3.595],["2023-06-19",3.577],["2023-06-26",3.571],["2023-07-03",3.527],["2023-07-10",3.546],["2023-07-17",3.559],["2023-07-24",3.596],["2023-07-31",3.757],["2023-08-07",3.828],["2023-08-14",3.85],["2023-08-21",3.868],["2023-08-28",3.813],["2023-09-04",3.807],["2023-09-11",3.822],["2023-09-18",3.878],["2023-09-25",3.837],["2023-10-02",3.798],["2023-10-09",3.684],["2023-10-16",3.576],["2023-10-23",3.533],["2023-10-30",3.473],["2023-11-06",3.396],["2023-11-13",3.349],["2023-11-20",3.289],["2023-11-27",3.238],["2023-12-04",3.231],["2023-12-11",3.136],["2023-12-18",3.053],["2023-12-25",3.116],["2024-01-01",3.089],["2024-01-08",3.073],["2024-01-15",3.058],["2024-01-22",3.062],["2024-01-29",3.095],["2024-02-05",3.136],["2024-02-12",3.192],["2024-02-19",3.269],["2024-02-26",3.249],["2024-03-04",3.35],["2024-03-11",3.376],["2024-03-18",3.453],["2024-03-25",3.523],["2024-04-01",3.517],["2024-04-08",3.591],["2024-04-15",3.628],["2024-04-22",3.668],["2024-04-29",3.653],["2024-05-06",3.643],["2024-05-13",3.608],["2024-05-20",3.584],["2024-05-27",3.577],["2024-06-03",3.516],["2024-06-10",3.429],["2024-06-17",3.435],["2024-06-24",3.438],["2024-07-01",3.479],["2024-07-08",3.489],["2024-07-15",3.496],["2024-07-22",3.471],["2024-07-29",3.484],["2024-08-05",3.448],["2024-08-12",3.414],["2024-08-19",3.382],["2024-08-26",3.313],["2024-09-02",3.289],["2024-09-09",3.236],["2024-09-16",3.18],["2024-09-23",3.185],["2024-09-30",3.179],["2024-10-07",3.136],["2024-10-14",3.171],["2024-10-21",3.144],["2024-10-28",3.097],["2024-11-04",3.069],["2024-11-11",3.052],["2024-11-18",3.046],["2024-11-25",3.044],["2024-12-02",3.034],["2024-12-09",3.008],["2024-12-16",3.016],["2024-12-23",3.024],["2024-12-30",3.006],["2025-01-06",3.047],["2025-01-13",3.043],["2025-01-20",3.109],["2025-01-27",3.103],["2025-02-03",3.082],["2025-02-10",3.128],["2025-02-17",3.148],["2025-02-24",3.125],["2025-03-03",3.078],["2025-03-10",3.069],["2025-03-17",3.058],["2025-03-24",3.115],["2025-03-31",3.162],["2025-04-07",3.243],["2025-04-14",3.168],["2025-04-21",3.141],["2025-04-28",3.133],["2025-05-05",3.147],["2025-05-12",3.12],["2025-05-19",3.173],["2025-05-26",3.16],["2025-06-02",3.127],["2025-06-09",3.108],["2025-06-16",3.139],["2025-06-23",3.213],["2025-06-30",3.164],["2025-07-07",3.125],["2025-07-14",3.13],["2025-07-21",3.121],["2025-07-28",3.123],["2025-08-04",3.14],["2025-08-11",3.118],["2025-08-18",3.125],["2025-08-25",3.147],["2025-09-01",3.177],["2025-09-08",3.192],["2025-09-15",3.168],["2025-09-22",3.173],["2025-09-29",3.118],["2025-10-06",3.124],["2025-10-13",3.061],["2025-10-20",3.019],["2025-10-27",3.035],["2025-11-03",3.019],["2025-11-10",3.056],["2025-11-17",3.062],["2025-11-24",3.061],["2025-12-01",2.985],["2025-12-08",2.94],["2025-12-15",2.895],["2025-12-22",2.841],["2025-12-29",2.811],["2026-01-05",2.796],["2026-01-12",2.779],["2026-01-19",2.806],["2026-01-26",2.853],["2026-02-02",2.867],["2026-02-09",2.902],["2026-02-16",2.924],["2026-02-23",2.937],["2026-03-02",3.015],["2026-03-09",3.502],["2026-03-16",3.72],["2026-03-23",3.961],["2026-03-30",3.99],["2026-04-06",4.12],["2026-04-13",4.123],["2026-04-20",4.044],["2026-04-27",4.123],["2026-05-04",4.452],["2026-05-11",4.5],["2026-05-18",4.49],["2026-05-25",4.475],["2026-06-01",4.305],["2026-06-08",4.146],["2026-06-15",4.052],["2026-06-22",3.914],["2026-06-29",3.831],["2026-07-06",3.777],["2026-07-13",3.855],["2026-07-20",4.001],["2026-07-27",4.096],["2026-08-03",4.079],["2026-08-10",4.006],["2026-08-17",4.049],["2026-08-24",4.085],["2026-08-31",4.071],["2026-09-07",4.157],["2026-09-14",4.319],["2026-09-21",4.478],["2026-09-28",4.465],["2026-10-05",4.354]],"spr":[["2016-01-01",695.1],["2016-01-08",695.1],["2016-01-15",695.1],["2016-01-22",695.1],["2016-01-29",695.1],["2016-02-05",695.1],["2016-02-12",695.1],["2016-02-19",695.1],["2016-02-26",695.1],["2016-03-04",695.1],["2016-03-11",695.1],["2016-03-18",695.1],["2016-03-25",695.1],["2016-04-01",695.1],["2016-04-08",695.1],["2016-04-15",695.1],["2016-04-22",695.1],["2016-04-29",695.1],["2016-05-06",695.1],["2016-05-13",695.1],["2016-05-20",695.1],["2016-05-27",695.1],["2016-06-03",695.1],["2016-06-10",695.1],["2016-06-17",695.1],["2016-06-24",695.1],["2016-07-01",695.1],["2016-07-08",695.1],["2016-07-15",695.1],["2016-07-22",695.1],["2016-07-29",695.1],["2016-08-05",695.1],["2016-08-12",695.1],["2016-08-19",695.1],["2016-08-26",695.1],["2016-09-02",695.1],["2016-09-09",695.1],["2016-09-16",695.1],["2016-09-23",695.1],["2016-09-30",695.1],["2016-10-07",695.1],["2016-10-14",695.1],["2016-10-21",695.1],["2016-10-28",695.1],["2016-11-04",695.1],["2016-11-11",695.1],["2016-11-18",695.1],["2016-11-25",695.1],["2016-12-02",695.1],["2016-12-09",695.1],["2016-12-16",695.1],["2016-12-23",695.1],["2016-12-30",695.1],["2017-01-06",695.1],["2017-01-13",695.1],["2017-01-20",695.1],["2017-01-27",695.1],["2017-02-03",695.1],["2017-02-10",695.1],["2017-02-17",695.1],["2017-02-24",695.1],["2017-03-03",694.8],["2017-03-10",694.0],["2017-03-17",693.4],["2017-03-24",692.7],["2017-03-31",692.1],["2017-04-07",691.5],["2017-04-14",691.3],["2017-04-21",690.8],["2017-04-28",689.3],["2017-05-05",688.8],["2017-05-12",688.1],["2017-05-19",687.7],["2017-05-26",686.7],["2017-06-02",685.0],["2017-06-09",684.6],["2017-06-16",683.8],["2017-06-23",682.4],["2017-06-30",682.0],["2017-07-07",678.9],["2017-07-14",678.9],["2017-07-21",678.9],["2017-07-28",678.9],["2017-08-04",678.9],["2017-08-11",678.9],["2017-08-18",678.9],["2017-08-25",678.9],["2017-09-01",678.6],["2017-09-08",677.0],["2017-09-15",675.4],["2017-09-22",674.6],["2017-09-29",673.6],["2017-10-06",672.4],["2017-10-13",671.7],["2017-10-20",671.4],["2017-10-27",670.6],["2017-11-03",669.9],["2017-11-10",669.2],["2017-11-17",667.5],["2017-11-24",665.1],["2017-12-01",662.7],["2017-12-08",662.9],["2017-12-15",663.3],["2017-12-22",663.4],["2017-12-29",663.7],["2018-01-05",663.7],["2018-01-12",664.2],["2018-01-19",664.5],["2018-01-26",664.7],["2018-02-02",665.1],["2018-02-09",665.6],["2018-02-16",664.9],["2018-02-23",665.3],["2018-03-02",665.5],["2018-03-09",665.5],["2018-03-16",665.5],["2018-03-23",665.5],["2018-03-30",665.5],["2018-04-06",665.5],["2018-04-13",665.5],["2018-04-20",664.7],["2018-04-27",664.3],["2018-05-04",663.6],["2018-05-11",662.0],["2018-05-18",661.3],["2018-05-25",660.8],["2018-06-01",660.2],["2018-06-08",660.2],["2018-06-15",660.0],["2018-06-22",660.0],["2018-06-29",660.0],["2018-07-06",660.0],["2018-07-13",660.0],["2018-07-20",660.0],["2018-07-27",660.0],["2018-08-03",660.0],["2018-08-10",660.0],["2018-08-17",660.0],["2018-08-24",660.0],["2018-08-31",660.0],["2018-09-07",660.0],["2018-09-14",660.0],["2018-09-21",660.0],["2018-09-28",660.0],["2018-10-05",658.7],["2018-10-12",657.6],["2018-10-19",656.5],["2018-10-26",654.9],["2018-11-02",654.7],["2018-11-09",653.3],["2018-11-16",652.6],["2018-11-23",650.6],["2018-11-30",649.6],["2018-12-07",649.6],["2018-12-14",649.1],["2018-12-21",649.1],["2018-12-28",649.1],["2019-01-04",649.1],["2019-01-11",649.1],["2019-01-18",649.1],["2019-01-25",649.1],["2019-02-01",649.1],["2019-02-08",649.1],["2019-02-15",649.1],["2019-02-22",649.1],["2019-03-01",649.1],["2019-03-08",649.1],["2019-03-15",649.1],["2019-03-22",649.1],["2019-03-29",649.1],["2019-04-05",649.1],["2019-04-12",649.1],["2019-04-19",649.1],["2019-04-26",648.6],["2019-05-03",647.7],["2019-05-10",646.0],["2019-05-17",644.8],["2019-05-24",644.8],["2019-05-31",644.8],["2019-06-07",644.8],["2019-06-14",644.8],["2019-06-21",644.8],["2019-06-28",644.8],["2019-07-05",644.8],["2019-07-12",644.8],["2019-07-19",644.8],["2019-07-26",644.8],["2019-08-02",644.8],["2019-08-09",644.8],["2019-08-16",644.8],["2019-08-23",644.8],["2019-08-30",644.8],["2019-09-06",644.8],["2019-09-13",644.8],["2019-09-20",644.8],["2019-09-27",644.8],["2019-10-04",644.6],["2019-10-11",643.3],["2019-10-18",642.4],["2019-10-25",641.7],["2019-11-01",641.0],["2019-11-08",639.5],["2019-11-15",637.5],["2019-11-22",636.2],["2019-11-29",635.2],["2019-12-06",635.0],["2019-12-13",635.0],["2019-12-20",635.0],["2019-12-27",635.0],["2020-01-03",635.0],["2020-01-10",635.0],["2020-01-17",635.0],["2020-01-24",635.0],["2020-01-31",635.0],["2020-02-07",635.0],["2020-02-14",635.0],["2020-02-21",635.0],["2020-02-28",635.0],["2020-03-06",635.0],["2020-03-13",635.0],["2020-03-20",635.0],["2020-03-27",635.0],["2020-04-03",635.0],["2020-04-10",635.0],["2020-04-17",635.0],["2020-04-24",636.1],["2020-05-01",637.8],["2020-05-08",639.8],["2020-05-15",641.6],["2020-05-22",643.8],["2020-05-29",647.8],["2020-06-05",650.0],["2020-06-12",651.7],["2020-06-19",653.7],["2020-06-26",655.4],["2020-07-03",656.0],["2020-07-10",656.1],["2020-07-17",656.1],["2020-07-24",656.1],["2020-07-31",656.1],["2020-08-07",653.9],["2020-08-14",651.2],["2020-08-21",649.5],["2020-08-28",648.2],["2020-09-04",647.9],["2020-09-11",645.7],["2020-09-18",645.0],["2020-09-25",643.2],["2020-10-02",642.0],["2020-10-09",640.8],["2020-10-16",640.1],["2020-10-23",639.4],["2020-10-30",639.3],["2020-11-06",638.7],["2020-11-13",638.3],["2020-11-20",638.2],["2020-11-27",638.2],["2020-12-04",638.1],["2020-12-11",638.1],["2020-12-18",638.1],["2020-12-25",638.1],["2021-01-01",638.1],["2021-01-08",638.1],["2021-01-15",638.1],["2021-01-22",638.1],["2021-01-29",638.1],["2021-02-05",637.9],["2021-02-12",637.8],["2021-02-19",637.8],["2021-02-26",637.8],["2021-03-05",637.8],["2021-03-12",637.8],["2021-03-19",637.8],["2021-03-26",637.8],["2021-04-02",637.8],["2021-04-09",636.7],["2021-04-16",635.9],["2021-04-23",634.5],["2021-04-30",633.4],["2021-05-07",632.0],["2021-05-14",630.1],["2021-05-21",628.5],["2021-05-28",627.8],["2021-06-04",626.5],["2021-06-11",625.6],["2021-06-18",623.9],["2021-06-25",622.5],["2021-07-02",621.3],["2021-07-09",621.3],["2021-07-16",621.3],["2021-07-23",621.3],["2021-07-30",621.3],["2021-08-06",621.3],["2021-08-13",621.3],["2021-08-20",621.3],["2021-08-27",621.3],["2021-09-03",621.3],["2021-09-10",620.8],["2021-09-17",619.6],["2021-09-24",618.7],["2021-10-01",617.8],["2021-10-08",617.0],["2021-10-15",615.3],["2021-10-22",614.2],["2021-10-29",612.5],["2021-11-05",609.4],["2021-11-12",606.1],["2021-11-19",604.5],["2021-11-26",602.6],["2021-12-03",600.9],["2021-12-10",598.9],["2021-12-17",596.4],["2021-12-24",595.0],["2021-12-31",593.7],["2022-01-07",593.4],["2022-01-14",592.0],["2022-01-21",590.8],["2022-01-28",588.9],["2022-02-04",587.5],["2022-02-11",584.8],["2022-02-18",582.4],["2022-02-25",580.0],["2022-03-04",577.5],["2022-03-11",575.5],["2022-03-18",571.3],["2022-03-25",568.3],["2022-04-01",564.6],["2022-04-08",560.7],["2022-04-15",556.0],["2022-04-22",553.1],["2022-04-29",550.0],["2022-05-06",543.0],["2022-05-13",538.0],["2022-05-20",532.0],["2022-05-27",526.6],["2022-06-03",519.3],["2022-06-10",511.6],["2022-06-17",504.8],["2022-06-24",497.9],["2022-07-01",492.0],["2022-07-08",485.1],["2022-07-15",480.1],["2022-07-22",474.5],["2022-07-29",469.9],["2022-08-05",464.6],["2022-08-12",461.2],["2022-08-19",453.1],["2022-08-26",450.0],["2022-09-02",442.5],["2022-09-09",434.1],["2022-09-16",427.2],["2022-09-23",422.6],["2022-09-30",416.4],["2022-10-07",408.7],["2022-10-14",405.1],["2022-10-21",401.7],["2022-10-28",399.8],["2022-11-04",396.2],["2022-11-11",392.1],["2022-11-18",390.5],["2022-11-25",389.1],["2022-12-02",387.0],["2022-12-09",382.3],["2022-12-16",378.6],["2022-12-23",375.1],["2022-12-30",372.4],["2023-01-06",371.6],["2023-01-13",371.6],["2023-01-20",371.6],["2023-01-27",371.6],["2023-02-03",371.6],["2023-02-10",371.6],["2023-02-17",371.6],["2023-02-24",371.6],["2023-03-03",371.6],["2023-03-10",371.6],["2023-03-17",371.6],["2023-03-24",371.6],["2023-03-31",371.2],["2023-04-07",369.6],["2023-04-14",368.0],["2023-04-21",366.9],["2023-04-28",364.9],["2023-05-05",362.0],["2023-05-12",359.6],["2023-05-19",358.0],["2023-05-26",355.4],["2023-06-02",353.6],["2023-06-09",351.7],["2023-06-16",350.0],["2023-06-23",348.6],["2023-06-30",347.2],["2023-07-07",346.8],["2023-07-14",346.8],["2023-07-21",346.8],["2023-07-28",346.8],["2023-08-04",347.8],["2023-08-11",348.4],["2023-08-18",348.9],["2023-08-25",349.5],["2023-09-01",350.3],["2023-09-08",350.6],["2023-09-15",351.2],["2023-09-22",351.0],["2023-09-29",351.3],["2023-10-06",351.3],["2023-10-13",351.3],["2023-10-20",351.3],["2023-10-27",351.3],["2023-11-03",351.3],["2023-11-10",351.3],["2023-11-17",351.3],["2023-11-24",351.6],["2023-12-01",351.9],["2023-12-08",351.9],["2023-12-15",352.5],["2023-12-22",353.3],["2023-12-29",354.4],["2024-01-05",355.0],["2024-01-12",355.6],["2024-01-19",356.5],["2024-01-26",357.4],["2024-02-02",358.0],["2024-02-09",358.8],["2024-02-16",359.5],["2024-02-23",360.3],["2024-03-01",361.0],["2024-03-08",361.6],["2024-03-15",362.3],["2024-03-22",363.1],["2024-03-29",363.6],["2024-04-05",364.2],["2024-04-12",364.9],["2024-04-19",365.7],["2024-04-26",366.3],["2024-05-03",367.2],["2024-05-10",367.8],["2024-05-17",368.8],["2024-05-24",369.3],["2024-05-31",370.2],["2024-06-07",370.5],["2024-06-14",370.9],["2024-06-21",372.2],["2024-06-28",372.6],["2024-07-05",373.1],["2024-07-12",373.7],["2024-07-19",374.4],["2024-07-26",375.1],["2024-08-02",375.8],["2024-08-09",376.5],["2024-08-16",377.2],["2024-08-23",377.9],["2024-08-30",379.7],["2024-09-06",380.0],["2024-09-13",380.6],["2024-09-20",381.9],["2024-09-27",382.6],["2024-10-04",382.9],["2024-10-11",383.9],["2024-10-18",384.6],["2024-10-25",385.8],["2024-11-01",387.2],["2024-11-08",387.8],["2024-11-15",389.2],["2024-11-22",390.4],["2024-11-29",391.8],["2024-12-06",392.5],["2024-12-13",393.1],["2024-12-20",393.3],["2024-12-27",393.6],["2025-01-03",393.8],["2025-01-10",394.3],["2025-01-17",394.6],["2025-01-24",394.8],["2025-01-31",395.1],["2025-02-07",395.3],["2025-02-14",395.3],["2025-02-21",395.3],["2025-02-28",395.3],["2025-03-07",395.6],["2025-03-14",395.9],["2025-03-21",396.1],["2025-03-28",396.4],["2025-04-04",396.7],["2025-04-11",397.0],["2025-04-18",397.5],["2025-04-25",398.5],["2025-05-02",399.1],["2025-05-09",399.6],["2025-05-16",400.5],["2025-05-23",401.3],["2025-05-30",401.8],["2025-06-06",402.1],["2025-06-13",402.3],["2025-06-20",402.5],["2025-06-27",402.8],["2025-07-04",403.0],["2025-07-11",402.7],["2025-07-18",402.5],["2025-07-25",402.7],["2025-08-01",403.0],["2025-08-08",403.2],["2025-08-15",403.4],["2025-08-22",404.2],["2025-08-29",404.7],["2025-09-05",405.2],["2025-09-12",405.7],["2025-09-19",406.0],["2025-09-26",406.7],["2025-10-03",407.0],["2025-10-10",407.7],["2025-10-17",408.6],["2025-10-24",409.1],["2025-10-31",409.6],["2025-11-07",410.4],["2025-11-14",410.9],["2025-11-21",411.4],["2025-11-28",411.7],["2025-12-05",411.9],["2025-12-12",412.2],["2025-12-19",413.0],["2025-12-26",413.2],["2026-01-02",413.5],["2026-01-09",413.7],["2026-01-16",414.5],["2026-01-23",415.0],["2026-01-30",415.2],["2026-02-06",415.2],["2026-02-13",415.4],["2026-02-20",415.4],["2026-02-27",415.4],["2026-03-06",415.4],["2026-03-13",415.4],["2026-03-20",415.4],["2026-03-27",415.1],["2026-04-03",413.3],["2026-04-10",409.2],["2026-04-17",405.0],["2026-04-24",397.9],["2026-05-01",392.7],["2026-05-08",384.1],["2026-05-15",374.2],["2026-05-22",365.1],["2026-05-29",357.1],["2026-06-05",349.2],["2026-06-12",340.3],["2026-06-19",331.2],["2026-06-26",325.7],["2026-07-03",319.5],["2026-07-10",316.5],["2026-07-17",311.4],["2026-07-24",307.6],["2026-07-31",304.8],["2026-08-07",298.7],["2026-08-14",293.4],["2026-08-21",289.7],["2026-08-28",286.6],["2026-09-04",285.4],["2026-09-11",285.0],["2026-09-18",284.6],["2026-09-25",283.8],["2026-10-02",283.0]],"wtiw":[["2016-01-01",36.99],["2016-01-08",34.65],["2016-01-15",30.59],["2016-01-22",29.19],["2016-01-29",31.81],["2016-02-05",31.26],["2016-02-12",28.14],["2016-02-19",30.02],["2016-02-26",31.32],["2016-03-04",34.43],["2016-03-11",37.69],["2016-03-18",38.32],["2016-03-25",39.45],["2016-04-01",36.82],["2016-04-08",36.72],["2016-04-15",41.23],["2016-04-22",41.86],["2016-04-29",44.3],["2016-05-06",44.22],["2016-05-13",45.44],["2016-05-20",47.99],["2016-05-27",48.72],["2016-06-03",49.0],["2016-06-10",50.18],["2016-06-17",47.89],["2016-06-24",48.71],["2016-07-01",48.17],["2016-07-08",46.17],["2016-07-15",45.6],["2016-07-22",44.44],["2016-07-29",41.83],["2016-08-05",40.82],["2016-08-12",43.11],["2016-08-19",47.16],["2016-08-26",47.05],["2016-09-02",45.11],["2016-09-09",45.96],["2016-09-16",44.34],["2016-09-23",44.59],["2016-09-30",46.55],["2016-10-07",49.48],["2016-10-14",50.29],["2016-10-21",50.56],["2016-10-28",49.36],["2016-11-04",45.51],["2016-11-11",44.61],["2016-11-18",45.15],["2016-11-25",47.25],["2016-12-02",48.63],["2016-12-09",50.97],["2016-12-16",51.91],["2016-12-23",51.95],["2016-12-30",53.6],["2017-01-06",53.34],["2017-01-13",52.07],["2017-01-20",51.82],["2017-01-27",52.74],["2017-02-03",53.33],["2017-02-10",52.88],["2017-02-17",53.22],["2017-02-24",54.03],["2017-03-03",53.56],["2017-03-10",50.5],["2017-03-17",48.03],["2017-03-24",47.28],["2017-03-31",49.14],["2017-04-07",51.26],["2017-04-14",53.19],["2017-04-21",51.09],["2017-04-28",49.12],["2017-05-05",47.21],["2017-05-12",47.04],["2017-05-19",49.24],["2017-05-26",50.21],["2017-06-02",48.48],["2017-06-09",46.57],["2017-06-16",45.3],["2017-06-23",43.09],["2017-06-30",44.63],["2017-07-07",44.96],["2017-07-14",45.51],["2017-07-21",46.41],["2017-07-28",48.27],["2017-08-04",49.52],["2017-08-11",49.08],["2017-08-18",47.52],["2017-08-25",47.68],["2017-09-01",46.68],["2017-09-08",48.58],["2017-09-15",49.07],["2017-09-22",50.12],["2017-09-29",51.77],["2017-10-06",50.23],["2017-10-13",50.77],["2017-10-20",51.74],["2017-10-27",52.51],["2017-11-03",54.59],["2017-11-10",57.05],["2017-11-17",55.81],["2017-11-24",57.47],["2017-12-01",57.81],["2017-12-08",56.92],["2017-12-15",57.17],["2017-12-22",57.87],["2017-12-29",59.88],["2018-01-05",61.36],["2018-01-12",63.26],["2018-01-19",63.77],["2018-01-26",65.14],["2018-02-02",65.32],["2018-02-09",62.01],["2018-02-16",60.56],["2018-02-23",62.47],["2018-03-02",62.07],["2018-03-09",61.65],["2018-03-16",61.28],["2018-03-23",64.11],["2018-03-30",64.97],["2018-04-06",63.07],["2018-04-13",66.02],["2018-04-20",67.55],["2018-04-27",67.91],["2018-05-04",68.38],["2018-05-11",70.56],["2018-05-18",71.3],["2018-05-25",70.98],["2018-06-01",66.96],["2018-06-08",65.35],["2018-06-15",66.21],["2018-06-22",66.32],["2018-06-29",74.03],["2018-07-06",73.73],["2018-07-13",71.96],["2018-07-20",68.95],["2018-07-27",70.01],["2018-08-03",69.46],["2018-08-10",67.9],["2018-08-17",66.15],["2018-08-24",68.1],["2018-08-31",69.66],["2018-09-07",68.51],["2018-09-14",68.96],["2018-09-21",70.28],["2018-09-28",72.84],["2018-10-05",75.13],["2018-10-12",72.96],["2018-10-19",70.24],["2018-10-26",67.43],["2018-11-02",65.06],["2018-11-09",61.57],["2018-11-16",56.92],["2018-11-23",54.99],["2018-11-30",51.01],["2018-12-07",52.63],["2018-12-14",51.54],["2018-12-21",46.98],["2018-12-28",45.22],["2019-01-04",47.0],["2019-01-11",50.78],["2019-01-18",51.92],["2019-01-25",52.88],["2019-02-01",53.63],["2019-02-08",53.53],["2019-02-15",53.88],["2019-02-22",56.74],["2019-03-01",56.12],["2019-03-08",56.35],["2019-03-15",57.81],["2019-03-22",59.44],["2019-03-29",59.49],["2019-04-05",62.36],["2019-04-12",64.1],["2019-04-19",63.8],["2019-04-26",65.28],["2019-05-03",62.9],["2019-05-10",61.81],["2019-05-17",62.1],["2019-05-24",60.72],["2019-05-31",56.93],["2019-06-07",52.97],["2019-06-14",52.52],["2019-06-21",54.75],["2019-06-28",58.38],["2019-07-05",57.32],["2019-07-12",59.02],["2019-07-19",56.74],["2019-07-26",56.05],["2019-08-02",56.55],["2019-08-09",53.28],["2019-08-16",55.31],["2019-08-23",55.5],["2019-08-30",55.21],["2019-09-06",55.73],["2019-09-13",56.16],["2019-09-20",59.33],["2019-09-27",56.9],["2019-10-04",53.12],["2019-10-11",53.27],["2019-10-18",53.49],["2019-10-25",55.2],["2019-11-01",55.17],["2019-11-08",56.69],["2019-11-15",56.85],["2019-11-22",56.9],["2019-11-29",58.07],["2019-12-06",57.64],["2019-12-13",59.25],["2019-12-20",60.75],["2019-12-27",61.29],["2020-01-03",62.09],["2020-01-10",60.84],["2020-01-17",58.29],["2020-01-24",56.15],["2020-01-31",52.7],["2020-02-07",50.36],["2020-02-14",50.83],["2020-02-21",53.14],["2020-02-28",48.36],["2020-03-06",45.57],["2020-03-13",32.39],["2020-03-20",24.19],["2020-03-27",19.44],["2020-04-03",21.69],["2020-04-10",24.41],["2020-04-17",20.12],["2020-04-24",3.32],["2020-05-01",15.71],["2020-05-08",23.46],["2020-05-15",26.4],["2020-05-22",33.1],["2020-05-29",34.19],["2020-06-05",37.32],["2020-06-12",37.87],["2020-06-19",38.35],["2020-06-26",39.22],["2020-07-03",39.85],["2020-07-10",40.44],["2020-07-17",40.57],["2020-07-24",41.34],["2020-07-31",40.69],["2020-08-07",41.57],["2020-08-14",42.08],["2020-08-21",42.73],["2020-08-28",42.93],["2020-09-04",41.84],["2020-09-11",37.38],["2020-09-18",39.55],["2020-09-25",39.78],["2020-10-02",38.99],["2020-10-09",40.19],["2020-10-16",40.33],["2020-10-23",40.43],["2020-10-30",37.32],["2020-11-06",37.71],["2020-11-13",40.66],["2020-11-20",41.52],["2020-11-27",44.4],["2020-12-04",45.37],["2020-12-11",46.04],["2020-12-18",47.97],["2020-12-25",47.73],["2021-01-01",47.98],["2021-01-08",50.09],["2021-01-15",52.75],["2021-01-22",52.82],["2021-01-29",52.52],["2021-02-05",55.39],["2021-02-12",58.54],["2021-02-19",60.17],["2021-02-26",62.3],["2021-03-05",62.29],["2021-03-12",65.02],["2021-03-19",63.22],["2021-03-26",59.95],["2021-04-02",60.66],["2021-04-09",59.35],["2021-04-16",61.93],["2021-04-23",62.18],["2021-04-30",63.47],["2021-05-07",65.1],["2021-05-14",65.07],["2021-05-21",64.11],["2021-05-28",66.4],["2021-06-04",68.74],["2021-06-11",70.11],["2021-06-18",71.55],["2021-06-25",73.48],["2021-07-02",74.07],["2021-07-09",73.35],["2021-07-16",73.19],["2021-07-23",69.68],["2021-07-30",72.75],["2021-08-06",69.5],["2021-08-13",68.33],["2021-08-20",65.05],["2021-08-27",67.59],["2021-09-03",69.15],["2021-09-10",68.98],["2021-09-17",71.69],["2021-09-24",72.18],["2021-10-01",75.45],["2021-10-08",78.5],["2021-10-15",81.18],["2021-10-22",83.48],["2021-10-29",83.84],["2021-11-05",81.79],["2021-11-12",81.93],["2021-11-19",78.99],["2021-11-26",77.79],["2021-12-03",66.89],["2021-12-10",71.31],["2021-12-17",71.18],["2021-12-24",71.63],["2021-12-31",76.05],["2022-01-07",77.86],["2022-01-14",81.52],["2022-01-21",85.93],["2022-01-28",86.94],["2022-02-04",89.6],["2022-02-11",90.61],["2022-02-18",92.89],["2022-02-25",92.18],["2022-03-04",106.8],["2022-03-11",113.39],["2022-03-18",100.43],["2022-03-25",113.69],["2022-04-01",103.89],["2022-04-08",99.21],["2022-04-15",101.46],["2022-04-22",104.02],["2022-04-29",102.85],["2022-05-06",106.69],["2022-05-13",105.0],["2022-05-20",112.18],["2022-05-27",113.38],["2022-06-03",116.37],["2022-06-10",120.43],["2022-06-17",116.46],["2022-06-24",107.88],["2022-07-01",110.96],["2022-07-08",103.32],["2022-07-15",99.92],["2022-07-22",102.24],["2022-07-29",99.6],["2022-08-05",94.01],["2022-08-12",94.65],["2022-08-19",91.81],["2022-08-26",94.47],["2022-09-02",90.79],["2022-09-09",85.29],["2022-09-16",87.24],["2022-09-23",83.46],["2022-09-30",80.08],["2022-10-07",88.22],["2022-10-14",88.97],["2022-10-21",85.36],["2022-10-28",87.87],["2022-11-04",89.14],["2022-11-11",88.41],["2022-11-18",84.02],["2022-11-25",78.74],["2022-12-02",79.29],["2022-12-09",73.06],["2022-12-16",75.12],["2022-12-23",77.28],["2022-12-30",79.23],["2023-01-06",74.27],["2023-01-13",77.1],["2023-01-20",80.34],["2023-01-27",80.33],["2023-02-03",76.51],["2023-02-10",77.51],["2023-02-17",78.51],["2023-02-24",75.42],["2023-03-03",77.54],["2023-03-10",77.31],["2023-03-17",69.6],["2023-03-24",69.33],["2023-03-31",73.79],["2023-04-07",80.62],["2023-04-14",81.87],["2023-04-21",79.22],["2023-04-28",76.31],["2023-05-05",71.16],["2023-05-12",72.03],["2023-05-19",71.62],["2023-05-26",72.62],["2023-06-02",69.85],["2023-06-09",71.56],["2023-06-16",69.42],["2023-06-23",70.41],["2023-06-30",69.36],["2023-07-07",71.79],["2023-07-14",75.2],["2023-07-21",75.61],["2023-07-28",79.68],["2023-08-04",81.4],["2023-08-11",83.04],["2023-08-18",80.93],["2023-08-25",79.97],["2023-09-01",82.5],["2023-09-08",87.17],["2023-09-15",89.14],["2023-09-22",90.28],["2023-09-29",91.44],["2023-10-06",85.5],["2023-10-13",85.03],["2023-10-20",88.03],["2023-10-27",85.2],["2023-11-03",81.99],["2023-11-10",77.92],["2023-11-17",76.98],["2023-11-24",77.02],["2023-12-01",75.49],["2023-12-08",70.71],["2023-12-15",70.11],["2023-12-22",73.23],["2023-12-29",73.52],["2024-01-05",72.49],["2024-01-12",72.03],["2024-01-19",73.36],["2024-01-26",76.36],["2024-02-02",75.78],["2024-02-09",75.05],["2024-02-16",78.17],["2024-02-23",78.71],["2024-03-01",79.58],["2024-03-08",79.53],["2024-03-15",80.43],["2024-03-22",82.79],["2024-03-29",82.73],["2024-04-05",86.35],["2024-04-12",86.5],["2024-04-19",84.65],["2024-04-26",84.48],["2024-05-03",81.74],["2024-05-10",80.26],["2024-05-17",80.61],["2024-05-24",79.43],["2024-05-31",79.52],["2024-06-07",75.53],["2024-06-14",79.24],["2024-06-21",82.26],["2024-06-28",82.53],["2024-07-05",84.61],["2024-07-12",83.44],["2024-07-19",82.98],["2024-07-26",79.26],["2024-08-02",77.11],["2024-08-09",76.33],["2024-08-16",79.49],["2024-08-23",74.68],["2024-08-30",76.36],["2024-09-06",70.02],["2024-09-13",68.82],["2024-09-20",72.14],["2024-09-27",70.22],["2024-10-04",71.83],["2024-10-11",75.69],["2024-10-18",70.81],["2024-10-25",71.59],["2024-11-01",68.69],["2024-11-08",71.89],["2024-11-15",68.38],["2024-11-22",70.11],["2024-11-29",68.94],["2024-12-06",68.89],["2024-12-13",69.97],["2024-12-20",70.39],["2024-12-27",70.51],["2025-01-03",73.15],["2025-01-10",75.14],["2025-01-17",79.28],["2025-01-24",75.73],["2025-01-31",73.31],["2025-02-07",72.05],["2025-02-14",72.17],["2025-02-21",72.1],["2025-02-28",69.93],["2025-03-07",67.52],["2025-03-14",66.95],["2025-03-21",67.96],["2025-03-28",69.81],["2025-04-04",69.09],["2025-04-11",61.24],["2025-04-18",62.92],["2025-04-25",63.62],["2025-05-02",60.99],["2025-05-09",60.39],["2025-05-16",63.94],["2025-05-23",63.26],["2025-05-30",61.82],["2025-06-06",64.06],["2025-06-13",68.63],["2025-06-20",74.94],["2025-06-27",66.78],["2025-07-04",67.43],["2025-07-11",69.15],["2025-07-18",68.07],["2025-07-25",67.11],["2025-08-01",69.58],["2025-08-08",65.75],["2025-08-15",64.34],["2025-08-22",64.14],["2025-08-29",64.52],["2025-09-05",64.09],["2025-09-12",63.06],["2025-09-19",63.98],["2025-09-26",64.83],["2025-10-03",62.59],["2025-10-10",62.1],["2025-10-17",58.8],["2025-10-24",60.2],["2025-10-31",61.49],["2025-11-07",60.87],["2025-11-14",60.16],["2025-11-21",60.27],["2025-11-28",58.69],["2025-12-05",59.48],["2025-12-12",58.3],["2025-12-19",56.3],["2025-12-26",58.01],["2026-01-02",57.54],["2026-01-09",57.56],["2026-01-16",60.12],["2026-01-23",60.16],["2026-01-30",62.9],["2026-02-06",63.09],["2026-02-13",63.93],["2026-02-20",65.3],["2026-02-27",65.87],["2026-03-06",78.37],["2026-03-13",91.85],["2026-03-20",96.07],["2026-03-27",94.29],["2026-04-03",105.67],["2026-04-10",104.54],["2026-04-17",93.84],["2026-04-24",95.43],["2026-05-01",105.57],["2026-05-08",102.28],["2026-05-15",105.1],["2026-05-22",105.32],["2026-05-29",93.45],["2026-06-05",96.87],["2026-06-12",92.16],["2026-06-19",81.36],["2026-06-26",73.59],["2026-07-03",70.48],["2026-07-10",72.26],["2026-07-17",80.77],["2026-07-24",88.58],["2026-07-31",84.51],["2026-08-07",78.94],["2026-08-14",84.05],["2026-08-21",87.35],["2026-08-28",84.62],["2026-09-04",91.18],["2026-09-11",99.08],["2026-09-18",103.54],["2026-09-25",93.57],["2026-10-02",98.07]],"states":[{"a":"AL","n":"Alabama","p":3.982,"tax":31.0,"ex":30.0,"oth":1.0,"padd":3,"c":7,"r":6},{"a":"AK","n":"Alaska","p":5.0223,"tax":8.95,"ex":8.0,"oth":0.95,"padd":5,"c":0,"r":0},{"a":"AZ","n":"Arizona","p":4.7068,"tax":19.0,"ex":18.0,"oth":1.0,"padd":5,"c":2,"r":5},{"a":"AR","n":"Arkansas","p":3.9675,"tax":25.0,"ex":24.7,"oth":0.3,"padd":3,"c":5,"r":5},{"a":"CA","n":"California","p":6.3069,"tax":73.64,"ex":63.4,"oth":10.24,"padd":5,"c":1,"r":4},{"a":"CO","n":"Colorado","p":4.2434,"tax":30.18,"ex":22.0,"oth":8.18,"padd":4,"c":3,"r":4},{"a":"CT","n":"Connecticut","p":4.4135,"tax":25.0,"ex":25.0,"oth":0.0,"padd":1,"c":10,"r":3},{"a":"DE","n":"Delaware","p":4.2521,"tax":23.0,"ex":23.0,"oth":0.0,"padd":1,"c":10,"r":4},{"a":"DC","n":"District of Columbia","p":4.443,"tax":35.7,"ex":23.5,"oth":12.2,"padd":1,"c":9,"r":5},{"a":"FL","n":"Florida","p":4.0879,"tax":40.1,"ex":22.0,"oth":18.1,"padd":1,"c":8,"r":7},{"a":"GA","n":"Georgia","p":3.8135,"tax":34.05,"ex":33.3,"oth":0.75,"padd":1,"c":8,"r":6},{"a":"HI","n":"Hawaii","p":5.6367,"tax":18.5,"ex":16.0,"oth":2.5,"padd":5,"c":1,"r":7},{"a":"ID","n":"Idaho","p":4.8963,"tax":33.0,"ex":32.0,"oth":1.0,"padd":4,"c":2,"r":2},{"a":"IL","n":"Illinois","p":4.7098,"tax":71.7,"ex":49.6,"oth":22.1,"padd":2,"c":6,"r":2},{"a":"IN","n":"Indiana","p":3.9155,"tax":64.5,"ex":37.0,"oth":27.5,"padd":2,"c":6,"r":3},{"a":"IA","n":"Iowa","p":4.2547,"tax":30.0,"ex":30.0,"oth":0.0,"padd":2,"c":5,"r":3},{"a":"KS","n":"Kansas","p":4.02,"tax":25.03,"ex":24.0,"oth":1.03,"padd":2,"c":4,"r":5},{"a":"KY","n":"Kentucky","p":4.0351,"tax":26.4,"ex":25.0,"oth":1.4,"padd":2,"c":6,"r":4},{"a":"LA","n":"Louisiana","p":3.9405,"tax":20.93,"ex":20.0,"oth":0.92,"padd":3,"c":5,"r":6},{"a":"ME","n":"Maine","p":4.3837,"tax":31.45,"ex":30.0,"oth":1.45,"padd":1,"c":11,"r":0},{"a":"MD","n":"Maryland","p":4.2656,"tax":46.81,"ex":23.5,"oth":23.31,"padd":1,"c":9,"r":4},{"a":"MA","n":"Massachusetts","p":4.3235,"tax":27.56,"ex":24.0,"oth":3.56,"padd":1,"c":10,"r":2},{"a":"MI","n":"Michigan","p":4.6614,"tax":53.4,"ex":52.4,"oth":1.0,"padd":2,"c":8,"r":2},{"a":"MN","n":"Minnesota","p":4.2554,"tax":32.7,"ex":32.6,"oth":0.1,"padd":2,"c":5,"r":2},{"a":"MS","n":"Mississippi","p":3.9342,"tax":24.4,"ex":24.0,"oth":0.4,"padd":3,"c":6,"r":6},{"a":"MO","n":"Missouri","p":4.0029,"tax":29.99,"ex":29.5,"oth":0.49,"padd":2,"c":5,"r":4},{"a":"MT","n":"Montana","p":4.5063,"tax":33.75,"ex":33.0,"oth":0.75,"padd":4,"c":3,"r":2},{"a":"NE","n":"Nebraska","p":4.2203,"tax":32.7,"ex":31.8,"oth":0.9,"padd":2,"c":4,"r":4},{"a":"NV","n":"Nevada","p":5.4403,"tax":23.8,"ex":23.0,"oth":0.8,"padd":5,"c":2,"r":3},{"a":"NH","n":"New Hampshire","p":4.3045,"tax":23.75,"ex":22.2,"oth":1.55,"padd":1,"c":11,"r":1},{"a":"NJ","n":"New Jersey","p":4.3026,"tax":49.15,"ex":10.5,"oth":38.65,"padd":1,"c":9,"r":3},{"a":"NM","n":"New Mexico","p":4.4114,"tax":18.88,"ex":17.0,"oth":1.88,"padd":3,"c":3,"r":5},{"a":"NY","n":"New York","p":4.4584,"tax":24.18,"ex":8.0,"oth":16.18,"padd":1,"c":9,"r":2},{"a":"NC","n":"North Carolina","p":3.9784,"tax":41.25,"ex":41.0,"oth":0.25,"padd":1,"c":7,"r":5},{"a":"ND","n":"North Dakota","p":4.1391,"tax":23.03,"ex":23.0,"oth":0.03,"padd":2,"c":4,"r":2},{"a":"OH","n":"Ohio","p":3.8907,"tax":38.5,"ex":38.5,"oth":0.0,"padd":2,"c":7,"r":3},{"a":"OK","n":"Oklahoma","p":4.0235,"tax":20.0,"ex":19.0,"oth":1.0,"padd":2,"c":4,"r":6},{"a":"OR","n":"Oregon","p":5.0046,"tax":40.0,"ex":40.0,"oth":0.0,"padd":5,"c":1,"r":3},{"a":"PA","n":"Pennsylvania","p":4.4571,"tax":58.7,"ex":57.6,"oth":1.1,"padd":1,"c":8,"r":3},{"a":"RI","n":"Rhode Island","p":4.2837,"tax":41.12,"ex":40.0,"oth":1.12,"padd":1,"c":11,"r":2},{"a":"SC","n":"South Carolina","p":4.007,"tax":28.75,"ex":28.0,"oth":0.75,"padd":1,"c":8,"r":5},{"a":"SD","n":"South Dakota","p":4.244,"tax":30.0,"ex":28.0,"oth":2.0,"padd":2,"c":4,"r":3},{"a":"TN","n":"Tennessee","p":3.94,"tax":27.4,"ex":26.0,"oth":1.4,"padd":2,"c":6,"r":5},{"a":"TX","n":"Texas","p":3.8249,"tax":20.0,"ex":20.0,"oth":0.0,"padd":3,"c":4,"r":7},{"a":"UT","n":"Utah","p":4.8256,"tax":38.55,"ex":37.9,"oth":0.65,"padd":4,"c":2,"r":4},{"a":"VT","n":"Vermont","p":4.4193,"tax":31.26,"ex":12.1,"oth":19.16,"padd":1,"c":10,"r":1},{"a":"VA","n":"Virginia","p":4.1781,"tax":42.4,"ex":32.6,"oth":9.8,"padd":1,"c":8,"r":4},{"a":"WA","n":"Washington","p":5.4525,"tax":60.17,"ex":56.5,"oth":3.67,"padd":5,"c":1,"r":2},{"a":"WV","n":"West Virginia","p":4.2733,"tax":35.7,"ex":20.5,"oth":15.2,"padd":1,"c":7,"r":4},{"a":"WI","n":"Wisconsin","p":4.1425,"tax":32.9,"ex":30.9,"oth":2.0,"padd":2,"c":7,"r":2},{"a":"WY","n":"Wyoming","p":4.4829,"tax":24.0,"ex":23.0,"oth":1.0,"padd":4,"c":3,"r":3}],"world":[["Hong Kong",16.7],["Norway",11.8],["Denmark",10.83],["Netherlands",10.5],["Israel",9.98],["Finland",9.92],["Switzerland",9.69],["Greece",9.39],["Singapore",9.34],["France",9.12],["Germany",9.11],["UK",8.79],["Italy",8.65],["Spain",7.64],["Sweden",7.13],["South Africa",6.83],["Turkey",6.51],["Australia",6.05],["Mexico",5.97],["Canada",5.48],["South Korea",5.34],["Argentina",5.38],["China",5.22],["Brazil",4.78],["United States",4.65],["India",4.27],["Japan",4.07],["Indonesia",4.06],["Nigeria",3.73],["Russia",3.34],["Saudi Arabia",2.35],["Kuwait",1.28],["Venezuela",0.13],["Iran",0.11],["Libya",0.09]],"worldAvg":6.02};
+(function(){
+'use strict';
+var D=DATA, NS='http://www.w3.org/2000/svg';
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function el(tag,attrs,parent){var e=document.createElementNS(NS,tag);if(attrs)for(var k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+function txt(e,s){e.textContent=s;return e;}
+function money(v,d){return v==null?'—':'$'+v.toFixed(d==null?2:d);}
+var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function dnum(iso){var p=iso.split('-');return Date.UTC(+p[0],+p[1]-1,p[2]?+p[2]:15);}
+function dlabel(x,withDay){var d=new Date(x);return (withDay?d.getUTCDate()+' ':'')+MON[d.getUTCMonth()]+' '+d.getUTCFullYear();}
+function monthKeyOf(x){var d=new Date(x);return d.getUTCFullYear()+'-'+('0'+(d.getUTCMonth()+1)).slice(-2);}
+var cpiLast=D.cpi[D.cpi.length-1];
+function cpiFactor(x){var k=monthKeyOf(x),i=D.months.indexOf(k);if(i<0)i=D.months.length-1;var c=D.cpi[i]||cpiLast;return cpiLast/c;}
+function niceStep(range,n){var raw=range/n,p=Math.pow(10,Math.floor(Math.log10(raw))),m=raw/p;return (m<1.5?1:m<3.5?2:m<7.5?5:10)*p;}
+function lum(hex){var c=hex.replace('#','');var r=parseInt(c.substr(0,2),16)/255,g=parseInt(c.substr(2,2),16)/255,b=parseInt(c.substr(4,2),16)/255;return .2126*r+.7152*g+.0722*b;}
+
+/* ---------- line chart engine ---------- */
+function LineChart(wrap,tip,cfg){
+  this.wrap=wrap;this.tip=tip;this.cfg=cfg||{};this.series=[];this.opts={};this.hoverX=null;
+  var self=this;
+  if(window.ResizeObserver){new ResizeObserver(function(){self.render();}).observe(wrap);}
+  else window.addEventListener('resize',function(){self.render();});
+}
+LineChart.prototype.set=function(series,opts){this.series=series;this.opts=opts||{};this.render();};
+LineChart.prototype.render=function(){
+  var wrap=this.wrap,cfg=this.cfg,opts=this.opts,series=this.series;
+  var W=wrap.clientWidth||800,H=cfg.height||300,ML=cfg.ml||46,MR=cfg.mr||58,MT=cfg.mt||22,MB=28;
+  if(W<520){MR=44;ML=40;}
+  wrap.innerHTML='';
+  var svg=el('svg',{viewBox:'0 0 '+W+' '+H,width:W,height:H,role:'img','aria-label':cfg.aria||''},wrap);
+  var all=[];series.forEach(function(s){s.pts.forEach(function(p){if(p[1]!=null)all.push(p);});});
+  if(!all.length)return;
+  var x0=opts.xmin!=null?opts.xmin:Math.min.apply(null,all.map(function(p){return p[0];}));
+  var x1=opts.xmax!=null?opts.xmax:Math.max.apply(null,all.map(function(p){return p[0];}));
+  var ymaxRaw=Math.max.apply(null,all.map(function(p){return p[1];}));
+  var yminRaw=cfg.zero?0:Math.min.apply(null,all.map(function(p){return p[1];}));
+  var step=niceStep((ymaxRaw-yminRaw)||1,4);
+  var ymax=Math.ceil((ymaxRaw*1.04)/step)*step, ymin=cfg.zero?0:Math.floor((yminRaw*.96)/step)*step;
+  if(ymax===ymin)ymax=ymin+step;
+  var PW=W-ML-MR,PH=H-MT-MB;
+  var X=function(x){return ML+(x-x0)/(x1-x0||1)*PW;},Y=function(y){return MT+(ymax-y)/(ymax-ymin)*PH;};
+  this.X=X;this.Y=Y;this.x0=x0;this.x1=x1;
+  /* term bands */
+  if(opts.bands){var gb=el('g',null,svg);opts.bands.forEach(function(b,i){var bx0=Math.max(x0,b[0]),bx1=Math.min(x1,b[1]);if(bx1<=bx0)return;
+    if(i%2===0)el('rect',{x:X(bx0),y:MT,width:X(bx1)-X(bx0),height:PH,'class':'term'},gb);
+    var t=el('text',{x:X(bx0)+4,y:MT-8,'class':'term-l'},gb);txt(t,b[2]);});}
+  /* grid + y axis */
+  var gg=el('g',{'class':'grid'},svg);
+  for(var y=ymin;y<=ymax+1e-9;y+=step){el('line',{x1:ML,x2:W-MR,y1:Y(y),y2:Y(y)},gg);var ty=el('text',{x:ML-6,y:Y(y)+4,'text-anchor':'end'},gg);txt(ty,cfg.yfmt?cfg.yfmt(y):y);}
+  /* x axis */
+  var gx=el('g',{'class':'axis'},svg);el('line',{x1:ML,x2:W-MR,y1:MT+PH,y2:MT+PH},gx);
+  var span=x1-x0,day=864e5,ticks=[];
+  if(span>400*day){var ys=new Date(x0).getUTCFullYear(),ye=new Date(x1).getUTCFullYear();for(var yy=ys;yy<=ye;yy++){var tx=Date.UTC(yy,0,1);if(tx>=x0&&tx<=x1)ticks.push([tx,String(yy)]);}
+    if(W<560)ticks=ticks.filter(function(t,i){return i%2===0;});}
+  else{var d0=new Date(x0),m0=d0.getUTCFullYear()*12+d0.getUTCMonth(),d1=new Date(x1),m1=d1.getUTCFullYear()*12+d1.getUTCMonth();for(var mm=m0;mm<=m1;mm++){var tx2=Date.UTC(Math.floor(mm/12),mm%12,1);if(tx2>=x0-15*day&&tx2<=x1)ticks.push([Math.max(tx2,x0),MON[mm%12]]);}
+    if(W<560)ticks=ticks.filter(function(t,i){return i%2===0;});}
+  ticks.forEach(function(t){el('line',{x1:X(t[0]),x2:X(t[0]),y1:MT+PH,y2:MT+PH+4},gx);var tt=el('text',{x:X(t[0]),y:MT+PH+16,'text-anchor':'middle'},gx);txt(tt,t[1]);});
+  /* series */
+  var gs=el('g',null,svg);
+  function path(pts,close){var d='',pen=false;pts.forEach(function(p){if(p[1]==null){pen=false;return;}d+=(pen?'L':'M')+X(p[0]).toFixed(1)+' '+Y(p[1]).toFixed(1);pen=true;});return d;}
+  series.forEach(function(s){
+    if(s.area){var pts=s.pts.filter(function(p){return p[1]!=null;});if(pts.length){var d=path(pts)+'L'+X(pts[pts.length-1][0]).toFixed(1)+' '+Y(ymin)+'L'+X(pts[0][0]).toFixed(1)+' '+Y(ymin)+'Z';el('path',{d:d,'class':'area '+s.cls},gs);}}
+    el('path',{d:path(s.pts),'class':'ln '+s.cls},gs);
+  });
+  /* direct labels: endpoint + extreme of primary */
+  var prim=series[0],pp=prim.pts.filter(function(p){return p[1]!=null;});
+  if(pp.length){var last=pp[pp.length-1];var mx=pp.reduce(function(a,p){return p[1]>a[1]?p:a;},pp[0]);var mn=pp.reduce(function(a,p){return p[1]<a[1]?p:a;},pp[0]);
+    var gl=el('g',null,svg);var mo=(opts.markers&&opts.markers.length)?1:0;
+    el('circle',{cx:X(last[0]),cy:Y(last[1]),r:4,'class':'dot '+prim.cls},gl);
+    var tl=el('text',{x:X(last[0])+(mo?13:8),y:Y(last[1])+4,'class':'lab bg'},gl);txt(tl,cfg.yfmt?cfg.yfmt(last[1]):last[1]);
+    if(cfg.labelMax!==false&&mx!==last){var above=Y(mx[1])-MT>14;var tm=el('text',{x:Math.min(X(mx[0]),W-MR-10),y:above?Y(mx[1])-(mo?16:8):Y(mx[1])+(mo?22:14),'text-anchor':'middle','class':'lab bg'},gl);txt(tm,(cfg.yfmt?cfg.yfmt(mx[1]):mx[1])+(cfg.maxNote?' '+cfg.maxNote(mx):''));}
+    if(cfg.labelMin&&mn!==last&&mn!==mx){var tn=el('text',{x:X(mn[0]),y:Y(mn[1])+16,'text-anchor':'middle','class':'lab bg'},gl);txt(tn,cfg.yfmt?cfg.yfmt(mn[1]):mn[1]);}
+  }
+  /* event markers */
+  if(opts.markers){var gm=el('g',null,svg);opts.markers.forEach(function(m){if(m.x<x0||m.x>x1)return;var g=el('g',{'class':'ev'+(m.on?' on':''),tabindex:'0',role:'button','aria-label':m.label},gm);el('circle',{cx:X(m.x),cy:Y(m.y),r:9},g);var t=el('text',{x:X(m.x),y:Y(m.y)+3},g);txt(t,m.n);
+    g.addEventListener('click',function(e){e.stopPropagation();m.onClick();});g.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();m.onClick();}});
+    g.addEventListener('pointerenter',function(){self.showTip(m.x,m.label);});});}
+  /* hover layer */
+  var self=this;var gh=el('g',null,svg);this.gh=gh;
+  var hit=el('rect',{x:ML,y:MT,width:PW,height:PH,'class':'hit',tabindex:'0','aria-label':'Chart values. Use arrow keys to move.'},svg);
+  hit.addEventListener('pointermove',function(e){var r=svg.getBoundingClientRect();var px=(e.clientX-r.left)*(W/r.width);var x=x0+(px-ML)/PW*(x1-x0);self.hover(x,true);});
+  hit.addEventListener('pointerleave',function(){self.hover(null,true);});
+  hit.addEventListener('keydown',function(e){var pts=series[0].pts.filter(function(p){return p[1]!=null;});var i=self.hoverIdx==null?pts.length-1:self.hoverIdx;if(e.key==='ArrowLeft'){i=Math.max(0,i-1);}else if(e.key==='ArrowRight'){i=Math.min(pts.length-1,i+1);}else if(e.key==='Escape'){self.hover(null,true);return;}else return;e.preventDefault();self.hover(pts[i][0],true);});
+  hit.addEventListener('blur',function(){self.hover(null,true);});
+  this.svg=svg;this.PH=PH;this.MT=MT;this.W=W;this.ML=ML;this.MR=MR;
+  if(this.hoverX!=null)this.hover(this.hoverX,false);
+};
+LineChart.prototype.nearest=function(x){var pts=this.series[0].pts.filter(function(p){return p[1]!=null;});var best=0,bd=Infinity;for(var i=0;i<pts.length;i++){var d=Math.abs(pts[i][0]-x);if(d<bd){bd=d;best=i;}}this.hoverIdx=best;return pts[best];};
+LineChart.prototype.hover=function(x,broadcast){
+  var self=this;if(broadcast&&this.cfg.linked){this.cfg.linked.forEach(function(c){if(c!==self)c.hover(x,false);});}
+  this.hoverX=x;var gh=this.gh;if(!gh)return;while(gh.firstChild)gh.removeChild(gh.firstChild);
+  if(x==null||x<this.x0||x>this.x1){this.tip.style.display='none';this.hoverIdx=null;return;}
+  var p=this.nearest(x),X=this.X,Y=this.Y,px=p[0];
+  el('line',{x1:X(px),x2:X(px),y1:this.MT,y2:this.MT+this.PH,'class':'xh'},gh);
+  var rows=[];
+  this.series.forEach(function(s){var q=null,bd=Infinity;s.pts.forEach(function(pt){if(pt[1]==null)return;var d=Math.abs(pt[0]-px);if(d<bd){bd=d;q=pt;}});if(!q||bd>20*864e5)return;el('circle',{cx:X(q[0]),cy:Y(q[1]),r:4.5,'class':'dot '+s.cls},gh);rows.push({name:s.name,cls:s.cls,v:q[1]});});
+  var label=this.cfg.tipLabel?this.cfg.tipLabel(px):dlabel(px);
+  this.renderTip(X(px),label,rows);
+};
+LineChart.prototype.renderTip=function(sx,label,rows){
+  var tip=this.tip,cfg=this.cfg;tip.innerHTML='';var d=document.createElement('div');d.className='d';d.textContent=label;tip.appendChild(d);
+  rows.forEach(function(r){var row=document.createElement('div');row.className='r';var b=document.createElement('b');var k=document.createElement('i');k.className='k';k.style.borderColor='var(--c-'+r.cls+')';b.appendChild(k);b.appendChild(document.createTextNode(cfg.yfmt?cfg.yfmt(r.v):r.v));var s=document.createElement('span');s.textContent=r.name;row.appendChild(b);row.appendChild(s);tip.appendChild(row);});
+  tip.style.display='block';var tw=tip.offsetWidth,ww=this.wrap.clientWidth;var left=sx+14;if(left+tw>ww)left=sx-14-tw;if(left<0)left=0;tip.style.left=left+'px';tip.style.top=(this.MT+6)+'px';
+};
+LineChart.prototype.showTip=function(x,label){this.hover(x,true);if(label){var d=this.tip.querySelector('.d');if(d)d.textContent=label;}};
+
+/* ---------- events ---------- */
+var EV=[
+ {d:'2016-02-15',when:'Feb 2016',t:'The bottom',s:'Shale glut meets an OPEC price war',p:'$1.72',b:'<p>OPEC decided in November 2014 to defend market share instead of price, flooding a market already swimming in U.S. shale oil. Crude fell from $100 to $30. Iran\'s sanctions were lifted in January 2016, adding more. The national average hit $1.72 the week of February 15, the cheapest of the decade. More than 100 U.S. oil companies went bankrupt in 2015 and 2016.</p><p>What Washington did: nothing, and nobody asked it to. Cheap gas has no constituency for action.</p>'},
+ {d:'2016-11-30',when:'Nov 2016',t:'OPEC+ is born',s:'Saudi Arabia and Russia agree to cut together',p:'$2.18',b:'<p>On November 30, 2016 OPEC agreed to its first production cut since 2008, about 1.2 million barrels a day. Ten days later Russia and other non-members joined with another 600,000. The alliance, now called OPEC+, has set the floor under the world price ever since. Gas rose about 60 cents over the next two years.</p>'},
+ {d:'2017-09-04',when:'Sep 2017',t:'Hurricane Harvey',s:'A quarter of U.S. refining goes dark',p:'$2.65',b:'<p>Harvey made landfall August 25, 2017 and flooded the Houston refining complex. About a quarter of U.S. refining capacity shut down, the Colonial Pipeline ran at reduced rates, and the national average jumped 30 cents in two weeks to $2.65 in September, the year\'s high. No oil was lost; the bottleneck was refining.</p><p>What Washington did: a Jones Act waiver on September 8 so foreign tankers could move Gulf fuel to the East Coast, and small SPR loans to refiners. Prices were back to normal by November.</p>'},
+ {d:'2018-10-08',when:'Oct 2018',t:'Iran sanctions, then a crash',s:'Trump exits the nuclear deal; crude hits $76, then falls 40%',p:'$2.86',b:'<p>The U.S. withdrew from the Iran nuclear deal on May 8, 2018 and reimposed oil sanctions in November. Crude climbed to $76 in early October and gas to $2.86, the highest since 2014. Then the administration granted waivers letting eight countries keep buying Iranian oil, U.S. output hit a record 11.9 million barrels a day, and trade-war fears hit demand. WTI fell to $49 by December and gas to $2.37.</p><p>The President tweeted at OPEC repeatedly that fall. Whether that moved anything is debated; the waivers and the shale boom clearly did.</p>'},
+ {d:'2019-09-16',when:'Sep 2019',t:'Abqaiq',s:'The biggest one-day supply loss ever barely registers',p:'$2.59',b:'<p>On September 14, 2019 drones and missiles hit Saudi Arabia\'s Abqaiq processing plant and Khurais field, knocking out 5.7 million barrels a day, about 5% of world supply. Brent jumped 15% in a day, the largest jump on record. The Saudis restored output in weeks, inventories covered the gap, and the pump moved about a dime. The lesson: spare capacity and full stockpiles absorb shocks. Both were thinner in 2026.</p>'},
+ {d:'2020-04-27',when:'Apr 2020',t:'COVID: oil goes negative',s:'Demand vanishes; a barrel of WTI closes at minus $37.63',p:'$1.77',b:'<p>Lockdowns cut world oil demand by a fifth in weeks. Saudi Arabia and Russia launched a price war on March 8. On April 20 the expiring WTI futures contract settled at minus $37.63 because storage was full and nobody could take delivery. Gas fell to $1.77 the week of April 27, but not to the $1.20 that zero-cost crude would imply, because taxes, refining and distribution do not fall with the barrel.</p><p>What Washington did: President Trump brokered a 9.7-million-barrel-a-day OPEC+ cut on April 12 to stop the collapse, the one time in the decade a President acted to push oil up, and offered to fill the SPR with cheap oil, which Congress declined to fund.</p>'},
+ {d:'2021-05-10',when:'May 2021',t:'Colonial Pipeline',s:'Ransomware empties stations across the Southeast',p:'$2.99',b:'<p>On May 7, 2021 a ransomware attack shut the Colonial Pipeline, which carries about 45% of the East Coast\'s fuel, for six days. Panic buying drained stations from Georgia to Virginia within 72 hours. The national average crossed $3 for the first time since 2014, more from the demand rebound and OPEC+\'s slow return than from the pipeline itself. By November gas was $3.40 and inflation was the story.</p><p>What Washington did: emergency trucking waivers and a Jones Act waiver for the outage; on November 23 Biden announced a 50-million-barrel SPR release coordinated with China, India, Japan, Korea and the U.K.</p>'},
+ {d:'2022-06-13',when:'Jun 2022',t:'Russia invades Ukraine: $5.01',s:'The all-time record',p:'$5.01',b:'<p>Russia invaded Ukraine on February 24, 2022. The U.S. banned Russian oil imports on March 8, the day Brent touched $128. Gas crossed $4 in March, $5 in June, and peaked at $5.01 the week of June 13 (AAA: $5.016 on June 14). Diesel hit $5.75. The price then fell for 98 straight days to $3.68 by late September as demand cooled, SPR oil flowed and refining margins normalized.</p><p>What Washington did: Biden ordered 180 million barrels from the SPR on March 31 (1 million a day for six months, the largest release ever); the EPA waived summer E15 rules April 29; Biden asked Congress on June 22 for a three-month gas tax holiday and got no vote; the House passed a price-gouging bill 217 to 207 on May 19 that the Senate ignored; Biden flew to Jeddah July 15 and OPEC+ added a token 100,000 barrels. Treasury later estimated the SPR release cut 17 to 42 cents a gallon.</p>'},
+ {d:'2022-10-05',when:'Oct 2022',t:'OPEC+ cuts 2 million',s:'Riyadh answers Washington',p:'$3.82',b:'<p>Three months after the Jeddah visit, OPEC+ cut output by 2 million barrels a day on October 5, 2022. The White House promised "consequences." Gas rose 20 cents in October and then fell anyway, to $3.21 by December, as recession fears and Chinese lockdowns cut demand. The episode is the clearest demonstration in the decade that the cartel does not take instructions from Presidents.</p>'},
+ {d:'2023-09-18',when:'Sep 2023',t:'The Saudi squeeze',s:'Voluntary cuts push crude to $90',p:'$3.84',b:'<p>Saudi Arabia added an extra 1-million-barrel cut in July 2023 and extended it through year-end, with Russia trimming exports. WTI climbed to $89 in September and gas to $3.84 in August and September. Then U.S. production hit a new record of 13.3 million barrels a day and gas fell to $3.13 by December. The pattern of the decade: OPEC+ sets the floor, U.S. shale sets the ceiling, and neither answers to Washington.</p>'},
+ {d:'2024-12-16',when:'Dec 2024',t:'The quiet year',s:'Record output, steady prices, an election',p:'$3.02',b:'<p>2024 averaged $3.31 and never left a 60-cent band. U.S. output set another record. Gas was a top-three issue in the election anyway. Congress ordered the small Northeast Gasoline Supply Reserve closed in March, and the Energy Department sold its 1 million barrels in May, an amount the Northeast burns in about a day. December closed at $3.02.</p>'},
+ {d:'2025-12-15',when:'Dec 2025',t:'Energy emergency, tariffs, cheap gas',s:'Lowest monthly average since early 2021',p:'$2.89',b:'<p>Trump declared a "national energy emergency" on January 20, 2025 and ordered more leasing and faster permits. The April 2 tariff announcement hit demand forecasts and WTI fell to $57 in May, the lowest since 2021. The 12-day Israel-Iran war in June moved Brent to $79 for a week and the pump barely noticed. OPEC+ unwound its cuts through the year. Sanctions on Russia\'s two largest producers landed October 22. U.S. output hit a record 13.99 million barrels a day in October. December averaged $2.89, the cheapest month since January 2021, and the week of January 12, 2026 was $2.78.</p><p>Little of the year\'s cheap gas traced to the emergency order; drilling follows price, and producers were cutting rigs at $60 oil. Most of it traced to OPEC+ adding barrels and a slowing world economy.</p>'},
+ {d:'2026-05-11',when:'May 2026',t:'Hormuz: $4.50',s:'Strikes on Iran close the strait; ten weeks, $1.70',p:'$4.50',b:'<p>U.S. and Israeli forces struck Iran on February 28, 2026. Iran attacked shipping and the Strait of Hormuz, the route for about a fifth of the world\'s oil, effectively closed. Brent rose 10% on March 2, passed $100 on March 12 and reached roughly $118 to $128 around April 2; Iraq, Saudi Arabia and the UAE shut in production they could not ship. Gas went from $2.78 in mid-January to $3.99 on March 30, $4.16 by April 9 and $4.50 the week of May 11, the highest since 2022. AAA\'s Memorial Day week average was $4.56. Diesel passed $5.60. Spirit Airlines shut down May 2 citing fuel costs.</p><p>What Washington did: Trump ordered 172 million barrels from the SPR on March 11 as the U.S. share of a 400-million-barrel IEA release (refiners initially took about half); Homeland Security waived the Jones Act March 17; the EPA issued a nationwide E15 emergency waiver in March; a ceasefire was announced April 8; Trump said April 23 to expect higher prices "for a little while" and floated a federal gas tax holiday May 11. Four gas-tax bills were introduced in Congress; none moved. Georgia, Utah, Indiana, Ohio and others cut state taxes. A U.S.-Iran agreement to reopen the strait was reached June 14 and 15 and signed in Switzerland June 19; Brent fell to about $70 by July 1 and gas to $3.91 by July 6.</p>'},
+ {d:'2026-09-21',when:'Sep 2026',t:'Re-escalation: the record autumn',s:'A pipeline attack, a ship hit, and diesel at $6.53',p:'$4.48',b:'<p>The reopened strait never returned to normal traffic. On September 10 and 11 a drone attack damaged two pumping stations on Saudi Arabia\'s East-West pipeline, the 4-to-5-million-barrel-a-day bypass that had carried Gulf exports around the strait for six months; on September 13 a tanker was struck in Hormuz. Brent went back above $100. Gas rose 16 cents in one week to $4.43 and $4.48 by September 21. September\'s average of $4.33 was 50 cents above the previous September record. Diesel hit $6.53 on September 22, up 77% in a year.</p><p>What Washington did: the SPR, drawn to 283 million barrels by October 2, the lowest since 1982, could not do much more; the IEA announced another 100-million-barrel coordinated release; Trump called for a diesel export ban that the administration said it was "examining"; on October 9 he announced a deal for Russia to ship diesel. Hurricane Isaias hit the Florida-Alabama coast October 9 and 10 after shutting more than two-thirds of Gulf production, and the Energy Department loaned 4 million SPR barrels to two refiners. AAA\'s national average on October 11: $4.36, down 5 cents on the week, still a record for mid-October.</p>'}
+];
+var evList=$('#events');
+EV.forEach(function(e,i){e.n=i+1;e.x=dnum(e.d);var li=document.createElement('li');li.className='event';li.id='ev-'+e.n;
+  var btn=document.createElement('button');btn.type='button';btn.setAttribute('aria-expanded','false');
+  var n=document.createElement('span');n.className='en';n.textContent=e.n;var d=document.createElement('span');d.className='ed';d.textContent=e.when;
+  var t=document.createElement('span');t.className='et';t.textContent=e.t;var sm=document.createElement('small');sm.textContent=e.s;t.appendChild(sm);
+  var p=document.createElement('span');p.className='ep';p.textContent=e.p;
+  btn.appendChild(n);btn.appendChild(d);btn.appendChild(t);btn.appendChild(p);
+  var body=document.createElement('div');body.className='eb';body.innerHTML=e.b;
+  li.appendChild(btn);li.appendChild(body);evList.appendChild(li);
+  btn.addEventListener('click',function(){var open=li.classList.toggle('open');btn.setAttribute('aria-expanded',open?'true':'false');state.ev=open?e.n:null;drawGas();});
+  e.li=li;e.btn=btn;});
+function openEvent(e){EV.forEach(function(o){if(o!==e){o.li.classList.remove('open');o.btn.setAttribute('aria-expanded','false');}});e.li.classList.add('open');e.btn.setAttribute('aria-expanded','true');state.ev=e.n;drawGas();e.li.scrollIntoView({behavior:'smooth',block:'center'});}
+
+/* ---------- main gas + crude charts ---------- */
+var state={region:'US',range:'all',dollars:'nominal',diesel:false,terms:false,events:true,table:false,ev:null};
+var TERMS=[[dnum('2009-01-20'),dnum('2017-01-20'),'Obama'],[dnum('2017-01-20'),dnum('2021-01-20'),'Trump'],[dnum('2021-01-20'),dnum('2025-01-20'),'Biden'],[dnum('2025-01-20'),dnum('2030-01-01'),'Trump']];
+var REGION_NAMES={US:'U.S. average',PADD1:'East Coast',PADD2:'Midwest',PADD3:'Gulf Coast',PADD4:'Rocky Mountain',PADD5:'West Coast',CA:'California',CO:'Colorado',FL:'Florida',MA:'Massachusetts',MN:'Minnesota',NY:'New York',OH:'Ohio',TX:'Texas',WA:'Washington'};
+var monthX=D.months.map(function(m){return dnum(m);});
+function monthlyPts(arr,real){return arr.map(function(v,i){return [monthX[i],v==null?null:(real?v*cpiFactor(monthX[i]):v)];});}
+function weeklyPts(arr,real){return arr.map(function(w){var x=dnum(w[0]);return [x,real?w[1]*cpiFactor(x):w[1]];});}
+function rangeBounds(){if(state.range==='all')return [dnum('2016-01-01'),dnum('2026-10-20')];var y=+state.range;return [Date.UTC(y,0,1),y===2026?dnum('2026-10-20'):Date.UTC(y,11,31)];}
+function inRange(pts,b){return pts.filter(function(p){return p[0]>=b[0]-16*864e5&&p[0]<=b[1]+16*864e5;});}
+var gasChart=new LineChart($('#chartGas'),$('#tipGas'),{height:340,zero:true,yfmt:function(v){return money(v);},aria:'Gas price over time',labelMin:true,tipLabel:function(x){return weeklyMode()?dlabel(x,true):dlabel(x);}});
+var crudeChart=new LineChart($('#chartCrude'),$('#tipCrude'),{height:200,zero:false,yfmt:function(v){return '$'+Math.round(v);},aria:'Crude oil price over time',tipLabel:function(x){return weeklyMode()?dlabel(x,true):dlabel(x);}});
+gasChart.cfg.linked=[gasChart,crudeChart];crudeChart.cfg.linked=[gasChart,crudeChart];
+function weeklyMode(){return state.range!=='all'&&state.region==='US';}
+function drawGas(){
+  var real=state.dollars==='real',b=rangeBounds(),series=[],wk=weeklyMode();
+  var primName=REGION_NAMES[state.region]+(real?' (today\'s $)':'');
+  var prim=wk?weeklyPts(D.weekly,real):monthlyPts(D.gas[state.region],real);
+  series.push({name:primName,cls:'gas',pts:inRange(prim,b),area:true});
+  if(state.region!=='US')series.push({name:'U.S. average',cls:'mute',pts:inRange(monthlyPts(D.gas.US,real),b)});
+  if(state.diesel)series.push({name:'Diesel (U.S.)',cls:'diesel',pts:inRange(monthlyPts(D.diesel,real),b)});
+  var markers=[];
+  if(state.events){EV.forEach(function(e){var pts=series[0].pts,q=null,bd=Infinity;pts.forEach(function(p){if(p[1]==null)return;var d=Math.abs(p[0]-e.x);if(d<bd){bd=d;q=p;}});if(!q)return;markers.push({x:q[0],y:q[1],n:e.n,on:state.ev===e.n,label:e.n+' · '+e.when+' · '+e.t,onClick:function(){openEvent(e);}});});}
+  gasChart.set(series,{xmin:b[0],xmax:b[1],bands:state.terms?TERMS:null,markers:markers});
+  $('#chartNote').textContent=(wk?'Weekly':'Monthly')+' average · EIA'+(real?' · CPI-adjusted to Aug 2026':'');
+  var leg=$('#legGas');leg.innerHTML='';series.forEach(function(s){var sp=document.createElement('span');var i=document.createElement('i');i.style.borderColor='var(--c-'+s.cls+')';sp.appendChild(i);sp.appendChild(document.createTextNode(s.name));leg.appendChild(sp);});
+  if(state.events){var sp2=document.createElement('span');var i2=document.createElement('i');i2.className='sw';i2.style.background='var(--sheet)';i2.style.border='2px solid var(--c-gas)';sp2.appendChild(i2);sp2.appendChild(document.createTextNode('Numbered: events, tap to read'));leg.appendChild(sp2);}
+  var cs=[{name:'WTI',cls:'crude',pts:inRange(wk?weeklyPts(D.wtiw,real):monthlyPts(D.wti,real),b)},{name:'Brent',cls:'mute',pts:inRange(monthlyPts(D.brent,real),b)}];
+  crudeChart.set(cs,{xmin:b[0],xmax:b[1],bands:state.terms?TERMS:null});
+  renderGasTable(series,cs);
+}
+function renderGasTable(series,cs){var t=$('#tblGas');if(!state.table){t.classList.remove('on');return;}t.classList.add('on');t.innerHTML='';
+  var tbl=document.createElement('table'),thead=document.createElement('thead'),tr=document.createElement('tr');
+  ['Date'].concat(series.map(function(s){return s.name;})).concat(['WTI','Brent']).forEach(function(h){var th=document.createElement('th');th.textContent=h;tr.appendChild(th);});thead.appendChild(tr);tbl.appendChild(thead);
+  var tb=document.createElement('tbody');var wk=weeklyMode();
+  series[0].pts.forEach(function(p){var row=document.createElement('tr');var td=document.createElement('td');td.textContent=wk?dlabel(p[0],true):dlabel(p[0]);row.appendChild(td);
+    series.forEach(function(s){var q=s.pts.filter(function(z){return z[1]!=null&&Math.abs(z[0]-p[0])<20*864e5;})[0];var c=document.createElement('td');c.textContent=q?money(q[1]):'—';row.appendChild(c);});
+    cs.forEach(function(s){var q=s.pts.filter(function(z){return z[1]!=null&&Math.abs(z[0]-p[0])<20*864e5;})[0];var c=document.createElement('td');c.textContent=q?money(q[1]):'—';row.appendChild(c);});
+    tb.appendChild(row);});tbl.appendChild(tb);t.appendChild(tbl);}
+$('#regionSel').addEventListener('change',function(e){state.region=e.target.value;drawGas();});
+$$('[data-range]').forEach(function(b){b.addEventListener('click',function(){state.range=b.getAttribute('data-range');$$('[data-range]').forEach(function(o){o.setAttribute('aria-pressed',o===b?'true':'false');});drawGas();});});
+$$('[data-dollars]').forEach(function(b){b.addEventListener('click',function(){state.dollars=b.getAttribute('data-dollars');$$('[data-dollars]').forEach(function(o){o.setAttribute('aria-pressed',o===b?'true':'false');});drawGas();});});
+$('#chkDiesel').addEventListener('change',function(e){state.diesel=e.target.checked;drawGas();});
+$('#chkTerms').addEventListener('change',function(e){state.terms=e.target.checked;drawGas();});
+$('#chkEvents').addEventListener('change',function(e){state.events=e.target.checked;drawGas();});
+$('#tblGasBtn').addEventListener('click',function(){state.table=!state.table;this.setAttribute('aria-pressed',state.table?'true':'false');drawGas();});
+drawGas();
+
+/* ---------- ticker: year-ago ---------- */
+(function(){var target=dnum('2025-10-11'),best=null,bd=Infinity;D.weekly.forEach(function(w){var d=Math.abs(dnum(w[0])-target);if(d<bd){bd=d;best=w;}});if(best)$('#tkYear').textContent=money(best[1]);})();
+
+/* ---------- calculator ---------- */
+var REFINE=0.99,DIST=0.67,TAX=0.54;
+function calc(){var c=+$('#crudeRange').value,oil=c/42,pump=oil+REFINE+DIST+TAX;$('#calcCrude').innerHTML='$'+c+'<small>/ barrel</small>';$('#calcPump').innerHTML=money(pump)+'<small>/ gallon</small>';
+  var parts=[['Crude',oil],['Refine',REFINE],['Dist',DIST],['Tax',TAX]];var segs=$$('#stack i');parts.forEach(function(p,i){var sh=p[1]/pump*100;segs[i].style.flexBasis=sh+'%';$('#sk'+p[0]).textContent=money(p[1]);$('#sk'+p[0]+'P').textContent=Math.round(sh)+'%';});
+  $('#stackNote').textContent=(c===100?'May 2026 · $4.48 · EIA':'Estimate at $'+c+' crude');
+  $('#calcNote').textContent='A barrel holds 42 gallons, so every $10 on a barrel is about 24 cents on a gallon. At $'+c+' crude, the oil alone is '+money(oil)+' of the price and taxes are '+Math.round(TAX/pump*100)+'%.';}
+$('#crudeRange').addEventListener('input',calc);calc();
+
+/* ---------- map ---------- */
+var PADD_NAMES={1:'East Coast',2:'Midwest',3:'Gulf Coast',4:'Rocky Mountain',5:'West Coast'};
+var RAMP_O=['#FBE3D4','#F6C4A4','#F0A074','#E97A47','#D95926','#B2431A','#7F2E10'],RAMP_B=['#D5E4FA','#AECBF4','#86B2EC','#5E97E3','#3A7BD5','#2A5FB0','#1C4382'],RAMP_P=['#AECBF4','#7FAEEA','#4F8EDC','#2E6BC0','#1C4382'];
+var mapState={layer:'price',sel:null,table:false};
+var LAYERS={
+  price:{name:'Price today',val:function(s){return s.p;},fmt:function(v){return money(v);},ramp:RAMP_O,note:'AAA · Oct 11, 2026',short:function(v){return money(v);}},
+  tax:{name:'State taxes & fees',val:function(s){return s.tax;},fmt:function(v){return v.toFixed(1)+'¢';},ramp:RAMP_B,note:'EIA · July 2026 · per gallon',short:function(v){return Math.round(v)+'¢';}},
+  net:{name:'Price minus all taxes',val:function(s){return s.p-s.tax/100-0.184;},fmt:function(v){return money(v);},ramp:RAMP_O,note:'AAA price less state and federal tax',short:function(v){return money(v);}},
+  padd:{name:'Refining region',val:function(s){return s.padd;},fmt:function(v){return 'PADD '+v+' · '+PADD_NAMES[v];},ramp:RAMP_P,note:'EIA Petroleum Administration for Defense Districts',short:function(v){return 'P'+v;}}
+};
+function rank(s,layer){var L=LAYERS[layer];var vals=D.states.map(function(o){return L.val(o);}).sort(function(a,b){return b-a;});return vals.indexOf(L.val(s))+1;}
+function tileColor(s,layer){var L=LAYERS[layer],v=L.val(s);if(layer==='padd')return RAMP_P[v-1];var vals=D.states.map(function(o){return L.val(o);}),mn=Math.min.apply(null,vals),mx=Math.max.apply(null,vals);var i=Math.min(L.ramp.length-1,Math.floor((v-mn)/((mx-mn)||1)*L.ramp.length));return L.ramp[i];}
+var mapWrap=$('#mapWrap'),tipMap=$('#tipMap');
+function drawMap(){
+  var W=mapWrap.clientWidth||800,cols=12,rows=8,gap=3,T=(W-gap*(cols-1))/cols,H=T*rows+gap*(rows-1);
+  mapWrap.innerHTML='';var svg=el('svg',{viewBox:'0 0 '+W+' '+H,width:W,height:H,role:'img','aria-label':'Tile map of U.S. states showing '+LAYERS[mapState.layer].name},mapWrap);
+  var L=LAYERS[mapState.layer];
+  D.states.forEach(function(s){var g=el('g',{'class':'tile'+(mapState.sel===s.a?' sel':''),tabindex:'0',role:'button','aria-label':s.n+': '+L.fmt(L.val(s))},svg);
+    var x=s.c*(T+gap),y=s.r*(T+gap),fill=tileColor(s,mapState.layer),ink=lum(fill)>.5?'#0F1B2D':'#FFFFFF';
+    el('rect',{x:x,y:y,width:T,height:T,fill:fill},g);
+    var ab=el('text',{x:x+T/2,y:y+T/2+(T>44?-2:4),'class':'ab',fill:ink,'font-size':Math.max(9,Math.min(14,T*.27))},g);txt(ab,s.a);
+    if(T>44){var vl=el('text',{x:x+T/2,y:y+T/2+13,'class':'vl',fill:ink,'font-size':Math.max(9,Math.min(11,T*.2))},g);txt(vl,L.short(L.val(s)));}
+    g.addEventListener('pointerenter',function(){showMapTip(s,x+T/2,y);});g.addEventListener('pointermove',function(){showMapTip(s,x+T/2,y);});g.addEventListener('pointerleave',function(){tipMap.style.display='none';});
+    g.addEventListener('click',function(){mapState.sel=mapState.sel===s.a?null:s.a;drawMap();renderDetail();});
+    g.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();mapState.sel=s.a;drawMap();renderDetail();}});
+    g.addEventListener('focus',function(){showMapTip(s,x+T/2,y);});g.addEventListener('blur',function(){tipMap.style.display='none';});
+  });
+  $('#mapNote').textContent=L.note;
+  var leg=$('#mapLegend');leg.innerHTML='';
+  if(mapState.layer==='padd'){[1,2,3,4,5].forEach(function(p){var sp=document.createElement('span');var i=document.createElement('i');i.className='sw';i.style.cssText='display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px;background:'+RAMP_P[p-1];sp.appendChild(i);sp.appendChild(document.createTextNode('PADD '+p+' '+PADD_NAMES[p]));sp.style.marginRight='12px';leg.appendChild(sp);});}
+  else{var vals=D.states.map(function(o){return L.val(o);}),mn=Math.min.apply(null,vals),mx=Math.max.apply(null,vals);var a=document.createElement('span');a.textContent=L.fmt(mn);var r=document.createElement('span');r.className='ramp';L.ramp.forEach(function(c){var i=document.createElement('i');i.style.background=c;r.appendChild(i);});var b=document.createElement('span');b.textContent=L.fmt(mx);leg.appendChild(a);leg.appendChild(r);leg.appendChild(b);var hint=document.createElement('span');hint.textContent='· tap a state for detail';hint.style.marginLeft='8px';leg.appendChild(hint);}
+  renderMapTable();
+}
+function showMapTip(s,px,py){var L=LAYERS[mapState.layer];tipMap.innerHTML='';var d=document.createElement('div');d.className='d';d.textContent=s.n;tipMap.appendChild(d);
+  var rows=[[money(s.p),'price, Oct 11'],[s.tax.toFixed(1)+'¢','state taxes & fees'],[money(s.p-s.tax/100-0.184),'minus all taxes'],['#'+rank(s,'price')+' of 51','most expensive']];
+  rows.forEach(function(r){var row=document.createElement('div');row.className='r';var b=document.createElement('b');b.textContent=r[0];var sp=document.createElement('span');sp.textContent=r[1];row.appendChild(b);row.appendChild(sp);tipMap.appendChild(row);});
+  tipMap.style.display='block';var W=mapWrap.clientWidth,tw=tipMap.offsetWidth;var left=px+14;if(left+tw>W)left=px-14-tw;if(left<0)left=0;tipMap.style.left=left+'px';tipMap.style.top=Math.max(0,py-10)+'px';}
+var BLURB={CA:'The most expensive gas in the country: the highest state taxes and fees (73.6¢), a cap-and-trade program and low-carbon fuel standard, a unique cleaner blend few outside refineries make, no pipeline from the Gulf, and two refinery closures in a year.',HI:'Everything arrives by ship and the state has one refinery. Hawaii is usually second or third most expensive regardless of what crude does.',WA:'A 60-cent state tax plus a carbon market that began in 2023, and the same West Coast island problem as California.',NV:'No refineries; Nevada\'s gasoline comes by pipeline from California and Utah, so it inherits West Coast prices without West Coast taxes.',AK:'The lowest state gas tax in the nation (8.95¢) and yet one of the highest prices: tiny market, one refinery, everything shipped in.',OR:'Raised its gas tax from 40 to 46 cents in 2026 and sits downstream of Washington\'s and California\'s refineries.',GA:'Usually among the cheapest states, and in 2026 the cheapest: Governor Kemp suspended the 33-cent state tax in the spring and again in late September.',TX:'Half the country\'s refining capacity, a 20-cent state tax and no special blend. Texas is almost always within a dime of the cheapest.',IL:'A 47-cent excise tax plus a sales tax that rises with the price gives Illinois the second-highest taxes in the country and the Midwest\'s highest price.',PA:'The highest flat excise tax outside the West Coast (57.6¢), levied to fund roads and bridges and state police.',OH:'Ohio passed a 90-day gas tax suspension in the fall of 2026, which is why it sits below neighbors with similar statutory rates.',NY:'New York\'s 8-cent excise is misleading: sales taxes and fees bring the state total to about 24¢, and downstate prices run well above upstate.',MI:'Michigan raised its tax 5.2 cents in 2026 and sales tax applies on top, so its price moves more than its neighbors\' when crude moves.',FL:'Florida has no refineries and gets fuel by ship into Tampa, Port Everglades and Jacksonville, which makes it sensitive to hurricanes and Jones Act shipping costs.',UT:'Utah cut its gas tax about 15% through the end of 2026, but Rocky Mountain refining is thin and prices here track Salt Lake City\'s five refineries.',NJ:'The state excise is only 10.5 cents, but a separate petroleum products tax brings the total to 49 cents; it still bans self-service.'};
+function renderDetail(){var box=$('#mapDetail');box.innerHTML='';var s=D.states.filter(function(o){return o.a===mapState.sel;})[0];
+  var h=document.createElement('h4');
+  if(!s){var hi=D.states.reduce(function(a,o){return o.p>a.p?o:a;}),lo=D.states.reduce(function(a,o){return o.p<a.p?o:a;});h.textContent='Tap a state';var sm=document.createElement('small');sm.textContent='or use the table';h.appendChild(sm);box.appendChild(h);
+    [[money(hi.p),'highest · '+hi.n],[money(lo.p),'lowest · '+lo.n],[money(hi.p-lo.p),'the spread'],['$4.36','national average']].forEach(function(r){var d=document.createElement('div');var b=document.createElement('b');b.textContent=r[0];var sp=document.createElement('span');sp.textContent=r[1];d.appendChild(b);d.appendChild(sp);box.appendChild(d);});
+    var p=document.createElement('p');p.textContent='Taxes explain part of the spread. The rest is geography: whether a state sits next to a refinery, on a pipeline, or on an island.';box.appendChild(p);return;}
+  h.textContent=s.n;var sm2=document.createElement('small');sm2.textContent='PADD '+s.padd+' · '+PADD_NAMES[s.padd];h.appendChild(sm2);box.appendChild(h);
+  var padKey='PADD'+s.padd,regArr=D.gas[padKey],regLast=regArr[regArr.length-1];
+  [[money(s.p),'regular, Oct 11'],['#'+rank(s,'price'),'of 51, most expensive'],[s.tax.toFixed(1)+'¢','state taxes & fees ('+s.ex.toFixed(1)+' excise + '+s.oth.toFixed(1)+' other)'],[money(s.p-s.tax/100-0.184),'after state & federal tax'],[money(regLast),PADD_NAMES[s.padd]+' avg, Sep 2026']].forEach(function(r){var d=document.createElement('div');var b=document.createElement('b');b.textContent=r[0];var sp=document.createElement('span');sp.textContent=r[1];d.appendChild(b);d.appendChild(sp);box.appendChild(d);});
+  var p2=document.createElement('p');p2.textContent=BLURB[s.a]||('Taxes and fees take '+Math.round((s.tax/100+0.184)/s.p*100)+'% of the price in '+s.n+'. The rest is the same crude everyone pays for, plus the cost of getting it there.');box.appendChild(p2);}
+function renderMapTable(){var t=$('#tblMap');if(!mapState.table){t.classList.remove('on');return;}t.classList.add('on');t.innerHTML='';var tbl=document.createElement('table');var thead=document.createElement('thead'),tr=document.createElement('tr');['State','Price','Rank','State tax','Minus taxes','Region'].forEach(function(h){var th=document.createElement('th');th.textContent=h;tr.appendChild(th);});thead.appendChild(tr);tbl.appendChild(thead);
+  var tb=document.createElement('tbody');D.states.slice().sort(function(a,b){return b.p-a.p;}).forEach(function(s,i){var row=document.createElement('tr');[s.n,money(s.p),String(i+1),s.tax.toFixed(1)+'¢',money(s.p-s.tax/100-0.184),'PADD '+s.padd+' '+PADD_NAMES[s.padd]].forEach(function(v){var td=document.createElement('td');td.textContent=v;row.appendChild(td);});tb.appendChild(row);});tbl.appendChild(tb);t.appendChild(tbl);}
+$$('[data-layer]').forEach(function(b){b.addEventListener('click',function(){mapState.layer=b.getAttribute('data-layer');$$('[data-layer]').forEach(function(o){o.setAttribute('aria-pressed',o===b?'true':'false');});drawMap();});});
+$('#tblMapBtn').addEventListener('click',function(){mapState.table=!mapState.table;this.setAttribute('aria-pressed',mapState.table?'true':'false');renderMapTable();});
+if(window.ResizeObserver)new ResizeObserver(function(){drawMap();}).observe(mapWrap);else window.addEventListener('resize',drawMap);
+drawMap();renderDetail();
+
+/* ---------- world bars ---------- */
+(function(){var wrap=$('#chartWorld');function draw(){var W=wrap.clientWidth||800,rows=D.world.slice().sort(function(a,b){return b[1]-a[1];}),RH=22,NL=W<520?92:130,MR=52,H=rows.length*RH+24;wrap.innerHTML='';
+  var svg=el('svg',{viewBox:'0 0 '+W+' '+H,width:W,height:H,role:'img','aria-label':'Gasoline price by country'},wrap);var mx=rows[0][1],PW=W-NL-MR,X=function(v){return NL+v/mx*PW;};
+  rows.forEach(function(r,i){var y=i*RH+4,us=r[0]==='United States';var nm=el('text',{x:NL-8,y:y+13,'text-anchor':'end','class':'nm'},svg);txt(nm,r[0]);if(us)nm.setAttribute('font-weight','600');
+    var rect=el('rect',{x:NL,y:y,width:Math.max(2,X(r[1])-NL),height:16,rx:0},svg);if(us)rect.setAttribute('class','us');
+    var g=el('g',null,svg);var vl=el('text',{x:X(r[1])+6,y:y+13,'class':us?'vl':''},svg);txt(vl,money(r[1]));
+    var t=document.createElementNS(NS,'title');t.textContent=r[0]+': '+money(r[1])+' per gallon';rect.appendChild(t);});
+  var ax=X(D.worldAvg);el('line',{x1:ax,x2:ax,y1:0,y2:H-18,'class':'avg'},svg);var al=el('text',{x:ax+4,y:H-6,'class':'vl'},svg);txt(al,'World avg '+money(D.worldAvg));}
+  if(window.ResizeObserver)new ResizeObserver(draw).observe(wrap);else window.addEventListener('resize',draw);draw();})();
+
+/* ---------- production & SPR ---------- */
+var prodChart=new LineChart($('#chartProd'),$('#tipProd'),{height:220,zero:false,yfmt:function(v){return v.toFixed(1)+'M';},aria:'U.S. crude production',labelMin:true});
+prodChart.set([{name:'Crude production, million b/d',cls:'crude',pts:monthlyPts(D.prod,false),area:true}],{xmin:dnum('2016-01-01'),xmax:dnum('2026-10-01')});
+var sprChart=new LineChart($('#chartSPR'),$('#tipSPR'),{height:220,zero:true,yfmt:function(v){return Math.round(v)+'M';},aria:'Strategic Petroleum Reserve stocks',labelMin:false,tipLabel:function(x){return dlabel(x,true);}});
+sprChart.set([{name:'SPR stocks, million barrels',cls:'gas',pts:D.spr.map(function(w){return [dnum(w[0]),w[1]];}),area:true}],{xmin:dnum('2016-01-01'),xmax:dnum('2026-10-20'),bands:TERMS});
+
+/* ---------- expand all ---------- */
+var allOpen=false;$('#expandAll').addEventListener('click',function(){allOpen=!allOpen;$$('details').forEach(function(d){d.open=allOpen;});EV.forEach(function(e){e.li.classList.toggle('open',allOpen);e.btn.setAttribute('aria-expanded',allOpen?'true':'false');});this.setAttribute('aria-pressed',allOpen?'true':'false');this.textContent=allOpen?'Collapse everything':'Expand everything';});
+})();
+</script>
+</body>
+</html>
