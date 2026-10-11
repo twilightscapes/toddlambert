@@ -7,6 +7,11 @@
   NPM_FLAGS = "--version"
 
 
+[[redirects]]
+  from = "/myths/*"
+  to = "/gopmyths/:splat"
+  status = 301
+
 [functions]
   node_bundler = "esbuild"
 

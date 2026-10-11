@@ -135,7 +135,7 @@ export default defineConfig({
     },
     workbox: {
       navigateFallback: '/',
-      navigateFallbackDenylist: [/^\/video/, /^\/aicongress/, /^\/gasprices/, /^\/datacenters/, /^\/myths/], // Don't fallback to / for the standalone pages
+      navigateFallbackDenylist: [/^\/video/, /^\/aicongress/, /^\/gasprices/, /^\/datacenters/, /^\/gopmyths/], // Don't fallback to / for the standalone pages
       globPatterns: ['**/*.{css,js,html,svg,png,ico}'],
       globIgnores: [
         '**/keystatic-page.*', // Exclude large Keystatic bundle from cache
