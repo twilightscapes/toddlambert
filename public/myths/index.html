@@ -1,0 +1,1172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Urban Myths: ten claims about kids, transgender people and immigrants checked against the actual numbers. Litter boxes in schools, surgeries on minors, men in women's sports, bathrooms, post-birth abortion, Springfield, noncitizen voting, with charts, a map of the laws the myths produced, and sources.">
+<meta property="og:title" content="Urban Myths">
+<meta property="og:description" content="Litter boxes in schools. Thousands of kids mutilated. Men taking over women's sports. Ten claims, checked against the numbers.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://toddlambert.com/myths/">
+<meta property="og:site_name" content="toddlambert.com">
+<meta property="og:image" content="https://toddlambert.com/myths/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Urban Myths: ten claims about kids, trans people and immigrants, checked against the numbers.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Urban Myths">
+<meta name="twitter:description" content="Litter boxes in schools. Thousands of kids mutilated. Men taking over women's sports. Ten claims, checked against the numbers.">
+<meta name="twitter:image" content="https://toddlambert.com/myths/og.png">
+<meta name="theme-color" content="#F2F4F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B1220" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://toddlambert.com/myths/">
+<title>Urban Myths</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: an explainer with a reading column beside a mono margin rail. Charts, the map and the
+   control panels break out to full width. Every section ends in a "Dig deeper" drawer. */
+:root{
+  --bg:#F2F4F7; --sheet:#FFFFFF; --fg:#0F1B2D; --fg-2:#56627A; --line:#D5DBE5; --grid:#E6EAF1;
+  --accent:#8E2F6E; --accent-ink:#FFFFFF; --accent-soft:#F6E3EF;
+  --yea:#1F8F5B; --nay:#C9362C;
+  --c-gas:#2a78d6; --c-crude:#eb6834; --c-diesel:#1baf7a; --c-dist:#eda100; --c-mute:#9AA5B8;
+  --font-display:'Big Shoulders Display','Arial Narrow',Impact,sans-serif;
+  --font-body:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B1220; --sheet:#121B2E; --fg:#E8EDF5; --fg-2:#9AA7BC; --line:#273349; --grid:#1D2840;
+    --accent:#F39BD0; --accent-ink:#0B1220; --accent-soft:#3A1830;
+    --yea:#43C285; --nay:#F26A60;
+    --c-gas:#3987e5; --c-crude:#d95926; --c-diesel:#199e70; --c-dist:#c98500; --c-mute:#5C6B85; color-scheme:dark
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B1220; --sheet:#121B2E; --fg:#E8EDF5; --fg-2:#9AA7BC; --line:#273349; --grid:#1D2840;
+  --accent:#F39BD0; --accent-ink:#0B1220; --accent-soft:#3A1830;
+  --yea:#43C285; --nay:#F26A60;
+  --c-gas:#3987e5; --c-crude:#d95926; --c-diesel:#199e70; --c-dist:#c98500; --c-mute:#5C6B85; color-scheme:dark
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1100px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+.eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-2)}
+.mono{font-family:var(--font-mono)}
+button{font:inherit}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:52px}
+.brand{font-family:var(--font-display);font-weight:900;font-size:22px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;color:var(--fg);white-space:nowrap}
+.navlinks{display:flex;gap:18px;font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;overflow-x:auto;min-width:0;scrollbar-width:none;align-items:center}
+.navlinks::-webkit-scrollbar{display:none}
+.navlinks a{color:var(--fg-2);text-decoration:none;white-space:nowrap;padding-block:16px}
+.navlinks a:hover{color:var(--accent)}
+.expandall{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);background:var(--sheet);color:var(--fg);padding:6px 10px;border-radius:3px;cursor:pointer;white-space:nowrap}
+.expandall:hover{border-color:var(--accent);color:var(--accent)}
+
+/* hero */
+.hero{padding-block:clamp(48px,9vw,112px) clamp(32px,6vw,72px)}
+h1{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(58px,11vw,146px);line-height:.88;letter-spacing:.005em;margin:14px 0 26px;text-wrap:balance;max-width:12ch}
+h1 em{font-style:normal;color:var(--accent)}
+.lede{font-size:clamp(18px,2.2vw,22px);max-width:62ch;margin:0 0 28px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;padding:12px 18px;border:1.5px solid var(--fg);border-radius:4px;text-decoration:none;color:var(--fg);font-weight:600;font-size:15px}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.ticker{margin-top:44px;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--line);border-block:1px solid var(--line)}
+.ticker div{background:var(--bg);padding:14px 16px 14px 0;min-width:0}
+.ticker div+div{padding-left:16px}
+.ticker b{display:block;font-family:var(--font-display);font-weight:900;font-size:44px;line-height:1}
+.ticker b.hot{color:var(--accent)}
+.ticker b.cool{color:var(--c-crude)}
+.ticker span{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-2);margin-top:6px}
+
+/* articles */
+.article{padding-block:clamp(48px,8vw,96px);border-top:1px solid var(--line)}
+.art-head{display:grid;grid-template-columns:120px 1fr;gap:24px;align-items:start}
+.art-head>div{min-width:0}
+.art-num{font-family:var(--font-mono);font-size:13px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;padding-top:16px}
+h2{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:clamp(38px,6vw,76px);line-height:.95;margin:0 0 18px;text-wrap:balance}
+h3.sub{font-family:var(--font-display);font-size:30px;font-weight:900;text-transform:uppercase;line-height:1;margin:36px 0 12px}
+.prose{max-width:66ch}
+.prose p{margin:0 0 1em}
+.prose p:last-child{margin-bottom:0}
+.prose ul{padding-left:20px;margin:0 0 1em}
+.prose li{margin-bottom:6px}
+@media (max-width:720px){.art-head{grid-template-columns:1fr;gap:8px}.art-num{padding-top:0}}
+
+/* panels & charts */
+.panel{background:var(--sheet);border:1px solid var(--line);margin-top:28px;min-width:0}
+.panel-bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px 16px;padding:12px 18px;border-bottom:1px solid var(--line);font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-2)}
+.panel-bar b{color:var(--fg);font-weight:500}
+.panel-body{padding:16px 18px 12px;position:relative}
+.panel-foot{padding:10px 18px 14px;font-size:13px;color:var(--fg-2);border-top:1px solid var(--line)}
+.panel-foot a{color:var(--fg-2)}
+.controls{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;padding:12px 18px;border-bottom:1px solid var(--line);font-size:13px}
+.controls label{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-2);display:flex;align-items:center;gap:6px;margin:0}
+.controls select{font:inherit;font-size:13px;padding:5px 8px;border:1px solid var(--line);border-radius:3px;background:var(--bg);color:var(--fg)}
+.seg{display:inline-flex;flex-wrap:wrap;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;max-width:100%}
+.seg button{border:0;background:var(--sheet);color:var(--fg-2);padding:6px 10px;cursor:pointer;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;flex:1 1 auto}
+.seg button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.chk{display:flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2);cursor:pointer}
+.chk input{accent-color:var(--accent);margin:0}
+.chart{position:relative;width:100%}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart text{font-family:var(--font-mono);font-size:11px;fill:var(--fg-2)}
+.chart .grid line{stroke:var(--grid);stroke-width:1}
+.chart .axis line{stroke:var(--line)}
+.chart .ln{fill:none;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.chart .ln.gas{stroke:var(--c-gas)}
+.chart .ln.crude{stroke:var(--c-crude)}
+.chart .ln.diesel{stroke:var(--c-diesel)}
+.chart .ln.mute{stroke:var(--c-mute);stroke-width:1.5}
+.chart .area.gas{fill:var(--c-gas);opacity:.08}
+.chart .area.crude{fill:var(--c-crude);opacity:.08}
+.chart .term{fill:var(--fg);opacity:.035}
+.chart .term-l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;fill:var(--fg-2)}
+.chart .lab{fill:var(--fg);font-weight:500}
+.chart .lab.bg{paint-order:stroke;stroke:var(--sheet);stroke-width:4px;stroke-linejoin:round}
+.chart .ev{cursor:pointer}
+.chart .ev circle{fill:var(--sheet);stroke:var(--c-gas);stroke-width:2}
+.chart .ev text{fill:var(--fg);font-size:9px;font-weight:500;text-anchor:middle;pointer-events:none}
+.chart .ev:hover circle,.chart .ev.on circle{fill:var(--c-gas)}
+.chart .ev:hover text,.chart .ev.on text{fill:var(--accent-ink)}
+.chart .xh{stroke:var(--fg-2);stroke-width:1;pointer-events:none}
+.chart .dot{stroke:var(--sheet);stroke-width:2;pointer-events:none}
+.chart .dot.gas{fill:var(--c-gas)}.chart .dot.crude{fill:var(--c-crude)}.chart .dot.diesel{fill:var(--c-diesel)}.chart .dot.mute{fill:var(--c-mute)}
+.chart .hit{fill:transparent}
+.tip{position:absolute;z-index:5;pointer-events:none;background:var(--sheet);border:1px solid var(--line);box-shadow:0 6px 20px rgba(0,0,0,.12);padding:8px 10px;font-size:13px;min-width:150px;border-radius:3px;display:none}
+.tip .d{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2);margin-bottom:4px}
+.tip .r{display:flex;justify-content:space-between;gap:14px;align-items:baseline}
+.tip .r b{font-weight:600;font-variant-numeric:tabular-nums}
+.tip .k{display:inline-block;width:12px;height:0;border-top:2px solid;vertical-align:middle;margin-right:6px}
+.tip .r span{color:var(--fg-2);font-size:12px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;padding:0 18px 10px;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2)}
+.legend i{display:inline-block;width:14px;border-top:2px solid;vertical-align:middle;margin-right:6px}
+.legend i.sw{width:12px;height:12px;border:0;border-radius:2px;vertical-align:-2px}
+.tbl{display:none;padding:0 18px 14px;overflow:auto;max-height:360px}
+.tbl.on{display:block}
+.tbl table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+.tbl th,.tbl td{text-align:right;padding:5px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl th:first-child,.tbl td:first-child{text-align:left;font-family:var(--font-mono);font-size:12px}
+.tbl th{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2);font-weight:500;position:sticky;top:0;background:var(--sheet)}
+.tbtn{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);background:transparent;color:var(--fg-2);padding:4px 8px;border-radius:3px;cursor:pointer}
+.tbtn[aria-pressed="true"],.tbtn:hover{color:var(--fg);border-color:var(--fg)}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin:28px 0 0}
+.stat{background:var(--sheet);padding:22px 20px;min-width:0}
+.stat b{display:block;font-family:var(--font-display);font-weight:900;font-size:56px;line-height:1;letter-spacing:.01em}
+.stat b.hot{color:var(--accent)}
+.stat span{display:block;margin-top:8px;color:var(--fg);font-size:15px}
+.stat small{display:block;margin-top:10px;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2)}
+.callout{border-left:4px solid var(--accent);padding:6px 0 6px 20px;margin:36px 0 0;max-width:66ch}
+.callout strong{font-family:var(--font-display);font-size:32px;font-weight:900;text-transform:uppercase;display:block;line-height:1;margin-bottom:8px}
+.callout p{margin:0}
+
+/* events */
+.events{list-style:none;margin:28px 0 0;padding:0;border-top:1px solid var(--line)}
+.event{border-bottom:1px solid var(--line)}
+.event>button{all:unset;display:grid;grid-template-columns:40px 110px 1fr auto;gap:14px;align-items:baseline;width:100%;padding:14px 0;cursor:pointer;box-sizing:border-box}
+.event>button:hover .et{color:var(--accent)}
+.event .en{font-family:var(--font-display);font-weight:900;font-size:26px;line-height:1;color:var(--c-gas)}
+.event .ed{font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;color:var(--fg-2);text-transform:uppercase}
+.event .et{font-weight:600;min-width:0}
+.event .et small{display:block;font-weight:400;color:var(--fg-2);font-size:14px;margin-top:2px}
+.event .ep{font-family:var(--font-display);font-weight:900;font-size:26px;line-height:1;white-space:nowrap}
+.event .eb{display:none;padding:0 0 18px 54px;max-width:70ch;font-size:15.5px}
+.event .eb p{margin:0 0 .8em}
+.event.open .eb{display:block}
+.event.open>button .et{color:var(--accent)}
+@media (max-width:640px){.event>button{grid-template-columns:34px 1fr auto;gap:10px}.event .ed{grid-column:2/4;order:3;margin-top:-6px}.event .eb{padding-left:0}}
+
+/* dig deeper drawers */
+.deeper{margin-top:28px;border:1px solid var(--line);background:var(--sheet);max-width:none}
+.deeper summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:500}
+.deeper summary::-webkit-details-marker{display:none}
+.deeper summary::after{content:"+";font-size:20px;line-height:1;font-weight:400}
+.deeper[open] summary::after{content:"\2212"}
+.deeper summary:hover{background:var(--accent-soft)}
+.deeper .dbody{padding:6px 18px 20px;border-top:1px solid var(--line);font-size:15.5px;max-width:none}
+.deeper .dbody p{max-width:70ch;margin:.8em 0}
+.deeper .dbody h4{font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-2);margin:18px 0 6px;font-weight:500}
+.deeper .dbody ul{padding-left:20px;max-width:70ch}
+.deeper .dbody li{margin-bottom:6px}
+.deeper table{border-collapse:collapse;font-size:14px;margin:8px 0}
+.deeper td,.deeper th{padding:6px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.deeper th{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2);font-weight:500}
+
+/* gallon */
+.gallon{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;margin-top:28px}
+@media (max-width:820px){.gallon{grid-template-columns:1fr}}
+.stackwrap{padding:16px 18px}
+.stack{display:flex;height:44px;gap:2px}
+.stack i{display:block;height:100%;border-radius:2px;transition:flex-basis .35s ease;min-width:4px;position:relative}
+.stack i.crude{background:var(--c-crude)}.stack i.refine{background:var(--c-diesel)}.stack i.dist{background:var(--c-dist)}.stack i.tax{background:var(--c-gas)}
+.stackkey{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:14px}
+.stackkey div{font-size:13px;color:var(--fg-2);padding-left:14px;position:relative}
+.stackkey div::before{content:"";position:absolute;left:0;top:5px;width:8px;height:8px;border-radius:2px}
+.stackkey .crude::before{background:var(--c-crude)}.stackkey .refine::before{background:var(--c-diesel)}.stackkey .dist::before{background:var(--c-dist)}.stackkey .tax::before{background:var(--c-gas)}
+.stackkey b{display:block;color:var(--fg);font-family:var(--font-display);font-size:26px;font-weight:900;line-height:1}
+.calc{padding:16px 18px}
+.calc .big{font-family:var(--font-display);font-weight:900;font-size:64px;line-height:1;margin:6px 0 2px}
+.calc .big small{font-size:22px;color:var(--fg-2);font-weight:700;margin-left:6px}
+.calc input[type=range]{width:100%;accent-color:var(--accent);margin:14px 0 4px}
+.calc .rng{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:11px;color:var(--fg-2);letter-spacing:.06em}
+.calc p{font-size:14px;color:var(--fg-2);margin:12px 0 0}
+.taxrow{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:24px}
+@media (max-width:560px){.taxrow{grid-template-columns:1fr}}
+.taxrow div{background:var(--sheet);padding:16px 18px}
+.taxrow b{display:block;font-family:var(--font-display);font-size:40px;font-weight:900;line-height:1}
+.taxrow span{display:block;font-size:14px;margin-top:6px}
+.taxrow small{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2);margin-top:8px}
+
+/* map */
+.map{position:relative}
+.map svg{display:block;width:100%;height:auto}
+.map .tile{cursor:pointer;transition:opacity .15s}
+.map .tile rect{rx:3;stroke:var(--sheet);stroke-width:2}
+.map .tile text{font-family:var(--font-mono);pointer-events:none;text-anchor:middle}
+.map .tile .ab{font-size:13px;font-weight:500}
+.map .tile .vl{font-size:10px}
+.map .tile.dim{opacity:.35}
+.map .tile.sel rect{stroke:var(--fg);stroke-width:2.5}
+.maplegend{display:flex;align-items:center;gap:10px;padding:0 18px 12px;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;color:var(--fg-2);flex-wrap:wrap}
+.maplegend .ramp{display:flex;gap:2px}
+.maplegend .ramp i{display:block;width:26px;height:12px;border-radius:2px}
+.mapdetail{border-top:1px solid var(--line);padding:16px 18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;align-items:start}
+.mapdetail h4{grid-column:1/-1;margin:0;font-family:var(--font-display);font-size:30px;font-weight:900;text-transform:uppercase;line-height:1}
+.mapdetail h4 small{font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;color:var(--fg-2);font-weight:400;text-transform:uppercase;margin-left:10px}
+.mapdetail b{display:block;font-family:var(--font-display);font-size:34px;font-weight:900;line-height:1}
+.mapdetail span{display:block;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2);margin-top:4px}
+.mapdetail p{grid-column:1/-1;margin:0;font-size:14.5px;color:var(--fg-2);max-width:80ch}
+
+/* control panel */
+.cp{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:28px}
+.cpc{background:var(--sheet);padding:20px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.cpc h3{font-family:var(--font-display);font-size:28px;font-weight:900;text-transform:uppercase;line-height:1;margin:0}
+.cpc .meta{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2);display:flex;flex-wrap:wrap;gap:4px 12px}
+.grip{display:flex;gap:3px;margin:2px 0}
+.grip i{display:block;width:22px;height:8px;border-radius:2px;background:var(--line)}
+.grip i.on{background:var(--c-gas)}
+.cpc p{margin:0;font-size:14.5px;color:var(--fg)}
+.cpc details{margin-top:auto;font-size:14px}
+.cpc summary{cursor:pointer;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);list-style:none;padding-top:6px}
+.cpc summary::-webkit-details-marker{display:none}
+.cpc summary::before{content:"+ "}
+.cpc details[open] summary::before{content:"\2212 "}
+.cpc details p{margin-top:8px;color:var(--fg-2)}
+
+/* levers */
+.levers{margin-top:28px;border-top:1px solid var(--line)}
+.lever{border-bottom:1px solid var(--line)}
+.lever>summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:1.3fr 1fr 1fr 1.2fr auto;gap:14px;align-items:center;padding:14px 0}
+.lever>summary::-webkit-details-marker{display:none}
+.lever>summary:hover .ln{color:var(--accent)}
+.lever .ln{font-weight:600}
+.lever .ln small{display:block;font-weight:400;color:var(--fg-2);font-size:13.5px}
+.lever .lm{font-family:var(--font-mono);font-size:12px;color:var(--fg-2);letter-spacing:.02em}
+.lever .lm b{display:block;font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-2);font-weight:400;opacity:.8}
+.lever .lm strong{color:var(--fg);font-weight:500;font-size:13px}
+.lever .pm{font-size:18px;color:var(--accent);width:18px;text-align:center}
+.lever[open] .pm::before{content:"\2212"}
+.lever:not([open]) .pm::before{content:"+"}
+.lever .lb{padding:0 0 18px;max-width:72ch;font-size:15px;color:var(--fg)}
+.lever .lb p{margin:0 0 .8em}
+.lever .lb p:last-child{margin:0}
+.lhead{display:grid;grid-template-columns:1.3fr 1fr 1fr 1.2fr auto;gap:14px;padding:8px 0;font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-2);margin-top:28px}
+@media (max-width:880px){.lever>summary,.lhead{grid-template-columns:1fr auto}.lever .lm,.lhead span:not(:first-child){display:none}.lever .ln small{font-size:13px}}
+
+/* can / cannot */
+.duty{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:36px}
+@media (max-width:760px){.duty{grid-template-columns:1fr}}
+.duty h3{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 6px;font-weight:500}
+.does h3{color:var(--yea)}
+.never h3{color:var(--nay)}
+.duty ul{list-style:none;margin:0;padding:0}
+.duty li{padding:10px 0 10px 26px;border-top:1px solid var(--line);position:relative;font-size:15.5px}
+.duty li::before{position:absolute;left:0;top:9px;font-family:var(--font-mono);font-weight:500;font-size:17px}
+.does li::before{content:"+";color:var(--yea)}
+.never li::before{content:"\00d7";color:var(--nay)}
+.duty li small{display:block;color:var(--fg-2);font-size:13.5px}
+
+/* world bars */
+.bars{padding:10px 18px 6px}
+.bars svg{display:block;width:100%;height:auto}
+.bars text{font-family:var(--font-mono);font-size:11px;fill:var(--fg-2)}
+.bars .nm{fill:var(--fg);font-family:var(--font-body);font-size:12.5px}
+.bars rect{fill:var(--c-mute)}
+.bars rect.us{fill:var(--c-gas)}
+.bars .avg{stroke:var(--fg);stroke-dasharray:none;stroke-width:1}
+.bars .vl{fill:var(--fg);font-weight:500}
+
+/* symmetry table */
+.sym{display:grid;grid-template-columns:180px 1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:28px;font-size:14.5px}
+.sym div{background:var(--sheet);padding:12px 14px;min-width:0}
+.sym .h{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-2)}
+.sym .k{font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;color:var(--fg-2)}
+@media (max-width:640px){.sym{grid-template-columns:1fr 1fr}.sym .k{grid-column:1/-1;background:var(--bg)}}
+
+/* small multiples */
+.sm{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:28px}
+@media (max-width:820px){.sm{grid-template-columns:1fr}}
+.sm .panel{margin-top:0}
+
+footer{border-top:1px solid var(--line);padding-block:40px 64px;color:var(--fg-2);font-size:14px}
+footer ol{padding-left:18px;margin:12px 0 0}
+footer li{margin-bottom:6px}
+footer a{overflow-wrap:anywhere}
+
+@media (prefers-reduced-motion:no-preference){
+  .hero .up{animation:up .7s cubic-bezier(.2,.7,.2,1) both}
+  .hero .up:nth-child(2){animation-delay:.07s}
+  .hero .up:nth-child(3){animation-delay:.14s}
+  .hero .up:nth-child(4){animation-delay:.21s}
+  .hero .up:nth-child(5){animation-delay:.28s}
+  @keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.stack i{transition:none}}
+@media print{.nav,.expandall,.controls{display:none}.deeper .dbody,.event .eb{display:block}}
+
+/* myths page additions */
+.chart .bar{fill:var(--c-gas)}.chart .bar.hl{fill:var(--c-crude)}.chart .bar.mute{fill:var(--c-mute)}
+.chart .blab{fill:var(--fg);font-weight:500}
+.said{margin:0 0 22px;padding:16px 18px;background:var(--sheet);border:1px solid var(--line);border-left:4px solid var(--c-crude);max-width:72ch}
+.said q{font-size:17px;font-style:italic;quotes:"\201C" "\201D"}
+.said .who{display:block;margin-top:8px;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg-2)}
+.verdict{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;margin:28px 0 0;padding:16px 18px;border:1px solid var(--line);background:var(--sheet)}
+@media (max-width:560px){.verdict{grid-template-columns:1fr}}
+.verdict .vl{font-family:var(--font-display);font-weight:900;text-transform:uppercase;font-size:34px;line-height:1;white-space:nowrap}
+.verdict .vl.f{color:var(--nay)}.verdict .vl.m{color:#B8530F}.verdict .vl.k{color:#9A7A10}
+:root[data-theme="dark"] .verdict .vl.m,:root:not([data-theme="light"]) .verdict .vl.m{color:#F0A06A}
+:root[data-theme="dark"] .verdict .vl.k,:root:not([data-theme="light"]) .verdict .vl.k{color:#E7C45A}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]) .verdict .vl.m{color:#B8530F}:root:not([data-theme="dark"]) .verdict .vl.k{color:#9A7A10}}
+.verdict .vm{display:flex;gap:3px;margin-top:8px}
+.verdict .vm i{display:block;width:26px;height:8px;border-radius:2px;background:var(--line)}
+.verdict .vm i.on{background:var(--nay)}
+.verdict p{margin:0;font-size:15px}
+.duty h3.k{color:#9A7A10}
+:root[data-theme="dark"] .duty h3.k,:root:not([data-theme="light"]) .duty h3.k{color:#E7C45A}
+.duty .does h3{color:var(--yea)}
+.rangebar{margin-top:10px}
+.rangebar .rr{display:grid;grid-template-columns:170px 1fr 110px;gap:12px;align-items:center;padding:8px 0;border-top:1px solid var(--line);font-size:14px}
+@media (max-width:560px){.rangebar .rr{grid-template-columns:1fr}}
+.rangebar .tr{height:10px;background:var(--grid);border-radius:3px;position:relative}
+.rangebar .tr i{position:absolute;top:0;height:100%;border-radius:3px;background:var(--c-gas)}
+.rangebar .tr i.c{background:var(--c-crude)}
+.rangebar .vl{font-family:var(--font-mono);font-size:12px;color:var(--fg-2);text-align:right}
+.ratio{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:28px}
+@media (max-width:560px){.ratio{grid-template-columns:1fr}}
+.ratio div{background:var(--sheet);padding:22px 20px;min-width:0}
+.ratio b{display:block;font-family:var(--font-display);font-weight:900;font-size:64px;line-height:1}
+.ratio b.hot{color:var(--accent)}
+.ratio span{display:block;margin-top:8px;font-size:15px}
+.ratio small{display:block;margin-top:8px;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2)}
+.dots{display:grid;grid-template-columns:repeat(50,1fr);gap:3px;margin-top:14px}
+.dots i{display:block;aspect-ratio:1;border-radius:50%;background:var(--c-mute);opacity:.5}
+.dots i.on{background:var(--c-crude);opacity:1}
+.event .en{color:var(--c-crude)}
+.event .ep{font-size:13px;font-family:var(--font-mono);font-weight:400;color:var(--fg-2);letter-spacing:.04em;white-space:normal;text-align:right;max-width:150px}
+@media (max-width:640px){.event>button{grid-template-columns:34px 1fr}.event .ed{grid-column:2;order:3;margin-top:-4px}.event .ep{grid-column:2;order:4;text-align:left;max-width:none;margin-top:2px}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">Urban Myths</a>
+    <div class="navlinks">
+      <a href="#litter">§1 Litter boxes</a>
+      <a href="#surgery">§2 "Mutilation"</a>
+      <a href="#school">§3 Sex changes at school</a>
+      <a href="#sports">§4 Women's sports</a>
+      <a href="#bathrooms">§5 Bathrooms</a>
+      <a href="#shooters">§6 Shooters</a>
+      <a href="#regret">§7 Regret</a>
+      <a href="#abortion">§8 "Post-birth"</a>
+      <a href="#immigrants">§9 Pets &amp; crime</a>
+      <a href="#voting">§10 Noncitizen voting</a>
+      <a href="#map">§11 The map</a>
+      <a href="#pattern">§12 The pattern</a>
+      <button class="expandall" id="expandAll" type="button" aria-pressed="false">Expand everything</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero wrap" id="top">
+  <p class="eyebrow up">Urban Myths &middot; an explainer &middot; data through October 2026</p>
+  <h1 class="up">Ten things you've been told about <em>kids, trans people and immigrants.</em></h1>
+  <p class="lede up">Each one was said on a debate stage, in a campaign ad, or by a sitting official. Each one has a number attached to it somewhere, in a federal survey, an insurance database, a state audit or a court record. This page puts the claim next to the number. Where there is a kernel of truth, it says so. Where there isn't, it says that too.</p>
+  <div class="cta up">
+    <a class="btn primary" href="#litter">Start with the litter boxes</a>
+    <a class="btn" href="#map">See what the myths built</a>
+  </div>
+  <div class="ticker up" aria-label="Headline figures">
+    <div><b>0</b><span>Litter boxes found in any school, after 20+ officials said otherwise</span></div>
+    <div><b>&lt;10</b><span>Transgender athletes among 510,000 in the NCAA, per its president</span></div>
+    <div><b class="cool">0</b><span>Gender surgeries on children 12 and under, in 22.8 million insured kids</span></div>
+    <div><b class="hot">77</b><span>State laws passed on the strength of these claims</span></div>
+  </div>
+</header>
+
+<main>
+
+<section class="article" id="litter">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§1 &middot; The claim</div>
+      <div>
+        <h2>"Schools are putting litter boxes in bathrooms for kids who identify as cats."</h2>
+        <div class="said"><q>They're putting litter boxes in schools for people who identify as cats.</q><span class="who">Rep. Lauren Boebert, Mesa County, Colorado, October 2022. At least 20 Republican candidates and officials made the same claim that year.</span></div>
+        <div class="prose">
+          <p>There has never been a litter box in an American school for a student who identifies as a cat. Every district named by a politician was asked and every one said no. NBC News counted at least 20 conservative candidates and officials repeating it in the 2022 midterms; a Nebraska state senator repeated it on the floor of the legislature and apologized the same afternoon when his staff could not find a school. The claim's only physical basis is a bucket of cat litter that one Colorado district keeps in classrooms as an emergency toilet for lockdowns during school shootings.</p>
+        </div>
+
+        <div class="verdict"><div><div class="vl f">False</div><div class="vm"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div><p>No school, no district, no state education department has ever produced one. The people who said it either retracted, could not name a school, or named one that denied it.</p></div>
+
+        <h3 class="sub">How it spread</h3>
+        <ol class="events" id="events"></ol>
+
+        <div class="duty">
+          <div class="does">
+            <h3>The kernel</h3>
+            <ul>
+              <li>Jefferson County, Colorado stocks classroom "go buckets" with cat litter<small>Alongside candy for diabetic students, wet wipes and a map: an emergency toilet for a lockdown. Since 2017.</small></li>
+              <li>Furries exist<small>Teenagers who like anthropomorphic animal characters. NBC asked one. She had never heard of anyone wanting a litter box.</small></li>
+            </ul>
+          </div>
+          <div class="never">
+            <h3>The myth</h3>
+            <ul>
+              <li>That any school provides litter boxes for students</li>
+              <li>That schools recognize students as cats, or let them come in costume</li>
+              <li>That this is tied to transgender students or policies<small>The claim was built as a slippery-slope argument: if schools accept trans kids, next they'll accept cats.</small></li>
+            </ul>
+          </div>
+        </div>
+
+        <details class="deeper">
+          <summary>Dig deeper: anatomy of the hoax</summary>
+          <div class="dbody">
+            <p>The modern version starts with a December 21, 2021 school board meeting in Midland, Michigan, where a resident said she was "furious" to learn litter boxes had been placed in a unisex bathroom. She had been told this by someone. The superintendent checked and said there had never been one. The Michigan Republican Party's co-chair shared the video anyway in January 2022, Libs of TikTok amplified it, and within three months it had been repeated by legislators in Nebraska, Iowa and Minnesota, each naming a different school, each school denying it.</p>
+            <p>By the fall it was a campaign line. Marjorie Taylor Greene said it at a Trump rally on September 3; Colorado's Republican nominee for governor said students were "identifying as cats" on September 26 and, pressed for evidence, pointed to Jefferson County's lockdown buckets; Minnesota's nominee for governor, New Hampshire's nominee for Senate and Lauren Boebert all repeated it in October. Joe Rogan told it on a podcast October 13 and said three weeks later that there was no proof. Tony Dungy tweeted it in January 2023 and apologized.</p>
+            <p>The pattern is the point. Nobody who repeated the claim had seen a litter box. Each repetition cited the one before. When officials went looking (a Hannibal, Missouri superintendent checked every bathroom in the district in June 2022), they found nothing, and the finding never traveled as far as the claim. Candidates who leaned on it lost in New Hampshire, Colorado, Illinois, Minnesota and Maine; the members of Congress who repeated it won.</p>
+            <p>The claim has since been exported to Canada, Scotland, Wales, New Zealand and Australia, where school authorities have issued the same denials, and it has been turned into legislation: an Oklahoma bill in 2024 and a Texas "FURRIES Act" in 2025 to ban non-human behavior in schools, both aimed at a problem no school has reported.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="surgery">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§2 &middot; The claim</div>
+      <div>
+        <h2>"Doctors are chemically and surgically mutilating thousands of children."</h2>
+        <div class="said"><q>Protecting Children from Chemical and Surgical Mutilation</q><span class="who">Title of Executive Order 14187, signed January 28, 2025. The order defines "children" as anyone under 19.</span></div>
+        <div class="prose">
+          <p>The numbers exist, because insurers keep them. In 2019, among 22.8 million insured Americans aged 17 and under, 85 had a gender-related surgery. Nearly all were 15 to 17 and 96% were chest procedures. Nobody 12 or younger had one. Over five years, among 5.2 million privately insured 8-to-17-year-olds, fewer than 8,000 started puberty blockers and about 16,000 started hormones nationally, about four and eight a day in a country of 26 million teenagers. The authors call even that an overestimate. The care is rare, it is almost entirely adolescents, it is almost never surgical, and it is now illegal for minors in 27 states anyway.</p>
+        </div>
+
+        <div class="verdict"><div><div class="vl m">Mostly false</div><div class="vm"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div><p>"Thousands" of surgeries is off by more than an order of magnitude. Genital surgery on minors is close to nonexistent in the data. The real numbers describe hundreds of chest surgeries a year on older teens and a few thousand adolescents a year on medication, under parental consent and specialist care.</p></div>
+
+        <div class="panel">
+          <div class="panel-bar"><span><b>Gender-affirming surgeries</b> &middot; per 100,000 insured people, by age, 2019</span><span>JAMA Network Open, 2024</span></div>
+          <div class="panel-body"><div class="chart" id="chartSurg"></div><div class="tip" id="tipSurg"></div></div>
+          <div class="panel-foot">85 surgeries among 22.8 million insured minors; 2,664 among 47.4 million insured adults. Of the minors' procedures, 82 of 85 were chest surgeries. A separate insurance analysis by Reuters and Komodo Health counted 776 mastectomies and 56 genital surgeries among 13-to-17-year-olds with a gender dysphoria diagnosis nationwide across 2019 to 2021 combined.</div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><b class="cool">0</b><span>children 12 or younger who received hormones or surgery in the five-year national study.</span><small>JAMA Pediatrics, Jan 2025</small></div>
+          <div class="stat"><b>&lt;8,000</b><span>youths who started puberty blockers in five years, 2018 to 2022, nationally. About four a day.</span><small>JAMA Pediatrics, 5.2M privately insured ages 8–17</small></div>
+          <div class="stat"><b>~16,000</b><span>who started hormones in the same five years. About eight a day, mostly 16- and 17-year-olds.</span><small>JAMA Pediatrics</small></div>
+          <div class="stat"><b class="hot">27</b><span>states plus Puerto Rico that now ban this care for minors. The Supreme Court upheld Tennessee's ban 6-3 in June 2025.</span><small>MAP, Oct 2026</small></div>
+        </div>
+
+        <div class="duty">
+          <div class="does">
+            <h3>The kernel</h3>
+            <ul>
+              <li>Some 15-to-17-year-olds do get chest surgery<small>A few hundred a year nationally, with parental consent, after a diagnosis and specialist referral. The numbers rose from 2016 to 2021.</small></li>
+              <li>Puberty blockers and hormones are real medical interventions with real tradeoffs<small>Fertility, bone density and the quality of the long-term evidence are legitimately debated among doctors; the May 2025 HHS review rated the evidence low, and so do many of the care's defenders.</small></li>
+            </ul>
+          </div>
+          <div class="never">
+            <h3>The myth</h3>
+            <ul>
+              <li>"Thousands" of surgeries on children<small>Insured minors: 85 in 2019. Reuters' broader count: a few hundred a year, nearly all chest.</small></li>
+              <li>Genital surgery on children<small>56 cases nationally over three years among 13-to-17-year-olds, some likely miscoded. Zero under 13.</small></li>
+              <li>Anything at all under 12<small>Zero hormones, zero surgeries. Younger children who socially transition change names and clothes, not bodies.</small></li>
+              <li>That it happens without parents<small>Every clinic protocol in the country requires parental consent for minors.</small></li>
+            </ul>
+          </div>
+        </div>
+
+        <details class="deeper">
+          <summary>Dig deeper: what the care actually is, and what 2025 changed</summary>
+          <div class="dbody">
+            <h4>The ladder</h4>
+            <p>Care for a transgender minor in the U.S. has four rungs, and almost everyone stops on the first. <strong>Social transition</strong> (a name, pronouns, clothes) involves no medicine. <strong>Puberty blockers</strong>, used for decades for early puberty, pause development at the start of adolescence; the national study found a rate of about 15 to 21 per 100,000 insured youths. <strong>Hormones</strong> (testosterone or estrogen) are typically started at 16 or later; the rate peaks at 17-year-olds, around 82 to 140 per 100,000. <strong>Surgery</strong> is rare before 18 and essentially limited to chest procedures on 15-to-17-year-olds.</p>
+            <h4>The real debate</h4>
+            <p>Serious people disagree about the second and third rungs. Britain's Cass Review (2024) and the U.S. HHS review (May 2025) both found the evidence base for blockers and hormones in adolescents to be low quality and urged caution; the HHS report went further, recommending psychotherapy over medication, and the major U.S. medical associations rejected it. That is a dispute about evidence standards and how to weigh risks for a small number of adolescents. It is not a dispute about whether thousands of children are being surgically altered, which no dataset supports.</p>
+            <h4>What changed in 2025 and 2026</h4>
+            <p>Executive Order 14187 told agencies to cut research and education funding to hospitals providing the care and directed HHS to use Medicare and Medicaid rules against it; hospitals in Washington, Virginia, Colorado and elsewhere paused care within days, and by 2026 even hospitals in states without bans, such as Baystate in Massachusetts, had stopped under threat of losing federal funding. The Supreme Court upheld Tennessee's ban in <em>United States v. Skrmetti</em> on June 18, 2025, which effectively secured the other 26 state bans. Six states make providing the care a felony. Half of American transgender teenagers now live where the care is illegal for them.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="school">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§3 &middot; The claim</div>
+      <div>
+        <h2>"Your kid goes to school and comes home a few days later with a sex change."</h2>
+        <div class="said"><q>Your kid goes to school and comes home a few days later with an operation. The school decides what's going to happen with your child.</q><span class="who">Donald Trump, Moms for Liberty summit, August 30, 2024, repeated at rallies through October. Asked for an example, the campaign could not provide one. Moms for Liberty's co-founder conceded it was false and said she was "thankful" he raised it.</span></div>
+        <div class="prose">
+          <p>No school in the United States has ever performed, arranged or sent a child to a gender surgery. Schools cannot prescribe aspirin without a parent's signature. The medical version of the claim is simply invented. What is real, and what the claim is built on top of, is a fight over whether a school must tell parents when a student asks to use a different name or pronouns at school. That fight is about social transition, which involves no medicine, and it is being decided in fifteen state legislatures and, as of March 2026, at the Supreme Court.</p>
+        </div>
+
+        <div class="verdict"><div><div class="vl f">False</div><div class="vm"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div><p>Zero documented cases, ever, of a school providing or arranging medical transition. The underlying policy dispute, parental notification of a student's chosen name, is real and is listed below as the kernel.</p></div>
+
+        <div class="stats">
+          <div class="stat"><b class="cool">0</b><span>examples the campaign could produce when CNN, AP and others asked for one.</span><small>CNN fact check, Sept 2024</small></div>
+          <div class="stat"><b>15</b><span>states whose laws require schools to tell parents when a student socially transitions, in some circumstances. 35 states do not require it.</span><small>MAP, Oct 2026</small></div>
+          <div class="stat"><b>Mar 3, 2026</b><span>The Supreme Court paused California's 2024 law barring districts from forcing teachers to out students, pending litigation.</span><small>Mirabelli v. Bonta</small></div>
+          <div class="stat"><b>4 / day</b><span>youths starting puberty blockers nationally, every one through a clinic with parental consent, none through a school.</span><small>JAMA Pediatrics, 2025</small></div>
+        </div>
+
+        <div class="duty">
+          <div class="does">
+            <h3>The kernel</h3>
+            <ul>
+              <li>Some districts adopted policies not to tell parents a student's chosen name without the student's consent<small>Framed as safety for kids with hostile homes. California's AB 1955 (2024) barred districts from requiring the opposite. Opponents call this "secret transition."</small></li>
+              <li>Social transition at school can precede a family conversation<small>That is the real dispute: who gets told, and when. It involves names and pronouns, not medicine.</small></li>
+            </ul>
+          </div>
+          <div class="never">
+            <h3>The myth</h3>
+            <ul>
+              <li>Any surgery, any hormone, any blocker, provided by or through a school</li>
+              <li>"A few days later"<small>Surgery for a minor, where it happens at all, follows years of diagnosis, specialist referral, parental consent and insurer approval.</small></li>
+              <li>"The school decides"<small>No U.S. jurisdiction lets a school consent to medical care for a minor.</small></li>
+            </ul>
+          </div>
+        </div>
+
+        <details class="deeper">
+          <summary>Dig deeper: the notification fight, honestly</summary>
+          <div class="dbody">
+            <p>The real policy question is narrow and hard. A 14-year-old asks a teacher to use a new name. Does the school tell the parents? Fifteen states now say yes in at least some circumstances (seven on any disclosure to staff, six before staff may use the name, two when a parent asks). Thirty-five do not require it, and some districts in those states have policies against disclosure without the student's consent, reasoning that a student who is not safe at home should not be outed by the school. California made that the statewide rule in 2024; a conservative legal group challenged it, and the Supreme Court paused the law in March 2026 while the case proceeds. The Trump administration separately found in January 2026 that California's policy violated federal parental-records law.</p>
+            <p>Reasonable people land in different places on this, and polls show parents want to be told. What the claim does is take that disagreement about a name on a roster and describe it as a surgery. The gap between the two is the whole distance between a school policy debate and a child's body.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="sports">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§4 &middot; The claim</div>
+      <div>
+        <h2>"Men are taking over women's sports."</h2>
+        <div class="said"><q>Keeping Men Out of Women's Sports</q><span class="who">Title of Executive Order 14201, February 5, 2025. The NCAA changed its policy to match it the next day.</span></div>
+        <div class="prose">
+          <p>Asked under oath in December 2024 how many transgender athletes compete in college sports, the NCAA's president said "less than 10," out of 510,000. There is no national count for high schools; the handful of known cases, a California high jumper, a Washington sprinter, two athletes in Maine, each became a national news story precisely because they were so rare. In the same period 29 states passed bans, the President issued an executive order, and the Supreme Court ruled 6-3 on June 30, 2026 that states may keep girls' teams for "biological females." The claim describes a takeover. The data describe fewer than ten people and seventy-odd laws.</p>
+        </div>
+
+        <div class="verdict"><div><div class="vl k">Kernel of truth</div><div class="vm"><i class="on"></i><i></i><i></i><i></i></div></div><p>Transgender women have competed in women's categories and a few have won, including an NCAA title in 2022. The physiology question is genuinely contested by sports scientists. "Taking over" is not: the known number is in the single digits nationally at the college level.</p></div>
+
+        <div class="ratio">
+          <div><b class="hot">&lt;10</b><span>transgender athletes the NCAA's president said he knew of, December 2024.</span><small>Charlie Baker, Senate Judiciary testimony</small></div>
+          <div><b>510,000</b><span>NCAA athletes. One in fifty thousand, if the ten are all there are.</span><small>NCAA</small></div>
+        </div>
+        <div class="panel">
+          <div class="panel-bar"><span><b>One in 51,000</b> &middot; each dot is 100 NCAA athletes</span><span>5,100 dots; the transgender athletes are 0.1 of one dot</span></div>
+          <div class="panel-body" style="padding-bottom:16px"><div class="dots" id="dots" role="img" aria-label="A grid of 5,100 dots representing 510,000 NCAA athletes; fewer than ten are transgender, less than a tenth of one dot"></div></div>
+          <div class="panel-foot">The single highlighted dot represents 100 athletes. Fewer than ten transgender athletes would not fill a tenth of it.</div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><b class="hot">29</b><span>states that bar transgender girls from girls' school sports: 27 by law, two by agency policy.</span><small>MAP, Oct 11, 2026</small></div>
+          <div class="stat"><b>6&ndash;3</b><span>Supreme Court vote upholding Idaho's and West Virginia's bans, June 30, 2026, with a unanimous holding that they do not violate Title IX.</span><small>West Virginia v. B.P.J.</small></div>
+          <div class="stat"><b>69%</b><span>of Americans say transgender athletes should compete according to birth sex, up from 62% in 2021.</span><small>Gallup, May 2025</small></div>
+          <div class="stat"><b>1</b><span>NCAA Division I title won by a transgender woman: Lia Thomas, 500-yard freestyle, 2022. She finished last in the 100.</span><small>NCAA results</small></div>
+        </div>
+
+        <div class="duty">
+          <div class="does">
+            <h3>The kernel</h3>
+            <ul>
+              <li>Transgender women have won<small>Thomas's 2022 title; a California high school triple-jump and high-jump champion in 2025; a Washington 400-meter champion. Each case is real and each was contested by competitors.</small></li>
+              <li>Male puberty confers physical advantages that hormone therapy does not fully reverse<small>Sports scientists disagree about how much and for which sports; the IOC left it to each federation; many federations now restrict by puberty.</small></li>
+              <li>Most Americans want birth-sex categories<small>69% in Gallup's 2025 poll, including 42% of Democrats.</small></li>
+            </ul>
+          </div>
+          <div class="never">
+            <h3>The myth</h3>
+            <ul>
+              <li>"Men"<small>The athletes in question are transgender girls and women, most of whom transitioned before or during puberty and compete under hormone rules.</small></li>
+              <li>"Taking over"<small>Fewer than ten of 510,000 college athletes; a handful of high school cases nationally; one Division I title in NCAA history.</small></li>
+              <li>The Olympic boxer<small>Imane Khelif, the Algerian boxer called a man by Trump and others in 2024, was born female, raised female and has a female passport. She is not transgender; the IOC said so and no evidence of a sex-development condition was ever produced.</small></li>
+            </ul>
+          </div>
+        </div>
+
+        <details class="deeper">
+          <summary>Dig deeper: the cases, the science, and the laws</summary>
+          <div class="dbody">
+            <h4>The documented cases</h4>
+            <p>Lia Thomas swam for Penn's women's team in 2021–22 after three seasons on the men's team and a year of hormone therapy under NCAA rules; she won the 500 free at nationals, placed fifth in the 200 and last in the 100 final. Penn later settled a Title IX complaint with the Trump administration by stripping her records. At the high school level the known cases are counted in ones: AB Hernandez won California's girls' high jump and triple jump in 2025 under a rule change that awarded duplicate medals; a Spokane Valley runner won a 400-meter title in Washington; Maine's governor said the state had two transgender girls in school sports when the administration moved to cut the state's funding over them. Advocacy groups keep lists of trans athletes who placed; the lists are short, and most entries are not champions.</p>
+            <h4>The science</h4>
+            <p>Testosterone during male puberty increases height, muscle mass, heart and lung size and bone density. Hormone therapy reduces muscle mass and hemoglobin over one to three years but does not reverse skeletal differences. How much residual advantage remains, and whether it matters in a given sport, is contested in the literature; the honest summary is "some, sport-dependent, and smaller for athletes who never went through male puberty." That argument is about eligibility rules for a handful of people. It does not support the word "takeover."</p>
+            <h4>The laws</h4>
+            <p>Idaho passed the first ban in 2020. By October 2026 there were 27 state laws and two agency policies (Alaska, Virginia). The NCAA barred athletes assigned male at birth from women's teams on February 6, 2025, the day after the executive order. On June 30, 2026 the Supreme Court held that Idaho's and West Virginia's laws violate neither the Equal Protection Clause nor Title IX; Justice Kavanaugh wrote that states "may maintain women's and girls' sports for biological females," and Justice Sotomayor's dissent objected that the laws apply even where an individual athlete has no advantage. Voters in Arizona, Colorado, Nebraska and Washington decide ballot measures on the question in November 2026.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="bathrooms">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§5 &middot; The claim</div>
+      <div>
+        <h2>"Letting trans people use the bathroom puts women and girls in danger."</h2>
+        <div class="said"><q>Men in women's bathrooms</q><span class="who">The standard phrasing in 21 state bathroom laws passed since 2021, and in the campaign ads that preceded them.</span></div>
+        <div class="prose">
+          <p>The claim has been tested. Massachusetts localities adopted transgender-inclusive restroom rules at different times, which let researchers compare police reports for assault, voyeurism and privacy violations in restrooms before and after, and against similar towns without the rules. There was no change. Incidents of any kind in restrooms were rare everywhere. What the national crime survey does show is who gets hurt: transgender people are victims of violent crime at four times the rate of everyone else.</p>
+        </div>
+
+        <div class="verdict"><div><div class="vl f">No evidence</div><div class="vm"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div><p>The one natural experiment found no effect on safety or privacy incidents. No state that passed a bathroom law has produced data showing the problem it was solving.</p></div>
+
+        <div class="panel">
+          <div class="panel-bar"><span><b>Violent victimization</b> &middot; per 1,000 people, 2017–2018</span><span>National Crime Victimization Survey via the Williams Institute</span></div>
+          <div class="panel-body"><div class="chart" id="chartVictim"></div><div class="tip" id="tipVictim"></div></div>
+          <div class="panel-foot">Rape, sexual assault, aggravated and simple assault. Transgender men: 107.5 per 1,000; transgender women: 86.1; cisgender women: 23.7; cisgender men: 19.8. The 2022–23 update put the transgender rate at 93.7.</div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><b class="cool">0</b><span>change in restroom assault or privacy incidents after Massachusetts towns adopted inclusive rules, versus matched towns that didn't.</span><small>Sexuality Research and Social Policy, 2018</small></div>
+          <div class="stat"><b>4&times;</b><span>the violent-victimization rate for transgender people compared with cisgender people.</span><small>NCVS, Williams Institute</small></div>
+          <div class="stat"><b class="hot">21</b><span>states plus Puerto Rico with bathroom restrictions; nine cover every government building, four make it a crime.</span><small>MAP, Oct 10, 2026</small></div>
+          <div class="stat"><b>70&ndash;90%</b><span>of child sexual abuse is committed by someone the child knows: family, coaches, clergy, family friends. Not strangers in restrooms.</span><small>Research review, Future of Children</small></div>
+        </div>
+
+        <div class="duty">
+          <div class="does">
+            <h3>The kernel</h3>
+            <ul>
+              <li>Women's restrooms and locker rooms are places where privacy matters and assaults, though rare, do occur<small>Every such assault is already a crime, by anyone, under every state's law.</small></li>
+              <li>Some people are uncomfortable sharing facilities with transgender people<small>Discomfort is real; the laws are sold as safety, which is a different claim.</small></li>
+            </ul>
+          </div>
+          <div class="never">
+            <h3>The myth</h3>
+            <ul>
+              <li>That inclusive rules increase assaults or voyeurism<small>The Massachusetts study found no effect.</small></li>
+              <li>That predators use trans-inclusive rules as cover<small>No documented pattern; a man entering a women's restroom to assault someone was illegal before and after.</small></li>
+              <li>"Groomers"<small>Drag story hours, Pride events and transgender teachers have never been linked by any dataset to abuse; the overwhelming majority of abusers are family members and trusted adults of the child's own community.</small></li>
+            </ul>
+          </div>
+        </div>
+
+        <details class="deeper">
+          <summary>Dig deeper: the study, and what the laws actually do</summary>
+          <div class="dbody">
+            <p>The Williams Institute study (Hasenbush, Flores and Herman, 2018) used Massachusetts, where some cities adopted gender-identity public accommodation ordinances before the 2016 statewide law. It matched those localities to similar ones without ordinances and compared police reports of assault, sex crimes, voyeurism and other privacy violations in restrooms and locker rooms before and after. The passage of the ordinances "is not related to the number or frequency of criminal incidents in these spaces." Such incidents were rare in all localities. The authors note the obvious limit: it is one state and the incidents are too rare to detect small effects. It remains the only controlled test anyone has run, because no state passing a bathroom law has commissioned one.</p>
+            <p>The laws themselves range widely. Three states cover K-12 schools only; nine cover schools and some government buildings; nine, plus Puerto Rico, cover every government-owned building including universities; four make using the "wrong" facility a crime in some circumstances, and Idaho's 2026 law made it a felony. What they share is an enforcement problem: nobody checks, so in practice they are enforced by other users' suspicion, which falls on anyone who looks gender-nonconforming, including cisgender women. The one measurable effect in the data is on transgender people, who report avoiding public restrooms, and whose victimization rate is four times the average.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="shooters">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§6 &middot; The claim</div>
+      <div>
+        <h2>"Mass shooters are disproportionately transgender."</h2>
+        <div class="said"><q>Trans/NB (Bio Male)</q><span class="who">Top line of a chart of "mass shootings per million" that went viral on X in late August 2025 after the Minneapolis church shooting, amplified by Donald Trump Jr. among others. No organization that tracks shootings produced it; the Gun Violence Archive's director said he had "no idea" where its numbers came from.</span></div>
+        <div class="prose">
+          <p>The Violence Project, the most-used database of mass shootings, counts 200 shooters from 1966 to 2024. One was transgender. One hundred and ninety-two were men. The Gun Violence Archive, using a broader definition that counts any shooting with four or more people hit, has about 5,750 incidents since 2013 and five confirmed transgender shooters, under 0.1%. Transgender people are about 1% of Americans 13 and older. By either database they are underrepresented among shooters, and men, at 96%, are the group that is not.</p>
+        </div>
+
+        <div class="verdict"><div><div class="vl f">False</div><div class="vm"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div><p>The viral chart had no source. Every real database shows the same thing: mass shooters are overwhelmingly men, and transgender shooters are a rounding error below their population share.</p></div>
+
+        <div class="panel">
+          <div class="panel-bar"><span><b>Mass shooters, 1966–2024</b> &middot; 200 shooters in 195 shootings</span><span>The Violence Project</span></div>
+          <div class="panel-body"><div class="chart" id="chartShoot"></div><div class="tip" id="tipShoot"></div></div>
+          <div class="panel-foot">The Violence Project counts public shootings with four or more killed. The one transgender shooter is the 2023 Nashville case, which the FBI's own active-shooter report lists as "female/transgender male"; the other 48 active shooters in that FBI report were men.</div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><b>96%</b><span>of mass shooters were men. Women: 3.5%. Transgender: 0.5%.</span><small>The Violence Project</small></div>
+          <div class="stat"><b>~1%</b><span>of Americans 13 and older identify as transgender, about 2.8 million people.</span><small>Williams Institute, Aug 2025</small></div>
+          <div class="stat"><b>5 of 5,748</b><span>Gun Violence Archive incidents, 2013 to Sept 2025, with a confirmed transgender shooter.</span><small>GVA</small></div>
+          <div class="stat"><b class="hot">0</b><span>sources cited by the viral chart. FactCheck.org, PolitiFact and Lead Stories all traced it to nothing.</span><small>Aug–Sep 2025</small></div>
+        </div>
+
+        <details class="deeper">
+          <summary>Dig deeper: why the claim recurs</summary>
+          <div class="dbody">
+            <p>The claim surfaces after specific shootings: Nashville in March 2023, Minneapolis in August 2025, and a British Columbia shooting in February 2026, each involving a perpetrator identified in reporting as transgender or nonbinary. Three cases in three years feel like a pattern to anyone who hears about them and never hears about the other 190. That is the mechanism of most of the claims on this page: a vivid case, a category, and no denominator. The denominator here is well documented. Of 200 Violence Project shooters, 192 were men who were not transgender; the FBI's 2023 active-shooter report listed 49 shooters, 48 of them men. Ohio State criminologist Laura Dugan's summary: relative to their population share, transgender people appear <em>under</em>represented. Several databases, including the AP/USA Today/Northeastern count, do not record gender identity at all, which is one reason the viral chart could not have been built from them.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="regret">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§7 &middot; The claim</div>
+      <div>
+        <h2>"Most of them regret it and detransition."</h2>
+        <div class="said"><q>Here come the detransitioner lawsuits</q><span class="who">A recurring framing in opinion pages and state legislative hearings since 2023, where individual detransitioners have testified in support of bans.</span></div>
+        <div class="prose">
+          <p>Regret is real and the people who experience it deserve to be heard. It is also uncommon by every measure anyone has taken. Pooling 27 studies of 7,928 surgical patients, regret ran about 1%. Across the studies of adolescents on hormones, between 1.6% and 9.8% stop, and between 1% and 7.6% stop puberty blockers. The largest survey of people who detransitioned found that 82.5% cited an outside reason, pressure from family, harassment, losing a job, trouble getting care, rather than a change in identity. The numbers are contested at the edges, mainly over who drops out of studies, but no study supports "most."</p>
+        </div>
+
+        <div class="verdict"><div><div class="vl m">Mostly false</div><div class="vm"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div><p>Detransition exists and the research on it is thinner than it should be. "Most" is not supported by any study; the range runs from about 1% for surgical regret to under 10% for stopping hormones, and most who stop cite pressure rather than regret.</p></div>
+
+        <div class="panel">
+          <div class="panel-bar"><span><b>How many stop or regret</b> &middot; range of published estimates</span><span>Bustos 2021; J. Sexual Medicine review 2025; Turban 2021</span></div>
+          <div class="panel-body" style="padding-bottom:16px">
+            <div class="rangebar" role="img" aria-label="Range bars of regret and discontinuation estimates">
+              <div class="rr"><span>Regret after surgery (27 studies)</span><div class="tr"><i style="left:0;width:2%"></i></div><span class="vl">~1%</span></div>
+              <div class="rr"><span>Stop puberty blockers</span><div class="tr"><i style="left:2%;width:13.2%"></i></div><span class="vl">1–7.6%</span></div>
+              <div class="rr"><span>Stop hormones</span><div class="tr"><i style="left:3.2%;width:16.4%"></i></div><span class="vl">1.6–9.8%</span></div>
+              <div class="rr"><span>Ever detransitioned, any reason (survey)</span><div class="tr"><i style="left:0;width:26.2%"></i></div><span class="vl">13.1%</span></div>
+              <div class="rr"><span>&hellip;of whom cited an external reason</span><div class="tr"><i class="c" style="left:0;width:82.5%"></i></div><span class="vl">82.5%</span></div>
+              <div class="rr"><span>"Most"</span><div class="tr"><i class="c" style="left:50%;width:50%;opacity:.35"></i></div><span class="vl">&gt;50%</span></div>
+            </div>
+          </div>
+          <div class="panel-foot">Bars scaled to 50% except the last two. The 13.1% figure is from the 2015 U.S. Transgender Survey of 27,715 adults and includes temporary detransition; of those, 15.9% cited an internal reason such as a change in identity. Critics note that regret studies lose patients to follow-up, which could understate rates; a UK clinic study with that caveat still found 6.9%.</div>
+        </div>
+
+        <div class="duty">
+          <div class="does">
+            <h3>The kernel</h3>
+            <ul>
+              <li>Some people detransition and some regret treatment<small>Their testimony has shaped laws in several states and lawsuits against providers. Their numbers are small but not zero.</small></li>
+              <li>Long-term follow-up is weak<small>Clinics lose track of patients; the "1%" figure comes from those who stayed in contact. The honest range for adolescents stopping hormones is single digits, with uncertainty.</small></li>
+            </ul>
+          </div>
+          <div class="never">
+            <h3>The myth</h3>
+            <ul>
+              <li>"Most"<small>No study, including those by critics of the care, finds a majority.</small></li>
+              <li>That detransition equals regret<small>Most who stop cite family pressure, harassment or cost; many later resume.</small></li>
+              <li>That surgery is commonly regretted<small>About 1% across 27 studies, lower than most elective surgeries.</small></li>
+            </ul>
+          </div>
+        </div>
+
+        <details class="deeper">
+          <summary>Dig deeper: what the studies measure</summary>
+          <div class="dbody">
+            <p>Three different things get called "detransition." <strong>Regret</strong> is a stated wish not to have had treatment. <strong>Discontinuation</strong> is stopping medication, for any reason, including cost, side effects, pregnancy plans or reaching a desired point. <strong>Identity change</strong> is ceasing to identify as transgender. The 2021 meta-analysis of surgical regret (Bustos et al.) pooled 7,928 patients and found about 1%, with wide confidence intervals and the authors' own warning about inconsistent definitions; a published rebuttal argued one included study's sample was overstated. A 2025 systematic review of discontinuation found adolescent hormone discontinuation ranging from 1.6% to 9.8% across studies and blocker discontinuation from 1% to 7.6%. The 2015 U.S. Transgender Survey found 13.1% of respondents had detransitioned at some point, 82.5% of them citing at least one external reason; a separate survey recruited from online detransitioner communities found the opposite emphasis, with 70% citing a realization that their dysphoria had other causes. Both are self-selected samples. The fair reading is that detransition is a minority outcome measured in single-digit percentages, that the people who experience it are poorly served by both sides of the argument, and that nobody has the long-term data that would settle it.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="abortion">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§8 &middot; The claim</div>
+      <div>
+        <h2>"Democrats support abortion up to birth, and even after."</h2>
+        <div class="said"><q>Execution after birth.</q><span class="who">Donald Trump, presidential debate, September 10, 2024, about Minnesota and its governor. The moderator corrected him on air: "There is no state in this country where it is legal to kill a baby after it's born." Ron DeSantis made a similar claim in 2023; PolitiFact rated it False.</span></div>
+        <div class="prose">
+          <p>Killing a newborn is homicide in all fifty states and always has been. No bill anywhere proposes otherwise. The "after birth" claim grew out of laws in a few states that let families decline aggressive intervention for infants born with conditions that will kill them within minutes or hours, which is palliative care, not abortion. The "up to birth" half has a kernel: ten states and the District of Columbia set no gestational limit in law. But the thing the phrase conjures, healthy late-term pregnancies ended on request, is not what happens. The CDC's count: 1.1% of abortions occur at 21 weeks or later, and those are overwhelmingly fetal anomalies and threats to the mother's life.</p>
+        </div>
+
+        <div class="verdict"><div><div class="vl f">False</div><div class="vm"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div><p>"After birth" is false everywhere. "Up to birth" is legally possible in ten states and DC and describes about 1% of abortions, nearly all medical emergencies, which is why the phrase is a myth even where the statute is real.</p></div>
+
+        <div class="panel">
+          <div class="panel-bar"><span><b>When abortions happen</b> &middot; share by weeks of gestation, 2022</span><span>CDC Abortion Surveillance, 41 reporting areas</span></div>
+          <div class="panel-body"><div class="chart" id="chartAbort"></div><div class="tip" id="tipAbort"></div></div>
+          <div class="panel-foot">613,383 abortions were reported to the CDC for 2022; 78.6% occurred at nine weeks or earlier and 92.8% by thirteen weeks. 53.3% were medication abortions. The 1.1% at 21 weeks or later is about 6,700 cases nationally, concentrated in diagnoses of fatal fetal conditions and maternal health crises.</div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><b class="cool">50</b><span>states where killing a newborn is a crime. The number of states where it is legal: zero.</span><small>Every state homicide statute</small></div>
+          <div class="stat"><b>10 + DC</b><span>jurisdictions with no gestational limit in law, after Massachusetts removed its 24-week line in August 2026.</span><small>KFF; Mass. law, Aug 10, 2026</small></div>
+          <div class="stat"><b>1.1%</b><span>of abortions at 21 weeks or later. 92.8% happen in the first 13 weeks.</span><small>CDC, 2022 data</small></div>
+          <div class="stat"><b class="hot">False</b><span>PolitiFact's rating of the "post-birth abortion" claim, 2023 and 2024.</span><small>PolitiFact</small></div>
+        </div>
+
+        <div class="duty">
+          <div class="does">
+            <h3>The kernel</h3>
+            <ul>
+              <li>Ten states and DC have no gestational limit<small>Alaska, Colorado, Maryland, Massachusetts, Michigan, Minnesota, New Jersey, New Mexico, Oregon, Vermont. Most Democrats in Congress support codifying Roe, which allowed limits after viability.</small></li>
+              <li>Some states repealed "born-alive" statutes<small>Minnesota in 2023 replaced a requirement to resuscitate with a requirement for care "consistent with good medical practice," which allows comfort care for infants who cannot survive.</small></li>
+            </ul>
+          </div>
+          <div class="never">
+            <h3>The myth</h3>
+            <ul>
+              <li>"Execution after birth"<small>Illegal in every state; no law or bill allows it.</small></li>
+              <li>That late abortions are common or elective<small>1.1% after 21 weeks, requiring a specialist, usually after a diagnosis that the fetus will not survive.</small></li>
+              <li>"Democrats" as a bloc<small>Democratic-led states range from no limit to viability limits; the party's federal bill restored Roe's viability framework.</small></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="immigrants">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§9 &middot; The claim</div>
+      <div>
+        <h2>"They're eating the pets. Immigrants are driving crime."</h2>
+        <div class="said"><q>In Springfield, they're eating the dogs. The people that came in, they're eating the cats.</q><span class="who">Donald Trump, presidential debate, September 10, 2024. Springfield's city manager, police chief, mayor and county commission president said there was no evidence. The woman whose missing cat started one rumor found it in her basement and apologized to her Haitian neighbors.</span></div>
+        <div class="prose">
+          <p>The Springfield story was false the day it was told and has stayed false through every attempt to revive it; the one later animal-cruelty case cited as vindication involved a woman who was neither Haitian nor from Springfield. The larger claim behind it, that immigrants commit more crime, is the rare political claim that has been tested against hard records, because Texas logs the immigration status of everyone it arrests. The result is the same every year: undocumented immigrants are arrested and convicted at lower rates than people born here, and legal immigrants at lower rates still.</p>
+        </div>
+
+        <div class="verdict"><div><div class="vl f">False</div><div class="vm"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div><p>No pets. And in the only state that keeps the records, immigrants of every status are arrested, convicted and imprisoned less often than the native-born.</p></div>
+
+        <div class="panel">
+          <div class="panel-bar"><span><b>Incarceration rate</b> &middot; per 100,000 people, 2024</span><span>Cato Institute from Census microdata, March 2026</span></div>
+          <div class="panel-body"><div class="chart" id="chartIncarc"></div><div class="tip" id="tipIncarc"></div></div>
+          <div class="panel-foot">Native-born Americans are incarcerated at roughly twice the rate of undocumented immigrants and four times the rate of legal immigrants. The Texas arrest data (Light, He and Robey, PNAS 2020) found undocumented immigrants had about half the violent-crime arrest rate of U.S.-born citizens and a quarter the property-crime rate, 2012 to 2018, with the gap holding for convictions.</div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><b class="cool">0</b><span>credible reports of pets harmed by immigrants in Springfield, per the city, police and county. The "evidence" later cited was a police report stating there was no evidence.</span><small>Springfield, Ohio, 2024–25</small></div>
+          <div class="stat"><b>45%</b><span>lower felony conviction rate for undocumented immigrants than for U.S.-born Texans.</span><small>PNAS, 2020, Texas DPS records</small></div>
+          <div class="stat"><b>52%</b><span>of Trump voters said the pet claim was definitely or probably true in a post-debate poll. 57% of Ohio voters said it was false.</span><small>YouGov; Washington Post, Sept 2024</small></div>
+          <div class="stat"><b>2 states</b><span>record immigration status in criminal records: Texas and Georgia. Both show the same lower rates. Everywhere else, the claim cannot even be checked.</span><small>Cato</small></div>
+        </div>
+
+        <div class="duty">
+          <div class="does">
+            <h3>The kernel</h3>
+            <ul>
+              <li>Springfield's Haitian population grew fast, to an estimated 15,000 in a city of 58,000<small>Housing, schools and clinics were strained; the strain was real and the city said so. The pets were not.</small></li>
+              <li>Individual immigrants commit crimes, some of them horrific<small>Every group's members do. The question the claim makes is about rates, and the rates run the other way.</small></li>
+            </ul>
+          </div>
+          <div class="never">
+            <h3>The myth</h3>
+            <ul>
+              <li>Anyone eating anyone's pet<small>One missing cat, found in the owner's basement. One stolen-geese report the county found no evidence for.</small></li>
+              <li>"Driving crime"<small>Undocumented: about half the native-born rate. Legal immigrants: about a quarter.</small></li>
+              <li>"Migrant crime wave"<small>Violent crime fell nationally in 2023, 2024 and 2025 during the largest immigration surge in decades.</small></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="voting">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§10 &middot; The claim</div>
+      <div>
+        <h2>"Millions of noncitizens are voting."</h2>
+        <div class="said"><q>Noncitizens are voting in our elections in massive numbers.</q><span class="who">The premise of the SAVE Act and of state "citizenship audits" in 2024 to 2026. The audits are the best evidence against the premise.</span></div>
+        <div class="prose">
+          <p>States that went looking found what every previous search found. Georgia checked 8.2 million registered voters in 2024 and found 20 noncitizens, nine of whom had ever voted, most before 2012. Michigan found 15 possible noncitizen ballots among 5.7 million cast. Utah reviewed two million registrations over a year and found 27 noncitizens registered. In thirty years of federal prosecutions, 129 people have been charged with voting as a noncitizen and 73 convicted. The crime carries prison and deportation, and the data show it is attempted at a rate of a few per million.</p>
+        </div>
+
+        <div class="verdict"><div><div class="vl f">False</div><div class="vm"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div><p>Every audit, including those run by Republican secretaries of state who expected to find fraud, found cases in the dozens against voter rolls in the millions.</p></div>
+
+        <div class="panel">
+          <div class="panel-bar"><span><b>Noncitizens found</b> &middot; per million voters checked</span><span>State audits, 2024–2026</span></div>
+          <div class="panel-body"><div class="chart" id="chartVote"></div><div class="tip" id="tipVote"></div></div>
+          <div class="panel-foot">Georgia: 20 of 8.2 million registrants, nine of whom had voted. Michigan: 15 potential noncitizen ballots of 5.7 million. Utah: 27 noncitizen registrations (not votes) of 2 million. Texas referred 117 cases for investigation in September 2026 out of 18 million registrants; referrals from database flags typically shrink on review because the federal citizenship database is out of date for naturalized citizens.</div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><b>73</b><span>federal convictions for noncitizen voting in 30 years, from 129 people charged.</span><small>Reuters analysis, 2026</small></div>
+          <div class="stat"><b>30</b><span>suspected noncitizen votes referred for investigation across 42 jurisdictions that counted 23.5 million ballots in 2016.</span><small>Brennan Center</small></div>
+          <div class="stat"><b class="cool">2.4</b><span>per million: Georgia's 2024 audit result. A 0.0002% rate.</span><small>Georgia Secretary of State</small></div>
+          <div class="stat"><b class="hot">Jun 2026</b><span>A federal court ruled the government's revised citizenship database could not lawfully be used to purge voter rolls, after flags proved to include naturalized citizens.</span><small>Center for Election Innovation tracker</small></div>
+        </div>
+
+        <div class="duty">
+          <div class="does">
+            <h3>The kernel</h3>
+            <ul>
+              <li>Noncitizens have occasionally registered and voted<small>Dozens per state over decades, usually green-card holders confused at the DMV. It is a felony and they are prosecuted.</small></li>
+              <li>A few cities let noncitizens vote in local elections<small>San Francisco school board; some Maryland and Vermont towns. Never federal or state races, where it is illegal everywhere.</small></li>
+            </ul>
+          </div>
+          <div class="never">
+            <h3>The myth</h3>
+            <ul>
+              <li>"Millions," "massive," "swinging elections"<small>The largest audit in the country found 20 people. The 2016 presidential margin in Georgia was 211,000 votes; in 2024, 115,000.</small></li>
+              <li>That audits are suppressed<small>Republican officials in Georgia, Ohio, Texas and Utah ran them and published them. The numbers are above.</small></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="map">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§11 &middot; The map</div>
+      <div>
+        <h2>What the myths built.</h2>
+        <div class="prose">
+          <p>Fewer than ten college athletes, 85 surgeries a year, zero litter boxes and no measurable bathroom risk produced, between 2020 and 2026, seventy-seven state laws and policies: 27 bans on medical care for transgender minors, 29 bans on transgender girls in school sports, and 21 bathroom restrictions. Switch layers to see where each applies. Half of American transgender teenagers now live where all three are law.</p>
+        </div>
+
+        <div class="panel">
+          <div class="controls" role="group" aria-label="Map layers">
+            <div class="seg" role="group" aria-label="Layer">
+              <button type="button" data-layer="care" aria-pressed="true">Care bans</button>
+              <button type="button" data-layer="sports" aria-pressed="false">Sports bans</button>
+              <button type="button" data-layer="bath" aria-pressed="false">Bathroom laws</button>
+            </div>
+            <span class="eyebrow" id="mapNote" style="margin-left:auto">MAP &middot; Oct 10, 2026</span>
+            <button class="tbtn" type="button" id="tblMapBtn" aria-pressed="false">Table</button>
+          </div>
+          <div class="panel-body"><div class="map" id="mapWrap"></div><div class="tip" id="tipMap"></div></div>
+          <div class="maplegend" id="mapLegend"></div>
+          <div class="mapdetail" id="mapDetail"></div>
+          <div class="tbl" id="tblMap"></div>
+          <div class="panel-foot">Source: Movement Advancement Project equality maps, data as of October 10–11, 2026. Care bans: 27 states plus Puerto Rico (Arizona's covers surgery only; Montana's is permanently blocked and Kansas's temporarily). Sports bans: 27 state laws plus agency policies in Alaska and Virginia. Bathroom laws: 21 states plus Puerto Rico. Tiles are a cartogram.</div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><b class="hot">48%</b><span>of transgender 13-to-17-year-olds live in a state that bans their medical care.</span><small>MAP</small></div>
+          <div class="stat"><b>53%</b><span>live in a state that bans them from school sports matching their identity.</span><small>MAP</small></div>
+          <div class="stat"><b>37%</b><span>of transgender people 13 and older live in a state with a school bathroom restriction.</span><small>MAP</small></div>
+          <div class="stat"><b>62%</b><span>of Americans oppose laws banning gender-affirming care for minors, even as 69% favor birth-sex sports categories. The public distinguishes the claims; the laws arrived as a bundle.</span><small>Gallup, 2024 and 2025</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article" id="pattern">
+  <div class="wrap">
+    <div class="art-head">
+      <div class="art-num">§12 &middot; The pattern</div>
+      <div>
+        <h2>One vivid case, one category, no denominator.</h2>
+        <div class="prose">
+          <p>Every claim on this page is built the same way. Take something that happened once, or never: a litter bucket, a swimmer, a missing cat, a chart with no source. Attach it to a category of people. Leave out the number that would show how rare it is. The listener fills in the rest, because a story about one child is more vivid than a table with 22.8 million in it. The correction, when it comes, is a denominator, and denominators do not travel.</p>
+        </div>
+
+        <div class="sym">
+          <div class="h">&nbsp;</div><div class="h">The vivid case</div><div class="h">The denominator</div>
+          <div class="k">Litter boxes</div><div>A bucket of cat litter in a Colorado lockdown kit</div><div>0 litter boxes for students in 13,000 school districts</div>
+          <div class="k">"Mutilation"</div><div>A 17-year-old's chest surgery</div><div>85 surgeries among 22.8 million insured minors; 0 under 13</div>
+          <div class="k">Sex changes at school</div><div>A district that didn't tell a parent about a new name</div><div>0 schools, ever, providing medical care</div>
+          <div class="k">Women's sports</div><div>Lia Thomas's 500-yard freestyle, 2022</div><div>Fewer than 10 of 510,000 NCAA athletes</div>
+          <div class="k">Bathrooms</div><div>A hypothetical predator</div><div>No change in incidents in the only controlled study; trans people victimized at 4&times; the rate</div>
+          <div class="k">Shooters</div><div>Nashville, 2023</div><div>1 of 200 mass shooters; 192 were men</div>
+          <div class="k">Regret</div><div>A detransitioner's testimony</div><div>~1% surgical regret; 1.6–9.8% stop hormones</div>
+          <div class="k">"Post-birth"</div><div>A comfort-care law for infants who will not survive</div><div>0 states where infanticide is legal; 1.1% of abortions after 21 weeks</div>
+          <div class="k">Pets and crime</div><div>A missing cat in Springfield</div><div>Immigrants incarcerated at half to a quarter the native-born rate</div>
+          <div class="k">Noncitizen voting</div><div>A green-card holder who voted in 2008</div><div>20 of 8.2 million in Georgia; 73 federal convictions in 30 years</div>
+        </div>
+
+        <h3 class="sub">Who took it back</h3>
+        <div class="prose">
+          <p>Retractions are rare and worth recording. Nebraska State Senator Bruce Bostelman apologized on the floor the same day in March 2022. Maine congressional candidate Ed Thelander said he "doesn't believe it now" in October 2022. Joe Rogan said three weeks after repeating the litter-box story that there was no proof. Tony Dungy deleted his tweet and apologized in January 2023. NCAA president Charlie Baker, asked under oath, gave the real number. The woman in Springfield whose cat was in her basement apologized to her neighbors. The pattern among those who retracted: they were asked for a school, a name, a case, and looked.</p>
+        </div>
+
+        <div class="duty">
+          <div class="does">
+            <h3>How to check a claim in five minutes</h3>
+            <ul>
+              <li>Ask for the denominator<small>Out of how many? A number without one is a story, not a rate.</small></li>
+              <li>Ask who counted<small>Insurers, the CDC, state auditors and crime surveys count. A chart with no source counts nothing.</small></li>
+              <li>Ask for the school, the case, the name<small>Every litter-box claim died at this step.</small></li>
+              <li>Separate the policy from the claim<small>You can favor birth-sex sports categories and still know the number is under ten. You can oppose blockers and still know it is zero under 12.</small></li>
+              <li>Notice the category<small>When a claim is about what "they" do, the data are usually about what one person did.</small></li>
+            </ul>
+          </div>
+          <div class="never">
+            <h3>What the claims have in common</h3>
+            <ul>
+              <li>Each names a vulnerable group of children as either victims or threats</li>
+              <li>Each arrived in an election year<small>2022, 2024 and 2026.</small></li>
+              <li>Each produced laws before it produced evidence<small>77 state measures; one controlled study, which found nothing.</small></li>
+              <li>Each is unfalsifiable by design<small>"Somewhere," "they," "people are saying." The denominator is the only reply.</small></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>The honest version.</strong>
+          <p>There are real debates inside these topics: how to weigh thin evidence for adolescent hormones, how to write eligibility rules for a sport, what a school owes a parent, where a gestational line belongs. Those debates deserve arguments. What they have gotten instead is a litter box. This page is not a position on any of them. It is the number you need before you can have one.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="eyebrow">Urban Myths &middot; an explainer &middot; October 2026</p>
+    <p>Figures are the most recent published at time of writing. Several claims concern recent court decisions and 2026 state laws that will continue to change; check the sources before you print anything.</p>
+    <ol>
+      <li>NBC News, <a href="https://www.nbcnews.com/tech/misinformation/urban-myth-litter-boxes-schools-became-gop-talking-point-rcna51439">How an urban myth about litter boxes in schools became a GOP talking point</a>, October 14, 2022; AP and Washington Post on Sen. Bostelman's retraction, March 28–29, 2022; KUSA on Jefferson County lockdown kits, October 5, 2017; Snopes, January 30, 2023.</li>
+      <li>Dai D. et al., <a href="https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2820437">Prevalence of Gender-Affirming Surgical Procedures Among Minors and Adults in the US</a>, <em>JAMA Network Open</em>, 2024; Hughes L.D. et al., <em>JAMA Pediatrics</em>, January 2025 (doi:10.1001/jamapediatrics.2024.6081); Reuters and Komodo Health, "Putting numbers on the rise in children seeking gender care," October 6, 2022.</li>
+      <li>Executive Order 14187 (January 28, 2025) and 14201 (February 5, 2025); HHS, "Treatment for Pediatric Gender Dysphoria," May 1, 2025; <em>United States v. Skrmetti</em>, No. 23-477 (June 18, 2025); <em>West Virginia v. B.P.J.</em>, No. 24-43, with <em>Little v. Hecox</em> (June 30, 2026); <em>Mirabelli v. Bonta</em> emergency order, March 3, 2026.</li>
+      <li>Movement Advancement Project equality maps: <a href="https://mapresearch.org/equality-map/bans-on-best-practice-medical-care-for-transgender-youth/">medical care bans</a>, <a href="https://mapresearch.org/equality-map/bans-on-transgender-youth-participation-in-sports/">sports bans</a>, <a href="https://mapresearch.org/equality-map/bans-on-transgender-people-using-public-bathrooms-and-facilities-according-to-their-gender-identity/">bathroom bans</a>, forced-outing laws; data as of October 10–11, 2026.</li>
+      <li>Charlie Baker, Senate Judiciary Committee testimony, December 17, 2024 (Athletic Business, NewsNation); NCAA participation policy, February 6, 2025; Gallup, May 2025 (sports) and May 2024 (care bans); CNN and PolitiFact fact checks of the school-surgery claim, September 2024.</li>
+      <li>Hasenbush, Flores and Herman, "Gender Identity Nondiscrimination Laws in Public Accommodations," <em>Sexuality Research and Social Policy</em>, 2018; Williams Institute, <a href="https://williamsinstitute.law.ucla.edu/press/ncvs-trans-press-release/">NCVS analysis of transgender victimization</a>, 2021, and 2022–23 update; Williams Institute population estimates, August 2025.</li>
+      <li>The Violence Project database; FactCheck.org, "Few Mass Shooters Have Been Transgender," September 2025; PolitiFact and Lead Stories on the viral chart, August–September 2025; FBI Active Shooter Incidents in the United States in 2023.</li>
+      <li>Bustos V.P. et al., "Regret after Gender-affirmation Surgery: A Systematic Review and Meta-analysis," <em>PRS Global Open</em>, 2021; <em>Journal of Sexual Medicine</em> systematic review of discontinuation, 2025; Turban J.L. et al., "Factors Leading to 'Detransition' Among Transgender and Gender Diverse People in the United States," <em>LGBT Health</em>, 2021; Vandenbussche, 2021.</li>
+      <li>CDC, <a href="https://www.cdc.gov/mmwr/volumes/73/ss/ss7307a1.htm">Abortion Surveillance — United States, 2022</a>; KFF, gestational limits dashboard, 2026; PolitiFact on "post-birth abortion," July 2023 and September 2024; ABC News debate transcript, September 10, 2024.</li>
+      <li>Light, He and Robey, "Comparing crime rates between undocumented immigrants, legal immigrants, and native-born US citizens in Texas," <em>PNAS</em>, 2020; Cato Institute, <a href="https://www.cato.org/briefing-paper/illegal-immigrant-incarceration-rates-2010-2024-demographics-american-imprisonment">Illegal Immigrant Incarceration Rates, 2010–2024</a>, March 2026; Springfield News-Sun, Dayton Daily News and Lead Stories on the pet claims, 2024–25; YouGov and Washington Post polls, September 2024.</li>
+      <li>Georgia Secretary of State citizenship audit, October 2024; Michigan Department of State review, 2025; Utah Lt. Governor's review, 2025–26; Texas Secretary of State, September 15, 2026; Center for Election Innovation and Research, <a href="https://electioninnovation.org/research/claims-noncitizen-registration-voting-analysis-tracker/">noncitizen voting claims tracker</a>, February 2026; Brennan Center, "Noncitizen Voting: The Missing Millions," 2017; Reuters analysis of federal prosecutions, 2026.</li>
+    </ol>
+  </div>
+</footer>
+<script>
+var DATA={"states":[{"a":"AL","n":"Alabama","c":7,"r":6,"care":true,"careN":"","sports":2,"sportsY":2021,"sportsN":"","bath":"2022, 2024"},{"a":"AK","n":"Alaska","c":0,"r":0,"care":false,"careN":"","sports":1,"sportsY":2023,"sportsN":"","bath":null},{"a":"AZ","n":"Arizona","c":2,"r":5,"care":true,"careN":"surgery only","sports":2,"sportsY":2022,"sportsN":"","bath":null},{"a":"AR","n":"Arkansas","c":5,"r":5,"care":true,"careN":"","sports":2,"sportsY":2021,"sportsN":"","bath":"2023, 2025"},{"a":"CA","n":"California","c":1,"r":4,"care":false,"careN":"","sports":0,"sportsY":null,"sportsN":"","bath":null},{"a":"CO","n":"Colorado","c":3,"r":4,"care":false,"careN":"","sports":0,"sportsY":null,"sportsN":"","bath":null},{"a":"CT","n":"Connecticut","c":10,"r":3,"care":false,"careN":"","sports":0,"sportsY":null,"sportsN":"","bath":null},{"a":"DE","n":"Delaware","c":10,"r":4,"care":false,"careN":"","sports":0,"sportsY":null,"sportsN":"","bath":null},{"a":"DC","n":"District of Columbia","c":9,"r":5,"care":false,"careN":"","sports":0,"sportsY":null,"sportsN":"","bath":null},{"a":"FL","n":"Florida","c":8,"r":7,"care":true,"careN":"","sports":2,"sportsY":2021,"sportsN":"","bath":"2023"},{"a":"GA","n":"Georgia","c":8,"r":6,"care":true,"careN":"","sports":2,"sportsY":2022,"sportsN":"","bath":null},{"a":"HI","n":"Hawaii","c":1,"r":7,"care":false,"careN":"","sports":0,"sportsY":null,"sportsN":"","bath":null},{"a":"ID","n":"Idaho","c":2,"r":2,"care":true,"careN":"","sports":2,"sportsY":2020,"sportsN":"MAP still lists a court block from Hecox; the Supreme Court upheld the law June 30, 2026","bath":"2023, 2025, 2026"},{"a":"IL","n":"Illinois","c":6,"r":2,"care":false,"careN":"","sports":0,"sportsY":null,"sportsN":"","bath":null},{"a":"IN","n":"Indiana","c":6,"r":3,"care":true,"careN":"","sports":2,"sportsY":2022,"sportsN":"","bath":null},{"a":"IA","n":"Iowa","c":5,"r":3,"care":true,"careN":"","sports":2,"sportsY":2022,"sportsN":"","bath":"2023"},{"a":"KS","n":"Kansas","c":4,"r":5,"care":true,"careN":"temporarily blocked (May 2026)","sports":2,"sportsY":2023,"sportsN":"","bath":"2026"},{"a":"KY","n":"Kentucky","c":6,"r":4,"care":true,"careN":"","sports":2,"sportsY":2022,"sportsN":"","bath":"2023"},{"a":"LA","n":"Louisiana","c":5,"r":6,"care":true,"careN":"","sports":2,"sportsY":2022,"sportsN":"","bath":"2024"},{"a":"ME","n":"Maine","c":11,"r":0,"care":false,"careN":"","sports":0,"sportsY":null,"sportsN":"","bath":null},{"a":"MD","n":"Maryland","c":9,"r":4,"care":false,"careN":"","sports":0,"sportsY":null,"sportsN":"","bath":null},{"a":"MA","n":"Massachusetts","c":10,"r":2,"care":false,"careN":"","sports":0,"sportsY":null,"sportsN":"","bath":null},{"a":"MI","n":"Michigan","c":8,"r":2,"care":false,"careN":"","sports":0,"sportsY":null,"sportsN":"","bath":null},{"a":"MN","n":"Minnesota","c":5,"r":2,"care":false,"careN":"","sports":0,"sportsY":null,"sportsN":"","bath":null},{"a":"MS","n":"Mississippi","c":6,"r":6,"care":true,"careN":"","sports":2,"sportsY":2021,"sportsN":"","bath":"2024, 2025"},{"a":"MO","n":"Missouri","c":5,"r":4,"care":true,"careN":"","sports":2,"sportsY":2023,"sportsN":"","bath":null},{"a":"MT","n":"Montana","c":3,"r":2,"care":true,"careN":"permanently blocked (May 2025)","sports":2,"sportsY":2021,"sportsN":"","bath":"2025"},{"a":"NE","n":"Nebraska","c":4,"r":4,"care":true,"careN":"","sports":2,"sportsY":2025,"sportsN":"","bath":null},{"a":"NV","n":"Nevada","c":2,"r":3,"care":false,"careN":"","sports":0,"sportsY":null,"sportsN":"","bath":null},{"a":"NH","n":"New Hampshire","c":11,"r":1,"care":true,"careN":"","sports":2,"sportsY":2024,"sportsN":"blocked only for two named plaintiffs","bath":null},{"a":"NJ","n":"New Jersey","c":9,"r":3,"care":false,"careN":"","sports":0,"sportsY":null,"sportsN":"","bath":null},{"a":"NM","n":"New Mexico","c":3,"r":5,"care":false,"careN":"","sports":0,"sportsY":null,"sportsN":"","bath":null},{"a":"NY","n":"New York","c":9,"r":2,"care":false,"careN":"","sports":0,"sportsY":null,"sportsN":"","bath":null},{"a":"NC","n":"North Carolina","c":7,"r":5,"care":true,"careN":"","sports":2,"sportsY":2023,"sportsN":"","bath":null},{"a":"ND","n":"North Dakota","c":4,"r":2,"care":true,"careN":"","sports":2,"sportsY":2023,"sportsN":"","bath":"2023"},{"a":"OH","n":"Ohio","c":7,"r":3,"care":true,"careN":"","sports":2,"sportsY":2024,"sportsN":"","bath":"2024"},{"a":"OK","n":"Oklahoma","c":4,"r":6,"care":true,"careN":"","sports":2,"sportsY":2022,"sportsN":"","bath":"2022, 2025"},{"a":"OR","n":"Oregon","c":1,"r":3,"care":false,"careN":"","sports":0,"sportsY":null,"sportsN":"","bath":null},{"a":"PA","n":"Pennsylvania","c":8,"r":3,"care":false,"careN":"","sports":0,"sportsY":null,"sportsN":"","bath":null},{"a":"RI","n":"Rhode Island","c":11,"r":2,"care":false,"careN":"","sports":0,"sportsY":null,"sportsN":"","bath":null},{"a":"SC","n":"South Carolina","c":8,"r":5,"care":true,"careN":"","sports":2,"sportsY":2022,"sportsN":"","bath":"2024, 2026"},{"a":"SD","n":"South Dakota","c":4,"r":3,"care":true,"careN":"","sports":2,"sportsY":2021,"sportsN":"","bath":"2025"},{"a":"TN","n":"Tennessee","c":6,"r":5,"care":true,"careN":"","sports":2,"sportsY":2021,"sportsN":"","bath":"2021, 2026"},{"a":"TX","n":"Texas","c":4,"r":7,"care":true,"careN":"","sports":2,"sportsY":2021,"sportsN":"","bath":"2025"},{"a":"UT","n":"Utah","c":2,"r":4,"care":true,"careN":"","sports":2,"sportsY":2022,"sportsN":"","bath":"2024"},{"a":"VT","n":"Vermont","c":10,"r":1,"care":false,"careN":"","sports":0,"sportsY":null,"sportsN":"","bath":null},{"a":"VA","n":"Virginia","c":8,"r":4,"care":false,"careN":"","sports":1,"sportsY":2023,"sportsN":"agency policy; many districts not enforcing","bath":"2023 (agency policy)"},{"a":"WA","n":"Washington","c":1,"r":2,"care":false,"careN":"","sports":0,"sportsY":null,"sportsN":"","bath":null},{"a":"WV","n":"West Virginia","c":7,"r":4,"care":true,"careN":"","sports":2,"sportsY":2021,"sportsN":"","bath":"2025"},{"a":"WI","n":"Wisconsin","c":7,"r":2,"care":false,"careN":"","sports":0,"sportsY":null,"sportsN":"","bath":null},{"a":"WY","n":"Wyoming","c":3,"r":3,"care":true,"careN":"","sports":2,"sportsY":2023,"sportsN":"","bath":"2025"}],"surg":[["12 and under",0],["13\u201314",0.1],["15\u201317",2.1],["Adults",5.3]],"victim":[["Cisgender",21.7],["Transgender",86.2]],"shooters":[["Men",192],["Women",7],["Transgender",1]],"abortion":[["\u22649 weeks",78.6],["10\u201313",14.2],["14\u201320",6.1],["21+",1.1]],"incarc":[["Legal immigrants",303],["Undocumented",674],["U.S.-born",1195]],"voting":[["Georgia",2.4,"20 of 8.2M registrants, 2024 audit"],["Michigan",2.6,"15 of 5.7M ballots, 2024 election"],["Utah",13.5,"27 of 2M registrations, 2025\u201326 review (registered, not voted)"]]};
+(function(){
+'use strict';
+var D=DATA, NS='http://www.w3.org/2000/svg';
+function $(s,r){return (r||document).querySelector(s);}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+function el(tag,attrs,parent){var e=document.createElementNS(NS,tag);if(attrs)for(var k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+function txt(e,s){e.textContent=s;return e;}
+function fmtN(v,d){return v==null?'—':v.toLocaleString('en-US',{maximumFractionDigits:d==null?0:d,minimumFractionDigits:d==null?0:d});}
+function niceStep(range,n){var raw=range/n,p=Math.pow(10,Math.floor(Math.log10(raw))),m=raw/p;return (m<1.5?1:m<3.5?2:m<7.5?5:10)*p;}
+function lum(hex){var c=hex.replace('#','');var r=parseInt(c.substr(0,2),16)/255,g=parseInt(c.substr(2,2),16)/255,b=parseInt(c.substr(4,2),16)/255;return .2126*r+.7152*g+.0722*b;}
+function placeTip(tip,wrap,sx,top){tip.style.display='block';var tw=tip.offsetWidth,ww=wrap.clientWidth;var left=sx+14;if(left+tw>ww)left=sx-14-tw;if(left<0)left=0;tip.style.left=left+'px';tip.style.top=top+'px';}
+function tipRows(tip,label,rows){tip.innerHTML='';var d=document.createElement('div');d.className='d';d.textContent=label;tip.appendChild(d);rows.forEach(function(r){var row=document.createElement('div');row.className='r';var b=document.createElement('b');b.textContent=r.v;var s=document.createElement('span');s.textContent=r.name;row.appendChild(b);row.appendChild(s);tip.appendChild(row);});}
+
+/* ---------- bar chart ---------- */
+function BarChart(wrap,tip,cfg){this.wrap=wrap;this.tip=tip;this.cfg=cfg||{};this.data=[];var self=this;if(window.ResizeObserver){new ResizeObserver(function(){self.render();}).observe(wrap);}else window.addEventListener('resize',function(){self.render();});}
+BarChart.prototype.set=function(data){this.data=data;this.render();};
+BarChart.prototype.render=function(){
+  var wrap=this.wrap,cfg=this.cfg,data=this.data,tip=this.tip;if(!data.length)return;
+  var W=wrap.clientWidth||800,H=cfg.height||250,ML=cfg.ml||52,MR=16,MT=26,MB=30;if(W<520)ML=44;
+  wrap.innerHTML='';var svg=el('svg',{viewBox:'0 0 '+W+' '+H,width:W,height:H,role:'img','aria-label':cfg.aria||''},wrap);
+  var ymaxRaw=Math.max.apply(null,data.map(function(d){return d.v;}));var step=niceStep(ymaxRaw||1,4),ymax=Math.ceil((ymaxRaw*1.08)/step)*step;if(ymax<=0)ymax=step;
+  var PW=W-ML-MR,PH=H-MT-MB,Y=function(y){return MT+(ymax-y)/ymax*PH;};
+  var gg=el('g',{'class':'grid'},svg);for(var y=0;y<=ymax+1e-9;y+=step){el('line',{x1:ML,x2:W-MR,y1:Y(y),y2:Y(y)},gg);var ty=el('text',{x:ML-6,y:Y(y)+4,'text-anchor':'end'},gg);txt(ty,cfg.yfmt?cfg.yfmt(y):y);}
+  var gx=el('g',{'class':'axis'},svg);el('line',{x1:ML,x2:W-MR,y1:MT+PH,y2:MT+PH},gx);
+  var n=data.length,slot=PW/n,bw=Math.min(cfg.maxBar||64,slot*.6);
+  data.forEach(function(d,i){var cx=ML+slot*(i+.5),x=cx-bw/2,h=Math.max(0,Y(0)-Y(d.v));
+    var g=el('g',{tabindex:'0',role:'img','aria-label':d.l+': '+(cfg.vfmt?cfg.vfmt(d.v):d.v)},svg);
+    var r=el('rect',{x:x,y:Y(d.v),width:bw,height:Math.max(h,d.v>0?2:0),rx:h>6?3:0,'class':'bar'+(d.cls?' '+d.cls:'')},g);
+    var vl=el('text',{x:cx,y:Y(d.v)-6,'text-anchor':'middle','class':'blab'},g);txt(vl,cfg.vfmt?cfg.vfmt(d.v):d.v);
+    var xl=el('text',{x:cx,y:MT+PH+16,'text-anchor':'middle'},g);txt(xl,d.l);
+    var hit=el('rect',{x:ML+slot*i,y:MT,width:slot,height:PH,'class':'hit'},g);
+    function show(){tipRows(tip,d.l,[{name:d.note||cfg.name||'',v:cfg.vfmt?cfg.vfmt(d.v):d.v}]);placeTip(tip,wrap,cx,MT+6);r.style.opacity='.8';}
+    function hide(){tip.style.display='none';r.style.opacity='';}
+    hit.addEventListener('pointerenter',show);hit.addEventListener('pointermove',show);hit.addEventListener('pointerleave',hide);g.addEventListener('focus',show);g.addEventListener('blur',hide);
+  });
+};
+new BarChart($('#chartSurg'),$('#tipSurg'),{height:240,yfmt:function(v){return fmtN(v,1);},vfmt:function(v){return fmtN(v,1)+' per 100k';},name:'surgeries per 100,000 insured, 2019',aria:'Gender-affirming surgery rate by age group'}).set(D.surg.map(function(p){return {l:p[0],v:p[1],cls:p[0]==='Adults'?'mute':'',note:p[0]==='12 and under'?'zero procedures among insured children 12 and under':p[0]==='15–17'?'82 of 85 minor procedures were chest surgeries':'surgeries per 100,000 insured, 2019'};}));
+new BarChart($('#chartVictim'),$('#tipVictim'),{height:220,yfmt:function(v){return fmtN(v);},vfmt:function(v){return fmtN(v,1)+' per 1,000';},name:'violent victimizations per 1,000, 2017–18',aria:'Violent victimization rate by gender identity'}).set(D.victim.map(function(p){return {l:p[0],v:p[1],cls:p[0]==='Transgender'?'hl':''};}));
+new BarChart($('#chartShoot'),$('#tipShoot'),{height:240,yfmt:function(v){return fmtN(v);},vfmt:function(v){return fmtN(v);},name:'of 200 mass shooters, 1966–2024',aria:'Mass shooters by gender'}).set(D.shooters.map(function(p){return {l:p[0],v:p[1],cls:p[0]==='Transgender'?'hl':'',note:p[0]==='Transgender'?'the 2023 Nashville shooter':'of 200 mass shooters, 1966–2024'};}));
+new BarChart($('#chartAbort'),$('#tipAbort'),{height:240,yfmt:function(v){return fmtN(v)+'%';},vfmt:function(v){return fmtN(v,1)+'%';},name:'share of abortions, 2022',aria:'Abortions by gestational age'}).set(D.abortion.map(function(p){return {l:p[0]+(p[0]==='21+'?' weeks':''),v:p[1],cls:p[0]==='21+'?'hl':'',note:p[0]==='21+'?'about 6,700 cases nationally, mostly fatal fetal diagnoses and maternal emergencies':'share of abortions, 2022'};}));
+new BarChart($('#chartIncarc'),$('#tipIncarc'),{height:240,yfmt:function(v){return fmtN(v);},vfmt:function(v){return fmtN(v)+' per 100k';},name:'incarcerated per 100,000, 2024',aria:'Incarceration rate by immigration status'}).set(D.incarc.map(function(p){return {l:p[0],v:p[1],cls:p[0]==='U.S.-born'?'hl':''};}));
+new BarChart($('#chartVote'),$('#tipVote'),{height:240,yfmt:function(v){return fmtN(v);},vfmt:function(v){return fmtN(v,1)+' per million';},name:'noncitizens found per million checked',aria:'Noncitizens found per million voters checked, by state audit'}).set(D.voting.map(function(p){return {l:p[0],v:p[1],note:p[2]};}));
+
+/* ---------- §4 dots ---------- */
+(function(){var w=$('#dots');if(!w)return;var frag=document.createDocumentFragment();for(var i=0;i<5100;i++){var d=document.createElement('i');if(i===2549)d.className='on';frag.appendChild(d);}w.appendChild(frag);})();
+
+/* ---------- §1 timeline ---------- */
+var EV=[
+ {when:'Dec 21, 2021',t:'Midland, Michigan',s:'A resident tells the school board litter boxes are in a unisex bathroom. She was told by someone.',p:'Superintendent: never happened',b:'<p>The superintendent of Midland Public Schools checked and said, "There have never been litter boxes within MPS schools." The claim was already circulating: a Kentucky district had denied a dress-code version in August and a Prince Edward Island school board had issued a denial in October. A 2016 Christian Post op-ed had floated litter boxes for people who "identify as cats" as a reductio about transgender rights.</p>'},
+ {when:'Jan 2022',t:'Michigan GOP co-chair shares the video',s:'Meshawn Maddock posts the board meeting; Libs of TikTok amplifies it.',p:'Goes national',b:'<p>Within days the Midland clip was a national story. A Texas school board candidate claimed special cafeteria tables for "furries" (the district denied it); an Iowa superintendent spent a week denying rumors; a fake email about an Indiana high school was shared 10,000 times before AP traced it to satire.</p>'},
+ {when:'Mar 28, 2022',t:'Nebraska State Senator Bruce Bostelman',s:'Repeats it on the floor of the legislature. Retracts and apologizes the same day.',p:'Retracted',b:'<p>Bostelman said schools were putting litter boxes in bathrooms during floor debate on a school bill. Reporters asked for the school. By that afternoon he had checked and said it was not true: "It was just something I felt that if this really was happening, we needed to address it." An Iowa senator who repeated it, Tim Kraayenbrink, later said he had not verified it.</p>'},
+ {when:'Sep 3, 2022',t:'Marjorie Taylor Greene at a Trump rally',s:'Pennsylvania. The claim enters presidential-rally rotation.',p:'No school named',b:'<p>By September the claim had been repeated by officials in Ohio, Tennessee, Minnesota, Wisconsin, Missouri, South Dakota and South Carolina, and every district named had denied it. Greene\'s rally version named no school at all.</p>'},
+ {when:'Sep 26, 2022',t:'Heidi Ganahl, Colorado nominee for governor',s:'"Kids are identifying as cats." Asked for evidence, she cites Jefferson County.',p:'Lockdown buckets',b:'<p>Ganahl told a radio host that students were identifying as cats in Colorado schools and that it was "a growing problem." Pressed by KDVR, she pointed to Jefferson County, whose district replied: "There are no litter boxes in our buildings and students are not allowed to come to school in costume." The county has stocked classrooms since 2017 with five-gallon "go buckets" for lockdowns: cat litter as an emergency toilet, candy for diabetic students, wet wipes, a flashlight and a map. It is the only cat litter any school has ever confirmed, and it is for school shootings.</p>'},
+ {when:'Oct 3–4, 2022',t:'Scott Jensen, Catalina Lauf, Lauren Boebert',s:'Minnesota\'s nominee for governor, an Illinois House candidate ("not a hoax"), and Boebert naming Durango, Colorado.',p:'Durango: untrue',b:'<p>Durango School District 9-R said the claim was untrue and that no student had ever requested a litter box. Jensen and Lauf lost in November; Boebert won by 546 votes.</p>'},
+ {when:'Oct 13, 2022',t:'Joe Rogan',s:'Tells it on Tulsi Gabbard\'s show, citing a friend\'s wife\'s school.',p:'Retracted Nov 2',b:'<p>Three weeks later Rogan said in an interview that he had looked into it and "I don\'t think they actually did it," conceding there was no proof. By then the clip had been viewed millions of times. The same day Rogan told it, Maine congressional candidate Ed Thelander said he "doesn\'t believe it now" and called his earlier repetition a mistake.</p>'},
+ {when:'Oct 14, 2022',t:'NBC News counts at least 20',s:'Every district named by a candidate or official is contacted. Every one says no.',p:'0 litter boxes',b:'<p>NBC\'s Ben Collins and Brandy Zadrozny found at least 20 conservative candidates and officials who had made the claim, contacted each district, and found none. A 14-year-old Colorado furry told them she had never heard of anyone wanting a litter box. The claim kept going: New Hampshire Senate nominee Don Bolduc repeated it at an October 29 event and again in a November debate; the school he named confirmed it was false.</p>'},
+ {when:'Jan 18, 2023',t:'Tony Dungy',s:'The NFL analyst tweets it, deletes it after backlash, apologizes.',p:'Retracted',b:'<p>Dungy wrote that schools were putting litter boxes in bathrooms, then deleted the tweet and apologized for "a flippant comment." Montana\'s superintendent of public instruction claimed evidence of litter boxes in August 2023; her department, asked for it, provided none. A Fox News anchor relayed "parents\' claims" about northern Virginia the same month.</p>'},
+ {when:'2024–2025',t:'It becomes legislation',s:'An Oklahoma bill targets students who "identify as animals"; Texas files the FURRIES Act.',p:'Laws for a problem no school reported',b:'<p>Oklahoma Rep. Justin Humphrey introduced a bill in January 2024 to bar students who "purport to be an imaginary animal"; Texas Rep. Stan Gerdes filed the Forbidding Unlawful Representation of Roleplaying In Education (FURRIES) Act in March 2025. Neither sponsor produced a school. The claim has been exported and denied in Canada, Scotland, Wales, New Zealand and Australia.</p>'}
+];
+var evList=$('#events');
+EV.forEach(function(e,i){e.n=i+1;var li=document.createElement('li');li.className='event';
+  var btn=document.createElement('button');btn.type='button';btn.setAttribute('aria-expanded','false');
+  var n=document.createElement('span');n.className='en';n.textContent=e.n;var d=document.createElement('span');d.className='ed';d.textContent=e.when;
+  var t=document.createElement('span');t.className='et';t.textContent=e.t;var sm=document.createElement('small');sm.textContent=e.s;t.appendChild(sm);
+  var p=document.createElement('span');p.className='ep';p.textContent=e.p;
+  btn.appendChild(n);btn.appendChild(d);btn.appendChild(t);btn.appendChild(p);
+  var body=document.createElement('div');body.className='eb';body.innerHTML=e.b;
+  li.appendChild(btn);li.appendChild(body);evList.appendChild(li);
+  btn.addEventListener('click',function(){var open=li.classList.toggle('open');btn.setAttribute('aria-expanded',open?'true':'false');});
+  e.li=li;e.btn=btn;});
+
+/* ---------- §11 map ---------- */
+var LAYERS={
+  care:{name:'Bans on medical care for transgender minors',note:'MAP · Oct 10, 2026',color:'#B2431A',val:function(s){return s.care;},label:function(s){return s.care?(s.careN?'ban*':'ban'):'';},legend:[['#B2431A','Ban on care for minors (27 states + PR)'],['#9AA5B8','No ban']],detail:function(s){return s.care?('Bans gender-affirming medical care for minors'+(s.careN?' ('+s.careN+')':'')+'.'):'No ban on care for minors.';}},
+  sports:{name:'Bans on transgender girls in school sports',note:'MAP · Oct 11, 2026',color:'#1C4382',val:function(s){return s.sports>0;},label:function(s){return s.sports===2?'law':s.sports===1?'policy':'';},legend:[['#1C4382','Ban by state law (27)'],['#7FAEEA','Ban by agency policy (AK, VA)'],['#9AA5B8','No ban']],detail:function(s){return s.sports===2?('State law bans transgender girls from girls\' school sports, passed '+s.sportsY+(s.sportsN?' ('+s.sportsN+')':'')+'.'):s.sports===1?('Ban by state agency policy, '+s.sportsY+(s.sportsN?' ('+s.sportsN+')':'')+'.'):'No sports ban.';}},
+  bath:{name:'Bathroom and facility restrictions',note:'MAP · Oct 10, 2026',color:'#5A2E8C',val:function(s){return !!s.bath;},label:function(s){return s.bath?'law':'';},legend:[['#5A2E8C','Restriction in law or policy (21 states + PR)'],['#9AA5B8','No restriction']],detail:function(s){return s.bath?('Restricts transgender people\'s restroom or facility use; passed '+s.bath+'.'):'No bathroom restriction.';}}
+};
+var mapState={layer:'care',sel:null,table:false};
+var mapWrap=$('#mapWrap'),tipMap=$('#tipMap');
+function tileFill(s){var L=LAYERS[mapState.layer];if(mapState.layer==='sports')return s.sports===2?'#1C4382':s.sports===1?'#7FAEEA':null;return L.val(s)?L.color:null;}
+function drawMap(){var W=mapWrap.clientWidth||800,cols=12,rows=8,gap=3,T=(W-gap*(cols-1))/cols,H=T*rows+gap*(rows-1);mapWrap.innerHTML='';
+  var L=LAYERS[mapState.layer];var svg=el('svg',{viewBox:'0 0 '+W+' '+H,width:W,height:H,role:'img','aria-label':'Tile map of U.S. states showing '+L.name},mapWrap);
+  D.states.forEach(function(s){var g=el('g',{'class':'tile'+(mapState.sel===s.a?' sel':''),tabindex:'0',role:'button','aria-label':s.n+': '+L.detail(s)},svg);
+    var x=s.c*(T+gap),y=s.r*(T+gap);var fill=tileFill(s),gray=!fill;if(gray)fill='#9AA5B8';
+    var rect=el('rect',{x:x,y:y,width:T,height:T,fill:fill},g);if(gray)rect.setAttribute('opacity','.35');
+    var ink=gray?'#0F1B2D':(lum(fill)>.5?'#0F1B2D':'#FFFFFF');
+    var ab=el('text',{x:x+T/2,y:y+T/2+(T>44?-2:4),'class':'ab',fill:ink,'font-size':Math.max(9,Math.min(14,T*.27))},g);txt(ab,s.a);
+    if(T>44&&L.label(s)){var vl=el('text',{x:x+T/2,y:y+T/2+13,'class':'vl',fill:ink,'font-size':Math.max(9,Math.min(11,T*.2))},g);txt(vl,L.label(s));}
+    function show(){tipRows(tipMap,s.n,[{name:'care for minors',v:s.care?'banned'+(s.careN?'*':''):'allowed'},{name:'girls\' sports',v:s.sports===2?'banned by law':s.sports===1?'banned by policy':'no ban'},{name:'bathrooms',v:s.bath?'restricted':'no law'}]);placeTip(tipMap,mapWrap,x+T/2,Math.max(0,y-10));}
+    g.addEventListener('pointerenter',show);g.addEventListener('pointermove',show);g.addEventListener('pointerleave',function(){tipMap.style.display='none';});g.addEventListener('focus',show);g.addEventListener('blur',function(){tipMap.style.display='none';});
+    g.addEventListener('click',function(){mapState.sel=mapState.sel===s.a?null:s.a;drawMap();renderDetail();});g.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();mapState.sel=s.a;drawMap();renderDetail();}});});
+  $('#mapNote').textContent=L.note;var leg=$('#mapLegend');leg.innerHTML='';
+  L.legend.forEach(function(r){var sp=document.createElement('span');var ic=document.createElement('i');ic.style.cssText='display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px;background:'+r[0]+(r[0]==='#9AA5B8'?';opacity:.35':'');sp.appendChild(ic);sp.appendChild(document.createTextNode(r[1]));sp.style.marginRight='12px';leg.appendChild(sp);});
+  var hint=document.createElement('span');hint.textContent='· tap a state';leg.appendChild(hint);renderMapTable();}
+function renderDetail(){var box=$('#mapDetail');box.innerHTML='';var s=D.states.filter(function(o){return o.a===mapState.sel;})[0];var h=document.createElement('h4');
+  var careN=D.states.filter(function(o){return o.care;}).length,spN=D.states.filter(function(o){return o.sports>0;}).length,baN=D.states.filter(function(o){return o.bath;}).length,all3=D.states.filter(function(o){return o.care&&o.sports>0&&o.bath;}).length;
+  if(!s){h.textContent='Tap a state';var sm=document.createElement('small');sm.textContent='or use the table';h.appendChild(sm);box.appendChild(h);
+    [[String(careN),'states ban care for minors'],[String(spN),'states ban trans girls from sports'],[String(baN),'states restrict bathrooms'],[String(all3),'states do all three']].forEach(function(r){var d=document.createElement('div');var b=document.createElement('b');b.textContent=r[0];var sp=document.createElement('span');sp.textContent=r[1];d.appendChild(b);d.appendChild(sp);box.appendChild(d);});
+    var p=document.createElement('p');p.textContent='Idaho passed the first sports ban in 2020. Most of the rest arrived in 2021 to 2025, usually as a package, usually in the same legislative session as a litter-box speech.';box.appendChild(p);return;}
+  h.textContent=s.n;box.appendChild(h);
+  [[s.care?'Yes'+(s.careN?'*':''):'No','care ban for minors'],[s.sports===2?'Law':s.sports===1?'Policy':'No','sports ban'+(s.sportsY?' ('+s.sportsY+')':'')],[s.bath?'Yes':'No','bathroom law'+(s.bath?' ('+s.bath+')':'')]].forEach(function(r){var d=document.createElement('div');var b=document.createElement('b');b.textContent=r[0];var sp=document.createElement('span');sp.textContent=r[1];d.appendChild(b);d.appendChild(sp);box.appendChild(d);});
+  var p2=document.createElement('p');var bits=[];if(s.careN)bits.push('Care ban: '+s.careN+'.');if(s.sportsN)bits.push('Sports ban: '+s.sportsN+'.');p2.textContent=bits.length?bits.join(' '):(s.care||s.sports||s.bath?'':'No restrictions in any of the three categories.');box.appendChild(p2);}
+function renderMapTable(){var t=$('#tblMap');if(!mapState.table){t.classList.remove('on');return;}t.classList.add('on');t.innerHTML='';var tbl=document.createElement('table'),tr=document.createElement('tr');['State','Care ban','Sports ban','Bathroom law'].forEach(function(h){var th=document.createElement('th');th.textContent=h;tr.appendChild(th);});tbl.appendChild(tr);
+  D.states.slice().sort(function(a,b){return ((b.care?1:0)+(b.sports?1:0)+(b.bath?1:0))-((a.care?1:0)+(a.sports?1:0)+(a.bath?1:0))||a.n.localeCompare(b.n);}).forEach(function(s){var row=document.createElement('tr');[s.n,s.care?'Yes'+(s.careN?' ('+s.careN+')':''):'—',s.sports===2?'Law, '+s.sportsY:s.sports===1?'Policy, '+s.sportsY:'—',s.bath?s.bath:'—'].forEach(function(v){var td=document.createElement('td');td.textContent=v;row.appendChild(td);});tbl.appendChild(row);});t.appendChild(tbl);}
+$$('[data-layer]').forEach(function(b){b.addEventListener('click',function(){mapState.layer=b.getAttribute('data-layer');$$('[data-layer]').forEach(function(o){o.setAttribute('aria-pressed',o===b?'true':'false');});drawMap();renderDetail();});});
+$('#tblMapBtn').addEventListener('click',function(){mapState.table=!mapState.table;this.setAttribute('aria-pressed',mapState.table?'true':'false');renderMapTable();});
+if(window.ResizeObserver)new ResizeObserver(function(){drawMap();}).observe(mapWrap);else window.addEventListener('resize',drawMap);
+drawMap();renderDetail();
+
+/* ---------- expand all ---------- */
+var allOpen=false;$('#expandAll').addEventListener('click',function(){allOpen=!allOpen;$$('details').forEach(function(d){d.open=allOpen;});EV.forEach(function(e){e.li.classList.toggle('open',allOpen);e.btn.setAttribute('aria-expanded',allOpen?'true':'false');});this.setAttribute('aria-pressed',allOpen?'true':'false');this.textContent=allOpen?'Collapse everything':'Expand everything';});
+})();
+</script>
+</body>
+</html>
